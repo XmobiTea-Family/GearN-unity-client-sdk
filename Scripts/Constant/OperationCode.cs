@@ -1,6 +1,6 @@
 namespace XmobiTea.GN.Constant
 {
-    public class OperationCode
+    public partial class OperationCode
     {
         public const int Debug = -1;
         public const int GetAppConfig = 1;

@@ -1,7 +1,7 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-    public class EventCode
+    public partial class EventCode
     {
-        public const int Debug = 0;
+
     }
 }

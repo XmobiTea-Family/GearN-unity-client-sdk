@@ -1,6 +1,9 @@
 ﻿#if UNITY_EDITOR
 namespace XmobiTea.GN.Config.Editor
 {
+    using System.IO;
+    using System.Text;
+
     using UnityEditor;
     using UnityEditor.Callbacks;
 
@@ -24,6 +27,7 @@ namespace XmobiTea.GN.Config.Editor
         SerializedProperty pingTimout;
         SerializedProperty peerSocketVersion;
         SerializedProperty codeCanSendNotAuthorized;
+        SerializedProperty gnServerSourcePath;
         
         private void OnEnable()
         {
@@ -38,6 +42,7 @@ namespace XmobiTea.GN.Config.Editor
             pingTimout = serializedObject.FindProperty("_pingTimeout");
             peerSocketVersion = serializedObject.FindProperty("_peerSocketVersion");
             codeCanSendNotAuthorized = serializedObject.FindProperty("_codeCanSendNotAuthorized");
+            gnServerSourcePath = serializedObject.FindProperty("_gnServerSourcePath");
         }
 
         public override void OnInspectorGUI()
@@ -55,6 +60,7 @@ namespace XmobiTea.GN.Config.Editor
             EditorGUILayout.PropertyField(pingTimout);
             EditorGUILayout.PropertyField(peerSocketVersion);
             EditorGUILayout.PropertyField(codeCanSendNotAuthorized);
+            EditorGUILayout.PropertyField(gnServerSourcePath);
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -65,8 +71,8 @@ namespace XmobiTea.GN.Config.Editor
             var gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
             if (gnServerSettings == null)
             {
-                if (!System.IO.Directory.Exists(GNServerSettings_Path))
-                    System.IO.Directory.CreateDirectory(GNServerSettings_Path);
+                if (!Directory.Exists(GNServerSettings_Path))
+                    Directory.CreateDirectory(GNServerSettings_Path);
 
                 gnServerSettings = ScriptableObject.CreateInstance<GNServerSettings>();
                 var path = GNServerSettings_Path + "/" + GNServerSettings.ResourcesPath + ".asset";
@@ -90,109 +96,294 @@ namespace XmobiTea.GN.Config.Editor
             Application.OpenURL("https://github.com/XmobiTea-Family/GN-server");
         }
 
-        //[MenuItem("GN/About")]
-        //private static void OpenAbout()
-        //{
-        //    EditorWindow.GetWindow(typeof(AboutEUNEditorWindow));
-        //}
-
-        [DidReloadScripts]
-        public static void OnCompileScripts()
+        [MenuItem("GN/Sync Server Folder")]
+        private static void SyncServerFolder()
         {
-            UpdateGN();
+            Debug.Log("Sync Server Folder");
+
+            SyncConstantFolder();
+            SyncEnumTypeFolder();
+            SyncParameterCodeFolder();
+            SyncErrorCodeFolder();
+
+            AssetDatabase.Refresh();
         }
 
-        private static void UpdateGN()
+        private static void SyncEnumTypeFolder()
         {
-            //var assemblie = typeof(GNServerSettings).Assembly;
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/enumType";
 
-            //var types = assemblie.GetTypes();
+            var allPathFiles = Directory.GetFiles(dir, "*.ts");
+            for (var i = 0; i < allPathFiles.Length; i++)
+            {
+                GenerateEnumTypeFile(allPathFiles[i]);
+            }
+        }
 
-            //var methodNameLst = new List<string>();
+        private static void GenerateEnumTypeFile(string dirPath)
+        {
+            const string Template = "$name = $code,";
 
-            //var dic = new Dictionary<int, string>();
+            var fileInfo = new FileInfo(dirPath);
+            
+            var allLines = File.ReadAllLines(dirPath);
 
-            //foreach (var type in types)
-            //{
-            //    var methodInfos = type.GetMethods(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public).Where(x => x.GetCustomAttributes(typeof(EUNRPCAttribute), false).Length > 0);
+            var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
-            //    foreach (var methodInfo in methodInfos)
-            //    {
-            //        if (!methodNameLst.Contains(methodInfo.Name)) methodNameLst.Add(methodInfo.Name);
-            //    }
-            //}
+            var stringBuilder = new StringBuilder();
 
-            //var needModifier = false;
+            stringBuilder.AppendLine("// The file auto generate, please dont change it");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
+            stringBuilder.AppendLine("{");
+            stringBuilder.AppendLine("    public enum " + fileName);
+            stringBuilder.AppendLine("    {");
+            // Value0 = 0,
+            for (var i = 0; i < allLines.Length; i++)
+            {
+                var line = allLines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+                if (line.Contains("import")) continue;
+                if (line.Contains("export class")) continue;
+                if (line.Contains("export enum")) continue;
+                if (line.Contains("{")) continue;
+                if (line.Contains("}")) continue;
+                if (line.Contains("//")) continue;
 
-            //var eunRPCCommandValues = Enum.GetValues(typeof(EUNRPCCommand));
+                var lineSpl0s = line.Split(',');
+                var lineSpl01s = lineSpl0s[0].Split('=');
 
-            //foreach (EUNRPCCommand eunRPCCommandValue in eunRPCCommandValues)
-            //{
-            //    if (methodNameLst.Contains(eunRPCCommandValue.ToString())) dic.Add((int)eunRPCCommandValue, eunRPCCommandValue.ToString());
-            //    else if (!needModifier) needModifier = true;
-            //}
+                var code = lineSpl01s[1].Trim();
+                var name = lineSpl01s[0].Trim();
 
-            //foreach (var methodName in methodNameLst)
-            //{
-            //    var dicValues = dic.Values.ToList();
+                stringBuilder.AppendLine("        " + Template.Replace("$name", name).Replace("$code", code));
+            }
 
-            //    if (!dicValues.Contains(methodName))
-            //    {
-            //        var dicKeys = dic.Keys.ToList();
+            stringBuilder.AppendLine("    }");
+            stringBuilder.AppendLine("}");
 
-            //        var key = dicKeys.Max() + 1;
+            WriteFile(fileName + ".cs", Application.dataPath + "/GN-unity-client-custom/Scripts/Constant/EnumType", stringBuilder);
+        }
 
-            //        dic.Add(key, methodName);
+        private static void SyncParameterCodeFolder()
+        {
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/parameterCode";
 
-            //        if (!needModifier) needModifier = true;
-            //    }
-            //}
+            var allPathFiles = Directory.GetFiles(dir, "*.ts");
+            for (var i = 0; i < allPathFiles.Length; i++)
+            {
+                GenerateParameterCodeFile(allPathFiles[i]);
+            }
+        }
 
-            //if (needModifier)
-            //{
-            //    var enableStringBuilder = new StringBuilder();
-            //    var disableStringBuilder = new StringBuilder();
+        private static void GenerateParameterCodeFile(string dirPath)
+        {
+            const string Template = "public const int $name = $code;";
 
-            //    enableStringBuilder.AppendLine("#if EUN");
-            //    disableStringBuilder.AppendLine("#if !EUN");
+            var fileInfo = new FileInfo(dirPath);
 
-            //    enableStringBuilder.AppendLine("// dont modifier this, this file will auto generate by EUN");
-            //    disableStringBuilder.AppendLine("// dont modifier this, this file will auto generate by EUN");
+            var allLines = File.ReadAllLines(dirPath);
 
-            //    enableStringBuilder.AppendLine("public enum EUNRPCCommand");
-            //    disableStringBuilder.AppendLine("public enum EUNRPCCommand");
+            var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
-            //    enableStringBuilder.AppendLine("{");
-            //    disableStringBuilder.AppendLine("{");
+            var stringBuilder = new StringBuilder();
 
-            //    foreach (var c in dic)
-            //    {
-            //        enableStringBuilder.AppendLine("    " + c.Value + " = " + c.Key + ",");
-            //        disableStringBuilder.AppendLine("    " + c.Value + " = " + c.Key + ",");
+            stringBuilder.AppendLine("// The file auto generate, please dont change it");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
+            stringBuilder.AppendLine("{");
+            stringBuilder.AppendLine("    public class " + fileName);
+            stringBuilder.AppendLine("    {");
+            // Value0 = 0,
+            for (var i = 0; i < allLines.Length; i++)
+            {
+                var line = allLines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+                if (line.Contains("import")) continue;
+                if (line.Contains("export class")) continue;
+                if (line.Contains("export enum")) continue;
+                if (line.Contains("{")) continue;
+                if (line.Contains("}")) continue;
+                if (line.Contains("//")) continue;
 
-            //        Debug.Log("EUNRPCCommand add " + c.Value + " = " + c.Key);
-            //    }
+                var lineSpl0s = line.Split('=');
+                var lineSpl01s = lineSpl0s[0].Split(' ');
+                var lineSpl013s = lineSpl01s[3].Split(':');
 
-            //    enableStringBuilder.AppendLine("}");
-            //    disableStringBuilder.AppendLine("}");
+                var code = lineSpl0s[1].Split(';')[0].Trim();
+                var name = lineSpl013s[0];
 
-            //    enableStringBuilder.AppendLine("#endif");
-            //    disableStringBuilder.AppendLine("#endif");
+                stringBuilder.AppendLine("        " + Template.Replace("$name", name).Replace("$code", code));
+            }
 
-            //    var dirPath = Application.dataPath + EUNRPC_Parent_Path;
-            //    if (!System.IO.Directory.Exists(dirPath)) System.IO.Directory.CreateDirectory(dirPath);
+            stringBuilder.AppendLine("    }");
+            stringBuilder.AppendLine("}");
 
-            //    // generate this file
-            //    var enableFilePath = Application.dataPath + EUNRPC_Path;
-            //    var disableFilePath = Application.dataPath + EUNRPC_Disable_Path;
+            WriteFile(fileName + ".cs", Application.dataPath + "/GN-unity-client-custom/Scripts/Constant/ParameterCode", stringBuilder);
+        }
 
-            //    if (System.IO.File.Exists(enableFilePath)) System.IO.File.Delete(enableFilePath);
+        private static void SyncErrorCodeFolder()
+        {
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/errorCode";
 
-            //    System.IO.File.WriteAllText(enableFilePath, enableStringBuilder.ToString());
-            //    System.IO.File.WriteAllText(disableFilePath, disableStringBuilder.ToString());
+            var allPathFiles = Directory.GetFiles(dir, "*.ts");
+            for (var i = 0; i < allPathFiles.Length; i++)
+            {
+                GenerateErrorCodeFile(allPathFiles[i]);
+            }
+        }
 
-            //    UnityEditor.AssetDatabase.Refresh();
-            //}
+        private static void GenerateErrorCodeFile(string dirPath)
+        {
+            const string Template = "public const int $name = $code;";
+
+            var fileInfo = new FileInfo(dirPath);
+
+            var allLines = File.ReadAllLines(dirPath);
+
+            var fileName = fileInfo.Name.Replace(".ts", string.Empty);
+
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("// The file auto generate, please dont change it");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
+            stringBuilder.AppendLine("{");
+            stringBuilder.AppendLine("    public class " + fileName);
+            stringBuilder.AppendLine("    {");
+            // Value0 = 0,
+            for (var i = 0; i < allLines.Length; i++)
+            {
+                var line = allLines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+                if (line.Contains("import")) continue;
+                if (line.Contains("export class")) continue;
+                if (line.Contains("export enum")) continue;
+                if (line.Contains("{")) continue;
+                if (line.Contains("}")) continue;
+                if (line.Contains("//")) continue;
+
+                var lineSpl0s = line.Split('=');
+                var lineSpl01s = lineSpl0s[0].Split(' ');
+                var lineSpl013s = lineSpl01s[3].Split(':');
+
+                var code = lineSpl0s[1].Split(';')[0].Trim();
+                var name = lineSpl013s[0];
+
+                stringBuilder.AppendLine("        " + Template.Replace("$name", name).Replace("$code", code));
+            }
+
+            stringBuilder.AppendLine("    }");
+            stringBuilder.AppendLine("}");
+
+            WriteFile(fileName + ".cs", Application.dataPath + "/GN-unity-client-custom/Scripts/Constant/ErrorCode", stringBuilder);
+        }
+
+        private static void SyncConstantFolder()
+        {
+            GenerateOperationCode();
+            GenerateEventCode();
+        }
+
+        private static void GenerateOperationCode()
+        {
+            const string Template = "public const int $name = $code;";
+
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var dirPath = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/OperationCode.ext.ts";
+            var allLines = File.ReadAllLines(dirPath);
+
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("// The file auto generate, please dont change it");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
+            stringBuilder.AppendLine("{");
+            stringBuilder.AppendLine("    public partial class OperationCode");
+            stringBuilder.AppendLine("    {");
+
+            for (var i = 0; i < allLines.Length; i++)
+            {
+                var line = allLines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+                if (line.Contains("import")) continue;
+                if (line.Contains("export class")) continue;
+                if (line.Contains("export enum")) continue;
+                if (line.Contains("{")) continue;
+                if (line.Contains("}")) continue;
+                if (line.Contains("//")) continue;
+
+                var lineSpl0s = line.Split('=');
+                var lineSpl01s = lineSpl0s[0].Split(' ');
+                var lineSpl013s = lineSpl01s[3].Split(':');
+
+                var code = lineSpl0s[1].Split(';')[0].Trim();
+                var name = lineSpl013s[0];
+
+                stringBuilder.AppendLine("        " + Template.Replace("$name", name).Replace("$code", code));
+            }
+
+            stringBuilder.AppendLine("    }");
+            stringBuilder.AppendLine("}");
+            WriteFile("OperationCode.cs", Application.dataPath + "/GN-unity-client-custom/Scripts/Constant", stringBuilder);
+        }
+
+        private static void GenerateEventCode()
+        {
+            const string Template = "public const int $name = $code;";
+
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var dirPath = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/EventCode.ext.ts";
+            var allLines = File.ReadAllLines(dirPath);
+
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("// The file auto generate, please dont change it");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
+            stringBuilder.AppendLine("{");
+            stringBuilder.AppendLine("    public partial class EventCode");
+            stringBuilder.AppendLine("    {");
+
+            for (var i = 0; i < allLines.Length; i++)
+            {
+                var line = allLines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+                if (line.Contains("import")) continue;
+                if (line.Contains("export class")) continue;
+                if (line.Contains("export enum")) continue;
+                if (line.Contains("{")) continue;
+                if (line.Contains("}")) continue;
+                if (line.Contains("//")) continue;
+
+                var lineSpl0s = line.Split('=');
+                var lineSpl01s = lineSpl0s[0].Split(' ');
+                var lineSpl013s = lineSpl01s[3].Split(':');
+
+                var code = lineSpl0s[1].Split(';')[0].Trim();
+                var name = lineSpl013s[0];
+
+                stringBuilder.AppendLine("        " + Template.Replace("$name", name).Replace("$code", code));
+            }
+
+            stringBuilder.AppendLine("    }");
+            stringBuilder.AppendLine("}");
+            WriteFile("EventCode.cs", Application.dataPath + "/GN-unity-client-custom/Scripts/Constant", stringBuilder);
+        }
+
+
+        private static void WriteFile(string fileNameWithExtension, string dirPath, StringBuilder contentBuilder)
+        {
+            if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
+            var filePath = Path.Combine(dirPath, fileNameWithExtension);
+
+            if (File.Exists(filePath)) File.Delete(filePath);
+            File.WriteAllText(filePath, contentBuilder.ToString());
+
+            Debug.Log("Create file path " + fileNameWithExtension + " at " + filePath + " success.");
         }
     }
 }

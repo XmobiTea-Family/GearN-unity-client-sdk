@@ -34,14 +34,28 @@
 
         static GNNetwork()
         {
+            InitServerSettings();
+
+            if (!Application.isPlaying) return;
+
             InitGNSocketObject();
+        }
+
+        private static void InitServerSettings()
+        {
+            gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
+            if (gnServerSettings == null)
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.ExecuteMenuItem("GN/GN Settings");
+                gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
+                if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
+#endif
+            }
         }
 
         private static void InitGNSocketObject()
         {
-            gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
-            if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
-
             peer = new GameObject("GN NetworkingPeer").AddComponent<NetworkingPeer>();
             GameObject.DontDestroyOnLoad(peer.gameObject);
 

@@ -62,6 +62,10 @@
         private List<int> _codeCanSendNotAuthorized = new List<int>() { OperationCode.Debug, OperationCode.GetAppConfig, OperationCode.Login, OperationCode.RegisterAccount };
         public List<int> codeCanSendNotAuthorized => _codeCanSendNotAuthorized;
 
+        [SerializeField]
+        private string _gnServerSourcePath = "Template_GN-server";
+        public string gnServerSourcePath => _gnServerSourcePath;
+
         public string SocketUrl
         {
             get
