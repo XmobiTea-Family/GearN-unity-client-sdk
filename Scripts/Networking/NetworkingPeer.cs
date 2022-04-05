@@ -43,7 +43,7 @@
             lastGetCurrentMilliseconds = Time.realtimeSinceStartup;
         }
 
-        internal long ServerTimestamp => lastCurrentServerMilliseconds + (int)((Time.realtimeSinceStartup - lastGetCurrentMilliseconds) * 1000);
+        internal long serverTimestamp => lastCurrentServerMilliseconds + (int)((Time.realtimeSinceStartup - lastGetCurrentMilliseconds) * 1000);
 
         internal void InitPeer()
         {

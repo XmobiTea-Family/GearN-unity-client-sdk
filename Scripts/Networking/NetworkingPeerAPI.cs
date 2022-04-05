@@ -1,13 +1,75 @@
 ﻿namespace XmobiTea.GN.Networking
 {
     using System;
+    using System.Collections;
 
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity.Request;
     using XmobiTea.GN.Entity.Response;
+    using XmobiTea.GN.Helper;
 
     public partial class NetworkingPeer
     {
+        internal void SyncTs(Action<long> onResponse = null)
+        {
+            if (httpPeer != null) {
+                (httpPeer as HttpPeer).Send("/ts", response =>
+                {
+                    if (response.IsSuccess)
+                    {
+                        if (response.StatusCode == 200)
+                        {
+                            var returnDatas = (IList)Parser.Parse(response.DataAsText);
+                            var gnArray = new GNArray.Builder()
+                                .AddAll(returnDatas)
+                                .Build();
+
+                            var returnCode = (ReturnCode)gnArray.GetInt(0);
+                            if (returnCode == ReturnCode.Ok)
+                            {
+                                var gnHashtable = gnArray.GetGNHashtable(1);
+                                var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+
+                                SetServerTimeMilliseconds(newServerTimestamp);
+                            }
+                        }
+                    }
+
+                    onResponse?.Invoke(serverTimestamp);
+                });
+            }
+        }
+
+        internal void GetConfig(string configName, Action<string> onResponse)
+        {
+            if (httpPeer != null)
+            {
+                (httpPeer as HttpPeer).Send("/getConfig/" + configName, response =>
+                {
+                    if (response.IsSuccess)
+                    {
+                        if (response.StatusCode == 200)
+                        {
+                            var returnDatas = (IList)Parser.Parse(response.DataAsText);
+                            var gnArray = new GNArray.Builder()
+                                .AddAll(returnDatas)
+                                .Build();
+
+                            var returnCode = (ReturnCode)gnArray.GetInt(0);
+                            if (returnCode == ReturnCode.Ok)
+                            {
+                                var gnHashtable = gnArray.GetGNHashtable(1);
+                                var configStr = gnHashtable.GetString(1);
+
+                                onResponse?.Invoke(configStr);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
         internal void Debug(bool booleanValue, int numberValue, string stringValue, GNHashtable gnHashtableValue, GNArray gnArrayValue, Action<DebugOperationResponse> onResponse = null)
         {
             var request = new DebugOperationRequest(booleanValue, numberValue, stringValue, gnHashtableValue, gnArrayValue).Builder();
