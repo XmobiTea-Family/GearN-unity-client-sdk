@@ -129,7 +129,7 @@
         {
             var request = new DeviceLoginOperationRequest(deviceInfo).Builder();
 
-            SocketSend(request, response =>
+            HttpSend(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
