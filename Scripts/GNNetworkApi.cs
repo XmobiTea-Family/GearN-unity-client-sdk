@@ -7,6 +7,16 @@
 
     public static partial class GNNetwork
     {
+        public static void SyncTs(Action<long> onResponse = null)
+        {
+            peer.SyncTs(onResponse);
+        }
+
+        public static void GetConfig(string configName, Action<string> onResponse)
+        {
+            peer.GetConfig(configName, onResponse);
+        }
+
         public static void Debug(bool booleanValue, int numberValue, string stringValue, GNHashtable gnHashtableValue, GNArray gnArrayValue, Action<DebugOperationResponse> onResponse = null)
         {
             peer.Debug(booleanValue, numberValue, stringValue, gnHashtableValue, gnArrayValue, onResponse);

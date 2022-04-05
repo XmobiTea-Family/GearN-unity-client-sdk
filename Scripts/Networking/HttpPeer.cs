@@ -60,35 +60,15 @@
                 }
             }
 
-            StartCoroutine(IESend(operationPending));
-        }
-
-        IEnumerator IESend(OperationPending operationPending)
-        {
-            var operationRequest = operationPending.GetOperationRequest();
-
-            var authToken = GNNetwork.authToken;
-
-            using (var request = new HTTPRequest(new Uri(httpUrl + "/api/" + operationRequest.GetOperationCode()), HTTPMethods.Post))
+            StartCoroutine(IESend("/api/" + operationRequest.GetOperationCode(), operationRequest.GetParameters(), HTTPMethods.Post, response =>
             {
-                var param = operationRequest.GetParameters();
-                if (param != null) request.AddField(Commands.Data, Serializer.Serialize(param.ToData()));
-
-                request.Timeout = TimeSpan.FromSeconds(OperationRequest.DefaultTimeOut + 5);
-
-                if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
-
-                request.Send();
-
-                yield return new WaitWhile(() => request.State < HTTPRequestStates.Finished);
-
                 var obj = new GNArray();
 
-                if (request.State == HTTPRequestStates.Finished)
+                if (response.IsSuccess)
                 {
-                    if (request.Response.IsSuccess)
+                    if (response.StatusCode == 200)
                     {
-                        var returnDatas = (IList)Parser.Parse(request.Response.DataAsText);
+                        var returnDatas = (IList)Parser.Parse(response.DataAsText);
                         var gnArray = new GNArray.Builder()
                             .AddAll(returnDatas)
                             .Build();
@@ -118,13 +98,38 @@
                 }
                 else
                 {
-                    obj.Add((int)ReturnCode.OperationTimeout);
+                    obj.Add((int)ReturnCode.UnknownError);
                     obj.Add(null);
                     obj.Add(operationRequest.GetRequestId());
                 }
 
                 OnResponseHandler(obj);
+            }, operationRequest.GetTimeOut()));
+        }
+
+        IEnumerator IESend(string uri, GNHashtable param, HTTPMethods methods, Action<HTTPResponse> onResponse, float timeout)
+        {
+            var authToken = GNNetwork.authToken;
+
+            using (var request = new HTTPRequest(new Uri(httpUrl + uri), methods))
+            {
+                if (param != null) request.AddField(Commands.Data, Serializer.Serialize(param.ToData()));
+
+                request.Timeout = TimeSpan.FromSeconds(timeout + 5);
+
+                if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
+
+                request.Send();
+
+                yield return new WaitWhile(() => request.State < HTTPRequestStates.Finished);
+
+                onResponse?.Invoke(request.Response);
             }
+        }
+    
+        internal void Send(string uri, Action<HTTPResponse> onResponse)
+        {
+            StartCoroutine(IESend(uri, null, HTTPMethods.Get, onResponse, 15));
         }
     }
 }

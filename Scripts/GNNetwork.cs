@@ -11,7 +11,7 @@
 
     public static partial class GNNetwork
     {
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.1";
 
         public static GNServerSettings gnServerSettings { get; private set; }
 
@@ -19,7 +19,7 @@
 
         public static int ping => peer != null ? peer.Ping : -1;
 
-        public static long serverTimestamp => peer != null ? peer.ServerTimestamp : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public static long serverTimestamp => peer != null ? peer.serverTimestamp : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
         public static string authToken
         {
