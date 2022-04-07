@@ -71,7 +71,7 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + GetOperationCode() + " ResponseId: " + responseId + " ReturnCode " + GetReturnCode());
+            stringBuilder.Append("Code: " + GetOperationCode() + " ResponseId: " + responseId + " ReturnCode " + GetReturnCode() + " parameters " + parameters);
 
             return stringBuilder.ToString();
         }
