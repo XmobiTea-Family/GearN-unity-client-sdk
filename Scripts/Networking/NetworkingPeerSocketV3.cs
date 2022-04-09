@@ -37,7 +37,8 @@ namespace XmobiTea.GN.Networking
         {
             base.SendRequestAuthSocket();
 
-            socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
+            if (!string.IsNullOrEmpty(ClientId))
+                socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
         }
 
         internal override void ReInitNewSocket()
@@ -79,7 +80,6 @@ namespace XmobiTea.GN.Networking
 
         private void OnEvent(byte[] eventData)
         {
-
             lock (messageLstLock)
             {
                 eventPacketLst.Add(eventData);

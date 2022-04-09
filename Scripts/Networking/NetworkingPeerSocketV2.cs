@@ -44,7 +44,8 @@
         {
             base.SendRequestAuthSocket();
 
-            socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
+            if (!string.IsNullOrEmpty(ClientId))
+                socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
         }
 
         internal override void ReInitNewSocket()
@@ -193,8 +194,6 @@
             var dataSend = operationRequest.ToData();
 
             socketManager.Socket.Emit(Commands.RequestCmd, LsMsgPack.MsgPackSerializer.Serialize(dataSend));
-
-            Debug.LogError(Serializer.Serialize(dataSend));
         }
 
         internal override void Close()

@@ -16,22 +16,29 @@
             if (httpPeer != null) {
                 (httpPeer as HttpPeer).Send("/ts", response =>
                 {
-                    if (response.IsSuccess)
+                    if (response == null)
                     {
-                        if (response.StatusCode == 200)
+
+                    }
+                    else
+                    {
+                        if (response.IsSuccess)
                         {
-                            var returnDatas = (IList)Parser.Parse(response.DataAsText);
-                            var gnArray = new GNArray.Builder()
-                                .AddAll(returnDatas)
-                                .Build();
-
-                            var returnCode = (ReturnCode)gnArray.GetInt(0);
-                            if (returnCode == ReturnCode.Ok)
+                            if (response.StatusCode == 200)
                             {
-                                var gnHashtable = gnArray.GetGNHashtable(1);
-                                var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                                var returnDatas = (IList)Parser.Parse(response.DataAsText);
+                                var gnArray = new GNArray.Builder()
+                                    .AddAll(returnDatas)
+                                    .Build();
 
-                                SetServerTimeMilliseconds(newServerTimestamp);
+                                var returnCode = (ReturnCode)gnArray.GetInt(0);
+                                if (returnCode == ReturnCode.Ok)
+                                {
+                                    var gnHashtable = gnArray.GetGNHashtable(1);
+                                    var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+
+                                    SetServerTimeMilliseconds(newServerTimestamp);
+                                }
                             }
                         }
                     }
@@ -47,22 +54,29 @@
             {
                 (httpPeer as HttpPeer).Send("/getConfig/" + configName, response =>
                 {
-                    if (response.IsSuccess)
+                    if (response == null)
                     {
-                        if (response.StatusCode == 200)
+
+                    }
+                    else
+                    {
+                        if (response.IsSuccess)
                         {
-                            var returnDatas = (IList)Parser.Parse(response.DataAsText);
-                            var gnArray = new GNArray.Builder()
-                                .AddAll(returnDatas)
-                                .Build();
-
-                            var returnCode = (ReturnCode)gnArray.GetInt(0);
-                            if (returnCode == ReturnCode.Ok)
+                            if (response.StatusCode == 200)
                             {
-                                var gnHashtable = gnArray.GetGNHashtable(1);
-                                var configStr = gnHashtable.GetString(1);
+                                var returnDatas = (IList)Parser.Parse(response.DataAsText);
+                                var gnArray = new GNArray.Builder()
+                                    .AddAll(returnDatas)
+                                    .Build();
 
-                                onResponse?.Invoke(configStr);
+                                var returnCode = (ReturnCode)gnArray.GetInt(0);
+                                if (returnCode == ReturnCode.Ok)
+                                {
+                                    var gnHashtable = gnArray.GetGNHashtable(1);
+                                    var configStr = gnHashtable.GetString(1);
+
+                                    onResponse?.Invoke(configStr);
+                                }
                             }
                         }
                     }

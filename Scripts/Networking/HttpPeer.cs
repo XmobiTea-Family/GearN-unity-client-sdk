@@ -7,7 +7,6 @@
     using UnityEngine;
 
     using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
     using XmobiTea.GN.Helper;
     using XmobiTea.GN.Common;
     using BestHTTP;
@@ -15,14 +14,6 @@
     internal class HttpPeer : PeerBase
     {
         private string httpUrl;
-
-        //class AcceptAllCertificatesSignedWithASpecificKeyPublicKey : CertificateHandler
-        //{
-        //    protected override bool ValidateCertificate(byte[] certificateData)
-        //    {
-        //        return true;
-        //    }
-        //}
 
         internal override void InitGNSocketObject()
         {
@@ -60,76 +51,73 @@
                 }
             }
 
-            StartCoroutine(IESend("/api/" + operationRequest.GetOperationCode(), operationRequest.GetParameters(), HTTPMethods.Post, response =>
+            Send("/api/" + operationRequest.GetOperationCode(), operationRequest.GetParameters(), HTTPMethods.Post, response =>
             {
                 var obj = new GNArray();
 
-                if (response.IsSuccess)
+                if (response != null)
                 {
-                    if (response.StatusCode == 200)
+                    if (response.IsSuccess)
                     {
-                        var returnDatas = (IList)Parser.Parse(response.DataAsText);
-                        var gnArray = new GNArray.Builder()
-                            .AddAll(returnDatas)
-                            .Build();
-
-                        var returnCode = gnArray.GetInt(0);
-                        obj.Add(returnCode);
-
-                        if (returnCode == (int)ReturnCode.Ok)
+                        if (response.StatusCode == 200)
                         {
-                            if (gnArray.Count() > 1) obj.Add(gnArray.GetGNHashtable(1));
-                            else obj.Add(new GNHashtable());
-                        }
-                        else
-                        {
-                            if (gnArray.Count() > 1) obj.Add(gnArray.GetString(1));
-                            else obj.Add(null);
-                        }
+                            var returnDatas = (IList)Parser.Parse(response.DataAsText);
+                            var gnArray = new GNArray.Builder()
+                                .AddAll(returnDatas)
+                                .Build();
 
-                        obj.Add(operationRequest.GetRequestId());
-                    }
-                    else
-                    {
-                        obj.Add((int)ReturnCode.UnknownError);
-                        obj.Add(null);
-                        obj.Add(operationRequest.GetRequestId());
+                            var returnCode = gnArray.GetInt(0);
+                            obj.Add(returnCode);
+
+                            if (returnCode == (int)ReturnCode.Ok)
+                            {
+                                if (gnArray.Count() > 1) obj.Add(gnArray.GetGNHashtable(1));
+                                else obj.Add(new GNHashtable());
+                            }
+                            else
+                            {
+                                if (gnArray.Count() > 1) obj.Add(gnArray.GetString(1));
+                                else obj.Add(null);
+                            }
+
+                            obj.Add(operationRequest.GetRequestId());
+
+                            OnResponseHandler(obj);
+                            return;
+                        }
                     }
                 }
-                else
-                {
-                    obj.Add((int)ReturnCode.UnknownError);
-                    obj.Add(null);
-                    obj.Add(operationRequest.GetRequestId());
-                }
+
+                obj.Add((int)ReturnCode.UnknownError);
+                obj.Add(null);
+                obj.Add(operationRequest.GetRequestId());
 
                 OnResponseHandler(obj);
-            }, operationRequest.GetTimeOut()));
+            }, operationRequest.GetTimeOut());
         }
 
-        IEnumerator IESend(string uri, GNHashtable param, HTTPMethods methods, Action<HTTPResponse> onResponse, float timeout)
+        void Send(string subUri, GNHashtable param, HTTPMethods methods, Action<HTTPResponse> onResponse, float timeout)
         {
-            var authToken = GNNetwork.authToken;
-
-            using (var request = new HTTPRequest(new Uri(httpUrl + uri), methods))
+            using (var request = new HTTPRequest(new Uri(httpUrl + subUri), methods, (httpRequest, httpResponse) =>
+            {
+                onResponse?.Invoke(httpResponse);
+            }))
             {
                 if (param != null) request.AddField(Commands.Data, Serializer.Serialize(param.ToData()));
 
                 request.Timeout = TimeSpan.FromSeconds(timeout + 5);
 
+                var authToken = GNNetwork.authToken;
+
                 if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
 
                 request.Send();
-
-                yield return new WaitWhile(() => request.State < HTTPRequestStates.Finished);
-
-                onResponse?.Invoke(request.Response);
             }
         }
     
         internal void Send(string uri, Action<HTTPResponse> onResponse)
         {
-            StartCoroutine(IESend(uri, null, HTTPMethods.Get, onResponse, 15));
+            Send(uri, null, HTTPMethods.Get, onResponse, 15);
         }
     }
 }

@@ -13,6 +13,8 @@
     {
         public const string Version = "1.0.1";
 
+        public const string AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
+
         public static GNServerSettings gnServerSettings { get; private set; }
 
         internal static NetworkingPeer peer { get; private set; }
@@ -39,6 +41,8 @@
             if (!Application.isPlaying) return;
 
             InitGNSocketObject();
+
+            authToken = PlayerPrefs.GetString(AUTH_TOKEN_KEY);
         }
 
         private static void InitServerSettings()

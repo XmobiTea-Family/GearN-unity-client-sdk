@@ -131,6 +131,14 @@
             return answer;
         }
 
+        public object ToBinaryData()
+        {
+            return new object[]
+            {
+                0, 1, 2
+            };
+        }
+
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();

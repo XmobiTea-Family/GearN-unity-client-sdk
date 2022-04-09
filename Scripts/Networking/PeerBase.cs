@@ -70,15 +70,14 @@
                     foreach (var operationPendingPair in operationWaitingResponseDic)
                     {
                         var operationPending = operationPendingPair.Value;
-                        var operationRequest = operationPending.GetOperationRequest();
 
-                        if (operationPending.GetTimeout() < Time.realtimeSinceStartup)
+                        if (operationPending.IsTimeout())
                         {
                             var gnArray = new GNArray();
 
                             gnArray.Add((int)ReturnCode.OperationTimeout);
-                            gnArray.Add((string)null);
-                            gnArray.Add(operationRequest.GetRequestId());
+                            gnArray.Add(null);
+                            gnArray.Add(operationPending.GetOperationRequest().GetRequestId());
 
                             gnArrayLst.Add(gnArray);
                         }
@@ -113,6 +112,11 @@
 
             if (operationWaitingResponseDic.ContainsKey(responseId))
             {
+                var operationPending = operationWaitingResponseDic[responseId];
+                operationPending.OnRecv();
+
+                operationWaitingResponseDic.Remove(responseId);
+
                 var returnCode = obj.GetInt(0);
 
                 GNHashtable parameters = null;
@@ -120,9 +124,6 @@
 
                 if (returnCode == (int)ReturnCode.Ok) parameters = obj.GetGNHashtable(1);
                 else debugMessage = obj.GetString(1);
-
-                var operationPending = operationWaitingResponseDic[responseId];
-                operationPending.OnRecv();
 
                 var operationRequest = operationPending.GetOperationRequest();
                 var operationResponse = new OperationResponse(operationRequest.GetOperationCode(), operationRequest.GetRequestId());
@@ -135,8 +136,6 @@
 
                 operationPending.GetCallback()?.Invoke(operationResponse);
 
-                operationWaitingResponseDic.Remove(responseId);
-
                 if (!operationResponse.HasError)
                 {
                     AddPing(operationPending.GetExecuteTimerInMs());
@@ -145,7 +144,11 @@
                     {
                         if (parameters.ContainsKey(ParameterCode.AuthToken))
                         {
-                            GNNetwork.authToken = parameters.GetString(ParameterCode.AuthToken);
+                            var authToken = parameters.GetString(ParameterCode.AuthToken);
+
+                            GNNetwork.authToken = authToken;
+
+                            PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, authToken);
                         }
 
                         if (parameters.ContainsKey(ParameterCode.Ts))
@@ -163,22 +166,24 @@
 
         internal virtual void Send(OperationPending operationPending)
         {
-            var operationRequest = operationPending.GetOperationRequest();
-            if (operationRequest.GetRequestId() != -1) operationRequest.SetRequestId(requestId++);
-
-            if (operationRequest.GetRequestId() != -1 && operationPending.GetCallback() != null)
-            {
-                operationWaitingResponseDic[operationRequest.GetRequestId()] = operationPending;
-            }
-
             operationPending.OnSend();
+
+            var operationRequest = operationPending.GetOperationRequest();
+            if (operationRequest.GetRequestId() != -1)
+            {
+                operationRequest.SetRequestId(requestId++);
+
+                if (operationPending.GetCallback() != null)
+                {
+                    operationWaitingResponseDic[operationRequest.GetRequestId()] = operationPending;
+                }
+            }
         }
 
         internal int Ping { get; private set; } = -1;
-        protected float pingTime { get; set; }
-        protected Queue<float> pingLst = new Queue<float>();
+        private Queue<float> pingLst = new Queue<float>();
 
-        internal void AddPing(float value)
+        private void AddPing(float value)
         {
             if (pingLst.Count > 10) pingLst.Dequeue();
             pingLst.Enqueue(value / 2);

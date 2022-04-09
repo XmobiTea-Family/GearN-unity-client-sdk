@@ -19,8 +19,6 @@ namespace XmobiTea.GN.Networking
         internal string ClientId { get; set; }
         internal virtual bool IsWsConnected { get; private set; }
 
-        private string lastAuthToken = string.Empty;
-
         #endregion
 
         #region Private Properties
@@ -102,7 +100,7 @@ namespace XmobiTea.GN.Networking
             this._onRecvSIdHandler?.Invoke();
 
             var authToken = GNNetwork.authToken;
-            if (!string.IsNullOrEmpty(authToken) && !authToken.Equals(lastAuthToken))
+            if (!string.IsNullOrEmpty(authToken))
             {
                 SendRequestAuthSocket();
             }
