@@ -4,6 +4,7 @@
     using XmobiTea.GN.Entity.Response;
 
     using System;
+    using XmobiTea.GN.Networking;
 
     public static partial class GNNetwork
     {
@@ -15,6 +16,16 @@
         public static void GetConfig(string configName, Action<string> onResponse)
         {
             peer.GetConfig(configName, onResponse);
+        }
+
+        public static void DownloadFile(string fileId, Action<HttpAppResponse> onHttpAppResponse)
+        {
+            peer.DownloadFile(fileId, onHttpAppResponse);
+        }
+
+        public static void UploadFile(string fileId, byte[] content, string mimeType, Action<HttpAppResponse> onHttpAppResponse)
+        {
+            peer.UploadFile(fileId, content, mimeType, onHttpAppResponse);
         }
 
         public static void Debug(bool booleanValue, int numberValue, string stringValue, GNHashtable gnHashtableValue, GNArray gnArrayValue, Action<DebugOperationResponse> onResponse = null)
@@ -95,6 +106,16 @@
         public static void Template(bool booleanValue, Action<TemplateOperationResponse> onResponse = null)
         {
             peer.Template(booleanValue, onResponse);
+        }
+
+        public static void CreateNewFileUploadInfo(string originFileName, Action<CreateNewFileUploadInfoOperationResponse> onResponse = null)
+        {
+            peer.CreateNewFileUploadInfo(originFileName, onResponse);
+        }
+
+        public static void GetFileUploadInfo(string fileId, Action<GetFileUploadInfoOperationResponse> onResponse = null)
+        {
+            peer.GetFileUploadInfo(fileId, onResponse);
         }
     }
 }

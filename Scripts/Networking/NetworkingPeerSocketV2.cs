@@ -9,8 +9,6 @@
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
-    using System.IO;
-    using XmobiTea.GN.Helper;
 
     internal class NetworkingPeerSocketV2 : NetworkingPeerBase
     {

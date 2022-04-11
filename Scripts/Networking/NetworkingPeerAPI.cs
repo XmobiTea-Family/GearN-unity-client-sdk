@@ -11,34 +11,34 @@
 
     public partial class NetworkingPeer
     {
+        internal const string SYNC_TS = "ts";
+        internal const string UPLOAD_FILE = "upload";
+        internal const string DOWNLOAD_FILE = "upload";
+        internal const string GET_CONFIG = "getConfig";
+        internal const string API_JSON = "api/0";
+        internal const string API_MSG_PACK = "api/1";
+
         internal void SyncTs(Action<long> onResponse = null)
         {
             if (httpPeer != null) {
-                (httpPeer as HttpPeer).Send("/ts", response =>
+                (httpPeer as HttpPeer).GetRequest(SYNC_TS, httpAppResponse =>
                 {
-                    if (response == null)
+                    if (!httpAppResponse.HasError)
                     {
-
-                    }
-                    else
-                    {
-                        if (response.IsSuccess)
+                        if (httpAppResponse.StatusCode == 200)
                         {
-                            if (response.StatusCode == 200)
+                            var returnDatas = (IList)Parser.Parse(httpAppResponse.Text);
+                            var gnArray = new GNArray.Builder()
+                                .AddAll(returnDatas)
+                                .Build();
+
+                            var returnCode = (ReturnCode)gnArray.GetInt(0);
+                            if (returnCode == ReturnCode.Ok)
                             {
-                                var returnDatas = (IList)Parser.Parse(response.DataAsText);
-                                var gnArray = new GNArray.Builder()
-                                    .AddAll(returnDatas)
-                                    .Build();
+                                var gnHashtable = gnArray.GetGNHashtable(1);
+                                var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-                                var returnCode = (ReturnCode)gnArray.GetInt(0);
-                                if (returnCode == ReturnCode.Ok)
-                                {
-                                    var gnHashtable = gnArray.GetGNHashtable(1);
-                                    var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-
-                                    SetServerTimeMilliseconds(newServerTimestamp);
-                                }
+                                SetServerTimeMilliseconds(newServerTimestamp);
                             }
                         }
                     }
@@ -52,35 +52,44 @@
         {
             if (httpPeer != null)
             {
-                (httpPeer as HttpPeer).Send("/getConfig/" + configName, response =>
+                (httpPeer as HttpPeer).GetRequest(GET_CONFIG + "/" + configName, httpAppResponse =>
                 {
-                    if (response == null)
+                    if (!httpAppResponse.HasError)
                     {
-
-                    }
-                    else
-                    {
-                        if (response.IsSuccess)
+                        if (httpAppResponse.StatusCode == 200)
                         {
-                            if (response.StatusCode == 200)
+                            var returnDatas = (IList)Parser.Parse(httpAppResponse.Text);
+                            var gnArray = new GNArray.Builder()
+                                .AddAll(returnDatas)
+                                .Build();
+
+                            var returnCode = (ReturnCode)gnArray.GetInt(0);
+                            if (returnCode == ReturnCode.Ok)
                             {
-                                var returnDatas = (IList)Parser.Parse(response.DataAsText);
-                                var gnArray = new GNArray.Builder()
-                                    .AddAll(returnDatas)
-                                    .Build();
+                                var gnHashtable = gnArray.GetGNHashtable(1);
+                                var configStr = gnHashtable.GetString(1);
 
-                                var returnCode = (ReturnCode)gnArray.GetInt(0);
-                                if (returnCode == ReturnCode.Ok)
-                                {
-                                    var gnHashtable = gnArray.GetGNHashtable(1);
-                                    var configStr = gnHashtable.GetString(1);
-
-                                    onResponse?.Invoke(configStr);
-                                }
+                                onResponse?.Invoke(configStr);
                             }
                         }
                     }
                 });
+            }
+        }
+
+        internal void DownloadFile(string fileId, Action<HttpAppResponse> onHttpAppResponse)
+        {
+            if (httpPeer != null)
+            {
+                (httpPeer as HttpPeer).GetRequest(DOWNLOAD_FILE + "/" + fileId, onHttpAppResponse);
+            }
+        }
+
+        internal void UploadFile(string fileId, byte[] content, string mimeType, Action<HttpAppResponse> onHttpAppResponse)
+        {
+            if (httpPeer != null)
+            {
+                (httpPeer as HttpPeer).UploadFile(fileId, content, mimeType, onHttpAppResponse);
             }
         }
 
@@ -257,6 +266,28 @@
             {
                 var templateOperationResponse = new TemplateOperationResponse(response);
                 onResponse?.Invoke(templateOperationResponse);
+            });
+        }
+
+        internal void CreateNewFileUploadInfo(string originFileName, Action<CreateNewFileUploadInfoOperationResponse> onResponse = null)
+        {
+            var request = new CreateNewFileUploadInfoOperationRequest(originFileName).Builder();
+
+            HttpSend(request, response =>
+            {
+                var createNewFileUploadInfoOperationResponse = new CreateNewFileUploadInfoOperationResponse(response);
+                onResponse?.Invoke(createNewFileUploadInfoOperationResponse);
+            });
+        }
+
+        internal void GetFileUploadInfo(string fileId, Action<GetFileUploadInfoOperationResponse> onResponse = null)
+        {
+            var request = new GetFileUploadInfoOperationRequest(fileId).Builder();
+
+            HttpSend(request, response =>
+            {
+                var getFileUploadInfoOperationResponse = new GetFileUploadInfoOperationResponse(response);
+                onResponse?.Invoke(getFileUploadInfoOperationResponse);
             });
         }
     }

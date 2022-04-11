@@ -28,7 +28,9 @@ namespace XmobiTea.GN.Config.Editor
         SerializedProperty peerSocketVersion;
         SerializedProperty codeCanSendNotAuthorized;
         SerializedProperty gnServerSourcePath;
-        
+        SerializedProperty httpRequestType;
+        SerializedProperty postType;
+
         private void OnEnable()
         {
             serverAddress = serializedObject.FindProperty("_serverAddress");
@@ -43,6 +45,8 @@ namespace XmobiTea.GN.Config.Editor
             peerSocketVersion = serializedObject.FindProperty("_peerSocketVersion");
             codeCanSendNotAuthorized = serializedObject.FindProperty("_codeCanSendNotAuthorized");
             gnServerSourcePath = serializedObject.FindProperty("_gnServerSourcePath");
+            httpRequestType = serializedObject.FindProperty("_httpRequestType");
+            postType = serializedObject.FindProperty("_postType");
         }
 
         public override void OnInspectorGUI()
@@ -61,6 +65,8 @@ namespace XmobiTea.GN.Config.Editor
             EditorGUILayout.PropertyField(peerSocketVersion);
             EditorGUILayout.PropertyField(codeCanSendNotAuthorized);
             EditorGUILayout.PropertyField(gnServerSourcePath);
+            EditorGUILayout.PropertyField(httpRequestType);
+            EditorGUILayout.PropertyField(postType);
 
             serializedObject.ApplyModifiedProperties();
         }

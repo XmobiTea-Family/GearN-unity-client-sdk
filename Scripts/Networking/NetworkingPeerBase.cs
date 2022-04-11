@@ -126,7 +126,7 @@ namespace XmobiTea.GN.Networking
             _onResponseHandler?.Invoke(obj);
         }
 
-        internal System.Collections.IDictionary fromMsgKeyValuePairs(KeyValuePair<object, object>[] keyValuePairs)
+        internal static System.Collections.IDictionary fromMsgKeyValuePairs(KeyValuePair<object, object>[] keyValuePairs)
         {
             var answer = new Dictionary<object, object>();
 
@@ -154,7 +154,7 @@ namespace XmobiTea.GN.Networking
             return answer;
         }
 
-        internal System.Collections.IList fromMsgList(object[] objects)
+        internal static System.Collections.IList fromMsgList(object[] objects)
         {
             var answer = new List<object>();
 

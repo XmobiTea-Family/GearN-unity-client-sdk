@@ -9,5 +9,7 @@ namespace XmobiTea.GN.Constant
         public const int EnterDisplayName = 4;
         public const int RegisterSocket = 5;
         public const int FetchAllData = 6;
+        public const int CreateNewFileUploadInfo = 7;
+        public const int GetFileUploadInfo = 8;
     }
 }
