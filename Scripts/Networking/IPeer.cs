@@ -60,4 +60,3 @@
         void Enqueue(OperationRequest operationRequest, Action<OperationResponse> onOperationResponse);
     }
 }
-
