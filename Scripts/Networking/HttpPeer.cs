@@ -244,7 +244,7 @@
                 var authToken = GNNetwork.authToken;
 
                 if (!string.IsNullOrEmpty(authToken)) unityWebRequest.SetRequestHeader(Commands.RequestAuthTokenCmd, authToken);
-                unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
+                //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
                 yield return unityWebRequest.SendWebRequest();
 
@@ -334,7 +334,7 @@
 
                 if (param == null) param = new GNHashtable();
 
-                unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
+                //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
                 if (postType == PostType.Json)
                 {
@@ -459,7 +459,7 @@
 
                 if (!string.IsNullOrEmpty(authToken)) unityWebRequest.SetRequestHeader(Commands.RequestAuthTokenCmd, authToken);
 
-                unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
+                //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
                 yield return unityWebRequest.SendWebRequest();
 
