@@ -7,6 +7,7 @@
 
     using UnityEngine;
     using XmobiTea.GN.Entity;
+    using XmobiTea.GN.Helper;
 
     public static partial class GNNetwork
     {
@@ -33,6 +34,12 @@
             }
         }
 
+        public static RuntimePlatform platform { get; private set; }
+
+        public static string deviceId { get; private set; }
+
+        public static string deviceInfo => platform + "_" + deviceId;
+
         static GNNetwork()
         {
             InitServerSettings();
@@ -42,6 +49,9 @@
             InitGNSocketObject();
 
             authToken = PlayerPrefs.GetString(AUTH_TOKEN_KEY);
+
+            platform = DeviceInfoHelper.Platform;
+            deviceId = DeviceInfoHelper.DeviceId;
         }
 
         private static void InitServerSettings()
@@ -65,14 +75,14 @@
             peer.InitPeer();
         }
 
-        public static void SocketSend(OperationRequest request, Action<OperationResponse> onResponse = null)
+        public static void SendViaSocket(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
-            peer.SocketSend(request, onResponse);
+            peer.SendViaSocket(request, onResponse);
         }
 
-        public static void HttpSend(OperationRequest request, Action<OperationResponse> onResponse = null)
+        public static void SendViaHttp(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
-            peer.HttpSend(request, onResponse);
+            peer.SendViaHttp(request, onResponse);
         }
     }
 }

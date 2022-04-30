@@ -39,7 +39,7 @@
 
     internal class HttpPeer : PeerBase
     {
-        private const string CONTENT_TYPE = "content-type";
+        private const string CONTENT_TYPE = "Content-Type";
         private const string APPLICATION_JSON = "application/json";
         private const string APPLICATION_MSGPACK = "application/msgpack";
 
@@ -68,7 +68,7 @@
 
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {
-                HTTPManager.UserAgent = string.Empty;
+                HTTPManager.UserAgent = "GN-unity@" + GNNetwork.Version;
                 HTTPManager.KeepAliveDefaultValue = false;
             }
         }
@@ -313,6 +313,8 @@
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
 
             request.Send();
+
+            Debug.Log("");
         }
 
         private IEnumerator IEPostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout)
