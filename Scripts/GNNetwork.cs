@@ -10,7 +10,7 @@
 
     public static partial class GNNetwork
     {
-        public const string Version = "0.3.0";
+        public const string Version = "0.3.4";
 
         public const string AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
 

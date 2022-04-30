@@ -3,6 +3,7 @@
     using System.Text;
 
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Helper;
 
     public class OperationRequest
     {
@@ -98,7 +99,7 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + GetOperationCode() + " RequestId: " + requestId + " parameters " + parameters);
+            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(operationCode) + " RequestId: " + requestId + " parameters " + parameters);
 
             return stringBuilder.ToString();
         }

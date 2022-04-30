@@ -194,13 +194,22 @@ namespace XmobiTea.GN.Config.Editor
 
             var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
+            var isPartialClass = false;
+
+            if (fileName.Contains(".ext"))
+            {
+                isPartialClass = true;
+
+                fileName = fileName.Replace(".ext", string.Empty);
+            }
+
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine("// The file auto generate, please dont change it");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
             stringBuilder.AppendLine("{");
-            stringBuilder.AppendLine("    public class " + fileName);
+            stringBuilder.AppendLine(isPartialClass ? ("    public partial class " + fileName) : ("    public class " + fileName));
             stringBuilder.AppendLine("    {");
             // Value0 = 0,
             for (var i = 0; i < allLines.Length; i++)
@@ -252,13 +261,22 @@ namespace XmobiTea.GN.Config.Editor
 
             var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
+            var isPartialClass = false;
+
+            if (fileName.Contains(".ext"))
+            {
+                isPartialClass = true;
+
+                fileName = fileName.Replace(".ext", string.Empty);
+            }
+
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine("// The file auto generate, please dont change it");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
             stringBuilder.AppendLine("{");
-            stringBuilder.AppendLine("    public class " + fileName);
+            stringBuilder.AppendLine(isPartialClass ? ("    public partial class " + fileName) : ("    public class " + fileName));
             stringBuilder.AppendLine("    {");
             // Value0 = 0,
             for (var i = 0; i < allLines.Length; i++)

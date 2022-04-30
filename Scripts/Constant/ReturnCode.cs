@@ -1,15 +1,17 @@
 namespace XmobiTea.GN.Constant
 {
-    public enum ReturnCode
+    public class ReturnCode
     {
-        OperationNotAuthorized = -7,
-        InvalidRequestParameters = -6,
-        OperationInvalid = -3,
-        InternalServerError = -2,
-        OperationTimeout = -1,
+        public const int MaxCCUReject = -8;
 
-        UnknownError = 0,
+        public const int OperationNotAuthorized = -7;
+        public const int InvalidRequestParameters = -6;
+        public const int OperationInvalid = -3;
+        public const int InternalServerError = -2;
+        public const int OperationTimeout = -1;
 
-        Ok = 1,
+        public const int UnknownError = 0;
+
+        public const int Ok = 1;
     }
 }

@@ -32,7 +32,7 @@
                                 .AddAll(returnDatas)
                                 .Build();
 
-                            var returnCode = (ReturnCode)gnArray.GetInt(0);
+                            var returnCode = gnArray.GetInt(0);
                             if (returnCode == ReturnCode.Ok)
                             {
                                 var gnHashtable = gnArray.GetGNHashtable(1);
@@ -63,7 +63,7 @@
                                 .AddAll(returnDatas)
                                 .Build();
 
-                            var returnCode = (ReturnCode)gnArray.GetInt(0);
+                            var returnCode = gnArray.GetInt(0);
                             if (returnCode == ReturnCode.Ok)
                             {
                                 var gnHashtable = gnArray.GetGNHashtable(1);

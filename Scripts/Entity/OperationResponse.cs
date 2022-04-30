@@ -2,10 +2,9 @@
 {
     using System.Text;
 
-    using UnityEngine;
-
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Helper;
 
     public class OperationResponse
     {
@@ -21,9 +20,9 @@
             return operationCode;
         }
 
-        public ReturnCode GetReturnCode()
+        public int GetReturnCode()
         {
-            return (ReturnCode)returnCode;
+            return returnCode;
         }
 
         public GNHashtable GetParameters()
@@ -71,7 +70,10 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + GetOperationCode() + " ResponseId: " + responseId + " ReturnCode " + GetReturnCode() + " parameters " + parameters);
+            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(operationCode) + " ResponseId: " + responseId + " ReturnCode " + CodeHelper.GetReturnCodeName(returnCode));
+
+            if (returnCode == ReturnCode.Ok) stringBuilder.Append(" Parameters " + parameters);
+            else stringBuilder.Append(" DebugMessage " + debugMessage);
 
             return stringBuilder.ToString();
         }

@@ -13,8 +13,8 @@
     using XmobiTea.GN.Config;
     using System.IO;
     using System.Text;
-    using MsgPack.Serialization;
     using System.Collections.Generic;
+    using XmobiTea.MsgPack;
 
     public class HttpAppResponse
     {
@@ -43,7 +43,6 @@
         private const string APPLICATION_JSON = "application/json";
         private const string APPLICATION_MSGPACK = "application/msgpack";
 
-        private MessagePackSerializer serializer;
         private string httpUrl;
         private HttpRequestType httpRequestType;
         private PostType postType;
@@ -62,8 +61,6 @@
 
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
-
-            serializer = MessagePackSerializer.Get<object>();
 
             httpRequestType = gnServerSettings.httpRequestType;
             postType = gnServerSettings.postType;
@@ -131,7 +128,7 @@
                 {
                     if (postType == PostType.MsgPack)
                     {
-                        var iList = LsMsgPack.MsgPackSerializer.Deserialize<object[]>(httpAppResponse.Data);
+                        var iList = MsgPackSerializer.Deserialize<object[]>(httpAppResponse.Data);
                         var gnArray = new GNArray();
 
                         var returnCode = Convert.ToInt32(iList[0]);
@@ -302,7 +299,9 @@
             {
                 request.SetHeader(CONTENT_TYPE, APPLICATION_MSGPACK);
 
-                var content = serializer.PackSingleObject(param.ToData());
+                var dataSend = param.ToData();
+
+                var content = MsgPackSerializer.Serialize(dataSend);
 
                 request.UploadStream = new MemoryStream(content);
             }
@@ -341,7 +340,9 @@
                 {
                     unityWebRequest.SetRequestHeader(CONTENT_TYPE, APPLICATION_MSGPACK);
 
-                    var content = serializer.PackSingleObject(param.ToData());
+                    var dataSend = param.ToData();
+
+                    var content = MsgPackSerializer.Serialize(dataSend);
 
                     unityWebRequest.uploadHandler = new UploadHandlerRaw(content);
                 }

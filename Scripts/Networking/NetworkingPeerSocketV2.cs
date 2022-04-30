@@ -9,6 +9,7 @@
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
+    using XmobiTea.MsgPack;
 
     internal class NetworkingPeerSocketV2 : NetworkingPeerBase
     {
@@ -60,6 +61,7 @@
                     ReconnectionDelay = new TimeSpan(0, 0, this.reconnectDelay),
                     Timeout = new TimeSpan(0, 0, (int)this.pingTimeout),
                     AutoConnect = false,
+                    ConnectWith = BestHTTP.SocketIO.Transports.TransportTypes.WebSocket
                 });
 
                 socketManager.Socket.On(SocketIOEventTypes.Connect, OnConnect);
@@ -120,7 +122,7 @@
 
                         try
                         {
-                            var iList = LsMsgPack.MsgPackSerializer.Deserialize<object[]>(byteArr);
+                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                             var gnArray = new GNArray();
 
@@ -158,7 +160,7 @@
 
                         try
                         {
-                            var iList = LsMsgPack.MsgPackSerializer.Deserialize<object[]>(byteArr);
+                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                             var gnArray = new GNArray.Builder().AddAll(fromMsgList(iList)).Build();
                             OnEventHandler(gnArray);
@@ -191,7 +193,7 @@
 
             var dataSend = operationRequest.ToData();
 
-            socketManager.Socket.Emit(Commands.RequestCmd, LsMsgPack.MsgPackSerializer.Serialize(dataSend));
+            socketManager.Socket.Emit(Commands.RequestCmd, MsgPackSerializer.Serialize(dataSend));
         }
 
         internal override void Close()

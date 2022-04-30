@@ -3,6 +3,7 @@
     using System.Text;
 
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Helper;
 
     public class OperationEvent
     {
@@ -44,7 +45,7 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + GetEventCode() + " parameters " + parameters);
+            stringBuilder.Append("Code: " + CodeHelper.GetEventCodeName(eventCode) + " parameters " + parameters);
 
             return stringBuilder.ToString();
         }

@@ -1,15 +1,14 @@
 ﻿namespace XmobiTea.GN.Entity.Response
 {
     using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
 
     public abstract class CustomOperationResponse
     {
         private GNHashtable Parameters { get; set; }
-        public ReturnCode ReturnCode { get; private set; }
+        public int ReturnCode { get; private set; }
         public string DebugMessage { get; private set; }
 
-        public bool HasError => ReturnCode != ReturnCode.Ok;
+        public bool HasError => ReturnCode != XmobiTea.GN.Constant.ReturnCode.Ok;
 
         public CustomOperationResponse(OperationResponse operationResponse)
         {
