@@ -10,7 +10,7 @@ namespace XmobiTea.GN.Helper.DeviceInfo.WebGL
     {
         private const string DEVICE_ID_PLAYER_PREFS_KEY = "[GN] DeviceId";
 
-        public string GetDeviceId()
+        public static string GetDeviceId()
         {
             var deviceId = PlayerPrefs.GetString(DeviceKeyChain.DEVICE_ID_PLAYER_PREFS_KEY);
 
