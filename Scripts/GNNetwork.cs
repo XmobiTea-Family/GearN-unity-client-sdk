@@ -38,7 +38,7 @@
 
         public static string deviceId { get; private set; }
 
-        public static string deviceInfo => platform + "_" + deviceId;
+        public static string deviceInfo => (int)platform + "_" + deviceId;
 
         static GNNetwork()
         {
