@@ -38,9 +38,9 @@
             return (this.secondsSend - this.firstSend) / 1000;
         }
 
-        public float GetTimeout()
+        public bool IsTimeout()
         {
-            return timeout;
+            return timeout < UnityEngine.Time.realtimeSinceStartup;
         }
 
         public OperationRequest GetOperationRequest()
@@ -60,4 +60,3 @@
         void Enqueue(OperationRequest operationRequest, Action<OperationResponse> onOperationResponse);
     }
 }
-

@@ -9,9 +9,7 @@ namespace XmobiTea.GN.Networking
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
-    using System.IO;
-    using XmobiTea.GN.Helper;
-    using System.Linq;
+    using XmobiTea.MsgPack;
 
     internal class NetworkingPeerSocketV3 : NetworkingPeerBase
     {
@@ -37,7 +35,8 @@ namespace XmobiTea.GN.Networking
         {
             base.SendRequestAuthSocket();
 
-            socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
+            if (!string.IsNullOrEmpty(ClientId))
+                socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
         }
 
         internal override void ReInitNewSocket()
@@ -53,6 +52,7 @@ namespace XmobiTea.GN.Networking
                     ReconnectionDelay = new TimeSpan(0, 0, this.reconnectDelay),
                     Timeout = new TimeSpan(0, 0, (int)this.pingTimeout),
                     AutoConnect = false,
+                    ConnectWith = BestHTTP.SocketIO3.Transports.TransportTypes.WebSocket
                 });
 
                 socketManager.Socket.On(SocketIOEventTypes.Connect, OnConnect);
@@ -79,7 +79,6 @@ namespace XmobiTea.GN.Networking
 
         private void OnEvent(byte[] eventData)
         {
-
             lock (messageLstLock)
             {
                 eventPacketLst.Add(eventData);
@@ -114,7 +113,7 @@ namespace XmobiTea.GN.Networking
 
                         try
                         {
-                            var iList = LsMsgPack.MsgPackSerializer.Deserialize<object[]>(byteArr);
+                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                             var gnArray = new GNArray();
 
@@ -152,7 +151,7 @@ namespace XmobiTea.GN.Networking
 
                         try
                         {
-                            var iList = LsMsgPack.MsgPackSerializer.Deserialize<object[]>(byteArr);
+                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                             var gnArray = new GNArray.Builder().AddAll(fromMsgList(iList)).Build();
                             OnEventHandler(gnArray);
@@ -185,7 +184,7 @@ namespace XmobiTea.GN.Networking
 
             var dataSend = operationRequest.ToData();
 
-            socketManager.Socket.Emit(Commands.RequestCmd, LsMsgPack.MsgPackSerializer.Serialize(dataSend));
+            socketManager.Socket.Emit(Commands.RequestCmd, MsgPackSerializer.Serialize(dataSend));
         }
 
         internal override void Close()

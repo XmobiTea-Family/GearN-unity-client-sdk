@@ -133,11 +133,25 @@
 
         public override string ToString()
         {
-            return new StringBuilder()
-                .Append("[")
-                .Append(String.Join(",", originObject))
-                .Append("]")
-                .ToString();
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("{");
+
+            var i = 0;
+            foreach (var c in originObject)
+            {
+                if (i != 0) stringBuilder.Append(",");
+
+                i++;
+                var value = c.Value;
+                if (value == null) stringBuilder.Append("\"" + c.Key.ToString() + "\"" + ":null");
+                else if (value is GNData gnData) stringBuilder.Append("\"" + c.Key.ToString() + "\"" + ":" + gnData.ToString());
+                else if (value is string valueStr) stringBuilder.Append("\"" + c.Key.ToString() + "\"" + ":" + "\"" + valueStr + "\"");
+                else if (value is bool boolValue) stringBuilder.Append("\"" + c.Key.ToString() + "\"" + ":" + boolValue.ToString().ToLower());
+                else stringBuilder.Append("\"" + c.Key.ToString() + "\"" + ":" + value);
+            }
+
+            stringBuilder.Append("}");
+            return stringBuilder.ToString();
         }
     }
 }

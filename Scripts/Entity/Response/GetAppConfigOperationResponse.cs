@@ -20,7 +20,10 @@
 
                 ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
 
-                ConfigNotUptodateLst = parameters.GetArray<string>(GetAppConfigParameterCode.ConfigNotUptodateLst);
+                if (ErrorCode == GetAppConfigErrorCode.Ok)
+                {
+                    ConfigNotUptodateLst = parameters.GetArray<string>(GetAppConfigParameterCode.ConfigNotUptodateLst);
+                }
             }
         }
     }

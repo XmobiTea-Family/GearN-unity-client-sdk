@@ -28,7 +28,9 @@ namespace XmobiTea.GN.Config.Editor
         SerializedProperty peerSocketVersion;
         SerializedProperty codeCanSendNotAuthorized;
         SerializedProperty gnServerSourcePath;
-        
+        SerializedProperty httpRequestType;
+        SerializedProperty postType;
+
         private void OnEnable()
         {
             serverAddress = serializedObject.FindProperty("_serverAddress");
@@ -43,6 +45,8 @@ namespace XmobiTea.GN.Config.Editor
             peerSocketVersion = serializedObject.FindProperty("_peerSocketVersion");
             codeCanSendNotAuthorized = serializedObject.FindProperty("_codeCanSendNotAuthorized");
             gnServerSourcePath = serializedObject.FindProperty("_gnServerSourcePath");
+            httpRequestType = serializedObject.FindProperty("_httpRequestType");
+            postType = serializedObject.FindProperty("_postType");
         }
 
         public override void OnInspectorGUI()
@@ -61,6 +65,8 @@ namespace XmobiTea.GN.Config.Editor
             EditorGUILayout.PropertyField(peerSocketVersion);
             EditorGUILayout.PropertyField(codeCanSendNotAuthorized);
             EditorGUILayout.PropertyField(gnServerSourcePath);
+            EditorGUILayout.PropertyField(httpRequestType);
+            EditorGUILayout.PropertyField(postType);
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -188,13 +194,22 @@ namespace XmobiTea.GN.Config.Editor
 
             var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
+            var isPartialClass = false;
+
+            if (fileName.Contains(".ext"))
+            {
+                isPartialClass = true;
+
+                fileName = fileName.Replace(".ext", string.Empty);
+            }
+
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine("// The file auto generate, please dont change it");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
             stringBuilder.AppendLine("{");
-            stringBuilder.AppendLine("    public class " + fileName);
+            stringBuilder.AppendLine(isPartialClass ? ("    public partial class " + fileName) : ("    public class " + fileName));
             stringBuilder.AppendLine("    {");
             // Value0 = 0,
             for (var i = 0; i < allLines.Length; i++)
@@ -246,13 +261,22 @@ namespace XmobiTea.GN.Config.Editor
 
             var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
+            var isPartialClass = false;
+
+            if (fileName.Contains(".ext"))
+            {
+                isPartialClass = true;
+
+                fileName = fileName.Replace(".ext", string.Empty);
+            }
+
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine("// The file auto generate, please dont change it");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
             stringBuilder.AppendLine("{");
-            stringBuilder.AppendLine("    public class " + fileName);
+            stringBuilder.AppendLine(isPartialClass ? ("    public partial class " + fileName) : ("    public class " + fileName));
             stringBuilder.AppendLine("    {");
             // Value0 = 0,
             for (var i = 0; i < allLines.Length; i++)

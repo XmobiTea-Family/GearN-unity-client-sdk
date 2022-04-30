@@ -9,8 +9,7 @@
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
-    using System.IO;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.MsgPack;
 
     internal class NetworkingPeerSocketV2 : NetworkingPeerBase
     {
@@ -44,7 +43,8 @@
         {
             base.SendRequestAuthSocket();
 
-            socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
+            if (!string.IsNullOrEmpty(ClientId))
+                socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
         }
 
         internal override void ReInitNewSocket()
@@ -61,6 +61,7 @@
                     ReconnectionDelay = new TimeSpan(0, 0, this.reconnectDelay),
                     Timeout = new TimeSpan(0, 0, (int)this.pingTimeout),
                     AutoConnect = false,
+                    ConnectWith = BestHTTP.SocketIO.Transports.TransportTypes.WebSocket
                 });
 
                 socketManager.Socket.On(SocketIOEventTypes.Connect, OnConnect);
@@ -121,7 +122,7 @@
 
                         try
                         {
-                            var iList = LsMsgPack.MsgPackSerializer.Deserialize<object[]>(byteArr);
+                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                             var gnArray = new GNArray();
 
@@ -159,7 +160,7 @@
 
                         try
                         {
-                            var iList = LsMsgPack.MsgPackSerializer.Deserialize<object[]>(byteArr);
+                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                             var gnArray = new GNArray.Builder().AddAll(fromMsgList(iList)).Build();
                             OnEventHandler(gnArray);
@@ -192,9 +193,7 @@
 
             var dataSend = operationRequest.ToData();
 
-            socketManager.Socket.Emit(Commands.RequestCmd, LsMsgPack.MsgPackSerializer.Serialize(dataSend));
-
-            Debug.LogError(Serializer.Serialize(dataSend));
+            socketManager.Socket.Emit(Commands.RequestCmd, MsgPackSerializer.Serialize(dataSend));
         }
 
         internal override void Close()

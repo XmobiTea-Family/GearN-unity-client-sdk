@@ -28,6 +28,9 @@
 
         void SubscriberServerEventHandler()
         {
+            if (serverEventHandlerDic == null) serverEventHandlerDic = new Dictionary<int, IServerEventHandler>();
+            else serverEventHandlerDic.Clear();
+
             var type = typeof(IServerEventHandler);
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())

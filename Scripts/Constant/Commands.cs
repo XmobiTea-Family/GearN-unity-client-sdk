@@ -9,6 +9,7 @@
 		public const string EventCmd = "e";
 
 		public const string Data = "d";
+		public const string File = "f";
 
 		private Commands() { }
 	}

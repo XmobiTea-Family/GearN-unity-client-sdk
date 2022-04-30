@@ -12,6 +12,18 @@
         V2_v3 = 1,
         V3 = 2,
     }
+    
+    public enum HttpRequestType
+    {
+        UnityWebRequest = 0,
+        HTTPRequest = 1,
+    }
+
+    public enum PostType
+    {
+        Json,
+        MsgPack
+    }
 
     //[CreateAssetMenu(fileName = GNServerSettings.ResourcesPath, menuName = "GN/GNServerSettings", order = 1)]
     public class GNServerSettings : ScriptableObject
@@ -65,6 +77,14 @@
         [SerializeField]
         private string _gnServerSourcePath = "Template_GN-server";
         public string gnServerSourcePath => _gnServerSourcePath;
+
+        [SerializeField]
+        private HttpRequestType _httpRequestType = HttpRequestType.HTTPRequest;
+        public HttpRequestType httpRequestType => _httpRequestType;
+
+        [SerializeField]
+        private PostType _postType = PostType.MsgPack;
+        public PostType postType => _postType;
 
         public string SocketUrl
         {
