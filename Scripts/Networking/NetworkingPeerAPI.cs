@@ -97,7 +97,7 @@
         {
             var request = new DebugOperationRequest(booleanValue, numberValue, stringValue, gnHashtableValue, gnArrayValue).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var debugOperationResponse = new DebugOperationResponse(response);
                 onResponse?.Invoke(debugOperationResponse);
@@ -108,7 +108,7 @@
         {
             var request = new EnterDisplayNameOperationRequest(displayName).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var enterDisplayNameOperationResponse = new EnterDisplayNameOperationResponse(response);
                 onResponse?.Invoke(enterDisplayNameOperationResponse);
@@ -119,7 +119,7 @@
         {
             var request = new FetchAllDataOperationRequest().Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var fetchAllDataOperationResponse = new FetchAllDataOperationResponse(response);
                 onResponse?.Invoke(fetchAllDataOperationResponse);
@@ -130,7 +130,7 @@
         {
             var request = new GetAppConfigOperationRequest(configTypes).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var getAppConfigOperationResponse = new GetAppConfigOperationResponse(response);
                 onResponse?.Invoke(getAppConfigOperationResponse);
@@ -141,18 +141,18 @@
         {
             var request = new AccountLoginOperationRequest(username, password).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
-        internal void DeviceLogin(string deviceInfo, Action<LoginOperationResponse> onResponse = null)
+        internal void DeviceLogin(Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new DeviceLoginOperationRequest(deviceInfo).Builder();
+            var request = new DeviceLoginOperationRequest(GNNetwork.deviceInfo).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
@@ -163,7 +163,7 @@
         {
             var request = new FacebookLoginOperationRequest(facebookToken).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
@@ -174,7 +174,7 @@
         {
             var request = new GoogleLoginOperationRequest(googleToken).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
@@ -185,7 +185,7 @@
         {
             var request = new AppleLoginOperationRequest(appleToken).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
@@ -196,7 +196,7 @@
         {
             var request = new UserIdLoginOperationRequest(userId).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
@@ -207,7 +207,7 @@
         {
             var request = new PublicAddressLoginOperationRequest(signature, publicAddress, message).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
@@ -218,7 +218,7 @@
         {
             var request = new PublicAddressGetRandomMessageOperationRequest().Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var publicAddressGetRandomMessageOperationResponse = new PublicAddressGetRandomMessageOperationResponse(response);
                 onResponse?.Invoke(publicAddressGetRandomMessageOperationResponse);
@@ -229,7 +229,7 @@
         {
             var request = new CustomIdLoginOperationRequest(customId).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var loginOperationResponse = new LoginOperationResponse(response);
                 onResponse?.Invoke(loginOperationResponse);
@@ -240,7 +240,7 @@
         {
             var request = new RegisterAccountOperationRequest(username, password).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var registerAccountOperationResponse = new RegisterAccountOperationResponse(response);
                 onResponse?.Invoke(registerAccountOperationResponse);
@@ -251,7 +251,7 @@
         {
             var request = new RegisterSocketOperationRequest(sid).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var registerSocketOperationResponse = new RegisterSocketOperationResponse(response);
                 onResponse?.Invoke(registerSocketOperationResponse);
@@ -262,7 +262,7 @@
         {
             var request = new TemplateOperationRequest(booleanValue).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var templateOperationResponse = new TemplateOperationResponse(response);
                 onResponse?.Invoke(templateOperationResponse);
@@ -273,7 +273,7 @@
         {
             var request = new CreateNewFileUploadInfoOperationRequest(originFileName).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var createNewFileUploadInfoOperationResponse = new CreateNewFileUploadInfoOperationResponse(response);
                 onResponse?.Invoke(createNewFileUploadInfoOperationResponse);
@@ -284,7 +284,7 @@
         {
             var request = new GetFileUploadInfoOperationRequest(fileId).Builder();
 
-            HttpSend(request, response =>
+            SendViaHttp(request, response =>
             {
                 var getFileUploadInfoOperationResponse = new GetFileUploadInfoOperationResponse(response);
                 onResponse?.Invoke(getFileUploadInfoOperationResponse);

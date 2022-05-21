@@ -65,12 +65,12 @@
             }
         }
 
-        internal void SocketSend(OperationRequest request, Action<OperationResponse> onResponse = null)
+        internal void SendViaSocket(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
             if (socketPeer != null) socketPeer.Enqueue(request, onResponse);
         }
 
-        internal void HttpSend(OperationRequest request, Action<OperationResponse> onResponse = null)
+        internal void SendViaHttp(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
             if (httpPeer != null) httpPeer.Enqueue(request, onResponse);
         }

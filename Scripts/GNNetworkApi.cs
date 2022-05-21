@@ -53,9 +53,9 @@
             peer.AccountLogin(username, password, onResponse);
         }
 
-        public static void DeviceLogin(string deviceInfo, Action<LoginOperationResponse> onResponse = null)
+        public static void DeviceLogin(Action<LoginOperationResponse> onResponse = null)
         {
-            peer.DeviceLogin(deviceInfo, onResponse);
+            peer.DeviceLogin(onResponse);
         }
 
         public static void FacebookLogin(string facebookToken, Action<LoginOperationResponse> onResponse = null)

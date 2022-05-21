@@ -39,9 +39,10 @@
 
     internal class HttpPeer : PeerBase
     {
-        private const string CONTENT_TYPE = "content-type";
+        private const string CONTENT_TYPE = "Content-Type";
         private const string APPLICATION_JSON = "application/json";
         private const string APPLICATION_MSGPACK = "application/msgpack";
+        private static string UserAgent { get; set; }
 
         private string httpUrl;
         private HttpRequestType httpRequestType;
@@ -66,9 +67,11 @@
             postType = gnServerSettings.postType;
             httpUrl = gnServerSettings.HttpUrl;
 
+            UserAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.Version;
+
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {
-                HTTPManager.UserAgent = string.Empty;
+                HTTPManager.UserAgent = UserAgent;
                 HTTPManager.KeepAliveDefaultValue = false;
             }
         }
@@ -241,6 +244,7 @@
                 var authToken = GNNetwork.authToken;
 
                 if (!string.IsNullOrEmpty(authToken)) unityWebRequest.SetRequestHeader(Commands.RequestAuthTokenCmd, authToken);
+                //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
                 yield return unityWebRequest.SendWebRequest();
 
@@ -313,6 +317,8 @@
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
 
             request.Send();
+
+            Debug.Log("");
         }
 
         private IEnumerator IEPostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout)
@@ -327,6 +333,8 @@
                 unityWebRequest.timeout = (int)timeout;
 
                 if (param == null) param = new GNHashtable();
+
+                //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
                 if (postType == PostType.Json)
                 {
@@ -450,6 +458,8 @@
                 var authToken = GNNetwork.authToken;
 
                 if (!string.IsNullOrEmpty(authToken)) unityWebRequest.SetRequestHeader(Commands.RequestAuthTokenCmd, authToken);
+
+                //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
                 yield return unityWebRequest.SendWebRequest();
 
