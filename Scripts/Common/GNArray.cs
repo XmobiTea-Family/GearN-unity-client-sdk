@@ -97,17 +97,38 @@
 
         public T[] ToArray<T>()
         {
-            return originArray.ToArray() as T[];
+            var answer = new T[originArray.Count];
+
+            for (var i = 0; i < originArray.Count; i++)
+            {
+                answer[i] = (T)Get<T>(i);
+            }
+
+            return answer;
         }
 
         public IList<T> ToList<T>()
         {
-            return originArray as IList<T>;
+            var answer = new List<T>();
+
+            for (var i = 0; i < originArray.Count; i++)
+            {
+                answer.Add((T)Get<T>(i));
+            }
+
+            return answer;
         }
 
         public override object ToData()
         {
-            return base.ToData();
+            var answer = new List<object>();
+
+            foreach (var c in originArray)
+            {
+                answer.Add(CreateGNDataFromUseData(c));
+            }
+
+            return answer;
         }
 
         public override string ToString()
