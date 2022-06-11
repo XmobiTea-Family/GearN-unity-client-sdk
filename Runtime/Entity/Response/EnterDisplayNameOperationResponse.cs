@@ -11,8 +11,6 @@
         {
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
                 if (errorCode == EnterDisplayNameErrorCode.Ok)
                 {
                     userRole = parameters.GetInt(EnterDisplayNameParameterCode.UserRole);

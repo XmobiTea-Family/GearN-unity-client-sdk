@@ -10,8 +10,6 @@
         {
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
                 if (errorCode == LoginErrorCode.Ok)
                 {
                     message = parameters.GetString(LoginParameterCode.Message);

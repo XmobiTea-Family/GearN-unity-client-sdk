@@ -23,8 +23,6 @@
         {
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
                 if (errorCode == FileUploadInfoErrorCode.Ok)
                 {
                     fileId = parameters.GetString(FileUploadInfoParameterCode.FileId);

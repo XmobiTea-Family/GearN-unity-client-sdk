@@ -121,7 +121,7 @@
 
         private static void SyncEnumTypeFolder()
         {
-            var gnServerSettings = GNNetwork.gnServerSettings;
+            var gnServerSettings = GetSettings();
             var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/enumType";
 
             var allPathFiles = Directory.GetFiles(dir, "*.ts");
@@ -178,7 +178,7 @@
 
         private static void SyncParameterCodeFolder()
         {
-            var gnServerSettings = GNNetwork.gnServerSettings;
+            var gnServerSettings = GetSettings();
             var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/parameterCode";
 
             var allPathFiles = Directory.GetFiles(dir, "*.ts");
@@ -245,7 +245,7 @@
 
         private static void SyncErrorCodeFolder()
         {
-            var gnServerSettings = GNNetwork.gnServerSettings;
+            var gnServerSettings = GetSettings();
             var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/errorCode";
 
             var allPathFiles = Directory.GetFiles(dir, "*.ts");
@@ -320,7 +320,7 @@
         {
             const string Template = "public const int $name = $code;";
 
-            var gnServerSettings = GNNetwork.gnServerSettings;
+            var gnServerSettings = GetSettings();
             var dirPath = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/OperationCode.ext.ts";
             var allLines = File.ReadAllLines(dirPath);
 
@@ -363,7 +363,7 @@
         {
             const string Template = "public const int $name = $code;";
 
-            var gnServerSettings = GNNetwork.gnServerSettings;
+            var gnServerSettings = GetSettings();
             var dirPath = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/EventCode.ext.ts";
             var allLines = File.ReadAllLines(dirPath);
 

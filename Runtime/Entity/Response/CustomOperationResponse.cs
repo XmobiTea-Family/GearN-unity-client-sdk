@@ -5,7 +5,7 @@
 
     public abstract class CustomOperationResponse
     {
-        private GNHashtable parameters { get; set; }
+        public GNHashtable parameters { get; private set; }
         public int returnCode { get; private set; }
         public string debugMessage { get; private set; }
 

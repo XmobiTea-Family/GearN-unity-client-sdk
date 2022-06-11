@@ -14,8 +14,6 @@
         {
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
                 if (errorCode == FetchAllDataErrorCode.Ok)
                 {
                     userId = parameters.GetString(FetchAllDataParameterCode.UserId);

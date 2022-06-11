@@ -13,8 +13,6 @@
         {
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
                 if (errorCode == LoginErrorCode.Ok)
                 {
                     authToken = parameters.GetString(ParameterCode.AuthToken);

@@ -10,8 +10,6 @@
         {
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
                 if (errorCode == GetAppConfigErrorCode.Ok)
                 {
                     configNotUptodateLst = parameters.GetArray<string>(GetAppConfigParameterCode.ConfigNotUptodateLst);

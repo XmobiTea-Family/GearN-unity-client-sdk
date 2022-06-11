@@ -15,8 +15,6 @@
         {
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
                 if (errorCode == DebugErrorCode.Ok)
                 {
                     boolean = parameters.GetBool(DebugParameterCode.Boolean);
