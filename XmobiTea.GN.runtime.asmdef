@@ -1,8 +1,9 @@
 {
     "name": "XmobiTea.GN.runtime",
+    "rootNamespace": "",
     "references": [
-        "GUID:9069ac25d95ca17448a247f3bb1c769f",
-        "GUID:f9b13174f3b35c4409f61b1400722ef7"
+        "BestHTTP",
+        "XmobiTea.MsgPack.runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -5,9 +5,9 @@
 
     public class FetchAllDataOperationRequest : CustomOperationRequest
     {
-        protected override int Code => OperationCode.FetchAllData;
+        protected override int code => OperationCode.FetchAllData;
 
-        protected override bool Reliable => true;
+        protected override bool reliable => true;
 
         public FetchAllDataOperationRequest(int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {

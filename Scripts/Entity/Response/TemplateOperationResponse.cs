@@ -4,25 +4,17 @@
 
     public class TemplateOperationResponse : CustomOperationResponse
     {
-        public bool Success { get; private set; }
-
-        public int ErrorCode;
-
-        public bool Boolean;
+        public bool boolean { get; private set; }
 
         public TemplateOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            if (!HasError)
+            if (!hasError)
             {
-                Success = true;
-
                 var parameters = operationResponse.GetParameters();
 
-                ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
-
-                if (ErrorCode == DebugErrorCode.Ok)
+                if (errorCode == DebugErrorCode.Ok)
                 {
-                    Boolean = parameters.GetBool(DebugParameterCode.Boolean);
+                    boolean = parameters.GetBool(DebugParameterCode.Boolean);
                 }
             }
         }

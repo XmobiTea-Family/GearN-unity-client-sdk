@@ -5,33 +5,25 @@
 
     public class DebugOperationResponse : CustomOperationResponse
     {
-        public bool Success { get; private set; }
-
-        public int ErrorCode;
-
-        public bool Boolean;
-        public string String;
-        public int Number;
-        public GNHashtable GNHashtable;
-        public GNArray GNArray;
+        public bool boolean { get; private set; }
+        public string @string { get; private set; }
+        public int number { get; private set; }
+        public GNHashtable gnHashtable { get; private set; }
+        public GNArray gnArray { get; private set; }
 
         public DebugOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            if (!HasError)
+            if (!hasError)
             {
-                Success = true;
-
                 var parameters = operationResponse.GetParameters();
 
-                ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
-
-                if (ErrorCode == DebugErrorCode.Ok)
+                if (errorCode == DebugErrorCode.Ok)
                 {
-                    Boolean = parameters.GetBool(DebugParameterCode.Boolean);
-                    String = parameters.GetString(DebugParameterCode.String);
-                    Number = parameters.GetInt(DebugParameterCode.Number);
-                    GNHashtable = parameters.GetGNHashtable(DebugParameterCode.GNHashtable);
-                    GNArray = parameters.GetGNArray(DebugParameterCode.GNArray);
+                    boolean = parameters.GetBool(DebugParameterCode.Boolean);
+                    @string = parameters.GetString(DebugParameterCode.String);
+                    number = parameters.GetInt(DebugParameterCode.Number);
+                    gnHashtable = parameters.GetGNHashtable(DebugParameterCode.GNHashtable);
+                    gnArray = parameters.GetGNArray(DebugParameterCode.GNArray);
                 }
             }
         }

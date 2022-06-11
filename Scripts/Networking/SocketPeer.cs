@@ -11,13 +11,13 @@
 
     internal class SocketPeer : PeerBase
     {
-        private const string AuthTokenFormat = "{\"authtoken\":$authtoken}";
+        private const string authTokenFormat = "{\"authtoken\":$authtoken}";
 
         private NetworkingPeerBase networkingPeerBase;
 
-        internal string ClientId => networkingPeerBase?.ClientId;
+        internal string clientId => networkingPeerBase?.clientId;
 
-        internal bool IsConnected => networkingPeerBase.IsWsConnected;
+        internal bool isConnected => networkingPeerBase.isWsConnected;
 
         private Dictionary<int, IServerEventHandler> serverEventHandlerDic;
 
@@ -72,12 +72,21 @@
 
             networkingPeerBase.Init(gnServerSettings.SocketUrl, gnServerSettings.reconnectDelay, gnServerSettings.pingInterval, gnServerSettings.pingTimeout);
             networkingPeerBase.ReInitNewSocket();
-            networkingPeerBase.Connect();
 
             networkingPeerBase.SetOnEventHandler(OnEventHandler);
             networkingPeerBase.SetOnResponseHandler(OnResponseHandler);
 
             SubscriberServerEventHandler();
+        }
+
+        internal void Connect()
+        {
+            if (networkingPeerBase != null) networkingPeerBase.Connect();
+        }
+
+        internal void Disconnect()
+        {
+            if (networkingPeerBase != null) networkingPeerBase.Close();
         }
 
         internal override void Send(OperationPending operationPending)
@@ -127,12 +136,12 @@
 
         internal static string Auth(BestHTTP.SocketIO3.SocketManager socketManager, BestHTTP.SocketIO3.Socket socket)
         {
-            return AuthTokenFormat.Replace("$authtoken", GNNetwork.authToken);
+            return authTokenFormat.Replace("$authtoken", GNNetwork.authToken);
         }
 
         internal static string Auth(BestHTTP.SocketIO.SocketManager socketManager, BestHTTP.SocketIO.Socket socket)
         {
-            return AuthTokenFormat.Replace("$authtoken", GNNetwork.authToken);
+            return authTokenFormat.Replace("$authtoken", GNNetwork.authToken);
         }
     }
 }

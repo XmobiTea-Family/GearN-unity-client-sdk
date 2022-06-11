@@ -16,8 +16,8 @@ namespace XmobiTea.GN.Networking
         protected float pingInterval;
         protected float pingTimeout;
 
-        internal string ClientId { get; set; }
-        internal virtual bool IsWsConnected { get; private set; }
+        internal string clientId { get; set; }
+        internal virtual bool isWsConnected { get; private set; }
 
         #endregion
 
@@ -45,7 +45,7 @@ namespace XmobiTea.GN.Networking
 
         protected virtual void Awake()
         {
-            ClientId = string.Empty;
+            clientId = string.Empty;
 
             Debug.Log("NetworkingPeerBase Awake");
         }

@@ -11,7 +11,7 @@
 
         internal string authToken = string.Empty;
 
-        internal int Ping
+        internal int ping
         {
             get
             {
@@ -78,6 +78,16 @@
         internal void SendRequestAuthSocket()
         {
             if (socketPeer != null) (socketPeer as SocketPeer).SendRequestAuthSocket();
+        }
+
+        internal void ConnectSocket()
+        {
+            if (socketPeer != null) (socketPeer as SocketPeer).Connect();
+        }
+
+        internal void DisconnectSocket()
+        {
+            if (socketPeer != null) (socketPeer as SocketPeer).Disconnect();
         }
     }
 }

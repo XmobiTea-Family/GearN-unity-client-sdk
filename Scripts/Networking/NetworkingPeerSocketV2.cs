@@ -16,7 +16,7 @@
         private SocketManager socketManager;
         private bool isConnected;
 
-        internal override bool IsWsConnected => socketManager != null ? socketManager.State == SocketManager.States.Open : false;
+        internal override bool isWsConnected => socketManager != null ? socketManager.State == SocketManager.States.Open : false;
 
         private object messageLstLock;
         private List<byte[]> responsePacketLst;
@@ -43,7 +43,7 @@
         {
             base.SendRequestAuthSocket();
 
-            if (!string.IsNullOrEmpty(ClientId))
+            if (!string.IsNullOrEmpty(clientId))
                 socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
         }
 
@@ -93,7 +93,7 @@
         {
             Debug.Log("[RECV] HandleOpen " + socket.Id);
 
-            ClientId = socket.Id;
+            clientId = socket.Id;
 
             OnConnectHandler();
         }
@@ -102,7 +102,7 @@
         {
             Debug.Log("[RECV] HandleClose ");
 
-            ClientId = string.Empty;
+            clientId = string.Empty;
         }
 
         private void OnError(Socket socket, Packet packet, object[] args)

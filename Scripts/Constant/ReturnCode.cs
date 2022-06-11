@@ -2,6 +2,8 @@ namespace XmobiTea.GN.Constant
 {
     public class ReturnCode
     {
+        public const int MaxSizeRequestReject = -10;
+        public const int MaxRequestReject = -9;
         public const int MaxCCUReject = -8;
 
         public const int OperationNotAuthorized = -7;

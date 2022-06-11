@@ -5,13 +5,13 @@
 
     public class RegisterSocketOperationRequest : CustomOperationRequest
     {
-        protected override int Code => OperationCode.RegisterSocket;
+        protected override int code => OperationCode.RegisterSocket;
 
-        protected override bool Reliable => true;
+        protected override bool reliable => true;
 
         public RegisterSocketOperationRequest(string sid, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            Parameters = new GNHashtable.Builder()
+            parameters = new GNHashtable.Builder()
                 .Add(RegisterSocketParameterCode.SId, sid)
                 .Build();
         }

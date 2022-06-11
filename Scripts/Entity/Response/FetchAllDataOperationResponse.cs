@@ -4,37 +4,28 @@
 
     public class FetchAllDataOperationResponse : CustomOperationResponse
     {
-        public bool Success { get; private set; }
-
-        public int ErrorCode;
-
-        public string UserId;
-        public int UserRole;
-        public string DisplayName;
-
-        public long TsExpire;
-        public string Reason;
+        public string userId { get; private set; }
+        public int userRole { get; private set; }
+        public string displayName { get; private set; }
+        public long tsExpire { get; private set; }
+        public string reason { get; private set; }
 
         public FetchAllDataOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            if (!HasError)
+            if (!hasError)
             {
-                Success = true;
-
                 var parameters = operationResponse.GetParameters();
 
-                ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
-
-                if (ErrorCode == FetchAllDataErrorCode.Ok)
+                if (errorCode == FetchAllDataErrorCode.Ok)
                 {
-                    UserId = parameters.GetString(FetchAllDataParameterCode.UserId);
-                    UserRole = parameters.GetInt(FetchAllDataParameterCode.UserRole);
-                    DisplayName = parameters.GetString(FetchAllDataParameterCode.DisplayName);
+                    userId = parameters.GetString(FetchAllDataParameterCode.UserId);
+                    userRole = parameters.GetInt(FetchAllDataParameterCode.UserRole);
+                    displayName = parameters.GetString(FetchAllDataParameterCode.DisplayName);
                 }
-                else if (ErrorCode == FetchAllDataErrorCode.UserHadBanned)
+                else if (errorCode == FetchAllDataErrorCode.UserHadBanned)
                 {
-                    TsExpire = parameters.GetLong(FetchAllDataParameterCode.TsExpire);
-                    Reason = parameters.GetString(FetchAllDataParameterCode.Reason);
+                    tsExpire = parameters.GetLong(FetchAllDataParameterCode.TsExpire);
+                    reason = parameters.GetString(FetchAllDataParameterCode.Reason);
                 }
             }
         }

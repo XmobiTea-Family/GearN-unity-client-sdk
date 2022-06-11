@@ -1,14 +1,12 @@
-﻿#if UNITY_EDITOR
-namespace XmobiTea.GN.Config.Editor
+﻿namespace XmobiTea.GN.Editor
 {
     using System.IO;
     using System.Text;
 
     using UnityEditor;
-    using UnityEditor.Callbacks;
 
     using UnityEngine;
-
+    using XmobiTea.GN.Config;
     using Debug = UnityEngine.Debug;
 
     [CustomEditor(typeof(GNServerSettings))]
@@ -71,7 +69,7 @@ namespace XmobiTea.GN.Config.Editor
             serializedObject.ApplyModifiedProperties();
         }
 
-        [MenuItem("GN/GN Settings")]
+        [MenuItem("XmobiTea GN/Open Settings")]
         private static void OpenGNServerSettings()
         {
             var gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
@@ -90,19 +88,19 @@ namespace XmobiTea.GN.Config.Editor
             Selection.SetActiveObjectWithContext(gnServerSettings, gnServerSettings);
         }
 
-        [MenuItem("GN/About GN")]
+        [MenuItem("XmobiTea GN/About GN")]
         private static void AboutEUNfox()
         {
-            Application.OpenURL("https://youngmonkeys.org/ezyfox-sever/");
+            Application.OpenURL("https://gn.xmobitea.com");
         }
 
-        [MenuItem("GN/Go to GN-server")]
+        [MenuItem("XmobiTea GN/Go to GN-server")]
         private static void GotoGNserver()
         {
             Application.OpenURL("https://github.com/XmobiTea-Family/GN-server");
         }
 
-        [MenuItem("GN/Sync Server Folder")]
+        [MenuItem("XmobiTea GN/Sync Server Folder")]
         private static void SyncServerFolder()
         {
             Debug.Log("Sync Server Folder");
@@ -411,4 +409,3 @@ namespace XmobiTea.GN.Config.Editor
         }
     }
 }
-#endif

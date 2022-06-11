@@ -4,24 +4,24 @@
 
     public abstract class CustomOperationRequest
     {
-        protected virtual int Code { get; }
+        protected virtual int code { get; }
 
-        protected virtual bool Reliable { get; }
+        protected virtual bool reliable { get; }
 
-        protected int Timeout { get; }
+        protected int timeout { get; }
 
-        protected GNHashtable Parameters { get; set; }
+        protected GNHashtable parameters { get; set; }
 
         public CustomOperationRequest(int timeout)
         {
-            this.Timeout = timeout;
+            this.timeout = timeout;
         }
 
         public OperationRequest Builder()
         {
-            var request = new OperationRequest(Code, Reliable, Timeout);
+            var request = new OperationRequest(code, reliable, timeout);
 
-            if (this.Parameters != null) request.SetParameters(this.Parameters);
+            if (this.parameters != null) request.SetParameters(this.parameters);
 
             return request;
         }

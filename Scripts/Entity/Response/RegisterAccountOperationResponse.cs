@@ -6,7 +6,6 @@
     {
         public RegisterAccountOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            
         }
     }
 }

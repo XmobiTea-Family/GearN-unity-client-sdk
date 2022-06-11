@@ -5,54 +5,47 @@
 
     public class GetFileUploadInfoOperationResponse : CustomOperationResponse
     {
-        public bool Success { get; private set; }
-        public bool FileHasUpload { get; private set; }
+        public bool fileHasUpload { get; private set; }
 
-        public int ErrorCode;
+        public string fileId { get; private set; }
+        public string originFileName { get; private set; }
+        public long tsCreate { get; private set; }
+        public string userId { get; private set; }
 
-        public string FileId;
-        public string OriginFileName;
-        public long TsCreate;
-        public string UserId;
+        public long tsUploadExpire { get; private set; }
 
-        public long TsUploadExpire;
-
-        public long TsUploadFile;
-        public string MimeType;
-        public long Size;
-        public string FolderFileName;
+        public long tsUploadFile { get; private set; }
+        public string mimeType { get; private set; }
+        public long size { get; private set; }
+        public string folderFileName { get; private set; }
 
         public GetFileUploadInfoOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            if (!HasError)
+            if (!hasError)
             {
-                Success = true;
-
                 var parameters = operationResponse.GetParameters();
 
-                ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
-
-                if (ErrorCode == FileUploadInfoErrorCode.Ok)
+                if (errorCode == FileUploadInfoErrorCode.Ok)
                 {
-                    FileId = parameters.GetString(FileUploadInfoParameterCode.FileId);
-                    OriginFileName = parameters.GetString(FileUploadInfoParameterCode.OriginFileName);
-                    TsCreate = parameters.GetLong(FileUploadInfoParameterCode.TsCreate);
-                    UserId = parameters.GetString(FileUploadInfoParameterCode.UserId);
+                    fileId = parameters.GetString(FileUploadInfoParameterCode.FileId);
+                    originFileName = parameters.GetString(FileUploadInfoParameterCode.OriginFileName);
+                    tsCreate = parameters.GetLong(FileUploadInfoParameterCode.TsCreate);
+                    userId = parameters.GetString(FileUploadInfoParameterCode.UserId);
 
                     if (parameters.ContainsKey(FileUploadInfoParameterCode.TsUploadExpire))
                     {
-                        FileHasUpload = false;
+                        fileHasUpload = false;
 
-                        TsUploadExpire = parameters.GetLong(FileUploadInfoParameterCode.TsUploadExpire);
+                        tsUploadExpire = parameters.GetLong(FileUploadInfoParameterCode.TsUploadExpire);
                     }
                     else
                     {
-                        FileHasUpload = true;
+                        fileHasUpload = true;
 
-                        TsUploadFile = parameters.GetLong(FileUploadInfoParameterCode.TsUploadFile);
-                        MimeType = parameters.GetString(FileUploadInfoParameterCode.MimeType);
-                        Size = parameters.GetLong(FileUploadInfoParameterCode.Size);
-                        FolderFileName = parameters.GetString(FileUploadInfoParameterCode.FolderFileName);
+                        tsUploadFile = parameters.GetLong(FileUploadInfoParameterCode.TsUploadFile);
+                        mimeType = parameters.GetString(FileUploadInfoParameterCode.MimeType);
+                        size = parameters.GetLong(FileUploadInfoParameterCode.Size);
+                        folderFileName = parameters.GetString(FileUploadInfoParameterCode.FolderFileName);
                     }
                 }
             }

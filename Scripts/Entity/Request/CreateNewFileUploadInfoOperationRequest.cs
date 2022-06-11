@@ -5,13 +5,13 @@
 
     public class CreateNewFileUploadInfoOperationRequest : CustomOperationRequest
     {
-        protected override int Code => OperationCode.CreateNewFileUploadInfo;
+        protected override int code => OperationCode.CreateNewFileUploadInfo;
 
-        protected override bool Reliable => true;
+        protected override bool reliable => true;
 
         public CreateNewFileUploadInfoOperationRequest(string originFileName, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            Parameters = new GNHashtable.Builder()
+            parameters = new GNHashtable.Builder()
                 .Add(FileUploadInfoParameterCode.OriginFileName, originFileName)
                 .Build();
         }

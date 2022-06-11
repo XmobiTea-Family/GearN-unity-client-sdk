@@ -4,27 +4,19 @@
 
     public class EnterDisplayNameOperationResponse : CustomOperationResponse
     {
-        public bool Success { get; private set; }
-
-        public int ErrorCode;
-
-        public int UserRole;
-        public string DisplayName;
+        public int userRole { get; private set; }
+        public string displayName { get; private set; }
 
         public EnterDisplayNameOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            if (!HasError)
+            if (!hasError)
             {
-                Success = true;
-
                 var parameters = operationResponse.GetParameters();
 
-                ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
-
-                if (ErrorCode == EnterDisplayNameErrorCode.Ok)
+                if (errorCode == EnterDisplayNameErrorCode.Ok)
                 {
-                    UserRole = parameters.GetInt(EnterDisplayNameParameterCode.UserRole);
-                    DisplayName = parameters.GetString(EnterDisplayNameParameterCode.DisplayName);
+                    userRole = parameters.GetInt(EnterDisplayNameParameterCode.UserRole);
+                    displayName = parameters.GetString(EnterDisplayNameParameterCode.DisplayName);
                 }
             }
         }

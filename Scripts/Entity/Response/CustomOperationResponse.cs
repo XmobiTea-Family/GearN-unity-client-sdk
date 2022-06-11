@@ -1,26 +1,35 @@
 ﻿namespace XmobiTea.GN.Entity.Response
 {
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Constant;
 
     public abstract class CustomOperationResponse
     {
-        private GNHashtable Parameters { get; set; }
-        public int ReturnCode { get; private set; }
-        public string DebugMessage { get; private set; }
+        private GNHashtable parameters { get; set; }
+        public int returnCode { get; private set; }
+        public string debugMessage { get; private set; }
 
-        public bool HasError => ReturnCode != XmobiTea.GN.Constant.ReturnCode.Ok;
+        public int errorCode { get; private set; }
+
+        public bool hasError => returnCode != ReturnCode.Ok;
 
         public CustomOperationResponse(OperationResponse operationResponse)
         {
-            ReturnCode = operationResponse.GetReturnCode();
-            DebugMessage = operationResponse.GetDebugMessage();
+            returnCode = operationResponse.GetReturnCode();
+            debugMessage = operationResponse.GetDebugMessage();
 
-            Parameters = operationResponse.GetParameters();
+            parameters = operationResponse.GetParameters();
+
+            if (!hasError)
+            {
+                var parameters = operationResponse.GetParameters();
+                errorCode = parameters.GetInt(ParameterCode.ErrorCode);
+            }
         }
 
         public override string ToString()
         {
-            return "ReturnCode: " + ReturnCode + " " + (Parameters != null ? Parameters.ToString() : DebugMessage);
+            return "ReturnCode: " + returnCode + " " + (parameters != null ? parameters.ToString() : debugMessage);
         }
     }
 }

@@ -11,7 +11,7 @@
 
     public static partial class GNNetwork
     {
-        public const string Version = "0.3.4";
+        public const string version = "0.3.5";
 
         public const string AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
 
@@ -19,7 +19,7 @@
 
         internal static NetworkingPeer peer { get; private set; }
 
-        public static int ping => peer != null ? peer.Ping : -1;
+        public static int ping => peer != null ? peer.ping : -1;
 
         public static long serverTimestamp => peer != null ? peer.serverTimestamp : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
@@ -60,7 +60,7 @@
             if (gnServerSettings == null)
             {
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.ExecuteMenuItem("GN/GN Settings");
+                UnityEditor.EditorApplication.ExecuteMenuItem("XmobiTea GN/Open Settings");
                 gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
                 if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 #endif
@@ -83,6 +83,16 @@
         public static void SendViaHttp(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
             peer.SendViaHttp(request, onResponse);
+        }
+
+        public static void ConnectSocket()
+        {
+            peer.ConnectSocket();
+        }
+
+        public static void DisconnectSocket()
+        {
+            peer.DisconnectSocket();
         }
     }
 }

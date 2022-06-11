@@ -67,7 +67,7 @@
             postType = gnServerSettings.postType;
             httpUrl = gnServerSettings.HttpUrl;
 
-            UserAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.Version;
+            UserAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.version;
 
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {

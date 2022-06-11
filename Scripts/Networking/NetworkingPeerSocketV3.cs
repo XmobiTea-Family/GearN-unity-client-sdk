@@ -16,7 +16,7 @@ namespace XmobiTea.GN.Networking
         private SocketManager socketManager;
         private bool isConnected;
 
-        internal override bool IsWsConnected => socketManager != null ? socketManager.State == SocketManager.States.Open : false;
+        internal override bool isWsConnected => socketManager != null ? socketManager.State == SocketManager.States.Open : false;
 
         private object messageLstLock;
         private List<byte[]> responsePacketLst;
@@ -35,7 +35,7 @@ namespace XmobiTea.GN.Networking
         {
             base.SendRequestAuthSocket();
 
-            if (!string.IsNullOrEmpty(ClientId))
+            if (!string.IsNullOrEmpty(clientId))
                 socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
         }
 
@@ -89,14 +89,14 @@ namespace XmobiTea.GN.Networking
         {
             Debug.Log("[RECV] HandleClose ");
 
-            ClientId = string.Empty;
+            clientId = string.Empty;
         }
 
         private void OnConnect()
         {
             Debug.Log("[RECV] HandleOpen " + socketManager.Socket.Id);
 
-            ClientId = socketManager.Socket.Id;
+            clientId = socketManager.Socket.Id;
 
             OnConnectHandler();
         }

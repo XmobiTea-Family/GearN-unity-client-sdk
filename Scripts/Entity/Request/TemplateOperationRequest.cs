@@ -5,13 +5,13 @@
 
     public class TemplateOperationRequest : CustomOperationRequest
     {
-        protected override int Code => OperationCode.Debug;
+        protected override int code => OperationCode.Debug;
 
-        protected override bool Reliable => true;
+        protected override bool reliable => true;
 
         public TemplateOperationRequest(bool booleanValue, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            Parameters = new GNHashtable.Builder()
+            parameters = new GNHashtable.Builder()
                 .Add(DebugParameterCode.Boolean, booleanValue)
                 .Build();
         }

@@ -2,7 +2,7 @@
 {
     using XmobiTea.GN.Entity;
 
-    internal interface IServerEventHandler
+    public interface IServerEventHandler
     {
         int GetEventCode();
         void Handle(OperationEvent operationEvent);

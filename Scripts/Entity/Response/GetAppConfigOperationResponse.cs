@@ -4,25 +4,17 @@
 
     public class GetAppConfigOperationResponse : CustomOperationResponse
     {
-        public bool Success { get; private set; }
-
-        public int ErrorCode;
-
-        public string[] ConfigNotUptodateLst;
+        public string[] configNotUptodateLst { get; private set; }
 
         public GetAppConfigOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            if (!HasError)
+            if (!hasError)
             {
-                Success = true;
-
                 var parameters = operationResponse.GetParameters();
 
-                ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
-
-                if (ErrorCode == GetAppConfigErrorCode.Ok)
+                if (errorCode == GetAppConfigErrorCode.Ok)
                 {
-                    ConfigNotUptodateLst = parameters.GetArray<string>(GetAppConfigParameterCode.ConfigNotUptodateLst);
+                    configNotUptodateLst = parameters.GetArray<string>(GetAppConfigParameterCode.ConfigNotUptodateLst);
                 }
             }
         }

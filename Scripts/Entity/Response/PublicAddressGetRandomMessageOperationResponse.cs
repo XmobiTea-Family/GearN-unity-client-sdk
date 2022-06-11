@@ -4,25 +4,17 @@
 
     public class PublicAddressGetRandomMessageOperationResponse : CustomOperationResponse
     {
-        public bool Success { get; private set; }
-
-        public int ErrorCode;
-
-        public string Message;
+        public string message { get; private set; }
 
         public PublicAddressGetRandomMessageOperationResponse(OperationResponse operationResponse) : base(operationResponse)
         {
-            if (!HasError)
+            if (!hasError)
             {
-                Success = true;
-
                 var parameters = operationResponse.GetParameters();
 
-                ErrorCode = parameters.GetInt(ParameterCode.ErrorCode);
-
-                if (ErrorCode == LoginErrorCode.Ok)
+                if (errorCode == LoginErrorCode.Ok)
                 {
-                    Message = parameters.GetString(LoginParameterCode.Message);
+                    message = parameters.GetString(LoginParameterCode.Message);
                 }
             }
         }
