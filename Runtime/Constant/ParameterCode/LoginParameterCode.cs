@@ -1,6 +1,6 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-	public class LoginParameterCode
+	public partial class LoginParameterCode
 	{
 		public const int LoginType = 1;
 		public const int Username = 2;

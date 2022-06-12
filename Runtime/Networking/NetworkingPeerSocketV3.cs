@@ -115,23 +115,7 @@ namespace XmobiTea.GN.Networking
                         {
                             var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
-                            var gnArray = new GNArray();
-
-                            var returnCode = Convert.ToInt32(iList[0]);
-                            gnArray.Add(returnCode);
-
-                            if (returnCode == (int)ReturnCode.Ok)
-                            {
-                                var keyValuePairs = (KeyValuePair<object, object>[])iList[1];
-                                gnArray.Add(new Common.GNHashtable.Builder().AddAll(fromMsgKeyValuePairs(keyValuePairs)).Build());
-                            }
-                            else
-                            {
-                                gnArray.Add(iList[1] as string);
-                            }
-
-                            gnArray.Add(Convert.ToInt32(iList[2]));
-
+                            var gnArray = new GNArray.Builder().AddAll(NetworkingPeerBase.fromMsgList(iList)).Build();
                             OnResponseHandler(gnArray);
                         }
                         catch (Exception ex)
@@ -153,7 +137,7 @@ namespace XmobiTea.GN.Networking
                         {
                             var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
-                            var gnArray = new GNArray.Builder().AddAll(fromMsgList(iList)).Build();
+                            var gnArray = new GNArray.Builder().AddAll(NetworkingPeerBase.fromMsgList(iList)).Build();
                             OnEventHandler(gnArray);
                         }
                         catch (Exception ex)

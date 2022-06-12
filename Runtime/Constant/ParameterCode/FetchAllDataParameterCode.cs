@@ -1,6 +1,6 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-    public class FetchAllDataParameterCode
+    public partial class FetchAllDataParameterCode
     {
         public const int UserId = 1;
         public const int DisplayName = 2;

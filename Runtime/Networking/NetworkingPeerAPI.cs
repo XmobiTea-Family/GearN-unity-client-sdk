@@ -25,9 +25,9 @@
                 {
                     if (!httpAppResponse.HasError)
                     {
-                        if (httpAppResponse.StatusCode == 200)
+                        if (httpAppResponse.statusCode == 200)
                         {
-                            var returnDatas = (IList)Parser.Parse(httpAppResponse.Text);
+                            var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
                             var gnArray = new GNArray.Builder()
                                 .AddAll(returnDatas)
                                 .Build();
@@ -56,9 +56,9 @@
                 {
                     if (!httpAppResponse.HasError)
                     {
-                        if (httpAppResponse.StatusCode == 200)
+                        if (httpAppResponse.statusCode == 200)
                         {
-                            var returnDatas = (IList)Parser.Parse(httpAppResponse.Text);
+                            var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
                             var gnArray = new GNArray.Builder()
                                 .AddAll(returnDatas)
                                 .Build();

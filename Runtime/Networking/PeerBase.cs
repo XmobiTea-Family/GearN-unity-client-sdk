@@ -121,8 +121,10 @@
 
                 GNHashtable parameters = null;
                 string debugMessage = null;
+                GNArray array = null;
 
-                if (returnCode == (int)ReturnCode.Ok) parameters = obj.GetGNHashtable(1);
+                if (returnCode == ReturnCode.Ok) parameters = obj.GetGNHashtable(1);
+                else if (returnCode == ReturnCode.InvalidRequestParameters) array = obj.GetGNArray(1);
                 else debugMessage = obj.GetString(1);
 
                 var operationRequest = operationPending.GetOperationRequest();
@@ -131,6 +133,18 @@
                 operationResponse.SetReturnCode(returnCode);
                 operationResponse.SetDebugMessage(debugMessage);
                 operationResponse.SetParameters(parameters);
+
+                if (array != null)
+                {
+                    var invalidMembers = new InvalidMember[array.Count()];
+                    for (var i = 0; i < array.Count(); i++)
+                    {
+                        var arrChild = array.GetGNArray(i);
+
+                        invalidMembers[i] = new InvalidMember(arrChild.GetInt(0), (InvalidMemberType)arrChild.GetInt(1));
+                    }
+                    operationResponse.SetInvalidMembers(invalidMembers);
+                }
 
                 Debug.Log("[GN RECV] " + operationResponse.ToString());
 
@@ -147,8 +161,6 @@
                             var authToken = parameters.GetString(ParameterCode.AuthToken);
 
                             GNNetwork.authToken = authToken;
-
-                            PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, authToken);
                         }
 
                         if (parameters.ContainsKey(ParameterCode.Ts))

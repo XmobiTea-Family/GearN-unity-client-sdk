@@ -1,6 +1,6 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-    public class FileUploadInfoParameterCode
+    public partial class FileUploadInfoParameterCode
     {
         public const int FileId = 1;
         public const int OriginFileName = 2;

@@ -11,9 +11,9 @@
 
     public static partial class GNNetwork
     {
-        public const string version = "0.3.7";
+        public const string version = "0.3.9";
 
-        public const string AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
+        internal const string AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
 
         public static GNServerSettings gnServerSettings { get; private set; }
 
@@ -29,6 +29,8 @@
             set
             {
                 peer.authToken = value;
+
+                PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, value);
 
                 peer.SendRequestAuthSocket();
             }
@@ -48,7 +50,7 @@
 
             InitGNSocketObject();
 
-            authToken = PlayerPrefs.GetString(AUTH_TOKEN_KEY);
+            peer.authToken = PlayerPrefs.GetString(AUTH_TOKEN_KEY, string.Empty);
 
             platform = Application.platform;
             deviceId = CXDevice.GetDeviceId();

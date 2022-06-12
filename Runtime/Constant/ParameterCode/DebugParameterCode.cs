@@ -1,6 +1,6 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-    public class DebugParameterCode
+    public partial class DebugParameterCode
     {
         public const int String = 1;
         public const int Number = 2;

@@ -18,20 +18,20 @@
 
     public class HttpAppResponse
     {
-        public long StatusCode { get; internal set; }
-        public string Error { get; internal set; }
-        public byte[] Data { get; internal set; }
-        public string Text { get; internal set; }
+        public long statusCode { get; internal set; }
+        public string error { get; internal set; }
+        public byte[] data { get; internal set; }
+        public string text { get; internal set; }
 
-        public bool HasError => !string.IsNullOrEmpty(Error);
+        public bool HasError => !string.IsNullOrEmpty(error);
 
         public override string ToString()
         {
             var stringBuilder = new System.Text.StringBuilder();
 
-            stringBuilder.Append(" StatusCode: " + StatusCode);
-            if (!string.IsNullOrEmpty(Error)) stringBuilder.Append(", <color=red>Error: " + Error + "</color>");
-            stringBuilder.Append(", Text: " + Text);
+            stringBuilder.Append(" StatusCode: " + statusCode);
+            if (!string.IsNullOrEmpty(error)) stringBuilder.Append(", <color=red>Error: " + error + "</color>");
+            stringBuilder.Append(", Text: " + text);
 
             return stringBuilder.ToString();
         }
@@ -42,7 +42,7 @@
         private const string CONTENT_TYPE = "Content-Type";
         private const string APPLICATION_JSON = "application/json";
         private const string APPLICATION_MSGPACK = "application/msgpack";
-        private static string UserAgent { get; set; }
+        private static string userAgent { get; set; }
 
         private string httpUrl;
         private HttpRequestType httpRequestType;
@@ -67,11 +67,11 @@
             postType = gnServerSettings.postType;
             httpUrl = gnServerSettings.HttpUrl;
 
-            UserAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.version;
+            userAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.version;
 
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {
-                HTTPManager.UserAgent = UserAgent;
+                HTTPManager.UserAgent = userAgent;
                 HTTPManager.KeepAliveDefaultValue = false;
             }
         }
@@ -127,36 +127,33 @@
 
             if (!httpAppResponse.HasError)
             {
-                if (httpAppResponse.StatusCode == 200)
+                if (httpAppResponse.statusCode == 200)
                 {
                     if (postType == PostType.MsgPack)
                     {
-                        var iList = MsgPackSerializer.Deserialize<object[]>(httpAppResponse.Data);
-                        var gnArray = new GNArray();
+                        var iList = MsgPackSerializer.Deserialize<object[]>(httpAppResponse.data);
 
-                        var returnCode = Convert.ToInt32(iList[0]);
-                        gnArray.Add(returnCode);
+                        var gnArray = new GNArray.Builder().AddAll(NetworkingPeerBase.fromMsgList(iList)).Build();
+
+                        var returnCode = gnArray.GetInt(0);
                         obj.Add(returnCode);
 
                         if (returnCode == (int)ReturnCode.Ok)
                         {
-                            var keyValuePairs = (KeyValuePair<object, object>[])iList[1];
-                            gnArray.Add(new Common.GNHashtable.Builder().AddAll(NetworkingPeerBase.fromMsgKeyValuePairs(keyValuePairs)).Build());
-
-                            if (gnArray.Count() > 1) obj.Add(gnArray.GetGNHashtable(1));
-                            else obj.Add(new GNHashtable());
+                            obj.Add(gnArray.GetGNHashtable(1, new GNHashtable()));
+                        }
+                        else if (returnCode == ReturnCode.InvalidRequestParameters)
+                        {
+                            obj.Add(gnArray.GetGNArray(1, new GNArray()));
                         }
                         else
                         {
-                            gnArray.Add(iList[1] as string);
-
-                            if (gnArray.Count() > 1) obj.Add(gnArray.GetString(1));
-                            else obj.Add(null);
+                            obj.Add(gnArray.GetString(1));
                         }
                     }
                     else if (postType == PostType.Json)
                     {
-                        var returnDatas = (System.Collections.IList)Parser.Parse(httpAppResponse.Text);
+                        var returnDatas = (System.Collections.IList)Parser.Parse(httpAppResponse.text);
                         var gnArray = new GNArray.Builder()
                             .AddAll(returnDatas)
                             .Build();
@@ -164,15 +161,17 @@
                         var returnCode = gnArray.GetInt(0);
                         obj.Add(returnCode);
 
-                        if (returnCode == (int)ReturnCode.Ok)
+                        if (returnCode == ReturnCode.Ok)
                         {
-                            if (gnArray.Count() > 1) obj.Add(gnArray.GetGNHashtable(1));
-                            else obj.Add(new GNHashtable());
+                            obj.Add(gnArray.GetGNHashtable(1, new GNHashtable()));
+                        }
+                        else if (returnCode == ReturnCode.InvalidRequestParameters)
+                        {
+                            obj.Add(gnArray.GetGNArray(1, new GNArray()));
                         }
                         else
                         {
-                            if (gnArray.Count() > 1) obj.Add(gnArray.GetString(1));
-                            else obj.Add(null);
+                            obj.Add(gnArray.GetString(1, string.Empty));
                         }
                     }
 
@@ -184,7 +183,7 @@
             }
 
             obj.Add((int)ReturnCode.UnknownError);
-            obj.Add(httpAppResponse.Error);
+            obj.Add(httpAppResponse.error);
             obj.Add(operationRequest.GetRequestId());
 
             OnResponseHandler(obj);
@@ -210,14 +209,14 @@
 
                 if (httpRequest.State == HTTPRequestStates.Finished)
                 {
-                    httpAppResponse.StatusCode = httpResponse.StatusCode;
-                    httpAppResponse.Data = httpResponse.Data;
-                    httpAppResponse.Text = httpResponse.DataAsText;
+                    httpAppResponse.statusCode = httpResponse.StatusCode;
+                    httpAppResponse.data = httpResponse.Data;
+                    httpAppResponse.text = httpResponse.DataAsText;
                 }
                 else
                 {
-                    httpAppResponse.StatusCode = -1;
-                    httpAppResponse.Error = httpRequest.Exception != null ? httpRequest.Exception.Message : "Unknown Error";
+                    httpAppResponse.statusCode = -1;
+                    httpAppResponse.error = httpRequest.Exception != null ? httpRequest.Exception.Message : "Unknown Error";
                 }
 
                 onHttpAppResponse?.Invoke(httpAppResponse);
@@ -251,17 +250,19 @@
                 certificateHandler.Dispose();
 
                 var httpAppResponse = new HttpAppResponse();
-                httpAppResponse.StatusCode = unityWebRequest.responseCode;
+                httpAppResponse.statusCode = unityWebRequest.responseCode;
 
-                if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+                if (unityWebRequest.result == UnityWebRequest.Result.ConnectionError
+                    || unityWebRequest.result == UnityWebRequest.Result.ProtocolError
+                    || unityWebRequest.result == UnityWebRequest.Result.DataProcessingError)
                 {
-                    httpAppResponse.Error = unityWebRequest.error;
+                    httpAppResponse.error = unityWebRequest.error;
                 }
                 else
                 {
                     var downloadHandler = unityWebRequest.downloadHandler;
-                    httpAppResponse.Data = downloadHandler.data;
-                    httpAppResponse.Text = downloadHandler.text;
+                    httpAppResponse.data = downloadHandler.data;
+                    httpAppResponse.text = downloadHandler.text;
                 }
 
                 onHttpAppResponse?.Invoke(httpAppResponse);
@@ -276,14 +277,14 @@
 
                 if (httpRequest.State == HTTPRequestStates.Finished)
                 {
-                    httpAppResponse.StatusCode = httpResponse.StatusCode;
-                    httpAppResponse.Data = httpResponse.Data;
-                    httpAppResponse.Text = httpResponse.DataAsText;
+                    httpAppResponse.statusCode = httpResponse.StatusCode;
+                    httpAppResponse.data = httpResponse.Data;
+                    httpAppResponse.text = httpResponse.DataAsText;
                 }
                 else
                 {
-                    httpAppResponse.StatusCode = -1;
-                    httpAppResponse.Error = httpRequest.Exception != null ? httpRequest.Exception.Message : "Unknown Error";
+                    httpAppResponse.statusCode = -1;
+                    httpAppResponse.error = httpRequest.Exception != null ? httpRequest.Exception.Message : "Unknown Error";
                 }
 
                 onHttpAppResponse?.Invoke(httpAppResponse);
@@ -317,8 +318,6 @@
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
 
             request.Send();
-
-            Debug.Log("");
         }
 
         private IEnumerator IEPostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout)
@@ -366,17 +365,19 @@
                 certificateHandler.Dispose();
 
                 var httpAppResponse = new HttpAppResponse();
-                httpAppResponse.StatusCode = unityWebRequest.responseCode;
+                httpAppResponse.statusCode = unityWebRequest.responseCode;
 
-                if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+                if (unityWebRequest.result == UnityWebRequest.Result.ConnectionError
+                    || unityWebRequest.result == UnityWebRequest.Result.ProtocolError
+                    || unityWebRequest.result == UnityWebRequest.Result.DataProcessingError)
                 {
-                    httpAppResponse.Error = unityWebRequest.error;
+                    httpAppResponse.error = unityWebRequest.error;
                 }
                 else
                 {
                     var downloadHandler = unityWebRequest.downloadHandler;
-                    httpAppResponse.Data = downloadHandler.data;
-                    httpAppResponse.Text = downloadHandler.text;
+                    httpAppResponse.data = downloadHandler.data;
+                    httpAppResponse.text = downloadHandler.text;
                 }
 
                 onHttpAppResponse?.Invoke(httpAppResponse);
@@ -390,8 +391,8 @@
             if (string.IsNullOrEmpty(authToken))
             {
                 var httpAppResponse = new HttpAppResponse();
-                httpAppResponse.StatusCode = 401;
-                httpAppResponse.Error = "Auth token null";
+                httpAppResponse.statusCode = 401;
+                httpAppResponse.error = "Auth token null";
 
                 onHttpAppResponse?.Invoke(httpAppResponse);
 
@@ -418,14 +419,14 @@
 
                 if (httpRequest.State == HTTPRequestStates.Finished)
                 {
-                    httpAppResponse.StatusCode = httpResponse.StatusCode;
-                    httpAppResponse.Data = httpResponse.Data;
-                    httpAppResponse.Text = httpResponse.DataAsText;
+                    httpAppResponse.statusCode = httpResponse.StatusCode;
+                    httpAppResponse.data = httpResponse.Data;
+                    httpAppResponse.text = httpResponse.DataAsText;
                 }
                 else
                 {
-                    httpAppResponse.StatusCode = -1;
-                    httpAppResponse.Error = httpRequest.Exception != null ? httpRequest.Exception.Message : "Unknown Error";
+                    httpAppResponse.statusCode = -1;
+                    httpAppResponse.error = httpRequest.Exception != null ? httpRequest.Exception.Message : "Unknown Error";
                 }
 
                 onHttpAppResponse?.Invoke(httpAppResponse);
@@ -466,17 +467,19 @@
                 certificateHandler.Dispose();
 
                 var httpAppResponse = new HttpAppResponse();
-                httpAppResponse.StatusCode = unityWebRequest.responseCode;
+                httpAppResponse.statusCode = unityWebRequest.responseCode;
 
-                if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+                if (unityWebRequest.result == UnityWebRequest.Result.ConnectionError
+                    || unityWebRequest.result == UnityWebRequest.Result.ProtocolError
+                    || unityWebRequest.result == UnityWebRequest.Result.DataProcessingError)
                 {
-                    httpAppResponse.Error = unityWebRequest.error;
+                    httpAppResponse.error = unityWebRequest.error;
                 }
                 else
                 {
                     var downloadHandler = unityWebRequest.downloadHandler;
-                    httpAppResponse.Data = downloadHandler.data;
-                    httpAppResponse.Text = downloadHandler.text;
+                    httpAppResponse.data = downloadHandler.data;
+                    httpAppResponse.text = downloadHandler.text;
                 }
 
                 onHttpAppResponse?.Invoke(httpAppResponse);

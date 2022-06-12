@@ -15,6 +15,8 @@
 
         private int responseId;
 
+        private InvalidMember[] invalidMembers;
+
         public int GetOperationCode()
         {
             return operationCode;
@@ -66,6 +68,12 @@
             return this;
         }
 
+        public OperationResponse SetInvalidMembers(InvalidMember[] invalidMembers)
+        {
+            this.invalidMembers = invalidMembers;
+            return this;
+        }
+
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();
@@ -73,6 +81,21 @@
             stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(operationCode) + " ResponseId: " + responseId + " ReturnCode " + CodeHelper.GetReturnCodeName(returnCode));
 
             if (returnCode == ReturnCode.Ok) stringBuilder.Append(" Parameters " + parameters);
+            else if (returnCode == ReturnCode.InvalidRequestParameters)
+            {
+                if (invalidMembers != null)
+                {
+                    var invalidStr = string.Empty;
+
+                    foreach (var invalidMember in invalidMembers)
+                    {
+                        invalidStr += invalidMember;
+                    }
+
+                    stringBuilder.Append(" InvalidMembers " + invalidStr);
+                }
+                else stringBuilder.Append(" InvalidMembers " + invalidMembers);
+            }
             else stringBuilder.Append(" DebugMessage " + debugMessage);
 
             return stringBuilder.ToString();
