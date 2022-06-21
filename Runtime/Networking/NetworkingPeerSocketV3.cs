@@ -10,6 +10,7 @@ namespace XmobiTea.GN.Networking
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
     using XmobiTea.MsgPack;
+    using XmobiTea.GN.Logger;
 
     internal class NetworkingPeerSocketV3 : NetworkingPeerBase
     {
@@ -66,7 +67,7 @@ namespace XmobiTea.GN.Networking
 
         private void OnError()
         {
-            Debug.Log("[RECV] Handle Error ");
+            GNDebug.Log("[GN Socket RECV] Handle Error ");
         }
 
         private void OnResponse(byte[] responseData)
@@ -87,14 +88,14 @@ namespace XmobiTea.GN.Networking
 
         private void OnDisconnect()
         {
-            Debug.Log("[RECV] HandleClose ");
+            GNDebug.Log("[GN Socket RECV] HandleClose ");
 
             clientId = string.Empty;
         }
 
         private void OnConnect()
         {
-            Debug.Log("[RECV] HandleOpen " + socketManager.Socket.Id);
+            GNDebug.Log("[GN Socket RECV] HandleOpen " + socketManager.Socket.Id);
 
             clientId = socketManager.Socket.Id;
 
@@ -120,7 +121,7 @@ namespace XmobiTea.GN.Networking
                         }
                         catch (Exception ex)
                         {
-                            Debug.LogException(ex);
+                            GNDebug.LogException(ex);
                         }
                     }
 
@@ -142,7 +143,7 @@ namespace XmobiTea.GN.Networking
                         }
                         catch (Exception ex)
                         {
-                            Debug.LogException(ex);
+                            GNDebug.LogException(ex);
                         }
                     }
 
@@ -187,14 +188,14 @@ namespace XmobiTea.GN.Networking
 
             if (isConnected)
             {
-                Debug.Log("Reconnecting");
+                GNDebug.Log("[GN Socket] Reconnecting");
 
                 return;
             }
 
             isConnected = true;
 
-            Debug.Log("Connecting to SocketIOv3 BestHTTP 2");
+            GNDebug.Log("[GN Socket] Connecting to SocketIOv3 BestHTTP 2");
 
             if (socketManager != null) socketManager.Open();
         }

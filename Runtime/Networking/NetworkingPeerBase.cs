@@ -7,6 +7,7 @@ namespace XmobiTea.GN.Networking
 
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Entity;
+    using XmobiTea.GN.Logger;
 
     public class NetworkingPeerBase : MonoBehaviour
     {
@@ -46,8 +47,6 @@ namespace XmobiTea.GN.Networking
         protected virtual void Awake()
         {
             clientId = string.Empty;
-
-            Debug.Log("NetworkingPeerBase Awake");
         }
 
         void OnApplicationQuit()

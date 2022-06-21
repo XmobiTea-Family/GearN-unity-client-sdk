@@ -10,6 +10,7 @@
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
     using XmobiTea.MsgPack;
+    using XmobiTea.GN.Logger;
 
     internal class NetworkingPeerSocketV2 : NetworkingPeerBase
     {
@@ -91,7 +92,7 @@
 
         private void OnConnect(Socket socket, Packet packet, object[] args)
         {
-            Debug.Log("[RECV] HandleOpen " + socket.Id);
+            GNDebug.Log("[GN Socket RECV] HandleOpen " + socket.Id);
 
             clientId = socket.Id;
 
@@ -100,14 +101,14 @@
 
         private void OnDisconnect(Socket socket, Packet packet, object[] args)
         {
-            Debug.Log("[RECV] HandleClose ");
+            GNDebug.Log("[GN Socket RECV] HandleClose ");
 
             clientId = string.Empty;
         }
 
         private void OnError(Socket socket, Packet packet, object[] args)
         {
-            Debug.LogError(string.Format("Error: {0}", args[0].ToString()));
+            GNDebug.LogError(string.Format("Error: {0}", args[0].ToString()));
         }
 
         void Update()
@@ -129,7 +130,7 @@
                         }
                         catch (Exception ex)
                         {
-                            Debug.LogException(ex);
+                            GNDebug.LogException(ex);
                         }
                     }
 
@@ -151,7 +152,7 @@
                         }
                         catch (Exception ex)
                         {
-                            Debug.LogException(ex);
+                            GNDebug.LogException(ex);
                         }
                     }
 
@@ -196,14 +197,14 @@
 
             if (isConnected)
             {
-                Debug.Log("Reconnecting");
+                GNDebug.Log("[GN Socket] Reconnecting");
 
                 return;
             }
 
             isConnected = true;
 
-            Debug.Log("Connecting to SocketIOv2 BestHTTP 2");
+            GNDebug.Log("[GN Socket] Connecting to SocketIOv2 BestHTTP 2");
 
             if (socketManager != null) socketManager.Open();
         }

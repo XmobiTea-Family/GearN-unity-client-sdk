@@ -8,9 +8,7 @@
         public GNHashtable parameters { get; private set; }
         public int returnCode { get; private set; }
         public string debugMessage { get; private set; }
-
         public int errorCode { get; private set; }
-
         public bool hasError => returnCode != ReturnCode.Ok;
 
         public CustomOperationResponse(OperationResponse operationResponse)

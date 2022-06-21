@@ -8,10 +8,11 @@
     using UnityEngine;
     using XmobiTea.GN.Entity;
     using XmobiTea.MiniDeviceId;
+    using XmobiTea.GN.Logger;
 
     public static partial class GNNetwork
     {
-        public const string version = "0.3.9";
+        public const string version = "0.4.0";
 
         internal const string AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
 
@@ -45,6 +46,7 @@
         static GNNetwork()
         {
             InitServerSettings();
+            InitEUNDebug();
 
             if (!Application.isPlaying) return;
 
@@ -67,6 +69,13 @@
                 if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 #endif
             }
+        }
+
+        private static void InitEUNDebug()
+        {
+            if (gnServerSettings == null) throw new NullReferenceException("Null EUN Server Settings, please find it now");
+
+            GNDebug.logType = gnServerSettings.logType;
         }
 
         private static void InitGNSocketObject()

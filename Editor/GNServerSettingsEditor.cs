@@ -26,6 +26,7 @@
         SerializedProperty gnServerSourcePath;
         SerializedProperty httpRequestType;
         SerializedProperty postType;
+        SerializedProperty logType;
 
         private void OnEnable()
         {
@@ -43,6 +44,7 @@
             gnServerSourcePath = serializedObject.FindProperty("_gnServerSourcePath");
             httpRequestType = serializedObject.FindProperty("_httpRequestType");
             postType = serializedObject.FindProperty("_postType");
+            logType = serializedObject.FindProperty("_logType");
         }
 
         public override void OnInspectorGUI()
@@ -63,8 +65,9 @@
             EditorGUILayout.PropertyField(gnServerSourcePath);
             EditorGUILayout.PropertyField(httpRequestType);
             EditorGUILayout.PropertyField(postType);
+            EditorGUILayout.PropertyField(logType);
 
-            serializedObject.ApplyModifiedProperties();
+            if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
         }
 
         [MenuItem("XmobiTea GN/Open Settings")]

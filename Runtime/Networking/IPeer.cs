@@ -58,5 +58,6 @@
     {
         void InitPeer();
         void Enqueue(OperationRequest operationRequest, Action<OperationResponse> onOperationResponse);
+        bool IsUsing();
     }
 }

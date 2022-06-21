@@ -15,6 +15,7 @@
     using System.Text;
     using System.Collections.Generic;
     using XmobiTea.MsgPack;
+    using XmobiTea.GN.Logger;
 
     public class HttpAppResponse
     {
@@ -23,7 +24,7 @@
         public byte[] data { get; internal set; }
         public string text { get; internal set; }
 
-        public bool HasError => !string.IsNullOrEmpty(error);
+        public bool hasError => !string.IsNullOrEmpty(error);
 
         public override string ToString()
         {
@@ -63,6 +64,8 @@
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
 
+            isUsing = gnServerSettings.useHttp;
+
             httpRequestType = gnServerSettings.httpRequestType;
             postType = gnServerSettings.postType;
             httpUrl = gnServerSettings.HttpUrl;
@@ -80,7 +83,7 @@
         {
             base.Send(operationPending);
 
-            Debug.Log("[GN HTTP SEND] " + operationPending.GetOperationRequest().ToString());
+            GNDebug.Log("[GN Http SEND] " + operationPending.GetOperationRequest().ToString());
 
             var operationRequest = operationPending.GetOperationRequest();
 
@@ -100,6 +103,19 @@
 
                     return;
                 }
+            }
+
+            if (operationRequest.GetOperationCode() == OperationCode.Logout)
+            {
+                var obj = new GNArray();
+
+                obj.Add((int)ReturnCode.Ok);
+                obj.Add(new GNHashtable());
+                obj.Add(operationRequest.GetRequestId());
+
+                OnResponseHandler(obj);
+
+                return;
             }
 
             var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.GetOperationCode();
@@ -125,7 +141,7 @@
             var operationRequest = operationPending.GetOperationRequest();
             var obj = new GNArray();
 
-            if (!httpAppResponse.HasError)
+            if (!httpAppResponse.hasError)
             {
                 if (httpAppResponse.statusCode == 200)
                 {

@@ -20,77 +20,66 @@
 
         internal void SyncTs(Action<long> onResponse = null)
         {
-            if (httpPeer != null) {
-                (httpPeer as HttpPeer).GetRequest(SYNC_TS, httpAppResponse =>
+            (httpPeer as HttpPeer).GetRequest(SYNC_TS, httpAppResponse =>
+            {
+                if (!httpAppResponse.hasError)
                 {
-                    if (!httpAppResponse.HasError)
+                    if (httpAppResponse.statusCode == 200)
                     {
-                        if (httpAppResponse.statusCode == 200)
+                        var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
+                        var gnArray = new GNArray.Builder()
+                            .AddAll(returnDatas)
+                            .Build();
+
+                        var returnCode = gnArray.GetInt(0);
+                        if (returnCode == ReturnCode.Ok)
                         {
-                            var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
-                            var gnArray = new GNArray.Builder()
-                                .AddAll(returnDatas)
-                                .Build();
+                            var gnHashtable = gnArray.GetGNHashtable(1);
+                            var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-                            var returnCode = gnArray.GetInt(0);
-                            if (returnCode == ReturnCode.Ok)
-                            {
-                                var gnHashtable = gnArray.GetGNHashtable(1);
-                                var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-
-                                SetServerTimeMilliseconds(newServerTimestamp);
-                            }
+                            SetServerTimeMilliseconds(newServerTimestamp);
                         }
                     }
+                }
 
-                    onResponse?.Invoke(serverTimestamp);
-                });
-            }
+                onResponse?.Invoke(serverTimestamp);
+            });
         }
 
         internal void GetConfig(string configName, Action<string> onResponse)
         {
-            if (httpPeer != null)
+            (httpPeer as HttpPeer).GetRequest(GET_CONFIG + "/" + configName, httpAppResponse =>
             {
-                (httpPeer as HttpPeer).GetRequest(GET_CONFIG + "/" + configName, httpAppResponse =>
+                if (!httpAppResponse.hasError)
                 {
-                    if (!httpAppResponse.HasError)
+                    if (httpAppResponse.statusCode == 200)
                     {
-                        if (httpAppResponse.statusCode == 200)
+                        var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
+                        var gnArray = new GNArray.Builder()
+                            .AddAll(returnDatas)
+                            .Build();
+
+                        var returnCode = gnArray.GetInt(0);
+                        if (returnCode == ReturnCode.Ok)
                         {
-                            var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
-                            var gnArray = new GNArray.Builder()
-                                .AddAll(returnDatas)
-                                .Build();
+                            var gnHashtable = gnArray.GetGNHashtable(1);
+                            var configStr = gnHashtable.GetString(1);
 
-                            var returnCode = gnArray.GetInt(0);
-                            if (returnCode == ReturnCode.Ok)
-                            {
-                                var gnHashtable = gnArray.GetGNHashtable(1);
-                                var configStr = gnHashtable.GetString(1);
-
-                                onResponse?.Invoke(configStr);
-                            }
+                            onResponse?.Invoke(configStr);
                         }
                     }
-                });
-            }
+                }
+            });
         }
 
         internal void DownloadFile(string fileId, Action<HttpAppResponse> onHttpAppResponse)
         {
-            if (httpPeer != null)
-            {
-                (httpPeer as HttpPeer).GetRequest(DOWNLOAD_FILE + "/" + fileId, onHttpAppResponse);
-            }
+            (httpPeer as HttpPeer).GetRequest(DOWNLOAD_FILE + "/" + fileId, onHttpAppResponse);
         }
 
         internal void UploadFile(string fileId, byte[] content, string mimeType, Action<HttpAppResponse> onHttpAppResponse)
         {
-            if (httpPeer != null)
-            {
-                (httpPeer as HttpPeer).UploadFile(fileId, content, mimeType, onHttpAppResponse);
-            }
+            (httpPeer as HttpPeer).UploadFile(fileId, content, mimeType, onHttpAppResponse);
         }
 
         internal void Debug(bool booleanValue, int numberValue, string stringValue, GNHashtable gnHashtableValue, GNArray gnArrayValue, Action<DebugOperationResponse> onResponse = null)
@@ -288,6 +277,17 @@
             {
                 var getFileUploadInfoOperationResponse = new GetFileUploadInfoOperationResponse(response);
                 onResponse?.Invoke(getFileUploadInfoOperationResponse);
+            });
+        }
+
+        internal void Logout(Action<LogoutOperationResponse> onResponse = null)
+        {
+            var request = new LogoutOperationRequest().Builder();
+
+            SendViaHttp(request, response =>
+            {
+                var logoutOperationResponse = new LogoutOperationResponse(response);
+                onResponse?.Invoke(logoutOperationResponse);
             });
         }
     }

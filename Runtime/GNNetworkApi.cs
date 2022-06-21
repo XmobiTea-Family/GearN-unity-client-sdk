@@ -117,5 +117,10 @@
         {
             peer.GetFileUploadInfo(fileId, onResponse);
         }
+
+        public static void Logout(Action<LogoutOperationResponse> onResponse = null)
+        {
+            peer.Logout(onResponse);
+        }
     }
 }

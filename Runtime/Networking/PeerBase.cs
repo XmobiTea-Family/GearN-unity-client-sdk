@@ -8,6 +8,7 @@
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
+    using XmobiTea.GN.Logger;
 
     internal class PeerBase : MonoBehaviour, IPeer
     {
@@ -26,6 +27,11 @@
             get => (int)(1000 / perMsgTimer);
             set => perMsgTimer = (float)1000 / value / 1000;
         }
+
+        internal int ping { get; private set; } = -1;
+        private Queue<float> pingLst = new Queue<float>();
+
+        protected internal bool isUsing { get; protected set; }
 
         public void InitPeer()
         {
@@ -52,13 +58,26 @@
 
         void IPeer.Enqueue(OperationRequest operationRequest, Action<OperationResponse> onOperationResponse)
         {
+            if (!isUsing)
+            {
+                GNDebug.LogError("[GN] Server Settings dont setup to use this to send operation request.");
+                return;
+            }
+
             var operationPending = new OperationPending(operationRequest, onOperationResponse);
 
             operationPendingQueue.Enqueue(operationPending);
         }
 
+        bool IPeer.IsUsing()
+        {
+            return isUsing;
+        }
+
         protected virtual void Update()
         {
+            if (!isUsing) return;
+
             if (checkTimeoutOperationPending < Time.time)
             {
                 checkTimeoutOperationPending = Time.time + 0.1f;
@@ -146,7 +165,7 @@
                     operationResponse.SetInvalidMembers(invalidMembers);
                 }
 
-                Debug.Log("[GN RECV] " + operationResponse.ToString());
+                GNDebug.Log("[GN RECV] " + operationResponse.ToString());
 
                 operationPending.GetCallback()?.Invoke(operationResponse);
 
@@ -172,7 +191,7 @@
             }
             else
             {
-                Debug.LogError("OnResponseHandler " + obj);
+                GNDebug.LogError("[GN] OnResponseHandler " + obj);
             }
         }
 
@@ -181,6 +200,7 @@
             operationPending.OnSend();
 
             var operationRequest = operationPending.GetOperationRequest();
+
             if (operationRequest.GetRequestId() != -1)
             {
                 operationRequest.SetRequestId(requestId++);
@@ -192,14 +212,11 @@
             }
         }
 
-        internal int Ping { get; private set; } = -1;
-        private Queue<float> pingLst = new Queue<float>();
-
         private void AddPing(float value)
         {
             if (pingLst.Count > 10) pingLst.Dequeue();
             pingLst.Enqueue(value / 2);
-            Ping = (int)(pingLst.Average() * 1000);
+            ping = (int)(pingLst.Average() * 1000);
         }
     }
 }

@@ -2,6 +2,7 @@ namespace XmobiTea.GN.Constant
 {
     public partial class OperationCode
     {
+        public const int Logout = -10;
         public const int Debug = -1;
         public const int GetAppConfig = 1;
         public const int Login = 2;

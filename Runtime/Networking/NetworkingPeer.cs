@@ -18,16 +18,16 @@
                 var count = 0;
                 var totalPing = 0;
 
-                if (httpPeer != null)
+                if (httpPeer.IsUsing())
                 {
                     count++;
-                    totalPing += ((PeerBase)httpPeer).Ping;
+                    totalPing += ((PeerBase)httpPeer).ping;
                 }
 
-                if (socketPeer != null)
+                if (socketPeer.IsUsing())
                 {
                     count++;
-                    totalPing += ((PeerBase)socketPeer).Ping;
+                    totalPing += ((PeerBase)socketPeer).ping;
                 }
 
                 return totalPing / count;
@@ -52,42 +52,36 @@
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 
-            if (gnServerSettings.useHttp)
-            {
-                httpPeer = this.gameObject.AddComponent<HttpPeer>();
-                httpPeer.InitPeer();
-            }
+            httpPeer = this.gameObject.AddComponent<HttpPeer>();
+            httpPeer.InitPeer();
 
-            if (gnServerSettings.useSocket)
-            {
-                socketPeer = this.gameObject.AddComponent<SocketPeer>();
-                socketPeer.InitPeer();
-            }
+            socketPeer = this.gameObject.AddComponent<SocketPeer>();
+            socketPeer.InitPeer();
         }
 
         internal void SendViaSocket(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
-            if (socketPeer != null) socketPeer.Enqueue(request, onResponse);
+            socketPeer.Enqueue(request, onResponse);
         }
 
         internal void SendViaHttp(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
-            if (httpPeer != null) httpPeer.Enqueue(request, onResponse);
+            httpPeer.Enqueue(request, onResponse);
         }
 
         internal void SendRequestAuthSocket()
         {
-            if (socketPeer != null) (socketPeer as SocketPeer).SendRequestAuthSocket();
+            (socketPeer as SocketPeer).SendRequestAuthSocket();
         }
 
         internal void ConnectSocket()
         {
-            if (socketPeer != null) (socketPeer as SocketPeer).Connect();
+            (socketPeer as SocketPeer).Connect();
         }
 
         internal void DisconnectSocket()
         {
-            if (socketPeer != null) (socketPeer as SocketPeer).Disconnect();
+            (socketPeer as SocketPeer).Disconnect();
         }
     }
 }

@@ -86,6 +86,10 @@
         private PostType _postType = PostType.MsgPack;
         public PostType postType => _postType;
 
+        [SerializeField]
+        private GN.Logger.LogType _logType = GN.Logger.LogType.All;
+        public GN.Logger.LogType logType => _logType;
+
         public string SocketUrl
         {
             get

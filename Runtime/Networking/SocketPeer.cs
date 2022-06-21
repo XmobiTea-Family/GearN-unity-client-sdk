@@ -8,6 +8,7 @@
     using XmobiTea.GN.Config;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
+    using XmobiTea.GN.Logger;
 
     internal class SocketPeer : PeerBase
     {
@@ -50,6 +51,8 @@
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
 
+            isUsing = gnServerSettings.useSocket;
+
             var peerSocketVersion = gnServerSettings.peerSocketVersion;
 
             if (peerSocketVersion == PeerSocketVersion.V3)
@@ -81,19 +84,19 @@
 
         internal void Connect()
         {
-            if (networkingPeerBase != null) networkingPeerBase.Connect();
+            networkingPeerBase.Connect();
         }
 
         internal void Disconnect()
         {
-            if (networkingPeerBase != null) networkingPeerBase.Close();
+            networkingPeerBase.Close();
         }
 
         internal override void Send(OperationPending operationPending)
         {
             base.Send(operationPending);
 
-            Debug.Log("[GN SOCKET SEND] " + operationPending.GetOperationRequest().ToString());
+            GNDebug.Log("[GN Socket SEND] " + operationPending.GetOperationRequest().ToString());
 
             var operationRequest = operationPending.GetOperationRequest();
 
@@ -128,20 +131,20 @@
 
             var operationEvent = new OperationEvent(eventCode, obj.GetGNHashtable(1));
 
-            Debug.Log("[GN SOCKET EVENT] " + operationEvent.ToString());
+            GNDebug.Log("[GN Socket EVENT] " + operationEvent.ToString());
 
             var serverEventHandler = serverEventHandlerDic[eventCode];
             serverEventHandler.Handle(operationEvent);
         }
 
-        internal static string Auth(BestHTTP.SocketIO3.SocketManager socketManager, BestHTTP.SocketIO3.Socket socket)
-        {
-            return authTokenFormat.Replace("$authtoken", GNNetwork.authToken);
-        }
+        //internal static string Auth(BestHTTP.SocketIO3.SocketManager socketManager, BestHTTP.SocketIO3.Socket socket)
+        //{
+        //    return authTokenFormat.Replace("$authtoken", GNNetwork.authToken);
+        //}
 
-        internal static string Auth(BestHTTP.SocketIO.SocketManager socketManager, BestHTTP.SocketIO.Socket socket)
-        {
-            return authTokenFormat.Replace("$authtoken", GNNetwork.authToken);
-        }
+        //internal static string Auth(BestHTTP.SocketIO.SocketManager socketManager, BestHTTP.SocketIO.Socket socket)
+        //{
+        //    return authTokenFormat.Replace("$authtoken", GNNetwork.authToken);
+        //}
     }
 }
