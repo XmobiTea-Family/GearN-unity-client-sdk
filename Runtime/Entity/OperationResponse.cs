@@ -42,7 +42,7 @@
             return debugMessage;
         }
 
-        public bool HasError => GetReturnCode() != ReturnCode.Ok;
+        public bool hasError => GetReturnCode() != ReturnCode.Ok;
 
         public OperationResponse(int operationCode, int responseId)
         {

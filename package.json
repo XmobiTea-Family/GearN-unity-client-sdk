@@ -1,6 +1,6 @@
 {
   "name": "com.xmobitea.changx.gn-unity",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "displayName": "XmobiTea GN Unity",
   "description": "XmobiTea Unity packages",
   "unity": "2020.3",

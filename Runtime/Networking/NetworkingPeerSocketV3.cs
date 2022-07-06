@@ -46,7 +46,7 @@ namespace XmobiTea.GN.Networking
 
             if (socketManager == null)
             {
-                var uri = new Uri(this.url);
+                var uri = new Uri(this.url + "/socket.io/");
                 socketManager = new SocketManager(uri, new SocketOptions()
                 {
                     Reconnection = true,

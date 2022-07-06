@@ -55,11 +55,12 @@
 
         protected override bool reliable => true;
 
-        public GoogleLoginOperationRequest(string googleToken, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
+        public GoogleLoginOperationRequest(string googleToken, int googleLoginType, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
             parameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.Google)
                 .Add(LoginParameterCode.GoogleToken, googleToken)
+                .Add(LoginParameterCode.GoogleLoginType, googleLoginType)
                 .Build();
         }
     }
@@ -70,11 +71,12 @@
 
         protected override bool reliable => true;
 
-        public AppleLoginOperationRequest(string appleToken, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
+        public AppleLoginOperationRequest(string appleToken, string displayName, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
             parameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.Apple)
                 .Add(LoginParameterCode.AppleToken, appleToken)
+                .Add(LoginParameterCode.DisplayName, displayName)
                 .Build();
         }
     }

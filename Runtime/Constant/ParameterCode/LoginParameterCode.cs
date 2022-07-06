@@ -17,5 +17,6 @@
 		public const int CustomId = 13;
 		public const int TsExpire = 14;
 		public const int Reason = 15;
+		public const int GoogleLoginType = 16;
 	}
 }

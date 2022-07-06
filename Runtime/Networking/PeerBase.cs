@@ -169,7 +169,7 @@
 
                 operationPending.GetCallback()?.Invoke(operationResponse);
 
-                if (!operationResponse.HasError)
+                if (!operationResponse.hasError)
                 {
                     AddPing(operationPending.GetExecuteTimerInMs());
 

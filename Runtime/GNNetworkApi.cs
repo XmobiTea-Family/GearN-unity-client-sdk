@@ -5,6 +5,7 @@
 
     using System;
     using XmobiTea.GN.Networking;
+    using XmobiTea.GN.Constant;
 
     public static partial class GNNetwork
     {
@@ -63,14 +64,14 @@
             peer.FacebookLogin(facebookToken, onResponse);
         }
 
-        public static void GoogleLogin(string googleToken, Action<LoginOperationResponse> onResponse = null)
+        public static void GoogleLogin(string googleToken, GoogleLoginType googleLoginType, Action<LoginOperationResponse> onResponse = null)
         {
-            peer.GoogleLogin(googleToken, onResponse);
+            peer.GoogleLogin(googleToken, (int)googleLoginType, onResponse);
         }
 
-        public static void AppleLogin(string appleToken, Action<LoginOperationResponse> onResponse = null)
+        public static void AppleLogin(string appleToken, string displayName = null, Action<LoginOperationResponse> onResponse = null)
         {
-            peer.GoogleLogin(appleToken, onResponse);
+            peer.AppleLogin(appleToken, displayName, onResponse);
         }
 
         public static void UserIdLogin(string userId, Action<LoginOperationResponse> onResponse = null)

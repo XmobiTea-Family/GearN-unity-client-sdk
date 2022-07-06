@@ -159,9 +159,9 @@
             });
         }
 
-        internal void GoogleLogin(string googleToken, Action<LoginOperationResponse> onResponse = null)
+        internal void GoogleLogin(string googleToken, int googleLoginType, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new GoogleLoginOperationRequest(googleToken).Builder();
+            var request = new GoogleLoginOperationRequest(googleToken, googleLoginType).Builder();
 
             SendViaHttp(request, response =>
             {
@@ -170,9 +170,9 @@
             });
         }
 
-        internal void AppleLogin(string appleToken, Action<LoginOperationResponse> onResponse = null)
+        internal void AppleLogin(string appleToken, string displayName, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new AppleLoginOperationRequest(appleToken).Builder();
+            var request = new AppleLoginOperationRequest(appleToken, displayName).Builder();
 
             SendViaHttp(request, response =>
             {
