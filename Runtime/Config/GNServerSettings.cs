@@ -71,8 +71,8 @@
         public PeerSocketVersion peerSocketVersion => _peerSocketVersion;
 
         [SerializeField]
-        private List<int> _codeCanSendNotAuthorized = new List<int>() { OperationCode.Debug, OperationCode.GetAppConfig, OperationCode.Login, OperationCode.RegisterAccount };
-        public List<int> codeCanSendNotAuthorized => _codeCanSendNotAuthorized;
+        private List<string> _codeCanSendNotAuthorized = new List<string>() { OperationCode.Debug, OperationCode.GetAppConfig, OperationCode.Login, OperationCode.RegisterAccount };
+        public List<string> codeCanSendNotAuthorized => _codeCanSendNotAuthorized;
 
         [SerializeField]
         private string _gnServerSourcePath = "Template_GN-server";

@@ -62,24 +62,24 @@
             return originArray;
         }
 
-        public override void Clear()
+        public void Clear()
         {
             originArray.Clear();
         }
 
-        public override bool Remove(int index)
+        public bool Remove(int index)
         {
             originArray.RemoveAt(index);
 
             return true;
         }
 
-        public override int Count()
+        public int Count()
         {
             return originArray.Count;
         }
 
-        protected override object Get<T>(int k, T defaultValue = default(T))
+        protected object Get<T>(int k, T defaultValue = default(T))
         {
             if (k < 0 || k > originArray.Count - 1) return defaultValue;
 
@@ -117,6 +117,88 @@
             }
 
             return answer;
+        }
+
+        public byte GetByte(int k, byte defaultValue = 0)
+        {
+            return Convert.ToByte(Get(k, defaultValue));
+        }
+
+        public sbyte GetSByte(int k, sbyte defaultValue = 0)
+        {
+            return Convert.ToSByte(Get(k, defaultValue));
+        }
+
+        public short GetShort(int k, short defaultValue = 0)
+        {
+            return Convert.ToInt16(Get(k, defaultValue));
+        }
+
+        public int GetInt(int k, int defaultValue = 0)
+        {
+            return Convert.ToInt32(Get(k, defaultValue));
+        }
+
+        public float GetFloat(int k, float defaultValue = 0)
+        {
+            return Convert.ToSingle(Get(k, defaultValue));
+        }
+
+        public long GetLong(int k, long defaultValue = 0)
+        {
+            return Convert.ToInt64(Get(k, defaultValue));
+        }
+
+        public double GetDouble(int k, double defaultValue = 0)
+        {
+            return Convert.ToDouble(Get(k, defaultValue));
+        }
+
+        public bool GetBool(int k, bool defaultValue = false)
+        {
+            return Convert.ToBoolean(Get(k, defaultValue));
+        }
+
+        public string GetString(int k, string defaultValue = null)
+        {
+            return Convert.ToString(Get(k, defaultValue));
+        }
+
+        public object GetObject(int k, object defaultValue = null)
+        {
+            return Get(k, defaultValue);
+        }
+
+        public T[] GetArray<T>(int k, T[] defaultValue = null)
+        {
+            var value0 = GetGNArray(k);
+            if (value0 != null)
+            {
+                return value0.ToArray<T>();
+            }
+
+            return defaultValue;
+        }
+
+        public IList<T> GetList<T>(int k, IList<T> defaultValue = null)
+        {
+            var value0 = GetGNArray(k);
+            if (value0 != null)
+            {
+                return value0.ToList<T>();
+            }
+
+            return defaultValue;
+        }
+
+        public GNArray GetGNArray(int k, GNArray defaultValue = null)
+        {
+            return (GNArray)Get(k, defaultValue);
+        }
+
+        public GNHashtable GetGNHashtable(int k, GNHashtable defaultValue = null)
+        {
+            return (GNHashtable)Get(k, defaultValue);
         }
 
         public override object ToData()

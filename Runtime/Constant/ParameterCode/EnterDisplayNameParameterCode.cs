@@ -2,7 +2,7 @@
 {
     public partial class EnterDisplayNameParameterCode
     {
-        public const int DisplayName = 1;
-        public const int UserRole = 2;
+        public const string DisplayName = "1";
+        public const string UserRole = "2";
     }
 }

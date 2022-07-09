@@ -8,9 +8,9 @@
     {
         public class Builder
         {
-            private IDictionary<int, object> originObject;
+            private IDictionary<string, object> originObject;
 
-            public Builder Add(int key, object value)
+            public Builder Add(string key, object value)
             {
                 originObject[key] = value;
 
@@ -24,15 +24,7 @@
                 {
                     if (key is string keyStr)
                     {
-                        int keyInt;
-                        if (int.TryParse(keyStr, out keyInt))
-                        {
-                            Add(keyInt, dict[key]);
-                        }
-                    }
-                    else if (key is int keyInt)
-                    {
-                        Add(keyInt, dict[key]);
+                        Add(keyStr, dict[key]);
                     }
                 }
 
@@ -54,18 +46,18 @@
 
             public Builder()
             {
-                originObject = new Dictionary<int, object>();
+                originObject = new Dictionary<string, object>();
             }
         }
 
-        private IDictionary<int, object> originObject;
+        private IDictionary<string, object> originObject;
 
         public GNHashtable()
         {
-            this.originObject = new Dictionary<int, object>();
+            this.originObject = new Dictionary<string, object>();
         }
 
-        public void Add(int key, object value)
+        public void Add(string key, object value)
         {
             originObject[key] = CreateUseDataFromOriginData(value);
         }
@@ -75,32 +67,32 @@
             return originObject.Values;
         }
 
-        public ICollection<int> Keys()
+        public ICollection<string> Keys()
         {
             return originObject.Keys;
         }
 
-        public bool ContainsKey(int key)
+        public bool ContainsKey(string key)
         {
             return originObject.ContainsKey(key);
         }
 
-        public override void Clear()
+        public void Clear()
         {
             originObject.Clear();
         }
 
-        public override bool Remove(int key)
+        public bool Remove(string key)
         {
             return originObject.Remove(key);
         }
 
-        public override int Count()
+        public int Count()
         {
             return originObject.Count;
         }
 
-        protected override object Get<T>(int k, T defaultValue = default(T))
+        protected object Get<T>(string k, T defaultValue = default(T))
         {
             if (originObject.ContainsKey(k))
             {
@@ -119,9 +111,91 @@
             return defaultValue;
         }
 
+        public byte GetByte(string k, byte defaultValue = 0)
+        {
+            return Convert.ToByte(Get(k, defaultValue));
+        }
+
+        public sbyte GetSByte(string k, sbyte defaultValue = 0)
+        {
+            return Convert.ToSByte(Get(k, defaultValue));
+        }
+
+        public short GetShort(string k, short defaultValue = 0)
+        {
+            return Convert.ToInt16(Get(k, defaultValue));
+        }
+
+        public int GetInt(string k, int defaultValue = 0)
+        {
+            return Convert.ToInt32(Get(k, defaultValue));
+        }
+
+        public float GetFloat(string k, float defaultValue = 0)
+        {
+            return Convert.ToSingle(Get(k, defaultValue));
+        }
+
+        public long GetLong(string k, long defaultValue = 0)
+        {
+            return Convert.ToInt64(Get(k, defaultValue));
+        }
+
+        public double GetDouble(string k, double defaultValue = 0)
+        {
+            return Convert.ToDouble(Get(k, defaultValue));
+        }
+
+        public bool GetBool(string k, bool defaultValue = false)
+        {
+            return Convert.ToBoolean(Get(k, defaultValue));
+        }
+
+        public string GetString(string k, string defaultValue = null)
+        {
+            return Convert.ToString(Get(k, defaultValue));
+        }
+
+        public object GetObject(string k, object defaultValue = null)
+        {
+            return Get(k, defaultValue);
+        }
+
+        public T[] GetArray<T>(string k, T[] defaultValue = null)
+        {
+            var value0 = GetGNArray(k);
+            if (value0 != null)
+            {
+                return value0.ToArray<T>();
+            }
+
+            return defaultValue;
+        }
+
+        public IList<T> GetList<T>(string k, IList<T> defaultValue = null)
+        {
+            var value0 = GetGNArray(k);
+            if (value0 != null)
+            {
+                return value0.ToList<T>();
+            }
+
+            return defaultValue;
+        }
+
+        public GNArray GetGNArray(string k, GNArray defaultValue = null)
+        {
+            return (GNArray)Get(k, defaultValue);
+        }
+
+        public GNHashtable GetGNHashtable(string k, GNHashtable defaultValue = null)
+        {
+            return (GNHashtable)Get(k, defaultValue);
+        }
+
         public override object ToData()
         {
-            var answer = new Dictionary<int, object>();
+            var answer = new Dictionary<string, object>();
 
             foreach (var c in originObject)
             {

@@ -193,7 +193,7 @@
 
         private static void GenerateParameterCodeFile(string dirPath)
         {
-            const string Template = "public const int $name = $code;";
+            const string Template = "public const string $name = $code;";
 
             var fileInfo = new FileInfo(dirPath);
 
@@ -201,12 +201,8 @@
 
             var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
-            var isPartialClass = false;
-
             if (fileName.Contains(".ext"))
             {
-                isPartialClass = true;
-
                 fileName = fileName.Replace(".ext", string.Empty);
             }
 
@@ -216,7 +212,7 @@
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
             stringBuilder.AppendLine("{");
-            stringBuilder.AppendLine(isPartialClass ? ("    public partial class " + fileName) : ("    public class " + fileName));
+            stringBuilder.AppendLine("    public partial class " + fileName);
             stringBuilder.AppendLine("    {");
             // Value0 = 0,
             for (var i = 0; i < allLines.Length; i++)
@@ -268,12 +264,8 @@
 
             var fileName = fileInfo.Name.Replace(".ts", string.Empty);
 
-            var isPartialClass = false;
-
             if (fileName.Contains(".ext"))
             {
-                isPartialClass = true;
-
                 fileName = fileName.Replace(".ext", string.Empty);
             }
 
@@ -283,7 +275,7 @@
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("namespace XmobiTea.GN.Constant");
             stringBuilder.AppendLine("{");
-            stringBuilder.AppendLine(isPartialClass ? ("    public partial class " + fileName) : ("    public class " + fileName));
+            stringBuilder.AppendLine("    public partial class " + fileName);
             stringBuilder.AppendLine("    {");
             // Value0 = 0,
             for (var i = 0; i < allLines.Length; i++)
@@ -404,7 +396,6 @@
             stringBuilder.AppendLine("}");
             WriteFile("EventCode.cs", Application.dataPath + "/XmobiTea-constance/GN/Scripts/Constant", stringBuilder);
         }
-
 
         private static void WriteFile(string fileNameWithExtension, string dirPath, StringBuilder contentBuilder)
         {

@@ -46,7 +46,7 @@
             return this;
         }
 
-        public OperationRequest SetScriptData(int key, object value)
+        public OperationRequest SetScriptData(string key, object value)
         {
             if (parameters == null) parameters = new GNHashtable();
 

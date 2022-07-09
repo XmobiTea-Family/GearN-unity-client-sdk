@@ -35,7 +35,7 @@
                         if (returnCode == ReturnCode.Ok)
                         {
                             var gnHashtable = gnArray.GetGNHashtable(1);
-                            var newServerTimestamp = gnHashtable.GetLong(1, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                            var newServerTimestamp = gnHashtable.GetLong("1", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
                             SetServerTimeMilliseconds(newServerTimestamp);
                         }
@@ -63,7 +63,7 @@
                         if (returnCode == ReturnCode.Ok)
                         {
                             var gnHashtable = gnArray.GetGNHashtable(1);
-                            var configStr = gnHashtable.GetString(1);
+                            var configStr = gnHashtable.GetString("1");
 
                             onResponse?.Invoke(configStr);
                         }

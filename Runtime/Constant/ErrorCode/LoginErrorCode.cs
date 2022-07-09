@@ -1,6 +1,6 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-    public class LoginErrorCode
+    public partial class LoginErrorCode
     {
         public const int Ok = 1;
         public const int UserDoesNotExists = 2;
