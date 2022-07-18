@@ -10,6 +10,7 @@
         private IPeer httpPeer;
 
         internal string authToken = string.Empty;
+        internal string userId = string.Empty;
 
         internal int ping
         {

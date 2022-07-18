@@ -5,5 +5,6 @@
         public const string AuthToken = "A";
         public const string Ts = "T";
         public const string ErrorCode = "E";
+        public const string UserId = "U";
     }
 }

@@ -12,5 +12,6 @@ namespace XmobiTea.GN.Constant
         public const int FetchAllData = 6;
         public const int CreateNewFileUploadInfo = 7;
         public const int GetFileUploadInfo = 8;
+        public const int FetchSparkPlayer = 9;
     }
 }

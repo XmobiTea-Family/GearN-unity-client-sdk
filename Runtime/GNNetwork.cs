@@ -14,7 +14,8 @@
     {
         public const string version = "1.0.0";
 
-        internal const string AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
+        internal const string AUTH_TOKEN_KEY = "[GN]_AUTH_TOKEN_KEY";
+        internal const string USER_ID_KEY = "[GN]_USER_ID_KEY";
 
         public static GNServerSettings gnServerSettings { get; private set; }
 
@@ -37,6 +38,17 @@
             }
         }
 
+        public static string userId
+        {
+            get { return peer.userId; }
+            set
+            {
+                peer.userId = value;
+
+                PlayerPrefs.SetString(GNNetwork.USER_ID_KEY, value);
+            }
+        }
+
         public static RuntimePlatform platform { get; private set; }
 
         public static string deviceId { get; private set; }
@@ -53,6 +65,7 @@
             InitGNSocketObject();
 
             peer.authToken = PlayerPrefs.GetString(AUTH_TOKEN_KEY, string.Empty);
+            peer.userId = PlayerPrefs.GetString(USER_ID_KEY, string.Empty);
 
             platform = Application.platform;
             deviceId = CXDevice.GetDeviceId();

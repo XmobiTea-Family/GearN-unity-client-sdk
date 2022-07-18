@@ -115,6 +115,17 @@
             });
         }
 
+        internal void FetchSparkPlayer(Action<FetchSparkPlayerOperationResponse> onResponse = null)
+        {
+            var request = new FetchSparkPlayerOperationRequest().Builder();
+
+            SendViaHttp(request, response =>
+            {
+                var fetchSparkPlayerOperationResponse = new FetchSparkPlayerOperationResponse(response);
+                onResponse?.Invoke(fetchSparkPlayerOperationResponse);
+            });
+        }
+
         internal void GetAppConfig(GNArray configTypes, Action<GetAppConfigOperationResponse> onResponse = null)
         {
             var request = new GetAppConfigOperationRequest(configTypes).Builder();

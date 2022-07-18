@@ -9,6 +9,7 @@ namespace XmobiTea.GN.Entity.Response
             if (!hasError)
             {
                 GNNetwork.authToken = string.Empty;
+                GNNetwork.userId = string.Empty;
 
                 GNDebug.Log("[GN] Logout success.");
             }

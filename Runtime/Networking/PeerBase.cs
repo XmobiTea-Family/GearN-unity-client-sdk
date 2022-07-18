@@ -182,6 +182,13 @@
                             GNNetwork.authToken = authToken;
                         }
 
+                        if (parameters.ContainsKey(ParameterCode.UserId))
+                        {
+                            var userId = parameters.GetString(ParameterCode.UserId);
+
+                            GNNetwork.userId = userId;
+                        }
+
                         if (parameters.ContainsKey(ParameterCode.Ts))
                         {
                             GNNetwork.peer.SetServerTimeMilliseconds(parameters.GetLong(ParameterCode.Ts, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
