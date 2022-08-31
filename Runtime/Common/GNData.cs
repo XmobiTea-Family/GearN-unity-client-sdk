@@ -1,8 +1,5 @@
 ﻿namespace XmobiTea.GN.Common
 {
-    using System;
-    using System.Collections.Generic;
-
     public class GNData : IGNData
     {
         protected static object CreateUseDataFromOriginData(object value)
@@ -11,12 +8,7 @@
 
             if (value is System.Collections.IList list)
             {
-                var answer = new GNArray();
-
-                for (var i = 0; i < list.Count; i++)
-                {
-                    answer.Add(list[i]);
-                }
+                var answer = new GNArray.Builder().AddAll(list);
 
                 return answer;
             }
