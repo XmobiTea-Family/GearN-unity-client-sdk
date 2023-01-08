@@ -84,7 +84,7 @@
             if (k < 0 || k > originArray.Count - 1) return defaultValue;
 
             var value = originArray[k];
-            
+
             if (value == null) return defaultValue;
 
             if (value is T t)
@@ -101,7 +101,7 @@
 
             for (var i = 0; i < originArray.Count; i++)
             {
-                answer[i] = (T)Get<T>(i);
+                answer[i] = (T)CustomGet(i);
             }
 
             return answer;
@@ -113,10 +113,31 @@
 
             for (var i = 0; i < originArray.Count; i++)
             {
-                answer.Add((T)Get<T>(i));
+                answer.Add((T)CustomGet(i));
             }
 
             return answer;
+        }
+
+        private object CustomGet(int k)
+        {
+            var obj = Get<object>(k);
+            if (obj == null) return null;
+
+            var objType = obj.GetType();
+            if (objType == typeof(byte)) return GetByte(k);
+            else if (objType == typeof(sbyte)) return GetSByte(k);
+            else if (objType == typeof(short)) return GetShort(k);
+            else if (objType == typeof(int)) return GetInt(k);
+            else if (objType == typeof(float)) return GetFloat(k);
+            else if (objType == typeof(long)) return GetLong(k);
+            else if (objType == typeof(double)) return GetDouble(k);
+            else if (objType == typeof(bool)) return GetBool(k);
+            else if (objType == typeof(string)) return GetString(k);
+            else if (objType == typeof(GNArray) || objType == typeof(System.Collections.IList)) return GetGNArray(k);
+            else if (objType == typeof(GNHashtable) || objType == typeof(System.Collections.IDictionary)) return GetGNHashtable(k);
+
+            return obj;
         }
 
         public byte GetByte(int k, byte defaultValue = 0)
