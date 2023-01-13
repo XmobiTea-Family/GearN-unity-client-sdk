@@ -10,7 +10,7 @@
         {
             base.SetupOperationResponse(operationResponse);
 
-            if (!this.hasError)
+            if (!this.HasError())
             {
                 if (this.errorCode == DebugErrorCode.Ok)
                 {

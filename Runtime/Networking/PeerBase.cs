@@ -173,10 +173,6 @@
                     operationResponse.SetInvalidMembers(invalidMembers);
                 }
 
-                GNDebug.Log("[GN RECV] " + operationResponse.ToString());
-
-                operationPending.GetCallback()?.Invoke(operationResponse);
-
                 if (!operationResponse.HasError())
                 {
                     AddPing(operationPending.GetExecuteTimerInMs());
@@ -203,6 +199,10 @@
                         }
                     }
                 }
+
+                GNDebug.Log("[GN RECV] " + operationResponse.ToString());
+
+                operationPending.GetCallback()?.Invoke(operationResponse);
             }
             else
             {

@@ -9,7 +9,7 @@ namespace XmobiTea.GN.Entity.Response
         {
             base.SetupOperationResponse(operationResponse);
 
-            if (!this.hasError)
+            if (!this.HasError())
             {
                 GNNetwork.authToken = string.Empty;
                 GNNetwork.userId = string.Empty;

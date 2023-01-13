@@ -165,7 +165,9 @@
                     if (gnArray == null)
                     {
                         var iList = MsgPackSerializer.Deserialize<object[]>(httpAppResponse.data);
-                        gnArray = new GNArray.Builder().AddAll(NetworkingPeerBase.fromMsgList(iList)).Build();
+                        gnArray = new GNArray.Builder()
+                            .AddAll(NetworkingPeerBase.fromMsgList(iList))
+                            .Build();
 
                         isEncrypted = true;
                     }

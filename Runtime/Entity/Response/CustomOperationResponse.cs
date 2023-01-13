@@ -12,7 +12,7 @@
         public int errorCode { get; private set; }
         public InvalidMember[] invalidMembers { get; private set; }
 
-        public bool hasError => this.returnCode != ReturnCode.Ok;
+        public bool HasError() => this.returnCode != ReturnCode.Ok;
 
 
         public virtual void SetupOperationResponse(OperationResponse operationResponse)
@@ -24,7 +24,7 @@
             this.parameters = operationResponse.GetParameters();
             this.invalidMembers = operationResponse.GetInvalidMembers();
 
-            if (!hasError)
+            if (!HasError())
             {
                 this.errorCode = this.parameters.GetInt(ParameterCode.ErrorCode);
             }

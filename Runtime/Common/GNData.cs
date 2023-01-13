@@ -8,7 +8,7 @@
 
             if (value is System.Collections.IList list)
             {
-                var answer = new GNArray.Builder().AddAll(list);
+                var answer = new GNArray.Builder().AddAll(list).Build();
 
                 return answer;
             }
