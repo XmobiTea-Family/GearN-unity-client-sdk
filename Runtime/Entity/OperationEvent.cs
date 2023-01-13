@@ -7,47 +7,64 @@
 
     public class OperationEvent
     {
-        private static OperationEvent operationEventConnect = new OperationEvent(0, null);
-        public static OperationEvent OperationEventConnect => operationEventConnect;
-
-        private static OperationEvent operationEventDisconnect = new OperationEvent(1, null);
-        public static OperationEvent OperationEventDisconnect => operationEventDisconnect;
-
-        private static OperationEvent operationEventOpen = new OperationEvent(2, null);
-        public static OperationEvent OperationEventOpen => operationEventOpen;
-
-        private static OperationEvent operationEventClose = new OperationEvent(3, null);
-        public static OperationEvent OperationEventClose => operationEventClose;
-
-        private static OperationEvent operationEventError = new OperationEvent(4, null);
-        public static OperationEvent OperationEventError => operationEventError;
 
         private int eventCode;
         private GNHashtable parameters;
+        private bool encrypted;
+
+        public OperationEvent(int eventCode, GNHashtable parameters = null, bool encrypted = true)
+        {
+            this.eventCode = eventCode;
+            this.parameters = parameters;
+            this.encrypted = encrypted;
+        }
 
         public int GetEventCode()
         {
-            return eventCode;
+            return this.eventCode;
         }
 
         public GNHashtable GetParameters()
         {
-            return parameters;
+            return this.parameters;
         }
 
-        public OperationEvent(int eventCode, GNHashtable parameters)
+        public bool IsEncrypted()
         {
-            this.eventCode = eventCode;
+            return this.encrypted;
+        }
+
+        public OperationEvent SetScriptData(string key, object value)
+        {
+            if (this.parameters == null) this.parameters = new GNHashtable();
+
+            this.parameters.Add(key, value);
+
+            return this;
+        }
+
+        public OperationEvent SetParameters(GNHashtable parameters)
+        {
             this.parameters = parameters;
+
+            return this;
+        }
+
+        public OperationEvent SetEncrypted(bool encrypted)
+        {
+            this.encrypted = encrypted;
+            return this;
         }
 
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.GetEventCodeName(eventCode) + " parameters " + parameters);
+            stringBuilder.Append("Code: " + CodeHelper.GetEventCodeName(this.eventCode) + ", parameters " + this.parameters);
 
             return stringBuilder.ToString();
         }
+
     }
+
 }

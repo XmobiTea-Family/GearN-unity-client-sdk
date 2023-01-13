@@ -1,6 +1,6 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-    public class GetAppConfigErrorCode
+    public partial class GetAppConfigErrorCode
     {
         public const int Ok = 1;
     }

@@ -1,28 +1,20 @@
 ﻿namespace XmobiTea.GN.Networking
 {
     using System;
-    using System.Collections.Generic;
-
-    using UnityEngine;
 
     using BestHTTP.SocketIO;
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Common;
     using XmobiTea.MsgPack;
+    using XmobiTea.GN.Logger;
 
     internal class NetworkingPeerSocketV2 : NetworkingPeerBase
     {
         private SocketManager socketManager;
         private bool isConnected;
 
-        internal override bool isWsConnected => socketManager != null ? socketManager.State == SocketManager.States.Open : false;
+        internal override bool isWsConnected => this.socketManager != null ? this.socketManager.State == SocketManager.States.Open : false;
 
-        private object messageLstLock;
-        private List<byte[]> responsePacketLst;
-        private List<byte[]> eventPacketLst;
-
-        [SerializeField]
         private SupportedSocketIOVersions serverVersion = SupportedSocketIOVersions.v3;
 
         public void SetServerVersion(SupportedSocketIOVersions serverVersion)
@@ -30,150 +22,96 @@
             this.serverVersion = serverVersion;
         }
 
-        protected override void Awake()
-        {
-            messageLstLock = new object();
-            responsePacketLst = new List<byte[]>();
-            eventPacketLst = new List<byte[]>();
-
-            base.Awake();
-        }
-
         internal override void SendRequestAuthSocket()
         {
             base.SendRequestAuthSocket();
 
-            if (!string.IsNullOrEmpty(clientId))
-                socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
+            if (!string.IsNullOrEmpty(this.clientId))
+                this.socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
         }
 
         internal override void ReInitNewSocket()
         {
             base.ReInitNewSocket();
 
-            if (socketManager == null)
+            if (this.socketManager == null)
             {
                 var uri = new Uri(this.url + "/socket.io/");
-                socketManager = new SocketManager(uri, new SocketOptions()
+                this.socketManager = new SocketManager(uri, new SocketOptions()
                 {
                     ServerVersion = serverVersion,
                     Reconnection = true,
-                    ReconnectionDelay = new TimeSpan(0, 0, this.reconnectDelay),
-                    Timeout = new TimeSpan(0, 0, (int)this.pingTimeout),
+                    ReconnectionDelay = TimeSpan.FromMilliseconds(this.reconnectDelay),
+                    Timeout = TimeSpan.FromMilliseconds(this.pingTimeout),
                     AutoConnect = false,
                     ConnectWith = BestHTTP.SocketIO.Transports.TransportTypes.WebSocket
                 });
 
-                socketManager.Socket.On(SocketIOEventTypes.Connect, OnConnect);
-                socketManager.Socket.On(SocketIOEventTypes.Disconnect, OnDisconnect);
-                socketManager.Socket.On(SocketIOEventTypes.Error, OnError);
+                this.socketManager.Socket.On(SocketIOEventTypes.Connect, OnConnect);
+                this.socketManager.Socket.On(SocketIOEventTypes.Disconnect, OnDisconnect);
+                this.socketManager.Socket.On(SocketIOEventTypes.Error, OnError);
 
-                socketManager.Socket.On(Commands.ResponseCmd, OnResponse);
-                socketManager.Socket.On(Commands.EventCmd, OnEvent);
+                this.socketManager.Socket.On(Commands.ResponseCmd_MsgPack, OnResponseMsgPack);
+                this.socketManager.Socket.On(Commands.EventCmd_MsgPack, OnEventMsgPack);
+
+                this.socketManager.Socket.On(Commands.ResponseCmd_Json, OnResponseJson);
+                this.socketManager.Socket.On(Commands.EventCmd_Json, OnEventJson);
             }
         }
 
-        private void OnResponse(Socket socket, Packet packet, object[] args)
+        private void OnResponseMsgPack(Socket socket, Packet packet, object[] args)
         {
-            lock (messageLstLock)
+            lock (this.messageLstLock)
             {
-                responsePacketLst.Add(packet.Attachments[0]);
+                this.responsePacketLst.Add(new SocketPacket(packet.Attachments[0], true));
             }
         }
 
-        private void OnEvent(Socket socket, Packet packet, object[] args)
+        private void OnEventMsgPack(Socket socket, Packet packet, object[] args)
         {
-            lock (messageLstLock)
+            lock (this.messageLstLock)
             {
-                eventPacketLst.Add(packet.Attachments[0]);
+                this.eventPacketLst.Add(new SocketPacket(packet.Attachments[0], true));
+            }
+        }
+
+        private void OnResponseJson(Socket socket, Packet packet, object[] args)
+        {
+            lock (this.messageLstLock)
+            {
+                this.responsePacketLst.Add(new SocketPacket(packet.DecodedArgs[0], false));
+            }
+        }
+
+        private void OnEventJson(Socket socket, Packet packet, object[] args)
+        {
+            lock (this.messageLstLock)
+            {
+                this.eventPacketLst.Add(new SocketPacket(packet.DecodedArgs[0], false));
             }
         }
 
         private void OnConnect(Socket socket, Packet packet, object[] args)
         {
-            Debug.Log("[RECV] HandleOpen " + socket.Id);
+            GNDebug.Log("[GN Socket RECV] HandleOpen " + socket.Id);
 
-            clientId = socket.Id;
+            this.clientId = socket.Id;
 
-            OnConnectHandler();
+            this.OnConnectHandler();
         }
 
         private void OnDisconnect(Socket socket, Packet packet, object[] args)
         {
-            Debug.Log("[RECV] HandleClose ");
+            GNDebug.Log("[GN Socket RECV] HandleClose ");
 
-            clientId = string.Empty;
+            this.clientId = string.Empty;
+
+            this.OnDisconnectHandler();
         }
 
         private void OnError(Socket socket, Packet packet, object[] args)
         {
-            Debug.LogError(string.Format("Error: {0}", args[0].ToString()));
-        }
-
-        void Update()
-        {
-            lock (messageLstLock)
-            {
-                if (responsePacketLst.Count > 0)
-                {
-                    for (var i = 0; i < responsePacketLst.Count; i++)
-                    {
-                        var byteArr = responsePacketLst[i];
-
-                        try
-                        {
-                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
-
-                            var gnArray = new GNArray();
-
-                            var returnCode = Convert.ToInt32(iList[0]);
-                            gnArray.Add(returnCode);
-
-                            if (returnCode == (int)ReturnCode.Ok)
-                            {
-                                var keyValuePairs = (KeyValuePair<object, object>[])iList[1];
-                                gnArray.Add(new Common.GNHashtable.Builder().AddAll(fromMsgKeyValuePairs(keyValuePairs)).Build());
-                            }
-                            else
-                            {
-                                gnArray.Add(iList[1] as string);
-                            }
-
-                            gnArray.Add(Convert.ToInt32(iList[2]));
-
-                            OnResponseHandler(gnArray);
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.LogException(ex);
-                        }
-                    }
-
-                    responsePacketLst.Clear();
-                }
-
-                if (eventPacketLst.Count > 0)
-                {
-                    for (var i = 0; i < eventPacketLst.Count; i++)
-                    {
-                        var byteArr = eventPacketLst[i];
-
-                        try
-                        {
-                            var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
-
-                            var gnArray = new GNArray.Builder().AddAll(fromMsgList(iList)).Build();
-                            OnEventHandler(gnArray);
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.LogException(ex);
-                        }
-                    }
-
-                    eventPacketLst.Clear();
-                }
-            }
+            GNDebug.LogError(string.Format("Error: {0}", args[0].ToString()));
         }
 
         internal override void Init(string url, int reconnectDelay, float pingInterval, float pingTimeout)
@@ -185,43 +123,58 @@
         {
             base.Emit(operationRequest);
 
-            if (socketManager == null || socketManager.Socket == null)
+            if (this.socketManager == null || this.socketManager.Socket == null)
             {
                 // callback here
                 return;
             }
 
-            var dataSend = operationRequest.ToData();
+            var dataSend = OperationHelper.ToSocketData(operationRequest);
 
-            socketManager.Socket.Emit(Commands.RequestCmd, MsgPackSerializer.Serialize(dataSend));
+            if (operationRequest.IsEncrypted())
+                this.socketManager.Socket.Emit(Commands.RequestCmd_MsgPack, MsgPackSerializer.Serialize(dataSend));
+            else
+                this.socketManager.Socket.Emit(Commands.RequestCmd_Json, dataSend);
         }
 
-        internal override void Close()
+        internal override void Close(Action _onSocketDisconnect)
         {
-            base.Close();
+            base.Close(_onSocketDisconnect);
 
-            if (socketManager != null)
+            this.isConnected = false;
+
+            if (this.socketManager != null)
             {
-                socketManager.Close();
+                if (this.socketManager.State != SocketManager.States.Closed)
+                {
+                    this.socketManager.Close();
+                    return;
+                }
             }
+
+            GNDebug.Log("[GN Socket] Disconnecting via SocketIOv2 BestHTTP 2");
+
+            OnDisconnectHandler();
         }
 
-        internal override void Connect()
+        internal override void Connect(Action _onSocketConnect)
         {
-            base.Connect();
+            base.Connect(_onSocketConnect);
 
-            if (isConnected)
+            if (this.isConnected)
             {
-                Debug.Log("Reconnecting");
+                GNDebug.Log("[GN Socket] Reconnecting");
 
                 return;
             }
 
-            isConnected = true;
+            this.isConnected = true;
 
-            Debug.Log("Connecting to SocketIOv2 BestHTTP 2");
+            GNDebug.Log("[GN Socket] Connecting via SocketIOv2 BestHTTP 2");
 
-            if (socketManager != null) socketManager.Open();
+            if (this.socketManager != null) this.socketManager.Open();
         }
+
     }
+
 }

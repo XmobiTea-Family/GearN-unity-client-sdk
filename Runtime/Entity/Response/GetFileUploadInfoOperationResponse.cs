@@ -19,36 +19,38 @@
         public long size { get; private set; }
         public string folderFileName { get; private set; }
 
-        public GetFileUploadInfoOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
+            base.SetupOperationResponse(operationResponse);
+
+            if (!this.hasError)
             {
-                var parameters = operationResponse.GetParameters();
-
-                if (errorCode == FileUploadInfoErrorCode.Ok)
+                if (this.errorCode == FileUploadInfoErrorCode.Ok)
                 {
-                    fileId = parameters.GetString(FileUploadInfoParameterCode.FileId);
-                    originFileName = parameters.GetString(FileUploadInfoParameterCode.OriginFileName);
-                    tsCreate = parameters.GetLong(FileUploadInfoParameterCode.TsCreate);
-                    userId = parameters.GetString(FileUploadInfoParameterCode.UserId);
+                    this.fileId = this.parameters.GetString(FileUploadInfoParameterCode.FileId);
+                    this.originFileName = this.parameters.GetString(FileUploadInfoParameterCode.OriginFileName);
+                    this.tsCreate = this.parameters.GetLong(FileUploadInfoParameterCode.TsCreate);
+                    this.userId = this.parameters.GetString(FileUploadInfoParameterCode.UserId);
 
-                    if (parameters.ContainsKey(FileUploadInfoParameterCode.TsUploadExpire))
+                    if (this.parameters.ContainsKey(FileUploadInfoParameterCode.TsUploadExpire))
                     {
-                        fileHasUpload = false;
+                        this.fileHasUpload = false;
 
-                        tsUploadExpire = parameters.GetLong(FileUploadInfoParameterCode.TsUploadExpire);
+                        this.tsUploadExpire = this.parameters.GetLong(FileUploadInfoParameterCode.TsUploadExpire);
                     }
                     else
                     {
-                        fileHasUpload = true;
+                        this.fileHasUpload = true;
 
-                        tsUploadFile = parameters.GetLong(FileUploadInfoParameterCode.TsUploadFile);
-                        mimeType = parameters.GetString(FileUploadInfoParameterCode.MimeType);
-                        size = parameters.GetLong(FileUploadInfoParameterCode.Size);
-                        folderFileName = parameters.GetString(FileUploadInfoParameterCode.FolderFileName);
+                        this.tsUploadFile = this.parameters.GetLong(FileUploadInfoParameterCode.TsUploadFile);
+                        this.mimeType = this.parameters.GetString(FileUploadInfoParameterCode.MimeType);
+                        this.size = this.parameters.GetLong(FileUploadInfoParameterCode.Size);
+                        this.folderFileName = this.parameters.GetString(FileUploadInfoParameterCode.FolderFileName);
                     }
                 }
             }
         }
+
     }
+
 }

@@ -3,140 +3,138 @@
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Constant;
 
-    public class AccountLoginOperationRequest : CustomOperationRequest
+    public class LoginOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.Login;
+        protected override int operationCode => OperationCode.Login;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
+
+        public LoginOperationRequest(int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
+        {
+            
+        }
+
+    }
+
+    public class AccountLoginOperationRequest : LoginOperationRequest
+    {
 
         public AccountLoginOperationRequest(string username, string password, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.Account)
                 .Add(LoginParameterCode.Username, username)
                 .Add(LoginParameterCode.Password, password)
                 .Build();
         }
+
     }
 
-    public class DeviceLoginOperationRequest : CustomOperationRequest
+    public class DeviceLoginOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
-
-        protected override bool reliable => true;
 
         public DeviceLoginOperationRequest(string deviceInfo, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.Device)
                 .Add(LoginParameterCode.DeviceInfo, deviceInfo)
                 .Build();
         }
+
     }
 
-    public class FacebookLoginOperationRequest : CustomOperationRequest
+    public class FacebookLoginOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
-
-        protected override bool reliable => true;
 
         public FacebookLoginOperationRequest(string facebookToken, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.Facebook)
                 .Add(LoginParameterCode.FacebookToken, facebookToken)
                 .Build();
         }
+
     }
 
-    public class GoogleLoginOperationRequest : CustomOperationRequest
+    public class GoogleLoginOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
 
-        protected override bool reliable => true;
-
-        public GoogleLoginOperationRequest(string googleToken, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
+        public GoogleLoginOperationRequest(string googleToken, int googleLoginType, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.Google)
                 .Add(LoginParameterCode.GoogleToken, googleToken)
+                .Add(LoginParameterCode.GoogleLoginType, googleLoginType)
                 .Build();
         }
+
     }
 
-    public class AppleLoginOperationRequest : CustomOperationRequest
+    public class AppleLoginOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
 
-        protected override bool reliable => true;
-
-        public AppleLoginOperationRequest(string appleToken, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
+        public AppleLoginOperationRequest(string appleToken, string displayName, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.Apple)
                 .Add(LoginParameterCode.AppleToken, appleToken)
+                .Add(LoginParameterCode.DisplayName, displayName)
                 .Build();
         }
+
     }
 
-    public class UserIdLoginOperationRequest : CustomOperationRequest
+    public class UserIdLoginOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
-
-        protected override bool reliable => true;
 
         public UserIdLoginOperationRequest(string userId, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.UserId)
                 .Add(LoginParameterCode.UserId, userId)
                 .Build();
         }
+
     }
 
-    public class PublicAddressLoginOperationRequest : CustomOperationRequest
+    public class PublicAddressLoginOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
-
-        protected override bool reliable => true;
 
         public PublicAddressLoginOperationRequest(string signature, string publicAddress, string message, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.PublicAddress)
                 .Add(LoginParameterCode.Signature, signature)
                 .Add(LoginParameterCode.PublicAddress, publicAddress)
                 .Add(LoginParameterCode.Message, message)
                 .Build();
         }
+
     }
 
-    public class PublicAddressGetRandomMessageOperationRequest : CustomOperationRequest
+    public class PublicAddressGetRandomMessageOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
-
-        protected override bool reliable => true;
 
         public PublicAddressGetRandomMessageOperationRequest(int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.PublicAddress)
                 .Build();
         }
+
     }
 
-    public class CustomIdLoginOperationRequest : CustomOperationRequest
+    public class CustomIdLoginOperationRequest : LoginOperationRequest
     {
-        protected override int code => OperationCode.Login;
-
-        protected override bool reliable => true;
 
         public CustomIdLoginOperationRequest(string customId, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.LoginType, (int)LoginType.CustomId)
                 .Add(LoginParameterCode.CustomId, customId)
                 .Build();
         }
+
     }
+
 }

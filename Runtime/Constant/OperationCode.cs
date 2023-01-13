@@ -2,6 +2,7 @@ namespace XmobiTea.GN.Constant
 {
     public partial class OperationCode
     {
+        public const int Logout = -10;
         public const int Debug = -1;
         public const int GetAppConfig = 1;
         public const int Login = 2;
@@ -11,5 +12,6 @@ namespace XmobiTea.GN.Constant
         public const int FetchAllData = 6;
         public const int CreateNewFileUploadInfo = 7;
         public const int GetFileUploadInfo = 8;
+        public const int FetchSparkPlayer = 9;
     }
 }

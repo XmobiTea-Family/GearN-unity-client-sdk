@@ -6,17 +6,19 @@
     {
         public string message { get; private set; }
 
-        public PublicAddressGetRandomMessageOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
-            {
-                var parameters = operationResponse.GetParameters();
+            base.SetupOperationResponse(operationResponse);
 
-                if (errorCode == LoginErrorCode.Ok)
+            if (!this.hasError)
+            {
+                if (this.errorCode == LoginErrorCode.Ok)
                 {
-                    message = parameters.GetString(LoginParameterCode.Message);
+                    this.message = this.parameters.GetString(LoginParameterCode.Message);
                 }
             }
         }
+
     }
+
 }

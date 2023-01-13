@@ -6,17 +6,19 @@
     {
         public bool boolean { get; private set; }
 
-        public TemplateOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
-            {
-                var parameters = operationResponse.GetParameters();
+            base.SetupOperationResponse(operationResponse);
 
-                if (errorCode == DebugErrorCode.Ok)
+            if (!this.hasError)
+            {
+                if (this.errorCode == DebugErrorCode.Ok)
                 {
-                    boolean = parameters.GetBool(DebugParameterCode.Boolean);
+                    this.boolean = this.parameters.GetBool(DebugParameterCode.Boolean);
                 }
             }
         }
+
     }
+
 }

@@ -5,31 +5,36 @@
 
     public abstract class CustomOperationResponse
     {
-        private GNHashtable parameters { get; set; }
+        public int operationCode { get; private set; }
+        public GNHashtable parameters { get; private set; }
         public int returnCode { get; private set; }
         public string debugMessage { get; private set; }
-
         public int errorCode { get; private set; }
+        public InvalidMember[] invalidMembers { get; private set; }
 
-        public bool hasError => returnCode != ReturnCode.Ok;
+        public bool hasError => this.returnCode != ReturnCode.Ok;
 
-        public CustomOperationResponse(OperationResponse operationResponse)
+
+        public virtual void SetupOperationResponse(OperationResponse operationResponse)
         {
-            returnCode = operationResponse.GetReturnCode();
-            debugMessage = operationResponse.GetDebugMessage();
+            this.operationCode = operationResponse.GetOperationCode();
+            this.returnCode = operationResponse.GetReturnCode();
+            this.debugMessage = operationResponse.GetDebugMessage();
 
-            parameters = operationResponse.GetParameters();
+            this.parameters = operationResponse.GetParameters();
+            this.invalidMembers = operationResponse.GetInvalidMembers();
 
             if (!hasError)
             {
-                var parameters = operationResponse.GetParameters();
-                errorCode = parameters.GetInt(ParameterCode.ErrorCode);
+                this.errorCode = this.parameters.GetInt(ParameterCode.ErrorCode);
             }
         }
 
         public override string ToString()
         {
-            return "ReturnCode: " + returnCode + " " + (parameters != null ? parameters.ToString() : debugMessage);
+            return "ReturnCode: " + this.returnCode + " " + (this.parameters != null ? this.parameters.ToString() : this.debugMessage);
         }
+
     }
+
 }

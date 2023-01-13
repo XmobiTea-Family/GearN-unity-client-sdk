@@ -6,17 +6,19 @@
     {
         public string[] configNotUptodateLst { get; private set; }
 
-        public GetAppConfigOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
-            {
-                var parameters = operationResponse.GetParameters();
+            base.SetupOperationResponse(operationResponse);
 
-                if (errorCode == GetAppConfigErrorCode.Ok)
+            if (!this.hasError)
+            {
+                if (this.errorCode == GetAppConfigErrorCode.Ok)
                 {
-                    configNotUptodateLst = parameters.GetArray<string>(GetAppConfigParameterCode.ConfigNotUptodateLst);
+                    this.configNotUptodateLst = this.parameters.GetArray<string>(GetAppConfigParameterCode.ConfigNotUptodateLst);
                 }
             }
         }
+
     }
+
 }

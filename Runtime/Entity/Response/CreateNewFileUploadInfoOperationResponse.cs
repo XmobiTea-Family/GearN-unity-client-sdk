@@ -10,21 +10,23 @@
         public long tsUploadExpire { get; private set; }
         public string userId { get; private set; }
 
-        public CreateNewFileUploadInfoOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
-            {
-                var parameters = operationResponse.GetParameters();
+            base.SetupOperationResponse(operationResponse);
 
-                if (errorCode == FileUploadInfoErrorCode.Ok)
+            if (!this.hasError)
+            {
+                if (this.errorCode == FileUploadInfoErrorCode.Ok)
                 {
-                    fileId = parameters.GetString(FileUploadInfoParameterCode.FileId);
-                    originFileName = parameters.GetString(FileUploadInfoParameterCode.OriginFileName);
-                    tsCreate = parameters.GetLong(FileUploadInfoParameterCode.TsCreate);
-                    tsUploadExpire = parameters.GetLong(FileUploadInfoParameterCode.TsUploadExpire);
-                    userId = parameters.GetString(FileUploadInfoParameterCode.UserId);
+                    this.fileId = this.parameters.GetString(FileUploadInfoParameterCode.FileId);
+                    this.originFileName = this.parameters.GetString(FileUploadInfoParameterCode.OriginFileName);
+                    this.tsCreate = this.parameters.GetLong(FileUploadInfoParameterCode.TsCreate);
+                    this.tsUploadExpire = this.parameters.GetLong(FileUploadInfoParameterCode.TsUploadExpire);
+                    this.userId = this.parameters.GetString(FileUploadInfoParameterCode.UserId);
                 }
             }
         }
+
     }
+
 }

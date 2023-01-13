@@ -71,5 +71,7 @@
                 returnCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
         }
+
     }
+
 }

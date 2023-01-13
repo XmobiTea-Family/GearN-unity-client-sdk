@@ -7,18 +7,20 @@
         public int userRole { get; private set; }
         public string displayName { get; private set; }
 
-        public EnterDisplayNameOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
-            {
-                var parameters = operationResponse.GetParameters();
+            base.SetupOperationResponse(operationResponse);
 
-                if (errorCode == EnterDisplayNameErrorCode.Ok)
+            if (!this.hasError)
+            {
+                if (this.errorCode == EnterDisplayNameErrorCode.Ok)
                 {
-                    userRole = parameters.GetInt(EnterDisplayNameParameterCode.UserRole);
-                    displayName = parameters.GetString(EnterDisplayNameParameterCode.DisplayName);
+                    this.userRole = this.parameters.GetInt(EnterDisplayNameParameterCode.UserRole);
+                    this.displayName = this.parameters.GetString(EnterDisplayNameParameterCode.DisplayName);
                 }
             }
         }
+
     }
+
 }
