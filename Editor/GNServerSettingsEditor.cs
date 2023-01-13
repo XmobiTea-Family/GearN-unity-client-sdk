@@ -1,5 +1,6 @@
 ﻿namespace XmobiTea.GN.Editor
 {
+    using System.Collections.Generic;
     using System.IO;
     using System.Text;
 
@@ -7,6 +8,7 @@
 
     using UnityEngine;
     using XmobiTea.GN.Config;
+    using XmobiTea.GN.Constant;
     using Debug = UnityEngine.Debug;
 
     [CustomEditor(typeof(GNServerSettings))]
@@ -25,8 +27,11 @@
         SerializedProperty codeCanSendNotAuthorized;
         SerializedProperty gnServerSourcePath;
         SerializedProperty httpRequestType;
-        SerializedProperty postType;
         SerializedProperty logType;
+
+        private Dictionary<int, string> operationCodeFieldDict;
+
+        Color m_Color = Color.white;
 
         private void OnEnable()
         {
@@ -43,13 +48,28 @@
             codeCanSendNotAuthorized = serializedObject.FindProperty("_codeCanSendNotAuthorized");
             gnServerSourcePath = serializedObject.FindProperty("_gnServerSourcePath");
             httpRequestType = serializedObject.FindProperty("_httpRequestType");
-            postType = serializedObject.FindProperty("_postType");
+            //postType = serializedObject.FindProperty("_postType");
             logType = serializedObject.FindProperty("_logType");
+
+            var fields = typeof(OperationCode).GetFields();
+
+            if (operationCodeFieldDict == null) operationCodeFieldDict = new Dictionary<int, string>();
+            else operationCodeFieldDict.Clear();
+
+            for (var i = 0; i < fields.Length; i++)
+            {
+                var field = fields[i];
+
+                operationCodeFieldDict[(int)field.GetValue(null)] = field.Name;
+            }
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+
+            EditorGUILayout.LabelField($"GN Unity Client SDK Version v{GNNetwork.GetClientSdkVersion()}");
+            EditorGUILayout.Space(20);
 
             EditorGUILayout.PropertyField(serverAddress);
             EditorGUILayout.PropertyField(serverPort);
@@ -61,10 +81,66 @@
             EditorGUILayout.PropertyField(pingInterval);
             EditorGUILayout.PropertyField(pingTimout);
             EditorGUILayout.PropertyField(peerSocketVersion);
-            EditorGUILayout.PropertyField(codeCanSendNotAuthorized);
+            EditorGUILayout.Space(20);
+
+            EditorGUILayout.BeginVertical();
+            EditorGUILayout.LabelField($"Code Can Send Not Authorized size is {codeCanSendNotAuthorized.arraySize}");
+
+            //scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+
+
+            for (var i = 0; i < codeCanSendNotAuthorized.arraySize; i++)
+            {
+                var serializedProperty = codeCanSendNotAuthorized.GetArrayElementAtIndex(i);
+                
+                var operationCodeName = string.Empty;
+
+                if (operationCodeFieldDict.ContainsKey(serializedProperty.intValue)) operationCodeName = $"({serializedProperty.intValue}) {operationCodeFieldDict[serializedProperty.intValue]}";
+                else operationCodeName = "Choose an operation code";
+
+                EditorGUILayout.BeginHorizontal();
+
+                if (EditorGUILayout.DropdownButton(new GUIContent(operationCodeName), FocusType.Passive))
+                {
+                    var operationCodeMenu = new GenericMenu();
+                    operationCodeMenu.AddItem(new GUIContent("None"), !operationCodeFieldDict.ContainsKey(serializedProperty.intValue), id =>
+                    {
+                        serializedProperty.intValue = (int)id;
+                        if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
+                    }, int.MinValue);
+                    operationCodeMenu.AddSeparator("");
+
+                    foreach (var c in operationCodeFieldDict)
+                    {
+                        operationCodeMenu.AddItem(new GUIContent($"({c.Key}) {c.Value}"), serializedProperty.intValue == c.Key, id =>
+                        {
+                            serializedProperty.intValue = (int)id;
+                            if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
+                        }, c.Key);
+                    }
+
+                    operationCodeMenu.ShowAsContext();
+                }
+
+                if (GUILayout.Button("-", GUILayout.MaxWidth(50)))
+                {
+                    codeCanSendNotAuthorized.DeleteArrayElementAtIndex(i);
+                }
+
+                EditorGUILayout.EndHorizontal();
+            }
+
+            if (GUILayout.Button("+"))
+            {
+                codeCanSendNotAuthorized.arraySize += 1;
+            }
+
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.Space(20);
+
             EditorGUILayout.PropertyField(gnServerSourcePath);
             EditorGUILayout.PropertyField(httpRequestType);
-            EditorGUILayout.PropertyField(postType);
+            //EditorGUILayout.PropertyField(postType);
             EditorGUILayout.PropertyField(logType);
 
             if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
@@ -98,7 +174,7 @@
         }
 
         [MenuItem("XmobiTea GN/About GN")]
-        private static void AboutEUNfox()
+        private static void AboutGN()
         {
             Application.OpenURL("https://gn.xmobitea.com");
         }

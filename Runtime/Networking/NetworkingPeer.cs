@@ -1,10 +1,9 @@
 ﻿namespace XmobiTea.GN.Networking
 {
     using System;
-    using UnityEngine;
     using XmobiTea.GN.Entity;
 
-    public partial class NetworkingPeer : MonoBehaviour
+    public partial class NetworkingPeer : UnityEngine.MonoBehaviour
     {
         private IPeer socketPeer;
         private IPeer httpPeer;
@@ -19,16 +18,16 @@
                 var count = 0;
                 var totalPing = 0;
 
-                if (httpPeer.IsUsing())
+                if (this.httpPeer.IsUsing())
                 {
                     count++;
-                    totalPing += ((PeerBase)httpPeer).ping;
+                    totalPing += ((PeerBase)this.httpPeer).ping;
                 }
 
-                if (socketPeer.IsUsing())
+                if (this.socketPeer.IsUsing())
                 {
                     count++;
-                    totalPing += ((PeerBase)socketPeer).ping;
+                    totalPing += ((PeerBase)this.socketPeer).ping;
                 }
 
                 return totalPing / count;
@@ -41,10 +40,10 @@
         internal void SetServerTimeMilliseconds(long currentServerMilliseconds)
         {
             lastCurrentServerMilliseconds = currentServerMilliseconds;
-            lastGetCurrentMilliseconds = Time.realtimeSinceStartup;
+            lastGetCurrentMilliseconds = UnityEngine.Time.realtimeSinceStartup;
         }
 
-        internal long serverTimestamp => lastCurrentServerMilliseconds + (int)((Time.realtimeSinceStartup - lastGetCurrentMilliseconds) * 1000);
+        internal long serverTimestamp => lastCurrentServerMilliseconds + (int)((UnityEngine.Time.realtimeSinceStartup - lastGetCurrentMilliseconds) * 1000);
 
         internal void InitPeer()
         {
@@ -53,36 +52,64 @@
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 
-            httpPeer = this.gameObject.AddComponent<HttpPeer>();
-            httpPeer.InitPeer();
+            this.httpPeer = this.gameObject.AddComponent<HttpPeer>();
+            this.httpPeer.InitPeer();
 
-            socketPeer = this.gameObject.AddComponent<SocketPeer>();
-            socketPeer.InitPeer();
+            this.socketPeer = this.gameObject.AddComponent<SocketPeer>();
+            this.socketPeer.InitPeer();
+        }
+
+        private void Update()
+        {
+            this.httpPeer?.Service();
+            this.socketPeer?.Service();
         }
 
         internal void SendViaSocket(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
-            socketPeer.Enqueue(request, onResponse);
+            this.socketPeer.Enqueue(request, onResponse);
         }
 
         internal void SendViaHttp(OperationRequest request, Action<OperationResponse> onResponse = null)
         {
-            httpPeer.Enqueue(request, onResponse);
+            this.httpPeer.Enqueue(request, onResponse);
         }
 
         internal void SendRequestAuthSocket()
         {
-            (socketPeer as SocketPeer).SendRequestAuthSocket();
+            (this.socketPeer as SocketPeer).SendRequestAuthSocket();
         }
 
-        internal void ConnectSocket()
+        internal void ConnectSocket(Action _onSocketConnect)
         {
-            (socketPeer as SocketPeer).Connect();
+            (this.socketPeer as SocketPeer).Connect(_onSocketConnect);
         }
 
-        internal void DisconnectSocket()
+        internal void DisconnectSocket(Action _onSocketDisconnect)
         {
-            (socketPeer as SocketPeer).Disconnect();
+            (this.socketPeer as SocketPeer).Disconnect(_onSocketDisconnect);
         }
+
+        internal void SetOnConnectHandler(Action _onConnectHandler)
+        {
+            (this.socketPeer as SocketPeer).SetOnConnectHandler(_onConnectHandler);
+        }
+
+        internal void SetOnDisconnectHandler(Action _onDisconnectHandler)
+        {
+            (this.socketPeer as SocketPeer).SetOnDisconnectHandler(_onDisconnectHandler);
+        }
+
+        internal void RemoveOnConnectHandler(Action _onConnectHandler)
+        {
+            (this.socketPeer as SocketPeer).RemoveOnConnectHandler(_onConnectHandler);
+        }
+
+        internal void RemoveOnDisconnectHandler(Action _onDisconnectHandler)
+        {
+            (this.socketPeer as SocketPeer).RemoveOnDisconnectHandler(_onDisconnectHandler);
+        }
+
     }
+
 }

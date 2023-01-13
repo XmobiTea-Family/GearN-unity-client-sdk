@@ -5,16 +5,18 @@
 
     public class RegisterAccountOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.RegisterAccount;
+        protected override int operationCode => OperationCode.RegisterAccount;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public RegisterAccountOperationRequest(string username, string password, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(LoginParameterCode.Username, username)
                 .Add(LoginParameterCode.Password, password)
                 .Build();
         }
+
     }
+
 }

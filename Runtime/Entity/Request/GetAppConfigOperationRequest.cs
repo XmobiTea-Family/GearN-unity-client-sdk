@@ -5,15 +5,17 @@
 
     public class GetAppConfigOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.GetAppConfig;
+        protected override int operationCode => OperationCode.GetAppConfig;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public GetAppConfigOperationRequest(GNArray configTypes, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(GetAppConfigParameterCode.ConfigTypes, configTypes)
                 .Build();
         }
+
     }
+
 }

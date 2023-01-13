@@ -18,9 +18,11 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + code + ", InvalidMemberType " + invalidMemberType);
+            stringBuilder.Append("Code: " + this.code + ", InvalidMemberType " + this.invalidMemberType);
 
             return stringBuilder.ToString();
         }
+
     }
+
 }

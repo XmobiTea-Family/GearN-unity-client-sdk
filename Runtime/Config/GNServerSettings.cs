@@ -19,12 +19,6 @@
         HTTPRequest = 1,
     }
 
-    public enum PostType
-    {
-        Json,
-        MsgPack
-    }
-
     //[CreateAssetMenu(fileName = GNServerSettings.ResourcesPath, menuName = "GN/GNServerSettings", order = 1)]
     public class GNServerSettings : ScriptableObject
     {
@@ -32,79 +26,78 @@
 
         [SerializeField]
         private string _serverAddress = "127.0.0.1";
-        public string serverAddress => _serverAddress;
+        public string serverAddress => this._serverAddress;
 
         [SerializeField]
         private int _serverPort = 2202;
-        public int serverPort => _serverPort;
+        public int serverPort => this._serverPort;
 
         [SerializeField]
         private bool _useSsl = false;
-        public bool useSsl => _useSsl;
+        public bool useSsl => this._useSsl;
 
         [SerializeField]
         private bool _useSocket = true;
-        public bool useSocket => _useSocket;
+        public bool useSocket => this._useSocket;
 
         [SerializeField]
         private bool _useHttp = true;
-        public bool useHttp => _useHttp;
+        public bool useHttp => this._useHttp;
 
         [SerializeField]
         private int _sendRate = 20;
-        public int sendRate => _sendRate;
+        public int sendRate => this._sendRate;
 
         [SerializeField]
         private int _reconnectDelay = 5000;
-        public int reconnectDelay => _reconnectDelay;
+        public int reconnectDelay => this._reconnectDelay;
 
         [SerializeField]
         private float _pingInterval = 20000;
-        public float pingInterval => _pingInterval;
+        public float pingInterval => this._pingInterval;
 
         [SerializeField]
         private float _pingTimeout = 20000;
-        public float pingTimeout => _pingTimeout;
+        public float pingTimeout => this._pingTimeout;
 
         [SerializeField]
         private PeerSocketVersion _peerSocketVersion = PeerSocketVersion.V3;
-        public PeerSocketVersion peerSocketVersion => _peerSocketVersion;
+        public PeerSocketVersion peerSocketVersion => this._peerSocketVersion;
 
         [SerializeField]
         private List<int> _codeCanSendNotAuthorized = new List<int>() { OperationCode.Debug, OperationCode.GetAppConfig, OperationCode.Login, OperationCode.RegisterAccount };
-        public List<int> codeCanSendNotAuthorized => _codeCanSendNotAuthorized;
+        public List<int> codeCanSendNotAuthorized => this._codeCanSendNotAuthorized;
 
         [SerializeField]
         private string _gnServerSourcePath = "Template_GN-server";
-        public string gnServerSourcePath => _gnServerSourcePath;
+        public string gnServerSourcePath => this._gnServerSourcePath;
 
         [SerializeField]
         private HttpRequestType _httpRequestType = HttpRequestType.HTTPRequest;
-        public HttpRequestType httpRequestType => _httpRequestType;
-
-        [SerializeField]
-        private PostType _postType = PostType.MsgPack;
-        public PostType postType => _postType;
+        public HttpRequestType httpRequestType => this._httpRequestType;
 
         [SerializeField]
         private GN.Logger.LogType _logType = GN.Logger.LogType.All;
-        public GN.Logger.LogType logType => _logType;
+        public GN.Logger.LogType logType => this._logType;
 
         public string SocketUrl
         {
             get
             {
-                if (_serverPort < 0) return string.Format((_useSsl ? "https" : "http") + "://{0}", _serverAddress);
-                else return string.Format((_useSsl ? "https" : "http") + "://{0}:{1}", _serverAddress, _serverPort);
+                if (this._serverPort < 0) return string.Format((this._useSsl ? "https" : "http") + "://{0}", this._serverAddress);
+                else return string.Format((this._useSsl ? "https" : "http") + "://{0}:{1}", this._serverAddress, this._serverPort);
             }
         }
+
         public string HttpUrl
         {
             get
             {
-                if (_serverPort < 0) return string.Format((_useSsl ? "https" : "http") + "://{0}", _serverAddress);
-                else return string.Format((_useSsl ? "https" : "http") + "://{0}:{1}", _serverAddress, _serverPort);
+                if (this._serverPort < 0) return string.Format((this._useSsl ? "https" : "http") + "://{0}", this._serverAddress);
+                else return string.Format((this._useSsl ? "https" : "http") + "://{0}:{1}", this._serverAddress, this._serverPort);
             }
         }
+
     }
+
 }

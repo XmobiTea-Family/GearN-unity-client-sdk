@@ -5,13 +5,15 @@
 
     public class LogoutOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.Logout;
+        protected override int operationCode => OperationCode.Logout;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public LogoutOperationRequest(int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder().Build();
+
         }
+
     }
+
 }

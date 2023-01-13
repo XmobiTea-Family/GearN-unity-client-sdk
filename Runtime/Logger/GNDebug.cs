@@ -1,7 +1,6 @@
 namespace XmobiTea.GN.Logger
 {
     using System;
-    using UnityEngine;
 
     public enum LogType
     {
@@ -9,7 +8,7 @@ namespace XmobiTea.GN.Logger
         Exception,
         Error,
         Warning,
-        All
+        All,
     }
 
     internal class GNDebug
@@ -24,25 +23,27 @@ namespace XmobiTea.GN.Logger
         public static void Log(object message)
         {
             if (_logType >= LogType.All)
-                Debug.Log(message);
+                UnityEngine.Debug.Log(message);
         }
 
         public static void LogException(Exception exception)
         {
             if (_logType >= LogType.Exception)
-                Debug.LogException(exception);
+                UnityEngine.Debug.LogException(exception);
         }
 
         public static void LogWarning(object message)
         {
             if (_logType >= LogType.Warning)
-                Debug.LogWarning(message);
+                UnityEngine.Debug.LogWarning(message);
         }
 
         public static void LogError(object message)
         {
             if (_logType >= LogType.Error)
-                Debug.LogError(message);
+                UnityEngine.Debug.LogError(message);
         }
+
     }
+
 }

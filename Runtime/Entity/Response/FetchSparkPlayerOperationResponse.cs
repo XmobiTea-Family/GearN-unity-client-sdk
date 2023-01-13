@@ -23,33 +23,37 @@
         public long tsExpire { get; private set; }
         public string reason { get; private set; }
 
-        public FetchSparkPlayerOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
+            base.SetupOperationResponse(operationResponse);
+
+            if (!this.hasError)
             {
-                if (errorCode == FetchSparkPlayerErrorCode.Ok)
+                if (this.errorCode == FetchSparkPlayerErrorCode.Ok)
                 {
-                    userId = parameters.GetString(FetchSparkPlayerParameterCode.UserId);
-                    userRole = parameters.GetInt(FetchSparkPlayerParameterCode.UserRole);
-                    fullname = parameters.GetString(FetchSparkPlayerParameterCode.Fullname);
-                    tsCreate = parameters.GetLong(FetchSparkPlayerParameterCode.TsCreate);
+                    this.userId = this.parameters.GetString(FetchSparkPlayerParameterCode.UserId);
+                    this.userRole = this.parameters.GetInt(FetchSparkPlayerParameterCode.UserRole);
+                    this.fullname = this.parameters.GetString(FetchSparkPlayerParameterCode.Fullname);
+                    this.tsCreate = this.parameters.GetLong(FetchSparkPlayerParameterCode.TsCreate);
 
-                    var gsUserExternal = parameters.GetGNHashtable(FetchSparkPlayerParameterCode.UserExternal);
+                    var gsUserExternal = this.parameters.GetGNHashtable(FetchSparkPlayerParameterCode.UserExternal);
 
-                    userExternal = new UserExternal();
-                    userExternal.customId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.CustomId);
-                    userExternal.facebookId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.FacebookId);
-                    userExternal.googleUserId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.GoogleUserId);
-                    userExternal.appleUserId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.AppleUserId);
-                    userExternal.deviceInfo = gsUserExternal.GetString(FetchSparkPlayerParameterCode.DeviceInfo);
-                    userExternal.publicAddress = gsUserExternal.GetString(FetchSparkPlayerParameterCode.PublicAddress);
+                    this.userExternal = new UserExternal();
+                    this.userExternal.customId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.CustomId);
+                    this.userExternal.facebookId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.FacebookId);
+                    this.userExternal.googleUserId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.GoogleUserId);
+                    this.userExternal.appleUserId = gsUserExternal.GetString(FetchSparkPlayerParameterCode.AppleUserId);
+                    this.userExternal.deviceInfo = gsUserExternal.GetString(FetchSparkPlayerParameterCode.DeviceInfo);
+                    this.userExternal.publicAddress = gsUserExternal.GetString(FetchSparkPlayerParameterCode.PublicAddress);
                 }
-                else if (errorCode == FetchSparkPlayerErrorCode.UserHadBanned)
+                else if (this.errorCode == FetchSparkPlayerErrorCode.UserHadBanned)
                 {
-                    tsExpire = parameters.GetLong(FetchSparkPlayerParameterCode.TsExpire);
-                    reason = parameters.GetString(FetchSparkPlayerParameterCode.Reason);
+                    this.tsExpire = this.parameters.GetLong(FetchSparkPlayerParameterCode.TsExpire);
+                    this.reason = this.parameters.GetString(FetchSparkPlayerParameterCode.Reason);
                 }
             }
         }
+
     }
+
 }

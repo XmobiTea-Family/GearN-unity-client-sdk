@@ -5,13 +5,15 @@
 
     public class FetchSparkPlayerOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.FetchSparkPlayer;
+        protected override int operationCode => OperationCode.FetchSparkPlayer;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public FetchSparkPlayerOperationRequest(int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
 
         }
+
     }
+
 }

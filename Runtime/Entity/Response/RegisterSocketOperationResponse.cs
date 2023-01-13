@@ -4,8 +4,20 @@
 
     public class RegisterSocketOperationResponse : CustomOperationResponse
     {
-        public RegisterSocketOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
+            base.SetupOperationResponse(operationResponse);
+
+            if (!this.hasError)
+            {
+                if (this.errorCode == RegisterSocketErrorCode.Ok)
+                {
+                    
+                }
+            }
         }
+
     }
+
 }

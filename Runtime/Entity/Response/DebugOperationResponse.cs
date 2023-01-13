@@ -11,19 +11,23 @@
         public GNHashtable gnHashtable { get; private set; }
         public GNArray gnArray { get; private set; }
 
-        public DebugOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
+            base.SetupOperationResponse(operationResponse);
+
+            if (!this.hasError)
             {
-                if (errorCode == DebugErrorCode.Ok)
+                if (this.errorCode == DebugErrorCode.Ok)
                 {
-                    boolean = parameters.GetBool(DebugParameterCode.Boolean);
-                    @string = parameters.GetString(DebugParameterCode.String);
-                    number = parameters.GetInt(DebugParameterCode.Number);
-                    gnHashtable = parameters.GetGNHashtable(DebugParameterCode.GNHashtable);
-                    gnArray = parameters.GetGNArray(DebugParameterCode.GNArray);
+                    this.boolean = this.parameters.GetBool(DebugParameterCode.Boolean);
+                    this.@string = this.parameters.GetString(DebugParameterCode.String);
+                    this.number = this.parameters.GetInt(DebugParameterCode.Number);
+                    this.gnHashtable = this.parameters.GetGNHashtable(DebugParameterCode.GNHashtable);
+                    this.gnArray = this.parameters.GetGNArray(DebugParameterCode.GNArray);
                 }
             }
         }
+
     }
+
 }

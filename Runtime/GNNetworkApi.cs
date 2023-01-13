@@ -128,5 +128,7 @@
         {
             peer.Logout(onResponse);
         }
+
     }
+
 }

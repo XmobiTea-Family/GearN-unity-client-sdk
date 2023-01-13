@@ -2,8 +2,6 @@
 {
     using System;
 
-    using UnityEngine;
-
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Helper;
     using XmobiTea.GN.Common;
@@ -13,7 +11,6 @@
     using XmobiTea.GN.Config;
     using System.IO;
     using System.Text;
-    using System.Collections.Generic;
     using XmobiTea.MsgPack;
     using XmobiTea.GN.Logger;
 
@@ -24,30 +21,34 @@
         public byte[] data { get; internal set; }
         public string text { get; internal set; }
 
-        public bool hasError => !string.IsNullOrEmpty(error);
+        public bool hasError => !string.IsNullOrEmpty(this.error);
 
         public override string ToString()
         {
-            var stringBuilder = new System.Text.StringBuilder();
+            var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append(" StatusCode: " + statusCode);
-            if (!string.IsNullOrEmpty(error)) stringBuilder.Append(", <color=red>Error: " + error + "</color>");
-            stringBuilder.Append(", Text: " + text);
+            stringBuilder.Append(" StatusCode: " + this.statusCode);
+            if (!string.IsNullOrEmpty(this.error)) stringBuilder.Append(", <color=red>Error: " + this.error + "</color>");
+            stringBuilder.Append(", Text: " + this.text);
 
             return stringBuilder.ToString();
         }
     }
 
+    public enum PostType
+    {
+        Json = 0,
+        MsgPack = 1,
+    }
+
     internal class HttpPeer : PeerBase
     {
-        private const string CONTENT_TYPE = "Content-Type";
-        private const string APPLICATION_JSON = "application/json";
-        private const string APPLICATION_MSGPACK = "application/msgpack";
         private static string userAgent { get; set; }
 
         private string httpUrl;
         private HttpRequestType httpRequestType;
-        private PostType postType;
+
+        private const char JSON_CHAR_KNOWN = '[';
 
         class AcceptAllCertificatesSignedWithASpecificKeyPublicKey : CertificateHandler
         {
@@ -64,13 +65,12 @@
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
 
-            isUsing = gnServerSettings.useHttp;
+            this.isUsing = gnServerSettings.useHttp;
 
             httpRequestType = gnServerSettings.httpRequestType;
-            postType = gnServerSettings.postType;
             httpUrl = gnServerSettings.HttpUrl;
 
-            userAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.version;
+            userAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.GetClientSdkVersion();
 
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {
@@ -99,7 +99,7 @@
                     obj.Add(null);
                     obj.Add(operationRequest.GetRequestId());
 
-                    OnResponseHandler(obj);
+                    OnResponseHandler(obj, operationRequest.IsEncrypted());
 
                     return;
                 }
@@ -113,10 +113,12 @@
                 obj.Add(new GNHashtable());
                 obj.Add(operationRequest.GetRequestId());
 
-                OnResponseHandler(obj);
+                OnResponseHandler(obj, operationRequest.IsEncrypted());
 
                 return;
             }
+
+            var postType = !operationRequest.IsEncrypted() ? PostType.Json : PostType.MsgPack;
 
             var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.GetOperationCode();
 
@@ -125,14 +127,14 @@
                 PostRequestViaHTTPRequest(subUri, operationRequest.GetParameters(), postType, httpAppResponse =>
                 {
                     OnSendOperationRequestResponse(operationPending, httpAppResponse);
-                }, operationRequest.GetTimeOut());
+                }, operationRequest.GetTimeout());
             }
             else if (httpRequestType == HttpRequestType.UnityWebRequest)
             {
                 StartCoroutine(IEPostRequestViaUnityWebRequest(subUri, operationRequest.GetParameters(), postType, httpAppResponse =>
                 {
                     OnSendOperationRequestResponse(operationPending, httpAppResponse);
-                }, operationRequest.GetTimeOut()));
+                }, operationRequest.GetTimeout()));
             }
         }
 
@@ -140,61 +142,47 @@
         {
             var operationRequest = operationPending.GetOperationRequest();
             var obj = new GNArray();
-
+            
             if (!httpAppResponse.hasError)
             {
                 if (httpAppResponse.statusCode == 200)
                 {
-                    if (postType == PostType.MsgPack)
+                    var isEncrypted = false;
+
+                    GNArray gnArray = null;
+
+                    if (!string.IsNullOrEmpty(httpAppResponse.text))
+                    {
+                        if (httpAppResponse.text[0].Equals(JSON_CHAR_KNOWN))
+                        {
+                            var returnDatas = (System.Collections.IList)Parser.Parse(httpAppResponse.text);
+                            gnArray = new GNArray.Builder()
+                                .AddAll(returnDatas)
+                                .Build();
+                        }
+                    }
+
+                    if (gnArray == null)
                     {
                         var iList = MsgPackSerializer.Deserialize<object[]>(httpAppResponse.data);
+                        gnArray = new GNArray.Builder().AddAll(NetworkingPeerBase.fromMsgList(iList)).Build();
 
-                        var gnArray = new GNArray.Builder().AddAll(NetworkingPeerBase.fromMsgList(iList)).Build();
-
-                        var returnCode = gnArray.GetInt(0);
-                        obj.Add(returnCode);
-
-                        if (returnCode == (int)ReturnCode.Ok)
-                        {
-                            obj.Add(gnArray.GetGNHashtable(1, new GNHashtable()));
-                        }
-                        else if (returnCode == ReturnCode.InvalidRequestParameters)
-                        {
-                            obj.Add(gnArray.GetGNArray(1, new GNArray()));
-                        }
-                        else
-                        {
-                            obj.Add(gnArray.GetString(1));
-                        }
+                        isEncrypted = true;
                     }
-                    else if (postType == PostType.Json)
+
+                    if (gnArray != null)
                     {
-                        var returnDatas = (System.Collections.IList)Parser.Parse(httpAppResponse.text);
-                        var gnArray = new GNArray.Builder()
-                            .AddAll(returnDatas)
-                            .Build();
-
                         var returnCode = gnArray.GetInt(0);
                         obj.Add(returnCode);
 
-                        if (returnCode == ReturnCode.Ok)
-                        {
-                            obj.Add(gnArray.GetGNHashtable(1, new GNHashtable()));
-                        }
-                        else if (returnCode == ReturnCode.InvalidRequestParameters)
-                        {
-                            obj.Add(gnArray.GetGNArray(1, new GNArray()));
-                        }
-                        else
-                        {
-                            obj.Add(gnArray.GetString(1, string.Empty));
-                        }
+                        if (returnCode == (int)ReturnCode.Ok) obj.Add(gnArray.GetGNHashtable(1, new GNHashtable()));
+                        else if (returnCode == ReturnCode.InvalidRequestParameters) obj.Add(gnArray.GetGNArray(1, new GNArray()));
+                        else obj.Add(gnArray.GetString(1));
+                        obj.Add(operationRequest.GetRequestId());
+
+                        OnResponseHandler(obj, isEncrypted);
+                        return;
                     }
-
-                    obj.Add(operationRequest.GetRequestId());
-
-                    OnResponseHandler(obj);
-                    return;
                 }
             }
 
@@ -202,7 +190,7 @@
             obj.Add(httpAppResponse.error);
             obj.Add(operationRequest.GetRequestId());
 
-            OnResponseHandler(obj);
+            OnResponseHandler(obj, operationRequest.IsEncrypted());
         }
 
         internal void GetRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = 15)
@@ -310,7 +298,7 @@
 
             if (postType == PostType.Json)
             {
-                request.SetHeader(CONTENT_TYPE, APPLICATION_JSON);
+                request.SetHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_JSON);
 
                 var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.ToData()));
 
@@ -318,7 +306,7 @@
             }
             else if (postType == PostType.MsgPack)
             {
-                request.SetHeader(CONTENT_TYPE, APPLICATION_MSGPACK);
+                request.SetHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_MSGPACK);
 
                 var dataSend = param.ToData();
 
@@ -353,7 +341,7 @@
 
                 if (postType == PostType.Json)
                 {
-                    unityWebRequest.SetRequestHeader(CONTENT_TYPE, APPLICATION_JSON);
+                    unityWebRequest.SetRequestHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_JSON);
 
                     var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.ToData()));
 
@@ -361,7 +349,7 @@
                 }
                 else if (postType == PostType.MsgPack)
                 {
-                    unityWebRequest.SetRequestHeader(CONTENT_TYPE, APPLICATION_MSGPACK);
+                    unityWebRequest.SetRequestHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_MSGPACK);
 
                     var dataSend = param.ToData();
 
@@ -461,7 +449,7 @@
 
         private IEnumerator IEPostRequestUploadViaUnityWebRequest(string subUri, byte[] content, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
         {
-            var form = new WWWForm();
+            var form = new UnityEngine.WWWForm();
             form.AddBinaryData(Commands.File, content, null, mimetype);
 
             using (var unityWebRequest = UnityWebRequest.Post(new Uri(httpUrl + "/" + subUri), form))
@@ -501,5 +489,7 @@
                 onHttpAppResponse?.Invoke(httpAppResponse);
             }
         }
+
     }
+
 }
