@@ -20,7 +20,7 @@
 
         internal void SyncTs(Action<long> onResponse = null)
         {
-            (httpPeer as HttpPeer).GetRequest(SYNC_TS, httpAppResponse =>
+            (this.httpPeer as HttpPeer).GetRequest(SYNC_TS, httpAppResponse =>
             {
                 if (!httpAppResponse.hasError)
                 {
@@ -48,7 +48,7 @@
 
         internal void GetConfig(string configName, Action<string> onResponse)
         {
-            (httpPeer as HttpPeer).GetRequest(GET_CONFIG + "/" + configName, httpAppResponse =>
+            (this.httpPeer as HttpPeer).GetRequest(GET_CONFIG + "/" + configName, httpAppResponse =>
             {
                 if (!httpAppResponse.hasError)
                 {
@@ -74,221 +74,274 @@
 
         internal void DownloadFile(string fileId, Action<HttpAppResponse> onHttpAppResponse)
         {
-            (httpPeer as HttpPeer).GetRequest(DOWNLOAD_FILE + "/" + fileId, onHttpAppResponse);
+            (this.httpPeer as HttpPeer).GetRequest(DOWNLOAD_FILE + "/" + fileId, onHttpAppResponse);
         }
 
         internal void UploadFile(string fileId, byte[] content, string mimeType, Action<HttpAppResponse> onHttpAppResponse)
         {
-            (httpPeer as HttpPeer).UploadFile(fileId, content, mimeType, onHttpAppResponse);
+            (this.httpPeer as HttpPeer).UploadFile(fileId, content, mimeType, onHttpAppResponse);
         }
 
         internal void Debug(bool booleanValue, int numberValue, string stringValue, GNHashtable gnHashtableValue, GNArray gnArrayValue, Action<DebugOperationResponse> onResponse = null)
         {
-            var request = new DebugOperationRequest(booleanValue, numberValue, stringValue, gnHashtableValue, gnArrayValue).Builder();
+            var request = new DebugOperationRequest(booleanValue, numberValue, stringValue, gnHashtableValue, gnArrayValue).Build();
 
             SendViaHttp(request, response =>
             {
-                var debugOperationResponse = new DebugOperationResponse(response);
+                var debugOperationResponse = new DebugOperationResponse();
+                debugOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(debugOperationResponse);
             });
         }
 
         internal void EnterDisplayName(string displayName, Action<EnterDisplayNameOperationResponse> onResponse = null)
         {
-            var request = new EnterDisplayNameOperationRequest(displayName).Builder();
+            var request = new EnterDisplayNameOperationRequest(displayName).Build();
 
             SendViaHttp(request, response =>
             {
-                var enterDisplayNameOperationResponse = new EnterDisplayNameOperationResponse(response);
+                var enterDisplayNameOperationResponse = new EnterDisplayNameOperationResponse();
+                enterDisplayNameOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(enterDisplayNameOperationResponse);
             });
         }
 
         internal void FetchAllData(Action<FetchAllDataOperationResponse> onResponse = null)
         {
-            var request = new FetchAllDataOperationRequest().Builder();
+            var request = new FetchAllDataOperationRequest().Build();
 
             SendViaHttp(request, response =>
             {
-                var fetchAllDataOperationResponse = new FetchAllDataOperationResponse(response);
+                var fetchAllDataOperationResponse = new FetchAllDataOperationResponse();
+                fetchAllDataOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(fetchAllDataOperationResponse);
+            });
+        }
+
+        internal void FetchSparkPlayer(Action<FetchSparkPlayerOperationResponse> onResponse = null)
+        {
+            var request = new FetchSparkPlayerOperationRequest().Build();
+
+            SendViaHttp(request, response =>
+            {
+                var fetchSparkPlayerOperationResponse = new FetchSparkPlayerOperationResponse();
+                fetchSparkPlayerOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(fetchSparkPlayerOperationResponse);
             });
         }
 
         internal void GetAppConfig(GNArray configTypes, Action<GetAppConfigOperationResponse> onResponse = null)
         {
-            var request = new GetAppConfigOperationRequest(configTypes).Builder();
+            var request = new GetAppConfigOperationRequest(configTypes).Build();
 
             SendViaHttp(request, response =>
             {
-                var getAppConfigOperationResponse = new GetAppConfigOperationResponse(response);
+                var getAppConfigOperationResponse = new GetAppConfigOperationResponse();
+                getAppConfigOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(getAppConfigOperationResponse);
             });
         }
 
         internal void AccountLogin(string username, string password, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new AccountLoginOperationRequest(username, password).Builder();
+            var request = new AccountLoginOperationRequest(username, password).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void DeviceLogin(Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new DeviceLoginOperationRequest(GNNetwork.deviceInfo).Builder();
+            var request = new DeviceLoginOperationRequest(GNNetwork.deviceInfo).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void FacebookLogin(string facebookToken, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new FacebookLoginOperationRequest(facebookToken).Builder();
+            var request = new FacebookLoginOperationRequest(facebookToken).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void GoogleLogin(string googleToken, int googleLoginType, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new GoogleLoginOperationRequest(googleToken, googleLoginType).Builder();
+            var request = new GoogleLoginOperationRequest(googleToken, googleLoginType).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void AppleLogin(string appleToken, string displayName, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new AppleLoginOperationRequest(appleToken, displayName).Builder();
+            var request = new AppleLoginOperationRequest(appleToken, displayName).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void UserIdLogin(string userId, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new UserIdLoginOperationRequest(userId).Builder();
+            var request = new UserIdLoginOperationRequest(userId).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void PublicAddressLogin(string signature, string publicAddress, string message, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new PublicAddressLoginOperationRequest(signature, publicAddress, message).Builder();
+            var request = new PublicAddressLoginOperationRequest(signature, publicAddress, message).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void PublicAddressGetRandomMessage(Action<PublicAddressGetRandomMessageOperationResponse> onResponse = null)
         {
-            var request = new PublicAddressGetRandomMessageOperationRequest().Builder();
+            var request = new PublicAddressGetRandomMessageOperationRequest().Build();
 
             SendViaHttp(request, response =>
             {
-                var publicAddressGetRandomMessageOperationResponse = new PublicAddressGetRandomMessageOperationResponse(response);
+                var publicAddressGetRandomMessageOperationResponse = new PublicAddressGetRandomMessageOperationResponse();
+                publicAddressGetRandomMessageOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(publicAddressGetRandomMessageOperationResponse);
             });
         }
 
         internal void CustomIdLogin(string customId, Action<LoginOperationResponse> onResponse = null)
         {
-            var request = new CustomIdLoginOperationRequest(customId).Builder();
+            var request = new CustomIdLoginOperationRequest(customId).Build();
 
             SendViaHttp(request, response =>
             {
-                var loginOperationResponse = new LoginOperationResponse(response);
+                var loginOperationResponse = new LoginOperationResponse();
+                loginOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(loginOperationResponse);
             });
         }
 
         internal void RegisterAccount(string username, string password, Action<RegisterAccountOperationResponse> onResponse = null)
         {
-            var request = new RegisterAccountOperationRequest(username, password).Builder();
+            var request = new RegisterAccountOperationRequest(username, password).Build();
 
             SendViaHttp(request, response =>
             {
-                var registerAccountOperationResponse = new RegisterAccountOperationResponse(response);
+                var registerAccountOperationResponse = new RegisterAccountOperationResponse();
+                registerAccountOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(registerAccountOperationResponse);
             });
         }
 
         internal void RegisterSocket(string sid, Action<RegisterSocketOperationResponse> onResponse = null)
         {
-            var request = new RegisterSocketOperationRequest(sid).Builder();
+            var request = new RegisterSocketOperationRequest(sid).Build();
 
             SendViaHttp(request, response =>
             {
-                var registerSocketOperationResponse = new RegisterSocketOperationResponse(response);
+                var registerSocketOperationResponse = new RegisterSocketOperationResponse();
+                registerSocketOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(registerSocketOperationResponse);
             });
         }
 
         internal void Template(bool booleanValue, Action<TemplateOperationResponse> onResponse = null)
         {
-            var request = new TemplateOperationRequest(booleanValue).Builder();
+            var request = new TemplateOperationRequest(booleanValue).Build();
 
             SendViaHttp(request, response =>
             {
-                var templateOperationResponse = new TemplateOperationResponse(response);
+                var templateOperationResponse = new TemplateOperationResponse();
+                templateOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(templateOperationResponse);
             });
         }
 
         internal void CreateNewFileUploadInfo(string originFileName, Action<CreateNewFileUploadInfoOperationResponse> onResponse = null)
         {
-            var request = new CreateNewFileUploadInfoOperationRequest(originFileName).Builder();
+            var request = new CreateNewFileUploadInfoOperationRequest(originFileName).Build();
 
             SendViaHttp(request, response =>
             {
-                var createNewFileUploadInfoOperationResponse = new CreateNewFileUploadInfoOperationResponse(response);
+                var createNewFileUploadInfoOperationResponse = new CreateNewFileUploadInfoOperationResponse();
+                createNewFileUploadInfoOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(createNewFileUploadInfoOperationResponse);
             });
         }
 
         internal void GetFileUploadInfo(string fileId, Action<GetFileUploadInfoOperationResponse> onResponse = null)
         {
-            var request = new GetFileUploadInfoOperationRequest(fileId).Builder();
+            var request = new GetFileUploadInfoOperationRequest(fileId).Build();
 
             SendViaHttp(request, response =>
             {
-                var getFileUploadInfoOperationResponse = new GetFileUploadInfoOperationResponse(response);
+                var getFileUploadInfoOperationResponse = new GetFileUploadInfoOperationResponse();
+                getFileUploadInfoOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(getFileUploadInfoOperationResponse);
             });
         }
 
         internal void Logout(Action<LogoutOperationResponse> onResponse = null)
         {
-            var request = new LogoutOperationRequest().Builder();
+            var request = new LogoutOperationRequest().Build();
 
             SendViaHttp(request, response =>
             {
-                var logoutOperationResponse = new LogoutOperationResponse(response);
+                var logoutOperationResponse = new LogoutOperationResponse();
+                logoutOperationResponse.SetupOperationResponse(response);
+
                 onResponse?.Invoke(logoutOperationResponse);
             });
         }
+
     }
+
 }

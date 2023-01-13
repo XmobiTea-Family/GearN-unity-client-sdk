@@ -3,14 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
 
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Logger;
 
-    internal class PeerBase : MonoBehaviour, IPeer
+    internal class PeerBase : UnityEngine.MonoBehaviour, IPeer
     {
         private Queue<OperationPending> operationPendingQueue;
 
@@ -24,8 +23,8 @@
 
         internal int sendRate
         {
-            get => (int)(1000 / perMsgTimer);
-            set => perMsgTimer = (float)1000 / value / 1000;
+            get => (int)(1000 / this.perMsgTimer);
+            set => this.perMsgTimer = (float)1000 / value / 1000;
         }
 
         internal int ping { get; private set; } = -1;
@@ -35,12 +34,12 @@
 
         public void InitPeer()
         {
-            if (operationWaitingResponseDic == null) operationWaitingResponseDic = new Dictionary<int, OperationPending>();
-            if (operationPendingQueue == null) operationPendingQueue = new Queue<OperationPending>();
+            if (this.operationWaitingResponseDic == null) this.operationWaitingResponseDic = new Dictionary<int, OperationPending>();
+            if (this.operationPendingQueue == null) this.operationPendingQueue = new Queue<OperationPending>();
 
-            InitSendRate();
+            this.InitSendRate();
 
-            InitGNSocketObject();
+            this.InitGNSocketObject();
         }
 
         private void InitSendRate()
@@ -58,7 +57,7 @@
 
         void IPeer.Enqueue(OperationRequest operationRequest, Action<OperationResponse> onOperationResponse)
         {
-            if (!isUsing)
+            if (!this.isUsing)
             {
                 GNDebug.LogError("[GN] Server Settings dont setup to use this to send operation request.");
                 return;
@@ -66,27 +65,27 @@
 
             var operationPending = new OperationPending(operationRequest, onOperationResponse);
 
-            operationPendingQueue.Enqueue(operationPending);
+            this.operationPendingQueue.Enqueue(operationPending);
         }
 
         bool IPeer.IsUsing()
         {
-            return isUsing;
+            return this.isUsing;
         }
 
-        protected virtual void Update()
+        public virtual void Service()
         {
-            if (!isUsing) return;
+            if (!this.isUsing) return;
 
-            if (checkTimeoutOperationPending < Time.time)
+            if (this.checkTimeoutOperationPending < UnityEngine.Time.time)
             {
-                checkTimeoutOperationPending = Time.time + 0.1f;
+                this.checkTimeoutOperationPending = UnityEngine.Time.time + 0.1f;
 
-                if (operationWaitingResponseDic.Count != 0)
+                if (this.operationWaitingResponseDic.Count != 0)
                 {
                     var gnArrayLst = new List<GNArray>();
 
-                    foreach (var operationPendingPair in operationWaitingResponseDic)
+                    foreach (var operationPendingPair in this.operationWaitingResponseDic)
                     {
                         var operationPending = operationPendingPair.Value;
 
@@ -97,6 +96,7 @@
                             gnArray.Add((int)ReturnCode.OperationTimeout);
                             gnArray.Add(null);
                             gnArray.Add(operationPending.GetOperationRequest().GetRequestId());
+                            gnArray.Add(operationPending.GetOperationRequest().IsEncrypted());
 
                             gnArrayLst.Add(gnArray);
                         }
@@ -106,35 +106,35 @@
                     {
                         foreach (var gnArray in gnArrayLst)
                         {
-                            OnResponseHandler(gnArray);
+                            this.OnResponseHandler(gnArray, gnArray.GetBool(3));
                         }
                     }
                 }
             }
 
-            if (nextSendMsgTimer < Time.time)
+            if (this.nextSendMsgTimer < UnityEngine.Time.time)
             {
-                if (operationPendingQueue.Count != 0)
+                if (this.operationPendingQueue.Count != 0)
                 {
-                    nextSendMsgTimer = Time.time + perMsgTimer;
+                    this.nextSendMsgTimer = UnityEngine.Time.time + this.perMsgTimer;
 
-                    var operationPending = operationPendingQueue.Dequeue();
+                    var operationPending = this.operationPendingQueue.Dequeue();
 
-                    Send(operationPending);
+                    this.Send(operationPending);
                 }
             }
         }
 
-        internal void OnResponseHandler(GNArray obj)
+        internal void OnResponseHandler(GNArray obj, bool isEncrypted)
         {
             var responseId = obj.GetInt(2);
 
-            if (operationWaitingResponseDic.ContainsKey(responseId))
+            if (this.operationWaitingResponseDic.ContainsKey(responseId))
             {
-                var operationPending = operationWaitingResponseDic[responseId];
+                var operationPending = this.operationWaitingResponseDic[responseId];
                 operationPending.OnRecv();
 
-                operationWaitingResponseDic.Remove(responseId);
+                this.operationWaitingResponseDic.Remove(responseId);
 
                 var returnCode = obj.GetInt(0);
 
@@ -144,10 +144,18 @@
 
                 if (returnCode == ReturnCode.Ok) parameters = obj.GetGNHashtable(1);
                 else if (returnCode == ReturnCode.InvalidRequestParameters) array = obj.GetGNArray(1);
+                else if (returnCode == ReturnCode.OperationNotAuthorized)
+                {
+                    if (!string.IsNullOrEmpty(GNNetwork.authToken))
+                    {
+                        GNNetwork.authToken = string.Empty;
+                        GNNetwork.userId = string.Empty;
+                    }
+                }
                 else debugMessage = obj.GetString(1);
 
                 var operationRequest = operationPending.GetOperationRequest();
-                var operationResponse = new OperationResponse(operationRequest.GetOperationCode(), operationRequest.GetRequestId());
+                var operationResponse = new OperationResponse(operationRequest.GetOperationCode(), operationRequest.GetRequestId(), isEncrypted);
 
                 operationResponse.SetReturnCode(returnCode);
                 operationResponse.SetDebugMessage(debugMessage);
@@ -169,7 +177,7 @@
 
                 operationPending.GetCallback()?.Invoke(operationResponse);
 
-                if (!operationResponse.hasError)
+                if (!operationResponse.HasError())
                 {
                     AddPing(operationPending.GetExecuteTimerInMs());
 
@@ -182,6 +190,13 @@
                             GNNetwork.authToken = authToken;
                         }
 
+                        if (parameters.ContainsKey(ParameterCode.UserId))
+                        {
+                            var userId = parameters.GetString(ParameterCode.UserId);
+
+                            GNNetwork.userId = userId;
+                        }
+
                         if (parameters.ContainsKey(ParameterCode.Ts))
                         {
                             GNNetwork.peer.SetServerTimeMilliseconds(parameters.GetLong(ParameterCode.Ts, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
@@ -191,7 +206,7 @@
             }
             else
             {
-                GNDebug.LogError("[GN] OnResponseHandler " + obj);
+                GNDebug.LogError("[GN] OnResponseHandler, un available request id " + obj);
             }
         }
 
@@ -207,16 +222,18 @@
 
                 if (operationPending.GetCallback() != null)
                 {
-                    operationWaitingResponseDic[operationRequest.GetRequestId()] = operationPending;
+                    this.operationWaitingResponseDic[operationRequest.GetRequestId()] = operationPending;
                 }
             }
         }
 
         private void AddPing(float value)
         {
-            if (pingLst.Count > 10) pingLst.Dequeue();
-            pingLst.Enqueue(value / 2);
-            ping = (int)(pingLst.Average() * 1000);
+            if (this.pingLst.Count > 10) this.pingLst.Dequeue();
+            this.pingLst.Enqueue(value / 2);
+            this.ping = (int)(this.pingLst.Average() * 1000);
         }
+
     }
+
 }

@@ -5,13 +5,13 @@
 
     public class DebugOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.Debug;
+        protected override int operationCode => OperationCode.Debug;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public DebugOperationRequest(bool booleanValue, int numberValue, string stringValue, GNHashtable gnHashtableValue, GNArray gnArrayValue, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(DebugParameterCode.Boolean, booleanValue)
                 .Add(DebugParameterCode.Number, numberValue)
                 .Add(DebugParameterCode.String, stringValue)
@@ -19,5 +19,7 @@
                 .Add(DebugParameterCode.GNArray, gnArrayValue)
                 .Build();
         }
+
     }
+
 }

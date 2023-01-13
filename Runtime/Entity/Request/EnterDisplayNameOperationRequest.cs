@@ -5,15 +5,17 @@
 
     public class EnterDisplayNameOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.EnterDisplayName;
+        protected override int operationCode => OperationCode.EnterDisplayName;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public EnterDisplayNameOperationRequest(string displayName, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(EnterDisplayNameParameterCode.DisplayName, displayName)
                 .Build();
         }
+
     }
+
 }

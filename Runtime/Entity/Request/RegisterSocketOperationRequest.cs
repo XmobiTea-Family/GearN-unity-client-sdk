@@ -5,15 +5,17 @@
 
     public class RegisterSocketOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.RegisterSocket;
+        protected override int operationCode => OperationCode.RegisterSocket;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public RegisterSocketOperationRequest(string sid, int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
-            parameters = new GNHashtable.Builder()
+            this.operationParameters = new GNHashtable.Builder()
                 .Add(RegisterSocketParameterCode.SId, sid)
                 .Build();
         }
+
     }
+
 }

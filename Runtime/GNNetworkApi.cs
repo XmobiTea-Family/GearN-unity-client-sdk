@@ -44,6 +44,11 @@
             peer.FetchAllData(onResponse);
         }
 
+        public static void FetchSparkPlayer(Action<FetchSparkPlayerOperationResponse> onResponse = null)
+        {
+            peer.FetchSparkPlayer(onResponse);
+        }
+
         public static void GetAppConfig(GNArray configTypes, Action<GetAppConfigOperationResponse> onResponse = null)
         {
             peer.GetAppConfig(configTypes, onResponse);
@@ -123,5 +128,7 @@
         {
             peer.Logout(onResponse);
         }
+
     }
+
 }

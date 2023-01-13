@@ -10,22 +10,26 @@
         public long tsExpire { get; private set; }
         public string reason { get; private set; }
 
-        public FetchAllDataOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
+            base.SetupOperationResponse(operationResponse);
+
+            if (!this.hasError)
             {
-                if (errorCode == FetchAllDataErrorCode.Ok)
+                if (this.errorCode == FetchAllDataErrorCode.Ok)
                 {
-                    userId = parameters.GetString(FetchAllDataParameterCode.UserId);
-                    userRole = parameters.GetInt(FetchAllDataParameterCode.UserRole);
-                    displayName = parameters.GetString(FetchAllDataParameterCode.DisplayName);
+                    this.userId = this.parameters.GetString(FetchAllDataParameterCode.UserId);
+                    this.userRole = this.parameters.GetInt(FetchAllDataParameterCode.UserRole);
+                    this.displayName = this.parameters.GetString(FetchAllDataParameterCode.DisplayName);
                 }
                 else if (errorCode == FetchAllDataErrorCode.UserHadBanned)
                 {
-                    tsExpire = parameters.GetLong(FetchAllDataParameterCode.TsExpire);
-                    reason = parameters.GetString(FetchAllDataParameterCode.Reason);
+                    this.tsExpire = this.parameters.GetLong(FetchAllDataParameterCode.TsExpire);
+                    this.reason = this.parameters.GetString(FetchAllDataParameterCode.Reason);
                 }
             }
         }
+
     }
+
 }

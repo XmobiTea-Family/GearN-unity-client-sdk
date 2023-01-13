@@ -4,11 +4,15 @@ namespace XmobiTea.GN.Entity.Response
 {
     public class LogoutOperationResponse : CustomOperationResponse
     {
-        public LogoutOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
+            base.SetupOperationResponse(operationResponse);
+
+            if (!this.hasError)
             {
                 GNNetwork.authToken = string.Empty;
+                GNNetwork.userId = string.Empty;
 
                 GNDebug.Log("[GN] Logout success.");
             }
@@ -17,5 +21,7 @@ namespace XmobiTea.GN.Entity.Response
                 GNDebug.LogError("[GN] You need login before logout.");
             }
         }
+
     }
+
 }

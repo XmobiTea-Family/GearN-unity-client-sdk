@@ -5,13 +5,15 @@
 
     public class FetchAllDataOperationRequest : CustomOperationRequest
     {
-        protected override int code => OperationCode.FetchAllData;
+        protected override int operationCode => OperationCode.FetchAllData;
 
-        protected override bool reliable => true;
+        protected override bool operationEncrypted => true;
 
         public FetchAllDataOperationRequest(int timeout = OperationRequest.DefaultTimeOut) : base(timeout)
         {
 
         }
+
     }
+
 }

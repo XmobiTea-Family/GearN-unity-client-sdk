@@ -12,32 +12,44 @@
         private int operationCode;
         private int requestId;
         private GNHashtable parameters;
-        private bool reliable;
-        private int timeOut;
+        private bool encrypted;
+        private int timeout;
+
+        public bool IsValidRequest()
+        {
+            return true;
+        }
+
+        public OperationRequest(int operationCode, bool encrypted = true, int timeout = DefaultTimeOut)
+        {
+            this.operationCode = operationCode;
+            this.encrypted = encrypted;
+            this.timeout = timeout;
+        }
 
         public int GetOperationCode()
         {
-            return operationCode;
+            return this.operationCode;
         }
 
         public int GetRequestId()
         {
-            return requestId;
+            return this.requestId;
         }
 
         public GNHashtable GetParameters()
         {
-            return parameters;
+            return this.parameters;
         }
 
-        public bool IsReliable()
+        public bool IsEncrypted()
         {
-            return reliable;
+            return this.encrypted;
         }
 
-        public int GetTimeOut()
+        public int GetTimeout()
         {
-            return timeOut;
+            return this.timeout;
         }
 
         public OperationRequest SetRequestId(int requestId)
@@ -48,9 +60,9 @@
 
         public OperationRequest SetScriptData(string key, object value)
         {
-            if (parameters == null) parameters = new GNHashtable();
+            if (this.parameters == null) this.parameters = new GNHashtable();
 
-            parameters.Add(key, value);
+            this.parameters.Add(key, value);
 
             return this;
         }
@@ -61,47 +73,27 @@
             return this;
         }
 
-        public OperationRequest SetReliable(bool reliable)
+        public OperationRequest SetEncrypted(bool encrypted)
         {
-            this.reliable = reliable;
+            this.encrypted = encrypted;
             return this;
         }
 
-        public OperationRequest SetTimeOut(int timeout)
+        public OperationRequest SetTimeout(int timeout)
         {
-            this.timeOut = timeout;
+            this.timeout = timeout;
             return this;
-        }
-
-        public OperationRequest(int operationCode, bool reliable = true, int timeout = DefaultTimeOut)
-        {
-            this.operationCode = operationCode;
-            this.reliable = reliable;
-            this.timeOut = timeout;
-        }
-
-        public object ToData()
-        {
-            if (requestId == -1) 
-                return new object[] {
-                    this.operationCode,
-                    (parameters == null) ? null : parameters.ToData()
-                };
-            else
-                return new object[] {
-                    this.operationCode,
-                    (parameters == null) ? null : parameters.ToData(),
-                    requestId
-                };
         }
 
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(operationCode) + " RequestId: " + requestId + " parameters " + parameters);
+            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(this.operationCode) + ", requestId: " + this.requestId + ", parameters " + this.parameters + ", encrypted " + this.encrypted);
 
             return stringBuilder.ToString();
         }
+
     }
+
 }

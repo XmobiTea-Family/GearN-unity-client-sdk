@@ -9,46 +9,59 @@
     public class OperationResponse
     {
         private int operationCode;
+        private int responseId;
         private int returnCode;
         private string debugMessage;
         private GNHashtable parameters;
-
-        private int responseId;
+        private bool encrypted;
 
         private InvalidMember[] invalidMembers;
 
+        public OperationResponse(int operationCode, int responseId, bool encrypted = true)
+        {
+            this.operationCode = operationCode;
+            this.responseId = responseId;
+            this.encrypted = encrypted;
+            this.parameters = new GNHashtable();
+            this.debugMessage = null;
+        }
+
         public int GetOperationCode()
         {
-            return operationCode;
+            return this.operationCode;
         }
 
         public int GetReturnCode()
         {
-            return returnCode;
+            return this.returnCode;
         }
 
         public GNHashtable GetParameters()
         {
-            return parameters;
+            return this.parameters;
+        }
+
+        public bool IsEncrypted()
+        {
+            return this.encrypted;
         }
 
         public int GetResponseId()
         {
-            return responseId;
+            return this.responseId;
         }
 
         public string GetDebugMessage()
         {
-            return debugMessage;
+            return this.debugMessage;
         }
 
-        public bool hasError => GetReturnCode() != ReturnCode.Ok;
-
-        public OperationResponse(int operationCode, int responseId)
+        public InvalidMember[] GetInvalidMembers()
         {
-            this.operationCode = operationCode;
-            this.responseId = responseId;
+            return this.invalidMembers;
         }
+
+        public bool HasError() => this.GetReturnCode() != ReturnCode.Ok;
 
         public OperationResponse SetReturnCode(int returnCode)
         {
@@ -62,9 +75,24 @@
             return this;
         }
 
+        public OperationResponse SetScriptData(string key, object value)
+        {
+            if (this.parameters == null) this.parameters = new GNHashtable();
+
+            this.parameters.Add(key, value);
+
+            return this;
+        }
+
         public OperationResponse SetParameters(GNHashtable parameters)
         {
             this.parameters = parameters;
+            return this;
+        }
+
+        public OperationResponse SetEncrypted(bool encrypted)
+        {
+            this.encrypted = encrypted;
             return this;
         }
 
@@ -78,27 +106,29 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(operationCode) + " ResponseId: " + responseId + " ReturnCode " + CodeHelper.GetReturnCodeName(returnCode));
+            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(this.operationCode) + ", responseId: " + this.responseId + ", returnCode " + CodeHelper.GetReturnCodeName(this.returnCode));
 
-            if (returnCode == ReturnCode.Ok) stringBuilder.Append(" Parameters " + parameters);
-            else if (returnCode == ReturnCode.InvalidRequestParameters)
+            if (this.returnCode == ReturnCode.Ok) stringBuilder.Append(", parameters " + this.parameters);
+            else if (this.returnCode == ReturnCode.InvalidRequestParameters)
             {
-                if (invalidMembers != null)
+                if (this.invalidMembers != null)
                 {
                     var invalidStr = string.Empty;
 
-                    foreach (var invalidMember in invalidMembers)
+                    foreach (var invalidMember in this.invalidMembers)
                     {
                         invalidStr += invalidMember;
                     }
 
-                    stringBuilder.Append(" InvalidMembers " + invalidStr);
+                    stringBuilder.Append(", invalidMembers " + invalidStr);
                 }
-                else stringBuilder.Append(" InvalidMembers " + invalidMembers);
+                else stringBuilder.Append(", invalidMembers " + this.invalidMembers);
             }
-            else stringBuilder.Append(" DebugMessage " + debugMessage);
+            else stringBuilder.Append(", debugMessage " + this.debugMessage);
 
             return stringBuilder.ToString();
         }
+
     }
+
 }

@@ -8,21 +8,27 @@
 
         public long tsExpire { get; private set; }
         public string reason { get; private set; }
+        public string userId { get; private set; }
 
-        public LoginOperationResponse(OperationResponse operationResponse) : base(operationResponse)
+        public override void SetupOperationResponse(OperationResponse operationResponse)
         {
-            if (!hasError)
+            base.SetupOperationResponse(operationResponse);
+
+            if (!this.hasError)
             {
-                if (errorCode == LoginErrorCode.Ok)
+                if (this.errorCode == LoginErrorCode.Ok)
                 {
-                    authToken = parameters.GetString(ParameterCode.AuthToken);
+                    this.authToken = this.parameters.GetString(ParameterCode.AuthToken);
+                    this.userId = this.parameters.GetString(ParameterCode.UserId);
                 }
                 else if (errorCode == LoginErrorCode.UserHadBanned)
                 {
-                    tsExpire = parameters.GetLong(LoginParameterCode.TsExpire);
-                    reason = parameters.GetString(LoginParameterCode.Reason);
+                    this.tsExpire = this.parameters.GetLong(LoginParameterCode.TsExpire);
+                    this.reason = this.parameters.GetString(LoginParameterCode.Reason);
                 }
             }
         }
+
     }
+
 }

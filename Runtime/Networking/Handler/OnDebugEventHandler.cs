@@ -1,6 +1,5 @@
 ﻿namespace XmobiTea.GN.Networking
 {
-    using UnityEngine;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
 
@@ -10,7 +9,9 @@
 
         public void Handle(OperationEvent operationEvent)
         {
-            Debug.Log(operationEvent);
+            UnityEngine.Debug.Log(operationEvent);
         }
+
     }
+
 }
