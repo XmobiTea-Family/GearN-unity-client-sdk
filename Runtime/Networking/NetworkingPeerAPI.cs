@@ -15,8 +15,8 @@
         internal const string UPLOAD_FILE = "upload";
         internal const string DOWNLOAD_FILE = "upload";
         internal const string GET_CONFIG = "getConfig";
-        internal const string API_JSON = "api/0";
-        internal const string API_MSG_PACK = "api/1";
+        internal const string API_JSON = "api/" + Commands.RequestCmd_Json;
+        internal const string API_MSG_PACK = "api/" + Commands.RequestCmd_MsgPack;
 
         internal void SyncTs(Action<long> onResponse = null)
         {

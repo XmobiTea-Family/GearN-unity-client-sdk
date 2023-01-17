@@ -126,6 +126,8 @@
             }
             else stringBuilder.Append(", debugMessage " + this.debugMessage);
 
+            stringBuilder.Append(", encrypted " + this.encrypted);
+
             return stringBuilder.ToString();
         }
 

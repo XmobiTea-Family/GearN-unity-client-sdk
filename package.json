@@ -1,10 +1,12 @@
 {
   "name": "com.xmobitea.changx.gn-unity",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "displayName": "XmobiTea GN Unity",
   "description": "XmobiTea Unity packages",
   "unity": "2020.3",
-  "dependencies": {},
+  "dependencies": {
+		"com.xmobitea.changx.app": "1.0.0"
+  },
   "keywords": [
     "chang x",
     "changx",

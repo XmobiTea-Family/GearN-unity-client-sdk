@@ -60,7 +60,7 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.GetEventCodeName(this.eventCode) + ", parameters " + this.parameters);
+            stringBuilder.Append("Code: " + CodeHelper.GetEventCodeName(this.eventCode) + ", parameters " + this.parameters + ", encrypted " + this.encrypted);
 
             return stringBuilder.ToString();
         }
