@@ -34,6 +34,8 @@
             }
         }
 
+        internal string clientId => (this.socketPeer as SocketPeer).clientId;
+
         private long lastCurrentServerMilliseconds;
         private float lastGetCurrentMilliseconds;
 
@@ -88,6 +90,11 @@
         internal void DisconnectSocket(Action _onSocketDisconnect)
         {
             (this.socketPeer as SocketPeer).Disconnect(_onSocketDisconnect);
+        }
+
+        internal void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        {
+            (this.socketPeer as SocketPeer).SetOnEventHandler(_onEventHandler);
         }
 
         internal void SetOnConnectHandler(Action _onConnectHandler)

@@ -21,6 +21,8 @@
 
         private Dictionary<int, IServerEventHandler> serverEventHandlerDic;
 
+        private Action<OperationEvent> _onEventHandler;
+
         internal void SendRequestAuthSocket()
         {
             this.networkingPeerBase.SendRequestAuthSocket();
@@ -111,6 +113,11 @@
             this.networkingPeerBase.Close(_onSocketDisconnect);
         }
 
+        internal void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        {
+            this._onEventHandler = _onEventHandler;
+        }
+
         internal override void Send(OperationPending operationPending)
         {
             base.Send(operationPending);
@@ -143,15 +150,18 @@
         internal void OnEventHandler(GNArray obj, bool isEncrypted)
         {
             var eventCode = obj.GetInt(0);
-            if (!this.serverEventHandlerDic.ContainsKey(eventCode))
-            {
-                return;
-            }
 
             var operationEvent = new OperationEvent(eventCode, obj.GetGNHashtable(1));
             operationEvent.SetEncrypted(isEncrypted);
 
             GNDebug.Log("[GN Socket EVENT] " + operationEvent.ToString());
+
+            _onEventHandler?.Invoke(operationEvent);
+
+            if (!this.serverEventHandlerDic.ContainsKey(eventCode))
+            {
+                return;
+            }
 
             var serverEventHandler = this.serverEventHandlerDic[eventCode];
             serverEventHandler.Handle(operationEvent);
