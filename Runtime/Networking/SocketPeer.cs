@@ -19,7 +19,7 @@
 
         internal bool isConnected => this.networkingPeerBase.isWsConnected;
 
-        private Dictionary<int, IServerEventHandler> serverEventHandlerDic;
+        private Dictionary<int, List<IServerEventHandler>> serverEventHandlersDic;
 
         private Action<OperationEvent> _onEventHandler;
 
@@ -30,8 +30,8 @@
 
         void SubscriberServerEventHandler()
         {
-            if (this.serverEventHandlerDic == null) this.serverEventHandlerDic = new Dictionary<int, IServerEventHandler>();
-            else this.serverEventHandlerDic.Clear();
+            if (this.serverEventHandlersDic == null) this.serverEventHandlersDic = new Dictionary<int, List<IServerEventHandler>>();
+            else this.serverEventHandlersDic.Clear();
 
             var type = typeof(IServerEventHandler);
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -41,7 +41,23 @@
             foreach (var t in types)
             {
                 var srvMsg = Activator.CreateInstance(t) as IServerEventHandler;
-                if (srvMsg != null) this.serverEventHandlerDic[srvMsg.GetEventCode()] = srvMsg;
+                if (srvMsg != null)
+                {
+                    List<IServerEventHandler> serverEventHandlers;
+
+                    if (!this.serverEventHandlersDic.ContainsKey(srvMsg.GetEventCode()))
+                    {
+                        serverEventHandlers = new List<IServerEventHandler>();
+
+                        this.serverEventHandlersDic[srvMsg.GetEventCode()] = serverEventHandlers;
+                    }
+                    else
+                    {
+                        serverEventHandlers = this.serverEventHandlersDic[srvMsg.GetEventCode()];
+                    }
+
+                    serverEventHandlers.Add(srvMsg);
+                }
             }
         }
 
@@ -158,13 +174,15 @@
 
             _onEventHandler?.Invoke(operationEvent);
 
-            if (!this.serverEventHandlerDic.ContainsKey(eventCode))
+            if (!this.serverEventHandlersDic.ContainsKey(eventCode))
             {
                 return;
             }
 
-            var serverEventHandler = this.serverEventHandlerDic[eventCode];
-            serverEventHandler.Handle(operationEvent);
+            var serverEventHandlers = this.serverEventHandlersDic[eventCode];
+
+            foreach (var serverEventHandler in serverEventHandlers)
+                serverEventHandler.Handle(operationEvent);
         }
 
         public override void Service()

@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections;
-
+    using System.Collections.Generic;
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Constant;
+    using XmobiTea.GN.Entity;
     using XmobiTea.GN.Entity.Request;
     using XmobiTea.GN.Entity.Response;
     using XmobiTea.GN.Helper;
@@ -17,6 +18,15 @@
         internal const string GET_CONFIG = "getConfig";
         internal const string API_JSON = "api/0";
         internal const string API_MSG_PACK = "api/1";
+
+        internal List<FriendItem> friendItemLst { get; set; }
+        internal Action<FriendItem> onFriendItemChange { get; set; }
+
+        internal List<ChatChannel> chatChannelLst { get; set; }
+        internal Action<ChatChannel> onChatChannelChange { get; set; }
+
+        internal List<ChatUser> chatUserLst { get; set; }
+        internal Action<ChatUser> onChatUserChange { get; set; }
 
         internal void SyncTs(Action<long> onResponse = null)
         {
@@ -339,6 +349,389 @@
                 logoutOperationResponse.SetupOperationResponse(response);
 
                 onResponse?.Invoke(logoutOperationResponse);
+            });
+        }
+
+        internal void AddFriend(string friendId, bool? forceAcceptFriend = false, Action<AddFriendOperationResponse> onResponse = null)
+        {
+            var request = new AddFriendOperationRequest(friendId, forceAcceptFriend).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var addFriendOperationResponse = new AddFriendOperationResponse();
+                addFriendOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(addFriendOperationResponse);
+            });
+        }
+
+        internal void RemoveFriend(string friendId, Action<RemoveFriendOperationResponse> onResponse = null)
+        {
+            var request = new RemoveFriendOperationRequest(friendId).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var removeFriendOperationResponse = new RemoveFriendOperationResponse();
+                removeFriendOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(removeFriendOperationResponse);
+            });
+        }
+
+        internal void GetFriends(Action<GetFriendsOperationResponse> onResponse = null)
+        {
+            var request = new GetFriendsOperationRequest().Build();
+
+            SendViaHttp(request, response =>
+            {
+                var getFriendsOperationResponse = new GetFriendsOperationResponse();
+                getFriendsOperationResponse.SetupOperationResponse(response);
+
+                this.friendItemLst.Clear();
+
+                if (getFriendsOperationResponse.errorCode == FriendErrorCode.Ok)
+                {
+                    var friendLst = getFriendsOperationResponse.friendLst;
+                    for (var i = 0; i < friendLst.Count; i++)
+                    {
+                        var friend = friendLst[i];
+
+                        this.friendItemLst.Add(new FriendItem()
+                        {
+                            friendId = friend.friendId,
+                            friendStatus = (FriendStatus)friend.friendStatus,
+                            isSocialLoginFriend = friend.isSocialLoginFriend,
+                            tsLastUpdate = friend.tsLastUpdate
+                        });
+                    }
+                }
+
+                onResponse?.Invoke(getFriendsOperationResponse);
+            });
+        }
+
+        internal void FindPlayer(string keyword, int skip = 0, int limit = 20, Action<FindPlayerOperationResponse> onResponse = null)
+        {
+            var request = new FindPlayerOperationRequest(keyword, skip, limit).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var findPlayerOperationResponse = new FindPlayerOperationResponse();
+                findPlayerOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(findPlayerOperationResponse);
+            });
+        }
+
+        internal void SendChatToUser(string userId, string message, bool? saveToDatabase = false, Action<SendChatToUserOperationResponse> onResponse = null)
+        {
+            var request = new SendChatToUserOperationRequest(userId, message, saveToDatabase).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var sendChatToUserOperationResponse = new SendChatToUserOperationResponse();
+                sendChatToUserOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(sendChatToUserOperationResponse);
+            });
+        }
+
+        internal void GetChatMessageUser(string userId, int skip = 0, int limit = 20, Action<GetChatMessageUserOperationResponse> onResponse = null)
+        {
+            var request = new GetChatMessageUserOperationRequest(userId, skip, limit).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var getChatMessageUserOperationResponse = new GetChatMessageUserOperationResponse();
+                getChatMessageUserOperationResponse.SetupOperationResponse(response);
+
+                if (getChatMessageUserOperationResponse.errorCode == ChatErrorCode.Ok)
+                {
+                    var chatUser = this.chatUserLst.Find(x => x.userId.Equals(userId));
+
+                    if (chatUser == null)
+                    {
+                        chatUser = new ChatUser();
+                        chatUser.userId = userId;
+                        chatUser.messages = new List<ChatMessage>();
+
+                        this.chatUserLst.Add(chatUser);
+                    }
+
+                    for (var i = 0; i < getChatMessageUserOperationResponse.messages.Count; i++)
+                    {
+                        var responseMessage = getChatMessageUserOperationResponse.messages[i];
+
+                        var message = chatUser.messages.Find(x => x.tsCreate == responseMessage.tsCreate);
+                        if (message == null)
+                        {
+                            message = new ChatMessage();
+                            message.tsCreate = responseMessage.tsCreate;
+                            message.messageEditeds = new List<EditChatMessage>();
+
+                            chatUser.messages.Add(message);
+                        }
+
+                        message.senderId = responseMessage.senderId;
+                        message.tsLastUpdate = responseMessage.tsLastUpdate;
+                        message.message = responseMessage.message;
+
+                        message.messageEditeds.Clear();
+
+                        for (var j = 0; j < responseMessage.messageEditeds.Count; j++)
+                        {
+                            var responseMessageEdited = responseMessage.messageEditeds[j];
+
+                            message.messageEditeds.Add(new EditChatMessage()
+                            {
+                                message = responseMessageEdited.message,
+                                tsCreate = responseMessageEdited.tsCreate
+                            });
+                        }
+
+                        message.isDelete = responseMessage.isDelete;
+                    }
+
+                    this.onChatUserChange?.Invoke(chatUser);
+                }
+
+                onResponse?.Invoke(getChatMessageUserOperationResponse);
+            });
+        }
+
+        internal void SendChatToChannel(string channel, string message, Action<SendChatToChannelOperationResponse> onResponse = null)
+        {
+            var request = new SendChatToChannelOperationRequest(channel, message).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var sendChatToChannelOperationResponse = new SendChatToChannelOperationResponse();
+                sendChatToChannelOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(sendChatToChannelOperationResponse);
+            });
+        }
+
+        internal void JoinChatChannel(string channel, Action<JoinChatChannelOperationResponse> onResponse = null)
+        {
+            var request = new JoinChatChannelOperationRequest(channel).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var joinChatChannelOperationResponse = new JoinChatChannelOperationResponse();
+                joinChatChannelOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(joinChatChannelOperationResponse);
+            });
+        }
+
+        internal void LeaveChatChannel(string channel, Action<LeaveChatChannelOperationResponse> onResponse = null)
+        {
+            var request = new LeaveChatChannelOperationRequest(channel).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var leaveChatChannelOperationResponse = new LeaveChatChannelOperationResponse();
+                leaveChatChannelOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(leaveChatChannelOperationResponse);
+            });
+        }
+
+        internal void GetChatInfoChannel(string channel, Action<GetChatInfoChannelOperationResponse> onResponse = null)
+        {
+            var request = new GetChatInfoChannelOperationRequest(channel).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var getChatInfoChannelOperationResponse = new GetChatInfoChannelOperationResponse();
+                getChatInfoChannelOperationResponse.SetupOperationResponse(response);
+
+                if (getChatInfoChannelOperationResponse.errorCode == ChatErrorCode.Ok)
+                {
+                    var chatChannel = this.chatChannelLst.Find(x => x.channel.Equals(channel));
+
+                    if (chatChannel == null) {
+                        chatChannel = new ChatChannel();
+                        chatChannel.channel = channel;
+
+                        chatChannel.avatarChannel = new AvatarChannel();
+                        chatChannel.users = new List<UserChannel>();
+                        chatChannel.messages = new List<ChatMessage>();
+
+                        this.chatChannelLst.Add(chatChannel);
+                    }
+
+                    var channelInfo = getChatInfoChannelOperationResponse.channelInfo;
+
+                    chatChannel.avatarChannel.type = channelInfo.avatarChannel.type;
+                    chatChannel.avatarChannel.value = channelInfo.avatarChannel.value;
+
+                    chatChannel.tsCreate = channelInfo.tsCreate;
+                    chatChannel.name = channelInfo.name;
+                    chatChannel.channelType = channelInfo.channelType;
+                    chatChannel.userCount = channelInfo.userCount;
+
+                    this.onChatChannelChange?.Invoke(chatChannel);
+                }
+
+                onResponse?.Invoke(getChatInfoChannelOperationResponse);
+            });
+        }
+
+        internal void GetChatMessageChannel(string channel, int skip = 0, int limit = 20, Action<GetChatMessageChannelOperationResponse> onResponse = null)
+        {
+            var request = new GetChatMessageChannelOperationRequest(channel, skip, limit).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var getChatMessageChannelOperationResponse = new GetChatMessageChannelOperationResponse();
+                getChatMessageChannelOperationResponse.SetupOperationResponse(response);
+
+                if (getChatMessageChannelOperationResponse.errorCode == ChatErrorCode.Ok)
+                {
+                    var chatChannel = this.chatChannelLst.Find(x => x.channel.Equals(channel));
+
+                    if (chatChannel == null)
+                    {
+                        chatChannel = new ChatChannel();
+                        chatChannel.channel = channel;
+
+                        chatChannel.avatarChannel = new AvatarChannel();
+                        chatChannel.users = new List<UserChannel>();
+                        chatChannel.messages = new List<ChatMessage>();
+
+                        this.chatChannelLst.Add(chatChannel);
+                    }
+
+                    var channelInfo = getChatMessageChannelOperationResponse.channelInfo;
+
+                    for (var i = 0; i < channelInfo.messages.Count; i++)
+                    {
+                        var responseMessage = channelInfo.messages[i];
+
+                        var message = chatChannel.messages.Find(x => x.tsCreate == responseMessage.tsCreate);
+                        if (message == null)
+                        {
+                            message = new ChatMessage();
+                            message.tsCreate = responseMessage.tsCreate;
+                            message.messageEditeds = new List<EditChatMessage>();
+
+                            chatChannel.messages.Add(message);
+                        }
+
+                        message.senderId = responseMessage.senderId;
+                        message.tsLastUpdate = responseMessage.tsLastUpdate;
+                        message.message = responseMessage.message;
+
+                        message.messageEditeds.Clear();
+
+                        for (var j = 0; j < responseMessage.messageEditeds.Count; j++)
+                        {
+                            var responseMessageEdited = responseMessage.messageEditeds[j];
+
+                            message.messageEditeds.Add(new EditChatMessage()
+                            {
+                                message = responseMessageEdited.message,
+                                tsCreate = responseMessageEdited.tsCreate
+                            });
+                        }
+
+                        message.isDelete = responseMessage.isDelete;
+                    }
+
+                    this.onChatChannelChange?.Invoke(chatChannel);
+                }
+
+                onResponse?.Invoke(getChatMessageChannelOperationResponse);
+            });
+        }
+
+        internal void GetChatMemberChannel(string channel, Action<GetChatMemberChannelOperationResponse> onResponse = null)
+        {
+            var request = new GetChatMemberChannelOperationRequest(channel).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var getChatMemberChannelOperationResponse = new GetChatMemberChannelOperationResponse();
+                getChatMemberChannelOperationResponse.SetupOperationResponse(response);
+
+                if (getChatMemberChannelOperationResponse.errorCode == ChatErrorCode.Ok)
+                {
+                    var chatChannel = this.chatChannelLst.Find(x => x.channel.Equals(channel));
+
+                    if (chatChannel == null)
+                    {
+                        chatChannel = new ChatChannel();
+                        chatChannel.channel = channel;
+
+                        chatChannel.avatarChannel = new AvatarChannel();
+                        chatChannel.users = new List<UserChannel>();
+                        chatChannel.messages = new List<ChatMessage>();
+
+                        this.chatChannelLst.Add(chatChannel);
+                    }
+
+                    var channelInfo = getChatMemberChannelOperationResponse.channelInfo;
+
+                    chatChannel.users.Clear();
+
+                    for (var i = 0; i < channelInfo.members.Count; i++)
+                    {
+                        var member = channelInfo.members[i];
+
+                        chatChannel.users.Add(new UserChannel()
+                        {
+                            userId = member.userId,
+                            tsJoin = member.tsJoin
+                        });
+                    }
+
+                    chatChannel.userCount = chatChannel.users.Count;
+
+                    this.onChatChannelChange?.Invoke(chatChannel);
+                }
+
+                onResponse?.Invoke(getChatMemberChannelOperationResponse);
+            });
+        }
+
+        internal void EditChatInfoChannel(string channel, string name = null, GNHashtable avatarChannel = null, Action<EditChatInfoChannelOperationResponse> onResponse = null)
+        {
+            var request = new EditChatInfoChannelOperationRequest(channel, name, avatarChannel).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var editChatInfoChannelOperationResponse = new EditChatInfoChannelOperationResponse();
+                editChatInfoChannelOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(editChatInfoChannelOperationResponse);
+            });
+        }
+
+        internal void EditChatMessageChannel(long tsCreate, string channel, string message = null, bool? isDelete = null, Action<EditChatMessageChannelOperationResponse> onResponse = null)
+        {
+            var request = new EditChatMessageChannelOperationRequest(tsCreate, channel, message, isDelete).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var editChatMessageChannelOperationResponse = new EditChatMessageChannelOperationResponse();
+                editChatMessageChannelOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(editChatMessageChannelOperationResponse);
+            });
+        }
+
+        internal void EditChatMessageUser(long tsCreate, string userId, string message = null, bool? isDelete = null, Action<EditChatMessageUserOperationResponse> onResponse = null)
+        {
+            var request = new EditChatMessageUserOperationRequest(tsCreate, userId, message, isDelete).Build();
+
+            SendViaHttp(request, response =>
+            {
+                var editChatMessageChannelOperationResponse = new EditChatMessageUserOperationResponse();
+                editChatMessageChannelOperationResponse.SetupOperationResponse(response);
+
+                onResponse?.Invoke(editChatMessageChannelOperationResponse);
             });
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace XmobiTea.GN.Networking
 {
     using System;
+    using System.Collections.Generic;
     using XmobiTea.GN.Entity;
 
     public partial class NetworkingPeer : UnityEngine.MonoBehaviour
@@ -59,6 +60,10 @@
 
             this.socketPeer = this.gameObject.AddComponent<SocketPeer>();
             this.socketPeer.InitPeer();
+
+            this.friendItemLst = new List<FriendItem>();
+            this.chatChannelLst = new List<ChatChannel>();
+            this.chatUserLst = new List<ChatUser>();
         }
 
         private void Update()
