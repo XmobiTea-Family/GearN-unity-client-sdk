@@ -15,5 +15,7 @@ namespace XmobiTea.GN.Constant
         public const int UnknownError = 0;
 
         public const int Ok = 1;
+
+        private ReturnCode() { }
     }
 }

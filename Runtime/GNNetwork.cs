@@ -25,6 +25,10 @@
 
         public static int ping => peer != null ? peer.ping : -1;
 
+        public static string getSocketSId() => peer != null ? peer.clientId : null;
+
+        public static bool isSocketConnected() => !string.IsNullOrEmpty(getSocketSId());
+
         public static long serverTimestamp => peer != null ? peer.serverTimestamp : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
         public static string authToken
@@ -160,6 +164,11 @@
         public static void DisconnectSocket(Action _onSocketDisconnect = null)
         {
             peer.DisconnectSocket(_onSocketDisconnect);
+        }
+
+        public static void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        {
+            peer.SetOnEventHandler(_onEventHandler);
         }
 
         public static void SubscriberOnConnectHandler(Action onConnectHandler)

@@ -6,9 +6,41 @@
     using System;
     using XmobiTea.GN.Networking;
     using XmobiTea.GN.Constant;
+    using System.Collections.Generic;
+    using XmobiTea.GN.Entity;
 
     public static partial class GNNetwork
     {
+        public static List<FriendItem> GetFriendItemLst()
+        {
+            return peer.friendItemLst;
+        }
+        internal static Action<FriendItem> onFriendItemChange => peer.onFriendItemChange;
+        public static void SubscriberOnFriendItemChange(Action<FriendItem> onHandler)
+        {
+            peer.onFriendItemChange += onHandler;
+        }
+
+        public static List<ChatChannel> GetChatChannelLst()
+        {
+            return peer.chatChannelLst;
+        }
+        internal static Action<ChatChannel> onChatChannelChange => peer.onChatChannelChange;
+        public static void SubscriberOnChatChannelChange(Action<ChatChannel> onHandler)
+        {
+            peer.onChatChannelChange += onHandler;
+        }
+
+        public static List<ChatUser> GetChatUserLst()
+        {
+            return peer.chatUserLst;
+        }
+        internal static Action<ChatUser> onChatUserChange => peer.onChatUserChange;
+        public static void SubscriberOnChatUserChange(Action<ChatUser> onHandler)
+        {
+            peer.onChatUserChange += onHandler;
+        }
+
         public static void SyncTs(Action<long> onResponse = null)
         {
             peer.SyncTs(onResponse);
@@ -127,6 +159,81 @@
         public static void Logout(Action<LogoutOperationResponse> onResponse = null)
         {
             peer.Logout(onResponse);
+        }
+
+        public static void AddFriend(string friendId, bool? forceAcceptFriend = false, Action<AddFriendOperationResponse> onResponse = null)
+        {
+            peer.AddFriend(friendId, forceAcceptFriend, onResponse);
+        }
+
+        public static void RemoveFriend(string friendId, Action<RemoveFriendOperationResponse> onResponse = null)
+        {
+            peer.RemoveFriend(friendId, onResponse);
+        }
+
+        public static void GetFriends(Action<GetFriendsOperationResponse> onResponse = null)
+        {
+            peer.GetFriends(onResponse);
+        }
+
+        public static void FindPlayer(string keyword, int skip = 0, int limit = 20, Action<FindPlayerOperationResponse> onResponse = null)
+        {
+            peer.FindPlayer(keyword, skip, limit, onResponse);
+        }
+
+        public static void SendChatToUser(string userId, string message, bool? saveToDatabase = false, Action<SendChatToUserOperationResponse> onResponse = null)
+        {
+            peer.SendChatToUser(userId, message, saveToDatabase, onResponse);
+        }
+
+        public static void GetChatMessageUser(string userId, int skip = 0, int limit = 20, Action<GetChatMessageUserOperationResponse> onResponse = null)
+        {
+            peer.GetChatMessageUser(userId, skip, limit, onResponse);
+        }
+
+        public static void SendChatToChannel(string channel, string message, Action<SendChatToChannelOperationResponse> onResponse = null)
+        {
+            peer.SendChatToChannel(channel, message, onResponse);
+        }
+
+        public static void JoinChatChannel(string channel, Action<JoinChatChannelOperationResponse> onResponse = null)
+        {
+            peer.JoinChatChannel(channel, onResponse);
+        }
+
+        public static void LeaveChatChannel(string channel, Action<LeaveChatChannelOperationResponse> onResponse = null)
+        {
+            peer.LeaveChatChannel(channel, onResponse);
+        }
+
+        public static void GetChatInfoChannel(string channel, Action<GetChatInfoChannelOperationResponse> onResponse = null)
+        {
+            peer.GetChatInfoChannel(channel, onResponse);
+        }
+
+        public static void GetChatMessageChannel(string channel, int skip = 0, int limit = 20, Action<GetChatMessageChannelOperationResponse> onResponse = null)
+        {
+            peer.GetChatMessageChannel(channel, skip, limit, onResponse);
+        }
+
+        public static void GetChatMemberChannel(string channel, Action<GetChatMemberChannelOperationResponse> onResponse = null)
+        {
+            peer.GetChatMemberChannel(channel, onResponse);
+        }
+
+        public static void EditChatInfoChannel(string channel, string name = null, GNHashtable avatarChannel = null, Action<EditChatInfoChannelOperationResponse> onResponse = null)
+        {
+            peer.EditChatInfoChannel(channel, name, avatarChannel, onResponse);
+        }
+
+        public static void EditChatMessageChannel(long tsCreate, string channel, string message = null, bool? isDelete = null, Action<EditChatMessageChannelOperationResponse> onResponse = null)
+        {
+            peer.EditChatMessageChannel(tsCreate, channel, message, isDelete, onResponse);
+        }
+
+        public static void EditChatMessageUser(long tsCreate, string userId, string message = null, bool? isDelete = null, Action<EditChatMessageUserOperationResponse> onResponse = null)
+        {
+            peer.EditChatMessageUser(tsCreate, userId, message, isDelete, onResponse);
         }
 
     }

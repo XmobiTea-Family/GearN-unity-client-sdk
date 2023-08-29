@@ -19,7 +19,9 @@
 
         internal bool isConnected => this.networkingPeerBase.isWsConnected;
 
-        private Dictionary<int, IServerEventHandler> serverEventHandlerDic;
+        private Dictionary<int, List<IServerEventHandler>> serverEventHandlersDic;
+
+        private Action<OperationEvent> _onEventHandler;
 
         internal void SendRequestAuthSocket()
         {
@@ -28,8 +30,8 @@
 
         void SubscriberServerEventHandler()
         {
-            if (this.serverEventHandlerDic == null) this.serverEventHandlerDic = new Dictionary<int, IServerEventHandler>();
-            else this.serverEventHandlerDic.Clear();
+            if (this.serverEventHandlersDic == null) this.serverEventHandlersDic = new Dictionary<int, List<IServerEventHandler>>();
+            else this.serverEventHandlersDic.Clear();
 
             var type = typeof(IServerEventHandler);
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -39,7 +41,23 @@
             foreach (var t in types)
             {
                 var srvMsg = Activator.CreateInstance(t) as IServerEventHandler;
-                if (srvMsg != null) this.serverEventHandlerDic[srvMsg.GetEventCode()] = srvMsg;
+                if (srvMsg != null)
+                {
+                    List<IServerEventHandler> serverEventHandlers;
+
+                    if (!this.serverEventHandlersDic.ContainsKey(srvMsg.GetEventCode()))
+                    {
+                        serverEventHandlers = new List<IServerEventHandler>();
+
+                        this.serverEventHandlersDic[srvMsg.GetEventCode()] = serverEventHandlers;
+                    }
+                    else
+                    {
+                        serverEventHandlers = this.serverEventHandlersDic[srvMsg.GetEventCode()];
+                    }
+
+                    serverEventHandlers.Add(srvMsg);
+                }
             }
         }
 
@@ -111,6 +129,11 @@
             this.networkingPeerBase.Close(_onSocketDisconnect);
         }
 
+        internal void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        {
+            this._onEventHandler = _onEventHandler;
+        }
+
         internal override void Send(OperationPending operationPending)
         {
             base.Send(operationPending);
@@ -143,18 +166,23 @@
         internal void OnEventHandler(GNArray obj, bool isEncrypted)
         {
             var eventCode = obj.GetInt(0);
-            if (!this.serverEventHandlerDic.ContainsKey(eventCode))
-            {
-                return;
-            }
 
             var operationEvent = new OperationEvent(eventCode, obj.GetGNHashtable(1));
             operationEvent.SetEncrypted(isEncrypted);
 
             GNDebug.Log("[GN Socket EVENT] " + operationEvent.ToString());
 
-            var serverEventHandler = this.serverEventHandlerDic[eventCode];
-            serverEventHandler.Handle(operationEvent);
+            _onEventHandler?.Invoke(operationEvent);
+
+            if (!this.serverEventHandlersDic.ContainsKey(eventCode))
+            {
+                return;
+            }
+
+            var serverEventHandlers = this.serverEventHandlersDic[eventCode];
+
+            foreach (var serverEventHandler in serverEventHandlers)
+                serverEventHandler.Handle(operationEvent);
         }
 
         public override void Service()

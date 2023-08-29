@@ -1,6 +1,7 @@
 ﻿namespace XmobiTea.GN.Networking
 {
     using System;
+    using System.Collections.Generic;
     using XmobiTea.GN.Entity;
 
     public partial class NetworkingPeer : UnityEngine.MonoBehaviour
@@ -34,6 +35,8 @@
             }
         }
 
+        internal string clientId => (this.socketPeer as SocketPeer).clientId;
+
         private long lastCurrentServerMilliseconds;
         private float lastGetCurrentMilliseconds;
 
@@ -57,6 +60,10 @@
 
             this.socketPeer = this.gameObject.AddComponent<SocketPeer>();
             this.socketPeer.InitPeer();
+
+            this.friendItemLst = new List<FriendItem>();
+            this.chatChannelLst = new List<ChatChannel>();
+            this.chatUserLst = new List<ChatUser>();
         }
 
         private void Update()
@@ -88,6 +95,11 @@
         internal void DisconnectSocket(Action _onSocketDisconnect)
         {
             (this.socketPeer as SocketPeer).Disconnect(_onSocketDisconnect);
+        }
+
+        internal void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        {
+            (this.socketPeer as SocketPeer).SetOnEventHandler(_onEventHandler);
         }
 
         internal void SetOnConnectHandler(Action _onConnectHandler)
