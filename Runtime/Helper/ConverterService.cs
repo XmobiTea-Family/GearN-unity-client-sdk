@@ -19,8 +19,6 @@ namespace XmobiTea.GN.Helper
         }
     }
 
-    public interface IGNObject { }
-
     public class ConverterService
     {
         private static Dictionary<Type, FieldInfo[]> declaredFieldsMap = new Dictionary<Type, FieldInfo[]>();
@@ -37,21 +35,27 @@ namespace XmobiTea.GN.Helper
         //private static Type typeOfGNArray => typeof(GNArray);
         //private static Type typeOfGNHashtable => typeof(GNHashtable);
 
-        public static T ConvertObject<T>(GNHashtable hashtable) where T : class, IGNObject
+        private static FieldInfo[] getGNEnhancedObjectFieldMetadata(System.Type cls) {
+            FieldInfo[] declaredFields;
+
+            if (declaredFieldsMap.ContainsKey(cls)) declaredFields = declaredFieldsMap[cls];
+            else
+            {
+                declaredFields = cls.GetFields(BindingFlags.NonPublic | BindingFlags.Public).Where(field => field.GetCustomAttribute<GNDataMemberAttribute>(true) != null).ToArray();
+
+                declaredFieldsMap[cls] = declaredFields;
+            }
+
+            return declaredFields;
+        }
+
+        public static T ConvertObject<T>(GNHashtable hashtable) where T : class
         {
             if (hashtable == null) return null;
 
             var type = typeof(T);
 
-            FieldInfo[] fieldInfos = null;
-
-            if (declaredFieldsMap.ContainsKey(type)) fieldInfos = declaredFieldsMap[type];
-            else
-            {
-                fieldInfos = type.GetFields(BindingFlags.NonPublic | BindingFlags.Public).Where(field => field.GetCustomAttribute<GNDataMemberAttribute>(true) != null).ToArray();
-
-                declaredFieldsMap[type] = fieldInfos;
-            }
+            var fieldInfos = getGNEnhancedObjectFieldMetadata(type);
 
             var answer = Activator.CreateInstance(type);
 

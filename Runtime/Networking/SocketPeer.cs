@@ -15,9 +15,9 @@
 
         private NetworkingPeerBase networkingPeerBase;
 
-        internal string clientId => this.networkingPeerBase?.clientId;
+        internal string getClientId() => this.networkingPeerBase?.clientId;
 
-        internal bool isConnected => this.networkingPeerBase.isWsConnected;
+        internal bool isConnected() => this.networkingPeerBase.isWsConnected;
 
         private Dictionary<int, List<IServerEventHandler>> serverEventHandlersDic;
 
@@ -142,7 +142,7 @@
 
             var operationRequest = operationPending.GetOperationRequest();
 
-            var authToken = GNNetwork.authToken;
+            var authToken = operationPending.GetAuthToken();
 
             if (string.IsNullOrEmpty(authToken))
             {
@@ -160,7 +160,10 @@
                 }
             }
 
-            this.networkingPeerBase.Send(operationPending.GetOperationRequest());
+            var secretKey = operationPending.GetSecretKey();
+            var customTags = operationPending.GetCustomTags();
+
+            this.networkingPeerBase.Send(operationPending.GetRequestType(), operationPending.GetRequestRole(), operationPending.GetOperationRequest(), authToken, secretKey, customTags);
         }
 
         internal void OnEventHandler(GNArray obj, bool isEncrypted)

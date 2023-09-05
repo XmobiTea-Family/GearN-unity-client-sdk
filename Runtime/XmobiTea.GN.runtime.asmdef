@@ -3,8 +3,7 @@
     "rootNamespace": "",
     "references": [
         "BestHTTP",
-        "XmobiTea.MsgPack.runtime",
-        "com.xmobitea.changx.mini-deviceid.runtime"
+        "XmobiTea.MsgPack.runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

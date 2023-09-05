@@ -70,7 +70,7 @@
             httpRequestType = gnServerSettings.httpRequestType;
             httpUrl = gnServerSettings.HttpUrl;
 
-            userAgent = "GN-unity-" + GNNetwork.platform + "@" + GNNetwork.GetClientSdkVersion();
+            userAgent = "GN-unity-" + GNNetwork.getPlatform() + "@" + GNNetwork.GetClientSdkVersion();
 
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {
@@ -87,7 +87,7 @@
 
             var operationRequest = operationPending.GetOperationRequest();
 
-            var authToken = GNNetwork.authToken;
+            var authToken = operationPending.GetAuthToken();
 
             if (string.IsNullOrEmpty(authToken))
             {
@@ -105,36 +105,26 @@
                 }
             }
 
-            if (operationRequest.GetOperationCode() == OperationCode.Logout)
-            {
-                var obj = new GNArray();
-
-                obj.Add((int)ReturnCode.Ok);
-                obj.Add(new GNHashtable());
-                obj.Add(operationRequest.GetRequestId());
-
-                OnResponseHandler(obj, operationRequest.IsEncrypted());
-
-                return;
-            }
+            var secretKey = operationPending.GetSecretKey();
+            var customTags = operationPending.GetCustomTags();
 
             var postType = !operationRequest.IsEncrypted() ? PostType.Json : PostType.MsgPack;
 
-            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.GetOperationCode();
+            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.GetOperationCode() + "/" + (int)operationPending.GetRequestType() + "/" + (int)operationPending.GetRequestRole();
 
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {
                 PostRequestViaHTTPRequest(subUri, operationRequest.GetParameters(), postType, httpAppResponse =>
                 {
                     OnSendOperationRequestResponse(operationPending, httpAppResponse);
-                }, operationRequest.GetTimeout());
+                }, operationRequest.GetTimeout(), authToken, secretKey, customTags);
             }
             else if (httpRequestType == HttpRequestType.UnityWebRequest)
             {
                 StartCoroutine(IEPostRequestViaUnityWebRequest(subUri, operationRequest.GetParameters(), postType, httpAppResponse =>
                 {
                     OnSendOperationRequestResponse(operationPending, httpAppResponse);
-                }, operationRequest.GetTimeout()));
+                }, operationRequest.GetTimeout(), authToken, secretKey, customTags));
             }
         }
 
@@ -195,19 +185,19 @@
             OnResponseHandler(obj, operationRequest.IsEncrypted());
         }
 
-        internal void GetRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = 15)
+        internal void GetRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = 15, string authToken = null, string secretKey = null)
         {
             if (httpRequestType == HttpRequestType.HTTPRequest)
             {
-                GetRequestViaHTTPRequest(subUri, onHttpAppResponse, timeout);
+                GetRequestViaHTTPRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey);
             }
             else if (httpRequestType == HttpRequestType.UnityWebRequest)
             {
-                StartCoroutine(IEGetRequestViaUnityWebRequest(subUri, onHttpAppResponse, timeout));
+                StartCoroutine(IEGetRequestViaUnityWebRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey));
             }
         }
 
-        private void GetRequestViaHTTPRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private void GetRequestViaHTTPRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey)
         {
             var request = new HTTPRequest(new Uri(httpUrl + "/" + subUri), HTTPMethods.Get, (httpRequest, httpResponse) =>
             {
@@ -230,14 +220,13 @@
 
             request.Timeout = TimeSpan.FromSeconds(timeout);
 
-            var authToken = GNNetwork.authToken;
-
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
+            if (!string.IsNullOrEmpty(secretKey)) request.SetHeader(Commands.RequestSecretCmd, secretKey);
 
             request.Send();
         }
 
-        private IEnumerator IEGetRequestViaUnityWebRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private IEnumerator IEGetRequestViaUnityWebRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey)
         {
             using (var unityWebRequest = UnityWebRequest.Get(new Uri(httpUrl + "/" + subUri)))
             {
@@ -246,9 +235,8 @@
 
                 unityWebRequest.timeout = (int)timeout;
 
-                var authToken = GNNetwork.authToken;
-
                 if (!string.IsNullOrEmpty(authToken)) unityWebRequest.SetRequestHeader(Commands.RequestAuthTokenCmd, authToken);
+                if (!string.IsNullOrEmpty(secretKey)) unityWebRequest.SetRequestHeader(Commands.RequestSecretCmd, secretKey);
                 //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
                 yield return unityWebRequest.SendWebRequest();
@@ -275,7 +263,7 @@
             }
         }
 
-        private void PostRequestViaHTTPRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private void PostRequestViaHTTPRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags)
         {
             var request = new HTTPRequest(new Uri(httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
             {
@@ -298,6 +286,8 @@
 
             if (param == null) param = new GNHashtable();
 
+            if (customTags != null) param.Add(GNParameterCode.CustomTags, customTags);
+
             if (postType == PostType.Json)
             {
                 request.SetHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_JSON);
@@ -319,14 +309,13 @@
 
             request.Timeout = TimeSpan.FromSeconds(timeout);
 
-            var authToken = GNNetwork.authToken;
-
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
+            if (!string.IsNullOrEmpty(secretKey)) request.SetHeader(Commands.RequestSecretCmd, secretKey);
 
             request.Send();
         }
 
-        private IEnumerator IEPostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private IEnumerator IEPostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags)
         {
             using (var unityWebRequest = new UnityWebRequest(new Uri(httpUrl + "/" + subUri)))
             {
@@ -338,6 +327,7 @@
                 unityWebRequest.timeout = (int)timeout;
 
                 if (param == null) param = new GNHashtable();
+                if (customTags != null) param.Add(GNParameterCode.CustomTags, customTags);
 
                 //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
@@ -362,9 +352,8 @@
 
                 unityWebRequest.downloadHandler = new DownloadHandlerBuffer();
 
-                var authToken = GNNetwork.authToken;
-
                 if (!string.IsNullOrEmpty(authToken)) unityWebRequest.SetRequestHeader(Commands.RequestAuthTokenCmd, authToken);
+                if (!string.IsNullOrEmpty(secretKey)) unityWebRequest.SetRequestHeader(Commands.RequestSecretCmd, secretKey);
 
                 yield return unityWebRequest.SendWebRequest();
 

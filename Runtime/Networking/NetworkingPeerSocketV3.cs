@@ -7,6 +7,7 @@ namespace XmobiTea.GN.Networking
     using XmobiTea.GN.Constant;
     using XmobiTea.MsgPack;
     using XmobiTea.GN.Logger;
+    using XmobiTea.GN.Common;
 
     internal class NetworkingPeerSocketV3 : NetworkingPeerBase
     {
@@ -111,9 +112,9 @@ namespace XmobiTea.GN.Networking
             base.Init(url, reconnectDelay, pingInterval, pingTimeout);
         }
 
-        protected override void Emit(OperationRequest operationRequest)
+        protected override void Emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags)
         {
-            base.Emit(operationRequest);
+            base.Emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
 
             if (this.socketManager == null || this.socketManager.Socket == null)
             {
@@ -121,7 +122,9 @@ namespace XmobiTea.GN.Networking
                 return;
             }
 
-            var dataSend = OperationHelper.ToSocketData(operationRequest);
+            if (customTags != null) operationRequest.SetParameter(GNParameterCode.CustomTags, customTags);
+
+            var dataSend = OperationHelper.ToSocketData(requestType, requestRole, operationRequest);
 
             if (operationRequest.IsEncrypted())
                 this.socketManager.Socket.Emit(Commands.RequestCmd_MsgPack, MsgPackSerializer.Serialize(dataSend));

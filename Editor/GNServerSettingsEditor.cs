@@ -28,6 +28,9 @@
         SerializedProperty gnServerSourcePath;
         SerializedProperty httpRequestType;
         SerializedProperty logType;
+        SerializedProperty adminSecretKey;
+        SerializedProperty serverSecretKey;
+        SerializedProperty clientSecretKey;
 
         private Dictionary<int, string> operationCodeFieldDict;
 
@@ -50,6 +53,9 @@
             httpRequestType = serializedObject.FindProperty("_httpRequestType");
             //postType = serializedObject.FindProperty("_postType");
             logType = serializedObject.FindProperty("_logType");
+            adminSecretKey = serializedObject.FindProperty("_adminSecretKey");
+            serverSecretKey = serializedObject.FindProperty("_serverSecretKey");
+            clientSecretKey = serializedObject.FindProperty("_clientSecretKey");
 
             var fields = typeof(OperationCode).GetFields();
 
@@ -142,6 +148,11 @@
             EditorGUILayout.PropertyField(httpRequestType);
             //EditorGUILayout.PropertyField(postType);
             EditorGUILayout.PropertyField(logType);
+
+            EditorGUILayout.Space(20);
+            EditorGUILayout.PropertyField(adminSecretKey);
+            EditorGUILayout.PropertyField(serverSecretKey);
+            EditorGUILayout.PropertyField(clientSecretKey);
 
             if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
         }

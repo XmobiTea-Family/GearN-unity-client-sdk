@@ -55,7 +55,7 @@
 
         }
 
-        void IPeer.Enqueue(OperationRequest operationRequest, Action<OperationResponse> onOperationResponse)
+        void IPeer.Enqueue(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags)
         {
             if (!this.isUsing)
             {
@@ -63,8 +63,15 @@
                 return;
             }
 
-            var operationPending = new OperationPending(operationRequest, onOperationResponse);
+            if (authToken == null) authToken = GNNetwork.authToken;
+            if (secretKey == null)
+            {
+                if (requestRole == RequestRole.Admin) secretKey = GNNetwork.gnServerSettings.adminSecretKey;
+                else if (requestRole == RequestRole.Server) secretKey = GNNetwork.gnServerSettings.serverSecretKey;
+                else if (requestRole == RequestRole.Client) secretKey = GNNetwork.gnServerSettings.clientSecretKey;
+            }
 
+            var operationPending = new OperationPending(requestType, requestRole, operationRequest, onOperationResponse, authToken, secretKey, customTags);
             this.operationPendingQueue.Enqueue(operationPending);
         }
 
@@ -97,6 +104,7 @@
                             gnArray.Add(null);
                             gnArray.Add(operationPending.GetOperationRequest().GetRequestId());
                             gnArray.Add(operationPending.GetOperationRequest().IsEncrypted());
+                            gnArray.Add(operationPending.GetCustomTags());
 
                             gnArrayLst.Add(gnArray);
                         }
@@ -146,11 +154,7 @@
                 else if (returnCode == ReturnCode.InvalidRequestParameters) array = obj.GetGNArray(1);
                 else if (returnCode == ReturnCode.OperationNotAuthorized)
                 {
-                    if (!string.IsNullOrEmpty(GNNetwork.authToken))
-                    {
-                        GNNetwork.authToken = string.Empty;
-                        GNNetwork.userId = string.Empty;
-                    }
+
                 }
                 else debugMessage = obj.GetString(1);
 
@@ -160,6 +164,8 @@
                 operationResponse.SetReturnCode(returnCode);
                 operationResponse.SetDebugMessage(debugMessage);
                 operationResponse.SetParameters(parameters);
+
+                if (!parameters.ContainsKey(GNParameterCode.CustomTags)) parameters.Add(GNParameterCode.CustomTags, obj.GetGNHashtable(4));
 
                 if (array != null)
                 {
@@ -183,14 +189,14 @@
                         {
                             var authToken = parameters.GetString(ParameterCode.AuthToken);
 
-                            GNNetwork.authToken = authToken;
+                            GNNetwork.getAuthenticateStatus().setAuthToken(authToken);
                         }
 
                         if (parameters.ContainsKey(ParameterCode.UserId))
                         {
                             var userId = parameters.GetString(ParameterCode.UserId);
 
-                            GNNetwork.userId = userId;
+                            GNNetwork.getAuthenticateStatus().setUserId(userId);
                         }
 
                         if (parameters.ContainsKey(ParameterCode.Ts))

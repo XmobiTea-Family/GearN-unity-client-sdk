@@ -61,11 +61,23 @@
         public float pingTimeout => this._pingTimeout;
 
         [SerializeField]
+        private string _adminSecretKey;
+        public string adminSecretKey => _adminSecretKey;
+
+        [SerializeField]
+        private string _serverSecretKey;
+        public string serverSecretKey => _serverSecretKey;
+
+        [SerializeField]
+        private string _clientSecretKey;
+        public string clientSecretKey => _clientSecretKey;
+
+        [SerializeField]
         private PeerSocketVersion _peerSocketVersion = PeerSocketVersion.V3;
         public PeerSocketVersion peerSocketVersion => this._peerSocketVersion;
 
         [SerializeField]
-        private List<int> _codeCanSendNotAuthorized = new List<int>() { OperationCode.Debug, OperationCode.GetAppConfig, OperationCode.Login, OperationCode.RegisterAccount };
+        private List<int> _codeCanSendNotAuthorized = new List<int>() {  };
         public List<int> codeCanSendNotAuthorized => this._codeCanSendNotAuthorized;
 
         [SerializeField]

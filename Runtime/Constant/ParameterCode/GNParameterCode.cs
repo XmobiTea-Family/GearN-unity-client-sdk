@@ -1,0 +1,423 @@
+﻿namespace XmobiTea.GN.Constant
+{
+	public partial class GNParameterCode
+	{
+		public const string Username = "1";
+		public const string Password = "2";
+		public const string AndroidDeviceId = "3";
+		public const string AppleId = "4";
+		public const string AppleIds = "4";
+		public const string GoogleId = "5";
+		public const string GoogleIds = "5";
+		public const string CustomDeviceId = "6";
+		public const string CustomId = "7";
+		public const string EditorDeviceId = "8";
+		public const string FacebookId = "9";
+		public const string ServiceName = "10";
+		public const string UserId = "11";
+		public const string CurrentPassword = "11";
+
+		public const string iOSDeviceId = "12";
+		public const string LinuxDeviceId = "13";
+		public const string MacOSDeviceId = "14";
+		public const string WindowsDeviceId = "15";
+		public const string WindowsPhoneDeviceId = "16";
+		public const string InfoResponseParameters = "17";
+		public const string CreatePlayerIfNotExists = "18";
+
+		public const string External = "19";
+		public const string Segments = "20";
+		public const string CustomDatas = "21";
+		public const string DisplayName = "23";
+		public const string UniqueDisplayName = "22";
+		public const string Avatar = "24";
+		public const string TsCreate = "25";
+		public const string Tags = "26";
+		public const string Role = "27";
+		public const string PlayerBan = "28";
+		public const string PlayerDatas = "29";
+		public const string PlayerCurrencies = "30";
+		public const string PlayerStatistics = "21";
+		public const string TsLastLogin = "32";
+		public const string IpAddressCreate = "33";
+		public const string CountryCode = "34";
+
+		public const string TagKeys = "54";
+		public const string CustomDataKeys = "54";
+
+		public const string Type = "38";
+		public const string Value = "39";
+		public const string Name = "40";
+		public const string TsExpire = "41";
+		public const string Reason = "42";
+		public const string Key = "43";
+		public const string Permission = "44";
+
+		public const string NewlyCreated = "45";
+		public const string Token = "46";
+
+		public const string Device = "47";
+		public const string Account = "48";
+		public const string Custom = "49";
+		public const string Apple = "50";
+		public const string Google = "51";
+		public const string Facebook = "52";
+		public const string GenericService = "53";
+		public const string ServiceId = "54";
+		public const string StatisticsAggregationMethod = "54";
+		public const string MaximumValue = "54";
+		public const string MinimumValue = "54";
+		public const string Skip = "54";
+		public const string Limit = "54";
+
+		public const string Results = "";
+		public const string FacebookIds = "";
+		public const string GenericIds = "";
+		public const string ForceLink = "";
+		public const string Email = "";
+		public const string InfoRequestParam = "";
+		public const string PlayerDataKeys = "";
+		public const string PlayerCurrencyKeys = "";
+		public const string PlayerStatisticsKeys = "";
+		public const string Amount = "39";
+		public const string Keyword = "39";
+
+		public const string Position = "39";
+		public const string LoadFromCache = "39";
+
+		public const string DataKeys = "35";
+		public const string CurrencyKeys = "36";
+		public const string StatisticsKeys = "37";
+
+		public const string Id = "38";
+		public const string TsRemove = "42";
+
+
+		public const string CharacterId = "";
+		public const string CatalogId = "";
+		public const string CharacterCatalogId = "";
+		public const string ItemId = "";
+		public const string ItemCatalogId = "";
+		public const string ItemClassId = "";
+		public const string GroupId = "";
+		public const string GroupCatalogId = "";
+		public const string Status = "";
+		public const string TsLastStatusUpdate = "";
+		public const string PlayerInventories = "";
+		public const string PlayerGroups = "";
+		public const string PlayerFriends = "";
+		public const string CharacterCatalogIds = "";
+		public const string ItemCatalogIds = "";
+		public const string GroupCatalogIds = "";
+		public const string FriendCatalogIds = "";
+		public const string Owner = "";
+		public const string RemoveStatus = "";
+		public const string FriendId = "";
+		public const string FriendCatalogId = "";
+		public const string GroupMembers = "";
+		public const string GroupStatistics = "";
+		public const string Members = "";
+		public const string OwnerId = "";
+		public const string OwnerType = "";
+		public const string Keys = "1";
+		public const string Label = "1";
+		public const string Configs = "1";
+		public const string Data = "1";
+		public const string FileName = "1";
+		public const string FileId = "1";
+		public const string MimeType = "1";
+		public const string Size = "1";
+		public const string FolderFileName = "1";
+		public const string FileUpload = "1";
+		public const string TsUploadExpire = "1";
+		public const string DownloadToken = "1";
+		public const string InfoGetParameters = "17";
+
+		public const string PrivateDataKeys = "54";
+		public const string ScriptDataKeys = "54";
+
+		public const string GameId = "";
+
+		public const string PlayerCharacters = "";
+
+		public const string ForceAcceptFriend = "";
+		public const string SocketId = "";
+		public const string OnlineStatus = "";
+		public const string ScriptData = "21";
+		public const string PrivateData = "22";
+		public const string GroupDatas = "29";
+		public const string GroupCurrencies = "30";
+
+
+		public const string GroupInventories = "";
+		public const string GroupDataKeys = "";
+		public const string GroupCurrencyKeys = "";
+		public const string GroupStatisticsKeys = "";
+		public const string MemberId = "";
+		public const string Message = "";
+		public const string SenderId = "";
+		public const string SenderType = "";
+		public const string GroupMessages = "";
+		public const string ItemCurrencies = "";
+		public const string ItemStatistics = "";
+		public const string ItemDatas = "";
+		public const string ItemInventories = "";
+		public const string ItemDataKeys = "";
+		public const string ItemCurrencyKeys = "";
+		public const string ItemStatisticsKeys = "";
+		public const string ItemType = "";
+		public const string ClassId = "";
+		public const string Hash = "3";
+		public const string GoogleSettings = "6";
+		public const string FacebookSettings = "7";
+		public const string AppleSettings = "8";
+		public const string GoogleClientId = "9";
+		public const string PackageId = "9";
+		public const string PublicRSAKey = "9";
+		public const string FacebookInappSecret = "9";
+		public const string FacebookAppToken = "9";
+
+		public const string FacebookAppId = "10";
+		public const string AppleClientId = "11";
+		public const string SandboxEnable = "12";
+		public const string SecretKey = "12";
+		public const string CreatorId = "12";
+		public const string GameDescription = "12";
+		public const string GameIconUrl = "12";
+		public const string GameSettings = "12";
+		public const string ThirtPartySettings = "12";
+		public const string ForceAcceptMember = "12";
+		public const string InitialValue = "12";
+		public const string GameName = "12";
+
+		public const string PlayerCurrencySettings = "12";
+		public const string PlayerStatisticsSettings = "12";
+		public const string PlayerDatasSettings = "12";
+		public const string CustomDatasSettings = "12";
+		public const string TagsSettings = "12";
+		public const string MasterPlayerSettings = "12";
+
+		public const string GamePlayerSettings = "12";
+		public const string CharacterPlayerSettings = "12";
+		public const string GroupSettings = "12";
+		public const string InventorySettings = "12";
+
+		public const string CharacterCatalogSettings = "12";
+		public const string GroupCatalogSettings = "12";
+		public const string ItemCatalogSettings = "12";
+		public const string FriendCatalogSettings = "12";
+		public const string ItemClassSettings = "12";
+		public const string Remove = "12";
+		public const string SelfEnable = "12";
+		public const string OtherSelfEnable = "12";
+		public const string AdminSelfEnable = "12";
+		public const string ServerSelfEnable = "12";
+
+		public const string Authenticate = "12";
+		public const string MasterPlayer = "12";
+		public const string GamePlayer = "12";
+		public const string CharacterPlayer = "12";
+		public const string Content = "12";
+		public const string Group = "12";
+		public const string Inventory = "12";
+		public const string StoreInventory = "12";
+		public const string MasterAdmin = "12";
+
+		public const string LoginByAccount = "12";
+		public const string LoginByAndroidDeviceId = "12";
+		public const string LoginByApple = "12";
+		public const string LoginByCustomDeviceId = "12";
+		public const string LoginByCustomId = "12";
+		public const string LoginByFacebook = "12";
+		public const string LoginByGenericService = "12";
+		public const string LoginByGoogle = "12";
+		public const string LoginByiOSDeviceId = "12";
+		public const string LoginByWindowsPhoneDeviceId = "12";
+		public const string RegisterAccount = "12";
+		public const string LoginByEditorDeviceId = "12";
+		public const string LoginByLinuxDeviceId = "12";
+		public const string LoginByMacOSDeviceId = "12";
+		public const string LoginByWindowsDeviceId = "12";
+
+		public const string LinkAccount = "12";
+		public const string LinkAndroidDeviceId = "12";
+		public const string LinkApple = "12";
+		public const string LinkCustomDeviceId = "12";
+		public const string LinkCustomId = "12";
+		public const string LinkEditorDeviceId = "12";
+		public const string LinkFacebook = "12";
+		public const string LinkGenericService = "12";
+		public const string LinkGoogle = "12";
+		public const string LinkiOSDeviceId = "12";
+		public const string LinkLinuxDeviceId = "12";
+		public const string LinkMacOSDeviceId = "12";
+		public const string LinkWindowsDeviceId = "12";
+		public const string LinkWindowsPhoneDeviceId = "12";
+		public const string UnlinkAccount = "12";
+		public const string UnlinkAndroidDeviceId = "12";
+		public const string UnlinkApple = "12";
+		public const string UnlinkCustomDeviceId = "12";
+		public const string UnlinkCustomId = "12";
+		public const string UnlinkEditorDeviceId = "12";
+		public const string UnlinkFacebook = "12";
+		public const string UnlinkGenericService = "12";
+		public const string UnlinkGoogle = "12";
+		public const string UnlinkiOSDeviceId = "12";
+		public const string UnlinkLinuxDeviceId = "12";
+		public const string UnlinkMacOSDeviceId = "12";
+		public const string UnlinkWindowsDeviceId = "12";
+		public const string UnlinkWindowsPhoneDeviceId = "12";
+		public const string AddSegment = "12";
+		public const string RemoveSegment = "12";
+		public const string GetSegment = "12";
+		public const string SetTag = "12";
+		public const string RemoveTag = "12";
+		public const string GetTag = "12";
+		public const string GetDisplayName = "12";
+		public const string SetDisplayName = "12";
+		public const string GetTsCreate = "12";
+		public const string GetIpAddressCreate = "12";
+		public const string SetTsLastLogin = "12";
+		public const string GetTsLastLogin = "12";
+		public const string SetPlayerBan = "12";
+		public const string GetPlayerBan = "12";
+		public const string SetCountryCode = "12";
+		public const string GetCountryCode = "12";
+		public const string ChangeAccountPassword = "12";
+		public const string ResetAccountPassword = "12";
+		public const string SetAvatar = "12";
+		public const string GetAvatar = "12";
+		public const string SetPlayerCurrency = "12";
+		public const string GetPlayerCurrency = "12";
+		public const string SetPlayerStatistics = "12";
+		public const string GetPlayerStatistics = "12";
+		public const string GetStatisticsLeaderboard = "12";
+		public const string GetStatisticsLeaderboardAroundPlayer = "12";
+		public const string GetCustomData = "12";
+		public const string SetCustomData = "12";
+		public const string SetPlayerData = "12";
+		public const string GetPlayerData = "12";
+		public const string GetPlayerInformation = "12";
+		public const string GetPlayersWithApple = "12";
+		public const string GetPlayersWithFacebook = "12";
+		public const string GetPlayersWithGoogle = "12";
+		public const string GetPlayersWithGenericService = "12";
+		public const string GetPlayersWithSegment = "12";
+		public const string GetPlayersWithTag = "12";
+		public const string GetExternal = "12";
+		public const string GetPlayersWithDisplayName = "12";
+
+		public const string GetPlayerCharacter = "12";
+		public const string GetPlayerInventory = "12";
+		public const string GetPlayerGroup = "12";
+		public const string GetPlayerFriend = "12";
+		public const string RemovePlayerItem = "12";
+		public const string GetOnlineStatus = "12";
+		public const string GrantGroup = "12";
+		public const string GrantPlayerItem = "12";
+		public const string GrantPlayerCharacter = "12";
+		public const string AddPlayerFriend = "12";
+		public const string RemovePlayerFriend = "12";
+		public const string RemovePlayerCharacter = "12";
+		public const string JoinGroup = "12";
+		public const string LeaveGroup = "12";
+		public const string GetFriendStatisticsLeaderboardAroundPlayer = "12";
+		public const string GetFriendStatisticsLeaderboard = "12";
+
+		public const string GetCatalogId = "12";
+		public const string GetOwner = "12";
+		public const string GetRemoveStatus = "12";
+		public const string SetOwner = "12";
+		public const string SetRemoveStatus = "12";
+
+		public const string GetContentData = "12";
+		public const string SetContentData = "12";
+
+		public const string SetGroupCurrency = "12";
+		public const string GetGroupCurrency = "12";
+		public const string SetGroupStatistics = "12";
+		public const string GetGroupStatistics = "12";
+		public const string GetStatisticsLeaderboardAroundGroup = "12";
+		public const string SetGroupData = "12";
+		public const string GetGroupData = "12";
+		public const string GetGroupInformation = "12";
+		public const string GetGroupsWithSegment = "12";
+		public const string GetGroupsWithTag = "12";
+		public const string GetGroupInventory = "12";
+		public const string RemoveGroupItem = "12";
+		public const string GrantGroupItem = "12";
+		public const string GetMembers = "12";
+		public const string AddMember = "12";
+		public const string RemoveMember = "12";
+		public const string sendGroupMessage = "12";
+		public const string GetGroupMessage = "12";
+		public const string GetGroupsWithDisplayName = "12";
+
+		public const string SetItemStatistics = "12";
+		public const string GetItemStatistics = "12";
+		public const string GetStatisticsLeaderboardAroundItem = "12";
+		public const string SetItemData = "12";
+		public const string GetItemData = "12";
+		public const string GetItemInformation = "12";
+		public const string GetItemsWithSegment = "12";
+		public const string GetItemsWithTag = "12";
+		public const string GetClassId = "12";
+		public const string GetItemType = "12";
+		public const string GetAmount = "12";
+		public const string SetAmount = "12";
+		public const string GetItemsWithDisplayName = "12";
+
+		public const string BuyStoreItem = "12";
+		public const string GetStoreItemInformation = "12";
+		public const string GetStoreItemsWithTag = "12";
+		public const string GrantStoreItem = "12";
+		public const string SetStoreItemInformation = "12";
+		public const string ValidateAppleAppStoreReceipt = "12";
+		public const string ValidateGooglePlayStoreReceipt = "12";
+		public const string ValidateFacebookStoreReceipt = "12";
+
+		public const string SetMasterGameSettings = "12";
+		public const string GrantAdminAccount = "12";
+		public const string RemoveAdminAccount = "12";
+		public const string SetPasswordAdminAccount = "12";
+		public const string SetSecretKeyAdminAccount = "12";
+		public const string SetGameInformation = "12";
+		public const string GrantGame = "12";
+		public const string ChangePasswordAdminAccount = "12";
+		public const string GetAdminAccountList = "12";
+		public const string GetGameInformation = "12";
+		public const string GetGameList = "12";
+		public const string GetMasterGameSettings = "12";
+		public const string GetServerLog = "12";
+		public const string GetSecretInfoInformation = "12";
+		public const string GetSecretInfoList = "12";
+		public const string GrantSecretInfo = "12";
+		public const string GenericServiceSettings = "12";
+		public const string GetEmail = "12";
+		public const string SetEmail = "12";
+
+		public const string CreateNewFileUploadInfo = "12";
+		public const string GetFileUploadInfoList = "12";
+		public const string GetFileUploadInfo = "12";
+		public const string RemoveFileUploadInfo = "12";
+		public const string RequestDownloadFileUploadInfo = "12";
+
+		public const string StoreId = "";
+		public const string StoreItems = "";
+		public const string StoreCurrencies = "";
+		public const string PriceCurrencies = "";
+		public const string InAppPurchase = "";
+		public const string StoreStatistics = "";
+		public const string StoreDatas = "";
+		public const string StoreDataKeys = "";
+		public const string StoreStatisticsKeys = "";
+		public const string Currencies = "";
+		public const string Inventories = "";
+		public const string Receipt = "";
+		public const string FacebookStoreId = "";
+		public const string AppleAppStoreId = "";
+		public const string GooglePlayStoreId = "";
+		public const string CustomTags = "";
+
+	}
+}

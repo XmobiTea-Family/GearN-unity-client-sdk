@@ -4,6 +4,7 @@ namespace XmobiTea.GN.Networking
     using System.Collections.Generic;
 
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Logger;
     using XmobiTea.MsgPack;
@@ -103,12 +104,12 @@ namespace XmobiTea.GN.Networking
 
         }
 
-        internal void Send(OperationRequest operationRequest)
+        internal void Send(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags)
         {
-            Emit(operationRequest);
+            Emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
         }
 
-        protected virtual void Emit(OperationRequest operationRequest) { }
+        protected virtual void Emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags) { }
 
         #endregion
 

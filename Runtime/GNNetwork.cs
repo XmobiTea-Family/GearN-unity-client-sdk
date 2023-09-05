@@ -7,29 +7,33 @@
 
     using UnityEngine;
     using XmobiTea.GN.Entity;
-    using XmobiTea.MiniDeviceId;
     using XmobiTea.GN.Logger;
     using XmobiTea.GN.Entity.Request;
     using XmobiTea.GN.Entity.Response;
+    using XmobiTea.GN.Constant;
+    using XmobiTea.GN.Common;
 
     public static partial class GNNetwork
     {
-        private const string GN_VERSION = "1.0.7";
+        private const string GN_VERSION = "0.0.1";
 
         private const string AUTH_TOKEN_KEY = "[GN]_AUTH_TOKEN_KEY";
+        private const string AUTH_TOKEN_TS_EXPIRE_KEY = "[GN]_AUTH_TOKEN_TS_EXPIRE_KEY";
         private const string USER_ID_KEY = "[GN]_USER_ID_KEY";
 
         public static GNServerSettings gnServerSettings { get; private set; }
 
         internal static NetworkingPeer peer { get; private set; }
 
-        public static int ping => peer != null ? peer.ping : -1;
+        public static int getPing() => peer != null ? peer.ping : -1;
 
-        public static string getSocketSId() => peer != null ? peer.clientId : null;
+        public static string getSocketSId() => peer != null ? peer.getClientId() : null;
 
         public static bool isSocketConnected() => !string.IsNullOrEmpty(getSocketSId());
 
-        public static long serverTimestamp => peer != null ? peer.serverTimestamp : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public static long getServerTimestamp() => peer != null ? peer.serverTimestamp : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+        public static AuthenticateStatus getAuthenticateStatus() => peer.authenticateStatus;
 
         public static string authToken
         {
@@ -55,11 +59,7 @@
             }
         }
 
-        public static RuntimePlatform platform { get; private set; }
-
-        public static string deviceId { get; private set; }
-
-        public static string deviceInfo => (int)platform + "_" + deviceId;
+        public static RuntimePlatform getPlatform() => Application.platform;
 
         static GNNetwork()
         {
@@ -70,11 +70,9 @@
 
             InitGNSocketObject();
 
-            peer.authToken = PlayerPrefs.GetString(AUTH_TOKEN_KEY, string.Empty);
-            peer.userId = PlayerPrefs.GetString(USER_ID_KEY, string.Empty);
-
-            platform = Application.platform;
-            deviceId = CXDevice.GetDeviceId();
+            peer.authenticateStatus.setAuthToken(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_KEY, string.Empty));
+            peer.authenticateStatus.setAuthTokenTsExpire(long.Parse(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_TS_EXPIRE_KEY, "-1")));
+            peer.authenticateStatus.setUserId(PlayerPrefs.GetString(GNNetwork.USER_ID_KEY, string.Empty));
         }
 
         public static string GetClientSdkVersion()
@@ -110,29 +108,29 @@
             peer.InitPeer();
         }
 
-        public static void SendViaSocket(OperationRequest request, Action<OperationResponse> onResponse = null)
+        public static void SendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
-            peer.SendViaSocket(request, onResponse);
+            peer.SendViaSocket(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaHttp(OperationRequest request, Action<OperationResponse> onResponse = null)
+        public static void SendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
-            peer.SendViaHttp(request, onResponse);
+            peer.SendViaHttp(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaSocket<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
+        public static void SendViaSocket<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
-            SendViaSocket(request.Build(), onResponse);
+            SendViaSocket(request.GetRequestType(), request.GetRequestRole(), request.Build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaHttp<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
+        public static void SendViaHttp<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
-            SendViaHttp(request.Build(), onResponse);
+            SendViaHttp(request.GetRequestType(), request.GetRequestRole(), request.Build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaSocket<TResponse>(OperationRequest request, Action<TResponse> onResponse = null) where TResponse : CustomOperationResponse, new()
+        public static void SendViaSocket<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
-            SendViaSocket(request, response =>
+            SendViaSocket(requestType, requestRole, request, response =>
             {
                 if (response == null) return;
 
@@ -140,12 +138,12 @@
                 customOperationResponse.SetupOperationResponse(response);
 
                 onResponse?.Invoke(customOperationResponse);
-            });
+            }, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaHttp<TResponse>(OperationRequest request, Action<TResponse> onResponse = null) where TResponse : CustomOperationResponse, new()
+        public static void SendViaHttp<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
-            SendViaHttp(request, response =>
+            SendViaHttp(requestType, requestRole, request, response =>
             {
                 if (response == null) return;
 
@@ -153,7 +151,7 @@
                 customOperationResponse.SetupOperationResponse(response);
 
                 onResponse?.Invoke(customOperationResponse);
-            });
+            }, overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public static void ConnectSocket(Action _onSocketConnect = null)

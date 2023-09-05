@@ -10,6 +10,7 @@
 		public const string APPLICATION_MSGPACK = "application/msgpack";
 
 		public const string RequestAuthTokenCmd = "a";
+		public const string RequestSecretCmd = "s";
 
 		public const string RequestCmd_MsgPack = "r";
 		public const string ResponseCmd_MsgPack = "r";

@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using XmobiTea.GN.Common;
+    using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
 
     public partial class NetworkingPeer : UnityEngine.MonoBehaviour
@@ -11,6 +13,8 @@
 
         internal string authToken = string.Empty;
         internal string userId = string.Empty;
+
+        internal AuthenticateStatus authenticateStatus = new AuthenticateStatus();
 
         internal int ping
         {
@@ -35,7 +39,7 @@
             }
         }
 
-        internal string clientId => (this.socketPeer as SocketPeer).clientId;
+        internal string getClientId() => (this.socketPeer as SocketPeer).getClientId();
 
         private long lastCurrentServerMilliseconds;
         private float lastGetCurrentMilliseconds;
@@ -60,10 +64,6 @@
 
             this.socketPeer = this.gameObject.AddComponent<SocketPeer>();
             this.socketPeer.InitPeer();
-
-            this.friendItemLst = new List<FriendItem>();
-            this.chatChannelLst = new List<ChatChannel>();
-            this.chatUserLst = new List<ChatUser>();
         }
 
         private void Update()
@@ -72,14 +72,14 @@
             this.socketPeer?.Service();
         }
 
-        internal void SendViaSocket(OperationRequest request, Action<OperationResponse> onResponse = null)
+        internal void SendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
-            this.socketPeer.Enqueue(request, onResponse);
+            this.socketPeer.Enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
         }
 
-        internal void SendViaHttp(OperationRequest request, Action<OperationResponse> onResponse = null)
+        internal void SendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
-            this.httpPeer.Enqueue(request, onResponse);
+            this.httpPeer.Enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
         }
 
         internal void SendRequestAuthSocket()
