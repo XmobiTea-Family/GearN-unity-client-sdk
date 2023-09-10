@@ -6,4 +6,5 @@
 		Consumable = 1,
 
 	}
+
 }

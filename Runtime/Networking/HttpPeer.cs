@@ -21,9 +21,12 @@
         public byte[] data { get; internal set; }
         public string text { get; internal set; }
 
-        public bool hasError => !string.IsNullOrEmpty(this.error);
+        public bool hasError()
+        {
+            return this.error != null;
+        }
 
-        public override string ToString()
+        public string toString()
         {
             var stringBuilder = new StringBuilder();
 
@@ -32,6 +35,11 @@
             stringBuilder.Append(", Text: " + this.text);
 
             return stringBuilder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.toString();
         }
     }
 
@@ -58,82 +66,79 @@
             }
         }
 
-        internal override void InitGNSocketObject()
+        internal override void initGNSocketObject()
         {
-            base.InitGNSocketObject();
-
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
 
-            this.isUsing = gnServerSettings.useHttp;
+            this.isUse = gnServerSettings.isUseHttp();
 
-            httpRequestType = gnServerSettings.httpRequestType;
-            httpUrl = gnServerSettings.HttpUrl;
+            this.httpRequestType = gnServerSettings.getHttpRequestType();
+            this.httpUrl = gnServerSettings.getHttpUrl();
 
-            userAgent = "GN-unity-" + GNNetwork.getPlatform() + "@" + GNNetwork.GetClientSdkVersion();
+            HttpPeer.userAgent = "GN-unity-" + GNNetwork.getPlatform() + "@" + GNNetwork.getClientSdkVersion();
 
-            if (httpRequestType == HttpRequestType.HTTPRequest)
+            if (this.httpRequestType == HttpRequestType.HTTPRequest)
             {
                 HTTPManager.UserAgent = userAgent;
                 HTTPManager.KeepAliveDefaultValue = false;
             }
         }
 
-        internal override void Send(OperationPending operationPending)
+        internal override void send(OperationPending operationPending)
         {
-            base.Send(operationPending);
+            base.send(operationPending);
 
-            GNDebug.Log("[GN Http SEND] " + operationPending.GetOperationRequest().ToString());
+            GNDebug.log("[GN Http SEND] " + operationPending.getOperationRequest().ToString());
 
-            var operationRequest = operationPending.GetOperationRequest();
+            var operationRequest = operationPending.getOperationRequest();
 
-            var authToken = operationPending.GetAuthToken();
+            //if (string.IsNullOrEmpty(authToken))
+            //{
+            //    if (!this.isOperationCanSendWithoutAuthorized(operationRequest.getOperationCode()))
+            //    {
+            //        var obj = new GNArray();
 
-            if (string.IsNullOrEmpty(authToken))
+            //        obj.add((int)ReturnCode.OperationNotAuthorized);
+            //        obj.add(null);
+            //        obj.add(operationRequest.getRequestId());
+
+            //        this.onResponseHandler(obj, operationRequest.isEncrypted());
+
+            //        return;
+            //    }
+            //}
+
+            var authToken = operationPending.getAuthToken();
+            var secretKey = operationPending.getSecretKey();
+            var customTags = operationPending.getCustomTags();
+
+            var postType = !operationRequest.isEncrypted() ? PostType.Json : PostType.MsgPack;
+
+            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.getOperationCode() + "/" + (int)operationPending.getRequestType() + "/" + (int)operationPending.getRequestRole();
+
+            if (this.httpRequestType == HttpRequestType.HTTPRequest)
             {
-                if (!GNNetwork.gnServerSettings.codeCanSendNotAuthorized.Contains(operationRequest.GetOperationCode()))
+                postRequestViaHTTPRequest(subUri, operationRequest.getParameters(), postType, httpAppResponse =>
                 {
-                    var obj = new GNArray();
-
-                    obj.Add((int)ReturnCode.OperationNotAuthorized);
-                    obj.Add(null);
-                    obj.Add(operationRequest.GetRequestId());
-
-                    OnResponseHandler(obj, operationRequest.IsEncrypted());
-
-                    return;
-                }
+                    onSendOperationRequestResponse(operationPending, httpAppResponse);
+                }, operationRequest.getTimeout(), authToken, secretKey, customTags);
             }
-
-            var secretKey = operationPending.GetSecretKey();
-            var customTags = operationPending.GetCustomTags();
-
-            var postType = !operationRequest.IsEncrypted() ? PostType.Json : PostType.MsgPack;
-
-            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.GetOperationCode() + "/" + (int)operationPending.GetRequestType() + "/" + (int)operationPending.GetRequestRole();
-
-            if (httpRequestType == HttpRequestType.HTTPRequest)
+            else if (this.httpRequestType == HttpRequestType.UnityWebRequest)
             {
-                PostRequestViaHTTPRequest(subUri, operationRequest.GetParameters(), postType, httpAppResponse =>
+                StartCoroutine(iePostRequestViaUnityWebRequest(subUri, operationRequest.getParameters(), postType, httpAppResponse =>
                 {
-                    OnSendOperationRequestResponse(operationPending, httpAppResponse);
-                }, operationRequest.GetTimeout(), authToken, secretKey, customTags);
-            }
-            else if (httpRequestType == HttpRequestType.UnityWebRequest)
-            {
-                StartCoroutine(IEPostRequestViaUnityWebRequest(subUri, operationRequest.GetParameters(), postType, httpAppResponse =>
-                {
-                    OnSendOperationRequestResponse(operationPending, httpAppResponse);
-                }, operationRequest.GetTimeout(), authToken, secretKey, customTags));
+                    onSendOperationRequestResponse(operationPending, httpAppResponse);
+                }, operationRequest.getTimeout(), authToken, secretKey, customTags));
             }
         }
 
-        void OnSendOperationRequestResponse(OperationPending operationPending, HttpAppResponse httpAppResponse)
+        void onSendOperationRequestResponse(OperationPending operationPending, HttpAppResponse httpAppResponse)
         {
-            var operationRequest = operationPending.GetOperationRequest();
+            var operationRequest = operationPending.getOperationRequest();
             var obj = new GNArray();
             
-            if (!httpAppResponse.hasError)
+            if (!httpAppResponse.hasError())
             {
                 if (httpAppResponse.statusCode == 200)
                 {
@@ -143,12 +148,12 @@
 
                     if (!string.IsNullOrEmpty(httpAppResponse.text))
                     {
-                        if (httpAppResponse.text[0].Equals(JSON_CHAR_KNOWN))
+                        if (httpAppResponse.text[0].Equals(HttpPeer.JSON_CHAR_KNOWN))
                         {
                             var returnDatas = (System.Collections.IList)Parser.Parse(httpAppResponse.text);
                             gnArray = new GNArray.Builder()
-                                .AddAll(returnDatas)
-                                .Build();
+                                .addAll(returnDatas)
+                                .build();
                         }
                     }
 
@@ -156,50 +161,50 @@
                     {
                         var iList = MsgPackSerializer.Deserialize<object[]>(httpAppResponse.data);
                         gnArray = new GNArray.Builder()
-                            .AddAll(NetworkingPeerBase.fromMsgList(iList))
-                            .Build();
+                            .addAll(NetworkingPeerBase.fromMsgList(iList))
+                            .build();
 
                         isEncrypted = true;
                     }
 
                     if (gnArray != null)
                     {
-                        var returnCode = gnArray.GetInt(0);
-                        obj.Add(returnCode);
+                        var returnCode = gnArray.getInt(0);
+                        obj.add(returnCode);
 
-                        if (returnCode == (int)ReturnCode.Ok) obj.Add(gnArray.GetGNHashtable(1, new GNHashtable()));
-                        else if (returnCode == ReturnCode.InvalidRequestParameters) obj.Add(gnArray.GetGNArray(1, new GNArray()));
-                        else obj.Add(gnArray.GetString(1));
-                        obj.Add(operationRequest.GetRequestId());
+                        if (returnCode == (int)ReturnCode.Ok) obj.add(gnArray.getGNHashtable(1, new GNHashtable()));
+                        else if (returnCode == ReturnCode.InvalidRequestParameters) obj.add(gnArray.getGNArray(1, new GNArray()));
+                        else obj.add(gnArray.getString(1));
+                        obj.add(operationRequest.getRequestId());
 
-                        OnResponseHandler(obj, isEncrypted);
+                        this.onResponseHandler(obj, isEncrypted);
                         return;
                     }
                 }
             }
 
-            obj.Add((int)ReturnCode.UnknownError);
-            obj.Add(httpAppResponse.error);
-            obj.Add(operationRequest.GetRequestId());
+            obj.add((int)ReturnCode.UnknownError);
+            obj.add(httpAppResponse.error);
+            obj.add(operationRequest.getRequestId());
 
-            OnResponseHandler(obj, operationRequest.IsEncrypted());
+            this.onResponseHandler(obj, operationRequest.isEncrypted());
         }
 
-        internal void GetRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = 15, string authToken = null, string secretKey = null)
+        internal void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = 15, string authToken = null, string secretKey = null)
         {
-            if (httpRequestType == HttpRequestType.HTTPRequest)
+            if (this.httpRequestType == HttpRequestType.HTTPRequest)
             {
-                GetRequestViaHTTPRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey);
+                getRequestViaHTTPRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey);
             }
-            else if (httpRequestType == HttpRequestType.UnityWebRequest)
+            else if (this.httpRequestType == HttpRequestType.UnityWebRequest)
             {
-                StartCoroutine(IEGetRequestViaUnityWebRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey));
+                StartCoroutine(ieGetRequestViaUnityWebRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey));
             }
         }
 
-        private void GetRequestViaHTTPRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey)
+        private void getRequestViaHTTPRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey)
         {
-            var request = new HTTPRequest(new Uri(httpUrl + "/" + subUri), HTTPMethods.Get, (httpRequest, httpResponse) =>
+            var request = new HTTPRequest(new Uri(this.httpUrl + "/" + subUri), HTTPMethods.Get, (httpRequest, httpResponse) =>
             {
                 var httpAppResponse = new HttpAppResponse();
 
@@ -226,9 +231,9 @@
             request.Send();
         }
 
-        private IEnumerator IEGetRequestViaUnityWebRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey)
+        private IEnumerator ieGetRequestViaUnityWebRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey)
         {
-            using (var unityWebRequest = UnityWebRequest.Get(new Uri(httpUrl + "/" + subUri)))
+            using (var unityWebRequest = UnityWebRequest.Get(new Uri(this.httpUrl + "/" + subUri)))
             {
                 var certificateHandler = new AcceptAllCertificatesSignedWithASpecificKeyPublicKey();
                 unityWebRequest.certificateHandler = certificateHandler;
@@ -263,9 +268,9 @@
             }
         }
 
-        private void PostRequestViaHTTPRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags)
+        private void postRequestViaHTTPRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags)
         {
-            var request = new HTTPRequest(new Uri(httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
+            var request = new HTTPRequest(new Uri(this.httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
             {
                 var httpAppResponse = new HttpAppResponse();
 
@@ -286,13 +291,13 @@
 
             if (param == null) param = new GNHashtable();
 
-            if (customTags != null) param.Add(GNParameterCode.CustomTags, customTags);
+            if (customTags != null) param.add(GNParameterCode.CustomTags, customTags);
 
             if (postType == PostType.Json)
             {
                 request.SetHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_JSON);
 
-                var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.ToData()));
+                var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
 
                 request.UploadStream = new MemoryStream(content);
             }
@@ -300,7 +305,7 @@
             {
                 request.SetHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_MSGPACK);
 
-                var dataSend = param.ToData();
+                var dataSend = param.toData();
 
                 var content = MsgPackSerializer.Serialize(dataSend);
 
@@ -315,9 +320,9 @@
             request.Send();
         }
 
-        private IEnumerator IEPostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags)
+        private IEnumerator iePostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags)
         {
-            using (var unityWebRequest = new UnityWebRequest(new Uri(httpUrl + "/" + subUri)))
+            using (var unityWebRequest = new UnityWebRequest(new Uri(this.httpUrl + "/" + subUri)))
             {
                 unityWebRequest.method = UnityWebRequest.kHttpVerbPOST;
 
@@ -327,7 +332,7 @@
                 unityWebRequest.timeout = (int)timeout;
 
                 if (param == null) param = new GNHashtable();
-                if (customTags != null) param.Add(GNParameterCode.CustomTags, customTags);
+                if (customTags != null) param.add(GNParameterCode.CustomTags, customTags);
 
                 //unityWebRequest.SetRequestHeader("User-Agent", UserAgent);
 
@@ -335,7 +340,7 @@
                 {
                     unityWebRequest.SetRequestHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_JSON);
 
-                    var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.ToData()));
+                    var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
 
                     unityWebRequest.uploadHandler = new UploadHandlerRaw(content);
                 }
@@ -343,7 +348,7 @@
                 {
                     unityWebRequest.SetRequestHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_MSGPACK);
 
-                    var dataSend = param.ToData();
+                    var dataSend = param.toData();
 
                     var content = MsgPackSerializer.Serialize(dataSend);
 
@@ -379,9 +384,9 @@
             }
         }
 
-        internal void UploadFile(string fileId, byte[] content, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout = 60)
+        internal void uploadFile(string fileId, byte[] content, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout = 60)
         {
-            var authToken = GNNetwork.authToken;
+            var authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
 
             if (string.IsNullOrEmpty(authToken))
             {
@@ -396,19 +401,19 @@
 
             var subUri = NetworkingPeer.UPLOAD_FILE + "/" + fileId;
 
-            if (httpRequestType == HttpRequestType.HTTPRequest)
+            if (this.httpRequestType == HttpRequestType.HTTPRequest)
             {
-                PostRequestUploadViaHTTPRequest(subUri, content, mimetype, onHttpAppResponse, timeout);
+                postRequestUploadViaHTTPRequest(subUri, content, mimetype, onHttpAppResponse, timeout);
             }
-            else if (httpRequestType == HttpRequestType.UnityWebRequest)
+            else if (this.httpRequestType == HttpRequestType.UnityWebRequest)
             {
-                StartCoroutine(IEPostRequestUploadViaUnityWebRequest(subUri, content, mimetype, onHttpAppResponse, timeout));
+                StartCoroutine(iePostRequestUploadViaUnityWebRequest(subUri, content, mimetype, onHttpAppResponse, timeout));
             }
         }
 
-        private void PostRequestUploadViaHTTPRequest(string subUri, byte[] content, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private void postRequestUploadViaHTTPRequest(string subUri, byte[] content, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
         {
-            var request = new HTTPRequest(new Uri(httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
+            var request = new HTTPRequest(new Uri(this.httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
             {
                 var httpAppResponse = new HttpAppResponse();
 
@@ -431,19 +436,19 @@
 
             request.AddBinaryData(Commands.File, content, null, mimetype);
 
-            var authToken = GNNetwork.authToken;
+            var authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
 
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
 
             request.Send();
         }
 
-        private IEnumerator IEPostRequestUploadViaUnityWebRequest(string subUri, byte[] content, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private IEnumerator iePostRequestUploadViaUnityWebRequest(string subUri, byte[] content, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
         {
             var form = new UnityEngine.WWWForm();
             form.AddBinaryData(Commands.File, content, null, mimetype);
 
-            using (var unityWebRequest = UnityWebRequest.Post(new Uri(httpUrl + "/" + subUri), form))
+            using (var unityWebRequest = UnityWebRequest.Post(new Uri(this.httpUrl + "/" + subUri), form))
             {
                 var certificateHandler = new AcceptAllCertificatesSignedWithASpecificKeyPublicKey();
 
@@ -451,7 +456,7 @@
 
                 unityWebRequest.timeout = (int)timeout;
 
-                var authToken = GNNetwork.authToken;
+                var authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
 
                 if (!string.IsNullOrEmpty(authToken)) unityWebRequest.SetRequestHeader(Commands.RequestAuthTokenCmd, authToken);
 

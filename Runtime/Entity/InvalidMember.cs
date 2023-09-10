@@ -14,13 +14,18 @@
             this.invalidMemberType = invalidMemberType;
         }
 
-        public override string ToString()
+        public string toString()
         {
             var stringBuilder = new StringBuilder();
 
             stringBuilder.Append("Code: " + this.code + ", InvalidMemberType " + this.invalidMemberType);
 
             return stringBuilder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.toString();
         }
 
     }

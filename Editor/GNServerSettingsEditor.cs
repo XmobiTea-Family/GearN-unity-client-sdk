@@ -24,7 +24,6 @@
         SerializedProperty pingInterval;
         SerializedProperty pingTimout;
         SerializedProperty peerSocketVersion;
-        SerializedProperty codeCanSendNotAuthorized;
         SerializedProperty gnServerSourcePath;
         SerializedProperty httpRequestType;
         SerializedProperty logType;
@@ -38,123 +37,67 @@
 
         private void OnEnable()
         {
-            serverAddress = serializedObject.FindProperty("_serverAddress");
-            serverPort = serializedObject.FindProperty("_serverPort");
-            useSsl = serializedObject.FindProperty("_useSsl");
-            useSocket = serializedObject.FindProperty("_useSocket");
-            useHttp = serializedObject.FindProperty("_useHttp");
-            sendRate = serializedObject.FindProperty("_sendRate");
-            reconnectDelay = serializedObject.FindProperty("_reconnectDelay");
-            pingInterval = serializedObject.FindProperty("_pingInterval");
-            pingTimout = serializedObject.FindProperty("_pingTimeout");
-            peerSocketVersion = serializedObject.FindProperty("_peerSocketVersion");
-            codeCanSendNotAuthorized = serializedObject.FindProperty("_codeCanSendNotAuthorized");
-            gnServerSourcePath = serializedObject.FindProperty("_gnServerSourcePath");
-            httpRequestType = serializedObject.FindProperty("_httpRequestType");
-            //postType = serializedObject.FindProperty("_postType");
-            logType = serializedObject.FindProperty("_logType");
-            adminSecretKey = serializedObject.FindProperty("_adminSecretKey");
-            serverSecretKey = serializedObject.FindProperty("_serverSecretKey");
-            clientSecretKey = serializedObject.FindProperty("_clientSecretKey");
+            this.serverAddress = serializedObject.FindProperty("serverAddress");
+            this.serverPort = serializedObject.FindProperty("serverPort");
+            this.useSsl = serializedObject.FindProperty("useSsl");
+            this.useSocket = serializedObject.FindProperty("useSocket");
+            this.useHttp = serializedObject.FindProperty("useHttp");
+            this.sendRate = serializedObject.FindProperty("sendRate");
+            this.reconnectDelay = serializedObject.FindProperty("reconnectDelay");
+            this.pingInterval = serializedObject.FindProperty("pingInterval");
+            this.pingTimout = serializedObject.FindProperty("pingTimeout");
+            this.peerSocketVersion = serializedObject.FindProperty("peerSocketVersion");
+            this.gnServerSourcePath = serializedObject.FindProperty("gnServerSourcePath");
+            this.httpRequestType = serializedObject.FindProperty("httpRequestType");
+            //postType = serializedObject.FindProperty("postType");
+            this.logType = serializedObject.FindProperty("logType");
+            this.adminSecretKey = serializedObject.FindProperty("adminSecretKey");
+            this.serverSecretKey = serializedObject.FindProperty("serverSecretKey");
+            this.clientSecretKey = serializedObject.FindProperty("clientSecretKey");
 
             var fields = typeof(OperationCode).GetFields();
 
-            if (operationCodeFieldDict == null) operationCodeFieldDict = new Dictionary<int, string>();
-            else operationCodeFieldDict.Clear();
+            if (this.operationCodeFieldDict == null) this.operationCodeFieldDict = new Dictionary<int, string>();
+            else this.operationCodeFieldDict.Clear();
 
             for (var i = 0; i < fields.Length; i++)
             {
                 var field = fields[i];
 
-                operationCodeFieldDict[(int)field.GetValue(null)] = field.Name;
+                this.operationCodeFieldDict[(int)field.GetValue(null)] = field.Name;
             }
         }
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            this.serializedObject.Update();
 
-            EditorGUILayout.LabelField($"GN Unity Client SDK Version v{GNNetwork.GetClientSdkVersion()}");
+            EditorGUILayout.LabelField($"GN Unity Client SDK Version v{GNNetwork.getClientSdkVersion()}");
             EditorGUILayout.Space(20);
 
-            EditorGUILayout.PropertyField(serverAddress);
-            EditorGUILayout.PropertyField(serverPort);
-            EditorGUILayout.PropertyField(useSsl);
-            EditorGUILayout.PropertyField(useSocket);
-            EditorGUILayout.PropertyField(useHttp);
-            EditorGUILayout.PropertyField(sendRate);
-            EditorGUILayout.PropertyField(reconnectDelay);
-            EditorGUILayout.PropertyField(pingInterval);
-            EditorGUILayout.PropertyField(pingTimout);
-            EditorGUILayout.PropertyField(peerSocketVersion);
+            EditorGUILayout.PropertyField(this.serverAddress);
+            EditorGUILayout.PropertyField(this.serverPort);
+            EditorGUILayout.PropertyField(this.useSsl);
+            EditorGUILayout.PropertyField(this.useSocket);
+            EditorGUILayout.PropertyField(this.useHttp);
+            EditorGUILayout.PropertyField(this.sendRate);
+            EditorGUILayout.PropertyField(this.reconnectDelay);
+            EditorGUILayout.PropertyField(this.pingInterval);
+            EditorGUILayout.PropertyField(this.pingTimout);
+            EditorGUILayout.PropertyField(this.peerSocketVersion);
             EditorGUILayout.Space(20);
 
-            EditorGUILayout.BeginVertical();
-            EditorGUILayout.LabelField($"Code Can Send Not Authorized size is {codeCanSendNotAuthorized.arraySize}");
-
-            //scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-
-
-            for (var i = 0; i < codeCanSendNotAuthorized.arraySize; i++)
-            {
-                var serializedProperty = codeCanSendNotAuthorized.GetArrayElementAtIndex(i);
-                
-                var operationCodeName = string.Empty;
-
-                if (operationCodeFieldDict.ContainsKey(serializedProperty.intValue)) operationCodeName = $"({serializedProperty.intValue}) {operationCodeFieldDict[serializedProperty.intValue]}";
-                else operationCodeName = "Choose an operation code";
-
-                EditorGUILayout.BeginHorizontal();
-
-                if (EditorGUILayout.DropdownButton(new GUIContent(operationCodeName), FocusType.Passive))
-                {
-                    var operationCodeMenu = new GenericMenu();
-                    operationCodeMenu.AddItem(new GUIContent("None"), !operationCodeFieldDict.ContainsKey(serializedProperty.intValue), id =>
-                    {
-                        serializedProperty.intValue = (int)id;
-                        if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
-                    }, int.MinValue);
-                    operationCodeMenu.AddSeparator("");
-
-                    foreach (var c in operationCodeFieldDict)
-                    {
-                        operationCodeMenu.AddItem(new GUIContent($"({c.Key}) {c.Value}"), serializedProperty.intValue == c.Key, id =>
-                        {
-                            serializedProperty.intValue = (int)id;
-                            if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
-                        }, c.Key);
-                    }
-
-                    operationCodeMenu.ShowAsContext();
-                }
-
-                if (GUILayout.Button("-", GUILayout.MaxWidth(50)))
-                {
-                    codeCanSendNotAuthorized.DeleteArrayElementAtIndex(i);
-                }
-
-                EditorGUILayout.EndHorizontal();
-            }
-
-            if (GUILayout.Button("+"))
-            {
-                codeCanSendNotAuthorized.arraySize += 1;
-            }
-
-            EditorGUILayout.EndVertical();
-            EditorGUILayout.Space(20);
-
-            EditorGUILayout.PropertyField(gnServerSourcePath);
-            EditorGUILayout.PropertyField(httpRequestType);
+            EditorGUILayout.PropertyField(this.gnServerSourcePath);
+            EditorGUILayout.PropertyField(this.httpRequestType);
             //EditorGUILayout.PropertyField(postType);
-            EditorGUILayout.PropertyField(logType);
+            EditorGUILayout.PropertyField(this.logType);
 
             EditorGUILayout.Space(20);
-            EditorGUILayout.PropertyField(adminSecretKey);
-            EditorGUILayout.PropertyField(serverSecretKey);
-            EditorGUILayout.PropertyField(clientSecretKey);
+            EditorGUILayout.PropertyField(this.adminSecretKey);
+            EditorGUILayout.PropertyField(this.serverSecretKey);
+            EditorGUILayout.PropertyField(this.clientSecretKey);
 
-            if (serializedObject.hasModifiedProperties) serializedObject.ApplyModifiedProperties();
+            if (this.serializedObject.hasModifiedProperties) this.serializedObject.ApplyModifiedProperties();
         }
 
         [MenuItem("XmobiTea GN/Open Settings")]
@@ -212,7 +155,7 @@
         private static void SyncEnumTypeFolder()
         {
             var gnServerSettings = GetSettings();
-            var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/enumType";
+            var dir = Application.dataPath + "/../../" + gnServerSettings.getGNServerSourcePath() + "/src/common/constant/enumType";
 
             var allPathFiles = Directory.GetFiles(dir, "*.ts");
             for (var i = 0; i < allPathFiles.Length; i++)
@@ -269,7 +212,7 @@
         private static void SyncParameterCodeFolder()
         {
             var gnServerSettings = GetSettings();
-            var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/parameterCode";
+            var dir = Application.dataPath + "/../../" + gnServerSettings.getGNServerSourcePath() + "/src/common/constant/parameterCode";
 
             var allPathFiles = Directory.GetFiles(dir, "*.ts");
             for (var i = 0; i < allPathFiles.Length; i++)
@@ -332,7 +275,7 @@
         private static void SyncErrorCodeFolder()
         {
             var gnServerSettings = GetSettings();
-            var dir = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/errorCode";
+            var dir = Application.dataPath + "/../../" + gnServerSettings.getGNServerSourcePath() + "/src/common/constant/errorCode";
 
             var allPathFiles = Directory.GetFiles(dir, "*.ts");
             for (var i = 0; i < allPathFiles.Length; i++)
@@ -403,7 +346,7 @@
             const string Template = "public const int $name = $code;";
 
             var gnServerSettings = GetSettings();
-            var dirPath = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/OperationCode.ext.ts";
+            var dirPath = Application.dataPath + "/../../" + gnServerSettings.getGNServerSourcePath() + "/src/common/constant/OperationCode.ext.ts";
             var allLines = File.ReadAllLines(dirPath);
 
             var stringBuilder = new StringBuilder();
@@ -446,7 +389,7 @@
             const string Template = "public const int $name = $code;";
 
             var gnServerSettings = GetSettings();
-            var dirPath = Application.dataPath + "/../../" + gnServerSettings.gnServerSourcePath + "/src/common/constant/EventCode.ext.ts";
+            var dirPath = Application.dataPath + "/../../" + gnServerSettings.getGNServerSourcePath() + "/src/common/constant/EventCode.ext.ts";
             var allLines = File.ReadAllLines(dirPath);
 
             var stringBuilder = new StringBuilder();

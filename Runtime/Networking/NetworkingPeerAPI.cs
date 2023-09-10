@@ -2,11 +2,8 @@
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Entity.Request;
     using XmobiTea.GN.Entity.Response;
     using XmobiTea.GN.Helper;
 
@@ -19,45 +16,45 @@
         internal const string API_JSON = "api/" + Commands.RequestCmd_Json;
         internal const string API_MSG_PACK = "api/" + Commands.RequestCmd_MsgPack;
 
-        internal void SyncTs(Action<long> onResponse = null)
+        internal void syncTs(Action<long> onResponse = null)
         {
-            (this.httpPeer as HttpPeer).GetRequest(SYNC_TS, httpAppResponse =>
+            (this.httpPeer as HttpPeer).getRequest(NetworkingPeer.SYNC_TS, httpAppResponse =>
             {
-                if (!httpAppResponse.hasError)
+                if (!httpAppResponse.hasError())
                 {
                     if (httpAppResponse.statusCode == 200)
                     {
                         var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
                         var gnArray = new GNArray.Builder()
-                            .AddAll(returnDatas)
-                            .Build();
+                            .addAll(returnDatas)
+                            .build();
 
-                        var returnCode = gnArray.GetInt(0);
+                        var returnCode = gnArray.getInt(0);
                         if (returnCode == ReturnCode.Ok)
                         {
-                            var gnHashtable = gnArray.GetGNHashtable(1);
-                            var newServerTimestamp = gnHashtable.GetLong("1", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                            var gnHashtable = gnArray.getGNHashtable(1);
+                            var newServerTimestamp = gnHashtable.getLong("1", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-                            SetServerTimeMilliseconds(newServerTimestamp);
+                            setServerTimeMilliseconds(newServerTimestamp);
                         }
                     }
                 }
 
-                onResponse?.Invoke(serverTimestamp);
+                onResponse?.Invoke(this.getServerTimestamp());
             });
         }
 
-        internal void AccountLogin(string username, string password, Action<LoginOperationResponse> onResponse = null)
-        {
-            //var request = new AccountLoginOperationRequest(username, password).Build();
+        //internal void accountLogin(string username, string password, Action<LoginOperationResponse> onResponse = null)
+        //{
+        //    //var request = new AccountLoginOperationRequest(username, password).Build();
 
-            //SendViaHttp(request, response =>
-            //{
-            //    var loginOperationResponse = new LoginOperationResponse();
-            //    loginOperationResponse.SetupOperationResponse(response);
+        //    //SendViaHttp(request, response =>
+        //    //{
+        //    //    var loginOperationResponse = new LoginOperationResponse();
+        //    //    loginOperationResponse.SetupOperationResponse(response);
 
-            //    onResponse?.Invoke(loginOperationResponse);
-            //});
-        }
+        //    //    onResponse?.Invoke(loginOperationResponse);
+        //    //});
+        //}
     }
 }

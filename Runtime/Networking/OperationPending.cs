@@ -23,7 +23,7 @@ namespace XmobiTea.GN.Networking
         {
             this.operationRequest = operationRequest;
             this.onOperationResponse = onOperationResponse;
-            this.timeout = UnityEngine.Time.realtimeSinceStartup + OperationRequest.DefaultTimeOut;
+            this.timeout = UnityEngine.Time.realtimeSinceStartup + OperationRequest.defaultTimeOut;
             this.firstSend = 0;
             this.secondsSend = 0;
 
@@ -34,58 +34,58 @@ namespace XmobiTea.GN.Networking
             this.customTags = customTags;
         }
 
-        public RequestType GetRequestType()
+        public RequestType getRequestType()
         {
             return this.requestType;
         }
 
-        public RequestRole GetRequestRole()
+        public RequestRole getRequestRole()
         {
             return this.requestRole;
         }
 
-        public string GetAuthToken()
+        public string getAuthToken()
         {
             return this.authToken;
         }
 
-        public string GetSecretKey()
+        public string getSecretKey()
         {
             return this.secretKey;
         }
 
-        public GNHashtable GetCustomTags()
+        public GNHashtable getCustomTags()
         {
             return this.customTags;
         }
 
-        public void OnSend()
+        public void onSend()
         {
             this.firstSend = UnityEngine.Time.realtimeSinceStartup;
-            this.timeout = this.firstSend + this.operationRequest.GetTimeout();
+            this.timeout = this.firstSend + this.operationRequest.getTimeout();
         }
 
-        public void OnRecv()
+        public void onRecv()
         {
             this.secondsSend = UnityEngine.Time.realtimeSinceStartup;
         }
 
-        public float GetExecuteTimerInMs()
+        public float getExecuteTimerInMs()
         {
             return (this.secondsSend - this.firstSend) * 1000;
         }
 
-        public bool IsTimeout()
+        public bool isTimeout()
         {
             return this.timeout < UnityEngine.Time.realtimeSinceStartup;
         }
 
-        public OperationRequest GetOperationRequest()
+        public OperationRequest getOperationRequest()
         {
             return this.operationRequest;
         }
 
-        public Action<OperationResponse> GetCallback()
+        public Action<OperationResponse> getCallback()
         {
             return this.onOperationResponse;
         }

@@ -1,22 +1,20 @@
 ﻿namespace XmobiTea.GN.Config
 {
-    using System.Collections.Generic;
-
     using UnityEngine;
-
-    using XmobiTea.GN.Constant;
 
     public enum PeerSocketVersion
     {
         V2_v2 = 0,
         V2_v3 = 1,
         V3 = 2,
+
     }
-    
+
     public enum HttpRequestType
     {
         UnityWebRequest = 0,
         HTTPRequest = 1,
+
     }
 
     //[CreateAssetMenu(fileName = GNServerSettings.ResourcesPath, menuName = "GN/GNServerSettings", order = 1)]
@@ -25,91 +23,148 @@
         public const string ResourcesPath = "GNServerSettings";
 
         [SerializeField]
-        private string _serverAddress = "127.0.0.1";
-        public string serverAddress => this._serverAddress;
+        private string serverAddress = "127.0.0.1";
 
         [SerializeField]
-        private int _serverPort = 2202;
-        public int serverPort => this._serverPort;
+        private int serverPort = 2202;
 
         [SerializeField]
-        private bool _useSsl = false;
-        public bool useSsl => this._useSsl;
+        private bool useSsl = false;
 
         [SerializeField]
-        private bool _useSocket = true;
-        public bool useSocket => this._useSocket;
+        private bool useSocket = true;
 
         [SerializeField]
-        private bool _useHttp = true;
-        public bool useHttp => this._useHttp;
+        private bool useHttp = true;
 
         [SerializeField]
-        private int _sendRate = 20;
-        public int sendRate => this._sendRate;
+        private int sendRate = 20;
 
         [SerializeField]
-        private int _reconnectDelay = 5000;
-        public int reconnectDelay => this._reconnectDelay;
+        private int reconnectDelay = 5000;
 
         [SerializeField]
-        private float _pingInterval = 20000;
-        public float pingInterval => this._pingInterval;
+        private float pingInterval = 20000;
 
         [SerializeField]
-        private float _pingTimeout = 20000;
-        public float pingTimeout => this._pingTimeout;
+        private float pingTimeout = 20000;
 
         [SerializeField]
-        private string _adminSecretKey;
-        public string adminSecretKey => _adminSecretKey;
+        private string adminSecretKey;
 
         [SerializeField]
-        private string _serverSecretKey;
-        public string serverSecretKey => _serverSecretKey;
+        private string serverSecretKey;
 
         [SerializeField]
-        private string _clientSecretKey;
-        public string clientSecretKey => _clientSecretKey;
+        private string clientSecretKey;
 
         [SerializeField]
-        private PeerSocketVersion _peerSocketVersion = PeerSocketVersion.V3;
-        public PeerSocketVersion peerSocketVersion => this._peerSocketVersion;
+        private PeerSocketVersion peerSocketVersion = PeerSocketVersion.V3;
 
         [SerializeField]
-        private List<int> _codeCanSendNotAuthorized = new List<int>() {  };
-        public List<int> codeCanSendNotAuthorized => this._codeCanSendNotAuthorized;
+        private string gnServerSourcePath = "Template_GN-server";
 
         [SerializeField]
-        private string _gnServerSourcePath = "Template_GN-server";
-        public string gnServerSourcePath => this._gnServerSourcePath;
+        private HttpRequestType httpRequestType = HttpRequestType.HTTPRequest;
 
         [SerializeField]
-        private HttpRequestType _httpRequestType = HttpRequestType.HTTPRequest;
-        public HttpRequestType httpRequestType => this._httpRequestType;
+        private GN.Logger.LogType logType = GN.Logger.LogType.All;
 
-        [SerializeField]
-        private GN.Logger.LogType _logType = GN.Logger.LogType.All;
-        public GN.Logger.LogType logType => this._logType;
-
-        public string SocketUrl
+        public string getServerAddress()
         {
-            get
-            {
-                if (this._serverPort < 0) return string.Format((this._useSsl ? "https" : "http") + "://{0}", this._serverAddress);
-                else return string.Format((this._useSsl ? "https" : "http") + "://{0}:{1}", this._serverAddress, this._serverPort);
-            }
+            return this.serverAddress;
         }
 
-        public string HttpUrl
+        public int getServerPort()
         {
-            get
-            {
-                if (this._serverPort < 0) return string.Format((this._useSsl ? "https" : "http") + "://{0}", this._serverAddress);
-                else return string.Format((this._useSsl ? "https" : "http") + "://{0}:{1}", this._serverAddress, this._serverPort);
-            }
+            return this.serverPort;
+        }
+
+        public bool isUseSsl()
+        {
+            return this.useSsl;
+        }
+
+
+        public bool isUseSocket()
+        {
+            return this.useSocket;
+        }
+
+        public bool isUseHttp()
+        {
+            return this.useHttp;
+        }
+
+        public int getSendRate()
+        {
+            return this.sendRate;
+        }
+
+        public int getReconnectDelay()
+        {
+            return this.reconnectDelay;
+        }
+
+        public float getPingInterval()
+        {
+            return this.pingInterval;
+        }
+
+        public float getPingTimeout()
+        {
+            return this.pingTimeout;
+        }
+
+        public string getAdminSecretKey()
+        {
+            return this.adminSecretKey;
+        }
+
+        public string getServerSecretKey()
+        {
+            return this.serverSecretKey;
+        }
+
+        public string getClientSecretKey()
+        {
+            return this.clientSecretKey;
+        }
+
+        public PeerSocketVersion getPeerSocketVersion()
+        {
+            return this.peerSocketVersion;
+        }
+
+        public string getGNServerSourcePath()
+        {
+            return this.gnServerSourcePath;
+        }
+
+        public HttpRequestType getHttpRequestType()
+        {
+            return this.httpRequestType;
+        }
+
+        public GN.Logger.LogType getLogType()
+        {
+            return this.logType;
+        }
+
+       
+        public string getSocketUrl()
+        {
+            if (this.serverPort < 0) return string.Format((this.useSsl ? "https" : "http") + "://{0}", this.serverAddress);
+            else return string.Format((this.useSsl ? "https" : "http") + "://{0}:{1}", this.serverAddress, this.serverPort);
+        }
+
+        public string getHttpUrl()
+        {
+            if (this.serverPort < 0) return string.Format((this.useSsl ? "https" : "http") + "://{0}", this.serverAddress);
+            else return string.Format((this.useSsl ? "https" : "http") + "://{0}:{1}", this.serverAddress, this.serverPort);
         }
 
     }
 
 }
+

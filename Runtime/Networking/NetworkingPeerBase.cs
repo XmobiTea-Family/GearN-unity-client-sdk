@@ -60,7 +60,7 @@ namespace XmobiTea.GN.Networking
 
         #endregion
 
-        internal virtual void Init(string url, int reconnectDelay, float pingInterval, float pingTimeout)
+        internal virtual void init(string url, int reconnectDelay, float pingInterval, float pingTimeout)
         {
             this.url = url;
 
@@ -82,81 +82,81 @@ namespace XmobiTea.GN.Networking
 
         void OnApplicationQuit()
         {
-            Close(null);
+            close(null);
         }
 
         #endregion
 
         #region Public Interface
 
-        internal virtual void Connect(Action _onSocketConnect)
+        internal virtual void connect(Action _onSocketConnect)
         {
             this._onSocketConnect = _onSocketConnect;
         }
 
-        internal virtual void Close(Action _onSocketDisconnect)
+        internal virtual void close(Action _onSocketDisconnect)
         {
             this._onSocketDisconnect = _onSocketDisconnect;
         }
 
-        internal virtual void SendRequestAuthSocket()
+        internal virtual void sendRequestAuthSocket()
         {
 
         }
 
         internal void Send(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags)
         {
-            Emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
+            emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
         }
 
-        protected virtual void Emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags) { }
+        protected virtual void emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags) { }
 
         #endregion
 
         #region Private Methods
 
-        internal virtual void ReInitNewSocket()
+        internal virtual void reInitNewSocket()
         {
 
         }
 
-        internal void SetOnConnectHandler(Action _onConnectHandler)
+        internal void setOnConnectHandler(Action _onConnectHandler)
         {
             this._onConnectHandler -= _onConnectHandler;
             this._onConnectHandler += _onConnectHandler;
         }
 
-        internal void SetOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void setOnDisconnectHandler(Action _onDisconnectHandler)
         {
             this._onDisconnectHandler -= _onDisconnectHandler;
             this._onDisconnectHandler += _onDisconnectHandler;
         }
 
-        internal void RemoveOnConnectHandler(Action _onConnectHandler)
+        internal void removeOnConnectHandler(Action _onConnectHandler)
         {
             this._onConnectHandler -= _onConnectHandler;
         }
 
-        internal void RemoveOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
         {
             this._onDisconnectHandler -= _onDisconnectHandler;
         }
 
-        internal void OnConnectHandler()
+        internal void onConnectHandler()
         {
             this._onConnectHandler?.Invoke();
 
-            var authToken = GNNetwork.authToken;
+            var authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
             if (!string.IsNullOrEmpty(authToken))
             {
-                SendRequestAuthSocket();
+                this.sendRequestAuthSocket();
             }
 
             this._onSocketConnect?.Invoke();
             this._onSocketConnect = null;
         }
 
-        internal void OnDisconnectHandler()
+        internal void onDisconnectHandler()
         {
             this._onDisconnectHandler?.Invoke();
 
@@ -164,22 +164,22 @@ namespace XmobiTea.GN.Networking
             this._onSocketDisconnect = null;
         }
 
-        internal void SetOnEventHandler(Action<GNArray, bool> _onEventHandler)
+        internal void setOnEventHandler(Action<GNArray, bool> _onEventHandler)
         {
             this._onEventHandler = _onEventHandler;
         }
 
-        internal void OnEventHandler(GNArray obj, bool isEncrypted)
+        internal void onEventHandler(GNArray obj, bool isEncrypted)
         {
             this._onEventHandler?.Invoke(obj, isEncrypted);
         }
 
-        internal void SetOnResponseHandler(Action<GNArray, bool> _onResponseHandler)
+        internal void setOnResponseHandler(Action<GNArray, bool> _onResponseHandler)
         {
             this._onResponseHandler = _onResponseHandler;
         }
 
-        internal void OnResponseHandler(GNArray obj, bool isEncrypted)
+        internal void onResponseHandler(GNArray obj, bool isEncrypted)
         {
             this._onResponseHandler?.Invoke(obj, isEncrypted);
         }
@@ -242,7 +242,7 @@ namespace XmobiTea.GN.Networking
             return (System.Collections.IList)objects;
         }
 
-        internal void Service()
+        internal void service()
         {
             lock (this.messageLstLock)
             {
@@ -261,13 +261,13 @@ namespace XmobiTea.GN.Networking
                                 var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                                 var gnArray = new GNArray.Builder()
-                                    .AddAll(NetworkingPeerBase.fromMsgList(iList))
-                                    .Build();
-                                OnResponseHandler(gnArray, responsePacket.encrypted);
+                                    .addAll(NetworkingPeerBase.fromMsgList(iList))
+                                    .build();
+                                onResponseHandler(gnArray, responsePacket.encrypted);
                             }
                             catch (Exception ex)
                             {
-                                GNDebug.LogException(ex);
+                                GNDebug.logException(ex);
                             }
                         }
                         else
@@ -277,13 +277,13 @@ namespace XmobiTea.GN.Networking
                                 var iList = responsePacket.obj;
 
                                 var gnArray = new GNArray.Builder()
-                                    .AddAll(NetworkingPeerBase.fromJsonList(iList))
-                                    .Build();
-                                OnResponseHandler(gnArray, responsePacket.encrypted);
+                                    .addAll(NetworkingPeerBase.fromJsonList(iList))
+                                    .build();
+                                onResponseHandler(gnArray, responsePacket.encrypted);
                             }
                             catch (Exception ex)
                             {
-                                GNDebug.LogException(ex);
+                                GNDebug.logException(ex);
                             }
                         }
                     }
@@ -306,13 +306,13 @@ namespace XmobiTea.GN.Networking
                                 var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                                 var gnArray = new GNArray.Builder()
-                                    .AddAll(NetworkingPeerBase.fromMsgList(iList))
-                                    .Build();
-                                OnEventHandler(gnArray, eventPacket.encrypted);
+                                    .addAll(NetworkingPeerBase.fromMsgList(iList))
+                                    .build();
+                                onEventHandler(gnArray, eventPacket.encrypted);
                             }
                             catch (Exception ex)
                             {
-                                GNDebug.LogException(ex);
+                                GNDebug.logException(ex);
                             }
                         }
                         else
@@ -322,13 +322,13 @@ namespace XmobiTea.GN.Networking
                                 var iList = eventPacket.obj;
 
                                 var gnArray = new GNArray.Builder()
-                                    .AddAll(NetworkingPeerBase.fromJsonList(iList))
-                                    .Build();
-                                OnEventHandler(gnArray, eventPacket.encrypted);
+                                    .addAll(NetworkingPeerBase.fromJsonList(iList))
+                                    .build();
+                                onEventHandler(gnArray, eventPacket.encrypted);
                             }
                             catch (Exception ex)
                             {
-                                GNDebug.LogException(ex);
+                                GNDebug.logException(ex);
                             }
                         }
                     }

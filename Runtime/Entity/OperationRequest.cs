@@ -7,7 +7,7 @@
 
     public class OperationRequest
     {
-        public const int DefaultTimeOut = 15;
+        public const int defaultTimeOut = 15;
 
         private int operationCode;
         private int requestId;
@@ -15,83 +15,88 @@
         private bool encrypted;
         private int timeout;
 
-        public bool IsValidRequest()
+        public bool isValidRequest()
         {
             return true;
         }
 
-        public OperationRequest(int operationCode, bool encrypted = true, int timeout = DefaultTimeOut)
+        public OperationRequest(int operationCode, bool encrypted = true, int timeout = defaultTimeOut)
         {
             this.operationCode = operationCode;
             this.encrypted = encrypted;
             this.timeout = timeout;
         }
 
-        public int GetOperationCode()
+        public int getOperationCode()
         {
             return this.operationCode;
         }
 
-        public int GetRequestId()
+        public int getRequestId()
         {
             return this.requestId;
         }
 
-        public GNHashtable GetParameters()
+        public GNHashtable getParameters()
         {
             return this.parameters;
         }
 
-        public bool IsEncrypted()
+        public bool isEncrypted()
         {
             return this.encrypted;
         }
 
-        public int GetTimeout()
+        public int getTimeout()
         {
             return this.timeout;
         }
 
-        public OperationRequest SetRequestId(int requestId)
+        public OperationRequest setRequestId(int requestId)
         {
             this.requestId = requestId;
             return this;
         }
 
-        public OperationRequest SetParameter(string key, object value)
+        public OperationRequest setParameter(string key, object value)
         {
             if (this.parameters == null) this.parameters = new GNHashtable();
 
-            this.parameters.Add(key, value);
+            this.parameters.add(key, value);
 
             return this;
         }
 
-        public OperationRequest SetParameters(GNHashtable parameters)
+        public OperationRequest setParameters(GNHashtable parameters)
         {
             this.parameters = parameters;
             return this;
         }
 
-        public OperationRequest SetEncrypted(bool encrypted)
+        public OperationRequest setEncrypted(bool encrypted)
         {
             this.encrypted = encrypted;
             return this;
         }
 
-        public OperationRequest SetTimeout(int timeout)
+        public OperationRequest setTimeout(int timeout)
         {
             this.timeout = timeout;
             return this;
         }
 
-        public override string ToString()
+        public string toString()
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(this.operationCode) + ", requestId: " + this.requestId + ", parameters " + this.parameters + ", encrypted " + this.encrypted);
+            stringBuilder.Append("Code: " + CodeHelper.getOperationCodeName(this.operationCode) + ", requestId: " + this.requestId + ", parameters " + this.parameters + ", encrypted " + this.encrypted);
 
             return stringBuilder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.toString();
         }
 
     }

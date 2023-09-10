@@ -3,7 +3,7 @@ namespace XmobiTea.GN.Constant
 	public partial class OperationCode
 	{
 		public const int LoginByAdminAccount = -1;
-		public const int ChangePasswordAdminAcount = -2;
+		public const int ChangePasswordAdminAccount = -2;
 		public const int GetGameList = -3;
 		public const int GetMasterGameSettings = -4;
 		public const int SetMasterGameSettings = -5;
@@ -194,7 +194,10 @@ namespace XmobiTea.GN.Constant
 		public const int RequestDownloadFileUploadInfo = 151;
 		public const int RemoveFileUploadInfo = 152;
 		public const int GetFileUploadInfoList = 153;
+		public const int SetStoreItemInformation = 154;
 
 		private OperationCode() { }
+
 	}
+
 }

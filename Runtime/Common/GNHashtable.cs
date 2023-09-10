@@ -8,37 +8,37 @@
     {
         public class Builder
         {
-            private IDictionary<string, object> originObject;
+            private IDictionary<string, object> dict;
 
-            public Builder Add(string key, object value)
+            public Builder add(string key, object value)
             {
-                this.originObject[key] = value;
+                this.dict[key] = value;
 
                 return this;
             }
 
-            public Builder AddAll(System.Collections.IDictionary dict)
+            public Builder addAll(System.Collections.IDictionary dict)
             {
                 var keys = dict.Keys;
                 foreach (var key in keys)
                 {
                     if (key is string keyStr)
                     {
-                        this.Add(keyStr, dict[key]);
+                        this.add(keyStr, dict[key]);
                     }
                 }
 
                 return this;
             }
 
-            public GNHashtable Build()
+            public GNHashtable build()
             {
                 var awnser = new GNHashtable();
 
-                var keys = originObject.Keys;
+                var keys = this.dict.Keys;
                 foreach (var key in keys)
                 {
-                    awnser.Add(key, originObject[key]);
+                    awnser.add(key, this.dict[key]);
                 }
 
                 return awnser;
@@ -46,57 +46,57 @@
 
             public Builder()
             {
-                this.originObject = new Dictionary<string, object>();
+                this.dict = new Dictionary<string, object>();
             }
         }
 
-        private IDictionary<string, object> originObject;
+        private IDictionary<string, object> dict;
 
         public GNHashtable()
         {
-            this.originObject = new Dictionary<string, object>();
+            this.dict = new Dictionary<string, object>();
         }
 
-        public void Add(string key, object value)
+        public void add(string key, object value)
         {
-            this.originObject[key] = CreateUseDataFromOriginData(value);
+            this.dict[key] = GNData.createUseDataFromOriginData(value);
         }
 
-        public ICollection<object> Values()
+        public ICollection<object> values()
         {
-            return this.originObject.Values;
+            return this.dict.Values;
         }
 
-        public ICollection<string> Keys()
+        public ICollection<string> keys()
         {
-            return this.originObject.Keys;
+            return this.dict.Keys;
         }
 
-        public bool ContainsKey(string key)
+        public bool containsKey(string key)
         {
-            return this.originObject.ContainsKey(key);
+            return this.dict.ContainsKey(key);
         }
 
-        public void Clear()
+        public void clear()
         {
-            this.originObject.Clear();
+            this.dict.Clear();
         }
 
-        public bool Remove(string key)
+        public bool remove(string key)
         {
-            return this.originObject.Remove(key);
+            return this.dict.Remove(key);
         }
 
-        public int Count()
+        public int count()
         {
-            return this.originObject.Count;
+            return this.dict.Count;
         }
 
-        protected object Get<T>(string k, T defaultValue = default(T))
+        protected object get<T>(string k, T defaultValue = default(T))
         {
-            if (this.originObject.ContainsKey(k))
+            if (this.dict.ContainsKey(k))
             {
-                var value = this.originObject[k];
+                var value = this.dict[k];
 
                 if (value == null) return defaultValue;
 
@@ -111,107 +111,107 @@
             return defaultValue;
         }
 
-        public byte GetByte(string k, byte defaultValue = 0)
+        public byte getByte(string k, byte defaultValue = 0)
         {
-            return Convert.ToByte(this.Get(k, defaultValue));
+            return Convert.ToByte(this.get(k, defaultValue));
         }
 
-        public sbyte GetSByte(string k, sbyte defaultValue = 0)
+        public sbyte getSByte(string k, sbyte defaultValue = 0)
         {
-            return Convert.ToSByte(this.Get(k, defaultValue));
+            return Convert.ToSByte(this.get(k, defaultValue));
         }
 
-        public short GetShort(string k, short defaultValue = 0)
+        public short getShort(string k, short defaultValue = 0)
         {
-            return Convert.ToInt16(this.Get(k, defaultValue));
+            return Convert.ToInt16(this.get(k, defaultValue));
         }
 
-        public int GetInt(string k, int defaultValue = 0)
+        public int getInt(string k, int defaultValue = 0)
         {
-            return Convert.ToInt32(this.Get(k, defaultValue));
+            return Convert.ToInt32(this.get(k, defaultValue));
         }
 
-        public float GetFloat(string k, float defaultValue = 0)
+        public float getFloat(string k, float defaultValue = 0)
         {
-            return Convert.ToSingle(this.Get(k, defaultValue));
+            return Convert.ToSingle(this.get(k, defaultValue));
         }
 
-        public long GetLong(string k, long defaultValue = 0)
+        public long getLong(string k, long defaultValue = 0)
         {
-            return Convert.ToInt64(this.Get(k, defaultValue));
+            return Convert.ToInt64(this.get(k, defaultValue));
         }
 
-        public double GetDouble(string k, double defaultValue = 0)
+        public double getDouble(string k, double defaultValue = 0)
         {
-            return Convert.ToDouble(this.Get(k, defaultValue));
+            return Convert.ToDouble(this.get(k, defaultValue));
         }
 
-        public bool GetBool(string k, bool defaultValue = false)
+        public bool getBool(string k, bool defaultValue = false)
         {
-            return Convert.ToBoolean(this.Get(k, defaultValue));
+            return Convert.ToBoolean(this.get(k, defaultValue));
         }
 
-        public string GetString(string k, string defaultValue = null)
+        public string getString(string k, string defaultValue = null)
         {
-            return Convert.ToString(this.Get(k, defaultValue));
+            return Convert.ToString(this.get(k, defaultValue));
         }
 
-        public object GetObject(string k, object defaultValue = null)
+        public object getObject(string k, object defaultValue = null)
         {
-            return this.Get(k, defaultValue);
+            return this.get(k, defaultValue);
         }
 
-        public T[] GetArray<T>(string k, T[] defaultValue = null)
+        public T[] getArray<T>(string k, T[] defaultValue = null)
         {
-            var value0 = this.GetGNArray(k);
+            var value0 = this.getGNArray(k);
             if (value0 != null)
             {
-                return value0.ToArray<T>();
+                return value0.toArray<T>();
             }
 
             return defaultValue;
         }
 
-        public IList<T> GetList<T>(string k, IList<T> defaultValue = null)
+        public IList<T> getList<T>(string k, IList<T> defaultValue = null)
         {
-            var value0 = this.GetGNArray(k);
+            var value0 = this.getGNArray(k);
             if (value0 != null)
             {
-                return value0.ToList<T>();
+                return value0.toList<T>();
             }
 
             return defaultValue;
         }
 
-        public GNArray GetGNArray(string k, GNArray defaultValue = null)
+        public GNArray getGNArray(string k, GNArray defaultValue = null)
         {
-            return (GNArray)this.Get(k, defaultValue);
+            return (GNArray)this.get(k, defaultValue);
         }
 
-        public GNHashtable GetGNHashtable(string k, GNHashtable defaultValue = null)
+        public GNHashtable getGNHashtable(string k, GNHashtable defaultValue = null)
         {
-            return (GNHashtable)this.Get(k, defaultValue);
+            return (GNHashtable)this.get(k, defaultValue);
         }
 
-        public override object ToData()
+        public override object toData()
         {
             var answer = new Dictionary<string, object>();
 
-            foreach (var c in this.originObject)
+            foreach (var c in this.dict)
             {
-                answer.Add(c.Key, CreateGNDataFromUseData(c.Value));
+                answer.Add(c.Key, GNData.createDataFromUseData(c.Value));
             }
 
             return answer;
         }
 
-        public override string ToString()
+        public override string toString()
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("{");
 
             var i = 0;
-            foreach (var c in this.originObject)
+            foreach (var c in this.dict)
             {
                 if (i != 0) stringBuilder.Append(",");
 
@@ -226,6 +226,11 @@
 
             stringBuilder.Append("}");
             return stringBuilder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.toString();
         }
 
     }

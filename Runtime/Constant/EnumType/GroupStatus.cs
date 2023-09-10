@@ -6,5 +6,7 @@
 		WaitingAccept = 1,
 		SentRequestAndWaitingAccept = 2,
 		NotMember = 3,
+
 	}
+
 }

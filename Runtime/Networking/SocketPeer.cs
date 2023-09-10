@@ -5,14 +5,11 @@
     using System.Linq;
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Config;
-    using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Logger;
 
     internal class SocketPeer : PeerBase
     {
-        //private const string authTokenFormat = "{\"authtoken\":$authtoken}";
-
         private NetworkingPeerBase networkingPeerBase;
 
         internal string getClientId() => this.networkingPeerBase?.clientId;
@@ -23,12 +20,12 @@
 
         private Action<OperationEvent> _onEventHandler;
 
-        internal void SendRequestAuthSocket()
+        internal void sendRequestAuthSocket()
         {
-            this.networkingPeerBase.SendRequestAuthSocket();
+            this.networkingPeerBase.sendRequestAuthSocket();
         }
 
-        void SubscriberServerEventHandler()
+        void subscriberServerEventHandler()
         {
             if (this.serverEventHandlersDic == null) this.serverEventHandlersDic = new Dictionary<int, List<IServerEventHandler>>();
             else this.serverEventHandlersDic.Clear();
@@ -45,15 +42,15 @@
                 {
                     List<IServerEventHandler> serverEventHandlers;
 
-                    if (!this.serverEventHandlersDic.ContainsKey(srvMsg.GetEventCode()))
+                    if (!this.serverEventHandlersDic.ContainsKey(srvMsg.getEventCode()))
                     {
                         serverEventHandlers = new List<IServerEventHandler>();
 
-                        this.serverEventHandlersDic[srvMsg.GetEventCode()] = serverEventHandlers;
+                        this.serverEventHandlersDic[srvMsg.getEventCode()] = serverEventHandlers;
                     }
                     else
                     {
-                        serverEventHandlers = this.serverEventHandlersDic[srvMsg.GetEventCode()];
+                        serverEventHandlers = this.serverEventHandlersDic[srvMsg.getEventCode()];
                     }
 
                     serverEventHandlers.Add(srvMsg);
@@ -61,16 +58,14 @@
             }
         }
 
-        internal override void InitGNSocketObject()
+        internal override void initGNSocketObject()
         {
-            base.InitGNSocketObject();
-
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
 
-            this.isUsing = gnServerSettings.useSocket;
+            this.isUse = gnServerSettings.isUseSocket();
 
-            var peerSocketVersion = gnServerSettings.peerSocketVersion;
+            var peerSocketVersion = gnServerSettings.getPeerSocketVersion();
 
             if (peerSocketVersion == PeerSocketVersion.V3)
             {
@@ -90,92 +85,91 @@
                 }
             }
 
-            this.networkingPeerBase.Init(gnServerSettings.SocketUrl, gnServerSettings.reconnectDelay, gnServerSettings.pingInterval, gnServerSettings.pingTimeout);
-            this.networkingPeerBase.ReInitNewSocket();
+            this.networkingPeerBase.init(gnServerSettings.getSocketUrl(), gnServerSettings.getReconnectDelay(), gnServerSettings.getPingInterval(), gnServerSettings.getPingTimeout());
+            this.networkingPeerBase.reInitNewSocket();
 
-            this.networkingPeerBase.SetOnEventHandler(OnEventHandler);
-            this.networkingPeerBase.SetOnResponseHandler(OnResponseHandler);
+            this.networkingPeerBase.setOnEventHandler(this.onEventHandler);
+            this.networkingPeerBase.setOnResponseHandler(this.onResponseHandler);
 
-            SubscriberServerEventHandler();
+            this.subscriberServerEventHandler();
         }
 
-        internal void SetOnConnectHandler(Action _onConnectHandler)
+        internal void setOnConnectHandler(Action _onConnectHandler)
         {
-            this.networkingPeerBase.SetOnConnectHandler(_onConnectHandler);
+            this.networkingPeerBase.setOnConnectHandler(_onConnectHandler);
         }
 
-        internal void SetOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void setOnDisconnectHandler(Action _onDisconnectHandler)
         {
-            this.networkingPeerBase.SetOnDisconnectHandler(_onDisconnectHandler);
+            this.networkingPeerBase.setOnDisconnectHandler(_onDisconnectHandler);
         }
 
-        internal void RemoveOnConnectHandler(Action _onConnectHandler)
+        internal void removeOnConnectHandler(Action _onConnectHandler)
         {
-            this.networkingPeerBase.RemoveOnConnectHandler(_onConnectHandler);
+            this.networkingPeerBase.removeOnConnectHandler(_onConnectHandler);
         }
 
-        internal void RemoveOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
         {
-            this.networkingPeerBase.RemoveOnDisconnectHandler(_onDisconnectHandler);
+            this.networkingPeerBase.removeOnDisconnectHandler(_onDisconnectHandler);
         }
 
-        internal void Connect(Action _onSocketConnect)
+        internal void connect(Action _onSocketConnect)
         {
-            this.networkingPeerBase.Connect(_onSocketConnect);
+            this.networkingPeerBase.connect(_onSocketConnect);
         }
 
-        internal void Disconnect(Action _onSocketDisconnect)
+        internal void disconnect(Action _onSocketDisconnect)
         {
-            this.networkingPeerBase.Close(_onSocketDisconnect);
+            this.networkingPeerBase.close(_onSocketDisconnect);
         }
 
-        internal void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        internal void setOnEventHandler(Action<OperationEvent> _onEventHandler)
         {
             this._onEventHandler = _onEventHandler;
         }
 
-        internal override void Send(OperationPending operationPending)
+        internal override void send(OperationPending operationPending)
         {
-            base.Send(operationPending);
+            base.send(operationPending);
 
-            GNDebug.Log("[GN Socket SEND] " + operationPending.GetOperationRequest().ToString());
+            GNDebug.log("[GN Socket SEND] " + operationPending.getOperationRequest().ToString());
 
-            var operationRequest = operationPending.GetOperationRequest();
+            //var operationRequest = operationPending.getOperationRequest();
 
-            var authToken = operationPending.GetAuthToken();
+            //if (string.IsNullOrEmpty(authToken))
+            //{
+            //    if (!this.isOperationCanSendWithoutAuthorized(operationRequest.getOperationCode()))
+            //    {
+            //        var obj = new GNArray();
 
-            if (string.IsNullOrEmpty(authToken))
-            {
-                if (!GNNetwork.gnServerSettings.codeCanSendNotAuthorized.Contains(operationRequest.GetOperationCode()))
-                {
-                    var obj = new GNArray();
+            //        obj.add((int)ReturnCode.OperationNotAuthorized);
+            //        obj.add(null);
+            //        obj.add(operationRequest.getRequestId());
 
-                    obj.Add((int)ReturnCode.OperationNotAuthorized);
-                    obj.Add(null);
-                    obj.Add(operationRequest.GetRequestId());
+            //        onResponseHandler(obj, operationRequest.isEncrypted());
 
-                    OnResponseHandler(obj, operationRequest.IsEncrypted());
+            //        return;
+            //    }
+            //}
 
-                    return;
-                }
-            }
+            var authToken = operationPending.getAuthToken();
+            var secretKey = operationPending.getSecretKey();
+            var customTags = operationPending.getCustomTags();
 
-            var secretKey = operationPending.GetSecretKey();
-            var customTags = operationPending.GetCustomTags();
-
-            this.networkingPeerBase.Send(operationPending.GetRequestType(), operationPending.GetRequestRole(), operationPending.GetOperationRequest(), authToken, secretKey, customTags);
+            this.networkingPeerBase.Send(operationPending.getRequestType(), operationPending.getRequestRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags);
         }
 
-        internal void OnEventHandler(GNArray obj, bool isEncrypted)
+        internal void onEventHandler(GNArray obj, bool isEncrypted)
         {
-            var eventCode = obj.GetInt(0);
+            var eventCode = obj.getInt(0);
 
-            var operationEvent = new OperationEvent(eventCode, obj.GetGNHashtable(1));
-            operationEvent.SetEncrypted(isEncrypted);
+            var operationEvent = new OperationEvent(eventCode, obj.getGNHashtable(1));
+            operationEvent.setEncrypted(isEncrypted);
 
-            GNDebug.Log("[GN Socket EVENT] " + operationEvent.ToString());
+            GNDebug.log("[GN Socket EVENT] " + operationEvent.toString());
 
-            _onEventHandler?.Invoke(operationEvent);
+            this._onEventHandler?.Invoke(operationEvent);
 
             if (!this.serverEventHandlersDic.ContainsKey(eventCode))
             {
@@ -185,14 +179,14 @@
             var serverEventHandlers = this.serverEventHandlersDic[eventCode];
 
             foreach (var serverEventHandler in serverEventHandlers)
-                serverEventHandler.Handle(operationEvent);
+                serverEventHandler.handle(operationEvent);
         }
 
-        public override void Service()
+        public override void service()
         {
-            base.Service();
+            base.service();
 
-            networkingPeerBase?.Service();
+            this.networkingPeerBase?.service();
         }
 
         //internal static string Auth(BestHTTP.SocketIO3.SocketManager socketManager, BestHTTP.SocketIO3.Socket socket)

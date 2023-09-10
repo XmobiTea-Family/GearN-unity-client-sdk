@@ -4,36 +4,39 @@
     using System.Collections.Generic;
     using System.Text;
 
+    /// <summary>
+    /// The GNData array, it store Array can be use to request or response 
+    /// </summary>
     public class GNArray : GNData
     {
         public class Builder
         {
-            private List<object> originArray;
+            private List<object> array;
 
-            public Builder Add(object value)
+            public Builder add(object value)
             {
-                originArray.Add(value);
+                this.array.Add(value);
 
                 return this;
             }
 
-            public Builder AddAll(System.Collections.IList list)
+            public Builder addAll(System.Collections.IList list)
             {
                 foreach (var o in list)
                 {
-                    Add(o);
+                    this.add(o);
                 }
 
                 return this;
             }
 
-            public GNArray Build()
+            public GNArray build()
             {
                 var awnser = new GNArray();
 
-                foreach (var o in originArray)
+                foreach (var o in this.array)
                 {
-                    awnser.Add(o);
+                    awnser.add(o);
                 }
 
                 return awnser;
@@ -41,49 +44,49 @@
 
             public Builder()
             {
-                originArray = new List<object>();
+                this.array = new List<object>();
             }
         }
 
-        private List<object> originArray;
+        private List<object> array;
 
         public GNArray()
         {
-            this.originArray = new List<object>();
+            this.array = new List<object>();
         }
 
-        public void Add(object value)
+        public void add(object value)
         {
-            this.originArray.Add(CreateUseDataFromOriginData(value));
+            this.array.Add(GNData.createUseDataFromOriginData(value));
         }
 
-        public ICollection<object> Values()
+        public ICollection<object> values()
         {
-            return this.originArray;
+            return this.array;
         }
 
-        public void Clear()
+        public void clear()
         {
-            this.originArray.Clear();
+            this.array.Clear();
         }
 
-        public bool Remove(int index)
+        public bool remove(int index)
         {
-            this.originArray.RemoveAt(index);
+            this.array.RemoveAt(index);
 
             return true;
         }
 
-        public int Count()
+        public int count()
         {
-            return this.originArray.Count;
+            return this.array.Count;
         }
 
-        protected object Get<T>(int k, T defaultValue = default(T))
+        protected object get<T>(int k, T defaultValue = default(T))
         {
-            if (k < 0 || k > this.originArray.Count - 1) return defaultValue;
+            if (k < 0 || k > this.array.Count - 1) return defaultValue;
 
-            var value = this.originArray[k];
+            var value = this.array[k];
 
             if (value == null) return defaultValue;
 
@@ -95,155 +98,155 @@
             return value;
         }
 
-        public T[] ToArray<T>()
+        public T[] toArray<T>()
         {
-            var answer = new T[this.originArray.Count];
+            var answer = new T[this.array.Count];
 
-            for (var i = 0; i < this.originArray.Count; i++)
+            for (var i = 0; i < this.array.Count; i++)
             {
-                answer[i] = (T)this.CustomGet(i);
+                answer[i] = (T)this.customGet(i);
             }
 
             return answer;
         }
 
-        public IList<T> ToList<T>()
+        public IList<T> toList<T>()
         {
             var answer = new List<T>();
 
-            for (var i = 0; i < this.originArray.Count; i++)
+            for (var i = 0; i < this.array.Count; i++)
             {
-                answer.Add((T)this.CustomGet(i));
+                answer.Add((T)this.customGet(i));
             }
 
             return answer;
         }
 
-        private object CustomGet(int k)
+        private object customGet(int k)
         {
-            var obj = this.Get<object>(k);
+            var obj = this.get<object>(k);
             if (obj == null) return null;
 
             var objType = obj.GetType();
-            if (objType == typeof(byte)) return this.GetByte(k);
-            else if (objType == typeof(sbyte)) return this.GetSByte(k);
-            else if (objType == typeof(short)) return this.GetShort(k);
-            else if (objType == typeof(int)) return this.GetInt(k);
-            else if (objType == typeof(float)) return this.GetFloat(k);
-            else if (objType == typeof(long)) return this.GetLong(k);
-            else if (objType == typeof(double)) return this.GetDouble(k);
-            else if (objType == typeof(bool)) return this.GetBool(k);
-            else if (objType == typeof(string)) return this.GetString(k);
-            else if (objType == typeof(GNArray) || objType == typeof(System.Collections.IList)) return this.GetGNArray(k);
-            else if (objType == typeof(GNHashtable) || objType == typeof(System.Collections.IDictionary)) return this.GetGNHashtable(k);
+            if (objType == typeof(byte)) return this.getByte(k);
+            else if (objType == typeof(sbyte)) return this.getSByte(k);
+            else if (objType == typeof(short)) return this.getShort(k);
+            else if (objType == typeof(int)) return this.getInt(k);
+            else if (objType == typeof(float)) return this.getFloat(k);
+            else if (objType == typeof(long)) return this.getLong(k);
+            else if (objType == typeof(double)) return this.getDouble(k);
+            else if (objType == typeof(bool)) return this.getBool(k);
+            else if (objType == typeof(string)) return this.getString(k);
+            else if (objType == typeof(GNArray) || objType == typeof(System.Collections.IList)) return this.getGNArray(k);
+            else if (objType == typeof(GNHashtable) || objType == typeof(System.Collections.IDictionary)) return this.getGNHashtable(k);
 
             return obj;
         }
 
-        public byte GetByte(int k, byte defaultValue = 0)
+        public byte getByte(int k, byte defaultValue = 0)
         {
-            return Convert.ToByte(this.Get(k, defaultValue));
+            return Convert.ToByte(this.get(k, defaultValue));
         }
 
-        public sbyte GetSByte(int k, sbyte defaultValue = 0)
+        public sbyte getSByte(int k, sbyte defaultValue = 0)
         {
-            return Convert.ToSByte(this.Get(k, defaultValue));
+            return Convert.ToSByte(this.get(k, defaultValue));
         }
 
-        public short GetShort(int k, short defaultValue = 0)
+        public short getShort(int k, short defaultValue = 0)
         {
-            return Convert.ToInt16(this.Get(k, defaultValue));
+            return Convert.ToInt16(this.get(k, defaultValue));
         }
 
-        public int GetInt(int k, int defaultValue = 0)
+        public int getInt(int k, int defaultValue = 0)
         {
-            return Convert.ToInt32(this.Get(k, defaultValue));
+            return Convert.ToInt32(this.get(k, defaultValue));
         }
 
-        public float GetFloat(int k, float defaultValue = 0)
+        public float getFloat(int k, float defaultValue = 0)
         {
-            return Convert.ToSingle(this.Get(k, defaultValue));
+            return Convert.ToSingle(this.get(k, defaultValue));
         }
 
-        public long GetLong(int k, long defaultValue = 0)
+        public long getLong(int k, long defaultValue = 0)
         {
-            return Convert.ToInt64(this.Get(k, defaultValue));
+            return Convert.ToInt64(this.get(k, defaultValue));
         }
 
-        public double GetDouble(int k, double defaultValue = 0)
+        public double getDouble(int k, double defaultValue = 0)
         {
-            return Convert.ToDouble(this.Get(k, defaultValue));
+            return Convert.ToDouble(this.get(k, defaultValue));
         }
 
-        public bool GetBool(int k, bool defaultValue = false)
+        public bool getBool(int k, bool defaultValue = false)
         {
-            return Convert.ToBoolean(this.Get(k, defaultValue));
+            return Convert.ToBoolean(this.get(k, defaultValue));
         }
 
-        public string GetString(int k, string defaultValue = null)
+        public string getString(int k, string defaultValue = null)
         {
-            return Convert.ToString(this.Get(k, defaultValue));
+            return Convert.ToString(this.get(k, defaultValue));
         }
 
-        public object GetObject(int k, object defaultValue = null)
+        public object getObject(int k, object defaultValue = null)
         {
-            return this.Get(k, defaultValue);
+            return this.get(k, defaultValue);
         }
 
-        public T[] GetArray<T>(int k, T[] defaultValue = null)
+        public T[] getArray<T>(int k, T[] defaultValue = null)
         {
-            var value0 = this.GetGNArray(k);
+            var value0 = this.getGNArray(k);
             if (value0 != null)
             {
-                return value0.ToArray<T>();
+                return value0.toArray<T>();
             }
 
             return defaultValue;
         }
 
-        public IList<T> GetList<T>(int k, IList<T> defaultValue = null)
+        public IList<T> getList<T>(int k, IList<T> defaultValue = null)
         {
-            var value0 = this.GetGNArray(k);
+            var value0 = this.getGNArray(k);
             if (value0 != null)
             {
-                return value0.ToList<T>();
+                return value0.toList<T>();
             }
 
             return defaultValue;
         }
 
-        public GNArray GetGNArray(int k, GNArray defaultValue = null)
+        public GNArray getGNArray(int k, GNArray defaultValue = null)
         {
-            return (GNArray)this.Get(k, defaultValue);
+            return (GNArray)this.get(k, defaultValue);
         }
 
-        public GNHashtable GetGNHashtable(int k, GNHashtable defaultValue = null)
+        public GNHashtable getGNHashtable(int k, GNHashtable defaultValue = null)
         {
-            return (GNHashtable)this.Get(k, defaultValue);
+            return (GNHashtable)this.get(k, defaultValue);
         }
 
-        public override object ToData()
+        public override object toData()
         {
             var answer = new List<object>();
 
-            foreach (var c in originArray)
+            foreach (var c in this.array)
             {
-                answer.Add(CreateGNDataFromUseData(c));
+                answer.Add(GNData.createDataFromUseData(c));
             }
 
             return answer;
         }
 
-        public override string ToString()
+        public override string toString()
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("[");
 
-            for (var i = 0; i < originArray.Count; i++)
+            for (var i = 0; i < this.array.Count; i++)
             {
                 if (i != 0) stringBuilder.Append(",");
 
-                var value = originArray[i];
+                var value = this.array[i];
 
                 if (value == null) stringBuilder.Append("null");
                 else if (value is GNData gnData) stringBuilder.Append(gnData.ToString());
@@ -254,6 +257,11 @@
 
             stringBuilder.Append("]");
             return stringBuilder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.toString();
         }
 
     }

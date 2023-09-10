@@ -2,7 +2,9 @@
 {
     public interface IGNData
     {
-        object ToData();
+        object toData();
+
+        string toString();
 
     }
 

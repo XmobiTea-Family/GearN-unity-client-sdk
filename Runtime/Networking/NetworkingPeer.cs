@@ -11,32 +11,26 @@
         private IPeer socketPeer;
         private IPeer httpPeer;
 
-        internal string authToken = string.Empty;
-        internal string userId = string.Empty;
+        internal AuthenticateStatus authenticateStatus;
 
-        internal AuthenticateStatus authenticateStatus = new AuthenticateStatus();
-
-        internal int ping
+        internal int getPing()
         {
-            get
+            var count = 0;
+            var totalPing = 0;
+
+            if (this.httpPeer.isUsing())
             {
-                var count = 0;
-                var totalPing = 0;
-
-                if (this.httpPeer.IsUsing())
-                {
-                    count++;
-                    totalPing += ((PeerBase)this.httpPeer).ping;
-                }
-
-                if (this.socketPeer.IsUsing())
-                {
-                    count++;
-                    totalPing += ((PeerBase)this.socketPeer).ping;
-                }
-
-                return totalPing / count;
+                count++;
+                totalPing += ((PeerBase)this.httpPeer).ping;
             }
+
+            if (this.socketPeer.isUsing())
+            {
+                count++;
+                totalPing += ((PeerBase)this.socketPeer).ping;
+            }
+
+            return totalPing / count;
         }
 
         internal string getClientId() => (this.socketPeer as SocketPeer).getClientId();
@@ -44,82 +38,103 @@
         private long lastCurrentServerMilliseconds;
         private float lastGetCurrentMilliseconds;
 
-        internal void SetServerTimeMilliseconds(long currentServerMilliseconds)
+        internal void setServerTimeMilliseconds(long currentServerMilliseconds)
         {
-            lastCurrentServerMilliseconds = currentServerMilliseconds;
-            lastGetCurrentMilliseconds = UnityEngine.Time.realtimeSinceStartup;
+            this.lastCurrentServerMilliseconds = currentServerMilliseconds;
+            this.lastGetCurrentMilliseconds = UnityEngine.Time.realtimeSinceStartup;
         }
 
-        internal long serverTimestamp => lastCurrentServerMilliseconds + (int)((UnityEngine.Time.realtimeSinceStartup - lastGetCurrentMilliseconds) * 1000);
-
-        internal void InitPeer()
+        internal long getServerTimestamp()
         {
-            SetServerTimeMilliseconds(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+            return this.lastCurrentServerMilliseconds + (int)((UnityEngine.Time.realtimeSinceStartup - this.lastGetCurrentMilliseconds) * 1000);
+        }
+
+        internal void initPeer()
+        {
+            setServerTimeMilliseconds(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 
+            this.authenticateStatus = new AuthenticateStatus();
+
             this.httpPeer = this.gameObject.AddComponent<HttpPeer>();
-            this.httpPeer.InitPeer();
+            this.httpPeer.initPeer();
 
             this.socketPeer = this.gameObject.AddComponent<SocketPeer>();
-            this.socketPeer.InitPeer();
+            this.socketPeer.initPeer();
         }
 
         private void Update()
         {
-            this.httpPeer?.Service();
-            this.socketPeer?.Service();
+            this.httpPeer?.service();
+            this.socketPeer?.service();
         }
 
-        internal void SendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
+        internal void sendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
-            this.socketPeer.Enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
+            if (authToken == null) authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
+            if (secretKey == null)
+            {
+                if (requestRole == RequestRole.Admin) secretKey = GNNetwork.gnServerSettings.getAdminSecretKey();
+                else if (requestRole == RequestRole.Server) secretKey = GNNetwork.gnServerSettings.getServerSecretKey();
+                else if (requestRole == RequestRole.Client) secretKey = GNNetwork.gnServerSettings.getClientSecretKey();
+            }
+
+            this.socketPeer.enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
         }
 
-        internal void SendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
+        internal void sendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
-            this.httpPeer.Enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
+            if (authToken == null) authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
+            if (secretKey == null)
+            {
+                if (requestRole == RequestRole.Admin) secretKey = GNNetwork.gnServerSettings.getAdminSecretKey();
+                else if (requestRole == RequestRole.Server) secretKey = GNNetwork.gnServerSettings.getServerSecretKey();
+                else if (requestRole == RequestRole.Client) secretKey = GNNetwork.gnServerSettings.getClientSecretKey();
+            }
+
+            this.httpPeer.enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
         }
 
-        internal void SendRequestAuthSocket()
+        internal void sendRequestAuthSocket()
         {
-            (this.socketPeer as SocketPeer).SendRequestAuthSocket();
+            (this.socketPeer as SocketPeer).sendRequestAuthSocket();
         }
 
-        internal void ConnectSocket(Action _onSocketConnect)
+        internal void connectSocket(Action _onSocketConnect)
         {
-            (this.socketPeer as SocketPeer).Connect(_onSocketConnect);
+            (this.socketPeer as SocketPeer).connect(_onSocketConnect);
         }
 
-        internal void DisconnectSocket(Action _onSocketDisconnect)
+        internal void disconnectSocket(Action _onSocketDisconnect)
         {
-            (this.socketPeer as SocketPeer).Disconnect(_onSocketDisconnect);
+            (this.socketPeer as SocketPeer).disconnect(_onSocketDisconnect);
         }
 
-        internal void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        internal void setOnEventHandler(Action<OperationEvent> _onEventHandler)
         {
-            (this.socketPeer as SocketPeer).SetOnEventHandler(_onEventHandler);
+            (this.socketPeer as SocketPeer).setOnEventHandler(_onEventHandler);
         }
 
-        internal void SetOnConnectHandler(Action _onConnectHandler)
+        internal void setOnConnectHandler(Action _onConnectHandler)
         {
-            (this.socketPeer as SocketPeer).SetOnConnectHandler(_onConnectHandler);
+            (this.socketPeer as SocketPeer).setOnConnectHandler(_onConnectHandler);
         }
 
-        internal void SetOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void setOnDisconnectHandler(Action _onDisconnectHandler)
         {
-            (this.socketPeer as SocketPeer).SetOnDisconnectHandler(_onDisconnectHandler);
+            (this.socketPeer as SocketPeer).setOnDisconnectHandler(_onDisconnectHandler);
         }
 
-        internal void RemoveOnConnectHandler(Action _onConnectHandler)
+        internal void removeOnConnectHandler(Action _onConnectHandler)
         {
-            (this.socketPeer as SocketPeer).RemoveOnConnectHandler(_onConnectHandler);
+            (this.socketPeer as SocketPeer).removeOnConnectHandler(_onConnectHandler);
         }
 
-        internal void RemoveOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
         {
-            (this.socketPeer as SocketPeer).RemoveOnDisconnectHandler(_onDisconnectHandler);
+            (this.socketPeer as SocketPeer).removeOnDisconnectHandler(_onDisconnectHandler);
         }
 
     }

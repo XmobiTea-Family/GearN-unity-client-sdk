@@ -12,181 +12,158 @@
     using XmobiTea.GN.Entity.Response;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Helper;
 
     public static partial class GNNetwork
     {
         private const string GN_VERSION = "0.0.1";
 
-        private const string AUTH_TOKEN_KEY = "[GN]_AUTH_TOKEN_KEY";
-        private const string AUTH_TOKEN_TS_EXPIRE_KEY = "[GN]_AUTH_TOKEN_TS_EXPIRE_KEY";
-        private const string USER_ID_KEY = "[GN]_USER_ID_KEY";
+        internal const string AUTH_TOKEN_KEY = "[GN]_AUTH_TOKEN_KEY";
+        internal const string AUTH_TOKEN_TS_EXPIRE_KEY = "[GN]_AUTH_TOKEN_TS_EXPIRE_KEY";
+        internal const string USER_ID_KEY = "[GN]_USER_ID_KEY";
 
         public static GNServerSettings gnServerSettings { get; private set; }
 
         internal static NetworkingPeer peer { get; private set; }
 
-        public static int getPing() => peer != null ? peer.ping : -1;
+        public static int getPing() => GNNetwork.peer != null ? GNNetwork.peer.getPing() : -1;
 
-        public static string getSocketSId() => peer != null ? peer.getClientId() : null;
+        public static string getSocketSId() => GNNetwork.peer != null ? GNNetwork.peer.getClientId() : null;
 
-        public static bool isSocketConnected() => !string.IsNullOrEmpty(getSocketSId());
+        public static bool isSocketConnected() => !string.IsNullOrEmpty(GNNetwork.getSocketSId());
 
-        public static long getServerTimestamp() => peer != null ? peer.serverTimestamp : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public static long getServerTimestamp() => GNNetwork.peer != null ? GNNetwork.peer.getServerTimestamp() : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
-        public static AuthenticateStatus getAuthenticateStatus() => peer.authenticateStatus;
-
-        public static string authToken
-        {
-            get { return peer.authToken; }
-            set
-            {
-                peer.authToken = value;
-
-                PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, value);
-
-                peer.SendRequestAuthSocket();
-            }
-        }
-
-        public static string userId
-        {
-            get { return peer.userId; }
-            set
-            {
-                peer.userId = value;
-
-                PlayerPrefs.SetString(GNNetwork.USER_ID_KEY, value);
-            }
-        }
+        public static AuthenticateStatus getAuthenticateStatus() => GNNetwork.peer.authenticateStatus;
 
         public static RuntimePlatform getPlatform() => Application.platform;
 
         static GNNetwork()
         {
-            InitServerSettings();
-            InitGNDebug();
+            GNNetwork.initServerSettings();
+            GNNetwork.initGNDebug();
 
             if (!Application.isPlaying) return;
 
-            InitGNSocketObject();
+            GNNetwork.initGNSocketObject();
 
-            peer.authenticateStatus.setAuthToken(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_KEY, string.Empty));
-            peer.authenticateStatus.setAuthTokenTsExpire(long.Parse(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_TS_EXPIRE_KEY, "-1")));
-            peer.authenticateStatus.setUserId(PlayerPrefs.GetString(GNNetwork.USER_ID_KEY, string.Empty));
+            GNNetwork.peer.authenticateStatus.setAuthToken(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_KEY, string.Empty));
+            GNNetwork.peer.authenticateStatus.setAuthTokenTsExpire(long.Parse(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_TS_EXPIRE_KEY, "-1")));
+            GNNetwork.peer.authenticateStatus.setUserId(PlayerPrefs.GetString(GNNetwork.USER_ID_KEY, string.Empty));
         }
 
-        public static string GetClientSdkVersion()
+        public static string getClientSdkVersion()
         {
-            return GN_VERSION;
+            return GNNetwork.GN_VERSION;
         }
 
-        private static void InitServerSettings()
+        private static void initServerSettings()
         {
-            gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
-            if (gnServerSettings == null)
+            GNNetwork.gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
+            if (GNNetwork.gnServerSettings == null)
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.ExecuteMenuItem("XmobiTea GN/Open Settings");
-                gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
-                if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
+                GNNetwork.gnServerSettings = Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
+                if (GNNetwork.gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 #endif
             }
         }
 
-        private static void InitGNDebug()
+        private static void initGNDebug()
         {
-            if (gnServerSettings == null) throw new NullReferenceException("Null EUN Server Settings, please find it now");
+            if (GNNetwork.gnServerSettings == null) throw new NullReferenceException("Null EUN Server Settings, please find it now");
 
-            GNDebug.logType = gnServerSettings.logType;
+            GNDebug.logType = GNNetwork.gnServerSettings.getLogType();
         }
 
-        private static void InitGNSocketObject()
+        private static void initGNSocketObject()
         {
-            peer = new GameObject("GN NetworkingPeer").AddComponent<NetworkingPeer>();
-            GameObject.DontDestroyOnLoad(peer.gameObject);
+            GNNetwork.peer = new GameObject("GN NetworkingPeer").AddComponent<NetworkingPeer>();
+            GameObject.DontDestroyOnLoad(GNNetwork.peer.gameObject);
 
-            peer.InitPeer();
+            GNNetwork.peer.initPeer();
         }
 
-        public static void SendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static void sendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
-            peer.SendViaSocket(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.peer.sendViaSocket(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static void sendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
-            peer.SendViaHttp(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.peer.sendViaHttp(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaSocket<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
+        public static void sendViaSocket<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
-            SendViaSocket(request.GetRequestType(), request.GetRequestRole(), request.Build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaSocket(request.getRequestType(), request.getRequestRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaHttp<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
+        public static void sendViaHttp<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
-            SendViaHttp(request.GetRequestType(), request.GetRequestRole(), request.Build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(request.getRequestType(), request.getRequestRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaSocket<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static void sendViaSocket<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
-            SendViaSocket(requestType, requestRole, request, response =>
+            GNNetwork.sendViaSocket(requestType, requestRole, request, response =>
             {
                 if (response == null) return;
 
                 var customOperationResponse = new TResponse() { };
-                customOperationResponse.SetupOperationResponse(response);
+                customOperationResponse.setupOperationResponse(response);
 
                 onResponse?.Invoke(customOperationResponse);
             }, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void SendViaHttp<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static void sendViaHttp<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
-            SendViaHttp(requestType, requestRole, request, response =>
+            GNNetwork.sendViaHttp(requestType, requestRole, request, response =>
             {
                 if (response == null) return;
 
                 var customOperationResponse = new TResponse() { };
-                customOperationResponse.SetupOperationResponse(response);
+                customOperationResponse.setupOperationResponse(response);
 
                 onResponse?.Invoke(customOperationResponse);
             }, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public static void ConnectSocket(Action _onSocketConnect = null)
+        public static void connectSocket(Action _onSocketConnect = null)
         {
-            peer.ConnectSocket(_onSocketConnect);
+            GNNetwork.peer.connectSocket(_onSocketConnect);
         }
 
-        public static void DisconnectSocket(Action _onSocketDisconnect = null)
+        public static void disconnectSocket(Action _onSocketDisconnect = null)
         {
-            peer.DisconnectSocket(_onSocketDisconnect);
+            GNNetwork.peer.disconnectSocket(_onSocketDisconnect);
         }
 
-        public static void SetOnEventHandler(Action<OperationEvent> _onEventHandler)
+        public static void setOnEventHandler(Action<OperationEvent> _onEventHandler)
         {
-            peer.SetOnEventHandler(_onEventHandler);
+            GNNetwork.peer.setOnEventHandler(_onEventHandler);
         }
 
-        public static void SubscriberOnConnectHandler(Action onConnectHandler)
+        public static void subscriberOnConnectHandler(Action onConnectHandler)
         {
-            peer.SetOnConnectHandler(onConnectHandler);
+            GNNetwork.peer.setOnConnectHandler(onConnectHandler);
         }
 
-        public static void SubscriberOnDisconnectHandler(Action onDisconnectHandler)
+        public static void subscriberOnDisconnectHandler(Action onDisconnectHandler)
         {
-            peer.SetOnDisconnectHandler(onDisconnectHandler);
+            GNNetwork.peer.setOnDisconnectHandler(onDisconnectHandler);
         }
 
-        public static void UnscriberOnConnectHandler(Action onConnectHandler)
+        public static void unscriberOnConnectHandler(Action onConnectHandler)
         {
-            peer.RemoveOnConnectHandler(onConnectHandler);
+            GNNetwork.peer.removeOnConnectHandler(onConnectHandler);
         }
 
-        public static void UnsubscriberOnDisconnectHandler(Action onDisconnectHandler)
+        public static void unsubscriberOnDisconnectHandler(Action onDisconnectHandler)
         {
-            peer.RemoveOnDisconnectHandler(onDisconnectHandler);
+            GNNetwork.peer.removeOnDisconnectHandler(onDisconnectHandler);
         }
 
     }

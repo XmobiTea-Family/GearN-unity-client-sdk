@@ -23,17 +23,17 @@
             this.serverVersion = serverVersion;
         }
 
-        internal override void SendRequestAuthSocket()
+        internal override void sendRequestAuthSocket()
         {
-            base.SendRequestAuthSocket();
+            base.sendRequestAuthSocket();
 
             if (!string.IsNullOrEmpty(this.clientId))
-                this.socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.authToken);
+                this.socketManager.Socket.Emit(Commands.RequestAuthTokenCmd, GNNetwork.getAuthenticateStatus().getAuthToken());
         }
 
-        internal override void ReInitNewSocket()
+        internal override void reInitNewSocket()
         {
-            base.ReInitNewSocket();
+            base.reInitNewSocket();
 
             if (this.socketManager == null)
             {
@@ -94,35 +94,35 @@
 
         private void OnConnect(Socket socket, Packet packet, object[] args)
         {
-            GNDebug.Log("[GN Socket RECV] HandleOpen " + socket.Id);
+            GNDebug.log("[GN Socket RECV] HandleOpen " + socket.Id);
 
             this.clientId = socket.Id;
 
-            this.OnConnectHandler();
+            this.onConnectHandler();
         }
 
         private void OnDisconnect(Socket socket, Packet packet, object[] args)
         {
-            GNDebug.Log("[GN Socket RECV] HandleClose ");
+            GNDebug.log("[GN Socket RECV] HandleClose ");
 
             this.clientId = string.Empty;
 
-            this.OnDisconnectHandler();
+            this.onDisconnectHandler();
         }
 
         private void OnError(Socket socket, Packet packet, object[] args)
         {
-            GNDebug.LogError(string.Format("Error: {0}", args[0].ToString()));
+            GNDebug.logError(string.Format("Error: {0}", args[0].ToString()));
         }
 
-        internal override void Init(string url, int reconnectDelay, float pingInterval, float pingTimeout)
+        internal override void init(string url, int reconnectDelay, float pingInterval, float pingTimeout)
         {
-            base.Init(url, reconnectDelay, pingInterval, pingTimeout);
+            base.init(url, reconnectDelay, pingInterval, pingTimeout);
         }
 
-        protected override void Emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags)
+        protected override void emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags)
         {
-            base.Emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
+            base.emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
 
             if (this.socketManager == null || this.socketManager.Socket == null)
             {
@@ -130,19 +130,19 @@
                 return;
             }
 
-            if (customTags != null) operationRequest.SetParameter(GNParameterCode.CustomTags, customTags);
+            if (customTags != null) operationRequest.setParameter(GNParameterCode.CustomTags, customTags);
 
-            var dataSend = OperationHelper.ToSocketData(requestType, requestRole, operationRequest);
+            var dataSend = OperationHelper.toSocketData(requestType, requestRole, operationRequest);
 
-            if (operationRequest.IsEncrypted())
+            if (operationRequest.isEncrypted())
                 this.socketManager.Socket.Emit(Commands.RequestCmd_MsgPack, MsgPackSerializer.Serialize(dataSend));
             else
                 this.socketManager.Socket.Emit(Commands.RequestCmd_Json, dataSend);
         }
 
-        internal override void Close(Action _onSocketDisconnect)
+        internal override void close(Action _onSocketDisconnect)
         {
-            base.Close(_onSocketDisconnect);
+            base.close(_onSocketDisconnect);
 
             this.isConnected = false;
 
@@ -155,25 +155,25 @@
                 }
             }
 
-            GNDebug.Log("[GN Socket] Disconnecting via SocketIOv2 BestHTTP 2");
+            GNDebug.log("[GN Socket] Disconnecting via SocketIOv2 BestHTTP 2");
 
-            OnDisconnectHandler();
+            onDisconnectHandler();
         }
 
-        internal override void Connect(Action _onSocketConnect)
+        internal override void connect(Action _onSocketConnect)
         {
-            base.Connect(_onSocketConnect);
+            base.connect(_onSocketConnect);
 
             if (this.isConnected)
             {
-                GNDebug.Log("[GN Socket] Reconnecting");
+                GNDebug.log("[GN Socket] Reconnecting");
 
                 return;
             }
 
             this.isConnected = true;
 
-            GNDebug.Log("[GN Socket] Connecting via SocketIOv2 BestHTTP 2");
+            GNDebug.log("[GN Socket] Connecting via SocketIOv2 BestHTTP 2");
 
             if (this.socketManager != null) this.socketManager.Open();
         }

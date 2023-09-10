@@ -4,28 +4,28 @@ namespace XmobiTea.GN.Entity
 {
     public class OperationHelper
     {
-        public static object ToSocketData(RequestType requestType, RequestRole requestRole, OperationRequest request)
+        public static object toSocketData(RequestType requestType, RequestRole requestRole, OperationRequest request)
         {
-            var requestId = request.GetRequestId();
+            var requestId = request.getRequestId();
 
             if (requestId == -1)
                 return new object[] {
-                    request.GetOperationCode(),
+                    request.getOperationCode(),
                     (int)requestType,
                     (int)requestRole,
-                    (request.GetParameters() == null) ? null : request.GetParameters().ToData()
+                    (request.getParameters() == null) ? null : request.getParameters().toData()
                 };
             else
                 return new object[] {
-                    request.GetOperationCode(),
+                    request.getOperationCode(),
                     (int)requestType,
                     (int)requestRole,
-                    (request.GetParameters() == null) ? null : request.GetParameters().ToData(),
+                    (request.getParameters() == null) ? null : request.getParameters().toData(),
                     requestId
                 };
         }
 
-        public static object ToHttpData(RequestType requestType, RequestRole requestRole, OperationRequest request)
+        public static object toHttpData(RequestType requestType, RequestRole requestRole, OperationRequest request)
         {
             return null;
         }

@@ -8,67 +8,67 @@
 
     public class CodeHelper
     {
-        private static string UnknownCode = "Unknown";
+        private static string unknownCode = "Unknown";
 
         private static Dictionary<int, string> operationCodeDic;
         private static Dictionary<int, string> eventCodeDic;
         private static Dictionary<int, string> returnCodeDic;
 
-        public static string GetOperationCodeName(int operationCode)
+        public static string getOperationCodeName(int operationCode)
         {
-            return operationCodeDic.ContainsKey(operationCode) ? operationCodeDic[operationCode] : UnknownCode;
+            return CodeHelper.operationCodeDic.ContainsKey(operationCode) ? CodeHelper.operationCodeDic[operationCode] : CodeHelper.unknownCode;
         }
 
-        public static string GetEventCodeName(int eventCode)
+        public static string getEventCodeName(int eventCode)
         {
-            return eventCodeDic.ContainsKey(eventCode) ? eventCodeDic[eventCode] : UnknownCode;
+            return CodeHelper.eventCodeDic.ContainsKey(eventCode) ? CodeHelper.eventCodeDic[eventCode] : CodeHelper.unknownCode;
         }
 
-        public static string GetReturnCodeName(int returnCode)
+        public static string getReturnCodeName(int returnCode)
         {
-            return returnCodeDic.ContainsKey(returnCode) ? returnCodeDic[returnCode] : UnknownCode;
+            return CodeHelper.returnCodeDic.ContainsKey(returnCode) ? CodeHelper.returnCodeDic[returnCode] : CodeHelper.unknownCode;
         }
 
         static CodeHelper()
         {
-            SetOperationCodeDic();
-            SetEventCodeDic();
-            SetReturnCodeDic();
+            setOperationCodeDic();
+            setEventCodeDic();
+            setReturnCodeDic();
         }
 
-        private static void SetOperationCodeDic()
+        private static void setOperationCodeDic()
         {
-            operationCodeDic = new Dictionary<int, string>();
+            CodeHelper.operationCodeDic = new Dictionary<int, string>();
 
             var fields = typeof(OperationCode).GetFields(BindingFlags.Public | BindingFlags.Static);
 
             foreach (var field in fields)
             {
-                operationCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
+                CodeHelper.operationCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
         }
 
-        private static void SetEventCodeDic()
+        private static void setEventCodeDic()
         {
-            eventCodeDic = new Dictionary<int, string>();
+            CodeHelper.eventCodeDic = new Dictionary<int, string>();
 
             var fields = typeof(EventCode).GetFields(BindingFlags.Public | BindingFlags.Static);
 
             foreach (var field in fields)
             {
-                eventCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
+                CodeHelper.eventCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
         }
 
-        private static void SetReturnCodeDic()
+        private static void setReturnCodeDic()
         {
-            returnCodeDic = new Dictionary<int, string>();
+            CodeHelper.returnCodeDic = new Dictionary<int, string>();
 
             var fields = typeof(ReturnCode).GetFields(BindingFlags.Public | BindingFlags.Static);
 
             foreach (var field in fields)
             {
-                returnCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
+                CodeHelper.returnCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
         }
 

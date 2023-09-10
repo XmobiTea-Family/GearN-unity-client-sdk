@@ -39,5 +39,7 @@
 		public const int ReceiptInvalid = 35;
 		public const int StoreItemHadBeenRemove = 36;
 		public const int DisplayNameHasUse = 37;
+
 	}
+
 }

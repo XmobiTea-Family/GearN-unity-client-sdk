@@ -4,5 +4,6 @@
     {
 
         private EventCode() { }
+
     }
 }

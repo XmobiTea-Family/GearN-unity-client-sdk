@@ -3,13 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using UnityEngine;
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Logger;
 
-    internal class PeerBase : UnityEngine.MonoBehaviour, IPeer
+    internal abstract class PeerBase : UnityEngine.MonoBehaviour, IPeer
     {
         private Queue<OperationPending> operationPendingQueue;
 
@@ -21,68 +21,60 @@
         private float nextSendMsgTimer;
         private float checkTimeoutOperationPending = 0;
 
-        internal int sendRate
+        protected int getSendRate()
         {
-            get => (int)(1000 / this.perMsgTimer);
-            set => this.perMsgTimer = (float)1000 / value / 1000;
+            return (int)(1000 / this.perMsgTimer);
         }
 
-        internal int ping { get; private set; } = -1;
+        protected void setSendRate(int sendRate)
+        {
+            this.perMsgTimer = (float)1000 / sendRate / 1000;
+        }
+
+        internal int ping { get; set; } = -1;
         private Queue<float> pingLst = new Queue<float>();
 
-        protected internal bool isUsing { get; protected set; }
+        protected bool isUse { get; set; }
 
-        public void InitPeer()
+        void IPeer.initPeer()
         {
             if (this.operationWaitingResponseDic == null) this.operationWaitingResponseDic = new Dictionary<int, OperationPending>();
             if (this.operationPendingQueue == null) this.operationPendingQueue = new Queue<OperationPending>();
 
-            this.InitSendRate();
-
-            this.InitGNSocketObject();
+            this.initSendRate();
+            this.initGNSocketObject();
         }
 
-        private void InitSendRate()
+        private void initSendRate()
         {
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 
-            this.sendRate = gnServerSettings.sendRate;
+            this.setSendRate(gnServerSettings.getSendRate());
         }
 
-        internal virtual void InitGNSocketObject()
-        {
+        internal abstract void initGNSocketObject();
 
-        }
-
-        void IPeer.Enqueue(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags)
+        void IPeer.enqueue(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags)
         {
-            if (!this.isUsing)
+            if (!this.isUse)
             {
-                GNDebug.LogError("[GN] Server Settings dont setup to use this to send operation request.");
+                GNDebug.logError("[GN] Server Settings dont setup to use this to send operation request.");
                 return;
-            }
-
-            if (authToken == null) authToken = GNNetwork.authToken;
-            if (secretKey == null)
-            {
-                if (requestRole == RequestRole.Admin) secretKey = GNNetwork.gnServerSettings.adminSecretKey;
-                else if (requestRole == RequestRole.Server) secretKey = GNNetwork.gnServerSettings.serverSecretKey;
-                else if (requestRole == RequestRole.Client) secretKey = GNNetwork.gnServerSettings.clientSecretKey;
             }
 
             var operationPending = new OperationPending(requestType, requestRole, operationRequest, onOperationResponse, authToken, secretKey, customTags);
             this.operationPendingQueue.Enqueue(operationPending);
         }
 
-        bool IPeer.IsUsing()
+        bool IPeer.isUsing()
         {
-            return this.isUsing;
+            return this.isUse;
         }
 
-        public virtual void Service()
+        public virtual void service()
         {
-            if (!this.isUsing) return;
+            if (!this.isUse) return;
 
             if (this.checkTimeoutOperationPending < UnityEngine.Time.time)
             {
@@ -96,15 +88,14 @@
                     {
                         var operationPending = operationPendingPair.Value;
 
-                        if (operationPending.IsTimeout())
+                        if (operationPending.isTimeout())
                         {
                             var gnArray = new GNArray();
 
-                            gnArray.Add((int)ReturnCode.OperationTimeout);
-                            gnArray.Add(null);
-                            gnArray.Add(operationPending.GetOperationRequest().GetRequestId());
-                            gnArray.Add(operationPending.GetOperationRequest().IsEncrypted());
-                            gnArray.Add(operationPending.GetCustomTags());
+                            gnArray.add((int)ReturnCode.OperationTimeout);
+                            gnArray.add(null);
+                            gnArray.add(operationPending.getOperationRequest().getRequestId());
+                            gnArray.add(operationPending.getOperationRequest().isEncrypted());
 
                             gnArrayLst.Add(gnArray);
                         }
@@ -114,7 +105,7 @@
                     {
                         foreach (var gnArray in gnArrayLst)
                         {
-                            this.OnResponseHandler(gnArray, gnArray.GetBool(3));
+                            this.onResponseHandler(gnArray, gnArray.getBool(3));
                         }
                     }
                 }
@@ -128,118 +119,121 @@
 
                     var operationPending = this.operationPendingQueue.Dequeue();
 
-                    this.Send(operationPending);
+                    this.send(operationPending);
                 }
             }
         }
 
-        internal void OnResponseHandler(GNArray obj, bool isEncrypted)
+        internal void onResponseHandler(GNArray obj, bool isEncrypted)
         {
-            var responseId = obj.GetInt(2);
+            var responseId = obj.getInt(2);
 
             if (this.operationWaitingResponseDic.ContainsKey(responseId))
             {
                 var operationPending = this.operationWaitingResponseDic[responseId];
-                operationPending.OnRecv();
+                operationPending.onRecv();
 
                 this.operationWaitingResponseDic.Remove(responseId);
 
-                var returnCode = obj.GetInt(0);
+                var returnCode = obj.getInt(0);
 
                 GNHashtable parameters = null;
                 string debugMessage = null;
                 GNArray array = null;
 
-                if (returnCode == ReturnCode.Ok) parameters = obj.GetGNHashtable(1);
-                else if (returnCode == ReturnCode.InvalidRequestParameters) array = obj.GetGNArray(1);
+                if (returnCode == ReturnCode.Ok) parameters = obj.getGNHashtable(1);
+                else if (returnCode == ReturnCode.InvalidRequestParameters) array = obj.getGNArray(1);
                 else if (returnCode == ReturnCode.OperationNotAuthorized)
                 {
 
                 }
-                else debugMessage = obj.GetString(1);
+                else debugMessage = obj.getString(1);
 
-                var operationRequest = operationPending.GetOperationRequest();
-                var operationResponse = new OperationResponse(operationRequest.GetOperationCode(), operationRequest.GetRequestId(), isEncrypted);
+                var operationRequest = operationPending.getOperationRequest();
+                var operationResponse = new OperationResponse(operationRequest.getOperationCode(), operationRequest.getRequestId(), isEncrypted);
 
-                operationResponse.SetReturnCode(returnCode);
-                operationResponse.SetDebugMessage(debugMessage);
-                operationResponse.SetParameters(parameters);
+                operationResponse.setReturnCode(returnCode);
+                operationResponse.setDebugMessage(debugMessage);
+                operationResponse.setParameters(parameters);
 
-                if (!parameters.ContainsKey(GNParameterCode.CustomTags)) parameters.Add(GNParameterCode.CustomTags, obj.GetGNHashtable(4));
+                //if (!parameters.containsKey(GNParameterCode.CustomTags)) parameters.add(GNParameterCode.CustomTags, customTags);
 
                 if (array != null)
                 {
-                    var invalidMembers = new InvalidMember[array.Count()];
-                    for (var i = 0; i < array.Count(); i++)
+                    var invalidMembers = new InvalidMember[array.count()];
+                    for (var i = 0; i < array.count(); i++)
                     {
-                        var arrChild = array.GetGNArray(i);
+                        var arrChild = array.getGNArray(i);
 
-                        invalidMembers[i] = new InvalidMember(arrChild.GetInt(0), (InvalidMemberType)arrChild.GetInt(1));
+                        invalidMembers[i] = new InvalidMember(arrChild.getInt(0), (InvalidMemberType)arrChild.getInt(1));
                     }
-                    operationResponse.SetInvalidMembers(invalidMembers);
+                    operationResponse.setInvalidMembers(invalidMembers);
                 }
 
-                if (!operationResponse.HasError())
+                if (!operationResponse.hasError())
                 {
-                    AddPing(operationPending.GetExecuteTimerInMs());
+                    addPing(operationPending.getExecuteTimerInMs());
 
                     if (parameters != null)
                     {
-                        if (parameters.ContainsKey(ParameterCode.AuthToken))
+                        if (parameters.containsKey(ParameterCode.AuthToken))
                         {
-                            var authToken = parameters.GetString(ParameterCode.AuthToken);
+                            var authToken = parameters.getString(ParameterCode.AuthToken);
 
                             GNNetwork.getAuthenticateStatus().setAuthToken(authToken);
+
+                            PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, authToken);
                         }
 
-                        if (parameters.ContainsKey(ParameterCode.UserId))
+                        if (parameters.containsKey(ParameterCode.UserId))
                         {
-                            var userId = parameters.GetString(ParameterCode.UserId);
+                            var userId = parameters.getString(ParameterCode.UserId);
 
                             GNNetwork.getAuthenticateStatus().setUserId(userId);
+
+                            PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, userId);
                         }
 
-                        if (parameters.ContainsKey(ParameterCode.Ts))
+                        if (parameters.containsKey(ParameterCode.Ts))
                         {
-                            GNNetwork.peer.SetServerTimeMilliseconds(parameters.GetLong(ParameterCode.Ts, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
+                            GNNetwork.peer.setServerTimeMilliseconds(parameters.getLong(ParameterCode.Ts, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
                         }
                     }
                 }
 
-                GNDebug.Log("[GN RECV] " + operationResponse.ToString());
+                GNDebug.log("[GN RECV] " + operationResponse.ToString());
 
-                operationPending.GetCallback()?.Invoke(operationResponse);
+                operationPending.getCallback()?.Invoke(operationResponse);
             }
             else
             {
-                GNDebug.LogError("[GN] OnResponseHandler, un available request id " + obj);
+                GNDebug.logError("[GN] OnResponseHandler, un available request id " + obj);
             }
         }
 
-        internal virtual void Send(OperationPending operationPending)
+        internal virtual void send(OperationPending operationPending)
         {
-            operationPending.OnSend();
+            operationPending.onSend();
 
-            var operationRequest = operationPending.GetOperationRequest();
+            var operationRequest = operationPending.getOperationRequest();
 
-            if (operationRequest.GetRequestId() != -1)
+            if (operationRequest.getRequestId() != -1)
             {
-                operationRequest.SetRequestId(requestId++);
+                operationRequest.setRequestId(PeerBase.requestId++);
 
-                if (operationPending.GetCallback() != null)
+                if (operationPending.getCallback() != null)
                 {
-                    this.operationWaitingResponseDic[operationRequest.GetRequestId()] = operationPending;
+                    this.operationWaitingResponseDic[operationRequest.getRequestId()] = operationPending;
                 }
             }
         }
 
-        private void AddPing(float value)
+        private void addPing(float value)
         {
             if (this.pingLst.Count > 10) this.pingLst.Dequeue();
             this.pingLst.Enqueue(value / 2);
             this.ping = (int)(this.pingLst.Average() * 1000);
         }
-
     }
 
 }

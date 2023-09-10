@@ -19,5 +19,7 @@ namespace XmobiTea.GN.Constant
         public const int Ok = 1;
 
         private ReturnCode() { }
+
     }
+
 }

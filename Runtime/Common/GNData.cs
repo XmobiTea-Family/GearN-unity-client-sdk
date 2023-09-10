@@ -1,21 +1,21 @@
 ﻿namespace XmobiTea.GN.Common
 {
-    public class GNData : IGNData
+    public abstract class GNData : IGNData
     {
-        protected static object CreateUseDataFromOriginData(object value)
+        protected static object createUseDataFromOriginData(object value)
         {
             if (value == null) return null;
 
             if (value is System.Collections.IList list)
             {
-                var answer = new GNArray.Builder().AddAll(list).Build();
+                var answer = new GNArray.Builder().addAll(list).build();
 
                 return answer;
             }
 
             if (value is System.Collections.IDictionary dict)
             {
-                var answer = new GNHashtable.Builder().AddAll(dict).Build();
+                var answer = new GNHashtable.Builder().addAll(dict).build();
 
                 return answer;
             }
@@ -23,19 +23,21 @@
             return value;
         }
 
-        protected static object CreateGNDataFromUseData(object value)
+        protected static object createDataFromUseData(object value)
         {
             if (value == null) return null;
 
             if (value is IGNData gnData)
             {
-                return gnData.ToData();
+                return gnData.toData();
             }
 
             return value;
         }
 
-        public virtual object ToData() { return null; }
+        public abstract object toData();
+
+        public abstract string toString();
 
     }
 

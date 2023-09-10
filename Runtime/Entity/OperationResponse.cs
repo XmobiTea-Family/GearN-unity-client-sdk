@@ -26,87 +26,87 @@
             this.debugMessage = null;
         }
 
-        public int GetOperationCode()
+        public int getOperationCode()
         {
             return this.operationCode;
         }
 
-        public int GetReturnCode()
+        public int getReturnCode()
         {
             return this.returnCode;
         }
 
-        public GNHashtable GetParameters()
+        public GNHashtable getParameters()
         {
             return this.parameters;
         }
 
-        public bool IsEncrypted()
+        public bool isEncrypted()
         {
             return this.encrypted;
         }
 
-        public int GetResponseId()
+        public int getResponseId()
         {
             return this.responseId;
         }
 
-        public string GetDebugMessage()
+        public string getDebugMessage()
         {
             return this.debugMessage;
         }
 
-        public InvalidMember[] GetInvalidMembers()
+        public InvalidMember[] getInvalidMembers()
         {
             return this.invalidMembers;
         }
 
-        public bool HasError() => this.GetReturnCode() != ReturnCode.Ok;
+        public bool hasError() => this.getReturnCode() != ReturnCode.Ok;
 
-        public OperationResponse SetReturnCode(int returnCode)
+        public OperationResponse setReturnCode(int returnCode)
         {
             this.returnCode = returnCode;
             return this;
         }
 
-        public OperationResponse SetDebugMessage(string debugMessage)
+        public OperationResponse setDebugMessage(string debugMessage)
         {
             this.debugMessage = debugMessage;
             return this;
         }
 
-        public OperationResponse SetScriptData(string key, object value)
+        public OperationResponse setParameter(string key, object value)
         {
             if (this.parameters == null) this.parameters = new GNHashtable();
 
-            this.parameters.Add(key, value);
+            this.parameters.add(key, value);
 
             return this;
         }
 
-        public OperationResponse SetParameters(GNHashtable parameters)
+        public OperationResponse setParameters(GNHashtable parameters)
         {
             this.parameters = parameters;
             return this;
         }
 
-        public OperationResponse SetEncrypted(bool encrypted)
+        public OperationResponse setEncrypted(bool encrypted)
         {
             this.encrypted = encrypted;
             return this;
         }
 
-        public OperationResponse SetInvalidMembers(InvalidMember[] invalidMembers)
+        public OperationResponse setInvalidMembers(InvalidMember[] invalidMembers)
         {
             this.invalidMembers = invalidMembers;
             return this;
         }
 
-        public override string ToString()
+        public string toString()
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.GetOperationCodeName(this.operationCode) + ", responseId: " + this.responseId + ", returnCode " + CodeHelper.GetReturnCodeName(this.returnCode));
+            stringBuilder.Append("Code: " + CodeHelper.getOperationCodeName(this.operationCode) + ", responseId: " + this.responseId + ", returnCode " + CodeHelper.getReturnCodeName(this.returnCode));
 
             if (this.returnCode == ReturnCode.Ok) stringBuilder.Append(", parameters " + this.parameters);
             else if (this.returnCode == ReturnCode.InvalidRequestParameters)
@@ -129,6 +129,11 @@
             stringBuilder.Append(", encrypted " + this.encrypted);
 
             return stringBuilder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.toString();
         }
 
     }

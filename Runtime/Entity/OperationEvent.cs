@@ -19,50 +19,55 @@
             this.encrypted = encrypted;
         }
 
-        public int GetEventCode()
+        public int getEventCode()
         {
             return this.eventCode;
         }
 
-        public GNHashtable GetParameters()
+        public GNHashtable getParameters()
         {
             return this.parameters;
         }
 
-        public bool IsEncrypted()
+        public bool isEncrypted()
         {
             return this.encrypted;
         }
 
-        public OperationEvent SetScriptData(string key, object value)
+        public OperationEvent setParameter(string key, object value)
         {
             if (this.parameters == null) this.parameters = new GNHashtable();
 
-            this.parameters.Add(key, value);
+            this.parameters.add(key, value);
 
             return this;
         }
 
-        public OperationEvent SetParameters(GNHashtable parameters)
+        public OperationEvent setParameters(GNHashtable parameters)
         {
             this.parameters = parameters;
 
             return this;
         }
 
-        public OperationEvent SetEncrypted(bool encrypted)
+        public OperationEvent setEncrypted(bool encrypted)
         {
             this.encrypted = encrypted;
             return this;
         }
 
-        public override string ToString()
+        public string toString()
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.GetEventCodeName(this.eventCode) + ", parameters " + this.parameters + ", encrypted " + this.encrypted);
+            stringBuilder.Append("Code: " + CodeHelper.getEventCodeName(this.eventCode) + ", parameters " + this.parameters + ", encrypted " + this.encrypted);
 
             return stringBuilder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.toString();
         }
 
     }

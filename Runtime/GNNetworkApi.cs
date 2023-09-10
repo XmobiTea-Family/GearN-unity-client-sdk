@@ -13,13 +13,13 @@
     {
         public static void SyncTs(Action<long> onResponse = null)
         {
-            peer.SyncTs(onResponse);
+            peer.syncTs(onResponse);
         }
 
-        public static void AccountLogin(string username, string password, Action<LoginOperationResponse> onResponse = null)
-        {
-            peer.AccountLogin(username, password, onResponse);
-        }
+        //public static void AccountLogin(string username, string password, Action<LoginOperationResponse> onResponse = null)
+        //{
+        //    peer.accountLogin(username, password, onResponse);
+        //}
 
     }
 

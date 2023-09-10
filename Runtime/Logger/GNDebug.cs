@@ -20,25 +20,25 @@ namespace XmobiTea.GN.Logger
             set => _logType = value;
         }
 
-        public static void Log(object message)
+        public static void log(object message)
         {
             if (_logType >= LogType.All)
                 UnityEngine.Debug.Log(message);
         }
 
-        public static void LogException(Exception exception)
+        public static void logException(Exception exception)
         {
             if (_logType >= LogType.Exception)
                 UnityEngine.Debug.LogException(exception);
         }
 
-        public static void LogWarning(object message)
+        public static void logWarning(object message)
         {
             if (_logType >= LogType.Warning)
                 UnityEngine.Debug.LogWarning(message);
         }
 
-        public static void LogError(object message)
+        public static void logError(object message)
         {
             if (_logType >= LogType.Error)
                 UnityEngine.Debug.LogError(message);

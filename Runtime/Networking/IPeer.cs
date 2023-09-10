@@ -7,13 +7,13 @@
 
     internal interface IPeer
     {
-        void InitPeer();
+        void initPeer();
 
-        void Enqueue(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags);
+        void enqueue(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags);
 
-        bool IsUsing();
+        bool isUsing();
 
-        void Service();
+        void service();
     }
 
 }

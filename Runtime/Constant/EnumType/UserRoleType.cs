@@ -8,5 +8,7 @@
 		Moderazor = 3,
 		User = 100,
 		UserNonActivate = 101,
+
 	}
+
 }
