@@ -94,12 +94,8 @@
 
 		public const string CharacterId = "CharacterId";
 		public const string CatalogId = "CatalogId";
-		public const string CharacterCatalogId = "CharacterCatalogId";
 		public const string ItemId = "ItemId";
-		public const string ItemCatalogId = "ItemCatalogId";
-		public const string ItemClassId = "ItemClassId";
 		public const string GroupId = "GroupId";
-		public const string GroupCatalogId = "GroupCatalogId";
 		public const string Status = "Status";
 		public const string TsLastStatusUpdate = "TsLastStatusUpdate";
 		public const string PlayerInventories = "PlayerInventories";
@@ -112,7 +108,6 @@
 		public const string Owner = "Owner";
 		public const string RemoveStatus = "RemoveStatus";
 		public const string FriendId = "FriendId";
-		public const string FriendCatalogId = "FriendCatalogId";
 		public const string GroupMembers = "GroupMembers";
 		public const string GroupStatistics = "GroupStatistics";
 		public const string Members = "Members";

@@ -278,8 +278,14 @@
 
 	public partial class AuthenticateModels
 	{
-		
-        public class ResponseData
+		public class AuthenticateResponseData : MasterPlayerModels.MasterPlayerWithUserIdResponseData
+        {
+			[BooleanDataMember(code = GNParameterCode.NewlyCreated, isOptional = true)]
+			public bool? newlyCreated;
+
+		}
+
+        public class EmptyResponseData
         {
 
         }

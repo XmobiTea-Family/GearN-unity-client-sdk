@@ -427,11 +427,11 @@
 			[StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
 			public string groupId;
 
-			[StringDataMember(code = GNParameterCode.ItemCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string itemCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
-			[StringDataMember(code = GNParameterCode.ItemClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string itemClassId;
+			[StringDataMember(code = GNParameterCode.ClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string classId;
 
 			[StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
 			public string? displayName;

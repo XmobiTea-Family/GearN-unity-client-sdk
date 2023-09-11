@@ -16,7 +16,7 @@
 		public class ServerCreateNewFileUploadInfoRequestData : CreateNewFileUploadInfoRequestData
 		{
 			[StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, mustNonNull = true)]
-			public new string userId;
+			public string userId;
 
 		}
 
@@ -26,8 +26,8 @@
 
 		public class GetContentDataRequestData
 		{
-			[GNArrayDataMember(code = GNParameterCode.Keys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? keys;
+			[GNArrayDataMember(code = GNParameterCode.Keys, elementCls = typeof(string), mustNonNull = true)]
+			public List<string> keys;
 
 			[StringDataMember(code = GNParameterCode.Label, minLength = 2, maxLength = 32, isOptional = true, defaultValue = "")]
 			public string? label;
@@ -113,8 +113,8 @@
 
 		public class SetContentDataRequestData
 		{
-			[GNArrayDataMember(code = GNParameterCode.Configs, isOptional = true, elementCls = typeof(ContentDataParam))]
-			public List<ContentDataParam>? configs;
+			[GNArrayDataMember(code = GNParameterCode.Configs, elementCls = typeof(ContentDataParam), mustNonNull = true)]
+			public List<ContentDataParam> configs;
 
 			[StringDataMember(code = GNParameterCode.Label, minLength = 2, maxLength = 32, isOptional = true)]
 			public string? label;

@@ -4,242 +4,242 @@
 
 	public class CharacterPlayerResponseModels
 	{
-		public class AddPlayerFriendOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class AddPlayerFriendOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class AddSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class AddSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetAvatarOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetAvatarOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetCatalogIdOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetCatalogIdOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetCountryCodeOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetCountryCodeOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetCustomDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetCustomDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetDisplayNameOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetDisplayNameOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetFriendStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetFriendStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetFriendStatisticsLeaderboardOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetFriendStatisticsLeaderboardOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetIpAddressCreateOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetIpAddressCreateOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetOwnerOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetOwnerOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerBanOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerBanOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerCurrencyOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerCurrencyOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerFriendOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerFriendOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerInformationOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerInformationOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerInventoryOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerInventoryOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayerStatisticsOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayerStatisticsOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayersWithDisplayNameOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayersWithDisplayNameOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayersWithSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayersWithSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetPlayersWithTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetPlayersWithTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetRemoveStatusOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetRemoveStatusOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetTsCreateOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetTsCreateOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetTsLastLoginOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GetTsLastLoginOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GrantGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GrantGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GrantPlayerItemOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class GrantPlayerItemOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class JoinGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class JoinGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class LeaveGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class LeaveGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemovePlayerFriendOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class RemovePlayerFriendOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemovePlayerItemOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class RemovePlayerItemOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemoveSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class RemoveSegmentOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemoveTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class RemoveTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetAvatarOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetAvatarOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetCountryCodeOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetCountryCodeOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetCustomDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetCustomDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetDisplayNameOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetDisplayNameOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetOwnerOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetOwnerOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetPlayerBanOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetPlayerBanOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetPlayerCurrencyOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetPlayerCurrencyOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetPlayerDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetPlayerDataOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetPlayerStatisticsOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetPlayerStatisticsOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetRemoveStatusOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetRemoveStatusOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.ResponseData>
+		public class SetTagOperationResponse : CustomOperationResponse<CharacterPlayerModels.EmptyResponseData>
 		{
 
 		}

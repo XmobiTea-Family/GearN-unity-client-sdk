@@ -13,8 +13,8 @@
 			[StringDataMember(code = GNParameterCode.FriendId, minLength = 10, maxLength = 10, mustNonNull = true)]
 			public string friendId;
 
-			[StringDataMember(code = GNParameterCode.FriendCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string friendCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
 		}
 
@@ -619,8 +619,8 @@
 			[StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, isOptional = true)]
 			public string? userId;
 
-			[StringDataMember(code = GNParameterCode.GroupCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string groupCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
 			[GNArrayDataMember(code = GNParameterCode.GroupMembers, isOptional = true, elementCls = typeof(GroupMemberParam))]
 			public List<GroupMemberParam>? groupMembers;
@@ -646,8 +646,8 @@
 			[StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, isOptional = true)]
 			public string? userId;
 
-			[StringDataMember(code = GNParameterCode.CharacterCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string characterCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
 			[StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true, mustNonNull = true)]
 			public string? displayName;
@@ -670,11 +670,11 @@
 			[StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, isOptional = true)]
 			public string? userId;
 
-			[StringDataMember(code = GNParameterCode.ItemCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string itemCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
-			[StringDataMember(code = GNParameterCode.ItemClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string itemClassId;
+			[StringDataMember(code = GNParameterCode.ClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string classId;
 
 			[StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
 			public string? displayName;

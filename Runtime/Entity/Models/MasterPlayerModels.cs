@@ -1609,8 +1609,263 @@
 
 	public partial class MasterPlayerModels
 	{
+		public class ExternalItem
+		{
+			public class Device
+			{
+				[StringDataMember(code = GNParameterCode.CustomDeviceId, isOptional = true)]
+				public string? customDeviceId;
 
-		public class ResponseData
+				[StringDataMember(code = GNParameterCode.AndroidDeviceId, isOptional = true)]
+				public string? androidDeviceId;
+
+				[StringDataMember(code = GNParameterCode.iOSDeviceId, isOptional = true)]
+				public string? iOSDeviceId;
+
+				[StringDataMember(code = GNParameterCode.WindowsPhoneDeviceId, isOptional = true)]
+				public string? windowsPhoneDeviceId;
+
+				[StringDataMember(code = GNParameterCode.WindowsDeviceId, isOptional = true)]
+				public string? windowsDeviceId;
+
+				[StringDataMember(code = GNParameterCode.LinuxDeviceId, isOptional = true)]
+				public string? linuxDeviceId;
+
+				[StringDataMember(code = GNParameterCode.MacOSDeviceId, isOptional = true)]
+				public string? macOSDeviceId;
+
+				[StringDataMember(code = GNParameterCode.EditorDeviceId, isOptional = true)]
+				public string? editorDeviceId;
+
+			}
+
+			public class Account
+			{
+				[StringDataMember(code = GNParameterCode.Username, isOptional = true)]
+				public string? username;
+
+			}
+
+			public class Custom
+			{
+				[StringDataMember(code = GNParameterCode.CustomId, isOptional = true)]
+				public string? customId;
+
+			}
+
+			public class Apple
+			{
+				[StringDataMember(code = GNParameterCode.AppleId)]
+				public string appleId;
+
+				[StringDataMember(code = GNParameterCode.Email)]
+				public string email;
+
+			}
+
+			public class Google
+			{
+				[StringDataMember(code = GNParameterCode.GoogleId)]
+				public string googleId;
+
+				[StringDataMember(code = GNParameterCode.DisplayName)]
+				public string displayName;
+
+				[StringDataMember(code = GNParameterCode.Email)]
+				public string email;
+
+			}
+
+			public class Facebook
+			{
+				[StringDataMember(code = GNParameterCode.FacebookId)]
+				public string facebookId;
+
+				[StringDataMember(code = GNParameterCode.DisplayName)]
+				public string displayName;
+
+				[StringDataMember(code = GNParameterCode.Email)]
+				public string email;
+
+			}
+
+			public class GenericService
+			{
+				[StringDataMember(code = GNParameterCode.ServiceName)]
+				public string serviceName;
+
+				[StringDataMember(code = GNParameterCode.ServiceId)]
+				public string serviceId;
+
+			}
+
+			[GNHashtableDataMember(code = GNParameterCode.Device, isOptional = true)]
+			public Device? device;
+
+			[GNHashtableDataMember(code = GNParameterCode.Account, isOptional = true)]
+			public Account? account;
+
+			[GNHashtableDataMember(code = GNParameterCode.Custom, isOptional = true)]
+			public Custom? custom;
+
+			[GNHashtableDataMember(code = GNParameterCode.Apple, isOptional = true)]
+			public Apple? apple;
+
+			[GNHashtableDataMember(code = GNParameterCode.Google, isOptional = true)]
+			public Google? google;
+
+			[GNHashtableDataMember(code = GNParameterCode.Facebook, isOptional = true)]
+			public Facebook? facebook;
+
+			[GNArrayDataMember(code = GNParameterCode.GenericService, isOptional = true, elementCls = typeof(GenericService))]
+			public List<GenericService> genericServices;
+
+		}
+
+		public class InfoResponseParameters
+        {
+            [GNHashtableDataMember(code = GNParameterCode.External, isOptional = true)]
+			public ExternalItem? external;
+
+			[GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
+			public List<string>? segments;
+
+			[GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? customDatas;
+
+			[StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+			public string? displayName;
+
+			[GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+			public GenericModels.AvatarItem? avatar;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+			public long? tsCreate;
+
+			[GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+			public List<GenericModels.TagItem>? tags;
+
+			[GNHashtableDataMember(code = GNParameterCode.PlayerBan, isOptional = true)]
+			public GenericModels.BanItem? playerBan;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? playerDatas;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencies, isOptional = true, elementCls = typeof(GenericModels.CurrencyItem))]
+			public List<GenericModels.CurrencyItem>? playerCurrencies;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
+			public List<GenericModels.StatisticsItem>? playerStatistics;
+
+			[NumberDataMember(code = GNParameterCode.TsLastLogin, isOptional = true)]
+			public long? tsLastLogin;
+
+			[StringDataMember(code = GNParameterCode.IpAddressCreate, isOptional = true)]
+			public string? ipAddressCreate;
+
+			[StringDataMember(code = GNParameterCode.CountryCode, isOptional = true)]
+			public string? countryCode;
+
+			[StringDataMember(code = GNParameterCode.Email, isOptional = true)]
+			public string? email;
+
+		}
+
+		public class MasterPlayerResponseData
+        {
+			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+			public InfoResponseParameters infoResponseParameters;
+
+		}
+
+		public class MasterPlayerWithUserIdResponseData
+		{
+			[StringDataMember(code = GNParameterCode.UserId)]
+			public string userId;
+
+			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+			public InfoResponseParameters infoResponseParameters;
+
+		}
+
+		public class MasterPlayerWithAppleIdResponseData : MasterPlayerWithUserIdResponseData
+		{
+			[StringDataMember(code = GNParameterCode.AppleId)]
+			public string appleId;
+
+		}
+
+		public class GetPlayersWithAppleResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MasterPlayerWithAppleIdResponseData))]
+			public List<MasterPlayerWithAppleIdResponseData> results;
+
+		}
+
+		public class MasterPlayersWithUserIdResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MasterPlayerWithUserIdResponseData))]
+			public List<MasterPlayerWithUserIdResponseData> results;
+
+		}
+
+		public class MasterPlayerWithFacebookIdResponseData : MasterPlayerWithUserIdResponseData
+		{
+			[StringDataMember(code = GNParameterCode.FacebookId)]
+			public string facebookId;
+
+		}
+
+		public class GetPlayersWithFacebookResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MasterPlayerWithFacebookIdResponseData))]
+			public List<MasterPlayerWithFacebookIdResponseData> results;
+
+		}
+
+		public class MasterPlayerWithGenericServiceIdResponseData : MasterPlayerWithUserIdResponseData
+		{
+			[StringDataMember(code = GNParameterCode.ServiceId)]
+			public string serviceId;
+
+		}
+
+		public class GetPlayersWithGenericServiceResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MasterPlayerWithGenericServiceIdResponseData))]
+			public List<MasterPlayerWithGenericServiceIdResponseData> results;
+
+		}
+
+		public class MasterPlayerWithGoogleIdResponseData : MasterPlayerWithUserIdResponseData
+		{
+			[StringDataMember(code = GNParameterCode.GoogleId)]
+			public string googleId;
+
+		}
+
+		public class GetPlayersWithGoogleResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MasterPlayerWithGoogleIdResponseData))]
+			public List<MasterPlayerWithGoogleIdResponseData> results;
+
+		}
+
+		public class MasterPlayerLeaderboardResponseData : MasterPlayerWithUserIdResponseData
+		{
+			[NumberDataMember(code = GNParameterCode.Position)]
+			public int position;
+
+		}
+
+		public class GetStatisticsLeaderboardResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MasterPlayerLeaderboardResponseData))]
+			public List<MasterPlayerLeaderboardResponseData> results;
+
+		}
+
+		public class EmptyResponseData
 		{
 
 		}

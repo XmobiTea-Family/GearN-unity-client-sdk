@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using XmobiTea.GN.Constant;
 
-	public partial class CharacterPlayerModels
+    public partial class CharacterPlayerModels
 	{
 		public class AddPlayerFriendRequestData
 		{
@@ -13,8 +13,8 @@
 			[StringDataMember(code = GNParameterCode.FriendId, minLength = 11, maxLength = 11, mustNonNull = true)]
 			public string friendId;
 
-			[StringDataMember(code = GNParameterCode.FriendCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string friendCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
 		}
 
@@ -559,8 +559,8 @@
 			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
 			public string characterId;
 
-			[StringDataMember(code = GNParameterCode.GroupCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string groupCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
 			[GNArrayDataMember(code = GNParameterCode.GroupMembers, isOptional = true, elementCls = typeof(GroupMemberParam))]
 			public List<GroupMemberParam>? groupMembers;
@@ -583,11 +583,11 @@
 			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
 			public string characterId;
 
-			[StringDataMember(code = GNParameterCode.ItemCatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string itemCatalogId;
+			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string catalogId;
 
-			[StringDataMember(code = GNParameterCode.ItemClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string itemClassId;
+			[StringDataMember(code = GNParameterCode.ClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
+			public string classId;
 
 			[StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
 			public string? displayName;
@@ -1069,8 +1069,70 @@
 
 	public partial class CharacterPlayerModels
 	{
+		public class InfoResponseParameters
+		{
+			[StringDataMember(code = GNParameterCode.CatalogId, isOptional = true)]
+			public string? catalogId;
 
-		public class ResponseData
+            [GNHashtableDataMember(code = GNParameterCode.Owner, isOptional = true)]
+            public GenericModels.OwnerItem? owner;
+
+            [StringDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
+            public GenericModels.RemoveStatusItem? removeStatus;
+
+            [GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
+			public List<string>? segments;
+
+			[GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? customDatas;
+
+			[StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+			public string? displayName;
+
+			[GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+			public GenericModels.AvatarItem? avatar;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+			public long? tsCreate;
+
+			[GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+			public List<GenericModels.TagItem>? tags;
+
+			[GNHashtableDataMember(code = GNParameterCode.PlayerBan, isOptional = true)]
+			public GenericModels.BanItem? playerBan;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? playerDatas;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencies, isOptional = true, elementCls = typeof(GenericModels.CurrencyItem))]
+			public List<GenericModels.CurrencyItem>? playerCurrencies;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
+			public List<GenericModels.StatisticsItem>? playerStatistics;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerInventories, isOptional = true, elementCls = typeof(GenericModels.InventoryItem))]
+			public List<GenericModels.InventoryItem>? playerInventories;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerGroups, isOptional = true, elementCls = typeof(GenericModels.GroupItem))]
+			public List<GenericModels.GroupItem>? playerGroups;
+
+			[GNArrayDataMember(code = GNParameterCode.PlayerFriends, isOptional = true, elementCls = typeof(GenericModels.FriendItem))]
+			public List<GenericModels.FriendItem>? playerFriends;
+
+			//     if (infoRequestParam.playerFriends)
+			//answer.add(GNParameterCode.PlayerFriends, this.generatePlayerFriends(characterPlayer, infoRequestParam.friendCatalogIds));
+
+			[NumberDataMember(code = GNParameterCode.TsLastLogin, isOptional = true)]
+			public long? tsLastLogin;
+
+			[StringDataMember(code = GNParameterCode.IpAddressCreate, isOptional = true)]
+			public string? ipAddressCreate;
+
+			[StringDataMember(code = GNParameterCode.CountryCode, isOptional = true)]
+			public string? countryCode;
+		}
+
+		public class EmptyResponseData
 		{
 
 		}

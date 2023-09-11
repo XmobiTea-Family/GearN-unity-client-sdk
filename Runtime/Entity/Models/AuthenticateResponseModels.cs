@@ -4,77 +4,77 @@
 
 	public class AuthenticateResponseModels
 	{
-		public class LoginByAccountOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByAccountOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByAndroidDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByAndroidDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByAppleOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByAppleOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByCustomDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByCustomDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByCustomIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByCustomIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByEditorDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByEditorDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByFacebookOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByFacebookOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByGenericServiceOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByGenericServiceOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByGoogleOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByGoogleOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByiOSDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByiOSDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByLinuxDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByLinuxDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByMacOSDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByMacOSDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByWindowsDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByWindowsDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class LoginByWindowsPhoneDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class LoginByWindowsPhoneDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
 
-		public class RegisterAccountOperationResponse : CustomOperationResponse<AuthenticateModels.ResponseData>
+		public class RegisterAccountOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
 		{
 
 		}
