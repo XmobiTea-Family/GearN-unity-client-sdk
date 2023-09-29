@@ -64,6 +64,16 @@
 
 		}
 
+		public class CharacterItem
+		{
+			[StringDataMember(code = GNParameterCode.CharacterId)]
+			public string characterId;
+
+			[StringDataMember(code = GNParameterCode.CatalogId)]
+			public string catalogId;
+
+		}
+
 		public class OwnerItem
 		{
 			[NumberDataMember(code = GNParameterCode.Type)]
@@ -116,7 +126,7 @@
 		public class FriendItem
         {
 			[StringDataMember(code = GNParameterCode.FriendId)]
-			public string groupId;
+			public string friendId;
 
 			[StringDataMember(code = GNParameterCode.CatalogId)]
 			public string catalogId;
@@ -126,6 +136,16 @@
 
 			[NumberDataMember(code = GNParameterCode.TsLastStatusUpdate)]
 			public long tsLastStatusUpdate;
+
+		}
+
+		public class MemberItem
+		{
+			[StringDataMember(code = GNParameterCode.MemberId)]
+			public string memberId;
+
+			[NumberDataMember(code = GNParameterCode.Status)]
+			public int status;
 
 		}
 

@@ -177,9 +177,9 @@
 		public const string InitialValue = "InitialValue";
 		public const string GameName = "GameName";
 
-		public const string PlayerCurrencySettings = "PlayerCurrencySettings";
-		public const string PlayerStatisticsSettings = "PlayerStatisticsSettings";
-		public const string PlayerDatasSettings = "PlayerDatasSettings";
+		public const string CurrencySettings = "CurrencySettings";
+		public const string StatisticsSettings = "StatisticsSettings";
+		public const string DatasSettings = "DatasSettings";
 		public const string CustomDatasSettings = "CustomDatasSettings";
 		public const string TagsSettings = "TagsSettings";
 		public const string MasterPlayerSettings = "MasterPlayerSettings";
@@ -336,7 +336,7 @@
 		public const string GetMembers = "GetMembers";
 		public const string AddMember = "AddMember";
 		public const string RemoveMember = "RemoveMember";
-		public const string sendGroupMessage = "sendGroupMessage";
+		public const string SendGroupMessage = "sendGroupMessage";
 		public const string GetGroupMessage = "GetGroupMessage";
 		public const string GetGroupsWithDisplayName = "GetGroupsWithDisplayName";
 
@@ -405,7 +405,7 @@
 		public const string AppleAppStoreId = "AppleAppStoreId";
 		public const string GooglePlayStoreId = "GooglePlayStoreId";
 		public const string CustomTags = "CustomTags";
-
+		public const string SetSecretInfoInformation = "SetSecretInfoInformation";
 	}
 
 }

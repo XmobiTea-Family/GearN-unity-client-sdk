@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Reflection;
 using XmobiTea.GN.Common;
 
 namespace XmobiTea.GN.Entity
 {
-    public interface GNEnhancedObjectFieldMetadata : GNObjectFieldMetadata
+    public interface IGNEnhancedObjectFieldMetadata : GNObjectFieldMetadata
     {
         string code { get; set; }
         bool isOptional { get; set; }
@@ -18,6 +19,36 @@ namespace XmobiTea.GN.Entity
         double? minValue { get; set; }
         double? maxValue { get; set; }
         bool? mustInt { get; set; }
+    }
+
+    public class GNEnhancedObjectFieldMetadata : IGNEnhancedObjectFieldMetadata
+    {
+        public string code { get; set; }
+        public bool isOptional { get; set; }
+        public GNFieldDataType gnFieldType { get; set; }
+        public object defaultValue { get; set; }
+        public bool activeConditionValid { get; set; }
+        public bool? mustNonNull { get; set; }
+        public int? minLength { get; set; }
+        public int? maxLength { get; set; }
+        public double? minValue { get; set; }
+        public double? maxValue { get; set; }
+        public bool? mustInt { get; set; }
+
+        public string name { get; }
+        public FieldDataType fieldType { get; }
+        public Type cls { get; }
+
+        public FieldInfo fieldInfo { get; }
+
+        public GNEnhancedObjectFieldMetadata(string name, FieldDataType fieldType, Type cls, FieldInfo fieldInfo)
+        {
+            this.name = name;
+            this.fieldType = fieldType;
+            this.cls = cls;
+
+            this.fieldInfo = fieldInfo;
+        }
     }
 
     public enum GNFieldDataType

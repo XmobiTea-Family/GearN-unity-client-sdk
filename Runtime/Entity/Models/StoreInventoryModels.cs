@@ -22,7 +22,7 @@
 		{
 		}
 
-		public class AdminBuyStoreItemRequestData : BuyStoreItemRequestData
+		public class AdminBuyStoreItemRequestData : ServerBuyStoreItemRequestData
 		{
 		}
 
@@ -40,7 +40,7 @@
 		{
 		}
 
-		public class AdminGetStoreItemInformationRequestData : GetStoreItemInformationRequestData
+		public class AdminGetStoreItemInformationRequestData : ServerGetStoreItemInformationRequestData
 		{
 		}
 
@@ -67,7 +67,7 @@
 		{
 		}
 
-		public class AdminGetStoreItemsWithTagRequestData : GetStoreItemsWithTagRequestData
+		public class AdminGetStoreItemsWithTagRequestData : ServerGetStoreItemsWithTagRequestData
 		{
 		}
 
@@ -82,7 +82,7 @@
 		{
 		}
 
-		public class AdminGrantStoreItemRequestData : GrantStoreItemRequestData
+		public class AdminGrantStoreItemRequestData : ServerGrantStoreItemRequestData
 		{
 		}
 
@@ -100,7 +100,7 @@
 		{
 		}
 
-		public class AdminSetRemoveStatusRequestData : SetRemoveStatusRequestData
+		public class AdminSetRemoveStatusRequestData : ServerSetRemoveStatusRequestData
 		{
 		}
 
@@ -139,7 +139,7 @@
 		{
 		}
 
-		public class AdminSetStoreItemInformationRequestData : SetStoreItemInformationRequestData
+		public class AdminSetStoreItemInformationRequestData : ServerSetStoreItemInformationRequestData
 		{
 		}
 
@@ -160,7 +160,7 @@
 		{
 		}
 
-		public class AdminValidateAppleAppStoreReceiptRequestData : ValidateAppleAppStoreReceiptRequestData
+		public class AdminValidateAppleAppStoreReceiptRequestData : ServerValidateAppleAppStoreReceiptRequestData
 		{
 		}
 
@@ -181,7 +181,7 @@
 		{
 		}
 
-		public class AdminValidateFacebookStoreReceiptRequestData : ValidateFacebookStoreReceiptRequestData
+		public class AdminValidateFacebookStoreReceiptRequestData : ServerValidateFacebookStoreReceiptRequestData
 		{
 		}
 
@@ -202,7 +202,7 @@
 		{
 		}
 
-		public class AdminValidateGooglePlayStoreReceiptRequestData : ValidateGooglePlayStoreReceiptRequestData
+		public class AdminValidateGooglePlayStoreReceiptRequestData : ServerValidateGooglePlayStoreReceiptRequestData
 		{
 		}
 
@@ -314,8 +314,157 @@
 
 	public partial class StoreInventoryModels
 	{
+		public class InAppPurchaseItem
+        {
+			[StringDataMember(code = GNParameterCode.FacebookStoreId)]
+			public string facebookStoreId;
 
-		public class ResponseData
+			[StringDataMember(code = GNParameterCode.AppleAppStoreId)]
+			public string appleAppStoreId;
+
+			[StringDataMember(code = GNParameterCode.GooglePlayStoreId)]
+			public string googlePlayStoreId;
+
+		}
+
+		public class PriceCurrencyItem
+        {
+			[StringDataMember(code = GNParameterCode.Key)]
+			public string key;
+
+			[NumberDataMember(code = GNParameterCode.Value)]
+			public double value;
+
+		}
+
+		public class OwnerStoreInventoryItem
+		{
+			[StringDataMember(code = GNParameterCode.ItemId)]
+			public string itemId;
+
+			[StringDataMember(code = GNParameterCode.CatalogId)]
+			public string catalogId;
+
+			[StringDataMember(code = GNParameterCode.ClassId)]
+			public string classId;
+
+		}
+
+		public class StoreInventoryItem
+        {
+			[StringDataMember(code = GNParameterCode.CatalogId)]
+			public string catalogId;
+
+			[StringDataMember(code = GNParameterCode.ClassId)]
+			public string classId;
+
+			[NumberDataMember(code = GNParameterCode.Amount)]
+			public int amount;
+
+		}
+
+		public class InfoResponseParameters
+		{
+			[GNArrayDataMember(code = GNParameterCode.StoreCurrencies, isOptional = true, elementCls = typeof(StoreInventoryItem))]
+			public List<StoreInventoryItem>? storeItems;
+
+			[GNArrayDataMember(code = GNParameterCode.StoreCurrencies, isOptional = true, elementCls = typeof(PriceCurrencyItem))]
+			public List<PriceCurrencyItem>? storeCurrencies;
+
+			[GNArrayDataMember(code = GNParameterCode.PriceCurrencies, isOptional = true, elementCls = typeof(PriceCurrencyItem))]
+			public List<PriceCurrencyItem>? priceCurrencies;
+
+			[GNHashtableDataMember(code = GNParameterCode.InAppPurchase, isOptional = true)]
+			public InAppPurchaseItem? inAppPurchase;
+
+			[GNHashtableDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
+			public GenericModels.RemoveStatusItem? removeStatus;
+
+			[StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+			public string? displayName;
+
+			[GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+			public GenericModels.AvatarItem? avatar;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+			public long? tsCreate;
+
+			[GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+			public List<GenericModels.TagItem>? tags;
+
+			[GNArrayDataMember(code = GNParameterCode.StoreDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? storeDatas;
+
+		}
+
+		public class StoreInventoryResponseData
+		{
+			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+			public InfoResponseParameters infoResponseParameters;
+
+		}
+
+		public class StoreInventoryWithStoreIdResponseData : StoreInventoryResponseData
+		{
+			[StringDataMember(code = GNParameterCode.StoreId)]
+			public string storeId;
+
+		}
+
+		public class StoreInventoryLeaderboardResponseData : StoreInventoryWithStoreIdResponseData
+		{
+			[NumberDataMember(code = GNParameterCode.Position)]
+			public int position;
+
+		}
+
+		public class GetStatisticsLeaderboardResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(StoreInventoryLeaderboardResponseData))]
+			public List<StoreInventoryLeaderboardResponseData> results;
+
+		}
+
+		public class StoreInventoriesWithStoreIdResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(StoreInventoryWithStoreIdResponseData))]
+			public List<StoreInventoryWithStoreIdResponseData> results;
+
+		}
+
+		public class GrantStoreItemResponseData
+        {
+			[StringDataMember(code = GNParameterCode.StoreId)]
+			public string storeId;
+		}
+
+		public class OwnerInfoResponseParameters
+        {
+			[GNArrayDataMember(code = GNParameterCode.Currencies, isOptional = true, elementCls = typeof(PriceCurrencyItem))]
+			public List<PriceCurrencyItem>? currencies;
+
+			[GNArrayDataMember(code = GNParameterCode.Inventories, isOptional = true, elementCls = typeof(OwnerStoreInventoryItem))]
+			public List<OwnerStoreInventoryItem>? inventories;
+
+		}
+
+		public class BuyStoreInventoryResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.StoreCurrencies, isOptional = true, elementCls = typeof(StoreInventoryItem))]
+			public List<StoreInventoryItem>? storeItems;
+
+			[GNArrayDataMember(code = GNParameterCode.StoreCurrencies, isOptional = true, elementCls = typeof(PriceCurrencyItem))]
+			public List<PriceCurrencyItem>? storeCurrencies;
+
+			[GNArrayDataMember(code = GNParameterCode.PriceCurrencies, isOptional = true, elementCls = typeof(PriceCurrencyItem))]
+			public List<PriceCurrencyItem>? priceCurrencies;
+
+			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters, isOptional = true)]
+			public OwnerInfoResponseParameters? infoResponseParameters;
+
+		}
+
+		public class EmptyResponseData
 		{
 
 		}

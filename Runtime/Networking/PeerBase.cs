@@ -9,11 +9,11 @@
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Logger;
 
-    internal abstract class PeerBase : UnityEngine.MonoBehaviour, IPeer
+    internal abstract class PeerBase : IPeer
     {
         private Queue<OperationPending> operationPendingQueue;
 
-        private Dictionary<int, OperationPending> operationWaitingResponseDic;
+        private Dictionary<int, OperationPending> operationWaitingResponseDict;
 
         private static int requestId;
 
@@ -32,14 +32,17 @@
         }
 
         internal int ping { get; set; } = -1;
-        private Queue<float> pingLst = new Queue<float>();
+        private Queue<float> pingLst;
 
         protected bool isUse { get; set; }
 
         void IPeer.initPeer()
         {
-            if (this.operationWaitingResponseDic == null) this.operationWaitingResponseDic = new Dictionary<int, OperationPending>();
+            if (this.operationWaitingResponseDict == null) this.operationWaitingResponseDict = new Dictionary<int, OperationPending>();
+
             if (this.operationPendingQueue == null) this.operationPendingQueue = new Queue<OperationPending>();
+
+            if (this.pingLst == null) this.pingLst = new Queue<float>();
 
             this.initSendRate();
             this.initGNSocketObject();
@@ -80,11 +83,11 @@
             {
                 this.checkTimeoutOperationPending = UnityEngine.Time.time + 0.1f;
 
-                if (this.operationWaitingResponseDic.Count != 0)
+                if (this.operationWaitingResponseDict.Count != 0)
                 {
                     var gnArrayLst = new List<GNArray>();
 
-                    foreach (var operationPendingPair in this.operationWaitingResponseDic)
+                    foreach (var operationPendingPair in this.operationWaitingResponseDict)
                     {
                         var operationPending = operationPendingPair.Value;
 
@@ -128,12 +131,12 @@
         {
             var responseId = obj.getInt(2);
 
-            if (this.operationWaitingResponseDic.ContainsKey(responseId))
+            if (this.operationWaitingResponseDict.ContainsKey(responseId))
             {
-                var operationPending = this.operationWaitingResponseDic[responseId];
+                var operationPending = this.operationWaitingResponseDict[responseId];
                 operationPending.onRecv();
 
-                this.operationWaitingResponseDic.Remove(responseId);
+                this.operationWaitingResponseDict.Remove(responseId);
 
                 var returnCode = obj.getInt(0);
 
@@ -165,14 +168,14 @@
                     {
                         var arrChild = array.getGNArray(i);
 
-                        invalidMembers[i] = new InvalidMember(arrChild.getInt(0), (InvalidMemberType)arrChild.getInt(1));
+                        invalidMembers[i] = new InvalidMember(arrChild.getString(0), (InvalidMemberType)arrChild.getInt(1));
                     }
                     operationResponse.setInvalidMembers(invalidMembers);
                 }
 
                 if (!operationResponse.hasError())
                 {
-                    addPing(operationPending.getExecuteTimerInMs());
+                    this.addPing(operationPending.getExecuteTimerInMs());
 
                     if (parameters != null)
                     {
@@ -191,7 +194,7 @@
 
                             GNNetwork.getAuthenticateStatus().setUserId(userId);
 
-                            PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, userId);
+                            PlayerPrefs.SetString(GNNetwork.USER_ID_KEY, userId);
                         }
 
                         if (parameters.containsKey(ParameterCode.Ts))
@@ -207,7 +210,7 @@
             }
             else
             {
-                GNDebug.logError("[GN] OnResponseHandler, un available request id " + obj);
+                GNDebug.logError("[GN] OnResponseHandler, unavailable request id " + obj);
             }
         }
 
@@ -223,7 +226,7 @@
 
                 if (operationPending.getCallback() != null)
                 {
-                    this.operationWaitingResponseDic[operationRequest.getRequestId()] = operationPending;
+                    this.operationWaitingResponseDict[operationRequest.getRequestId()] = operationPending;
                 }
             }
         }

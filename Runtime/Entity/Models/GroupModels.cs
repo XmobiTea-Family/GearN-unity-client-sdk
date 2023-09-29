@@ -19,7 +19,7 @@
 		{
 		}
 
-		public class AdminAddMemberRequestData : AddMemberRequestData
+		public class AdminAddMemberRequestData : ServerAddMemberRequestData
 		{
 		}
 
@@ -37,7 +37,7 @@
 		{
 		}
 
-		public class AdminAddSegmentRequestData : AddSegmentRequestData
+		public class AdminAddSegmentRequestData : ServerAddSegmentRequestData
 		{
 		}
 
@@ -52,7 +52,7 @@
 		{
 		}
 
-		public class AdminGetAvatarRequestData : GetAvatarRequestData
+		public class AdminGetAvatarRequestData : ServerGetAvatarRequestData
 		{
 		}
 
@@ -67,7 +67,7 @@
 		{
 		}
 
-		public class AdminGetCatalogIdRequestData : GetCatalogIdRequestData
+		public class AdminGetCatalogIdRequestData : ServerGetCatalogIdRequestData
 		{
 		}
 
@@ -85,7 +85,7 @@
 		{
 		}
 
-		public class AdminGetCustomDataRequestData : GetCustomDataRequestData
+		public class AdminGetCustomDataRequestData : ServerGetCustomDataRequestData
 		{
 		}
 
@@ -100,7 +100,7 @@
 		{
 		}
 
-		public class AdminGetDisplayNameRequestData : GetDisplayNameRequestData
+		public class AdminGetDisplayNameRequestData : ServerGetDisplayNameRequestData
 		{
 		}
 
@@ -118,7 +118,7 @@
 		{
 		}
 
-		public class AdminGetGroupCurrencyRequestData : GetGroupCurrencyRequestData
+		public class AdminGetGroupCurrencyRequestData : ServerGetGroupCurrencyRequestData
 		{
 		}
 
@@ -136,7 +136,7 @@
 		{
 		}
 
-		public class AdminGetGroupDataRequestData : GetGroupDataRequestData
+		public class AdminGetGroupDataRequestData : ServerGetGroupDataRequestData
 		{
 		}
 
@@ -154,7 +154,7 @@
 		{
 		}
 
-		public class AdminGetGroupInformationRequestData : GetGroupInformationRequestData
+		public class AdminGetGroupInformationRequestData : ServerGetGroupInformationRequestData
 		{
 		}
 
@@ -172,7 +172,7 @@
 		{
 		}
 
-		public class AdminGetGroupInventoryRequestData : GetGroupInventoryRequestData
+		public class AdminGetGroupInventoryRequestData : ServerGetGroupInventoryRequestData
 		{
 		}
 
@@ -193,7 +193,7 @@
 		{
 		}
 
-		public class AdminGetGroupMessageRequestData : GetGroupMessageRequestData
+		public class AdminGetGroupMessageRequestData : ServerGetGroupMessageRequestData
 		{
 		}
 
@@ -211,7 +211,7 @@
 		{
 		}
 
-		public class AdminGetGroupStatisticsRequestData : GetGroupStatisticsRequestData
+		public class AdminGetGroupStatisticsRequestData : ServerGetGroupStatisticsRequestData
 		{
 		}
 
@@ -235,7 +235,7 @@
 		{
 		}
 
-		public class AdminGetGroupsWithDisplayNameRequestData : GetGroupsWithDisplayNameRequestData
+		public class AdminGetGroupsWithDisplayNameRequestData : ServerGetGroupsWithDisplayNameRequestData
 		{
 		}
 
@@ -259,7 +259,7 @@
 		{
 		}
 
-		public class AdminGetGroupsWithSegmentRequestData : GetGroupsWithSegmentRequestData
+		public class AdminGetGroupsWithSegmentRequestData : ServerGetGroupsWithSegmentRequestData
 		{
 		}
 
@@ -286,7 +286,7 @@
 		{
 		}
 
-		public class AdminGetGroupsWithTagRequestData : GetGroupsWithTagRequestData
+		public class AdminGetGroupsWithTagRequestData : ServerGetGroupsWithTagRequestData
 		{
 		}
 
@@ -301,7 +301,7 @@
 		{
 		}
 
-		public class AdminGetMembersRequestData : GetMembersRequestData
+		public class AdminGetMembersRequestData : ServerGetMembersRequestData
 		{
 		}
 
@@ -316,7 +316,7 @@
 		{
 		}
 
-		public class AdminGetRemoveStatusRequestData : GetRemoveStatusRequestData
+		public class AdminGetRemoveStatusRequestData : ServerGetRemoveStatusRequestData
 		{
 		}
 
@@ -331,7 +331,7 @@
 		{
 		}
 
-		public class AdminGetSegmentRequestData : GetSegmentRequestData
+		public class AdminGetSegmentRequestData : ServerGetSegmentRequestData
 		{
 		}
 
@@ -358,7 +358,7 @@
 		{
 		}
 
-		public class AdminGetStatisticsLeaderboardAroundGroupRequestData : GetStatisticsLeaderboardAroundGroupRequestData
+		public class AdminGetStatisticsLeaderboardAroundGroupRequestData : ServerGetStatisticsLeaderboardAroundGroupRequestData
 		{
 		}
 
@@ -385,7 +385,7 @@
 		{
 		}
 
-		public class AdminGetStatisticsLeaderboardRequestData : GetStatisticsLeaderboardRequestData
+		public class AdminGetStatisticsLeaderboardRequestData : ServerGetStatisticsLeaderboardRequestData
 		{
 		}
 
@@ -403,7 +403,7 @@
 		{
 		}
 
-		public class AdminGetTagRequestData : GetTagRequestData
+		public class AdminGetTagRequestData : ServerGetTagRequestData
 		{
 		}
 
@@ -418,7 +418,7 @@
 		{
 		}
 
-		public class AdminGetTsCreateRequestData : GetTsCreateRequestData
+		public class AdminGetTsCreateRequestData : ServerGetTsCreateRequestData
 		{
 		}
 
@@ -445,7 +445,7 @@
 		{
 		}
 
-		public class AdminGrantGroupItemRequestData : GrantGroupItemRequestData
+		public class AdminGrantGroupItemRequestData : ServerGrantGroupItemRequestData
 		{
 		}
 
@@ -463,7 +463,7 @@
 		{
 		}
 
-		public class AdminRemoveGroupItemRequestData : RemoveGroupItemRequestData
+		public class AdminRemoveGroupItemRequestData : ServerRemoveGroupItemRequestData
 		{
 		}
 
@@ -481,7 +481,7 @@
 		{
 		}
 
-		public class AdminRemoveMemberRequestData : RemoveMemberRequestData
+		public class AdminRemoveMemberRequestData : ServerRemoveMemberRequestData
 		{
 		}
 
@@ -499,7 +499,7 @@
 		{
 		}
 
-		public class AdminRemoveSegmentRequestData : RemoveSegmentRequestData
+		public class AdminRemoveSegmentRequestData : ServerRemoveSegmentRequestData
 		{
 		}
 
@@ -517,7 +517,7 @@
 		{
 		}
 
-		public class AdminRemoveTagRequestData : RemoveTagRequestData
+		public class AdminRemoveTagRequestData : ServerRemoveTagRequestData
 		{
 		}
 
@@ -538,7 +538,7 @@
 		{
 		}
 
-		public class AdminSendGroupMessageRequestData : SendGroupMessageRequestData
+		public class AdminSendGroupMessageRequestData : ServerSendGroupMessageRequestData
 		{
 		}
 
@@ -559,7 +559,7 @@
 		{
 		}
 
-		public class AdminSetAvatarRequestData : SetAvatarRequestData
+		public class AdminSetAvatarRequestData : ServerSetAvatarRequestData
 		{
 		}
 
@@ -577,7 +577,7 @@
 		{
 		}
 
-		public class AdminSetCustomDataRequestData : SetCustomDataRequestData
+		public class AdminSetCustomDataRequestData : ServerSetCustomDataRequestData
 		{
 		}
 
@@ -595,7 +595,7 @@
 		{
 		}
 
-		public class AdminSetDisplayNameRequestData : SetDisplayNameRequestData
+		public class AdminSetDisplayNameRequestData : ServerSetDisplayNameRequestData
 		{
 		}
 
@@ -613,7 +613,7 @@
 		{
 		}
 
-		public class AdminSetGroupCurrencyRequestData : SetGroupCurrencyRequestData
+		public class AdminSetGroupCurrencyRequestData : ServerSetGroupCurrencyRequestData
 		{
 		}
 
@@ -631,7 +631,7 @@
 		{
 		}
 
-		public class AdminSetGroupDataRequestData : SetGroupDataRequestData
+		public class AdminSetGroupDataRequestData : ServerSetGroupDataRequestData
 		{
 		}
 
@@ -649,7 +649,7 @@
 		{
 		}
 
-		public class AdminSetGroupStatisticsRequestData : SetGroupStatisticsRequestData
+		public class AdminSetGroupStatisticsRequestData : ServerSetGroupStatisticsRequestData
 		{
 		}
 
@@ -667,7 +667,7 @@
 		{
 		}
 
-		public class AdminSetRemoveStatusRequestData : SetRemoveStatusRequestData
+		public class AdminSetRemoveStatusRequestData : ServerSetRemoveStatusRequestData
 		{
 		}
 
@@ -688,7 +688,7 @@
 		{
 		}
 
-		public class AdminSetTagRequestData : SetTagRequestData
+		public class AdminSetTagRequestData : ServerSetTagRequestData
 		{
 		}
 
@@ -814,8 +814,106 @@
 
 	public partial class GroupModels
 	{
+		public class InfoResponseParameters
+		{
+			[StringDataMember(code = GNParameterCode.CatalogId, isOptional = true)]
+			public string? catalogId;
 
-		public class ResponseData
+			[GNArrayDataMember(code = GNParameterCode.Members, isOptional = true, elementCls = typeof(GenericModels.MemberItem))]
+			public List<GenericModels.MemberItem>? members;
+
+			[GNHashtableDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
+			public GenericModels.RemoveStatusItem? removeStatus;
+
+			[GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
+			public List<string>? segments;
+
+			[GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? customDatas;
+
+			[StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+			public string? displayName;
+
+			[GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+			public GenericModels.AvatarItem? avatar;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+			public long? tsCreate;
+
+			[GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+			public List<GenericModels.TagItem>? tags;
+
+			[GNArrayDataMember(code = GNParameterCode.GroupDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? groupDatas;
+
+			[GNArrayDataMember(code = GNParameterCode.GroupCurrencies, isOptional = true, elementCls = typeof(GenericModels.CurrencyItem))]
+			public List<GenericModels.CurrencyItem>? groupCurrencies;
+
+			[GNArrayDataMember(code = GNParameterCode.GroupStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
+			public List<GenericModels.StatisticsItem>? groupStatistics;
+
+			[GNArrayDataMember(code = GNParameterCode.GroupInventories, isOptional = true, elementCls = typeof(GenericModels.InventoryItem))]
+			public List<GenericModels.InventoryItem>? groupInventories;
+
+		}
+
+		public class GroupResponseData
+		{
+			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+			public InfoResponseParameters infoResponseParameters;
+
+		}
+
+		public class GroupWithGroupIdResponseData : GroupResponseData
+		{
+			[StringDataMember(code = GNParameterCode.GroupId)]
+			public string groupId;
+
+		}
+
+		public class GroupLeaderboardResponseData : GroupWithGroupIdResponseData
+		{
+			[NumberDataMember(code = GNParameterCode.Position)]
+			public int position;
+
+		}
+
+		public class GetStatisticsLeaderboardResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupLeaderboardResponseData))]
+			public List<GroupLeaderboardResponseData> results;
+
+		}
+
+		public class GroupsWithGroupIdResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupWithGroupIdResponseData))]
+			public List<GroupWithGroupIdResponseData> results;
+
+		}
+
+		public class GroupMessageResponseData
+        {
+			[StringDataMember(code = GNParameterCode.Message)]
+			public string message;
+
+			[StringDataMember(code = GNParameterCode.SenderId)]
+			public string senderId;
+
+			[NumberDataMember(code = GNParameterCode.SenderType)]
+			public int senderType;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate)]
+			public long tsCreate;
+		}
+
+		public class GroupMessagesResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.GroupMessages, elementCls = typeof(GroupMessageResponseData))]
+			public List<GroupMessageResponseData> groupMessages;
+		}
+
+		public class EmptyResponseData
 		{
 
 		}

@@ -13,7 +13,7 @@
         public int errorCode { get; private set; }
         public InvalidMember[] invalidMembers { get; private set; }
 
-        public bool hasError()
+        public bool hasReturnCodeError()
         {
             return this.returnCode != ReturnCode.Ok;
         }
@@ -27,7 +27,7 @@
             this.parameters = operationResponse.getParameters();
             this.invalidMembers = operationResponse.getInvalidMembers();
 
-            if (!hasError())
+            if (!this.hasReturnCodeError())
             {
                 this.errorCode = this.parameters.getInt(ParameterCode.ErrorCode);
             }
@@ -52,7 +52,7 @@
         {
             base.setupOperationResponse(operationResponse);
 
-            if (!hasError())
+            if (!this.hasReturnCodeError())
             {
                 this.responseData = ConverterService.deserializeObject<TResponseData>(this.parameters);
             }

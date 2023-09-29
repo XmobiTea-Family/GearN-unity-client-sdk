@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Text;
 
+    /// <summary>
+    /// The GNData dictionary, it store Dictionary can be use to request or response
+    /// </summary>
     public class GNHashtable : GNData
     {
         public class Builder

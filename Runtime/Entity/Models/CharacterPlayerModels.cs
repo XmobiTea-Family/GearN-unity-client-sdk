@@ -22,7 +22,7 @@
 		{
 		}
 
-		public class AdminAddPlayerFriendRequestData : AddPlayerFriendRequestData
+		public class AdminAddPlayerFriendRequestData : ServerAddPlayerFriendRequestData
 		{
 		}
 
@@ -40,7 +40,7 @@
 		{
 		}
 
-		public class AdminAddSegmentRequestData : AddSegmentRequestData
+		public class AdminAddSegmentRequestData : ServerAddSegmentRequestData
 		{
 		}
 
@@ -55,7 +55,7 @@
 		{
 		}
 
-		public class AdminGetAvatarRequestData : GetAvatarRequestData
+		public class AdminGetAvatarRequestData : ServerGetAvatarRequestData
 		{
 		}
 
@@ -70,7 +70,7 @@
 		{
 		}
 
-		public class AdminGetCatalogIdRequestData : GetCatalogIdRequestData
+		public class AdminGetCatalogIdRequestData : ServerGetCatalogIdRequestData
 		{
 		}
 
@@ -85,7 +85,7 @@
 		{
 		}
 
-		public class AdminGetCountryCodeRequestData : GetCountryCodeRequestData
+		public class AdminGetCountryCodeRequestData : ServerGetCountryCodeRequestData
 		{
 		}
 
@@ -103,7 +103,7 @@
 		{
 		}
 
-		public class AdminGetCustomDataRequestData : GetCustomDataRequestData
+		public class AdminGetCustomDataRequestData : ServerGetCustomDataRequestData
 		{
 		}
 
@@ -118,7 +118,7 @@
 		{
 		}
 
-		public class AdminGetDisplayNameRequestData : GetDisplayNameRequestData
+		public class AdminGetDisplayNameRequestData : ServerGetDisplayNameRequestData
 		{
 		}
 
@@ -145,7 +145,7 @@
 		{
 		}
 
-		public class AdminGetFriendStatisticsLeaderboardAroundPlayerRequestData : GetFriendStatisticsLeaderboardAroundPlayerRequestData
+		public class AdminGetFriendStatisticsLeaderboardAroundPlayerRequestData : ServerGetFriendStatisticsLeaderboardAroundPlayerRequestData
 		{
 		}
 
@@ -172,7 +172,7 @@
 		{
 		}
 
-		public class AdminGetFriendStatisticsLeaderboardRequestData : GetFriendStatisticsLeaderboardRequestData
+		public class AdminGetFriendStatisticsLeaderboardRequestData : ServerGetFriendStatisticsLeaderboardRequestData
 		{
 		}
 
@@ -187,7 +187,7 @@
 		{
 		}
 
-		public class AdminGetIpAddressCreateRequestData : GetIpAddressCreateRequestData
+		public class AdminGetIpAddressCreateRequestData : ServerGetIpAddressCreateRequestData
 		{
 		}
 
@@ -202,7 +202,7 @@
 		{
 		}
 
-		public class AdminGetOwnerRequestData : GetOwnerRequestData
+		public class AdminGetOwnerRequestData : ServerGetOwnerRequestData
 		{
 		}
 
@@ -217,7 +217,7 @@
 		{
 		}
 
-		public class AdminGetPlayerBanRequestData : GetPlayerBanRequestData
+		public class AdminGetPlayerBanRequestData : ServerGetPlayerBanRequestData
 		{
 		}
 
@@ -235,7 +235,7 @@
 		{
 		}
 
-		public class AdminGetPlayerCurrencyRequestData : GetPlayerCurrencyRequestData
+		public class AdminGetPlayerCurrencyRequestData : ServerGetPlayerCurrencyRequestData
 		{
 		}
 
@@ -253,7 +253,7 @@
 		{
 		}
 
-		public class AdminGetPlayerDataRequestData : GetPlayerDataRequestData
+		public class AdminGetPlayerDataRequestData : ServerGetPlayerDataRequestData
 		{
 		}
 
@@ -271,7 +271,7 @@
 		{
 		}
 
-		public class AdminGetPlayerFriendRequestData : GetPlayerFriendRequestData
+		public class AdminGetPlayerFriendRequestData : ServerGetPlayerFriendRequestData
 		{
 		}
 
@@ -289,7 +289,7 @@
 		{
 		}
 
-		public class AdminGetPlayerGroupRequestData : GetPlayerGroupRequestData
+		public class AdminGetPlayerGroupRequestData : ServerGetPlayerGroupRequestData
 		{
 		}
 
@@ -307,7 +307,7 @@
 		{
 		}
 
-		public class AdminGetPlayerInformationRequestData : GetPlayerInformationRequestData
+		public class AdminGetPlayerInformationRequestData : ServerGetPlayerInformationRequestData
 		{
 		}
 
@@ -325,7 +325,7 @@
 		{
 		}
 
-		public class AdminGetPlayerInventoryRequestData : GetPlayerInventoryRequestData
+		public class AdminGetPlayerInventoryRequestData : ServerGetPlayerInventoryRequestData
 		{
 		}
 
@@ -343,7 +343,7 @@
 		{
 		}
 
-		public class AdminGetPlayerStatisticsRequestData : GetPlayerStatisticsRequestData
+		public class AdminGetPlayerStatisticsRequestData : ServerGetPlayerStatisticsRequestData
 		{
 		}
 
@@ -367,7 +367,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithDisplayNameRequestData : GetPlayersWithDisplayNameRequestData
+		public class AdminGetPlayersWithDisplayNameRequestData : ServerGetPlayersWithDisplayNameRequestData
 		{
 		}
 
@@ -391,7 +391,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithSegmentRequestData : GetPlayersWithSegmentRequestData
+		public class AdminGetPlayersWithSegmentRequestData : ServerGetPlayersWithSegmentRequestData
 		{
 		}
 
@@ -418,7 +418,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithTagRequestData : GetPlayersWithTagRequestData
+		public class AdminGetPlayersWithTagRequestData : ServerGetPlayersWithTagRequestData
 		{
 		}
 
@@ -433,7 +433,7 @@
 		{
 		}
 
-		public class AdminGetRemoveStatusRequestData : GetRemoveStatusRequestData
+		public class AdminGetRemoveStatusRequestData : ServerGetRemoveStatusRequestData
 		{
 		}
 
@@ -448,7 +448,7 @@
 		{
 		}
 
-		public class AdminGetSegmentRequestData : GetSegmentRequestData
+		public class AdminGetSegmentRequestData : ServerGetSegmentRequestData
 		{
 		}
 
@@ -475,7 +475,7 @@
 		{
 		}
 
-		public class AdminGetStatisticsLeaderboardAroundPlayerRequestData : GetStatisticsLeaderboardAroundPlayerRequestData
+		public class AdminGetStatisticsLeaderboardAroundPlayerRequestData : ServerGetStatisticsLeaderboardAroundPlayerRequestData
 		{
 		}
 
@@ -502,7 +502,7 @@
 		{
 		}
 
-		public class AdminGetStatisticsLeaderboardRequestData : GetStatisticsLeaderboardRequestData
+		public class AdminGetStatisticsLeaderboardRequestData : ServerGetStatisticsLeaderboardRequestData
 		{
 		}
 
@@ -520,7 +520,7 @@
 		{
 		}
 
-		public class AdminGetTagRequestData : GetTagRequestData
+		public class AdminGetTagRequestData : ServerGetTagRequestData
 		{
 		}
 
@@ -535,7 +535,7 @@
 		{
 		}
 
-		public class AdminGetTsCreateRequestData : GetTsCreateRequestData
+		public class AdminGetTsCreateRequestData : ServerGetTsCreateRequestData
 		{
 		}
 
@@ -550,7 +550,7 @@
 		{
 		}
 
-		public class AdminGetTsLastLoginRequestData : GetTsLastLoginRequestData
+		public class AdminGetTsLastLoginRequestData : ServerGetTsLastLoginRequestData
 		{
 		}
 
@@ -574,7 +574,7 @@
 		{
 		}
 
-		public class AdminGrantGroupRequestData : GrantGroupRequestData
+		public class AdminGrantGroupRequestData : ServerGrantGroupRequestData
 		{
 		}
 
@@ -601,7 +601,7 @@
 		{
 		}
 
-		public class AdminGrantPlayerItemRequestData : GrantPlayerItemRequestData
+		public class AdminGrantPlayerItemRequestData : ServerGrantPlayerItemRequestData
 		{
 		}
 
@@ -619,7 +619,7 @@
 		{
 		}
 
-		public class AdminJoinGroupRequestData : JoinGroupRequestData
+		public class AdminJoinGroupRequestData : ServerJoinGroupRequestData
 		{
 		}
 
@@ -637,7 +637,7 @@
 		{
 		}
 
-		public class AdminLeaveGroupRequestData : LeaveGroupRequestData
+		public class AdminLeaveGroupRequestData : ServerLeaveGroupRequestData
 		{
 		}
 
@@ -655,7 +655,7 @@
 		{
 		}
 
-		public class AdminRemovePlayerFriendRequestData : RemovePlayerFriendRequestData
+		public class AdminRemovePlayerFriendRequestData : ServerRemovePlayerFriendRequestData
 		{
 		}
 
@@ -673,7 +673,7 @@
 		{
 		}
 
-		public class AdminRemovePlayerItemRequestData : RemovePlayerItemRequestData
+		public class AdminRemovePlayerItemRequestData : ServerRemovePlayerItemRequestData
 		{
 		}
 
@@ -691,7 +691,7 @@
 		{
 		}
 
-		public class AdminRemoveSegmentRequestData : RemoveSegmentRequestData
+		public class AdminRemoveSegmentRequestData : ServerRemoveSegmentRequestData
 		{
 		}
 
@@ -709,7 +709,7 @@
 		{
 		}
 
-		public class AdminRemoveTagRequestData : RemoveTagRequestData
+		public class AdminRemoveTagRequestData : ServerRemoveTagRequestData
 		{
 		}
 
@@ -730,7 +730,7 @@
 		{
 		}
 
-		public class AdminSetAvatarRequestData : SetAvatarRequestData
+		public class AdminSetAvatarRequestData : ServerSetAvatarRequestData
 		{
 		}
 
@@ -748,7 +748,7 @@
 		{
 		}
 
-		public class AdminSetCountryCodeRequestData : SetCountryCodeRequestData
+		public class AdminSetCountryCodeRequestData : ServerSetCountryCodeRequestData
 		{
 		}
 
@@ -766,7 +766,7 @@
 		{
 		}
 
-		public class AdminSetCustomDataRequestData : SetCustomDataRequestData
+		public class AdminSetCustomDataRequestData : ServerSetCustomDataRequestData
 		{
 		}
 
@@ -784,7 +784,7 @@
 		{
 		}
 
-		public class AdminSetDisplayNameRequestData : SetDisplayNameRequestData
+		public class AdminSetDisplayNameRequestData : ServerSetDisplayNameRequestData
 		{
 		}
 
@@ -802,7 +802,7 @@
 		{
 		}
 
-		public class AdminSetOwnerRequestData : SetOwnerRequestData
+		public class AdminSetOwnerRequestData : ServerSetOwnerRequestData
 		{
 		}
 
@@ -823,7 +823,7 @@
 		{
 		}
 
-		public class AdminSetPlayerBanRequestData : SetPlayerBanRequestData
+		public class AdminSetPlayerBanRequestData : ServerSetPlayerBanRequestData
 		{
 		}
 
@@ -841,7 +841,7 @@
 		{
 		}
 
-		public class AdminSetPlayerCurrencyRequestData : SetPlayerCurrencyRequestData
+		public class AdminSetPlayerCurrencyRequestData : ServerSetPlayerCurrencyRequestData
 		{
 		}
 
@@ -859,7 +859,7 @@
 		{
 		}
 
-		public class AdminSetPlayerDataRequestData : SetPlayerDataRequestData
+		public class AdminSetPlayerDataRequestData : ServerSetPlayerDataRequestData
 		{
 		}
 
@@ -877,7 +877,7 @@
 		{
 		}
 
-		public class AdminSetPlayerStatisticsRequestData : SetPlayerStatisticsRequestData
+		public class AdminSetPlayerStatisticsRequestData : ServerSetPlayerStatisticsRequestData
 		{
 		}
 
@@ -895,7 +895,7 @@
 		{
 		}
 
-		public class AdminSetRemoveStatusRequestData : SetRemoveStatusRequestData
+		public class AdminSetRemoveStatusRequestData : ServerSetRemoveStatusRequestData
 		{
 		}
 
@@ -916,7 +916,7 @@
 		{
 		}
 
-		public class AdminSetTagRequestData : SetTagRequestData
+		public class AdminSetTagRequestData : ServerSetTagRequestData
 		{
 		}
 
@@ -1077,7 +1077,7 @@
             [GNHashtableDataMember(code = GNParameterCode.Owner, isOptional = true)]
             public GenericModels.OwnerItem? owner;
 
-            [StringDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
+            [GNHashtableDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
             public GenericModels.RemoveStatusItem? removeStatus;
 
             [GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
@@ -1119,9 +1119,6 @@
 			[GNArrayDataMember(code = GNParameterCode.PlayerFriends, isOptional = true, elementCls = typeof(GenericModels.FriendItem))]
 			public List<GenericModels.FriendItem>? playerFriends;
 
-			//     if (infoRequestParam.playerFriends)
-			//answer.add(GNParameterCode.PlayerFriends, this.generatePlayerFriends(characterPlayer, infoRequestParam.friendCatalogIds));
-
 			[NumberDataMember(code = GNParameterCode.TsLastLogin, isOptional = true)]
 			public long? tsLastLogin;
 
@@ -1130,6 +1127,41 @@
 
 			[StringDataMember(code = GNParameterCode.CountryCode, isOptional = true)]
 			public string? countryCode;
+		}
+
+		public class CharacterPlayerResponseData
+		{
+			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+			public InfoResponseParameters infoResponseParameters;
+
+		}
+
+		public class CharacterPlayerWithCharacterIdResponseData : CharacterPlayerResponseData
+        {
+			[StringDataMember(code = GNParameterCode.CharacterId)]
+			public string characterId;
+
+		}
+
+		public class CharacterPlayerLeaderboardResponseData : CharacterPlayerWithCharacterIdResponseData
+		{
+			[NumberDataMember(code = GNParameterCode.Position)]
+			public int position;
+
+		}
+
+		public class GetStatisticsLeaderboardResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLeaderboardResponseData))]
+			public List<CharacterPlayerLeaderboardResponseData> results;
+
+		}
+
+		public class MasterPlayersWithCharacterIdResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerWithCharacterIdResponseData))]
+			public List<CharacterPlayerWithCharacterIdResponseData> results;
+
 		}
 
 		public class EmptyResponseData

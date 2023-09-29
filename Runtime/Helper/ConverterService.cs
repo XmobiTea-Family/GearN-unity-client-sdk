@@ -7,18 +7,18 @@
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Entity;
 
-    public class DataMemberFieldInfoTypeMapper
+    internal class DataMemberFieldInfoTypeMapper
     {
-        private Dictionary<Type, FieldInfo[]> declaredFieldsMap;
+        private Dictionary<Type, GNEnhancedObjectFieldMetadata[]> declaredFieldsMap;
 
-        public FieldInfo[] getGNEnhancedObjectFieldMetadata(System.Type cls)
+        public GNEnhancedObjectFieldMetadata[] getGNEnhancedObjectFieldMetadata(System.Type cls)
         {
-            FieldInfo[] declaredFields;
+            GNEnhancedObjectFieldMetadata[] declaredFields;
 
             if (this.declaredFieldsMap.ContainsKey(cls)) declaredFields = this.declaredFieldsMap[cls];
             else
             {
-                var declaredFieldLst = new List<FieldInfo>();
+                var fieldInfoLst = new List<FieldInfo>();
 
                 var currentCls = cls;
 
@@ -28,9 +28,9 @@
 
                     foreach (var field in allDeclaredFields)
                     {
-                        var thisDeclaredField = declaredFieldLst.Find(x => x.Name.Equals(field.Name));
+                        var thisDeclaredField = fieldInfoLst.Find(x => x.Name.Equals(field.Name));
 
-                        if (thisDeclaredField == null) declaredFieldLst.Add(field);
+                        if (thisDeclaredField == null) fieldInfoLst.Add(field);
                     }
 
                     if (currentCls.BaseType == typeof(object))
@@ -41,7 +41,71 @@
                     currentCls = currentCls.BaseType;
                 }
 
-                declaredFields = declaredFieldLst.ToArray();
+                declaredFields = new GNEnhancedObjectFieldMetadata[fieldInfoLst.Count];
+
+                for (var i = 0; i < fieldInfoLst.Count; i++)
+                {
+                    GNEnhancedObjectFieldMetadata gnEnhancedObjectFieldMetadata;
+
+                    var field = fieldInfoLst[i];
+
+                    var dataMemberAnno = field.GetCustomAttribute<DataMemberAttribute>(true);
+
+                    if (dataMemberAnno is StringDataMemberAttribute stringDataMemberAnno)
+                    {
+                        gnEnhancedObjectFieldMetadata = new GNEnhancedObjectFieldMetadata(field.Name, FieldDataType.String, field.FieldType, field);
+
+                        gnEnhancedObjectFieldMetadata.defaultValue = stringDataMemberAnno.defaultValue;
+                        gnEnhancedObjectFieldMetadata.mustNonNull = stringDataMemberAnno.mustNonNull;
+                        gnEnhancedObjectFieldMetadata.minLength = stringDataMemberAnno.minLength;
+                        gnEnhancedObjectFieldMetadata.maxLength = stringDataMemberAnno.maxLength;
+                    }
+                    else if (dataMemberAnno is BooleanDataMemberAttribute booleanDataMemberAnno)
+                    {
+                        gnEnhancedObjectFieldMetadata = new GNEnhancedObjectFieldMetadata(field.Name, FieldDataType.Boolean, field.FieldType, field);
+
+                        gnEnhancedObjectFieldMetadata.defaultValue = booleanDataMemberAnno.defaultValue;
+                    }
+                    else if (dataMemberAnno is GNHashtableDataMemberAttribute gnHashtableDataMemberAnno)
+                    {
+                        gnEnhancedObjectFieldMetadata = new GNEnhancedObjectFieldMetadata(field.Name, FieldDataType.Object, field.FieldType, field);
+
+                        gnEnhancedObjectFieldMetadata.defaultValue = gnHashtableDataMemberAnno.defaultValue;
+                        gnEnhancedObjectFieldMetadata.mustNonNull = gnHashtableDataMemberAnno.mustNonNull;
+                        gnEnhancedObjectFieldMetadata.minLength = gnHashtableDataMemberAnno.minLength;
+                        gnEnhancedObjectFieldMetadata.maxLength = gnHashtableDataMemberAnno.maxLength;
+                    }
+                    else if (dataMemberAnno is GNArrayDataMemberAttribute gnArrayDataMemberAnno)
+                    {
+                        gnEnhancedObjectFieldMetadata = new GNEnhancedObjectFieldMetadata(field.Name, FieldDataType.Array, gnArrayDataMemberAnno.elementCls == null ? field.FieldType : gnArrayDataMemberAnno.elementCls, field);
+
+                        gnEnhancedObjectFieldMetadata.defaultValue = gnArrayDataMemberAnno.defaultValue;
+                        gnEnhancedObjectFieldMetadata.mustNonNull = gnArrayDataMemberAnno.mustNonNull;
+                        gnEnhancedObjectFieldMetadata.minLength = gnArrayDataMemberAnno.minLength;
+                        gnEnhancedObjectFieldMetadata.maxLength = gnArrayDataMemberAnno.maxLength;
+                    }
+                    else if (dataMemberAnno is NumberDataMemberAttribute numberDataMemberAnno)
+                    {
+                        gnEnhancedObjectFieldMetadata = new GNEnhancedObjectFieldMetadata(field.Name, FieldDataType.Number, field.FieldType, field);
+
+                        gnEnhancedObjectFieldMetadata.defaultValue = numberDataMemberAnno.defaultValue;
+                        gnEnhancedObjectFieldMetadata.minValue = numberDataMemberAnno.minValue;
+                        gnEnhancedObjectFieldMetadata.maxValue = numberDataMemberAnno.maxValue;
+                        gnEnhancedObjectFieldMetadata.mustInt = numberDataMemberAnno.mustInt;
+                    }
+                    else
+                    {
+                        gnEnhancedObjectFieldMetadata = new GNEnhancedObjectFieldMetadata(field.Name, FieldDataType.Object, field.FieldType, field);
+
+                        gnEnhancedObjectFieldMetadata.defaultValue = dataMemberAnno.defaultValue;
+                    }
+
+                    gnEnhancedObjectFieldMetadata.code = dataMemberAnno.code;
+                    gnEnhancedObjectFieldMetadata.isOptional = dataMemberAnno.isOptional;
+                    gnEnhancedObjectFieldMetadata.gnFieldType = dataMemberAnno.gnFieldType;
+
+                    declaredFields[i] = gnEnhancedObjectFieldMetadata;
+                }
 
                 this.declaredFieldsMap[cls] = declaredFields;
             }
@@ -51,145 +115,125 @@
 
         public DataMemberFieldInfoTypeMapper()
         {
-            this.declaredFieldsMap = new Dictionary<Type, FieldInfo[]>();
+            this.declaredFieldsMap = new Dictionary<Type, GNEnhancedObjectFieldMetadata[]>();
         }
     }
 
-    public class ConverterService
+    internal class DeserializeConverter
     {
-        private static DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper = new DataMemberFieldInfoTypeMapper();
+        private DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper;
 
-        private static Type typeOfByte => typeof(byte);
-        private static Type typeOfSByte => typeof(sbyte);
-        private static Type typeOfShort => typeof(short);
-        private static Type typeOfInt => typeof(int);
-        private static Type typeOfFloat => typeof(float);
-        private static Type typeOfLong => typeof(long);
-        private static Type typeOfDouble => typeof(double);
-        private static Type typeOfBool => typeof(bool);
-        private static Type typeOfString => typeof(string);
-        private static Type typeOfGNArray => typeof(GNArray);
-        private static Type typeOfGNHashtable => typeof(GNHashtable);
+        private Type typeOfByte;
+        private Type typeOfSByte;
+        private Type typeOfShort;
+        private Type typeOfInt;
+        private Type typeOfFloat;
+        private Type typeOfLong;
+        private Type typeOfDouble;
+        private Type typeOfBool;
+        private Type typeOfString;
+        private Type typeOfGNArray;
+        private Type typeOfGNHashtable;
 
-        public static T deserializeObject<T>(GNHashtable gnHashtable)
-        {
-            return (T)ConverterService.deserializeObject(gnHashtable, typeof(T));
-        }
-
-        public static object deserializeObject(GNHashtable gnHashtable, Type type)
+        public object deserializeObject(GNHashtable gnHashtable, Type cls)
         {
             if (gnHashtable == null) return null;
 
-            var fieldInfos = ConverterService.dataMemberFieldInfoMapper.getGNEnhancedObjectFieldMetadata(type);
+            var declaredFields = this.dataMemberFieldInfoMapper.getGNEnhancedObjectFieldMetadata(cls);
 
-            var answer = Activator.CreateInstance(type);
+            var answer = Activator.CreateInstance(cls);
 
-            foreach (var field in fieldInfos)
+            foreach (var declaredField in declaredFields)
             {
-                var dataMemberAnno = field.GetCustomAttribute<DataMemberAttribute>(true);
+                var value = gnHashtable.getObject(declaredField.code);
 
-                var value = gnHashtable.getObject(dataMemberAnno.code);
-
-                if (dataMemberAnno is StringDataMemberAttribute stringDataMemberAnno)
+                if (declaredField.gnFieldType == GNFieldDataType.String)
                 {
-                    if (value == null) field.SetValue(answer, stringDataMemberAnno.defaultValue);
-                    else if (value is string) field.SetValue(answer, value);
+                    if (value == null) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                    else if (value is string) declaredField.fieldInfo.SetValue(answer, value);
                 }
-                else if (dataMemberAnno is BooleanDataMemberAttribute booleanDataMemberAnno)
+                else if (declaredField.gnFieldType == GNFieldDataType.Boolean)
                 {
-                    if (value == null) field.SetValue(answer, booleanDataMemberAnno.defaultValue);
-                    else if (value is bool) field.SetValue(answer, value);
+                    if (value == null) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                    else if (value is bool) declaredField.fieldInfo.SetValue(answer, value);
                 }
-                else if (dataMemberAnno is GNHashtableDataMemberAttribute gnHashtableDataMemberAnno)
+                else if (declaredField.gnFieldType == GNFieldDataType.GNHashtable)
                 {
                     if (value == null)
                     {
-                        if (gnHashtableDataMemberAnno.defaultValue != null)
+                        if (declaredField.defaultValue != null)
                         {
-                            if (field.FieldType == typeOfGNHashtable) field.SetValue(answer, gnHashtableDataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeof(System.Collections.IDictionary)) field.SetValue(answer, gnHashtableDataMemberAnno.defaultValue.toData());
-                            else field.SetValue(answer, ConverterService.deserializeObject(gnHashtableDataMemberAnno.defaultValue, field.FieldType));
+                            if (declaredField.fieldInfo.FieldType == typeOfGNHashtable) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IDictionary)) declaredField.fieldInfo.SetValue(answer, ((GNHashtable)(declaredField.defaultValue)).toData());
+                            else declaredField.fieldInfo.SetValue(answer, this.deserializeObject((GNHashtable)declaredField.defaultValue, declaredField.cls));
                         }
                     }
                     else
                     {
-                        if (field.FieldType == typeOfGNHashtable) field.SetValue(answer, value);
-                        else if (field.FieldType == typeof(System.Collections.IDictionary)) field.SetValue(answer, ((IGNData)value).toData());
-                        else field.SetValue(answer, ConverterService.deserializeObject((GNHashtable)value, field.FieldType));
+                        if (declaredField.fieldInfo.FieldType == typeOfGNHashtable) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IDictionary)) declaredField.fieldInfo.SetValue(answer, ((IGNData)value).toData());
+                        else declaredField.fieldInfo.SetValue(answer, this.deserializeObject((GNHashtable)value, declaredField.cls));
                     }
                 }
-                else if (dataMemberAnno is GNArrayDataMemberAttribute gnArrayDataMemberAnno)
+                else if (declaredField.gnFieldType == GNFieldDataType.GNArray)
                 {
                     if (value == null)
                     {
-                        if (gnArrayDataMemberAnno.defaultValue != null)
+                        if (declaredField.defaultValue != null)
                         {
-                            if (field.FieldType == typeOfGNArray) field.SetValue(answer, gnArrayDataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeof(System.Collections.IList)) field.SetValue(answer, gnArrayDataMemberAnno.defaultValue.toData());
+                            if (declaredField.fieldInfo.FieldType == typeOfGNArray) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IList)) declaredField.fieldInfo.SetValue(answer, ((GNArray)declaredField.defaultValue).toData());
                         }
                     }
                     else
                     {
-                        if (field.FieldType == typeOfGNArray) field.SetValue(answer, value);
-                        else if (field.FieldType == typeof(System.Collections.IList)) field.SetValue(answer, ((IGNData)value).toData());
+                        if (declaredField.fieldInfo.FieldType == typeOfGNArray) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IList)) declaredField.fieldInfo.SetValue(answer, ((IGNData)value).toData());
                     }
                 }
-                else if (dataMemberAnno is NumberDataMemberAttribute numberDataMemberAnno)
+                else if (declaredField.gnFieldType == GNFieldDataType.Number)
                 {
-                    if (value == null) field.SetValue(answer, numberDataMemberAnno.defaultValue);
-                    else if (ConverterService.isNumber(value)) field.SetValue(answer, value);
-
-                    //var typeOfField = field.FieldType;
-
-                    //if (typeOfField == typeOfByte) field.SetValue(answer, gnHashtable.getByte(dataMemberAnno.code, Convert.ToByte(numberDataMemberAnno.defaultValue)));
-                    //else if (typeOfField == typeOfSByte) field.SetValue(answer, gnHashtable.getSByte(dataMemberAnno.code, Convert.ToSByte(numberDataMemberAnno.defaultValue)));
-                    //else if (typeOfField == typeOfShort) field.SetValue(answer, gnHashtable.getShort(dataMemberAnno.code, Convert.ToInt16(numberDataMemberAnno.defaultValue)));
-                    //else if (typeOfField == typeOfInt) field.SetValue(answer, gnHashtable.getInt(dataMemberAnno.code, Convert.ToInt32(numberDataMemberAnno.defaultValue)));
-                    //else if (typeOfField == typeOfFloat) field.SetValue(answer, gnHashtable.getFloat(dataMemberAnno.code, Convert.ToSingle(numberDataMemberAnno.defaultValue)));
-                    //else if (typeOfField == typeOfLong) field.SetValue(answer, gnHashtable.getLong(dataMemberAnno.code, Convert.ToInt64(numberDataMemberAnno.defaultValue)));
-                    //else if (typeOfField == typeOfDouble) field.SetValue(answer, gnHashtable.getDouble(dataMemberAnno.code, Convert.ToDouble(numberDataMemberAnno.defaultValue)));
-                    //else field.SetValue(answer, numberDataMemberAnno.defaultValue);
-
-                    //field.SetValue(answer, gnHashtable.getDouble(dataMemberAnno.code, numberDataMemberAnno.defaultValue));
+                    if (value == null) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                    else if (ConverterService.isNumber(value)) declaredField.fieldInfo.SetValue(answer, value);
                 }
                 else
                 {
                     if (value == null)
                     {
-                        if (dataMemberAnno.defaultValue != null)
+                        if (declaredField.defaultValue != null)
                         {
-                            if (field.FieldType == typeOfByte) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfSByte) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfShort) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfInt) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfFloat) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfLong) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfDouble) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfBool) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfString) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeOfGNArray) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeof(System.Collections.IList)) field.SetValue(answer, ((IGNData)dataMemberAnno.defaultValue).toData());
-                            else if (field.FieldType == typeOfGNHashtable) field.SetValue(answer, dataMemberAnno.defaultValue);
-                            else if (field.FieldType == typeof(System.Collections.IDictionary)) field.SetValue(answer, ((IGNData)dataMemberAnno.defaultValue).toData());
-                            else field.SetValue(answer, ConverterService.deserializeObject((GNHashtable)dataMemberAnno.defaultValue, field.FieldType));
+                            if (declaredField.fieldInfo.FieldType == typeOfByte) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfSByte) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfShort) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfInt) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfFloat) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfLong) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfDouble) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfBool) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfString) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeOfGNArray) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IList)) declaredField.fieldInfo.SetValue(answer, ((IGNData)declaredField.defaultValue).toData());
+                            else if (declaredField.fieldInfo.FieldType == typeOfGNHashtable) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
+                            else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IDictionary)) declaredField.fieldInfo.SetValue(answer, ((IGNData)declaredField.defaultValue).toData());
+                            else declaredField.fieldInfo.SetValue(answer, this.deserializeObject((GNHashtable)declaredField.defaultValue, declaredField.cls));
                         }
                     }
                     else
                     {
-                        if (field.FieldType == typeOfByte) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfSByte) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfShort) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfInt) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfFloat) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfLong) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfDouble) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfBool) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfString) field.SetValue(answer, value);
-                        else if (field.FieldType == typeOfGNArray) field.SetValue(answer, value);
-                        else if (field.FieldType == typeof(System.Collections.IList)) field.SetValue(answer, ((IGNData)value).toData());
-                        else if (field.FieldType == typeOfGNHashtable) field.SetValue(answer, value);
-                        else if (field.FieldType == typeof(System.Collections.IDictionary)) field.SetValue(answer, ((IGNData)value).toData());
-                        else field.SetValue(answer, ConverterService.deserializeObject((GNHashtable)value, field.FieldType));
+                        if (declaredField.fieldInfo.FieldType == typeOfByte) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfSByte) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfShort) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfInt) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfFloat) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfLong) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfDouble) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfBool) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfString) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeOfGNArray) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IList)) declaredField.fieldInfo.SetValue(answer, ((IGNData)value).toData());
+                        else if (declaredField.fieldInfo.FieldType == typeOfGNHashtable) declaredField.fieldInfo.SetValue(answer, value);
+                        else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IDictionary)) declaredField.fieldInfo.SetValue(answer, ((IGNData)value).toData());
+                        else declaredField.fieldInfo.SetValue(answer, this.deserializeObject((GNHashtable)value, declaredField.cls));
                     }
                 }
             }
@@ -197,25 +241,7 @@
             return answer;
         }
 
-        public static System.Collections.IList deserializeArray<T>(GNArray gnArray)
-        {
-            var cls = typeof(T);
-
-            var array = ConverterService.deserializeArray(gnArray, cls);
-
-            if (array == null) return null;
-
-            var answer = new List<T>();
-
-            for (var i = 0; i < array.Count; i++)
-            {
-                answer.Add((T)array[i]);
-            }
-
-            return answer;
-        }
-
-        public static System.Collections.IList deserializeArray(GNArray gnArray, Type cls)
+        public System.Collections.IList deserializeArray(GNArray gnArray, Type cls)
         {
             if (gnArray == null) return null;
 
@@ -241,69 +267,89 @@
                     else if (cls == typeOfGNArray) answer.Add(value);
                     else if (cls == typeOfGNHashtable) answer.Add(value);
                     else if (typeOfValue == typeof(System.Collections.IList))
-                        answer.Add(ConverterService.deserializeArray(gnArray.getGNArray(i), cls));
+                        answer.Add(this.deserializeArray(gnArray.getGNArray(i), cls));
                     else
-                        answer.Add(ConverterService.deserializeObject(gnArray.getGNHashtable(i), cls));
+                        answer.Add(this.deserializeObject(gnArray.getGNHashtable(i), cls));
                 }
             }
 
             return answer;
         }
 
-        public static GNHashtable serializeObject(object obj)
+        public DeserializeConverter(DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper)
+        {
+            this.typeOfByte = typeof(byte);
+            this.typeOfSByte = typeof(sbyte);
+            this.typeOfShort = typeof(short);
+            this.typeOfInt = typeof(int);
+            this.typeOfFloat = typeof(float);
+            this.typeOfLong = typeof(long);
+            this.typeOfDouble = typeof(double);
+            this.typeOfBool = typeof(bool);
+            this.typeOfString = typeof(string);
+            this.typeOfGNArray = typeof(GNArray);
+            this.typeOfGNHashtable = typeof(GNHashtable);
+
+            this.dataMemberFieldInfoMapper = dataMemberFieldInfoMapper;
+        }
+    }
+
+    internal class SerializeConverter
+    {
+        private DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper;
+
+        public GNHashtable serializeObject(object obj)
         {
             if (obj == null) return null;
 
             var type = obj.GetType();
 
-            var fieldInfos = dataMemberFieldInfoMapper.getGNEnhancedObjectFieldMetadata(type);
+            var declaredFields = this.dataMemberFieldInfoMapper.getGNEnhancedObjectFieldMetadata(type);
 
             var answer = new GNHashtable();
 
-            foreach (var field in fieldInfos)
+            foreach (var declaredField in declaredFields)
             {
-                var dataMemberAnno = field.GetCustomAttribute<DataMemberAttribute>(true);
-
-                var value = field.GetValue(obj);
+                var value = declaredField.fieldInfo.GetValue(obj);
 
                 if (value == null)
                 {
-                    if (!dataMemberAnno.isOptional) answer.add(dataMemberAnno.code, null);
+                    if (!declaredField.isOptional) answer.add(declaredField.code, null);
                 }
                 else
                 {
-                    if (dataMemberAnno is StringDataMemberAttribute stringDataMemberAnno)
+                    if (declaredField.gnFieldType == GNFieldDataType.String)
                     {
-                        if (value is string) answer.add(dataMemberAnno.code, value);
+                        if (value is string) answer.add(declaredField.code, value);
                     }
-                    else if (dataMemberAnno is BooleanDataMemberAttribute booleanDataMemberAnno)
+                    else if (declaredField.gnFieldType == GNFieldDataType.Boolean)
                     {
-                        if (value is bool) answer.add(dataMemberAnno.code, value);
+                        if (value is bool) answer.add(declaredField.code, value);
                     }
-                    else if (dataMemberAnno is GNHashtableDataMemberAttribute gnHashtableDataMemberAnno)
+                    else if (declaredField.gnFieldType == GNFieldDataType.GNHashtable)
                     {
-                        if (value is GNHashtable) answer.add(dataMemberAnno.code, value);
-                        else if (value is System.Collections.IDictionary valueDict) answer.add(dataMemberAnno.code, new GNHashtable.Builder().addAll(valueDict).build());
-                        else answer.add(dataMemberAnno.code, ConverterService.serializeObject(value));
+                        if (value is GNHashtable) answer.add(declaredField.code, value);
+                        else if (value is System.Collections.IDictionary valueDict) answer.add(declaredField.code, new GNHashtable.Builder().addAll(valueDict).build());
+                        else answer.add(declaredField.code, this.serializeObject(value));
                     }
-                    else if (dataMemberAnno is GNArrayDataMemberAttribute gnArrayDataMemberAnno)
+                    else if (declaredField.gnFieldType == GNFieldDataType.GNArray)
                     {
-                        if (value is GNArray) answer.add(dataMemberAnno.code, value);
-                        else if (value is System.Collections.IList valueLst) answer.add(dataMemberAnno.code, ConverterService.serializeArray(valueLst));
+                        if (value is GNArray) answer.add(declaredField.code, value);
+                        else if (value is System.Collections.IList valueLst) answer.add(declaredField.code, this.serializeArray(valueLst));
                     }
-                    else if (dataMemberAnno is NumberDataMemberAttribute numberDataMemberAnno)
+                    else if (declaredField.gnFieldType == GNFieldDataType.Number)
                     {
-                        if (ConverterService.isNumber(value)) answer.add(dataMemberAnno.code, value);
+                        if (ConverterService.isNumber(value)) answer.add(declaredField.code, value);
                     }
                     else
                     {
-                        if (value is string) answer.add(dataMemberAnno.code, value);
-                        else if (value is bool) answer.add(dataMemberAnno.code, value);
-                        else if (ConverterService.isNumber(value)) answer.add(dataMemberAnno.code, value);
-                        else if (value is IGNData) answer.add(dataMemberAnno.code, value);
-                        else if (value is System.Collections.IList valueLst) answer.add(dataMemberAnno.code, ConverterService.serializeArray(valueLst));
-                        else if (value is System.Collections.IDictionary valueDict) answer.add(dataMemberAnno.code, new GNHashtable.Builder().addAll(valueDict).build());
-                        else answer.add(dataMemberAnno.code, ConverterService.serializeObject(value));
+                        if (value is string) answer.add(declaredField.code, value);
+                        else if (value is bool) answer.add(declaredField.code, value);
+                        else if (ConverterService.isNumber(value)) answer.add(declaredField.code, value);
+                        else if (value is IGNData) answer.add(declaredField.code, value);
+                        else if (value is System.Collections.IList valueLst) answer.add(declaredField.code, this.serializeArray(valueLst));
+                        else if (value is System.Collections.IDictionary valueDict) answer.add(declaredField.code, new GNHashtable.Builder().addAll(valueDict).build());
+                        else answer.add(declaredField.code, this.serializeObject(value));
                     }
                 }
             }
@@ -311,7 +357,7 @@
             return answer;
         }
 
-        public static GNArray serializeArray(System.Collections.IList objLst)
+        public GNArray serializeArray(System.Collections.IList objLst)
         {
             if (objLst == null) return null;
 
@@ -326,25 +372,74 @@
                 else if (obj is bool) answer.add(obj);
                 else if (ConverterService.isNumber(obj)) answer.add(obj);
                 else if (obj is IGNData) answer.add(obj);
-                else if (obj is System.Collections.IList) answer.add(ConverterService.serializeArray((System.Collections.IList)obj));
-                else answer.add(ConverterService.serializeObject(obj));
+                else if (obj is System.Collections.IList iList) answer.add(this.serializeArray(iList));
+                else answer.add(this.serializeObject(obj));
             }
 
             return answer;
         }
 
-        private static bool isNumber(object value)
+        public SerializeConverter(DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper)
         {
-            return (value is byte
-                || value is sbyte
-                || value is short
-                || value is int
-                || value is float
-                || value is long
-                || value is double);
+            this.dataMemberFieldInfoMapper = dataMemberFieldInfoMapper;
+        }
+    }
+
+    public class ConverterService
+    {
+        private static SerializeConverter serializeConverter;
+        private static DeserializeConverter deserializeConverter;
+
+        public static T deserializeObject<T>(GNHashtable gnHashtable)
+        {
+            return (T)ConverterService.deserializeObject(gnHashtable, typeof(T));
         }
 
-        private static bool isInteger(object value)
+        public static object deserializeObject(GNHashtable gnHashtable, Type cls)
+        {
+            return ConverterService.deserializeConverter.deserializeObject(gnHashtable, cls);
+        }
+
+        public static System.Collections.IList deserializeArray<T>(GNArray gnArray)
+        {
+            return ConverterService.deserializeArray<T>(gnArray);
+        }
+
+        public static System.Collections.IList deserializeArray(GNArray gnArray, Type cls)
+        {
+            return ConverterService.deserializeConverter.deserializeArray(gnArray, cls);
+        }
+
+        public static GNHashtable serializeObject(object obj)
+        {
+            return ConverterService.serializeConverter.serializeObject(obj);
+        }
+
+        public static GNArray serializeArray(System.Collections.IList objLst)
+        {
+            return ConverterService.serializeConverter.serializeArray(objLst);
+        }
+
+        static ConverterService()
+        {
+            var dataMemberFieldInfoMapper = new DataMemberFieldInfoTypeMapper();
+
+            ConverterService.serializeConverter = new SerializeConverter(dataMemberFieldInfoMapper);
+            ConverterService.deserializeConverter = new DeserializeConverter(dataMemberFieldInfoMapper);
+        }
+
+        public static bool isNumber(object value)
+        {
+            return (value is byte
+                    || value is sbyte
+                    || value is short
+                    || value is int
+                    || value is float
+                    || value is long
+                    || value is double);
+        }
+
+        public static bool isInteger(object value)
         {
             return (value is byte
                 || value is sbyte

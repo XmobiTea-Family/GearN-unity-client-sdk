@@ -19,7 +19,7 @@
 		{
 		}
 
-		public class AdminAddSegmentRequestData : AddSegmentRequestData
+		public class AdminAddSegmentRequestData : ServerAddSegmentRequestData
 		{
 		}
 
@@ -34,7 +34,7 @@
 		{
 		}
 
-		public class AdminGetAmountRequestData : GetAmountRequestData
+		public class AdminGetAmountRequestData : ServerGetAmountRequestData
 		{
 		}
 
@@ -49,7 +49,7 @@
 		{
 		}
 
-		public class AdminGetAvatarRequestData : GetAvatarRequestData
+		public class AdminGetAvatarRequestData : ServerGetAvatarRequestData
 		{
 		}
 
@@ -64,7 +64,7 @@
 		{
 		}
 
-		public class AdminGetCatalogIdRequestData : GetCatalogIdRequestData
+		public class AdminGetCatalogIdRequestData : ServerGetCatalogIdRequestData
 		{
 		}
 
@@ -79,7 +79,7 @@
 		{
 		}
 
-		public class AdminGetClassIdRequestData : GetClassIdRequestData
+		public class AdminGetClassIdRequestData : ServerGetClassIdRequestData
 		{
 		}
 
@@ -97,7 +97,7 @@
 		{
 		}
 
-		public class AdminGetCustomDataRequestData : GetCustomDataRequestData
+		public class AdminGetCustomDataRequestData : ServerGetCustomDataRequestData
 		{
 		}
 
@@ -112,7 +112,7 @@
 		{
 		}
 
-		public class AdminGetDisplayNameRequestData : GetDisplayNameRequestData
+		public class AdminGetDisplayNameRequestData : ServerGetDisplayNameRequestData
 		{
 		}
 
@@ -130,7 +130,7 @@
 		{
 		}
 
-		public class AdminGetItemDataRequestData : GetItemDataRequestData
+		public class AdminGetItemDataRequestData : ServerGetItemDataRequestData
 		{
 		}
 
@@ -148,7 +148,7 @@
 		{
 		}
 
-		public class AdminGetItemInformationRequestData : GetItemInformationRequestData
+		public class AdminGetItemInformationRequestData : ServerGetItemInformationRequestData
 		{
 		}
 
@@ -166,7 +166,7 @@
 		{
 		}
 
-		public class AdminGetItemStatisticsRequestData : GetItemStatisticsRequestData
+		public class AdminGetItemStatisticsRequestData : ServerGetItemStatisticsRequestData
 		{
 		}
 
@@ -190,7 +190,7 @@
 		{
 		}
 
-		public class AdminGetItemsWithDisplayNameRequestData : GetItemsWithDisplayNameRequestData
+		public class AdminGetItemsWithDisplayNameRequestData : ServerGetItemsWithDisplayNameRequestData
 		{
 		}
 
@@ -214,7 +214,7 @@
 		{
 		}
 
-		public class AdminGetItemsWithSegmentRequestData : GetItemsWithSegmentRequestData
+		public class AdminGetItemsWithSegmentRequestData : ServerGetItemsWithSegmentRequestData
 		{
 		}
 
@@ -241,7 +241,7 @@
 		{
 		}
 
-		public class AdminGetItemsWithTagRequestData : GetItemsWithTagRequestData
+		public class AdminGetItemsWithTagRequestData : ServerGetItemsWithTagRequestData
 		{
 		}
 
@@ -256,7 +256,7 @@
 		{
 		}
 
-		public class AdminGetItemTypeRequestData : GetItemTypeRequestData
+		public class AdminGetItemTypeRequestData : ServerGetItemTypeRequestData
 		{
 		}
 
@@ -271,7 +271,7 @@
 		{
 		}
 
-		public class AdminGetOwnerRequestData : GetOwnerRequestData
+		public class AdminGetOwnerRequestData : ServerGetOwnerRequestData
 		{
 		}
 
@@ -286,7 +286,7 @@
 		{
 		}
 
-		public class AdminGetRemoveStatusRequestData : GetRemoveStatusRequestData
+		public class AdminGetRemoveStatusRequestData : ServerGetRemoveStatusRequestData
 		{
 		}
 
@@ -301,7 +301,7 @@
 		{
 		}
 
-		public class AdminGetSegmentRequestData : GetSegmentRequestData
+		public class AdminGetSegmentRequestData : ServerGetSegmentRequestData
 		{
 		}
 
@@ -328,7 +328,7 @@
 		{
 		}
 
-		public class AdminGetStatisticsLeaderboardAroundItemRequestData : GetStatisticsLeaderboardAroundItemRequestData
+		public class AdminGetStatisticsLeaderboardAroundItemRequestData : ServerGetStatisticsLeaderboardAroundItemRequestData
 		{
 		}
 
@@ -355,7 +355,7 @@
 		{
 		}
 
-		public class AdminGetStatisticsLeaderboardRequestData : GetStatisticsLeaderboardRequestData
+		public class AdminGetStatisticsLeaderboardRequestData : ServerGetStatisticsLeaderboardRequestData
 		{
 		}
 
@@ -373,7 +373,7 @@
 		{
 		}
 
-		public class AdminGetTagRequestData : GetTagRequestData
+		public class AdminGetTagRequestData : ServerGetTagRequestData
 		{
 		}
 
@@ -388,7 +388,7 @@
 		{
 		}
 
-		public class AdminGetTsCreateRequestData : GetTsCreateRequestData
+		public class AdminGetTsCreateRequestData : ServerGetTsCreateRequestData
 		{
 		}
 
@@ -406,7 +406,7 @@
 		{
 		}
 
-		public class AdminRemoveSegmentRequestData : RemoveSegmentRequestData
+		public class AdminRemoveSegmentRequestData : ServerRemoveSegmentRequestData
 		{
 		}
 
@@ -424,7 +424,7 @@
 		{
 		}
 
-		public class AdminRemoveTagRequestData : RemoveTagRequestData
+		public class AdminRemoveTagRequestData : ServerRemoveTagRequestData
 		{
 		}
 
@@ -442,7 +442,7 @@
 		{
 		}
 
-		public class AdminSetAmountRequestData : SetAmountRequestData
+		public class AdminSetAmountRequestData : ServerSetAmountRequestData
 		{
 		}
 
@@ -463,7 +463,7 @@
 		{
 		}
 
-		public class AdminSetAvatarRequestData : SetAvatarRequestData
+		public class AdminSetAvatarRequestData : ServerSetAvatarRequestData
 		{
 		}
 
@@ -481,7 +481,7 @@
 		{
 		}
 
-		public class AdminSetCustomDataRequestData : SetCustomDataRequestData
+		public class AdminSetCustomDataRequestData : ServerSetCustomDataRequestData
 		{
 		}
 
@@ -499,7 +499,7 @@
 		{
 		}
 
-		public class AdminSetDisplayNameRequestData : SetDisplayNameRequestData
+		public class AdminSetDisplayNameRequestData : ServerSetDisplayNameRequestData
 		{
 		}
 
@@ -517,7 +517,7 @@
 		{
 		}
 
-		public class AdminSetItemDataRequestData : SetItemDataRequestData
+		public class AdminSetItemDataRequestData : ServerSetItemDataRequestData
 		{
 		}
 
@@ -535,7 +535,7 @@
 		{
 		}
 
-		public class AdminSetItemStatisticsRequestData : SetItemStatisticsRequestData
+		public class AdminSetItemStatisticsRequestData : ServerSetItemStatisticsRequestData
 		{
 		}
 
@@ -556,7 +556,7 @@
 		{
 		}
 
-		public class AdminSetOwnerRequestData : SetOwnerRequestData
+		public class AdminSetOwnerRequestData : ServerSetOwnerRequestData
 		{
 		}
 
@@ -574,7 +574,7 @@
 		{
 		}
 
-		public class AdminSetRemoveStatusRequestData : SetRemoveStatusRequestData
+		public class AdminSetRemoveStatusRequestData : ServerSetRemoveStatusRequestData
 		{
 		}
 
@@ -595,7 +595,7 @@
 		{
 		}
 
-		public class AdminSetTagRequestData : SetTagRequestData
+		public class AdminSetTagRequestData : ServerSetTagRequestData
 		{
 		}
 
@@ -698,8 +698,88 @@
 
 	public partial class InventoryModels
 	{
+		public class InfoResponseParameters
+		{
+			[StringDataMember(code = GNParameterCode.CatalogId, isOptional = true)]
+			public string? catalogId;
 
-		public class ResponseData
+			[StringDataMember(code = GNParameterCode.ClassId, isOptional = true)]
+			public string? classId;
+
+			[NumberDataMember(code = GNParameterCode.ItemType, isOptional = true)]
+			public int? itemType;
+
+			[NumberDataMember(code = GNParameterCode.Amount, isOptional = true)]
+			public int? amount;
+
+			[GNHashtableDataMember(code = GNParameterCode.Owner, isOptional = true)]
+			public GenericModels.OwnerItem? owner;
+
+			[GNHashtableDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
+			public GenericModels.RemoveStatusItem? removeStatus;
+
+			[GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
+			public List<string>? segments;
+
+			[GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? customDatas;
+
+			[StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+			public string? displayName;
+
+			[GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+			public GenericModels.AvatarItem? avatar;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+			public long? tsCreate;
+
+			[GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+			public List<GenericModels.TagItem>? tags;
+
+			[GNArrayDataMember(code = GNParameterCode.ItemDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+			public List<GenericModels.DataItem>? itemDatas;
+
+			[GNArrayDataMember(code = GNParameterCode.ItemStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
+			public List<GenericModels.StatisticsItem>? itemStatistics;
+
+		}
+
+		public class InventoryResponseData
+		{
+			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+			public InfoResponseParameters infoResponseParameters;
+
+		}
+
+		public class InventoryWithItemIdResponseData : InventoryResponseData
+		{
+			[StringDataMember(code = GNParameterCode.ItemId)]
+			public string itemId;
+
+		}
+
+		public class InventoryLeaderboardResponseData : InventoryWithItemIdResponseData
+		{
+			[NumberDataMember(code = GNParameterCode.Position)]
+			public int position;
+
+		}
+
+		public class GetStatisticsLeaderboardResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(InventoryLeaderboardResponseData))]
+			public List<InventoryLeaderboardResponseData> results;
+
+		}
+
+		public class InventoriesWithItemIdResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(InventoryWithItemIdResponseData))]
+			public List<InventoryWithItemIdResponseData> results;
+
+		}
+
+		public class EmptyResponseData
 		{
 
 		}

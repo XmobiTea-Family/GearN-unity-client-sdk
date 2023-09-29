@@ -61,7 +61,10 @@
             return this.invalidMembers;
         }
 
-        public bool hasError() => this.getReturnCode() != ReturnCode.Ok;
+        public bool hasError()
+        {
+            return this.getReturnCode() != ReturnCode.Ok;
+        }
 
         public OperationResponse setReturnCode(int returnCode)
         {

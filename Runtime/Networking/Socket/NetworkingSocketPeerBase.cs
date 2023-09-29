@@ -1,4 +1,4 @@
-namespace XmobiTea.GN.Networking
+namespace XmobiTea.GN.Networking.Socket
 {
     using System;
     using System.Collections.Generic;
@@ -28,7 +28,7 @@ namespace XmobiTea.GN.Networking
         }
     }
 
-    public class NetworkingPeerBase : UnityEngine.MonoBehaviour
+    public abstract class NetworkingSocketPeerBase
     {
         #region Public Properties
 
@@ -69,9 +69,7 @@ namespace XmobiTea.GN.Networking
             this.pingTimeout = pingTimeout;
         }
 
-        #region Unity interface
-
-        protected virtual void Awake()
+        public NetworkingSocketPeerBase()
         {
             this.clientId = string.Empty;
 
@@ -79,13 +77,6 @@ namespace XmobiTea.GN.Networking
             this.responsePacketLst = new List<SocketPacket>();
             this.eventPacketLst = new List<SocketPacket>();
         }
-
-        void OnApplicationQuit()
-        {
-            close(null);
-        }
-
-        #endregion
 
         #region Public Interface
 
@@ -106,7 +97,7 @@ namespace XmobiTea.GN.Networking
 
         internal void Send(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags)
         {
-            emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
+            this.emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags);
         }
 
         protected virtual void emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags) { }
@@ -261,7 +252,7 @@ namespace XmobiTea.GN.Networking
                                 var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                                 var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingPeerBase.fromMsgList(iList))
+                                    .addAll(NetworkingSocketPeerBase.fromMsgList(iList))
                                     .build();
                                 onResponseHandler(gnArray, responsePacket.encrypted);
                             }
@@ -277,7 +268,7 @@ namespace XmobiTea.GN.Networking
                                 var iList = responsePacket.obj;
 
                                 var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingPeerBase.fromJsonList(iList))
+                                    .addAll(NetworkingSocketPeerBase.fromJsonList(iList))
                                     .build();
                                 onResponseHandler(gnArray, responsePacket.encrypted);
                             }
@@ -306,7 +297,7 @@ namespace XmobiTea.GN.Networking
                                 var iList = MsgPackSerializer.Deserialize<object[]>(byteArr);
 
                                 var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingPeerBase.fromMsgList(iList))
+                                    .addAll(NetworkingSocketPeerBase.fromMsgList(iList))
                                     .build();
                                 onEventHandler(gnArray, eventPacket.encrypted);
                             }
@@ -322,7 +313,7 @@ namespace XmobiTea.GN.Networking
                                 var iList = eventPacket.obj;
 
                                 var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingPeerBase.fromJsonList(iList))
+                                    .addAll(NetworkingSocketPeerBase.fromJsonList(iList))
                                     .build();
                                 onEventHandler(gnArray, eventPacket.encrypted);
                             }

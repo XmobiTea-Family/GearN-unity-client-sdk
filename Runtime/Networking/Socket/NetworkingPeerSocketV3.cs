@@ -1,4 +1,4 @@
-namespace XmobiTea.GN.Networking
+namespace XmobiTea.GN.Networking.Socket
 {
     using System;
 
@@ -9,7 +9,7 @@ namespace XmobiTea.GN.Networking
     using XmobiTea.GN.Logger;
     using XmobiTea.GN.Common;
 
-    internal class NetworkingPeerSocketV3 : NetworkingPeerBase
+    internal class NetworkingPeerSocketV3 : NetworkingSocketPeerBase
     {
         private SocketManager socketManager;
         private bool isConnected;

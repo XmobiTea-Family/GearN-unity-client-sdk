@@ -20,7 +20,7 @@
 
 		}
 
-		public class AdminCreateNewFileUploadInfoRequestData : CreateNewFileUploadInfoRequestData
+		public class AdminCreateNewFileUploadInfoRequestData : ServerCreateNewFileUploadInfoRequestData
 		{
 		}
 
@@ -38,7 +38,7 @@
 		{
 		}
 
-		public class AdminGetContentDataRequestData : GetContentDataRequestData
+		public class AdminGetContentDataRequestData : ServerGetContentDataRequestData
 		{
 		}
 
@@ -59,7 +59,7 @@
 		{
 		}
 
-		public class AdminGetFileUploadInfoListRequestData : GetFileUploadInfoListRequestData
+		public class AdminGetFileUploadInfoListRequestData : ServerGetFileUploadInfoListRequestData
 		{
 		}
 
@@ -74,7 +74,7 @@
 		{
 		}
 
-		public class AdminGetFileUploadInfoRequestData : GetFileUploadInfoRequestData
+		public class AdminGetFileUploadInfoRequestData : ServerGetFileUploadInfoRequestData
 		{
 		}
 
@@ -92,7 +92,7 @@
 		{
 		}
 
-		public class AdminRemoveFileUploadInfoRequestData : RemoveFileUploadInfoRequestData
+		public class AdminRemoveFileUploadInfoRequestData : ServerRemoveFileUploadInfoRequestData
 		{
 		}
 
@@ -107,7 +107,7 @@
 		{
 		}
 
-		public class AdminRequestDownloadFileUploadInfoRequestData : RequestDownloadFileUploadInfoRequestData
+		public class AdminRequestDownloadFileUploadInfoRequestData : ServerRequestDownloadFileUploadInfoRequestData
 		{
 		}
 
@@ -125,7 +125,7 @@
 		{
 		}
 
-		public class AdminSetContentDataRequestData : SetContentDataRequestData
+		public class AdminSetContentDataRequestData : ServerSetContentDataRequestData
 		{
 		}
 
@@ -147,8 +147,73 @@
 
 	public partial class ContentModels
 	{
+		public class FileIdUploadResponseData
+		{
+			[StringDataMember(code = GNParameterCode.FileId)]
+			public string fileId;
 
-		public class ResponseData
+		}
+
+		public class GetContentDataResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Configs, elementCls = typeof(ContentDataParam), mustNonNull = true)]
+			public List<ContentDataParam> configs;
+
+		}
+
+		public class GetFileUploadInfoListResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(FileIdUploadResponseData))]
+			public List<FileIdUploadResponseData> results;
+
+		}
+
+		public class FileUploadItem
+        {
+			[StringDataMember(code = GNParameterCode.MimeType)]
+			public string mimeType;
+
+			[NumberDataMember(code = GNParameterCode.Size)]
+			public long size;
+
+			[StringDataMember(code = GNParameterCode.FolderFileName)]
+			public string folderFileName;
+
+		}
+
+		public class GetFileUploadInfoResponseData : FileIdUploadResponseData
+		{
+			//operationResponse.setParameter(GNParameterCode.FileName, uploadFileInfo.getFileName());
+			//     operationResponse.setParameter(GNParameterCode.TsCreate, uploadFileInfo.getTsCreate());
+			//     operationResponse.setParameter(GNParameterCode.UserId, uploadFileInfo.getUserId());
+
+			[StringDataMember(code = GNParameterCode.FileName)]
+			public string fileName;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate)]
+			public long tsCreate;
+
+			[StringDataMember(code = GNParameterCode.UserId)]
+			public string userId;
+
+			[GNHashtableDataMember(code = GNParameterCode.RemoveStatus)]
+			public GenericModels.RemoveStatusItem removeStatus;
+
+			[NumberDataMember(code = GNParameterCode.TsUploadExpire, isOptional = true)]
+			public long? tsUploadExpire;
+
+			[GNHashtableDataMember(code = GNParameterCode.FileUpload, isOptional = true)]
+			public FileUploadItem? fileUpload;
+
+		}
+
+		public class RequestDownloadFileUploadInfoResponseData
+        {
+			[StringDataMember(code = GNParameterCode.DownloadToken)]
+			public string downloadToken;
+		}
+
+		public class EmptyResponseData
 		{
 
 		}

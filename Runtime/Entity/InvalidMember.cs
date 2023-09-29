@@ -5,10 +5,10 @@
 
     public struct InvalidMember
     {
-        public int code { get; private set; }
+        public string code { get; private set; }
         public InvalidMemberType invalidMemberType { get; private set; }
 
-        public InvalidMember(int code, InvalidMemberType invalidMemberType)
+        public InvalidMember(string code, InvalidMemberType invalidMemberType)
         {
             this.code = code;
             this.invalidMemberType = invalidMemberType;

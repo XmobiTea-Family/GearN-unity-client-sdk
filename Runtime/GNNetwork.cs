@@ -12,11 +12,10 @@
     using XmobiTea.GN.Entity.Response;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
-    using XmobiTea.GN.Helper;
 
     public static partial class GNNetwork
     {
-        private const string GN_VERSION = "0.0.1";
+        private const string GN_VERSION = "2.0";
 
         internal const string AUTH_TOKEN_KEY = "[GN]_AUTH_TOKEN_KEY";
         internal const string AUTH_TOKEN_TS_EXPIRE_KEY = "[GN]_AUTH_TOKEN_TS_EXPIRE_KEY";
@@ -45,17 +44,26 @@
 
             if (!Application.isPlaying) return;
 
+            GNDebug.log("GNNetwork init on unity. Version: " + GNNetwork.getClientSdkVersion());
+
             GNNetwork.initGNSocketObject();
 
             GNNetwork.peer.authenticateStatus.setAuthToken(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_KEY, string.Empty));
             GNNetwork.peer.authenticateStatus.setAuthTokenTsExpire(long.Parse(PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_TS_EXPIRE_KEY, "-1")));
             GNNetwork.peer.authenticateStatus.setUserId(PlayerPrefs.GetString(GNNetwork.USER_ID_KEY, string.Empty));
+
+            GNNetwork.authenticate = new AuthenticateApi();
+            GNNetwork.characterPlayer = new CharacterPlayerApi();
+            GNNetwork.content = new ContentApi();
+            GNNetwork.dashboard = new DashboardApi();
+            GNNetwork.gamePlayer = new GamePlayerApi();
+            GNNetwork.group = new GroupApi();
+            GNNetwork.inventory = new InventoryApi();
+            GNNetwork.masterPlayer = new MasterPlayerApi();
+            GNNetwork.storeInventory = new StoreInventoryApi();
         }
 
-        public static string getClientSdkVersion()
-        {
-            return GNNetwork.GN_VERSION;
-        }
+        public static string getClientSdkVersion() => GNNetwork.GN_VERSION;
 
         private static void initServerSettings()
         {
@@ -79,10 +87,16 @@
 
         private static void initGNSocketObject()
         {
-            GNNetwork.peer = new GameObject("GN NetworkingPeer").AddComponent<NetworkingPeer>();
-            GameObject.DontDestroyOnLoad(GNNetwork.peer.gameObject);
+            var peer = new NetworkingPeer();
 
-            GNNetwork.peer.initPeer();
+            peer.initPeer();
+
+            GNNetwork.peer = peer;
+
+            var serviceUpdate = new GameObject("[GN] ServiceUpdate").AddComponent<Unity.ServiceUpdate>();
+            GameObject.DontDestroyOnLoad(serviceUpdate.gameObject);
+
+            serviceUpdate.peer = peer;
         }
 
         public static void sendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)

@@ -6,70 +6,91 @@
 
     using XmobiTea.GN.Constant;
 
-    public class CodeHelper
+    internal class CodeHelperBase
     {
         private static string unknownCode = "Unknown";
 
-        private static Dictionary<int, string> operationCodeDic;
-        private static Dictionary<int, string> eventCodeDic;
-        private static Dictionary<int, string> returnCodeDic;
+        private Dictionary<int, string> codeDict;
+
+        public string getCodeName(int code)
+        {
+            return this.codeDict.ContainsKey(code) ? this.codeDict[code] : CodeHelperBase.unknownCode;
+        }
+
+        public CodeHelperBase(Dictionary<int, string> codeDict)
+        {
+            this.codeDict = codeDict;
+        }
+    }
+
+    public class CodeHelper
+    {
+        private static CodeHelperBase operationCodeHelper;
+        private static CodeHelperBase eventCodeHelper;
+        private static CodeHelperBase returnCodeHelper;
 
         public static string getOperationCodeName(int operationCode)
         {
-            return CodeHelper.operationCodeDic.ContainsKey(operationCode) ? CodeHelper.operationCodeDic[operationCode] : CodeHelper.unknownCode;
+            return CodeHelper.operationCodeHelper.getCodeName(operationCode);
         }
 
         public static string getEventCodeName(int eventCode)
         {
-            return CodeHelper.eventCodeDic.ContainsKey(eventCode) ? CodeHelper.eventCodeDic[eventCode] : CodeHelper.unknownCode;
+            return CodeHelper.eventCodeHelper.getCodeName(eventCode);
         }
 
         public static string getReturnCodeName(int returnCode)
         {
-            return CodeHelper.returnCodeDic.ContainsKey(returnCode) ? CodeHelper.returnCodeDic[returnCode] : CodeHelper.unknownCode;
+            return CodeHelper.returnCodeHelper.getCodeName(returnCode);
         }
 
         static CodeHelper()
         {
-            setOperationCodeDic();
-            setEventCodeDic();
-            setReturnCodeDic();
+            CodeHelper.setOperationCodeDic();
+            CodeHelper.setEventCodeDic();
+            CodeHelper.setReturnCodeDic();
         }
 
         private static void setOperationCodeDic()
         {
-            CodeHelper.operationCodeDic = new Dictionary<int, string>();
+            var codeDict = new Dictionary<int, string>();
 
             var fields = typeof(OperationCode).GetFields(BindingFlags.Public | BindingFlags.Static);
 
             foreach (var field in fields)
             {
-                CodeHelper.operationCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
+                codeDict[Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
+
+            CodeHelper.operationCodeHelper = new CodeHelperBase(codeDict);
         }
 
         private static void setEventCodeDic()
         {
-            CodeHelper.eventCodeDic = new Dictionary<int, string>();
+            var codeDict = new Dictionary<int, string>();
 
             var fields = typeof(EventCode).GetFields(BindingFlags.Public | BindingFlags.Static);
 
             foreach (var field in fields)
             {
-                CodeHelper.eventCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
+                codeDict[Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
+
+            CodeHelper.eventCodeHelper = new CodeHelperBase(codeDict);
         }
 
         private static void setReturnCodeDic()
         {
-            CodeHelper.returnCodeDic = new Dictionary<int, string>();
+            var codeDict = new Dictionary<int, string>();
 
             var fields = typeof(ReturnCode).GetFields(BindingFlags.Public | BindingFlags.Static);
 
             foreach (var field in fields)
             {
-                CodeHelper.returnCodeDic[Convert.ToInt32(field.GetValue(null))] = field.Name;
+                codeDict[Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
+
+            CodeHelper.returnCodeHelper = new CodeHelperBase(codeDict);
         }
 
     }

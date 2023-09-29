@@ -283,6 +283,8 @@
 			[BooleanDataMember(code = GNParameterCode.NewlyCreated, isOptional = true)]
 			public bool? newlyCreated;
 
+			[StringDataMember(code = ParameterCode.AuthToken)]
+			public string authToken;
 		}
 
         public class EmptyResponseData

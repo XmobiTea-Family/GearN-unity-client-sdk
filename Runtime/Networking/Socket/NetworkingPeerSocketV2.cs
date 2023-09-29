@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Networking
+﻿namespace XmobiTea.GN.Networking.Socket
 {
     using System;
 
@@ -9,7 +9,7 @@
     using XmobiTea.GN.Logger;
     using XmobiTea.GN.Common;
 
-    internal class NetworkingPeerSocketV2 : NetworkingPeerBase
+    internal class NetworkingPeerSocketV2 : NetworkingSocketPeerBase
     {
         private SocketManager socketManager;
         private bool isConnected;
@@ -18,7 +18,7 @@
 
         private SupportedSocketIOVersions serverVersion = SupportedSocketIOVersions.v3;
 
-        public void SetServerVersion(SupportedSocketIOVersions serverVersion)
+        public void setServerVersion(SupportedSocketIOVersions serverVersion)
         {
             this.serverVersion = serverVersion;
         }
@@ -48,19 +48,19 @@
                     ConnectWith = BestHTTP.SocketIO.Transports.TransportTypes.WebSocket
                 });
 
-                this.socketManager.Socket.On(SocketIOEventTypes.Connect, OnConnect);
-                this.socketManager.Socket.On(SocketIOEventTypes.Disconnect, OnDisconnect);
-                this.socketManager.Socket.On(SocketIOEventTypes.Error, OnError);
+                this.socketManager.Socket.On(SocketIOEventTypes.Connect, onConnect);
+                this.socketManager.Socket.On(SocketIOEventTypes.Disconnect, onDisconnect);
+                this.socketManager.Socket.On(SocketIOEventTypes.Error, onError);
 
-                this.socketManager.Socket.On(Commands.ResponseCmd_MsgPack, OnResponseMsgPack);
-                this.socketManager.Socket.On(Commands.EventCmd_MsgPack, OnEventMsgPack);
+                this.socketManager.Socket.On(Commands.ResponseCmd_MsgPack, onResponseMsgPack);
+                this.socketManager.Socket.On(Commands.EventCmd_MsgPack, onEventMsgPack);
 
-                this.socketManager.Socket.On(Commands.ResponseCmd_Json, OnResponseJson);
-                this.socketManager.Socket.On(Commands.EventCmd_Json, OnEventJson);
+                this.socketManager.Socket.On(Commands.ResponseCmd_Json, onResponseJson);
+                this.socketManager.Socket.On(Commands.EventCmd_Json, onEventJson);
             }
         }
 
-        private void OnResponseMsgPack(Socket socket, Packet packet, object[] args)
+        private void onResponseMsgPack(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
             {
@@ -68,7 +68,7 @@
             }
         }
 
-        private void OnEventMsgPack(Socket socket, Packet packet, object[] args)
+        private void onEventMsgPack(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        private void OnResponseJson(Socket socket, Packet packet, object[] args)
+        private void onResponseJson(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
             {
@@ -84,7 +84,7 @@
             }
         }
 
-        private void OnEventJson(Socket socket, Packet packet, object[] args)
+        private void onEventJson(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
             {
@@ -92,7 +92,7 @@
             }
         }
 
-        private void OnConnect(Socket socket, Packet packet, object[] args)
+        private void onConnect(Socket socket, Packet packet, object[] args)
         {
             GNDebug.log("[GN Socket RECV] HandleOpen " + socket.Id);
 
@@ -101,7 +101,7 @@
             this.onConnectHandler();
         }
 
-        private void OnDisconnect(Socket socket, Packet packet, object[] args)
+        private void onDisconnect(Socket socket, Packet packet, object[] args)
         {
             GNDebug.log("[GN Socket RECV] HandleClose ");
 
@@ -110,7 +110,7 @@
             this.onDisconnectHandler();
         }
 
-        private void OnError(Socket socket, Packet packet, object[] args)
+        private void onError(Socket socket, Packet packet, object[] args)
         {
             GNDebug.logError(string.Format("Error: {0}", args[0].ToString()));
         }

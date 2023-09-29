@@ -4,237 +4,237 @@
 
 	public class GamePlayerResponseModels
 	{
-		public class AddPlayerFriendOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class AddPlayerFriendOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class AddSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class AddSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetAvatarOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetAvatarOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetCountryCodeOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetCountryCodeOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetCustomDataOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetCustomDataOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetDisplayNameOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetDisplayNameOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetFriendStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetFriendStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<GamePlayerModels.GetStatisticsLeaderboardResponseData>
 		{
 
 		}
 
-		public class GetFriendStatisticsLeaderboardOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetFriendStatisticsLeaderboardOperationResponse : CustomOperationResponse<GamePlayerModels.GetStatisticsLeaderboardResponseData>
 		{
 
 		}
 
-		public class GetIpAddressCreateOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetIpAddressCreateOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetOnlineStatusOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetOnlineStatusOperationResponse : CustomOperationResponse<GamePlayerModels.OnlineStatusResponseData>
 		{
 
 		}
 
-		public class GetPlayerBanOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerBanOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerCurrencyOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerCurrencyOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerDataOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerDataOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerFriendOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerFriendOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerGroupOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerGroupOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerInformationOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerInformationOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerInventoryOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerInventoryOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayerStatisticsOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayerStatisticsOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetPlayersWithDisplayNameOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayersWithDisplayNameOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayersWithUserIdResponseData>
 		{
 
 		}
 
-		public class GetPlayersWithSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayersWithSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayersWithUserIdResponseData>
 		{
 
 		}
 
-		public class GetPlayersWithTagOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetPlayersWithTagOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayersWithUserIdResponseData>
 		{
 
 		}
 
-		public class GetSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetStatisticsLeaderboardAroundPlayerOperationResponse : CustomOperationResponse<GamePlayerModels.GetStatisticsLeaderboardResponseData>
 		{
 
 		}
 
-		public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<GamePlayerModels.GetStatisticsLeaderboardResponseData>
 		{
 
 		}
 
-		public class GetTagOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetTagOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetTsCreateOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetTsCreateOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GetTsLastLoginOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GetTsLastLoginOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GrantGroupOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GrantGroupOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GrantPlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GrantPlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class GrantPlayerItemOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class GrantPlayerItemOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class JoinGroupOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class JoinGroupOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class LeaveGroupOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class LeaveGroupOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemovePlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class RemovePlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemovePlayerFriendOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class RemovePlayerFriendOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemovePlayerItemOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class RemovePlayerItemOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemoveSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class RemoveSegmentOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemoveTagOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class RemoveTagOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetAvatarOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetAvatarOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetCountryCodeOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetCountryCodeOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetCustomDataOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetCustomDataOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class SetDisplayNameOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetDisplayNameOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetPlayerBanOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetPlayerBanOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetPlayerCurrencyOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetPlayerCurrencyOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class SetPlayerDataOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetPlayerDataOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class SetPlayerStatisticsOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetPlayerStatisticsOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
 		{
 
 		}
 
-		public class SetTagOperationResponse : CustomOperationResponse<GamePlayerModels.ResponseData>
+		public class SetTagOperationResponse : CustomOperationResponse<GamePlayerModels.EmptyResponseData>
 		{
 
 		}

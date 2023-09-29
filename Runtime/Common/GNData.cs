@@ -1,5 +1,9 @@
 ﻿namespace XmobiTea.GN.Common
 {
+
+    /// <summary>
+    /// The base class for GNData
+    /// </summary>
     public abstract class GNData : IGNData
     {
         protected static object createUseDataFromOriginData(object value)

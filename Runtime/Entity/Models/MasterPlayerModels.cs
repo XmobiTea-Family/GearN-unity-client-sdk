@@ -22,7 +22,7 @@
 
 		}
 
-		public class AdminAddSegmentRequestData : AddSegmentRequestData
+		public class AdminAddSegmentRequestData : ServerAddSegmentRequestData
 		{
 		}
 
@@ -53,7 +53,7 @@
 
 		}
 
-		public class AdminGetAvatarRequestData : GetAvatarRequestData
+		public class AdminGetAvatarRequestData : ServerGetAvatarRequestData
 		{
 		}
 
@@ -71,7 +71,7 @@
 
 		}
 
-		public class AdminGetCountryCodeRequestData : GetCountryCodeRequestData
+		public class AdminGetCountryCodeRequestData : ServerGetCountryCodeRequestData
 		{
 		}
 
@@ -92,7 +92,7 @@
 
 		}
 
-		public class AdminGetCustomDataRequestData : GetCustomDataRequestData
+		public class AdminGetCustomDataRequestData : ServerGetCustomDataRequestData
 		{
 		}
 
@@ -110,7 +110,7 @@
 
 		}
 
-		public class AdminGetDisplayNameRequestData : GetDisplayNameRequestData
+		public class AdminGetDisplayNameRequestData : ServerGetDisplayNameRequestData
 		{
 		}
 
@@ -128,7 +128,7 @@
 
 		}
 
-		public class AdminGetEmailRequestData : GetEmailRequestData
+		public class AdminGetEmailRequestData : ServerGetEmailRequestData
 		{
 		}
 
@@ -146,7 +146,7 @@
 
 		}
 
-		public class AdminGetExternalRequestData : GetExternalRequestData
+		public class AdminGetExternalRequestData : ServerGetExternalRequestData
 		{
 		}
 
@@ -164,7 +164,7 @@
 
 		}
 
-		public class AdminGetIpAddressCreateRequestData : GetIpAddressCreateRequestData
+		public class AdminGetIpAddressCreateRequestData : ServerGetIpAddressCreateRequestData
 		{
 		}
 
@@ -182,7 +182,7 @@
 
 		}
 
-		public class AdminGetPlayerBanRequestData : GetPlayerBanRequestData
+		public class AdminGetPlayerBanRequestData : ServerGetPlayerBanRequestData
 		{
 		}
 
@@ -203,7 +203,7 @@
 
 		}
 
-		public class AdminGetPlayerCurrencyRequestData : GetPlayerCurrencyRequestData
+		public class AdminGetPlayerCurrencyRequestData : ServerGetPlayerCurrencyRequestData
 		{
 		}
 
@@ -224,7 +224,7 @@
 
 		}
 
-		public class AdminGetPlayerDataRequestData : GetPlayerDataRequestData
+		public class AdminGetPlayerDataRequestData : ServerGetPlayerDataRequestData
 		{
 		}
 
@@ -245,7 +245,7 @@
 
 		}
 
-		public class AdminGetPlayerInformationRequestData : GetPlayerInformationRequestData
+		public class AdminGetPlayerInformationRequestData : ServerGetPlayerInformationRequestData
 		{
 		}
 
@@ -266,7 +266,7 @@
 
 		}
 
-		public class AdminGetPlayerStatisticsRequestData : GetPlayerStatisticsRequestData
+		public class AdminGetPlayerStatisticsRequestData : ServerGetPlayerStatisticsRequestData
 		{
 		}
 
@@ -284,7 +284,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithAppleRequestData : GetPlayersWithAppleRequestData
+		public class AdminGetPlayersWithAppleRequestData : ServerGetPlayersWithAppleRequestData
 		{
 		}
 
@@ -308,7 +308,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithDisplayNameRequestData : GetPlayersWithDisplayNameRequestData
+		public class AdminGetPlayersWithDisplayNameRequestData : ServerGetPlayersWithDisplayNameRequestData
 		{
 		}
 
@@ -326,7 +326,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithFacebookRequestData : GetPlayersWithFacebookRequestData
+		public class AdminGetPlayersWithFacebookRequestData : ServerGetPlayersWithFacebookRequestData
 		{
 		}
 
@@ -347,7 +347,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithGenericServiceRequestData : GetPlayersWithGenericServiceRequestData
+		public class AdminGetPlayersWithGenericServiceRequestData : ServerGetPlayersWithGenericServiceRequestData
 		{
 		}
 
@@ -365,7 +365,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithGoogleRequestData : GetPlayersWithGoogleRequestData
+		public class AdminGetPlayersWithGoogleRequestData : ServerGetPlayersWithGoogleRequestData
 		{
 		}
 
@@ -389,7 +389,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithSegmentRequestData : GetPlayersWithSegmentRequestData
+		public class AdminGetPlayersWithSegmentRequestData : ServerGetPlayersWithSegmentRequestData
 		{
 		}
 
@@ -416,7 +416,7 @@
 		{
 		}
 
-		public class AdminGetPlayersWithTagRequestData : GetPlayersWithTagRequestData
+		public class AdminGetPlayersWithTagRequestData : ServerGetPlayersWithTagRequestData
 		{
 		}
 
@@ -434,7 +434,7 @@
 
 		}
 
-		public class AdminGetSegmentRequestData : GetSegmentRequestData
+		public class AdminGetSegmentRequestData : ServerGetSegmentRequestData
 		{
 		}
 
@@ -464,7 +464,7 @@
 
 		}
 
-		public class AdminGetStatisticsLeaderboardAroundPlayerRequestData : GetStatisticsLeaderboardAroundPlayerRequestData
+		public class AdminGetStatisticsLeaderboardAroundPlayerRequestData : ServerGetStatisticsLeaderboardAroundPlayerRequestData
 		{
 		}
 
@@ -491,7 +491,7 @@
 		{
 		}
 
-		public class AdminGetStatisticsLeaderboardRequestData : GetStatisticsLeaderboardRequestData
+		public class AdminGetStatisticsLeaderboardRequestData : ServerGetStatisticsLeaderboardRequestData
 		{
 		}
 
@@ -512,7 +512,7 @@
 
 		}
 
-		public class AdminGetTagRequestData : GetTagRequestData
+		public class AdminGetTagRequestData : ServerGetTagRequestData
 		{
 		}
 
@@ -530,7 +530,7 @@
 
 		}
 
-		public class AdminGetTsCreateRequestData : GetTsCreateRequestData
+		public class AdminGetTsCreateRequestData : ServerGetTsCreateRequestData
 		{
 		}
 
@@ -548,7 +548,7 @@
 
 		}
 
-		public class AdminGetTsLastLoginRequestData : GetTsLastLoginRequestData
+		public class AdminGetTsLastLoginRequestData : ServerGetTsLastLoginRequestData
 		{
 		}
 
@@ -575,7 +575,7 @@
 
 		}
 
-		public class AdminLinkAccountRequestData : LinkAccountRequestData
+		public class AdminLinkAccountRequestData : ServerLinkAccountRequestData
 		{
 		}
 
@@ -599,7 +599,7 @@
 
 		}
 
-		public class AdminLinkAndroidDeviceIdRequestData : LinkAndroidDeviceIdRequestData
+		public class AdminLinkAndroidDeviceIdRequestData : ServerLinkAndroidDeviceIdRequestData
 		{
 		}
 
@@ -623,7 +623,7 @@
 
 		}
 
-		public class AdminLinkAppleRequestData : LinkAppleRequestData
+		public class AdminLinkAppleRequestData : ServerLinkAppleRequestData
 		{
 		}
 
@@ -647,7 +647,7 @@
 
 		}
 
-		public class AdminLinkCustomDeviceIdRequestData : LinkCustomDeviceIdRequestData
+		public class AdminLinkCustomDeviceIdRequestData : ServerLinkCustomDeviceIdRequestData
 		{
 		}
 
@@ -671,7 +671,7 @@
 
 		}
 
-		public class AdminLinkCustomIdRequestData : LinkCustomIdRequestData
+		public class AdminLinkCustomIdRequestData : ServerLinkCustomIdRequestData
 		{
 		}
 
@@ -695,7 +695,7 @@
 
 		}
 
-		public class AdminLinkEditorDeviceIdRequestData : LinkEditorDeviceIdRequestData
+		public class AdminLinkEditorDeviceIdRequestData : ServerLinkEditorDeviceIdRequestData
 		{
 		}
 
@@ -719,7 +719,7 @@
 
 		}
 
-		public class AdminLinkFacebookRequestData : LinkFacebookRequestData
+		public class AdminLinkFacebookRequestData : ServerLinkFacebookRequestData
 		{
 		}
 
@@ -746,7 +746,7 @@
 
 		}
 
-		public class AdminLinkGenericServiceRequestData : LinkGenericServiceRequestData
+		public class AdminLinkGenericServiceRequestData : ServerLinkGenericServiceRequestData
 		{
 		}
 
@@ -773,7 +773,7 @@
 
 		}
 
-		public class AdminLinkGoogleRequestData : LinkGoogleRequestData
+		public class AdminLinkGoogleRequestData : ServerLinkGoogleRequestData
 		{
 		}
 
@@ -797,7 +797,7 @@
 
 		}
 
-		public class AdminLinkiOSDeviceIdRequestData : LinkiOSDeviceIdRequestData
+		public class AdminLinkiOSDeviceIdRequestData : ServerLinkiOSDeviceIdRequestData
 		{
 		}
 
@@ -821,7 +821,7 @@
 
 		}
 
-		public class AdminLinkLinuxDeviceIdRequestData : LinkLinuxDeviceIdRequestData
+		public class AdminLinkLinuxDeviceIdRequestData : ServerLinkLinuxDeviceIdRequestData
 		{
 		}
 
@@ -845,7 +845,7 @@
 
 		}
 
-		public class AdminLinkMacOSDeviceIdRequestData : LinkMacOSDeviceIdRequestData
+		public class AdminLinkMacOSDeviceIdRequestData : ServerLinkMacOSDeviceIdRequestData
 		{
 		}
 
@@ -869,7 +869,7 @@
 
 		}
 
-		public class AdminLinkWindowsDeviceIdRequestData : LinkWindowsDeviceIdRequestData
+		public class AdminLinkWindowsDeviceIdRequestData : ServerLinkWindowsDeviceIdRequestData
 		{
 		}
 
@@ -893,7 +893,7 @@
 
 		}
 
-		public class AdminLinkWindowsPhoneDeviceIdRequestData : LinkWindowsPhoneDeviceIdRequestData
+		public class AdminLinkWindowsPhoneDeviceIdRequestData : ServerLinkWindowsPhoneDeviceIdRequestData
 		{
 		}
 
@@ -914,7 +914,7 @@
 
 		}
 
-		public class AdminRemoveSegmentRequestData : RemoveSegmentRequestData
+		public class AdminRemoveSegmentRequestData : ServerRemoveSegmentRequestData
 		{
 		}
 
@@ -935,7 +935,7 @@
 
 		}
 
-		public class AdminRemoveTagRequestData : RemoveTagRequestData
+		public class AdminRemoveTagRequestData : ServerRemoveTagRequestData
 		{
 		}
 
@@ -956,7 +956,7 @@
 
 		}
 
-		public class AdminResetAccountPasswordRequestData : ResetAccountPasswordRequestData
+		public class AdminResetAccountPasswordRequestData : ServerResetAccountPasswordRequestData
 		{
 		}
 
@@ -980,7 +980,7 @@
 
 		}
 
-		public class AdminSetAvatarRequestData : SetAvatarRequestData
+		public class AdminSetAvatarRequestData : ServerSetAvatarRequestData
 		{
 		}
 
@@ -1001,7 +1001,7 @@
 
 		}
 
-		public class AdminSetCountryCodeRequestData : SetCountryCodeRequestData
+		public class AdminSetCountryCodeRequestData : ServerSetCountryCodeRequestData
 		{
 		}
 
@@ -1022,7 +1022,7 @@
 
 		}
 
-		public class AdminSetCustomDataRequestData : SetCustomDataRequestData
+		public class AdminSetCustomDataRequestData : ServerSetCustomDataRequestData
 		{
 		}
 
@@ -1046,7 +1046,7 @@
 
 		}
 
-		public class AdminSetDisplayNameRequestData : SetDisplayNameRequestData
+		public class AdminSetDisplayNameRequestData : ServerSetDisplayNameRequestData
 		{
 		}
 
@@ -1067,7 +1067,7 @@
 
 		}
 
-		public class AdminSetEmailRequestData : SetEmailRequestData
+		public class AdminSetEmailRequestData : ServerSetEmailRequestData
 		{
 		}
 
@@ -1091,7 +1091,7 @@
 
 		}
 
-		public class AdminSetPlayerBanRequestData : SetPlayerBanRequestData
+		public class AdminSetPlayerBanRequestData : ServerSetPlayerBanRequestData
 		{
 		}
 
@@ -1112,7 +1112,7 @@
 
 		}
 
-		public class AdminSetPlayerCurrencyRequestData : SetPlayerCurrencyRequestData
+		public class AdminSetPlayerCurrencyRequestData : ServerSetPlayerCurrencyRequestData
 		{
 		}
 
@@ -1133,7 +1133,7 @@
 
 		}
 
-		public class AdminSetPlayerDataRequestData : SetPlayerDataRequestData
+		public class AdminSetPlayerDataRequestData : ServerSetPlayerDataRequestData
 		{
 		}
 
@@ -1154,7 +1154,7 @@
 
 		}
 
-		public class AdminSetPlayerStatisticsRequestData : SetPlayerStatisticsRequestData
+		public class AdminSetPlayerStatisticsRequestData : ServerSetPlayerStatisticsRequestData
 		{
 		}
 
@@ -1178,7 +1178,7 @@
 
 		}
 
-		public class AdminSetTagRequestData : SetTagRequestData
+		public class AdminSetTagRequestData : ServerSetTagRequestData
 		{
 		}
 
@@ -1196,7 +1196,7 @@
 
 		}
 
-		public class AdminSetTsLastLoginRequestData : SetTsLastLoginRequestData
+		public class AdminSetTsLastLoginRequestData : ServerSetTsLastLoginRequestData
 		{
 		}
 
@@ -1217,7 +1217,7 @@
 
 		}
 
-		public class AdminUnlinkAccountRequestData : UnlinkAccountRequestData
+		public class AdminUnlinkAccountRequestData : ServerUnlinkAccountRequestData
 		{
 		}
 
@@ -1238,7 +1238,7 @@
 
 		}
 
-		public class AdminUnlinkAndroidDeviceIdRequestData : UnlinkAndroidDeviceIdRequestData
+		public class AdminUnlinkAndroidDeviceIdRequestData : ServerUnlinkAndroidDeviceIdRequestData
 		{
 		}
 
@@ -1259,7 +1259,7 @@
 
 		}
 
-		public class AdminUnlinkAppleRequestData : UnlinkAppleRequestData
+		public class AdminUnlinkAppleRequestData : ServerUnlinkAppleRequestData
 		{
 		}
 
@@ -1280,7 +1280,7 @@
 
 		}
 
-		public class AdminUnlinkCustomDeviceIdRequestData : UnlinkCustomDeviceIdRequestData
+		public class AdminUnlinkCustomDeviceIdRequestData : ServerUnlinkCustomDeviceIdRequestData
 		{
 		}
 
@@ -1301,7 +1301,7 @@
 
 		}
 
-		public class AdminUnlinkCustomIdRequestData : UnlinkCustomIdRequestData
+		public class AdminUnlinkCustomIdRequestData : ServerUnlinkCustomIdRequestData
 		{
 		}
 
@@ -1322,7 +1322,7 @@
 
 		}
 
-		public class AdminUnlinkEditorDeviceIdRequestData : UnlinkEditorDeviceIdRequestData
+		public class AdminUnlinkEditorDeviceIdRequestData : ServerUnlinkEditorDeviceIdRequestData
 		{
 		}
 
@@ -1343,7 +1343,7 @@
 
 		}
 
-		public class AdminUnlinkFacebookRequestData : UnlinkFacebookRequestData
+		public class AdminUnlinkFacebookRequestData : ServerUnlinkFacebookRequestData
 		{
 		}
 
@@ -1367,7 +1367,7 @@
 
 		}
 
-		public class AdminUnlinkGenericServiceRequestData : UnlinkGenericServiceRequestData
+		public class AdminUnlinkGenericServiceRequestData : ServerUnlinkGenericServiceRequestData
 		{
 		}
 
@@ -1388,7 +1388,7 @@
 
 		}
 
-		public class AdminUnlinkGoogleRequestData : UnlinkGoogleRequestData
+		public class AdminUnlinkGoogleRequestData : ServerUnlinkGoogleRequestData
 		{
 		}
 
@@ -1409,7 +1409,7 @@
 
 		}
 
-		public class AdminUnlinkiOSDeviceIdRequestData : UnlinkiOSDeviceIdRequestData
+		public class AdminUnlinkiOSDeviceIdRequestData : ServerUnlinkiOSDeviceIdRequestData
 		{
 		}
 
@@ -1430,7 +1430,7 @@
 
 		}
 
-		public class AdminUnlinkLinuxDeviceIdRequestData : UnlinkLinuxDeviceIdRequestData
+		public class AdminUnlinkLinuxDeviceIdRequestData : ServerUnlinkLinuxDeviceIdRequestData
 		{
 		}
 
@@ -1451,7 +1451,7 @@
 
 		}
 
-		public class AdminUnlinkMacOSDeviceIdRequestData : UnlinkMacOSDeviceIdRequestData
+		public class AdminUnlinkMacOSDeviceIdRequestData : ServerUnlinkMacOSDeviceIdRequestData
 		{
 		}
 
@@ -1472,7 +1472,7 @@
 
 		}
 
-		public class AdminUnlinkWindowsDeviceIdRequestData : UnlinkWindowsDeviceIdRequestData
+		public class AdminUnlinkWindowsDeviceIdRequestData : ServerUnlinkWindowsDeviceIdRequestData
 		{
 		}
 
@@ -1493,7 +1493,7 @@
 
 		}
 
-		public class AdminUnlinkWindowsPhoneDeviceIdRequestData : UnlinkWindowsPhoneDeviceIdRequestData
+		public class AdminUnlinkWindowsPhoneDeviceIdRequestData : ServerUnlinkWindowsPhoneDeviceIdRequestData
 		{
 		}
 
@@ -1778,13 +1778,10 @@
 
 		}
 
-		public class MasterPlayerWithUserIdResponseData
+		public class MasterPlayerWithUserIdResponseData : MasterPlayerResponseData
 		{
 			[StringDataMember(code = GNParameterCode.UserId)]
 			public string userId;
-
-			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
-			public InfoResponseParameters infoResponseParameters;
 
 		}
 

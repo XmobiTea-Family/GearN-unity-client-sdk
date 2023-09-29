@@ -5,14 +5,25 @@
     using System.Text;
 
     /// <summary>
-    /// The GNData array, it store Array can be use to request or response 
+    /// The GNData array, it store Array can be use to request or response
     /// </summary>
     public class GNArray : GNData
     {
+        /// <summary>
+        /// Builder for GNArray
+        /// </summary>
         public class Builder
         {
+            /// <summary>
+            /// The origin array
+            /// </summary>
             private List<object> array;
 
+            /// <summary>
+            /// Add a value to origin array
+            /// </summary>
+            /// <param name="value">The value type must is string, bool, number, Map or Array</param>
+            /// <returns></returns>
             public Builder add(object value)
             {
                 this.array.Add(value);
@@ -20,6 +31,11 @@
                 return this;
             }
 
+            /// <summary>
+            /// Add some values to origin array
+            /// </summary>
+            /// <param name="list">The element value type must is type string, bool, number, Map or Array</param>
+            /// <returns></returns>
             public Builder addAll(System.Collections.IList list)
             {
                 foreach (var o in list)
@@ -30,6 +46,10 @@
                 return this;
             }
 
+            /// <summary>
+            /// Build GNArray
+            /// </summary>
+            /// <returns></returns>
             public GNArray build()
             {
                 var awnser = new GNArray();
@@ -42,19 +62,32 @@
                 return awnser;
             }
 
+            /// <summary>
+            /// Constructor for GNArray builder
+            /// </summary>
             public Builder()
             {
                 this.array = new List<object>();
             }
         }
 
+        /// <summary>
+        /// The GN array
+        /// </summary>
         private List<object> array;
 
+        /// <summary>
+        /// The constructor for GNArray
+        /// </summary>
         public GNArray()
         {
             this.array = new List<object>();
         }
 
+        /// <summary>
+        /// Add a value
+        /// </summary>
+        /// <param name="value">The </param>
         public void add(object value)
         {
             this.array.Add(GNData.createUseDataFromOriginData(value));

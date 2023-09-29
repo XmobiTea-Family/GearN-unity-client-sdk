@@ -143,11 +143,11 @@
 			[StringDataMember(code = GNParameterCode.SecretKey, minLength = 6, maxLength = 64, mustNonNull = true)]
 			public string secretKey;
 
-			[BooleanDataMember(code = GNParameterCode.Remove)]
-			public bool remove;
+			[BooleanDataMember(code = GNParameterCode.Remove, isOptional = true)]
+			public bool? remove;
 
-			[NumberDataMember(code = GNParameterCode.TsExpire)]
-			public double tsExpire;
+			[NumberDataMember(code = GNParameterCode.TsExpire, isOptional = true)]
+			public double? tsExpire;
 
 			[GNHashtableDataMember(code = GNParameterCode.Permission, isOptional = true)]
 			public PermissionParam? permissionParam;
@@ -377,13 +377,13 @@
 
 		public class CharacterPlayerSettingsParam
 		{
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
 			public List<CurrencySettingsParam>? playerCurrencySettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
 			public List<StatisticsSettingsParam>? playerStatisticsSettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
 			public List<DataSettingsParam>? playerDatasSettings;
 
 			[GNArrayDataMember(code = GNParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
@@ -605,13 +605,13 @@
 
 		public class GamePlayerSettingsParam
 		{
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
 			public List<CurrencySettingsParam>? playerCurrencySettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
 			public List<StatisticsSettingsParam>? playerStatisticsSettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
 			public List<DataSettingsParam>? playerDatasSettings;
 
 			[GNArrayDataMember(code = GNParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
@@ -768,7 +768,7 @@
 			[GNHashtableDataMember(code = GNParameterCode.RemoveMember, isOptional = true)]
 			public PermissionRulesParam? removeMember;
 
-			[GNHashtableDataMember(code = GNParameterCode.sendGroupMessage, isOptional = true)]
+			[GNHashtableDataMember(code = GNParameterCode.SendGroupMessage, isOptional = true)]
 			public PermissionRulesParam? sendGroupMessage;
 
 			[GNHashtableDataMember(code = GNParameterCode.GetGroupMessage, isOptional = true)]
@@ -784,13 +784,13 @@
 
 		public class GroupSettingsParam
 		{
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
 			public List<CurrencySettingsParam>? groupCurrencySettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
 			public List<StatisticsSettingsParam>? groupStatisticsSettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
 			public List<DataSettingsParam>? groupDatasSettings;
 
 			[GNArrayDataMember(code = GNParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
@@ -906,10 +906,10 @@
 
 		public class InventorySettingsParam
 		{
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
 			public List<StatisticsSettingsParam>? inventoryStatisticsSettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+			[GNArrayDataMember(code = GNParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
 			public List<DataSettingsParam>? inventoryDatasSettings;
 
 			[GNArrayDataMember(code = GNParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
@@ -993,6 +993,9 @@
 			[GNHashtableDataMember(code = GNParameterCode.GrantSecretInfo, isOptional = true)]
 			public PermissionRulesParam? grantSecretInfo;
 
+			[GNHashtableDataMember(code = GNParameterCode.SetSecretInfoInformation, isOptional = true)]
+			public PermissionRulesParam? setSecretInfoInformation;
+			
 		}
 
 		public class MasterPlayerPermissionRulesParam
@@ -1211,13 +1214,13 @@
 			[GNArrayDataMember(code = GNParameterCode.GenericServiceSettings, elementCls = typeof(GenericServiceSettingsParam), isOptional = true )]
 			public List<GenericServiceSettingsParam>? genericServiceSettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true )]
+			[GNArrayDataMember(code = GNParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true )]
 			public List<CurrencySettingsParam>? playerCurrencySettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatisticsSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true )]
+			[GNArrayDataMember(code = GNParameterCode.StatisticsSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true )]
 			public List<StatisticsSettingsParam>? playerStatisticsSettings;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDatasSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true )]
+			[GNArrayDataMember(code = GNParameterCode.DatasSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true )]
 			public List<DataSettingsParam>? playerDatasSettings;
 
 			[GNArrayDataMember(code = GNParameterCode.CustomDatasSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true )]
@@ -1385,8 +1388,132 @@
 
 	public partial class DashboardModels
 	{
+		public class AdminAccountResponseData
+		{
+			[StringDataMember(code = GNParameterCode.UserId)]
+			public string userId;
 
-		public class ResponseData
+			[StringDataMember(code = GNParameterCode.Username)]
+			public string username;
+
+			[StringDataMember(code = GNParameterCode.SecretKey)]
+			public string secretKey;
+
+		}
+
+		public class GetAdminAccountListResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(AdminAccountResponseData))]
+			public List<AdminAccountResponseData> results;
+		}
+
+		public class GetGameInformationResponseData
+        {
+			[StringDataMember(code = GNParameterCode.GameId)]
+			public string gameId;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate)]
+			public long tsCreate;
+
+			[StringDataMember(code = GNParameterCode.CreatorId)]
+			public string creatorId;
+
+			[StringDataMember(code = GNParameterCode.GameDescription)]
+			public string gameDescription;
+
+			[StringDataMember(code = GNParameterCode.GameIconUrl)]
+			public string gameIconUrl;
+
+			[GNHashtableDataMember(code = GNParameterCode.GameSettings)]
+			public GameSettingsParam gameSettings;
+
+		}
+
+		public class GameWithGameIdResponseData
+		{
+			[StringDataMember(code = GNParameterCode.GameId)]
+			public string gameId;
+
+		}
+
+		public class GetGameListResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GameWithGameIdResponseData))]
+			public List<GameWithGameIdResponseData> results;
+
+		}
+
+		public class GetMasterGameSettingsResponseData
+        {
+			[GNHashtableDataMember(code = GNParameterCode.MasterPlayerSettings)]
+			public MasterPlayerSettingsParam masterPlayerSettings;
+
+		}
+
+		public class GetSecretInfoInformationResponseData
+        {
+			[StringDataMember(code = GNParameterCode.SecretKey)]
+			public string secretKey;
+
+			[StringDataMember(code = GNParameterCode.GameId)]
+			public string gameId;
+
+			[NumberDataMember(code = GNParameterCode.Role)]
+			public int role;
+
+			[NumberDataMember(code = GNParameterCode.TsCreate)]
+			public long tsCreate;
+
+			[StringDataMember(code = GNParameterCode.CreatorId)]
+			public string creatorId;
+
+			[BooleanDataMember(code = GNParameterCode.Remove)]
+			public bool remove;
+
+			[NumberDataMember(code = GNParameterCode.TsExpire)]
+			public long tsExpire;
+
+			[GNHashtableDataMember(code = GNParameterCode.Permission)]
+			public PermissionParam permission;
+
+		}
+
+		public class SecretInfoWithSecretKeyResponseData
+		{
+			[StringDataMember(code = GNParameterCode.SecretKey)]
+			public string secretKey;
+
+		}
+
+		public class GetSecretInfoListResponseData
+        {
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
+			public List<SecretInfoWithSecretKeyResponseData> results;
+
+		}
+
+		public class AdminAccountWithUserIdResponseData
+		{
+			[StringDataMember(code = GNParameterCode.UserId)]
+			public string userId;
+
+		}
+
+		public class GrantAdminAccountResponseData
+		{
+			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(AdminAccountWithUserIdResponseData))]
+			public List<AdminAccountWithUserIdResponseData> results;
+
+		}
+
+        public class LoginByAdminAccountResponseData
+        {
+			[StringDataMember(code = ParameterCode.AuthToken)]
+			public string authToken;
+
+		}
+
+		public class EmptyResponseData
 		{
 
 		}

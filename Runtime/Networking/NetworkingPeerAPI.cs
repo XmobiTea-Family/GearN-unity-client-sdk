@@ -11,14 +11,13 @@
     {
         internal const string SYNC_TS = "ts";
         internal const string UPLOAD_FILE = "upload";
-        internal const string DOWNLOAD_FILE = "upload";
-        internal const string GET_CONFIG = "getConfig";
+        internal const string DOWNLOAD_FILE = "download";
         internal const string API_JSON = "api/" + Commands.RequestCmd_Json;
         internal const string API_MSG_PACK = "api/" + Commands.RequestCmd_MsgPack;
 
         internal void syncTs(Action<long> onResponse = null)
         {
-            (this.httpPeer as HttpPeer).getRequest(NetworkingPeer.SYNC_TS, httpAppResponse =>
+            (this.httpPeer as Http.HttpPeer).getRequest(NetworkingPeer.SYNC_TS, httpAppResponse =>
             {
                 if (!httpAppResponse.hasError())
                 {
@@ -35,7 +34,7 @@
                             var gnHashtable = gnArray.getGNHashtable(1);
                             var newServerTimestamp = gnHashtable.getLong("1", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-                            setServerTimeMilliseconds(newServerTimestamp);
+                            this.setServerTimeMilliseconds(newServerTimestamp);
                         }
                     }
                 }

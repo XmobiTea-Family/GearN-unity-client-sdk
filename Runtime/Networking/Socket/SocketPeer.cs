@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Networking
+﻿namespace XmobiTea.GN.Networking.Socket
 {
     using System;
     using System.Collections.Generic;
@@ -10,25 +10,32 @@
 
     internal class SocketPeer : PeerBase
     {
-        private NetworkingPeerBase networkingPeerBase;
+        private NetworkingSocketPeerBase networkingSocketPeerBase;
 
-        internal string getClientId() => this.networkingPeerBase?.clientId;
 
-        internal bool isConnected() => this.networkingPeerBase.isWsConnected;
-
-        private Dictionary<int, List<IServerEventHandler>> serverEventHandlersDic;
+        private Dictionary<int, List<IServerEventHandler>> serverEventHandlersDict;
 
         private Action<OperationEvent> _onEventHandler;
 
+        internal string getClientId()
+        {
+            return this.networkingSocketPeerBase?.clientId;
+        }
+
+        internal bool isConnected()
+        {
+            return this.networkingSocketPeerBase.isWsConnected;
+        }
+
         internal void sendRequestAuthSocket()
         {
-            this.networkingPeerBase.sendRequestAuthSocket();
+            this.networkingSocketPeerBase.sendRequestAuthSocket();
         }
 
         void subscriberServerEventHandler()
         {
-            if (this.serverEventHandlersDic == null) this.serverEventHandlersDic = new Dictionary<int, List<IServerEventHandler>>();
-            else this.serverEventHandlersDic.Clear();
+            if (this.serverEventHandlersDict == null) this.serverEventHandlersDict = new Dictionary<int, List<IServerEventHandler>>();
+            else this.serverEventHandlersDict.Clear();
 
             var type = typeof(IServerEventHandler);
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -42,15 +49,15 @@
                 {
                     List<IServerEventHandler> serverEventHandlers;
 
-                    if (!this.serverEventHandlersDic.ContainsKey(srvMsg.getEventCode()))
+                    if (!this.serverEventHandlersDict.ContainsKey(srvMsg.getEventCode()))
                     {
                         serverEventHandlers = new List<IServerEventHandler>();
 
-                        this.serverEventHandlersDic[srvMsg.getEventCode()] = serverEventHandlers;
+                        this.serverEventHandlersDict[srvMsg.getEventCode()] = serverEventHandlers;
                     }
                     else
                     {
-                        serverEventHandlers = this.serverEventHandlersDic[srvMsg.getEventCode()];
+                        serverEventHandlers = this.serverEventHandlersDict[srvMsg.getEventCode()];
                     }
 
                     serverEventHandlers.Add(srvMsg);
@@ -69,59 +76,59 @@
 
             if (peerSocketVersion == PeerSocketVersion.V3)
             {
-                this.networkingPeerBase = this.gameObject.AddComponent<NetworkingPeerSocketV3>();
+                this.networkingSocketPeerBase = new NetworkingPeerSocketV3();
             }
             else
             {
-                this.networkingPeerBase = this.gameObject.AddComponent<NetworkingPeerSocketV2>();
+                this.networkingSocketPeerBase = new NetworkingPeerSocketV2();
 
                 if (peerSocketVersion == PeerSocketVersion.V2_v2)
                 {
-                    ((NetworkingPeerSocketV2)this.networkingPeerBase).SetServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v2);
+                    ((NetworkingPeerSocketV2)this.networkingSocketPeerBase).setServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v2);
                 }
                 else if (peerSocketVersion == PeerSocketVersion.V2_v3)
                 {
-                    ((NetworkingPeerSocketV2)this.networkingPeerBase).SetServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v3);
+                    ((NetworkingPeerSocketV2)this.networkingSocketPeerBase).setServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v3);
                 }
             }
 
-            this.networkingPeerBase.init(gnServerSettings.getSocketUrl(), gnServerSettings.getReconnectDelay(), gnServerSettings.getPingInterval(), gnServerSettings.getPingTimeout());
-            this.networkingPeerBase.reInitNewSocket();
+            this.networkingSocketPeerBase.init(gnServerSettings.getSocketUrl(), gnServerSettings.getReconnectDelay(), gnServerSettings.getPingInterval(), gnServerSettings.getPingTimeout());
+            this.networkingSocketPeerBase.reInitNewSocket();
 
-            this.networkingPeerBase.setOnEventHandler(this.onEventHandler);
-            this.networkingPeerBase.setOnResponseHandler(this.onResponseHandler);
+            this.networkingSocketPeerBase.setOnEventHandler(this.onEventHandler);
+            this.networkingSocketPeerBase.setOnResponseHandler(this.onResponseHandler);
 
             this.subscriberServerEventHandler();
         }
 
         internal void setOnConnectHandler(Action _onConnectHandler)
         {
-            this.networkingPeerBase.setOnConnectHandler(_onConnectHandler);
+            this.networkingSocketPeerBase.setOnConnectHandler(_onConnectHandler);
         }
 
         internal void setOnDisconnectHandler(Action _onDisconnectHandler)
         {
-            this.networkingPeerBase.setOnDisconnectHandler(_onDisconnectHandler);
+            this.networkingSocketPeerBase.setOnDisconnectHandler(_onDisconnectHandler);
         }
 
         internal void removeOnConnectHandler(Action _onConnectHandler)
         {
-            this.networkingPeerBase.removeOnConnectHandler(_onConnectHandler);
+            this.networkingSocketPeerBase.removeOnConnectHandler(_onConnectHandler);
         }
 
         internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
         {
-            this.networkingPeerBase.removeOnDisconnectHandler(_onDisconnectHandler);
+            this.networkingSocketPeerBase.removeOnDisconnectHandler(_onDisconnectHandler);
         }
 
         internal void connect(Action _onSocketConnect)
         {
-            this.networkingPeerBase.connect(_onSocketConnect);
+            this.networkingSocketPeerBase.connect(_onSocketConnect);
         }
 
         internal void disconnect(Action _onSocketDisconnect)
         {
-            this.networkingPeerBase.close(_onSocketDisconnect);
+            this.networkingSocketPeerBase.close(_onSocketDisconnect);
         }
 
         internal void setOnEventHandler(Action<OperationEvent> _onEventHandler)
@@ -135,29 +142,11 @@
 
             GNDebug.log("[GN Socket SEND] " + operationPending.getOperationRequest().ToString());
 
-            //var operationRequest = operationPending.getOperationRequest();
-
-            //if (string.IsNullOrEmpty(authToken))
-            //{
-            //    if (!this.isOperationCanSendWithoutAuthorized(operationRequest.getOperationCode()))
-            //    {
-            //        var obj = new GNArray();
-
-            //        obj.add((int)ReturnCode.OperationNotAuthorized);
-            //        obj.add(null);
-            //        obj.add(operationRequest.getRequestId());
-
-            //        onResponseHandler(obj, operationRequest.isEncrypted());
-
-            //        return;
-            //    }
-            //}
-
             var authToken = operationPending.getAuthToken();
             var secretKey = operationPending.getSecretKey();
             var customTags = operationPending.getCustomTags();
 
-            this.networkingPeerBase.Send(operationPending.getRequestType(), operationPending.getRequestRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags);
+            this.networkingSocketPeerBase.Send(operationPending.getRequestType(), operationPending.getRequestRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags);
         }
 
         internal void onEventHandler(GNArray obj, bool isEncrypted)
@@ -171,12 +160,12 @@
 
             this._onEventHandler?.Invoke(operationEvent);
 
-            if (!this.serverEventHandlersDic.ContainsKey(eventCode))
+            if (!this.serverEventHandlersDict.ContainsKey(eventCode))
             {
                 return;
             }
 
-            var serverEventHandlers = this.serverEventHandlersDic[eventCode];
+            var serverEventHandlers = this.serverEventHandlersDict[eventCode];
 
             foreach (var serverEventHandler in serverEventHandlers)
                 serverEventHandler.handle(operationEvent);
@@ -186,7 +175,7 @@
         {
             base.service();
 
-            this.networkingPeerBase?.service();
+            this.networkingSocketPeerBase?.service();
         }
 
         //internal static string Auth(BestHTTP.SocketIO3.SocketManager socketManager, BestHTTP.SocketIO3.Socket socket)

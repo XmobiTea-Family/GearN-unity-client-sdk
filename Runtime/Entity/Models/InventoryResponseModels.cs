@@ -4,162 +4,162 @@
 
 	public class InventoryResponseModels
 	{
-		public class AddSegmentOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class AddSegmentOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetAmountOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetAmountOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetAvatarOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetAvatarOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetCatalogIdOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetCatalogIdOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetClassIdOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetClassIdOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetCustomDataOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetCustomDataOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetItemDataOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetItemDataOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetItemInformationOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetItemInformationOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetItemsWithDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetItemsWithDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.InventoriesWithItemIdResponseData>
 		{
 
 		}
 
-		public class GetItemsWithSegmentOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetItemsWithSegmentOperationResponse : CustomOperationResponse<InventoryModels.InventoriesWithItemIdResponseData>
 		{
 
 		}
 
-		public class GetItemsWithTagOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetItemsWithTagOperationResponse : CustomOperationResponse<InventoryModels.InventoriesWithItemIdResponseData>
 		{
 
 		}
 
-		public class GetItemTypeOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetItemTypeOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetOwnerOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetOwnerOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetRemoveStatusOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetRemoveStatusOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetSegmentOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetSegmentOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetStatisticsLeaderboardAroundItemOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetStatisticsLeaderboardAroundItemOperationResponse : CustomOperationResponse<InventoryModels.GetStatisticsLeaderboardResponseData>
 		{
 
 		}
 
-		public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<InventoryModels.GetStatisticsLeaderboardResponseData>
 		{
 
 		}
 
-		public class GetTagOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetTagOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class GetTsCreateOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class GetTsCreateOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class RemoveSegmentOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class RemoveSegmentOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}
 
-		public class RemoveTagOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class RemoveTagOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetAmountOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetAmountOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class SetAvatarOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetAvatarOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetCustomDataOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetCustomDataOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class SetDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetItemDataOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetItemDataOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class SetItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.InfoResponseParameters>
 		{
 
 		}
 
-		public class SetOwnerOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetOwnerOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetRemoveStatusOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetRemoveStatusOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetTagOperationResponse : CustomOperationResponse<InventoryModels.ResponseData>
+		public class SetTagOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
 		{
 
 		}

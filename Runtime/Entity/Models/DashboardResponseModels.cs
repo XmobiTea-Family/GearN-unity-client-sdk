@@ -4,92 +4,92 @@
 
 	public class DashboardResponseModels
 	{
-		public class ChangePasswordAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class ChangePasswordAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GetAdminAccountListOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GetAdminAccountListOperationResponse : CustomOperationResponse<DashboardModels.GetAdminAccountListResponseData>
 		{
 
 		}
 
-		public class GetGameInformationOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GetGameInformationOperationResponse : CustomOperationResponse<DashboardModels.GetGameInformationResponseData>
 		{
 
 		}
 
-		public class GetGameListOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GetGameListOperationResponse : CustomOperationResponse<DashboardModels.GetGameListResponseData>
 		{
 
 		}
 
-		public class GetMasterGameSettingsOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GetMasterGameSettingsOperationResponse : CustomOperationResponse<DashboardModels.GetMasterGameSettingsResponseData>
 		{
 
 		}
 
-		public class GetSecretInfoInformationOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GetSecretInfoInformationOperationResponse : CustomOperationResponse<DashboardModels.GetSecretInfoInformationResponseData>
 		{
 
 		}
 
-		public class GetSecretInfoListOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GetSecretInfoListOperationResponse : CustomOperationResponse<DashboardModels.GetSecretInfoListResponseData>
 		{
 
 		}
 
-		public class GetServerLogOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GetServerLogOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}
 
-		public class GrantAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GrantAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.GrantAdminAccountResponseData>
 		{
 
 		}
 
-		public class GrantGameOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GrantGameOperationResponse : CustomOperationResponse<DashboardModels.GameWithGameIdResponseData>
 		{
 
 		}
 
-		public class GrantSecretInfoOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class GrantSecretInfoOperationResponse : CustomOperationResponse<DashboardModels.SecretInfoWithSecretKeyResponseData>
 		{
 
 		}
 
-		public class LoginByAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class LoginByAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.LoginByAdminAccountResponseData>
 		{
 
 		}
 
-		public class RemoveAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class RemoveAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetGameInformationOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class SetGameInformationOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetMasterGameSettingsOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class SetMasterGameSettingsOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetPasswordAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class SetPasswordAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetSecretInfoInformationOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class SetSecretInfoInformationOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}
 
-		public class SetSecretKeyAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.ResponseData>
+		public class SetSecretKeyAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
 		{
 
 		}

@@ -15,11 +15,6 @@
         private bool encrypted;
         private int timeout;
 
-        public bool isValidRequest()
-        {
-            return true;
-        }
-
         public OperationRequest(int operationCode, bool encrypted = true, int timeout = defaultTimeOut)
         {
             this.operationCode = operationCode;
