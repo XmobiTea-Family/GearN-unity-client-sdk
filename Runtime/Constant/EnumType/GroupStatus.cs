@@ -1,12 +1,12 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-	public enum GroupStatus
-	{
-		Member = 0,
-		WaitingAccept = 1,
-		SentRequestAndWaitingAccept = 2,
-		NotMember = 3,
+    public enum GroupStatus
+    {
+        Member = 1,
+        WaitingAccept = 2,
+        SentRequestAndWaitingAccept = 3,
+        NotMember = 4,
 
-	}
+    }
 
 }

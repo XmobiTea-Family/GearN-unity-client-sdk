@@ -2,1077 +2,1195 @@
 {
     using System.Collections.Generic;
     using XmobiTea.GN.Constant;
+    using static XmobiTea.GN.Entity.Models.MasterPlayerModels;
 
     public partial class CharacterPlayerModels
-	{
-		public class AddPlayerFriendRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+    {
+        public class AddPlayerFriendRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[StringDataMember(code = GNParameterCode.FriendId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string friendId;
+            [StringDataMember(code = GNParameterCode.FriendId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string friendId;
 
-			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string catalogId;
+            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string catalogId;
 
-		}
+        }
 
-		public class ServerAddPlayerFriendRequestData : AddPlayerFriendRequestData
-		{
-		}
+        public class ServerAddPlayerFriendRequestData : AddPlayerFriendRequestData
+        {
+        }
 
-		public class AdminAddPlayerFriendRequestData : ServerAddPlayerFriendRequestData
-		{
-		}
+        public class AdminAddPlayerFriendRequestData : ServerAddPlayerFriendRequestData
+        {
+        }
 
-		public class AddSegmentRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AddSegmentRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[StringDataMember(code = GNParameterCode.Value, minLength = 6, maxLength = 32, mustNonNull = true)]
-			public string value;
+            [StringDataMember(code = GNParameterCode.Value, minLength = 6, maxLength = 32, mustNonNull = true)]
+            public string value;
 
-		}
+        }
 
-		public class ServerAddSegmentRequestData : AddSegmentRequestData
-		{
-		}
+        public class ServerAddSegmentRequestData : AddSegmentRequestData
+        {
+        }
 
-		public class AdminAddSegmentRequestData : ServerAddSegmentRequestData
-		{
-		}
+        public class AdminAddSegmentRequestData : ServerAddSegmentRequestData
+        {
+        }
 
-		public class GetAvatarRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class GetAvatarRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+        }
 
-		public class ServerGetAvatarRequestData : GetAvatarRequestData
-		{
-		}
+        public class ServerGetAvatarRequestData : GetAvatarRequestData
+        {
+        }
 
-		public class AdminGetAvatarRequestData : ServerGetAvatarRequestData
-		{
-		}
+        public class AdminGetAvatarRequestData : ServerGetAvatarRequestData
+        {
+        }
 
-		public class GetCatalogIdRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class GetCatalogIdRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+        }
 
-		public class ServerGetCatalogIdRequestData : GetCatalogIdRequestData
-		{
-		}
+        public class ServerGetCatalogIdRequestData : GetCatalogIdRequestData
+        {
+        }
 
-		public class AdminGetCatalogIdRequestData : ServerGetCatalogIdRequestData
-		{
-		}
+        public class AdminGetCatalogIdRequestData : ServerGetCatalogIdRequestData
+        {
+        }
 
-		public class GetCountryCodeRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class GetCountryCodeRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+        }
 
-		public class ServerGetCountryCodeRequestData : GetCountryCodeRequestData
-		{
-		}
+        public class ServerGetCountryCodeRequestData : GetCountryCodeRequestData
+        {
+        }
 
-		public class AdminGetCountryCodeRequestData : ServerGetCountryCodeRequestData
-		{
-		}
+        public class AdminGetCountryCodeRequestData : ServerGetCountryCodeRequestData
+        {
+        }
 
-		public class GetCustomDataRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class GetCustomDataRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? customDataKeys;
+            [GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? customDataKeys;
 
-		}
+        }
 
-		public class ServerGetCustomDataRequestData : GetCustomDataRequestData
-		{
-		}
+        public class ServerGetCustomDataRequestData : GetCustomDataRequestData
+        {
+        }
 
-		public class AdminGetCustomDataRequestData : ServerGetCustomDataRequestData
-		{
-		}
+        public class AdminGetCustomDataRequestData : ServerGetCustomDataRequestData
+        {
+        }
 
-		public class GetDisplayNameRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class GetDisplayNameRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+        }
 
-		public class ServerGetDisplayNameRequestData : GetDisplayNameRequestData
-		{
-		}
+        public class ServerGetDisplayNameRequestData : GetDisplayNameRequestData
+        {
+        }
 
-		public class AdminGetDisplayNameRequestData : ServerGetDisplayNameRequestData
-		{
-		}
+        public class AdminGetDisplayNameRequestData : ServerGetDisplayNameRequestData
+        {
+        }
 
-		public class GetFriendStatisticsLeaderboardAroundPlayerRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class GetFriendStatisticsLeaderboardAroundPlayerRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-			[NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
-			public long? skip;
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-			[NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
-			public long? limit;
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-		}
+            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
 
-		public class ServerGetFriendStatisticsLeaderboardAroundPlayerRequestData : GetFriendStatisticsLeaderboardAroundPlayerRequestData
-		{
-		}
+        }
 
-		public class AdminGetFriendStatisticsLeaderboardAroundPlayerRequestData : ServerGetFriendStatisticsLeaderboardAroundPlayerRequestData
-		{
-		}
+        public class ServerGetFriendStatisticsLeaderboardAroundPlayerRequestData : GetFriendStatisticsLeaderboardAroundPlayerRequestData
+        {
+        }
 
-		public class GetFriendStatisticsLeaderboardRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminGetFriendStatisticsLeaderboardAroundPlayerRequestData : ServerGetFriendStatisticsLeaderboardAroundPlayerRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        public class GetFriendStatisticsLeaderboardRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-			[NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
-			public long? skip;
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-			[NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
-			public long? limit;
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-		}
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-		public class ServerGetFriendStatisticsLeaderboardRequestData : GetFriendStatisticsLeaderboardRequestData
-		{
-		}
+            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
 
-		public class AdminGetFriendStatisticsLeaderboardRequestData : ServerGetFriendStatisticsLeaderboardRequestData
-		{
-		}
+        }
 
-		public class GetIpAddressCreateRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetFriendStatisticsLeaderboardRequestData : GetFriendStatisticsLeaderboardRequestData
+        {
+        }
 
-		}
+        public class AdminGetFriendStatisticsLeaderboardRequestData : ServerGetFriendStatisticsLeaderboardRequestData
+        {
+        }
 
-		public class ServerGetIpAddressCreateRequestData : GetIpAddressCreateRequestData
-		{
-		}
+        public class GetIpAddressCreateRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class AdminGetIpAddressCreateRequestData : ServerGetIpAddressCreateRequestData
-		{
-		}
+        }
 
-		public class GetOwnerRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetIpAddressCreateRequestData : GetIpAddressCreateRequestData
+        {
+        }
 
-		}
+        public class AdminGetIpAddressCreateRequestData : ServerGetIpAddressCreateRequestData
+        {
+        }
 
-		public class ServerGetOwnerRequestData : GetOwnerRequestData
-		{
-		}
+        public class GetOwnerRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class AdminGetOwnerRequestData : ServerGetOwnerRequestData
-		{
-		}
+        }
 
-		public class GetPlayerBanRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetOwnerRequestData : GetOwnerRequestData
+        {
+        }
 
-		}
+        public class AdminGetOwnerRequestData : ServerGetOwnerRequestData
+        {
+        }
 
-		public class ServerGetPlayerBanRequestData : GetPlayerBanRequestData
-		{
-		}
+        public class GetPlayerBanRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class AdminGetPlayerBanRequestData : ServerGetPlayerBanRequestData
-		{
-		}
+        }
 
-		public class GetPlayerCurrencyRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayerBanRequestData : GetPlayerBanRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencyKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? playerCurrencyKeys;
+        public class AdminGetPlayerBanRequestData : ServerGetPlayerBanRequestData
+        {
+        }
 
-		}
+        public class GetPlayerCurrencyRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetPlayerCurrencyRequestData : GetPlayerCurrencyRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.PlayerCurrencyKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? playerCurrencyKeys;
 
-		public class AdminGetPlayerCurrencyRequestData : ServerGetPlayerCurrencyRequestData
-		{
-		}
+        }
 
-		public class GetPlayerDataRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayerCurrencyRequestData : GetPlayerCurrencyRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDataKeys, isOptional = true)]
-			public List<string>? playerDataKeys;
+        public class AdminGetPlayerCurrencyRequestData : ServerGetPlayerCurrencyRequestData
+        {
+        }
 
-		}
+        public class GetPlayerDataRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetPlayerDataRequestData : GetPlayerDataRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.PlayerDataKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? playerDataKeys;
 
-		public class AdminGetPlayerDataRequestData : ServerGetPlayerDataRequestData
-		{
-		}
+        }
 
-		public class GetPlayerFriendRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayerDataRequestData : GetPlayerDataRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.FriendCatalogIds, isOptional = true, elementCls = typeof(string))]
-			public List<string>? friendCatalogIds;
+        public class AdminGetPlayerDataRequestData : ServerGetPlayerDataRequestData
+        {
+        }
 
-		}
+        public class GetPlayerFriendRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetPlayerFriendRequestData : GetPlayerFriendRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.FriendCatalogIds, isOptional = true, elementCls = typeof(string))]
+            public List<string>? friendCatalogIds;
 
-		public class AdminGetPlayerFriendRequestData : ServerGetPlayerFriendRequestData
-		{
-		}
+        }
 
-		public class GetPlayerGroupRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayerFriendRequestData : GetPlayerFriendRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.GroupCatalogIds, isOptional = true, elementCls = typeof(string))]
-			public List<string>? groupCatalogIds;
+        public class AdminGetPlayerFriendRequestData : ServerGetPlayerFriendRequestData
+        {
+        }
 
-		}
+        public class GetPlayerGroupRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetPlayerGroupRequestData : GetPlayerGroupRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.GroupCatalogIds, isOptional = true, elementCls = typeof(string))]
+            public List<string>? groupCatalogIds;
 
-		public class AdminGetPlayerGroupRequestData : ServerGetPlayerGroupRequestData
-		{
-		}
+        }
 
-		public class GetPlayerInformationRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayerGroupRequestData : GetPlayerGroupRequestData
+        {
+        }
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+        public class AdminGetPlayerGroupRequestData : ServerGetPlayerGroupRequestData
+        {
+        }
 
-		}
+        public class GetPlayerInformationRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetPlayerInformationRequestData : GetPlayerInformationRequestData
-		{
-		}
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-		public class AdminGetPlayerInformationRequestData : ServerGetPlayerInformationRequestData
-		{
-		}
+        }
 
-		public class GetPlayerInventoryRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayerInformationRequestData : GetPlayerInformationRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
-			public List<string>? itemCatalogIds;
+        public class AdminGetPlayerInformationRequestData : ServerGetPlayerInformationRequestData
+        {
+        }
 
-		}
+        public class GetPlayerInventoryRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetPlayerInventoryRequestData : GetPlayerInventoryRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
+            public List<string>? itemCatalogIds;
 
-		public class AdminGetPlayerInventoryRequestData : ServerGetPlayerInventoryRequestData
-		{
-		}
+        }
 
-		public class GetPlayerStatisticsRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayerInventoryRequestData : GetPlayerInventoryRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.StatisticsKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? statisticsKeys;
+        public class AdminGetPlayerInventoryRequestData : ServerGetPlayerInventoryRequestData
+        {
+        }
 
-		}
+        public class GetPlayerStatisticsRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetPlayerStatisticsRequestData : GetPlayerStatisticsRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.StatisticsKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? statisticsKeys;
 
-		public class AdminGetPlayerStatisticsRequestData : ServerGetPlayerStatisticsRequestData
-		{
-		}
+        }
 
-		public class GetPlayersWithDisplayNameRequestData
-		{
-			[StringDataMember(code = GNParameterCode.Keyword, minLength = 2, maxLength = 32)]
-			public string keyword;
+        public class ServerGetPlayerStatisticsRequestData : GetPlayerStatisticsRequestData
+        {
+        }
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+        public class AdminGetPlayerStatisticsRequestData : ServerGetPlayerStatisticsRequestData
+        {
+        }
 
-			[NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
-			public long? skip;
+        public class GetPlayersWithDisplayNameRequestData
+        {
+            [StringDataMember(code = GNParameterCode.Keyword, minLength = 2, maxLength = 32)]
+            public string keyword;
 
-			[NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
-			public long? limit;
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-		}
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-		public class ServerGetPlayersWithDisplayNameRequestData : GetPlayersWithDisplayNameRequestData
-		{
-		}
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-		public class AdminGetPlayersWithDisplayNameRequestData : ServerGetPlayersWithDisplayNameRequestData
-		{
-		}
+        }
 
-		public class GetPlayersWithSegmentRequestData
-		{
-			[StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string value;
+        public class ServerGetPlayersWithDisplayNameRequestData : GetPlayersWithDisplayNameRequestData
+        {
+        }
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+        public class AdminGetPlayersWithDisplayNameRequestData : ServerGetPlayersWithDisplayNameRequestData
+        {
+        }
 
-			[NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
-			public long? skip;
+        public class GetPlayersWithSegmentRequestData
+        {
+            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string value;
 
-			[NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
-			public long? limit;
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-		}
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-		public class ServerGetPlayersWithSegmentRequestData : GetPlayersWithSegmentRequestData
-		{
-		}
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-		public class AdminGetPlayersWithSegmentRequestData : ServerGetPlayersWithSegmentRequestData
-		{
-		}
+        }
 
-		public class GetPlayersWithTagRequestData
-		{
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        public class ServerGetPlayersWithSegmentRequestData : GetPlayersWithSegmentRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string value;
+        public class AdminGetPlayersWithSegmentRequestData : ServerGetPlayersWithSegmentRequestData
+        {
+        }
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+        public class GetPlayersWithTagRequestData
+        {
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-			[NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
-			public long? skip;
+            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string value;
 
-			[NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
-			public long? limit;
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-		}
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-		public class ServerGetPlayersWithTagRequestData : GetPlayersWithTagRequestData
-		{
-		}
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-		public class AdminGetPlayersWithTagRequestData : ServerGetPlayersWithTagRequestData
-		{
-		}
+        }
 
-		public class GetRemoveStatusRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetPlayersWithTagRequestData : GetPlayersWithTagRequestData
+        {
+        }
 
-		}
+        public class AdminGetPlayersWithTagRequestData : ServerGetPlayersWithTagRequestData
+        {
+        }
 
-		public class ServerGetRemoveStatusRequestData : GetRemoveStatusRequestData
-		{
-		}
+        public class GetRemoveStatusRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class AdminGetRemoveStatusRequestData : ServerGetRemoveStatusRequestData
-		{
-		}
+        }
 
-		public class GetSegmentRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetRemoveStatusRequestData : GetRemoveStatusRequestData
+        {
+        }
 
-		}
+        public class AdminGetRemoveStatusRequestData : ServerGetRemoveStatusRequestData
+        {
+        }
 
-		public class ServerGetSegmentRequestData : GetSegmentRequestData
-		{
-		}
+        public class GetSegmentRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class AdminGetSegmentRequestData : ServerGetSegmentRequestData
-		{
-		}
+        }
 
-		public class GetStatisticsLeaderboardAroundPlayerRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetSegmentRequestData : GetSegmentRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        public class AdminGetSegmentRequestData : ServerGetSegmentRequestData
+        {
+        }
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+        public class GetStatisticsLeaderboardAroundPlayerRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
-			public long? skip;
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-			[NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
-			public long? limit;
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-		}
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-		public class ServerGetStatisticsLeaderboardAroundPlayerRequestData : GetStatisticsLeaderboardAroundPlayerRequestData
-		{
-		}
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-		public class AdminGetStatisticsLeaderboardAroundPlayerRequestData : ServerGetStatisticsLeaderboardAroundPlayerRequestData
-		{
-		}
+            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
 
-		public class GetStatisticsLeaderboardRequestData
-		{
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            public string? catalogId;
 
-			[GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
-			public InfoRequestParam infoRequestParam;
+        }
 
-			[NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
-			public long? skip;
+        public class ServerGetStatisticsLeaderboardAroundPlayerRequestData : GetStatisticsLeaderboardAroundPlayerRequestData
+        {
+        }
 
-			[NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
-			public long? limit;
+        public class AdminGetStatisticsLeaderboardAroundPlayerRequestData : ServerGetStatisticsLeaderboardAroundPlayerRequestData
+        {
+        }
 
-			[BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
-			public bool? loadFromCache;
+        public class GetStatisticsLeaderboardRequestData
+        {
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-		}
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-		public class ServerGetStatisticsLeaderboardRequestData : GetStatisticsLeaderboardRequestData
-		{
-		}
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-		public class AdminGetStatisticsLeaderboardRequestData : ServerGetStatisticsLeaderboardRequestData
-		{
-		}
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-		public class GetTagRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
 
-			[GNArrayDataMember(code = GNParameterCode.TagKeys, elementCls = typeof(string))]
-			public List<string> tagKeys;
+            [StringDataMember(code = GNParameterCode.Version, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            public string? version;
 
-		}
+            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            public string? catalogId;
 
-		public class ServerGetTagRequestData : GetTagRequestData
-		{
-		}
+        }
 
-		public class AdminGetTagRequestData : ServerGetTagRequestData
-		{
-		}
+        public class ServerGetStatisticsLeaderboardRequestData : GetStatisticsLeaderboardRequestData
+        {
+        }
 
-		public class GetTsCreateRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminGetStatisticsLeaderboardRequestData : ServerGetStatisticsLeaderboardRequestData
+        {
+        }
 
-		}
+        public class GetTagRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerGetTsCreateRequestData : GetTsCreateRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.TagKeys, elementCls = typeof(string))]
+            public List<string> tagKeys;
 
-		public class AdminGetTsCreateRequestData : ServerGetTsCreateRequestData
-		{
-		}
+        }
 
-		public class GetTsLastLoginRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetTagRequestData : GetTagRequestData
+        {
+        }
 
-		}
+        public class AdminGetTagRequestData : ServerGetTagRequestData
+        {
+        }
 
-		public class ServerGetTsLastLoginRequestData : GetTsLastLoginRequestData
-		{
-		}
+        public class GetTsCreateRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class AdminGetTsLastLoginRequestData : ServerGetTsLastLoginRequestData
-		{
-		}
+        }
 
-		public class GrantGroupRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerGetTsCreateRequestData : GetTsCreateRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string catalogId;
+        public class AdminGetTsCreateRequestData : ServerGetTsCreateRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.GroupMembers, isOptional = true, elementCls = typeof(GroupMemberParam))]
-			public List<GroupMemberParam>? groupMembers;
+        public class GetTsLastLoginRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
-			public string? displayName;
+        }
 
-		}
+        public class ServerGetTsLastLoginRequestData : GetTsLastLoginRequestData
+        {
+        }
 
-		public class ServerGrantGroupRequestData : GrantGroupRequestData
-		{
-		}
+        public class AdminGetTsLastLoginRequestData : ServerGetTsLastLoginRequestData
+        {
+        }
 
-		public class AdminGrantGroupRequestData : ServerGrantGroupRequestData
-		{
-		}
+        public class GrantGroupRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class GrantPlayerItemRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string catalogId;
 
-			[StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string catalogId;
+            [GNArrayDataMember(code = GNParameterCode.GroupMembers, isOptional = true, elementCls = typeof(GroupMemberParam))]
+            public List<GroupMemberParam>? groupMembers;
 
-			[StringDataMember(code = GNParameterCode.ClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string classId;
+            [StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
+            public string? displayName;
 
-			[StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
-			public string? displayName;
+        }
 
-			[NumberDataMember(code = GNParameterCode.Amount, defaultValue = 1, isOptional = true)]
-			public double? amount;
+        public class ServerGrantGroupRequestData : GrantGroupRequestData
+        {
+        }
 
-		}
+        public class AdminGrantGroupRequestData : ServerGrantGroupRequestData
+        {
+        }
 
-		public class ServerGrantPlayerItemRequestData : GrantPlayerItemRequestData
-		{
-		}
+        public class GrantPlayerItemRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class AdminGrantPlayerItemRequestData : ServerGrantPlayerItemRequestData
-		{
-		}
+            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string catalogId;
 
-		public class JoinGroupRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 10, maxLength = 10, mustNonNull = true)]
-			public string characterId;
+            [StringDataMember(code = GNParameterCode.ClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string classId;
 
-			[StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
-			public string groupId;
+            [StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
+            public string? displayName;
 
-		}
+            [NumberDataMember(code = GNParameterCode.Amount, defaultValue = 1, mustInt = true, isOptional = true)]
+            public int? amount;
 
-		public class ServerJoinGroupRequestData : JoinGroupRequestData
-		{
-		}
+        }
 
-		public class AdminJoinGroupRequestData : ServerJoinGroupRequestData
-		{
-		}
+        public class ServerGrantPlayerItemRequestData : GrantPlayerItemRequestData
+        {
+        }
 
-		public class LeaveGroupRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 10, maxLength = 10, mustNonNull = true)]
-			public string characterId;
+        public class AdminGrantPlayerItemRequestData : ServerGrantPlayerItemRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
-			public string groupId;
+        public class JoinGroupRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            public string groupId;
 
-		public class ServerLeaveGroupRequestData : LeaveGroupRequestData
-		{
-		}
+        }
 
-		public class AdminLeaveGroupRequestData : ServerLeaveGroupRequestData
-		{
-		}
+        public class ServerJoinGroupRequestData : JoinGroupRequestData
+        {
+        }
 
-		public class RemovePlayerFriendRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminJoinGroupRequestData : ServerJoinGroupRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.FriendId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string friendId;
+        public class LeaveGroupRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            public string groupId;
 
-		public class ServerRemovePlayerFriendRequestData : RemovePlayerFriendRequestData
-		{
-		}
+        }
 
-		public class AdminRemovePlayerFriendRequestData : ServerRemovePlayerFriendRequestData
-		{
-		}
+        public class ServerLeaveGroupRequestData : LeaveGroupRequestData
+        {
+        }
 
-		public class RemovePlayerItemRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminLeaveGroupRequestData : ServerLeaveGroupRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
-			public string itemId;
+        public class RemovePlayerFriendRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.FriendId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string friendId;
 
-		public class ServerRemovePlayerItemRequestData : RemovePlayerItemRequestData
-		{
-		}
+        }
 
-		public class AdminRemovePlayerItemRequestData : ServerRemovePlayerItemRequestData
-		{
-		}
+        public class ServerRemovePlayerFriendRequestData : RemovePlayerFriendRequestData
+        {
+        }
 
-		public class RemoveSegmentRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminRemovePlayerFriendRequestData : ServerRemovePlayerFriendRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string value;
+        public class RemovePlayerItemRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            public string itemId;
 
-		public class ServerRemoveSegmentRequestData : RemoveSegmentRequestData
-		{
-		}
+        }
 
-		public class AdminRemoveSegmentRequestData : ServerRemoveSegmentRequestData
-		{
-		}
+        public class ServerRemovePlayerItemRequestData : RemovePlayerItemRequestData
+        {
+        }
 
-		public class RemoveTagRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminRemovePlayerItemRequestData : ServerRemovePlayerItemRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        public class RemoveSegmentRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string value;
 
-		public class ServerRemoveTagRequestData : RemoveTagRequestData
-		{
-		}
+        }
 
-		public class AdminRemoveTagRequestData : ServerRemoveTagRequestData
-		{
-		}
+        public class ServerRemoveSegmentRequestData : RemoveSegmentRequestData
+        {
+        }
 
-		public class SetAvatarRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminRemoveSegmentRequestData : ServerRemoveSegmentRequestData
+        {
+        }
 
-			[NumberDataMember(code = GNParameterCode.Type, mustInt = true)]
-			public long type;
+        public class RemoveTagRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[StringDataMember(code = GNParameterCode.Value, minLength = 1, maxLength = 128, mustNonNull = true)]
-			public string value;
+            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-		}
+        }
 
-		public class ServerSetAvatarRequestData : SetAvatarRequestData
-		{
-		}
+        public class ServerRemoveTagRequestData : RemoveTagRequestData
+        {
+        }
 
-		public class AdminSetAvatarRequestData : ServerSetAvatarRequestData
-		{
-		}
+        public class AdminRemoveTagRequestData : ServerRemoveTagRequestData
+        {
+        }
 
-		public class SetCountryCodeRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class SetAvatarRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[StringDataMember(code = GNParameterCode.CountryCode, minLength = 2, maxLength = 32)]
-			public string countryCode;
+            [NumberDataMember(code = GNParameterCode.Type, mustInt = true)]
+            public int type;
 
-		}
+            [StringDataMember(code = GNParameterCode.Value, minLength = 1, maxLength = 128, mustNonNull = true)]
+            public string value;
 
-		public class ServerSetCountryCodeRequestData : SetCountryCodeRequestData
-		{
-		}
+        }
 
-		public class AdminSetCountryCodeRequestData : ServerSetCountryCodeRequestData
-		{
-		}
+        public class ServerSetAvatarRequestData : SetAvatarRequestData
+        {
+        }
 
-		public class SetCustomDataRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminSetAvatarRequestData : ServerSetAvatarRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
-			public List<CustomDataParam> customData;
+        public class SetCountryCodeRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.CountryCode, minLength = 2, maxLength = 32)]
+            public string countryCode;
 
-		public class ServerSetCustomDataRequestData : SetCustomDataRequestData
-		{
-		}
+        }
 
-		public class AdminSetCustomDataRequestData : ServerSetCustomDataRequestData
-		{
-		}
+        public class ServerSetCountryCodeRequestData : SetCountryCodeRequestData
+        {
+        }
 
-		public class SetDisplayNameRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminSetCountryCodeRequestData : ServerSetCountryCodeRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.DisplayName, minLength = 5, maxLength = 32, mustNonNull = true)]
-			public string displayName;
+        public class SetCustomDataRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [GNArrayDataMember(code = GNParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
+            public List<CustomDataParam> customData;
 
-		public class ServerSetDisplayNameRequestData : SetDisplayNameRequestData
-		{
-		}
+        }
 
-		public class AdminSetDisplayNameRequestData : ServerSetDisplayNameRequestData
-		{
-		}
+        public class ServerSetCustomDataRequestData : SetCustomDataRequestData
+        {
+        }
 
-		public class SetOwnerRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminSetCustomDataRequestData : ServerSetCustomDataRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.OwnerId, minLength = 10, maxLength = 10, mustNonNull = true)]
-			public string newOwnerId;
+        public class SetDisplayNameRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.DisplayName, minLength = 5, maxLength = 32, mustNonNull = true)]
+            public string displayName;
 
-		public class ServerSetOwnerRequestData : SetOwnerRequestData
-		{
-		}
+        }
 
-		public class AdminSetOwnerRequestData : ServerSetOwnerRequestData
-		{
-		}
+        public class ServerSetDisplayNameRequestData : SetDisplayNameRequestData
+        {
+        }
 
-		public class SetPlayerBanRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminSetDisplayNameRequestData : ServerSetDisplayNameRequestData
+        {
+        }
 
-			[NumberDataMember(code = GNParameterCode.TsExpire)]
-			public double tsExpire;
+        public class SetOwnerRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[StringDataMember(code = GNParameterCode.Reason)]
-			public string reason;
+            [StringDataMember(code = GNParameterCode.OwnerId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            public string newOwnerId;
 
-		}
+        }
 
-		public class ServerSetPlayerBanRequestData : SetPlayerBanRequestData
-		{
-		}
+        public class ServerSetOwnerRequestData : SetOwnerRequestData
+        {
+        }
 
-		public class AdminSetPlayerBanRequestData : ServerSetPlayerBanRequestData
-		{
-		}
+        public class AdminSetOwnerRequestData : ServerSetOwnerRequestData
+        {
+        }
 
-		public class SetPlayerCurrencyRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class SetPlayerBanRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencies, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerCurrencyParam))]
-			public List<PlayerCurrencyParam> playerCurrencyParams;
+            [NumberDataMember(code = GNParameterCode.TsExpire)]
+            public long tsExpire;
 
-		}
+            [StringDataMember(code = GNParameterCode.Reason)]
+            public string reason;
 
-		public class ServerSetPlayerCurrencyRequestData : SetPlayerCurrencyRequestData
-		{
-		}
+        }
 
-		public class AdminSetPlayerCurrencyRequestData : ServerSetPlayerCurrencyRequestData
-		{
-		}
+        public class ServerSetPlayerBanRequestData : SetPlayerBanRequestData
+        {
+        }
 
-		public class SetPlayerDataRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class AdminSetPlayerBanRequestData : ServerSetPlayerBanRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerDataParam))]
-			public List<PlayerDataParam> playerDataParams;
+        public class SetPlayerCurrencyRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [GNArrayDataMember(code = GNParameterCode.PlayerCurrencies, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerCurrencyParam))]
+            public List<PlayerCurrencyParam> playerCurrencyParams;
 
-		public class ServerSetPlayerDataRequestData : SetPlayerDataRequestData
-		{
-		}
+            [StringDataMember(code = GNParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
+            public string? log;
 
-		public class AdminSetPlayerDataRequestData : ServerSetPlayerDataRequestData
-		{
-		}
+        }
 
-		public class SetPlayerStatisticsRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerSetPlayerCurrencyRequestData : SetPlayerCurrencyRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerStatisticsParam))]
-			public List<PlayerStatisticsParam> playerStatisticsParams;
+        public class AdminSetPlayerCurrencyRequestData : ServerSetPlayerCurrencyRequestData
+        {
+        }
 
-		}
+        public class SetPlayerDataRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerSetPlayerStatisticsRequestData : SetPlayerStatisticsRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.PlayerDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerDataParam))]
+            public List<PlayerDataParam> playerDataParams;
 
-		public class AdminSetPlayerStatisticsRequestData : ServerSetPlayerStatisticsRequestData
-		{
-		}
+        }
 
-		public class SetRemoveStatusRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        public class ServerSetPlayerDataRequestData : SetPlayerDataRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.Reason, isOptional = true, defaultValue = "")]
-			public string? reason;
+        public class AdminSetPlayerDataRequestData : ServerSetPlayerDataRequestData
+        {
+        }
 
-		}
+        public class SetPlayerStatisticsRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerSetRemoveStatusRequestData : SetRemoveStatusRequestData
-		{
-		}
+            [GNArrayDataMember(code = GNParameterCode.PlayerStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerStatisticsParam))]
+            public List<PlayerStatisticsParam> playerStatisticsParams;
 
-		public class AdminSetRemoveStatusRequestData : ServerSetRemoveStatusRequestData
-		{
-		}
+            [StringDataMember(code = GNParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
+            public string? log;
 
-		public class SetTagRequestData
-		{
-			[StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
-			public string characterId;
+        }
 
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        public class ServerSetPlayerStatisticsRequestData : SetPlayerStatisticsRequestData
+        {
+        }
 
-			[StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string value;
+        public class AdminSetPlayerStatisticsRequestData : ServerSetPlayerStatisticsRequestData
+        {
+        }
 
-		}
+        public class SetRemoveStatusRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		public class ServerSetTagRequestData : SetTagRequestData
-		{
-		}
+            [StringDataMember(code = GNParameterCode.Reason, isOptional = true, defaultValue = "")]
+            public string? reason;
 
-		public class AdminSetTagRequestData : ServerSetTagRequestData
-		{
-		}
+        }
 
-	}
+        public class ServerSetRemoveStatusRequestData : SetRemoveStatusRequestData
+        {
+        }
 
-	public partial class CharacterPlayerModels
-	{
-		public class CustomDataParam
-		{
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        public class AdminSetRemoveStatusRequestData : ServerSetRemoveStatusRequestData
+        {
+        }
 
-			[DataMember(code = GNParameterCode.Value)]
-			public object value;
+        public class SetTagRequestData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
-		}
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-		public class GroupMemberParam
-		{
-			[StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, mustNonNull = true)]
-			public string userId;
+            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string value;
 
-			[NumberDataMember(code = GNParameterCode.Role, mustInt = true)]
-			public long role;
+        }
 
-		}
+        public class ServerSetTagRequestData : SetTagRequestData
+        {
+        }
 
-		public class InfoRequestParam
-		{
-			[BooleanDataMember(code = GNParameterCode.CatalogId, isOptional = true, defaultValue = false)]
-			public bool? catalogId;
+        public class AdminSetTagRequestData : ServerSetTagRequestData
+        {
+        }
 
-			[BooleanDataMember(code = GNParameterCode.Owner, isOptional = true, defaultValue = false)]
-			public bool? owner;
+        public class GetCreateLeaderboardRequestData
+        {
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-			[BooleanDataMember(code = GNParameterCode.RemoveStatus, isOptional = true, defaultValue = false)]
-			public bool? removeStatus;
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-			[BooleanDataMember(code = GNParameterCode.Segments, isOptional = true, defaultValue = false)]
-			public bool? segments;
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-			[BooleanDataMember(code = GNParameterCode.CustomDatas, isOptional = true, defaultValue = false)]
-			public bool? customDatas;
+            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
 
-			[BooleanDataMember(code = GNParameterCode.DisplayName, isOptional = true, defaultValue = false)]
-			public bool? displayName;
+        }
 
-			[BooleanDataMember(code = GNParameterCode.Avatar, isOptional = true, defaultValue = false)]
-			public bool? avatar;
+        public class ServerGetCreateLeaderboardRequestData : GetCreateLeaderboardRequestData
+        {
+        }
 
-			[BooleanDataMember(code = GNParameterCode.TsCreate, isOptional = true, defaultValue = false)]
-			public bool? tsCreate;
+        public class AdminGetCreateLeaderboardRequestData : ServerGetCreateLeaderboardRequestData
+        {
+        }
 
-			[BooleanDataMember(code = GNParameterCode.Tags, isOptional = true, defaultValue = false)]
-			public bool? tags;
+        public class GetLastLoginLeaderboardRequestData
+        {
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
 
-			[BooleanDataMember(code = GNParameterCode.PlayerBan, isOptional = true, defaultValue = false)]
-			public bool? playerBan;
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
 
-			[BooleanDataMember(code = GNParameterCode.PlayerCurrencies, isOptional = true, defaultValue = false)]
-			public bool? playerCurrencies;
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-			[BooleanDataMember(code = GNParameterCode.PlayerStatistics, isOptional = true, defaultValue = false)]
-			public bool? playerStatistics;
+            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
 
-			[BooleanDataMember(code = GNParameterCode.PlayerDatas, isOptional = true, defaultValue = false)]
-			public bool? playerDatas;
+        }
 
-			[BooleanDataMember(code = GNParameterCode.IpAddressCreate, isOptional = true, defaultValue = false)]
-			public bool? ipAddressCreate;
+        public class ServerGetLastLoginLeaderboardRequestData : GetLastLoginLeaderboardRequestData
+        {
+        }
 
-			[BooleanDataMember(code = GNParameterCode.CountryCode, isOptional = true, defaultValue = false)]
-			public bool? countryCode;
+        public class AdminGetLastLoginLeaderboardRequestData : ServerGetLastLoginLeaderboardRequestData
+        {
+        }
 
-			[BooleanDataMember(code = GNParameterCode.TsLastLogin, isOptional = true, defaultValue = false)]
-			public bool? tsLastLogin;
+        public class GetStatisticsLogRequestData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
+            public List<string>? keys;
 
-			[BooleanDataMember(code = GNParameterCode.PlayerInventories, isOptional = true, defaultValue = false)]
-			public bool? playerInventories;
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true, isOptional = true)]
+            public string? characterId;
 
-			[BooleanDataMember(code = GNParameterCode.PlayerGroups, isOptional = true, defaultValue = false)]
-			public bool? playerGroups;
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-			[BooleanDataMember(code = GNParameterCode.PlayerFriends, isOptional = true, defaultValue = false)]
-			public bool? playerFriends;
+            [StringDataMember(code = GNParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
+            public string? token;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDataKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? playerDataKeys;
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencyKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? playerCurrencyKeys;
+        public class ServerGetStatisticsLogRequestData : GetStatisticsLogRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatisticsKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? playerStatisticsKeys;
+        public class AdminGetStatisticsLogRequestData : ServerGetStatisticsLogRequestData
+        {
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? customDataKeys;
+        public class GetCurrencyLogRequestData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
+            public List<string>? keys;
 
-			[GNArrayDataMember(code = GNParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
-			public List<string>? tagKeys;
+            [StringDataMember(code = GNParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true, isOptional = true)]
+            public string? characterId;
 
-			[GNArrayDataMember(code = GNParameterCode.CharacterCatalogIds, isOptional = true, elementCls = typeof(string))]
-			public List<string>? characterCatalogIds;
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
 
-			[GNArrayDataMember(code = GNParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
-			public List<string>? itemCatalogIds;
+            [StringDataMember(code = GNParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
+            public string? token;
 
-			[GNArrayDataMember(code = GNParameterCode.GroupCatalogIds, isOptional = true, elementCls = typeof(string))]
-			public List<string>? groupCatalogIds;
+        }
 
-			[GNArrayDataMember(code = GNParameterCode.FriendCatalogIds, isOptional = true, elementCls = typeof(string))]
-			public List<string>? friendCatalogIds;
+        public class ServerGetCurrencyLogRequestData : GetCurrencyLogRequestData
+        {
+        }
 
-		}
+        public class AdminGetCurrencyLogRequestData : ServerGetCurrencyLogRequestData
+        {
+        }
 
-		public class PlayerCurrencyParam
-		{
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+    }
 
-			[NumberDataMember(code = GNParameterCode.Amount)]
-			public double amount;
+    public partial class CharacterPlayerModels
+    {
+        public class CustomDataParam
+        {
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
 
-		}
+            [DataMember(code = GNParameterCode.Value)]
+            public object value;
 
-		public class PlayerDataParam
-		{
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        }
 
-			[DataMember(code = GNParameterCode.Value)]
-			public object value;
+        public class GroupMemberParam
+        {
+            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            public string userId;
 
-			[NumberDataMember(code = GNParameterCode.Permission, mustInt = true)]
-			public long permission;
+            [NumberDataMember(code = GNParameterCode.Role, mustInt = true)]
+            public int role;
 
-		}
+        }
 
-		public class PlayerStatisticsParam
-		{
-			[StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
-			public string key;
+        public class InfoRequestParam
+        {
+            [BooleanDataMember(code = GNParameterCode.CatalogId, isOptional = true, defaultValue = false)]
+            public bool? catalogId;
 
-			[NumberDataMember(code = GNParameterCode.Value)]
-			public double value;
+            [BooleanDataMember(code = GNParameterCode.Owner, isOptional = true, defaultValue = false)]
+            public bool? owner;
 
-		}
+            [BooleanDataMember(code = GNParameterCode.RemoveStatus, isOptional = true, defaultValue = false)]
+            public bool? removeStatus;
 
-	}
+            [BooleanDataMember(code = GNParameterCode.Segments, isOptional = true, defaultValue = false)]
+            public bool? segments;
 
-	public partial class CharacterPlayerModels
-	{
-		public class InfoResponseParameters
-		{
-			[StringDataMember(code = GNParameterCode.CatalogId, isOptional = true)]
-			public string? catalogId;
+            [BooleanDataMember(code = GNParameterCode.CustomDatas, isOptional = true, defaultValue = false)]
+            public bool? customDatas;
+
+            [BooleanDataMember(code = GNParameterCode.DisplayName, isOptional = true, defaultValue = false)]
+            public bool? displayName;
+
+            [BooleanDataMember(code = GNParameterCode.Avatar, isOptional = true, defaultValue = false)]
+            public bool? avatar;
+
+            [BooleanDataMember(code = GNParameterCode.TsCreate, isOptional = true, defaultValue = false)]
+            public bool? tsCreate;
+
+            [BooleanDataMember(code = GNParameterCode.Tags, isOptional = true, defaultValue = false)]
+            public bool? tags;
+
+            [BooleanDataMember(code = GNParameterCode.PlayerBan, isOptional = true, defaultValue = false)]
+            public bool? playerBan;
+
+            [BooleanDataMember(code = GNParameterCode.PlayerCurrencies, isOptional = true, defaultValue = false)]
+            public bool? playerCurrencies;
+
+            [BooleanDataMember(code = GNParameterCode.PlayerStatistics, isOptional = true, defaultValue = false)]
+            public bool? playerStatistics;
+
+            [BooleanDataMember(code = GNParameterCode.PlayerDatas, isOptional = true, defaultValue = false)]
+            public bool? playerDatas;
+
+            [BooleanDataMember(code = GNParameterCode.IpAddressCreate, isOptional = true, defaultValue = false)]
+            public bool? ipAddressCreate;
+
+            [BooleanDataMember(code = GNParameterCode.CountryCode, isOptional = true, defaultValue = false)]
+            public bool? countryCode;
+
+            [BooleanDataMember(code = GNParameterCode.TsLastLogin, isOptional = true, defaultValue = false)]
+            public bool? tsLastLogin;
+
+            [BooleanDataMember(code = GNParameterCode.PlayerInventories, isOptional = true, defaultValue = false)]
+            public bool? playerInventories;
+
+            [BooleanDataMember(code = GNParameterCode.PlayerGroups, isOptional = true, defaultValue = false)]
+            public bool? playerGroups;
+
+            [BooleanDataMember(code = GNParameterCode.PlayerFriends, isOptional = true, defaultValue = false)]
+            public bool? playerFriends;
+
+            [GNArrayDataMember(code = GNParameterCode.PlayerDataKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? playerDataKeys;
+
+            [GNArrayDataMember(code = GNParameterCode.PlayerCurrencyKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? playerCurrencyKeys;
+
+            [GNArrayDataMember(code = GNParameterCode.PlayerStatisticsKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? playerStatisticsKeys;
+
+            [GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? customDataKeys;
+
+            [GNArrayDataMember(code = GNParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? tagKeys;
+
+            [GNArrayDataMember(code = GNParameterCode.CharacterCatalogIds, isOptional = true, elementCls = typeof(string))]
+            public List<string>? characterCatalogIds;
+
+            [GNArrayDataMember(code = GNParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
+            public List<string>? itemCatalogIds;
+
+            [GNArrayDataMember(code = GNParameterCode.GroupCatalogIds, isOptional = true, elementCls = typeof(string))]
+            public List<string>? groupCatalogIds;
+
+            [GNArrayDataMember(code = GNParameterCode.FriendCatalogIds, isOptional = true, elementCls = typeof(string))]
+            public List<string>? friendCatalogIds;
+
+        }
+
+        public class PlayerCurrencyParam
+        {
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
+
+            [NumberDataMember(code = GNParameterCode.Amount)]
+            public double amount;
+
+        }
+
+        public class PlayerDataParam
+        {
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
+
+            [DataMember(code = GNParameterCode.Value)]
+            public object value;
+
+        }
+
+        public class PlayerStatisticsParam
+        {
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
+
+            [NumberDataMember(code = GNParameterCode.Value)]
+            public double value;
+
+        }
+
+    }
+
+    public partial class CharacterPlayerModels
+    {
+        public class InfoResponseParameters
+        {
+            [StringDataMember(code = GNParameterCode.CatalogId, isOptional = true)]
+            public string? catalogId;
 
             [GNHashtableDataMember(code = GNParameterCode.Owner, isOptional = true)]
             public GenericModels.OwnerItem? owner;
@@ -1081,94 +1199,196 @@
             public GenericModels.RemoveStatusItem? removeStatus;
 
             [GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
-			public List<string>? segments;
+            public List<string>? segments;
 
-			[GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
-			public List<GenericModels.DataItem>? customDatas;
+            [GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+            public List<GenericModels.DataItem>? customDatas;
 
-			[StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
-			public string? displayName;
+            [StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+            public string? displayName;
 
-			[GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
-			public GenericModels.AvatarItem? avatar;
+            [GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+            public GenericModels.AvatarItem? avatar;
 
-			[NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
-			public long? tsCreate;
+            [NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+            public long? tsCreate;
 
-			[GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
-			public List<GenericModels.TagItem>? tags;
+            [GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+            public List<GenericModels.TagItem>? tags;
 
-			[GNHashtableDataMember(code = GNParameterCode.PlayerBan, isOptional = true)]
-			public GenericModels.BanItem? playerBan;
+            [GNHashtableDataMember(code = GNParameterCode.PlayerBan, isOptional = true)]
+            public GenericModels.BanItem? playerBan;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
-			public List<GenericModels.DataItem>? playerDatas;
+            [GNArrayDataMember(code = GNParameterCode.PlayerDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+            public List<GenericModels.DataItem>? playerDatas;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerCurrencies, isOptional = true, elementCls = typeof(GenericModels.CurrencyItem))]
-			public List<GenericModels.CurrencyItem>? playerCurrencies;
+            [GNArrayDataMember(code = GNParameterCode.PlayerCurrencies, isOptional = true, elementCls = typeof(GenericModels.CurrencyItem))]
+            public List<GenericModels.CurrencyItem>? playerCurrencies;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
-			public List<GenericModels.StatisticsItem>? playerStatistics;
+            [GNArrayDataMember(code = GNParameterCode.PlayerStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
+            public List<GenericModels.StatisticsItem>? playerStatistics;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerInventories, isOptional = true, elementCls = typeof(GenericModels.InventoryItem))]
-			public List<GenericModels.InventoryItem>? playerInventories;
+            [GNArrayDataMember(code = GNParameterCode.PlayerInventories, isOptional = true, elementCls = typeof(GenericModels.InventoryItem))]
+            public List<GenericModels.InventoryItem>? playerInventories;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerGroups, isOptional = true, elementCls = typeof(GenericModels.GroupItem))]
-			public List<GenericModels.GroupItem>? playerGroups;
+            [GNArrayDataMember(code = GNParameterCode.PlayerGroups, isOptional = true, elementCls = typeof(GenericModels.GroupItem))]
+            public List<GenericModels.GroupItem>? playerGroups;
 
-			[GNArrayDataMember(code = GNParameterCode.PlayerFriends, isOptional = true, elementCls = typeof(GenericModels.FriendItem))]
-			public List<GenericModels.FriendItem>? playerFriends;
+            [GNArrayDataMember(code = GNParameterCode.PlayerFriends, isOptional = true, elementCls = typeof(GenericModels.FriendItem))]
+            public List<GenericModels.FriendItem>? playerFriends;
 
-			[NumberDataMember(code = GNParameterCode.TsLastLogin, isOptional = true)]
-			public long? tsLastLogin;
+            [NumberDataMember(code = GNParameterCode.TsLastLogin, isOptional = true)]
+            public long? tsLastLogin;
 
-			[StringDataMember(code = GNParameterCode.IpAddressCreate, isOptional = true)]
-			public string? ipAddressCreate;
+            [StringDataMember(code = GNParameterCode.IpAddressCreate, isOptional = true)]
+            public string? ipAddressCreate;
 
-			[StringDataMember(code = GNParameterCode.CountryCode, isOptional = true)]
-			public string? countryCode;
-		}
+            [StringDataMember(code = GNParameterCode.CountryCode, isOptional = true)]
+            public string? countryCode;
+        }
 
-		public class CharacterPlayerResponseData
-		{
-			[GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
-			public InfoResponseParameters infoResponseParameters;
-
-		}
-
-		public class CharacterPlayerWithCharacterIdResponseData : CharacterPlayerResponseData
+        public class CharacterPlayerResponseData
         {
-			[StringDataMember(code = GNParameterCode.CharacterId)]
-			public string characterId;
+            [GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+            public InfoResponseParameters infoResponseParameters;
 
-		}
+        }
 
-		public class CharacterPlayerLeaderboardResponseData : CharacterPlayerWithCharacterIdResponseData
-		{
-			[NumberDataMember(code = GNParameterCode.Position)]
-			public int position;
+        public class CharacterPlayerWithCharacterIdResponseData : CharacterPlayerResponseData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId)]
+            public string characterId;
 
-		}
+        }
 
-		public class GetStatisticsLeaderboardResponseData
-		{
-			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLeaderboardResponseData))]
-			public List<CharacterPlayerLeaderboardResponseData> results;
+        public class CharacterPlayerLeaderboardResponseData : CharacterPlayerWithCharacterIdResponseData
+        {
+            [NumberDataMember(code = GNParameterCode.Position)]
+            public int position;
 
-		}
+            [NumberDataMember(code = GNParameterCode.BackupValue, isOptional = true)]
+            public double? backupValue;
 
-		public class MasterPlayersWithCharacterIdResponseData
-		{
-			[GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerWithCharacterIdResponseData))]
-			public List<CharacterPlayerWithCharacterIdResponseData> results;
+        }
 
-		}
+        public class CharacterPlayerLogResponseData
+        {
+            [StringDataMember(code = GNParameterCode.CharacterId)]
+            public string characterId;
 
-		public class EmptyResponseData
-		{
+            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            public long tsCreate;
 
-		}
+            [NumberDataMember(code = GNParameterCode.Log)]
+            public string log;
 
-	}
+            [NumberDataMember(code = GNParameterCode.Key)]
+            public string key;
+
+            [NumberDataMember(code = GNParameterCode.Amount)]
+            public double amount;
+
+            [NumberDataMember(code = GNParameterCode.StartValue)]
+            public double startValue;
+
+            [NumberDataMember(code = GNParameterCode.FinalValue)]
+            public double finalValue;
+
+        }
+
+        public class GetStatisticsLeaderboardResponseData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLeaderboardResponseData))]
+            public List<CharacterPlayerLeaderboardResponseData> results;
+
+            [NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+            public long? tsCreate;
+
+        }
+
+        public class CharacterPlayersWithCharacterIdResponseData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerWithCharacterIdResponseData))]
+            public List<CharacterPlayerWithCharacterIdResponseData> results;
+
+        }
+
+        public class GetCurrencyLeaderboardRequestData
+        {
+            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string key;
+
+            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
+
+            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
+
+            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
+
+            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
+
+            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            public string? catalogId;
+
+        }
+
+        public class ServerGetCurrencyLeaderboardRequestData : GetCurrencyLeaderboardRequestData
+        {
+        }
+
+        public class AdminGetCurrencyLeaderboardRequestData : ServerGetCurrencyLeaderboardRequestData
+        {
+        }
+
+        public class GetCurrencyLeaderboardResponseData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLeaderboardResponseData))]
+            public List<CharacterPlayerLeaderboardResponseData> results;
+
+        }
+
+        public class GetCreateLeaderboardResponseData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLeaderboardResponseData))]
+            public List<CharacterPlayerLeaderboardResponseData> results;
+
+        }
+
+        public class GetLastLoginLeaderboardResponseData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLeaderboardResponseData))]
+            public List<CharacterPlayerLeaderboardResponseData> results;
+
+        }
+
+        public class GetStatisticsLogResponseData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLogResponseData))]
+            public List<CharacterPlayerLogResponseData> results;
+
+            [StringDataMember(code = GNParameterCode.Token, isOptional = true)]
+            public string? token;
+
+        }
+
+        public class GetCurrencyLogResponseData
+        {
+            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(CharacterPlayerLogResponseData))]
+            public List<CharacterPlayerLogResponseData> results;
+
+            [StringDataMember(code = GNParameterCode.Token, isOptional = true)]
+            public string? token;
+
+        }
+
+        public class EmptyResponseData
+        {
+
+        }
+
+    }
 
 }

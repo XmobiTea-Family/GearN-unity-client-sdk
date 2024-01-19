@@ -5,65 +5,61 @@
     using System.Text;
 
     /// <summary>
-    /// The GNData array, it store Array can be use to request or response
+    /// Represents a GNData array, which can be used for request or response data.
     /// </summary>
     public class GNArray : GNData
     {
         /// <summary>
-        /// Builder for GNArray
+        /// A builder class to help construct a GNArray.
         /// </summary>
         public class Builder
         {
             /// <summary>
-            /// The origin array
+            /// The internal list representing the array.
             /// </summary>
             private List<object> array;
 
             /// <summary>
-            /// Add a value to origin array
+            /// Adds a value to the internal array.
             /// </summary>
-            /// <param name="value">The value type must is string, bool, number, Map or Array</param>
-            /// <returns></returns>
+            /// <param name="value">The value to add, must be a supported type.</param>
+            /// <returns>The current Builder instance.</returns>
             public Builder add(object value)
             {
                 this.array.Add(value);
-
                 return this;
             }
 
             /// <summary>
-            /// Add some values to origin array
+            /// Adds a collection of values to the internal array.
             /// </summary>
-            /// <param name="list">The element value type must is type string, bool, number, Map or Array</param>
-            /// <returns></returns>
+            /// <param name="list">The list of values to add.</param>
+            /// <returns>The current Builder instance.</returns>
             public Builder addAll(System.Collections.IList list)
             {
                 foreach (var o in list)
                 {
                     this.add(o);
                 }
-
                 return this;
             }
 
             /// <summary>
-            /// Build GNArray
+            /// Builds and returns the GNArray.
             /// </summary>
-            /// <returns></returns>
+            /// <returns>The constructed GNArray instance.</returns>
             public GNArray build()
             {
-                var awnser = new GNArray();
-
+                var answer = new GNArray();
                 foreach (var o in this.array)
                 {
-                    awnser.add(o);
+                    answer.add(o);
                 }
-
-                return awnser;
+                return answer;
             }
 
             /// <summary>
-            /// Constructor for GNArray builder
+            /// Initializes a new instance of the Builder class.
             /// </summary>
             public Builder()
             {
@@ -72,12 +68,12 @@
         }
 
         /// <summary>
-        /// The GN array
+        /// The internal array storing the data.
         /// </summary>
         private List<object> array;
 
         /// <summary>
-        /// The constructor for GNArray
+        /// Initializes a new instance of the GNArray class.
         /// </summary>
         public GNArray()
         {
@@ -85,76 +81,114 @@
         }
 
         /// <summary>
-        /// Add a value
+        /// Adds a value to the GNArray.
         /// </summary>
-        /// <param name="value">The </param>
+        /// <param name="value">The value to add.</param>
         public void add(object value)
         {
             this.array.Add(GNData.createUseDataFromOriginData(value));
         }
 
+        /// <summary>
+        /// Gets or sets a value in the GNArray by index.
+        /// </summary>
+        /// <param name="index">The index of the value.</param>
+        /// <returns>The value at the specified index.</returns>
+        public object this[int index]
+        {
+            get => this.get<object>(index);
+            set => this.array[index] = GNData.createUseDataFromOriginData(value);
+        }
+
+        /// <summary>
+        /// Gets all values in the GNArray as a collection.
+        /// </summary>
+        /// <returns>A collection of all values in the GNArray.</returns>
         public ICollection<object> values()
         {
             return this.array;
         }
 
+        /// <summary>
+        /// Clears all elements in the GNArray.
+        /// </summary>
         public void clear()
         {
             this.array.Clear();
         }
 
+        /// <summary>
+        /// Removes a value at the specified index.
+        /// </summary>
+        /// <param name="index">The index of the value to remove.</param>
+        /// <returns>True if the value was removed.</returns>
         public bool remove(int index)
         {
             this.array.RemoveAt(index);
-
             return true;
         }
 
+        /// <summary>
+        /// Gets the number of elements in the GNArray.
+        /// </summary>
+        /// <returns>The number of elements.</returns>
         public int count()
         {
             return this.array.Count;
         }
 
+        /// <summary>
+        /// Gets a value at the specified index.
+        /// </summary>
+        /// <typeparam name="T">The expected type of the value.</typeparam>
+        /// <param name="k">The index.</param>
+        /// <param name="defaultValue">The default value to return if the index is invalid.</param>
+        /// <returns>The value at the index or the default value.</returns>
         protected object get<T>(int k, T defaultValue = default(T))
         {
             if (k < 0 || k > this.array.Count - 1) return defaultValue;
 
             var value = this.array[k];
-
             if (value == null) return defaultValue;
 
-            if (value is T t)
-            {
-                return t;
-            }
-
-            return value;
+            return value is T t ? t : value;
         }
 
+        /// <summary>
+        /// Converts the GNArray to an array of the specified type.
+        /// </summary>
+        /// <typeparam name="T">The target type.</typeparam>
+        /// <returns>An array of the target type.</returns>
         public T[] toArray<T>()
         {
             var answer = new T[this.array.Count];
-
             for (var i = 0; i < this.array.Count; i++)
             {
                 answer[i] = (T)this.customGet(i);
             }
-
             return answer;
         }
 
+        /// <summary>
+        /// Converts the GNArray to a list of the specified type.
+        /// </summary>
+        /// <typeparam name="T">The target type.</typeparam>
+        /// <returns>A list of the target type.</returns>
         public IList<T> toList<T>()
         {
             var answer = new List<T>();
-
             for (var i = 0; i < this.array.Count; i++)
             {
                 answer.Add((T)this.customGet(i));
             }
-
             return answer;
         }
 
+        /// <summary>
+        /// Helper method to retrieve and convert a value at a specified index based on its type.
+        /// </summary>
+        /// <param name="k">The index of the value.</param>
+        /// <returns>The converted value or null if the index is invalid.</returns>
         private object customGet(int k)
         {
             var obj = this.get<object>(k);
@@ -176,56 +210,89 @@
             return obj;
         }
 
+        /// <summary>
+        /// Retrieves a byte value at the specified index.
+        /// </summary>
         public byte getByte(int k, byte defaultValue = 0)
         {
             return Convert.ToByte(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves an sbyte value at the specified index.
+        /// </summary>
         public sbyte getSByte(int k, sbyte defaultValue = 0)
         {
             return Convert.ToSByte(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves a short value at the specified index.
+        /// </summary>
         public short getShort(int k, short defaultValue = 0)
         {
             return Convert.ToInt16(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves an int value at the specified index.
+        /// </summary>
         public int getInt(int k, int defaultValue = 0)
         {
             return Convert.ToInt32(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves a float value at the specified index.
+        /// </summary>
         public float getFloat(int k, float defaultValue = 0)
         {
             return Convert.ToSingle(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves a long value at the specified index.
+        /// </summary>
         public long getLong(int k, long defaultValue = 0)
         {
             return Convert.ToInt64(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves a double value at the specified index.
+        /// </summary>
         public double getDouble(int k, double defaultValue = 0)
         {
             return Convert.ToDouble(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves a bool value at the specified index.
+        /// </summary>
         public bool getBool(int k, bool defaultValue = false)
         {
             return Convert.ToBoolean(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves a string value at the specified index.
+        /// </summary>
         public string getString(int k, string defaultValue = null)
         {
             return Convert.ToString(this.get(k, defaultValue));
         }
 
+        /// <summary>
+        /// Retrieves an object value at the specified index.
+        /// </summary>
         public object getObject(int k, object defaultValue = null)
         {
             return this.get(k, defaultValue);
         }
 
+        /// <summary>
+        /// Retrieves an array of the specified type at the specified index.
+        /// </summary>
         public T[] getArray<T>(int k, T[] defaultValue = null)
         {
             var value0 = this.getGNArray(k);
@@ -237,6 +304,9 @@
             return defaultValue;
         }
 
+        /// <summary>
+        /// Retrieves a list of the specified type at the specified index.
+        /// </summary>
         public IList<T> getList<T>(int k, IList<T> defaultValue = null)
         {
             var value0 = this.getGNArray(k);
@@ -248,16 +318,25 @@
             return defaultValue;
         }
 
+        /// <summary>
+        /// Retrieves a GNArray value at the specified index.
+        /// </summary>
         public GNArray getGNArray(int k, GNArray defaultValue = null)
         {
             return (GNArray)this.get(k, defaultValue);
         }
 
+        /// <summary>
+        /// Retrieves a GNHashtable value at the specified index.
+        /// </summary>
         public GNHashtable getGNHashtable(int k, GNHashtable defaultValue = null)
         {
             return (GNHashtable)this.get(k, defaultValue);
         }
 
+        /// <summary>
+        /// Converts the GNArray into a data object suitable for serialization.
+        /// </summary>
         public override object toData()
         {
             var answer = new List<object>();
@@ -270,6 +349,9 @@
             return answer;
         }
 
+        /// <summary>
+        /// Converts the GNArray into a string representation.
+        /// </summary>
         public override string toString()
         {
             var stringBuilder = new StringBuilder();
@@ -292,6 +374,9 @@
             return stringBuilder.ToString();
         }
 
+        /// <summary>
+        /// Returns the string representation of the GNArray.
+        /// </summary>
         public override string ToString()
         {
             return this.toString();

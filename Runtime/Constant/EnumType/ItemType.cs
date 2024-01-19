@@ -1,10 +1,10 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-	public enum ItemType
-	{
-		NonComsumable = 0,
-		Consumable = 1,
+    public enum ItemType
+    {
+        NonStackable = 1,
+        Stackable = 2,
 
-	}
+    }
 
 }

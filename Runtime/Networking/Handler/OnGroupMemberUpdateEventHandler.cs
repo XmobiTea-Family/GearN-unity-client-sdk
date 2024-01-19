@@ -7,23 +7,42 @@
     using XmobiTea.GN.Entity.Models;
     using XmobiTea.GN.Helper;
 
+    /// <summary>
+    /// Represents the data structure for updating group members.
+    /// </summary>
     public class GroupMemberUpdate
     {
+        /// <summary>
+        /// A list of members associated with the group.
+        /// </summary>
         [GNArrayDataMember(code = GNParameterCode.Members, elementCls = typeof(GenericModels.FriendItem))]
         public List<GenericModels.MemberItem> members;
     }
 
+    /// <summary>
+    /// Handles the "OnGroupMemberUpdate" event.
+    /// </summary>
     public class OnGroupMemberUpdateEventHandler : IServerEventHandler
     {
+        /// <summary>
+        /// Event triggered when group members are updated.
+        /// </summary>
         public static Action<GroupMemberUpdate> onUpdate;
 
+        /// <summary>
+        /// Gets the event code associated with this handler.
+        /// </summary>
+        /// <returns>The event code for "OnGroupMemberUpdate".</returns>
         public int getEventCode() => EventCode.OnGroupMemberUpdate;
 
+        /// <summary>
+        /// Handles the "OnGroupMemberUpdate" operation event.
+        /// Deserializes the event parameters and invokes the update action.
+        /// </summary>
+        /// <param name="operationEvent">The operation event containing the parameters for the group member update.</param>
         public void handle(OperationEvent operationEvent)
         {
             OnGroupMemberUpdateEventHandler.onUpdate?.Invoke(ConverterService.deserializeObject<GroupMemberUpdate>(operationEvent.getParameters()));
         }
-
     }
-
 }

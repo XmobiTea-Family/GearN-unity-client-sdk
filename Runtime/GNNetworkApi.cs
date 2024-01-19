@@ -1,26 +1,106 @@
 ﻿namespace XmobiTea.GN
 {
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Entity.Response;
-
     using System;
+    using System.Threading.Tasks;
+    using XmobiTea.GN.Entity.Response;
     using XmobiTea.GN.Networking;
-    using XmobiTea.GN.Constant;
-    using System.Collections.Generic;
-    using XmobiTea.GN.Entity;
 
     public static partial class GNNetwork
     {
-        public static void SyncTs(Action<long> onResponse = null)
+        /// <summary>
+        /// Synchronizes the timestamp by calling a peer method and invokes the callback with the result.
+        /// </summary>
+        /// <param name="onResponse">An optional callback that receives the synchronized timestamp.</param>
+        public static void syncTs(Action<long> onResponse = null)
         {
-            peer.syncTs(onResponse);
+            // Delegate the synchronization to the peer's syncTs method.
+            GNNetwork.peer.syncTs(onResponse);
         }
 
-        //public static void AccountLogin(string username, string password, Action<LoginOperationResponse> onResponse = null)
-        //{
-        //    peer.accountLogin(username, password, onResponse);
-        //}
+        /// <summary>
+        /// Asynchronously synchronizes the timestamp and returns the result as a Task.
+        /// </summary>
+        /// <returns>A Task that resolves to the synchronized timestamp.</returns>
+        public static Task<long> syncTsAsync()
+        {
+            // Create a TaskCompletionSource to manage the asynchronous operation.
+            var taskCompletionSource = new TaskCompletionSource<long>();
+
+            // Call the syncTs method and use the callback to set the Task result.
+            GNNetwork.syncTs(response =>
+            {
+                // Set the result of the Task once the callback is invoked.
+                taskCompletionSource.SetResult(response);
+            });
+
+            // Return the Task to the caller, allowing them to await the result.
+            return taskCompletionSource.Task;
+        }
+
+        /// <summary>
+        /// Validate a GN authToken
+        /// </summary>
+        /// <param name="authToken"></param>
+        /// <param name="onResponse"></param>
+        public static void getAuthInfo(string authToken, Action<GetAuthInfoResponse> onResponse = null)
+        {
+            GNNetwork.peer.getAuthInfo(authToken, onResponse);
+        }
+
+        /// <summary>
+        /// Asynchronously validate a GN authToken
+        /// </summary>
+        /// <param name="authToken"></param>
+        /// <returns></returns>
+        public static Task<GetAuthInfoResponse> getAuthInfoAsync(string authToken)
+        {
+            // Create a TaskCompletionSource to manage the asynchronous operation.
+            var taskCompletionSource = new TaskCompletionSource<GetAuthInfoResponse>();
+
+            // Call the syncTs method and use the callback to set the Task result.
+            GNNetwork.getAuthInfo(authToken, response =>
+            {
+                // Set the result of the Task once the callback is invoked.
+                taskCompletionSource.SetResult(response);
+            });
+
+            // Return the Task to the caller, allowing them to await the result.
+            return taskCompletionSource.Task;
+        }
+
+        /// <summary>
+        /// Upload file to server
+        /// </summary>
+        /// <param name="fileId">the file id</param>
+        /// <param name="content">content byte of this file</param>
+        /// <param name="filename">the full file name</param>
+        /// <param name="mimetype">the mimetype of file</param>
+        /// <param name="onResponse">response</param>
+        public static void uploadFile(string fileId, byte[] content, string filename, string mimetype, Action<UploadFileResponse> onResponse)
+        {
+            GNNetwork.peer.uploadFile(fileId, content, filename, mimetype, onResponse);
+        }
+
+        public static Task<UploadFileResponse> uploadFileAsync(string fileId, byte[] content, string filename, string mimetype)
+        {
+            // Create a TaskCompletionSource to manage the asynchronous operation.
+            var taskCompletionSource = new TaskCompletionSource<UploadFileResponse>();
+
+            // Call the syncTs method and use the callback to set the Task result.
+            GNNetwork.uploadFile(fileId, content, filename, mimetype, response =>
+            {
+                // Set the result of the Task once the callback is invoked.
+                taskCompletionSource.SetResult(response);
+            });
+
+            // Return the Task to the caller, allowing them to await the result.
+            return taskCompletionSource.Task;
+        }
+
+        public static string getDownloadFileUrl(string downloadToken)
+        {
+            return GNNetwork.gnServerSettings.getHttpUrl() + "/" + NetworkingPeer.DOWNLOAD_FILE + "/" + downloadToken;
+        }
 
     }
-
 }

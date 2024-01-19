@@ -1,11 +1,13 @@
 ﻿namespace XmobiTea.GN.Entity
 {
     using System.Text;
-
-    using XmobiTea.GN.Constant;
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Constant;
     using XmobiTea.GN.Helper;
 
+    /// <summary>
+    /// Represents an operation response, encapsulating details such as operation code, return code, debug messages, and parameters.
+    /// </summary>
     public class OperationResponse
     {
         private int operationCode;
@@ -17,6 +19,12 @@
 
         private InvalidMember[] invalidMembers;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OperationResponse"/> class.
+        /// </summary>
+        /// <param name="operationCode">The operation code associated with the response.</param>
+        /// <param name="responseId">The response ID.</param>
+        /// <param name="encrypted">Indicates whether the response is encrypted.</param>
         public OperationResponse(int operationCode, int responseId, bool encrypted = true)
         {
             this.operationCode = operationCode;
@@ -26,119 +34,159 @@
             this.debugMessage = null;
         }
 
-        public int getOperationCode()
-        {
-            return this.operationCode;
-        }
+        /// <summary>
+        /// Gets the operation code of the response.
+        /// </summary>
+        public int getOperationCode() => this.operationCode;
 
-        public int getReturnCode()
-        {
-            return this.returnCode;
-        }
+        /// <summary>
+        /// Gets the return code of the response.
+        /// </summary>
+        public int getReturnCode() => this.returnCode;
 
-        public GNHashtable getParameters()
-        {
-            return this.parameters;
-        }
+        /// <summary>
+        /// Gets the parameters associated with the response.
+        /// </summary>
+        public GNHashtable getParameters() => this.parameters;
 
-        public bool isEncrypted()
-        {
-            return this.encrypted;
-        }
+        /// <summary>
+        /// Determines whether the response is encrypted.
+        /// </summary>
+        public bool isEncrypted() => this.encrypted;
 
-        public int getResponseId()
-        {
-            return this.responseId;
-        }
+        /// <summary>
+        /// Gets the response ID of the operation.
+        /// </summary>
+        public int getResponseId() => this.responseId;
 
-        public string getDebugMessage()
-        {
-            return this.debugMessage;
-        }
+        /// <summary>
+        /// Gets the debug message, if any.
+        /// </summary>
+        public string getDebugMessage() => this.debugMessage;
 
-        public InvalidMember[] getInvalidMembers()
-        {
-            return this.invalidMembers;
-        }
+        /// <summary>
+        /// Gets the invalid members, if any, associated with the response.
+        /// </summary>
+        public InvalidMember[] getInvalidMembers() => this.invalidMembers;
 
-        public bool hasError()
-        {
-            return this.getReturnCode() != ReturnCode.Ok;
-        }
+        /// <summary>
+        /// Determines whether the response has an error based on the return code.
+        /// </summary>
+        public bool hasError() => this.getReturnCode() != ReturnCode.Ok;
 
+        /// <summary>
+        /// Sets the return code for the response.
+        /// </summary>
+        /// <param name="returnCode">The return code to set.</param>
+        /// <returns>The updated <see cref="OperationResponse"/> instance.</returns>
         public OperationResponse setReturnCode(int returnCode)
         {
             this.returnCode = returnCode;
             return this;
         }
 
+        /// <summary>
+        /// Sets the debug message for the response.
+        /// </summary>
+        /// <param name="debugMessage">The debug message to set.</param>
+        /// <returns>The updated <see cref="OperationResponse"/> instance.</returns>
         public OperationResponse setDebugMessage(string debugMessage)
         {
             this.debugMessage = debugMessage;
             return this;
         }
 
+        /// <summary>
+        /// Adds or updates a parameter for the response.
+        /// </summary>
+        /// <param name="key">The parameter key.</param>
+        /// <param name="value">The parameter value.</param>
+        /// <returns>The updated <see cref="OperationResponse"/> instance.</returns>
         public OperationResponse setParameter(string key, object value)
         {
             if (this.parameters == null) this.parameters = new GNHashtable();
-
             this.parameters.add(key, value);
-
             return this;
         }
 
+        /// <summary>
+        /// Sets the parameters for the response.
+        /// </summary>
+        /// <param name="parameters">The parameters to set.</param>
+        /// <returns>The updated <see cref="OperationResponse"/> instance.</returns>
         public OperationResponse setParameters(GNHashtable parameters)
         {
             this.parameters = parameters;
             return this;
         }
 
+        /// <summary>
+        /// Sets whether the response is encrypted.
+        /// </summary>
+        /// <param name="encrypted">True if the response should be encrypted; otherwise false.</param>
+        /// <returns>The updated <see cref="OperationResponse"/> instance.</returns>
         public OperationResponse setEncrypted(bool encrypted)
         {
             this.encrypted = encrypted;
             return this;
         }
 
+        /// <summary>
+        /// Sets the invalid members for the response.
+        /// </summary>
+        /// <param name="invalidMembers">The invalid members to set.</param>
+        /// <returns>The updated <see cref="OperationResponse"/> instance.</returns>
         public OperationResponse setInvalidMembers(InvalidMember[] invalidMembers)
         {
             this.invalidMembers = invalidMembers;
             return this;
         }
 
+        /// <summary>
+        /// Converts the operation response to a string representation.
+        /// </summary>
+        /// <returns>A string representation of the operation response.</returns>
         public string toString()
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: " + CodeHelper.getOperationCodeName(this.operationCode) + ", responseId: " + this.responseId + ", returnCode " + CodeHelper.getReturnCodeName(this.returnCode));
+            stringBuilder.Append("Code: ")
+                         .Append(CodeHelper.getOperationCodeName(this.operationCode))
+                         .Append(", responseId: ")
+                         .Append(this.responseId)
+                         .Append(", returnCode: ")
+                         .Append(CodeHelper.getReturnCodeName(this.returnCode));
 
-            if (this.returnCode == ReturnCode.Ok) stringBuilder.Append(", parameters " + this.parameters);
+            if (this.returnCode == ReturnCode.Ok)
+            {
+                stringBuilder.Append(", parameters: ").Append(this.parameters);
+            }
             else if (this.returnCode == ReturnCode.InvalidRequestParameters)
             {
                 if (this.invalidMembers != null)
                 {
-                    var invalidStr = string.Empty;
-
-                    foreach (var invalidMember in this.invalidMembers)
-                    {
-                        invalidStr += invalidMember;
-                    }
-
-                    stringBuilder.Append(", invalidMembers " + invalidStr);
+                    var invalidStr = string.Join(", ", this.invalidMembers);
+                    stringBuilder.Append(", invalidMembers: ").Append(invalidStr);
                 }
-                else stringBuilder.Append(", invalidMembers " + this.invalidMembers);
+                else
+                {
+                    stringBuilder.Append(", invalidMembers: null");
+                }
             }
-            else stringBuilder.Append(", debugMessage " + this.debugMessage);
+            else
+            {
+                stringBuilder.Append(", debugMessage: ").Append(this.debugMessage);
+            }
 
-            stringBuilder.Append(", encrypted " + this.encrypted);
+            stringBuilder.Append(", encrypted: ").Append(this.encrypted);
 
             return stringBuilder.ToString();
         }
 
-        public override string ToString()
-        {
-            return this.toString();
-        }
-
+        /// <summary>
+        /// Returns a string that represents the current operation response.
+        /// </summary>
+        /// <returns>A string representation of the operation response.</returns>
+        public override string ToString() => this.toString();
     }
-
 }

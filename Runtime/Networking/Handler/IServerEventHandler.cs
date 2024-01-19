@@ -3,23 +3,23 @@
     using XmobiTea.GN.Entity;
 
     /// <summary>
-    /// The interface, some class want handler event need implement IServerEventHandler
+    /// Defines an interface for handling server events. 
+    /// Classes that implement this interface must define how to handle specific events.
     /// </summary>
     public interface IServerEventHandler
     {
         /// <summary>
-        /// Get the event code, the event code should be store in EventCode file
+        /// Gets the event code associated with the handler. 
+        /// The event codes should be defined in the EventCode file.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An integer representing the event code.</returns>
         int getEventCode();
 
         /// <summary>
-        /// handle function
-        /// How to handle this operation
+        /// Handles the specified operation event.
+        /// This method defines how to process the provided event.
         /// </summary>
-        /// <param name="operationEvent">the operation event need handle</param>
+        /// <param name="operationEvent">The operation event that needs to be handled.</param>
         void handle(OperationEvent operationEvent);
-
     }
-
 }

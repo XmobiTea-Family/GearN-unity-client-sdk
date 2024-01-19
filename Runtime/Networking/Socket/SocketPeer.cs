@@ -8,34 +8,50 @@
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Logger;
 
+    /// <summary>
+    /// Manages socket communication for the application.
+    /// </summary>
     internal class SocketPeer : PeerBase
     {
         private NetworkingSocketPeerBase networkingSocketPeerBase;
-
-
         private Dictionary<int, List<IServerEventHandler>> serverEventHandlersDict;
-
         private Action<OperationEvent> _onEventHandler;
 
+        /// <summary>
+        /// Gets the client ID of the socket connection.
+        /// </summary>
+        /// <returns>The client ID as a string.</returns>
         internal string getClientId()
         {
             return this.networkingSocketPeerBase?.clientId;
         }
 
+        /// <summary>
+        /// Checks if the socket connection is established.
+        /// </summary>
+        /// <returns>True if connected, otherwise false.</returns>
         internal bool isConnected()
         {
             return this.networkingSocketPeerBase.isWsConnected;
         }
 
+        /// <summary>
+        /// Sends an authentication request via the socket.
+        /// </summary>
         internal void sendRequestAuthSocket()
         {
             this.networkingSocketPeerBase.sendRequestAuthSocket();
         }
 
+        /// <summary>
+        /// Subscribes server event handlers by scanning the current assembly.
+        /// </summary>
         void subscriberServerEventHandler()
         {
-            if (this.serverEventHandlersDict == null) this.serverEventHandlersDict = new Dictionary<int, List<IServerEventHandler>>();
-            else this.serverEventHandlersDict.Clear();
+            if (this.serverEventHandlersDict == null)
+                this.serverEventHandlersDict = new Dictionary<int, List<IServerEventHandler>>();
+            else
+                this.serverEventHandlersDict.Clear();
 
             var type = typeof(IServerEventHandler);
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -65,6 +81,9 @@
             }
         }
 
+        /// <summary>
+        /// Initializes the socket object with server settings.
+        /// </summary>
         internal override void initGNSocketObject()
         {
             var gnServerSettings = GNNetwork.gnServerSettings;
@@ -72,14 +91,19 @@
 
             this.isUse = gnServerSettings.isUseSocket();
 
+            if (!this.isUse) return;
+
             var peerSocketVersion = gnServerSettings.getPeerSocketVersion();
 
             if (peerSocketVersion == PeerSocketVersion.V3)
             {
+#if UNITY_USING_BEST_HTTP
                 this.networkingSocketPeerBase = new NetworkingPeerSocketV3();
+#endif
             }
             else
             {
+#if UNITY_USING_BEST_HTTP
                 this.networkingSocketPeerBase = new NetworkingPeerSocketV2();
 
                 if (peerSocketVersion == PeerSocketVersion.V2_v2)
@@ -90,7 +114,10 @@
                 {
                     ((NetworkingPeerSocketV2)this.networkingSocketPeerBase).setServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v3);
                 }
+#endif
             }
+
+            if (this.networkingSocketPeerBase == null) throw new NullReferenceException("this.networkingSocketPeerBase null");
 
             this.networkingSocketPeerBase.init(gnServerSettings.getSocketUrl(), gnServerSettings.getReconnectDelay(), gnServerSettings.getPingInterval(), gnServerSettings.getPingTimeout());
             this.networkingSocketPeerBase.reInitNewSocket();
@@ -101,41 +128,65 @@
             this.subscriberServerEventHandler();
         }
 
+        /// <summary>
+        /// Sets a callback for when the socket connects.
+        /// </summary>
         internal void setOnConnectHandler(Action _onConnectHandler)
         {
             this.networkingSocketPeerBase.setOnConnectHandler(_onConnectHandler);
         }
 
+        /// <summary>
+        /// Sets a callback for when the socket disconnects.
+        /// </summary>
         internal void setOnDisconnectHandler(Action _onDisconnectHandler)
         {
             this.networkingSocketPeerBase.setOnDisconnectHandler(_onDisconnectHandler);
         }
 
+        /// <summary>
+        /// Removes the connection callback.
+        /// </summary>
         internal void removeOnConnectHandler(Action _onConnectHandler)
         {
             this.networkingSocketPeerBase.removeOnConnectHandler(_onConnectHandler);
         }
 
+        /// <summary>
+        /// Removes the disconnection callback.
+        /// </summary>
         internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
         {
             this.networkingSocketPeerBase.removeOnDisconnectHandler(_onDisconnectHandler);
         }
 
+        /// <summary>
+        /// Connects the socket with a specified callback.
+        /// </summary>
         internal void connect(Action _onSocketConnect)
         {
             this.networkingSocketPeerBase.connect(_onSocketConnect);
         }
 
+        /// <summary>
+        /// Disconnects the socket with a specified callback.
+        /// </summary>
         internal void disconnect(Action _onSocketDisconnect)
         {
             this.networkingSocketPeerBase.close(_onSocketDisconnect);
         }
 
+        /// <summary>
+        /// Sets the event handler for incoming socket events.
+        /// </summary>
         internal void setOnEventHandler(Action<OperationEvent> _onEventHandler)
         {
             this._onEventHandler = _onEventHandler;
         }
 
+        /// <summary>
+        /// Sends an operation request via the socket.
+        /// </summary>
         internal override void send(OperationPending operationPending)
         {
             base.send(operationPending);
@@ -144,11 +195,20 @@
 
             var authToken = operationPending.getAuthToken();
             var secretKey = operationPending.getSecretKey();
+            var gameId = operationPending.getGameId();
             var customTags = operationPending.getCustomTags();
 
-            this.networkingSocketPeerBase.Send(operationPending.getRequestType(), operationPending.getRequestRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags);
+            this.networkingSocketPeerBase.send(operationPending.getRequestType(), operationPending.getRequestRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags, gameId);
         }
 
+        protected override void onEnqueue(OperationPending operationPending)
+        {
+            GNDebug.log("[GN Socket ENQUEUE] " + operationPending.getOperationRequest().ToString());
+        }
+
+        /// <summary>
+        /// Handles incoming socket events and invokes appropriate handlers.
+        /// </summary>
         internal void onEventHandler(GNArray obj, bool isEncrypted)
         {
             var eventCode = obj.getInt(0);
@@ -160,10 +220,7 @@
 
             this._onEventHandler?.Invoke(operationEvent);
 
-            if (!this.serverEventHandlersDict.ContainsKey(eventCode))
-            {
-                return;
-            }
+            if (!this.serverEventHandlersDict.ContainsKey(eventCode)) return;
 
             var serverEventHandlers = this.serverEventHandlersDict[eventCode];
 
@@ -171,10 +228,12 @@
                 serverEventHandler.handle(operationEvent);
         }
 
+        /// <summary>
+        /// Processes socket service operations.
+        /// </summary>
         public override void service()
         {
             base.service();
-
             this.networkingSocketPeerBase?.service();
         }
 
@@ -189,5 +248,4 @@
         //}
 
     }
-
 }

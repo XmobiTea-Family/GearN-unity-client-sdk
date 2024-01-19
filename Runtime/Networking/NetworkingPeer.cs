@@ -5,13 +5,21 @@
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
 
+    /// <summary>
+    /// Manages networking peers for HTTP and socket communication.
+    /// </summary>
     public partial class NetworkingPeer
     {
-        private IPeer socketPeer;
-        private IPeer httpPeer;
+        private IPeer socketPeer; // Socket peer instance.
+        private IPeer httpPeer;   // HTTP peer instance.
 
-        internal AuthenticateStatus authenticateStatus;
+        internal AuthenticateStatus authenticateStatus; // Stores authentication status.
+        internal string gameId;
 
+        /// <summary>
+        /// Calculates and returns the average ping between HTTP and socket peers.
+        /// </summary>
+        /// <returns>The average ping in milliseconds.</returns>
         internal int getPing()
         {
             var count = 0;
@@ -29,28 +37,43 @@
                 totalPing += ((PeerBase)this.socketPeer).ping;
             }
 
-            return totalPing / count;
+            return count > 0 ? totalPing / count : -1;
         }
 
+        /// <summary>
+        /// Gets the client ID of the socket connection.
+        /// </summary>
+        /// <returns>The client ID as a string.</returns>
         internal string getClientId()
         {
             return (this.socketPeer as Socket.SocketPeer).getClientId();
         }
 
-        private long lastCurrentServerMilliseconds;
-        private float lastGetCurrentMilliseconds;
+        private long lastCurrentServerMilliseconds; // The last known server time in milliseconds.
+        private float lastGetCurrentMilliseconds;  // The local time in seconds when the server time was last updated.
 
+        /// <summary>
+        /// Sets the current server time in milliseconds.
+        /// </summary>
+        /// <param name="currentServerMilliseconds">The server time in milliseconds.</param>
         internal void setServerTimeMilliseconds(long currentServerMilliseconds)
         {
             this.lastCurrentServerMilliseconds = currentServerMilliseconds;
             this.lastGetCurrentMilliseconds = UnityEngine.Time.realtimeSinceStartup;
         }
 
+        /// <summary>
+        /// Gets the current server timestamp in milliseconds.
+        /// </summary>
+        /// <returns>The current server timestamp.</returns>
         internal long getServerTimestamp()
         {
             return this.lastCurrentServerMilliseconds + (int)((UnityEngine.Time.realtimeSinceStartup - this.lastGetCurrentMilliseconds) * 1000);
         }
 
+        /// <summary>
+        /// Initializes the HTTP and socket peers.
+        /// </summary>
         internal void initPeer()
         {
             this.setServerTimeMilliseconds(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
@@ -67,12 +90,18 @@
             this.socketPeer.initPeer();
         }
 
+        /// <summary>
+        /// Processes pending operations for both HTTP and socket peers.
+        /// </summary>
         internal void service()
         {
             this.httpPeer?.service();
             this.socketPeer?.service();
         }
 
+        /// <summary>
+        /// Sends a request via socket peer.
+        /// </summary>
         internal void sendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
             if (authToken == null) authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
@@ -83,9 +112,12 @@
                 else if (requestRole == RequestRole.Client) secretKey = GNNetwork.gnServerSettings.getClientSecretKey();
             }
 
-            this.socketPeer.enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
+            this.socketPeer.enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags, this.gameId);
         }
 
+        /// <summary>
+        /// Sends a request via HTTP peer.
+        /// </summary>
         internal void sendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
             if (authToken == null) authToken = this.authenticateStatus.getAuthToken();
@@ -96,49 +128,71 @@
                 else if (requestRole == RequestRole.Client) secretKey = GNNetwork.gnServerSettings.getClientSecretKey();
             }
 
-            this.httpPeer.enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags);
+            this.httpPeer.enqueue(requestType, requestRole, request, onResponse, authToken, secretKey, customTags, this.gameId);
         }
 
+        /// <summary>
+        /// Sends an authentication request via socket.
+        /// </summary>
         internal void sendRequestAuthSocket()
         {
             (this.socketPeer as Socket.SocketPeer).sendRequestAuthSocket();
         }
 
+        /// <summary>
+        /// Connects to the socket with a specified callback.
+        /// </summary>
         internal void connectSocket(Action _onSocketConnect)
         {
             (this.socketPeer as Socket.SocketPeer).connect(_onSocketConnect);
         }
 
+        /// <summary>
+        /// Disconnects the socket with a specified callback.
+        /// </summary>
         internal void disconnectSocket(Action _onSocketDisconnect)
         {
             (this.socketPeer as Socket.SocketPeer).disconnect(_onSocketDisconnect);
         }
 
+        /// <summary>
+        /// Sets the handler for processing socket events.
+        /// </summary>
         internal void setOnEventHandler(Action<OperationEvent> _onEventHandler)
         {
             (this.socketPeer as Socket.SocketPeer).setOnEventHandler(_onEventHandler);
         }
 
+        /// <summary>
+        /// Sets a handler for socket connection events.
+        /// </summary>
         internal void setOnConnectHandler(Action _onConnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).setOnConnectHandler(_onConnectHandler);
         }
 
+        /// <summary>
+        /// Sets a handler for socket disconnection events.
+        /// </summary>
         internal void setOnDisconnectHandler(Action _onDisconnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).setOnDisconnectHandler(_onDisconnectHandler);
         }
 
+        /// <summary>
+        /// Removes the handler for socket connection events.
+        /// </summary>
         internal void removeOnConnectHandler(Action _onConnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).removeOnConnectHandler(_onConnectHandler);
         }
 
+        /// <summary>
+        /// Removes the handler for socket disconnection events.
+        /// </summary>
         internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).removeOnDisconnectHandler(_onDisconnectHandler);
         }
-
     }
-
 }
