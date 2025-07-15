@@ -19,12 +19,12 @@
         SerializedProperty useSsl;
         SerializedProperty useSocket;
         SerializedProperty useHttp;
+        SerializedProperty messageType;
         SerializedProperty sendRate;
         SerializedProperty reconnectDelay;
         SerializedProperty pingInterval;
         SerializedProperty pingTimout;
         SerializedProperty peerSocketVersion;
-        //SerializedProperty gnServerSourcePath;
         SerializedProperty httpRequestType;
         SerializedProperty logType;
         SerializedProperty adminSecretKey;
@@ -43,14 +43,13 @@
             this.useSsl = this.serializedObject.FindProperty("useSsl");
             this.useSocket = this.serializedObject.FindProperty("useSocket");
             this.useHttp = this.serializedObject.FindProperty("useHttp");
+            this.messageType = this.serializedObject.FindProperty("messageType");
             this.sendRate = this.serializedObject.FindProperty("sendRate");
             this.reconnectDelay = this.serializedObject.FindProperty("reconnectDelay");
             this.pingInterval = this.serializedObject.FindProperty("pingInterval");
             this.pingTimout = this.serializedObject.FindProperty("pingTimeout");
             this.peerSocketVersion = this.serializedObject.FindProperty("peerSocketVersion");
-            //this.gnServerSourcePath = serializedObject.FindProperty("gnServerSourcePath");
             this.httpRequestType = this.serializedObject.FindProperty("httpRequestType");
-            //postType = serializedObject.FindProperty("postType");
             this.logType = this.serializedObject.FindProperty("logType");
             this.adminSecretKey = this.serializedObject.FindProperty("adminSecretKey");
             this.serverSecretKey = this.serializedObject.FindProperty("serverSecretKey");
@@ -81,6 +80,7 @@
             EditorGUILayout.Space(5);
             EditorGUILayout.PropertyField(this.useSsl);
             EditorGUILayout.PropertyField(this.sendRate);
+            EditorGUILayout.PropertyField(this.messageType);
             EditorGUILayout.Space(10);
 
             EditorGUILayout.PropertyField(this.useHttp);
@@ -113,8 +113,6 @@
 
             EditorGUILayout.Space(20);
 
-            //EditorGUILayout.PropertyField(this.gnServerSourcePath);
-            //EditorGUILayout.PropertyField(postType);
             EditorGUILayout.PropertyField(this.logType);
 
             EditorGUILayout.Space(20);

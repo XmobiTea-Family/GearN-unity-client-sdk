@@ -5,6 +5,7 @@ namespace XmobiTea.GN.Networking.Socket
     using BestHTTP.SocketIO3;
     using System;
     using XmobiTea.GN.Common;
+    using XmobiTea.GN.Config;
     using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Helper;
@@ -179,10 +180,12 @@ namespace XmobiTea.GN.Networking.Socket
 
             var dataSend = OperationHelper.toSocketData(requestType, requestRole, operationRequest);
 
-            if (operationRequest.isEncrypted())
-                this.socketManager.Socket.Emit(Commands.RequestCmd_MsgPack, MessagePackConverterService.serialize(dataSend));
-            else
+            var gnServerSettings = GNNetwork.gnServerSettings;
+
+            if (gnServerSettings.getMessageType() == MessageType.Json)
                 this.socketManager.Socket.Emit(Commands.RequestCmd_Json, dataSend);
+            else
+                this.socketManager.Socket.Emit(Commands.RequestCmd_MsgPack, MessagePackConverterService.serialize(dataSend));
         }
 
         /// <summary>

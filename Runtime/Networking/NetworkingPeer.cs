@@ -194,5 +194,12 @@
         {
             (this.socketPeer as Socket.SocketPeer).removeOnDisconnectHandler(_onDisconnectHandler);
         }
+
+        internal void subscriberServerEventHandler(IServerEventHandler serverEventHandler)
+        {
+            (this.socketPeer as Socket.SocketPeer).subscriberAServerEventHandler(serverEventHandler);
+        }
+
     }
+
 }

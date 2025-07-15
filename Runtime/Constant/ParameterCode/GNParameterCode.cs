@@ -596,6 +596,9 @@
         public const string EmailSettings = "emailSettings";
         public const string PushNotificationSettings = "pushNotificationSettings";
         public const string SendFrom = "sendFrom";
+        public const string Host = "host";
+        public const string Port = "port";
+        public const string Secure = "secure";
         public const string SendGridApiKey = "sendGridApiKey";
         public const string Subject = "subject";
         public const string ContentHtml = "contentHtml";
@@ -642,6 +645,10 @@
         public const string OwnerIds = "ownerIds";
         public const string GetStoreUsed = "getStoreUsed";
         public const string RemoveStoreUsed = "removeStoreUsed";
+
+        public const string AdminSecretKeys = "adminSecretKeys";
+        public const string ServerSecretKeys = "serverSecretKeys";
+        public const string PlayerSecretKeys = "playerSecretKeys";
 
     }
 

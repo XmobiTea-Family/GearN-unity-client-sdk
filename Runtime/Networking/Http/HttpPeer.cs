@@ -113,7 +113,9 @@
             var secretKey = operationPending.getSecretKey();
             var gameId = operationPending.getGameId();
             var customTags = operationPending.getCustomTags();
-            var postType = !operationRequest.isEncrypted() ? PostType.Json : PostType.MsgPack;
+
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var postType = gnServerSettings.getMessageType() == MessageType.Json ? PostType.Json : PostType.MsgPack;
 
             var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.getOperationCode() + "/" + (int)operationPending.getRequestType() + "/" + (int)operationPending.getRequestRole();
 

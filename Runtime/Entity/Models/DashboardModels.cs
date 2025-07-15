@@ -167,6 +167,9 @@
             [NumberDataMember(code = GNParameterCode.TsExpire, isOptional = true)]
             public long? tsExpire;
 
+            [StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+            public string? displayName;
+
             [GNHashtableDataMember(code = GNParameterCode.Permission, isOptional = true)]
             public PermissionParam? permissionParam;
 
@@ -628,9 +631,20 @@
             [StringDataMember(code = GNParameterCode.SendFrom)]
             public string sendFrom;
 
-            [StringDataMember(code = GNParameterCode.SendGridApiKey)]
-            public string sendGridApiKey;
+            [BooleanDataMember(code = GNParameterCode.Secure)]
+            public bool secure;
 
+            [StringDataMember(code = GNParameterCode.Host)]
+            public string host;
+
+            [NumberDataMember(code = GNParameterCode.Port)]
+            public int port;
+
+            [StringDataMember(code = GNParameterCode.Username)]
+            public string username;
+
+            [StringDataMember(code = GNParameterCode.Password)]
+            public string password;
         }
 
         public class PushNotificationSettingsParam
@@ -2020,6 +2034,9 @@
             [NumberDataMember(code = GNParameterCode.TsExpire)]
             public long tsExpire;
 
+            [StringDataMember(code = GNParameterCode.DisplayName)]
+            public string displayName;
+
             [GNHashtableDataMember(code = GNParameterCode.Permission)]
             public PermissionParam permission;
 
@@ -2034,8 +2051,14 @@
 
         public class GetSecretInfoListResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
-            public List<SecretInfoWithSecretKeyResponseData> results;
+            [GNArrayDataMember(code = GNParameterCode.AdminSecretKeys, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
+            public List<SecretInfoWithSecretKeyResponseData> adminSecretKeys;
+
+            [GNArrayDataMember(code = GNParameterCode.ServerSecretKeys, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
+            public List<SecretInfoWithSecretKeyResponseData> serverSecretKeys;
+
+            [GNArrayDataMember(code = GNParameterCode.PlayerSecretKeys, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
+            public List<SecretInfoWithSecretKeyResponseData> playerSecretKeys;
 
         }
 

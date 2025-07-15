@@ -63,22 +63,28 @@
                 var srvMsg = Activator.CreateInstance(t) as IServerEventHandler;
                 if (srvMsg != null)
                 {
-                    List<IServerEventHandler> serverEventHandlers;
-
-                    if (!this.serverEventHandlersDict.ContainsKey(srvMsg.getEventCode()))
+                    if (!this.serverEventHandlersDict.TryGetValue(srvMsg.getEventCode(), out var serverEventHandlers))
                     {
                         serverEventHandlers = new List<IServerEventHandler>();
 
                         this.serverEventHandlersDict[srvMsg.getEventCode()] = serverEventHandlers;
                     }
-                    else
-                    {
-                        serverEventHandlers = this.serverEventHandlersDict[srvMsg.getEventCode()];
-                    }
 
                     serverEventHandlers.Add(srvMsg);
                 }
             }
+        }
+
+        internal void subscriberAServerEventHandler(IServerEventHandler serverEventHandler)
+        {
+            if (!this.serverEventHandlersDict.TryGetValue(serverEventHandler.getEventCode(), out var serverEventHandlers))
+            {
+                serverEventHandlers = new List<IServerEventHandler>();
+
+                this.serverEventHandlersDict[serverEventHandler.getEventCode()] = serverEventHandlers;
+            }
+
+            serverEventHandlers.Add(serverEventHandler);
         }
 
         /// <summary>

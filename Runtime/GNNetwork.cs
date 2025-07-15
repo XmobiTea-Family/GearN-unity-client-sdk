@@ -135,15 +135,18 @@
         /// </summary>
         private static void initServerSettings()
         {
-            GNNetwork.gnServerSettings = UnityEngine.Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
-            if (GNNetwork.gnServerSettings == null)
+            var gnServerSettings = UnityEngine.Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
+
+            if (gnServerSettings == null)
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.ExecuteMenuItem("XmobiTea GN/Open Settings");
-                GNNetwork.gnServerSettings = UnityEngine.Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
-                if (GNNetwork.gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
+                gnServerSettings = UnityEngine.Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
+                if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
 #endif
             }
+
+            GNNetwork.gnServerSettings = UnityEngine.Object.Instantiate(gnServerSettings);
         }
 
         /// <summary>
@@ -494,6 +497,11 @@
         public static void unsubscriberOnDisconnectHandler(Action onDisconnectHandler)
         {
             GNNetwork.peer.removeOnDisconnectHandler(onDisconnectHandler);
+        }
+
+        public static void subscriberServerEventHandler(IServerEventHandler serverEventHandler)
+        {
+            GNNetwork.peer.subscriberServerEventHandler(serverEventHandler);
         }
 
     }

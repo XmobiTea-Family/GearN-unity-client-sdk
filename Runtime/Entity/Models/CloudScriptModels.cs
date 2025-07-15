@@ -58,8 +58,8 @@
             [DataMember(code = GNParameterCode.FunctionParameters)]
             public object functionParameters;
 
-            [StringDataMember(code = GNParameterCode.Version, minLength = 7, maxLength = 7, mustNonNull = true)]
-            public string version;
+            [StringDataMember(code = GNParameterCode.Version, minLength = 7, maxLength = 7, isOptional = true)]
+            public string? version;
 
         }
 

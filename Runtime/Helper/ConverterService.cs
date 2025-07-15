@@ -137,23 +137,23 @@
     internal class DeserializeConverter
     {
         // Mapper to retrieve metadata for fields with DataMember attributes
-        private DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper;
+        private DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper { get; }
 
         // Cached type definitions for common types
-        private Type typeOfByte;
-        private Type typeOfSByte;
-        private Type typeOfShort;
-        private Type typeOfUShort;
-        private Type typeOfInt;
-        private Type typeOfUInt;
-        private Type typeOfFloat;
-        private Type typeOfLong;
-        private Type typeOfULong;
-        private Type typeOfDouble;
-        private Type typeOfBool;
-        private Type typeOfString;
-        private Type typeOfGNArray;
-        private Type typeOfGNHashtable;
+        private Type typeOfByte { get; }
+        private Type typeOfSByte { get; }
+        private Type typeOfShort { get; }
+        private Type typeOfUShort { get; }
+        private Type typeOfInt { get; }
+        private Type typeOfUInt { get; }
+        private Type typeOfFloat { get; }
+        private Type typeOfLong { get; }
+        private Type typeOfULong { get; }
+        private Type typeOfDouble { get; }
+        private Type typeOfBool { get; }
+        private Type typeOfString { get; }
+        private Type typeOfGNArray { get; }
+        private Type typeOfGNHashtable { get; }
 
         bool TryGetNullable(FieldInfo fieldInfo, out Type tType)
         {
@@ -188,7 +188,11 @@
                 if (declaredField.gnFieldType == GNFieldDataType.String)
                 {
                     if (value == null) declaredField.fieldInfo.SetValue(answer, declaredField.defaultValue);
-                    else if (value is string) declaredField.fieldInfo.SetValue(answer, value);
+                    else if (value is string valueStr)
+                    {
+                        if (declaredField.fieldInfo.FieldType.IsEnum) declaredField.fieldInfo.SetValue(answer, Enum.Parse(declaredField.fieldInfo.FieldType, valueStr, true));
+                        else declaredField.fieldInfo.SetValue(answer, valueStr);
+                    }
                 }
                 else if (declaredField.gnFieldType == GNFieldDataType.Boolean)
                 {
@@ -242,34 +246,38 @@
 
                     if (ConverterService.isNumber(lastValue))
                     {
-                        if (TryGetNullable(declaredField.fieldInfo, out var tType))
-                        {
-                            var typeCode = Type.GetTypeCode(tType);
-
-                            if (typeCode == TypeCode.SByte) declaredField.fieldInfo.SetValue(answer, Convert.ToSByte(lastValue));
-                            else if (typeCode == TypeCode.Byte) declaredField.fieldInfo.SetValue(answer, Convert.ToByte(lastValue));
-                            else if (typeCode == TypeCode.Int16) declaredField.fieldInfo.SetValue(answer, Convert.ToInt16(lastValue));
-                            else if (typeCode == TypeCode.UInt16) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt16(lastValue));
-                            else if (typeCode == TypeCode.Int32) declaredField.fieldInfo.SetValue(answer, Convert.ToInt32(lastValue));
-                            else if (typeCode == TypeCode.UInt32) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt32(lastValue));
-                            else if (typeCode == TypeCode.Int64) declaredField.fieldInfo.SetValue(answer, Convert.ToInt64(lastValue));
-                            else if (typeCode == TypeCode.UInt64) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt64(lastValue));
-                            else if (typeCode == TypeCode.Single) declaredField.fieldInfo.SetValue(answer, Convert.ToSingle(lastValue));
-                            else if (typeCode == TypeCode.Double) declaredField.fieldInfo.SetValue(answer, Convert.ToDouble(lastValue));
-                        }
+                        if (declaredField.fieldInfo.FieldType.IsEnum) declaredField.fieldInfo.SetValue(answer, Enum.ToObject(declaredField.fieldInfo.FieldType, lastValue));
                         else
                         {
-                            if (declaredField.fieldInfo.FieldType == this.typeOfByte) declaredField.fieldInfo.SetValue(answer, Convert.ToByte(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfSByte) declaredField.fieldInfo.SetValue(answer, Convert.ToSByte(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfShort) declaredField.fieldInfo.SetValue(answer, Convert.ToInt16(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfUShort) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt16(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfInt) declaredField.fieldInfo.SetValue(answer, Convert.ToInt32(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfUInt) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt32(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfFloat) declaredField.fieldInfo.SetValue(answer, Convert.ToSingle(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfLong) declaredField.fieldInfo.SetValue(answer, Convert.ToInt64(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfULong) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt64(lastValue));
-                            else if (declaredField.fieldInfo.FieldType == this.typeOfDouble) declaredField.fieldInfo.SetValue(answer, Convert.ToDouble(lastValue));
-                            else declaredField.fieldInfo.SetValue(answer, value);
+                            if (TryGetNullable(declaredField.fieldInfo, out var tType))
+                            {
+                                var typeCode = Type.GetTypeCode(tType);
+
+                                if (typeCode == TypeCode.SByte) declaredField.fieldInfo.SetValue(answer, Convert.ToSByte(lastValue));
+                                else if (typeCode == TypeCode.Byte) declaredField.fieldInfo.SetValue(answer, Convert.ToByte(lastValue));
+                                else if (typeCode == TypeCode.Int16) declaredField.fieldInfo.SetValue(answer, Convert.ToInt16(lastValue));
+                                else if (typeCode == TypeCode.UInt16) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt16(lastValue));
+                                else if (typeCode == TypeCode.Int32) declaredField.fieldInfo.SetValue(answer, Convert.ToInt32(lastValue));
+                                else if (typeCode == TypeCode.UInt32) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt32(lastValue));
+                                else if (typeCode == TypeCode.Int64) declaredField.fieldInfo.SetValue(answer, Convert.ToInt64(lastValue));
+                                else if (typeCode == TypeCode.UInt64) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt64(lastValue));
+                                else if (typeCode == TypeCode.Single) declaredField.fieldInfo.SetValue(answer, Convert.ToSingle(lastValue));
+                                else if (typeCode == TypeCode.Double) declaredField.fieldInfo.SetValue(answer, Convert.ToDouble(lastValue));
+                            }
+                            else
+                            {
+                                if (declaredField.fieldInfo.FieldType == this.typeOfByte) declaredField.fieldInfo.SetValue(answer, Convert.ToByte(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfSByte) declaredField.fieldInfo.SetValue(answer, Convert.ToSByte(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfShort) declaredField.fieldInfo.SetValue(answer, Convert.ToInt16(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfUShort) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt16(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfInt) declaredField.fieldInfo.SetValue(answer, Convert.ToInt32(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfUInt) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt32(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfFloat) declaredField.fieldInfo.SetValue(answer, Convert.ToSingle(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfLong) declaredField.fieldInfo.SetValue(answer, Convert.ToInt64(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfULong) declaredField.fieldInfo.SetValue(answer, Convert.ToUInt64(lastValue));
+                                else if (declaredField.fieldInfo.FieldType == this.typeOfDouble) declaredField.fieldInfo.SetValue(answer, Convert.ToDouble(lastValue));
+                                else declaredField.fieldInfo.SetValue(answer, value);
+                            }
                         }
                     }
                 }
@@ -317,7 +325,11 @@
                         else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IList)) declaredField.fieldInfo.SetValue(answer, ((IGNData)value).toData());
                         else if (declaredField.fieldInfo.FieldType == this.typeOfGNHashtable) declaredField.fieldInfo.SetValue(answer, value);
                         else if (declaredField.fieldInfo.FieldType == typeof(System.Collections.IDictionary)) declaredField.fieldInfo.SetValue(answer, ((IGNData)value).toData());
-                        else declaredField.fieldInfo.SetValue(answer, value);
+                        else
+                        {
+                            if (declaredField.fieldInfo.FieldType.IsEnum) declaredField.fieldInfo.SetValue(answer, Enum.ToObject(declaredField.fieldInfo.FieldType, value));
+                            else declaredField.fieldInfo.SetValue(answer, value);
+                        }
                     }
                 }
             }
@@ -363,7 +375,10 @@
                     else if (typeOfValue == typeof(System.Collections.IList))
                         answer.Add(this.deserializeArray(gnArray.getGNArray(i), cls));
                     else
-                        answer.Add(this.deserializeObject(gnArray.getGNHashtable(i), cls));
+                    {
+                        if (cls.IsEnum) answer.Add(Enum.ToObject(typeOfValue, System.Convert.ToByte(value)));
+                        else answer.Add(this.deserializeObject(gnArray.getGNHashtable(i), cls));
+                    }
                 }
             }
 
@@ -402,6 +417,8 @@
         /// <param name="dataMemberFieldInfoMapper">The mapper for field metadata.</param>
         public DeserializeConverter(DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper)
         {
+            this.dataMemberFieldInfoMapper = dataMemberFieldInfoMapper;
+
             this.typeOfByte = typeof(byte);
             this.typeOfSByte = typeof(sbyte);
             this.typeOfShort = typeof(short);
@@ -417,7 +434,6 @@
             this.typeOfGNArray = typeof(GNArray);
             this.typeOfGNHashtable = typeof(GNHashtable);
 
-            this.dataMemberFieldInfoMapper = dataMemberFieldInfoMapper;
         }
     }
 
@@ -428,6 +444,17 @@
     {
         // Mapper to retrieve metadata for fields with DataMember attributes.
         private DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper;
+
+        private Type typeOfByte { get; }
+        private Type typeOfSByte { get; }
+        private Type typeOfShort { get; }
+        private Type typeOfUShort { get; }
+        private Type typeOfInt { get; }
+        private Type typeOfUInt { get; }
+        private Type typeOfFloat { get; }
+        private Type typeOfLong { get; }
+        private Type typeOfULong { get; }
+        private Type typeOfDouble { get; }
 
         /// <summary>
         /// Serializes an object into a GNHashtable.
@@ -465,6 +492,7 @@
                     if (declaredField.gnFieldType == GNFieldDataType.String)
                     {
                         if (value is string) answer.add(declaredField.code, value);
+                        else answer.add(declaredField.code, value.ToString());
                     }
                     else if (declaredField.gnFieldType == GNFieldDataType.Boolean)
                     {
@@ -487,6 +515,26 @@
                     {
                         // Handle numeric fields.
                         if (ConverterService.isNumber(value)) answer.add(declaredField.code, value);
+                        else
+                        {
+                            var valueType = value.GetType();
+
+                            if (valueType.IsEnum)
+                            {
+                                var underlyingValueType = Enum.GetUnderlyingType(valueType);
+
+                                if (underlyingValueType == this.typeOfByte) answer.add(declaredField.code, Convert.ToByte(value));
+                                else if (underlyingValueType == this.typeOfSByte) answer.add(declaredField.code, Convert.ToSByte(value));
+                                else if (underlyingValueType == this.typeOfShort) answer.add(declaredField.code, Convert.ToInt16(value));
+                                else if (underlyingValueType == this.typeOfUShort) answer.add(declaredField.code, Convert.ToUInt16(value));
+                                else if (underlyingValueType == this.typeOfInt) answer.add(declaredField.code, Convert.ToInt32(value));
+                                else if (underlyingValueType == this.typeOfUInt) answer.add(declaredField.code, Convert.ToUInt32(value));
+                                else if (underlyingValueType == this.typeOfFloat) answer.add(declaredField.code, Convert.ToSingle(value));
+                                else if (underlyingValueType == this.typeOfLong) answer.add(declaredField.code, Convert.ToInt64(value));
+                                else if (underlyingValueType == this.typeOfULong) answer.add(declaredField.code, Convert.ToUInt64(value));
+                                else if (underlyingValueType == this.typeOfDouble) answer.add(declaredField.code, Convert.ToDouble(value));
+                            }
+                        }
                     }
                     else
                     {
@@ -497,7 +545,27 @@
                         else if (value is IGNData) answer.add(declaredField.code, value);
                         else if (value is System.Collections.IList valueLst) answer.add(declaredField.code, this.serializeArray(valueLst));
                         else if (value is System.Collections.IDictionary valueDict) answer.add(declaredField.code, new GNHashtable.Builder().addAll(valueDict).build());
-                        else answer.add(declaredField.code, this.serializeObject(value));
+                        else
+                        {
+                            var valueType = value.GetType();
+
+                            if (valueType.IsEnum)
+                            {
+                                var underlyingValueType = Enum.GetUnderlyingType(valueType);
+
+                                if (underlyingValueType == this.typeOfByte) answer.add(declaredField.code, Convert.ToByte(value));
+                                else if (underlyingValueType == this.typeOfSByte) answer.add(declaredField.code, Convert.ToSByte(value));
+                                else if (underlyingValueType == this.typeOfShort) answer.add(declaredField.code, Convert.ToInt16(value));
+                                else if (underlyingValueType == this.typeOfUShort) answer.add(declaredField.code, Convert.ToUInt16(value));
+                                else if (underlyingValueType == this.typeOfInt) answer.add(declaredField.code, Convert.ToInt32(value));
+                                else if (underlyingValueType == this.typeOfUInt) answer.add(declaredField.code, Convert.ToUInt32(value));
+                                else if (underlyingValueType == this.typeOfFloat) answer.add(declaredField.code, Convert.ToSingle(value));
+                                else if (underlyingValueType == this.typeOfLong) answer.add(declaredField.code, Convert.ToInt64(value));
+                                else if (underlyingValueType == this.typeOfULong) answer.add(declaredField.code, Convert.ToUInt64(value));
+                                else if (underlyingValueType == this.typeOfDouble) answer.add(declaredField.code, Convert.ToDouble(value));
+                            }
+                            else answer.add(declaredField.code, this.serializeObject(value));
+                        }
                     }
                 }
             }
@@ -529,7 +597,27 @@
                 else if (ConverterService.isNumber(obj)) answer.add(obj);
                 else if (obj is IGNData) answer.add(obj);
                 else if (obj is System.Collections.IList iList) answer.add(this.serializeArray(iList));
-                else answer.add(this.serializeObject(obj));
+                else
+                {
+                    var valueType = obj.GetType();
+
+                    if (valueType.IsEnum)
+                    {
+                        var underlyingValueType = Enum.GetUnderlyingType(valueType);
+
+                        if (underlyingValueType == this.typeOfByte) answer.add(Convert.ToByte(obj));
+                        else if (underlyingValueType == this.typeOfSByte) answer.add(Convert.ToSByte(obj));
+                        else if (underlyingValueType == this.typeOfShort) answer.add(Convert.ToInt16(obj));
+                        else if (underlyingValueType == this.typeOfUShort) answer.add(Convert.ToUInt16(obj));
+                        else if (underlyingValueType == this.typeOfInt) answer.add(Convert.ToInt32(obj));
+                        else if (underlyingValueType == this.typeOfUInt) answer.add(Convert.ToUInt32(obj));
+                        else if (underlyingValueType == this.typeOfFloat) answer.add(Convert.ToSingle(obj));
+                        else if (underlyingValueType == this.typeOfLong) answer.add(Convert.ToInt64(obj));
+                        else if (underlyingValueType == this.typeOfULong) answer.add(Convert.ToUInt64(obj));
+                        else if (underlyingValueType == this.typeOfDouble) answer.add(Convert.ToDouble(obj));
+                    }
+                    else answer.add(this.serializeObject(obj));
+                }
             }
 
             return answer;
@@ -542,6 +630,17 @@
         public SerializeConverter(DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper)
         {
             this.dataMemberFieldInfoMapper = dataMemberFieldInfoMapper;
+
+            this.typeOfByte = typeof(byte);
+            this.typeOfSByte = typeof(sbyte);
+            this.typeOfShort = typeof(short);
+            this.typeOfUShort = typeof(ushort);
+            this.typeOfInt = typeof(int);
+            this.typeOfUInt = typeof(uint);
+            this.typeOfFloat = typeof(float);
+            this.typeOfLong = typeof(long);
+            this.typeOfULong = typeof(ulong);
+            this.typeOfDouble = typeof(double);
         }
     }
 

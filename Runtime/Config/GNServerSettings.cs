@@ -46,6 +46,12 @@
         HttpWebRequest = 2,
     }
 
+    public enum MessageType
+    {
+        Json = 1,
+        MsgPack = 2,
+    }
+
     /// <summary>
     /// GN Server settings configuration.
     /// </summary>
@@ -71,6 +77,9 @@
 
         [SerializeField]
         private bool useHttp = true;
+
+        [SerializeField]
+        private MessageType messageType = MessageType.MsgPack;
 
         [SerializeField]
         private int sendRate = 20;
@@ -108,11 +117,15 @@
         /// <returns>The server address.</returns>
         public string getServerAddress() => this.serverAddress;
 
+        public void setServerAddress(string serverAddress) => this.serverAddress = serverAddress;
+
         /// <summary>
         /// Gets the server port.
         /// </summary>
         /// <returns>The server port.</returns>
         public int getServerPort() => this.serverPort;
+
+        public void setServerPort(int serverPort) => this.serverPort = serverPort;
 
         /// <summary>
         /// Gets the server socket port.
@@ -120,11 +133,15 @@
         /// <returns>The server socket port.</returns>
         public int getServerSocketPort() => this.serverSocketPort;
 
+        public void setServerSocketPort(int serverSocketPort) => this.serverSocketPort = serverSocketPort;
+
         /// <summary>
         /// Indicates whether SSL is used.
         /// </summary>
         /// <returns>True if SSL is used; otherwise, false.</returns>
         public bool isUseSsl() => this.useSsl;
+
+        public void setUseSsl(bool useSsl) => this.useSsl = useSsl;
 
         /// <summary>
         /// Indicates whether socket communication is enabled.
@@ -132,11 +149,19 @@
         /// <returns>True if socket is used; otherwise, false.</returns>
         public bool isUseSocket() => this.useSocket;
 
+        public void setUseSocket(bool useSocket) => this.useSocket = useSocket;
+
         /// <summary>
         /// Indicates whether HTTP communication is enabled.
         /// </summary>
         /// <returns>True if HTTP is used; otherwise, false.</returns>
         public bool isUseHttp() => this.useHttp;
+
+        public void setUseHttp(bool useHttp) => this.useHttp = useHttp;
+
+        public MessageType getMessageType() => this.messageType;
+
+        public void setMessageType(MessageType messageType) => this.messageType = messageType;
 
         /// <summary>
         /// Gets the message send rate.
@@ -144,11 +169,15 @@
         /// <returns>The send rate.</returns>
         public int getSendRate() => this.sendRate;
 
+        public void setSendRate(int sendRate) => this.sendRate = sendRate;
+
         /// <summary>
         /// Gets the reconnect delay in milliseconds.
         /// </summary>
         /// <returns>The reconnect delay.</returns>
         public int getReconnectDelay() => this.reconnectDelay;
+
+        public void setReconnectDelay(int recoonectDelay) => this.reconnectDelay = reconnectDelay;
 
         /// <summary>
         /// Gets the ping interval in milliseconds.
@@ -156,11 +185,15 @@
         /// <returns>The ping interval.</returns>
         public float getPingInterval() => this.pingInterval;
 
+        public void setPingInterval(int pingInterval) => this.pingInterval = pingInterval; 
+
         /// <summary>
         /// Gets the ping timeout in milliseconds.
         /// </summary>
         /// <returns>The ping timeout.</returns>
         public float getPingTimeout() => this.pingTimeout;
+
+        public void setPingTimeout(float pingTimeout) => this.pingTimeout = pingTimeout;
 
         /// <summary>
         /// Gets the admin secret key.
@@ -168,17 +201,23 @@
         /// <returns>The admin secret key.</returns>
         public string getAdminSecretKey() => this.adminSecretKey;
 
+        public void setAdminSecretKey(string adminSecretKey) => this.adminSecretKey = adminSecretKey;
+
         /// <summary>
         /// Gets the server secret key.
         /// </summary>
         /// <returns>The server secret key.</returns>
         public string getServerSecretKey() => this.serverSecretKey;
 
+        public void setServerSecretKey(string serverSecretKey) => this.serverSecretKey = serverSecretKey;
+
         /// <summary>
         /// Gets the client secret key.
         /// </summary>
         /// <returns>The client secret key.</returns>
         public string getClientSecretKey() => this.clientSecretKey;
+
+        public void setClientSecretKey(string clientSecretKey) => this.clientSecretKey = clientSecretKey;
 
         /// <summary>
         /// Gets the peer socket version.
