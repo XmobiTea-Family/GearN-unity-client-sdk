@@ -262,6 +262,15 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<DashboardRequestModels.GetServerGameDataOperationRequest, DashboardResponseModels.GetServerGameDataOperationResponse>(new DashboardRequestModels.GetServerGameDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
+        public void deleteInDatabase(DashboardModels.DeleteInDatabaseRequestData requestData, Action<DashboardResponseModels.DeleteInDatabaseOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        {
+            GNNetwork.sendViaHttp(new DashboardRequestModels.DeleteInDatabaseOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+        }
+
+        public Task<DashboardResponseModels.DeleteInDatabaseOperationResponse> deleteInDatabaseAsync(DashboardModels.DeleteInDatabaseRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        {
+            return GNNetwork.sendViaHttpAsync<DashboardRequestModels.DeleteInDatabaseOperationRequest, DashboardResponseModels.DeleteInDatabaseOperationResponse>(new DashboardRequestModels.DeleteInDatabaseOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+        }
 
         public class ServerApi
         {

@@ -129,6 +129,11 @@
 
         }
 
+        public class DeleteInDatabaseOperationResponse : CustomOperationResponse<DashboardModels.EmptyResponseData>
+        {
+
+        }
+
     }
 
 }

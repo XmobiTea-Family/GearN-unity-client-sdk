@@ -251,6 +251,15 @@
             public GetServerGameDataOperationRequest(DashboardModels.GetServerGameDataRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
+        public class DeleteInDatabaseOperationRequest : CustomOperationRequest<DashboardModels.DeleteInDatabaseRequestData>
+        {
+            protected override string operationCode => OperationCode.DeleteInDatabase;
+            protected override RequestType requestType => RequestType.Dashboard;
+            protected override RequestRole role => RequestRole.Client;
+
+            public DeleteInDatabaseOperationRequest(DashboardModels.DeleteInDatabaseRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+        }
+
     }
 
 }

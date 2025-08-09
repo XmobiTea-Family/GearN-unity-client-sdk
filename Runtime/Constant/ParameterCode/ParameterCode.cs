@@ -64,6 +64,7 @@
         public const string Reason = "reason";
         public const string Key = "key";
         public const string Permission = "permission";
+        public const string PermissionParam = "permissionParam";
 
         public const string NewlyCreated = "newlyCreated";
         public const string Token = "token";

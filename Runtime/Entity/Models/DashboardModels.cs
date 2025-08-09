@@ -86,7 +86,7 @@
             [NumberDataMember(code = ParameterCode.Role, mustInt = true)]
             public int role;
 
-            [GNHashtableDataMember(code = ParameterCode.Permission, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.PermissionParam, isOptional = true)]
             public PermissionParam? permissionParam;
 
         }
@@ -170,7 +170,7 @@
             [StringDataMember(code = ParameterCode.Description, isOptional = true)]
             public string? description;
 
-            [GNHashtableDataMember(code = ParameterCode.Permission, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.PermissionParam, isOptional = true)]
             public PermissionParam? permissionParam;
 
         }
@@ -236,7 +236,7 @@
 
         public class ResetStatisticsLeaderboardRequestData
         {
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
             [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32)]
@@ -256,12 +256,28 @@
 
         }
 
+        public class DeleteInDatabaseRequestData
+        {
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
+            public int type;
+
+            [StringDataMember(code = ParameterCode.Id, minLength = 2, maxLength = 15)]
+            public string id;
+
+            [StringDataMember(code = ParameterCode.GameId, minLength = 2, maxLength = 32, mustNonNull = true)]
+            public string gameId;
+
+            [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
+            public string? log;
+
+        }
+
         public class GetBackupStatisticsLeaderboardVersionRequestData
         {
             [StringDataMember(code = ParameterCode.GameId, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string gameId;
 
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
             [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32)]
