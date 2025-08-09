@@ -128,6 +128,7 @@
         public const string OwnerId = "ownerId";
         public const string NewOwnerId = "newOwnerId";
         public const string OwnerType = "ownerType";
+        public const string NewOwnerType = "newOwnerType";
         public const string Keys = "keys";
         public const string Label = "label";
         public const string Configs = "configs";

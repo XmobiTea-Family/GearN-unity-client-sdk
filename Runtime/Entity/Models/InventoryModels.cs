@@ -122,7 +122,7 @@
             public string itemId;
 
             [GNArrayDataMember(code = ParameterCode.ItemDataKeys, isOptional = true, elementCls = typeof(string))]
-            public List<string>? inventoryDataKeys;
+            public List<string>? itemDataKeys;
 
         }
 
@@ -485,7 +485,7 @@
             public string itemId;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
-            public List<CustomDataParam> customData;
+            public List<CustomDataParam> customDatas;
 
         }
 
@@ -521,7 +521,7 @@
             public string itemId;
 
             [GNArrayDataMember(code = ParameterCode.ItemDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(ItemDataParam))]
-            public List<ItemDataParam> inventoryDataParams;
+            public List<ItemDataParam> itemDatas;
 
         }
 
@@ -539,7 +539,7 @@
             public string itemId;
 
             [GNArrayDataMember(code = ParameterCode.ItemStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(ItemStatisticsParam))]
-            public List<ItemStatisticsParam> inventoryStatisticsParams;
+            public List<ItemStatisticsParam> itemStatistics;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
@@ -559,10 +559,10 @@
             [StringDataMember(code = ParameterCode.ItemId, minLength = 11, maxLength = 11, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.NewOwnerId, minLength = 10, maxLength = 12, mustNonNull = true)]
             public string newOwnerId;
 
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.NewOwnerType, mustInt = true)]
             public int newOwnerType;
 
         }
