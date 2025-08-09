@@ -909,7 +909,7 @@
             public string? userId;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
-            public List<CustomDataParam> customData;
+            public List<CustomDataParam> customDatas;
 
         }
 
@@ -978,7 +978,7 @@
             public string? userId;
 
             [GNArrayDataMember(code = ParameterCode.PlayerCurrencies, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerCurrencyParam))]
-            public List<PlayerCurrencyParam> playerCurrencyParams;
+            public List<PlayerCurrencyParam> playerCurrencies;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
@@ -1002,7 +1002,7 @@
             public string? userId;
 
             [GNArrayDataMember(code = ParameterCode.PlayerDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerDataParam))]
-            public List<PlayerDataParam> playerDataParams;
+            public List<PlayerDataParam> playerDatas;
 
         }
 
@@ -1023,7 +1023,7 @@
             public string? userId;
 
             [GNArrayDataMember(code = ParameterCode.PlayerStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(PlayerStatisticsParam))]
-            public List<PlayerStatisticsParam> playerStatisticsParams;
+            public List<PlayerStatisticsParam> playerStatistics;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
