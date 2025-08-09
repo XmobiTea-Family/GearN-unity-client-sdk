@@ -581,7 +581,7 @@
             public string groupId;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
-            public List<CustomDataParam> customData;
+            public List<CustomDataParam> customDatas;
 
         }
 
@@ -617,7 +617,7 @@
             public string groupId;
 
             [GNArrayDataMember(code = ParameterCode.GroupCurrencies, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupCurrencyParam))]
-            public List<GroupCurrencyParam> groupCurrencyParams;
+            public List<GroupCurrencyParam> groupCurrencies;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
@@ -638,7 +638,7 @@
             public string groupId;
 
             [GNArrayDataMember(code = ParameterCode.GroupDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupDataParam))]
-            public List<GroupDataParam> groupDataParams;
+            public List<GroupDataParam> groupDatas;
 
         }
 
@@ -656,7 +656,7 @@
             public string groupId;
 
             [GNArrayDataMember(code = ParameterCode.GroupStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupStatisticsParam))]
-            public List<GroupStatisticsParam> groupStatisticsParams;
+            public List<GroupStatisticsParam> groupStatistics;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
