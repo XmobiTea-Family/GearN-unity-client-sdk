@@ -322,14 +322,14 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<GroupRequestModels.SetDisplayNameOperationRequest, GroupResponseModels.SetDisplayNameOperationResponse>(new GroupRequestModels.SetDisplayNameOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void setGroupCurrency(GroupModels.SetGroupCurrencyRequestData requestData, Action<GroupResponseModels.SetGroupCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void changeGroupCurrency(GroupModels.ChangeGroupCurrencyRequestData requestData, Action<GroupResponseModels.ChangeGroupCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new GroupRequestModels.SetGroupCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new GroupRequestModels.ChangeGroupCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<GroupResponseModels.SetGroupCurrencyOperationResponse> setGroupCurrencyAsync(GroupModels.SetGroupCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<GroupResponseModels.ChangeGroupCurrencyOperationResponse> changeGroupCurrencyAsync(GroupModels.ChangeGroupCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<GroupRequestModels.SetGroupCurrencyOperationRequest, GroupResponseModels.SetGroupCurrencyOperationResponse>(new GroupRequestModels.SetGroupCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<GroupRequestModels.ChangeGroupCurrencyOperationRequest, GroupResponseModels.ChangeGroupCurrencyOperationResponse>(new GroupRequestModels.ChangeGroupCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void setGroupData(GroupModels.SetGroupDataRequestData requestData, Action<GroupResponseModels.SetGroupDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -342,14 +342,14 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<GroupRequestModels.SetGroupDataOperationRequest, GroupResponseModels.SetGroupDataOperationResponse>(new GroupRequestModels.SetGroupDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void setGroupStatistics(GroupModels.SetGroupStatisticsRequestData requestData, Action<GroupResponseModels.SetGroupStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void changeGroupStatistics(GroupModels.ChangeGroupStatisticsRequestData requestData, Action<GroupResponseModels.ChangeGroupStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new GroupRequestModels.SetGroupStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new GroupRequestModels.ChangeGroupStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<GroupResponseModels.SetGroupStatisticsOperationResponse> setGroupStatisticsAsync(GroupModels.SetGroupStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<GroupResponseModels.ChangeGroupStatisticsOperationResponse> changeGroupStatisticsAsync(GroupModels.ChangeGroupStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<GroupRequestModels.SetGroupStatisticsOperationRequest, GroupResponseModels.SetGroupStatisticsOperationResponse>(new GroupRequestModels.SetGroupStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<GroupRequestModels.ChangeGroupStatisticsOperationRequest, GroupResponseModels.ChangeGroupStatisticsOperationResponse>(new GroupRequestModels.ChangeGroupStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void setRemoveStatus(GroupModels.SetRemoveStatusRequestData requestData, Action<GroupResponseModels.SetRemoveStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -725,14 +725,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerSetDisplayNameOperationRequest, GroupResponseModels.SetDisplayNameOperationResponse>(new GroupRequestModels.ServerSetDisplayNameOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setGroupCurrency(GroupModels.ServerSetGroupCurrencyRequestData requestData, Action<GroupResponseModels.SetGroupCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changeGroupCurrency(GroupModels.ServerChangeGroupCurrencyRequestData requestData, Action<GroupResponseModels.ChangeGroupCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GroupRequestModels.ServerSetGroupCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GroupRequestModels.ServerChangeGroupCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GroupResponseModels.SetGroupCurrencyOperationResponse> setGroupCurrencyAsync(GroupModels.ServerSetGroupCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GroupResponseModels.ChangeGroupCurrencyOperationResponse> changeGroupCurrencyAsync(GroupModels.ServerChangeGroupCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerSetGroupCurrencyOperationRequest, GroupResponseModels.SetGroupCurrencyOperationResponse>(new GroupRequestModels.ServerSetGroupCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerChangeGroupCurrencyOperationRequest, GroupResponseModels.ChangeGroupCurrencyOperationResponse>(new GroupRequestModels.ServerChangeGroupCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setGroupData(GroupModels.ServerSetGroupDataRequestData requestData, Action<GroupResponseModels.SetGroupDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -745,14 +745,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerSetGroupDataOperationRequest, GroupResponseModels.SetGroupDataOperationResponse>(new GroupRequestModels.ServerSetGroupDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setGroupStatistics(GroupModels.ServerSetGroupStatisticsRequestData requestData, Action<GroupResponseModels.SetGroupStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changeGroupStatistics(GroupModels.ServerChangeGroupStatisticsRequestData requestData, Action<GroupResponseModels.ChangeGroupStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GroupRequestModels.ServerSetGroupStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GroupRequestModels.ServerChangeGroupStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GroupResponseModels.SetGroupStatisticsOperationResponse> setGroupStatisticsAsync(GroupModels.ServerSetGroupStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GroupResponseModels.ChangeGroupStatisticsOperationResponse> changeGroupStatisticsAsync(GroupModels.ServerChangeGroupStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerSetGroupStatisticsOperationRequest, GroupResponseModels.SetGroupStatisticsOperationResponse>(new GroupRequestModels.ServerSetGroupStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerChangeGroupStatisticsOperationRequest, GroupResponseModels.ChangeGroupStatisticsOperationResponse>(new GroupRequestModels.ServerChangeGroupStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setRemoveStatus(GroupModels.ServerSetRemoveStatusRequestData requestData, Action<GroupResponseModels.SetRemoveStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1129,14 +1129,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminSetDisplayNameOperationRequest, GroupResponseModels.SetDisplayNameOperationResponse>(new GroupRequestModels.AdminSetDisplayNameOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setGroupCurrency(GroupModels.AdminSetGroupCurrencyRequestData requestData, Action<GroupResponseModels.SetGroupCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changeGroupCurrency(GroupModels.AdminChangeGroupCurrencyRequestData requestData, Action<GroupResponseModels.ChangeGroupCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GroupRequestModels.AdminSetGroupCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GroupRequestModels.AdminChangeGroupCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GroupResponseModels.SetGroupCurrencyOperationResponse> setGroupCurrencyAsync(GroupModels.AdminSetGroupCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GroupResponseModels.ChangeGroupCurrencyOperationResponse> changeGroupCurrencyAsync(GroupModels.AdminChangeGroupCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminSetGroupCurrencyOperationRequest, GroupResponseModels.SetGroupCurrencyOperationResponse>(new GroupRequestModels.AdminSetGroupCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminChangeGroupCurrencyOperationRequest, GroupResponseModels.ChangeGroupCurrencyOperationResponse>(new GroupRequestModels.AdminChangeGroupCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setGroupData(GroupModels.AdminSetGroupDataRequestData requestData, Action<GroupResponseModels.SetGroupDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1149,14 +1149,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminSetGroupDataOperationRequest, GroupResponseModels.SetGroupDataOperationResponse>(new GroupRequestModels.AdminSetGroupDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setGroupStatistics(GroupModels.AdminSetGroupStatisticsRequestData requestData, Action<GroupResponseModels.SetGroupStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changeGroupStatistics(GroupModels.AdminChangeGroupStatisticsRequestData requestData, Action<GroupResponseModels.ChangeGroupStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GroupRequestModels.AdminSetGroupStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GroupRequestModels.AdminChangeGroupStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GroupResponseModels.SetGroupStatisticsOperationResponse> setGroupStatisticsAsync(GroupModels.AdminSetGroupStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GroupResponseModels.ChangeGroupStatisticsOperationResponse> changeGroupStatisticsAsync(GroupModels.AdminChangeGroupStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminSetGroupStatisticsOperationRequest, GroupResponseModels.SetGroupStatisticsOperationResponse>(new GroupRequestModels.AdminSetGroupStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminChangeGroupStatisticsOperationRequest, GroupResponseModels.ChangeGroupStatisticsOperationResponse>(new GroupRequestModels.AdminChangeGroupStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setRemoveStatus(GroupModels.AdminSetRemoveStatusRequestData requestData, Action<GroupResponseModels.SetRemoveStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)

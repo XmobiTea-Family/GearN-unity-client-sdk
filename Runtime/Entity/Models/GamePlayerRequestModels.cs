@@ -1037,27 +1037,27 @@
         }
 
 
-        public class SetPlayerCurrencyOperationRequest : CustomOperationRequest<GamePlayerModels.SetPlayerCurrencyRequestData>
+        public class ChangePlayerCurrencyOperationRequest : CustomOperationRequest<GamePlayerModels.ChangePlayerCurrencyRequestData>
         {
-            protected override string operationCode => OperationCode.SetPlayerCurrency;
+            protected override string operationCode => OperationCode.ChangePlayerCurrency;
             protected override RequestType requestType => RequestType.GamePlayer;
             protected override RequestRole role => RequestRole.Client;
 
-            public SetPlayerCurrencyOperationRequest(GamePlayerModels.SetPlayerCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ChangePlayerCurrencyOperationRequest(GamePlayerModels.ChangePlayerCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class ServerSetPlayerCurrencyOperationRequest : SetPlayerCurrencyOperationRequest
+        public class ServerChangePlayerCurrencyOperationRequest : ChangePlayerCurrencyOperationRequest
         {
             protected override RequestRole role => RequestRole.Server;
 
-            public ServerSetPlayerCurrencyOperationRequest(GamePlayerModels.ServerSetPlayerCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ServerChangePlayerCurrencyOperationRequest(GamePlayerModels.ServerChangePlayerCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class AdminSetPlayerCurrencyOperationRequest : SetPlayerCurrencyOperationRequest
+        public class AdminChangePlayerCurrencyOperationRequest : ChangePlayerCurrencyOperationRequest
         {
             protected override RequestRole role => RequestRole.Admin;
 
-            public AdminSetPlayerCurrencyOperationRequest(GamePlayerModels.AdminSetPlayerCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public AdminChangePlayerCurrencyOperationRequest(GamePlayerModels.AdminChangePlayerCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
 
@@ -1085,27 +1085,27 @@
         }
 
 
-        public class SetPlayerStatisticsOperationRequest : CustomOperationRequest<GamePlayerModels.SetPlayerStatisticsRequestData>
+        public class ChangePlayerStatisticsOperationRequest : CustomOperationRequest<GamePlayerModels.ChangePlayerStatisticsRequestData>
         {
-            protected override string operationCode => OperationCode.SetPlayerStatistics;
+            protected override string operationCode => OperationCode.ChangePlayerStatistics;
             protected override RequestType requestType => RequestType.GamePlayer;
             protected override RequestRole role => RequestRole.Client;
 
-            public SetPlayerStatisticsOperationRequest(GamePlayerModels.SetPlayerStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ChangePlayerStatisticsOperationRequest(GamePlayerModels.ChangePlayerStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class ServerSetPlayerStatisticsOperationRequest : SetPlayerStatisticsOperationRequest
+        public class ServerChangePlayerStatisticsOperationRequest : ChangePlayerStatisticsOperationRequest
         {
             protected override RequestRole role => RequestRole.Server;
 
-            public ServerSetPlayerStatisticsOperationRequest(GamePlayerModels.ServerSetPlayerStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ServerChangePlayerStatisticsOperationRequest(GamePlayerModels.ServerChangePlayerStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class AdminSetPlayerStatisticsOperationRequest : SetPlayerStatisticsOperationRequest
+        public class AdminChangePlayerStatisticsOperationRequest : ChangePlayerStatisticsOperationRequest
         {
             protected override RequestRole role => RequestRole.Admin;
 
-            public AdminSetPlayerStatisticsOperationRequest(GamePlayerModels.AdminSetPlayerStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public AdminChangePlayerStatisticsOperationRequest(GamePlayerModels.AdminChangePlayerStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
 

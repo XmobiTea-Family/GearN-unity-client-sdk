@@ -442,14 +442,14 @@
             return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.SetPlayerBanOperationRequest, CharacterPlayerResponseModels.SetPlayerBanOperationResponse>(new CharacterPlayerRequestModels.SetPlayerBanOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void setPlayerCurrency(CharacterPlayerModels.SetPlayerCurrencyRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void changePlayerCurrency(CharacterPlayerModels.ChangePlayerCurrencyRequestData requestData, Action<CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.SetPlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.ChangePlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse> setPlayerCurrencyAsync(CharacterPlayerModels.SetPlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> changePlayerCurrencyAsync(CharacterPlayerModels.ChangePlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.SetPlayerCurrencyOperationRequest, CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse>(new CharacterPlayerRequestModels.SetPlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ChangePlayerCurrencyOperationRequest, CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse>(new CharacterPlayerRequestModels.ChangePlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void setPlayerData(CharacterPlayerModels.SetPlayerDataRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -462,14 +462,14 @@
             return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.SetPlayerDataOperationRequest, CharacterPlayerResponseModels.SetPlayerDataOperationResponse>(new CharacterPlayerRequestModels.SetPlayerDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void setPlayerStatistics(CharacterPlayerModels.SetPlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void changePlayerStatistics(CharacterPlayerModels.ChangePlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.SetPlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.ChangePlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse> setPlayerStatisticsAsync(CharacterPlayerModels.SetPlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> changePlayerStatisticsAsync(CharacterPlayerModels.ChangePlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.SetPlayerStatisticsOperationRequest, CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse>(new CharacterPlayerRequestModels.SetPlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ChangePlayerStatisticsOperationRequest, CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse>(new CharacterPlayerRequestModels.ChangePlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void setRemoveStatus(CharacterPlayerModels.SetRemoveStatusRequestData requestData, Action<CharacterPlayerResponseModels.SetRemoveStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -975,14 +975,14 @@
                 return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ServerSetPlayerBanOperationRequest, CharacterPlayerResponseModels.SetPlayerBanOperationResponse>(new CharacterPlayerRequestModels.ServerSetPlayerBanOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerCurrency(CharacterPlayerModels.ServerSetPlayerCurrencyRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerCurrency(CharacterPlayerModels.ServerChangePlayerCurrencyRequestData requestData, Action<CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.ServerSetPlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.ServerChangePlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse> setPlayerCurrencyAsync(CharacterPlayerModels.ServerSetPlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> changePlayerCurrencyAsync(CharacterPlayerModels.ServerChangePlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ServerSetPlayerCurrencyOperationRequest, CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse>(new CharacterPlayerRequestModels.ServerSetPlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ServerChangePlayerCurrencyOperationRequest, CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse>(new CharacterPlayerRequestModels.ServerChangePlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
             public void setPlayerData(CharacterPlayerModels.ServerSetPlayerDataRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
@@ -994,14 +994,14 @@
                 return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ServerSetPlayerDataOperationRequest, CharacterPlayerResponseModels.SetPlayerDataOperationResponse>(new CharacterPlayerRequestModels.ServerSetPlayerDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerStatistics(CharacterPlayerModels.ServerSetPlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerStatistics(CharacterPlayerModels.ServerChangePlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.ServerSetPlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.ServerChangePlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse> setPlayerStatisticsAsync(CharacterPlayerModels.ServerSetPlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> changePlayerStatisticsAsync(CharacterPlayerModels.ServerChangePlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ServerSetPlayerStatisticsOperationRequest, CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse>(new CharacterPlayerRequestModels.ServerSetPlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.ServerChangePlayerStatisticsOperationRequest, CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse>(new CharacterPlayerRequestModels.ServerChangePlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setRemoveStatus(CharacterPlayerModels.ServerSetRemoveStatusRequestData requestData, Action<CharacterPlayerResponseModels.SetRemoveStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1508,14 +1508,14 @@
                 return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.AdminSetPlayerBanOperationRequest, CharacterPlayerResponseModels.SetPlayerBanOperationResponse>(new CharacterPlayerRequestModels.AdminSetPlayerBanOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerCurrency(CharacterPlayerModels.AdminSetPlayerCurrencyRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerCurrency(CharacterPlayerModels.AdminChangePlayerCurrencyRequestData requestData, Action<CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.AdminSetPlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.AdminChangePlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse> setPlayerCurrencyAsync(CharacterPlayerModels.AdminSetPlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> changePlayerCurrencyAsync(CharacterPlayerModels.AdminChangePlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.AdminSetPlayerCurrencyOperationRequest, CharacterPlayerResponseModels.SetPlayerCurrencyOperationResponse>(new CharacterPlayerRequestModels.AdminSetPlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.AdminChangePlayerCurrencyOperationRequest, CharacterPlayerResponseModels.ChangePlayerCurrencyOperationResponse>(new CharacterPlayerRequestModels.AdminChangePlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setPlayerData(CharacterPlayerModels.AdminSetPlayerDataRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1528,14 +1528,14 @@
                 return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.AdminSetPlayerDataOperationRequest, CharacterPlayerResponseModels.SetPlayerDataOperationResponse>(new CharacterPlayerRequestModels.AdminSetPlayerDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerStatistics(CharacterPlayerModels.AdminSetPlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerStatistics(CharacterPlayerModels.AdminChangePlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.AdminSetPlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new CharacterPlayerRequestModels.AdminChangePlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task setPlayerStatisticsAsync(CharacterPlayerModels.AdminSetPlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task changePlayerStatisticsAsync(CharacterPlayerModels.AdminChangePlayerStatisticsRequestData requestData, Action<CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.AdminSetPlayerStatisticsOperationRequest, CharacterPlayerResponseModels.SetPlayerStatisticsOperationResponse>(new CharacterPlayerRequestModels.AdminSetPlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<CharacterPlayerRequestModels.AdminChangePlayerStatisticsOperationRequest, CharacterPlayerResponseModels.ChangePlayerStatisticsOperationResponse>(new CharacterPlayerRequestModels.AdminChangePlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setRemoveStatus(CharacterPlayerModels.AdminSetRemoveStatusRequestData requestData, Action<CharacterPlayerResponseModels.SetRemoveStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)

@@ -274,7 +274,7 @@
 
         }
 
-        public class SetPlayerCurrencyOperationResponse : CustomOperationResponse<MasterPlayerModels.MasterPlayerResponseData>
+        public class ChangePlayerCurrencyOperationResponse : CustomOperationResponse<MasterPlayerModels.MasterPlayerResponseData>
         {
 
         }
@@ -284,7 +284,7 @@
 
         }
 
-        public class SetPlayerStatisticsOperationResponse : CustomOperationResponse<MasterPlayerModels.MasterPlayerResponseData>
+        public class ChangePlayerStatisticsOperationResponse : CustomOperationResponse<MasterPlayerModels.MasterPlayerResponseData>
         {
 
         }

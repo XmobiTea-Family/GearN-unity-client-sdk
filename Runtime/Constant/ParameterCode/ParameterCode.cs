@@ -291,9 +291,9 @@
         public const string ResetAccountPassword = "resetAccountPassword";
         public const string SetAvatar = "setAvatar";
         public const string GetAvatar = "getAvatar";
-        public const string SetPlayerCurrency = "setPlayerCurrency";
+        public const string ChangePlayerCurrency = "changePlayerCurrency";
         public const string GetPlayerCurrency = "getPlayerCurrency";
-        public const string SetPlayerStatistics = "setPlayerStatistics";
+        public const string ChangePlayerStatistics = "changePlayerStatistics";
         public const string GetPlayerStatistics = "getPlayerStatistics";
         public const string GetStatisticsLeaderboard = "getStatisticsLeaderboard";
         public const string GetStatisticsLeaderboardAroundPlayer = "getStatisticsLeaderboardAroundPlayer";
@@ -337,9 +337,9 @@
         public const string GetContentData = "getContentData";
         public const string SetContentData = "setContentData";
 
-        public const string SetGroupCurrency = "setGroupCurrency";
+        public const string ChangeGroupCurrency = "changeGroupCurrency";
         public const string GetGroupCurrency = "getGroupCurrency";
-        public const string SetGroupStatistics = "setGroupStatistics";
+        public const string ChangeGroupStatistics = "changeGroupStatistics";
         public const string GetGroupStatistics = "getGroupStatistics";
         public const string GetStatisticsLeaderboardAroundGroup = "getStatisticsLeaderboardAroundGroup";
         public const string SetGroupData = "setGroupData";
@@ -357,7 +357,7 @@
         public const string GetGroupMessage = "getGroupMessage";
         public const string GetGroupsWithDisplayName = "getGroupsWithDisplayName";
 
-        public const string SetItemStatistics = "setItemStatistics";
+        public const string ChangeItemStatistics = "changeItemStatistics";
         public const string GetItemStatistics = "getItemStatistics";
         public const string GetStatisticsLeaderboardAroundItem = "getStatisticsLeaderboardAroundItem";
         public const string SetItemData = "setItemData";

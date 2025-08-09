@@ -749,27 +749,27 @@
         }
 
 
-        public class SetGroupCurrencyOperationRequest : CustomOperationRequest<GroupModels.SetGroupCurrencyRequestData>
+        public class ChangeGroupCurrencyOperationRequest : CustomOperationRequest<GroupModels.ChangeGroupCurrencyRequestData>
         {
-            protected override string operationCode => OperationCode.SetGroupCurrency;
+            protected override string operationCode => OperationCode.ChangeGroupCurrency;
             protected override RequestType requestType => RequestType.Group;
             protected override RequestRole role => RequestRole.Client;
 
-            public SetGroupCurrencyOperationRequest(GroupModels.SetGroupCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ChangeGroupCurrencyOperationRequest(GroupModels.ChangeGroupCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class ServerSetGroupCurrencyOperationRequest : SetGroupCurrencyOperationRequest
+        public class ServerChangeGroupCurrencyOperationRequest : ChangeGroupCurrencyOperationRequest
         {
             protected override RequestRole role => RequestRole.Server;
 
-            public ServerSetGroupCurrencyOperationRequest(GroupModels.ServerSetGroupCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ServerChangeGroupCurrencyOperationRequest(GroupModels.ServerChangeGroupCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class AdminSetGroupCurrencyOperationRequest : SetGroupCurrencyOperationRequest
+        public class AdminChangeGroupCurrencyOperationRequest : ChangeGroupCurrencyOperationRequest
         {
             protected override RequestRole role => RequestRole.Admin;
 
-            public AdminSetGroupCurrencyOperationRequest(GroupModels.AdminSetGroupCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public AdminChangeGroupCurrencyOperationRequest(GroupModels.AdminChangeGroupCurrencyRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
 
@@ -797,27 +797,27 @@
         }
 
 
-        public class SetGroupStatisticsOperationRequest : CustomOperationRequest<GroupModels.SetGroupStatisticsRequestData>
+        public class ChangeGroupStatisticsOperationRequest : CustomOperationRequest<GroupModels.ChangeGroupStatisticsRequestData>
         {
-            protected override string operationCode => OperationCode.SetGroupStatistics;
+            protected override string operationCode => OperationCode.ChangeGroupStatistics;
             protected override RequestType requestType => RequestType.Group;
             protected override RequestRole role => RequestRole.Client;
 
-            public SetGroupStatisticsOperationRequest(GroupModels.SetGroupStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ChangeGroupStatisticsOperationRequest(GroupModels.ChangeGroupStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class ServerSetGroupStatisticsOperationRequest : SetGroupStatisticsOperationRequest
+        public class ServerChangeGroupStatisticsOperationRequest : ChangeGroupStatisticsOperationRequest
         {
             protected override RequestRole role => RequestRole.Server;
 
-            public ServerSetGroupStatisticsOperationRequest(GroupModels.ServerSetGroupStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ServerChangeGroupStatisticsOperationRequest(GroupModels.ServerChangeGroupStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class AdminSetGroupStatisticsOperationRequest : SetGroupStatisticsOperationRequest
+        public class AdminChangeGroupStatisticsOperationRequest : ChangeGroupStatisticsOperationRequest
         {
             protected override RequestRole role => RequestRole.Admin;
 
-            public AdminSetGroupStatisticsOperationRequest(GroupModels.AdminSetGroupStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public AdminChangeGroupStatisticsOperationRequest(GroupModels.AdminChangeGroupStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
 

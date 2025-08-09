@@ -440,14 +440,14 @@
             [GNHashtableDataMember(code = ParameterCode.GetAvatar, isOptional = true)]
             public PermissionRulesParam? getAvatar;
 
-            [GNHashtableDataMember(code = ParameterCode.SetPlayerCurrency, isOptional = true)]
-            public PermissionRulesParam? setPlayerCurrency;
+            [GNHashtableDataMember(code = ParameterCode.ChangePlayerCurrency, isOptional = true)]
+            public PermissionRulesParam? changePlayerCurrency;
 
             [GNHashtableDataMember(code = ParameterCode.GetPlayerCurrency, isOptional = true)]
             public PermissionRulesParam? getPlayerCurrency;
 
-            [GNHashtableDataMember(code = ParameterCode.SetPlayerStatistics, isOptional = true)]
-            public PermissionRulesParam? setPlayerStatistics;
+            [GNHashtableDataMember(code = ParameterCode.ChangePlayerStatistics, isOptional = true)]
+            public PermissionRulesParam? changePlayerStatistics;
 
             [GNHashtableDataMember(code = ParameterCode.GetPlayerStatistics, isOptional = true)]
             public PermissionRulesParam? getPlayerStatistics;
@@ -729,14 +729,14 @@
             [GNHashtableDataMember(code = ParameterCode.GetAvatar, isOptional = true)]
             public PermissionRulesParam? getAvatar;
 
-            [GNHashtableDataMember(code = ParameterCode.SetPlayerCurrency, isOptional = true)]
-            public PermissionRulesParam? setPlayerCurrency;
+            [GNHashtableDataMember(code = ParameterCode.ChangePlayerCurrency, isOptional = true)]
+            public PermissionRulesParam? changePlayerCurrency;
 
             [GNHashtableDataMember(code = ParameterCode.GetPlayerCurrency, isOptional = true)]
             public PermissionRulesParam? getPlayerCurrency;
 
-            [GNHashtableDataMember(code = ParameterCode.SetPlayerStatistics, isOptional = true)]
-            public PermissionRulesParam? setPlayerStatistics;
+            [GNHashtableDataMember(code = ParameterCode.ChangePlayerStatistics, isOptional = true)]
+            public PermissionRulesParam? changePlayerStatistics;
 
             [GNHashtableDataMember(code = ParameterCode.GetPlayerStatistics, isOptional = true)]
             public PermissionRulesParam? getPlayerStatistics;
@@ -935,14 +935,14 @@
             [GNHashtableDataMember(code = ParameterCode.GetAvatar, isOptional = true)]
             public PermissionRulesParam? getAvatar;
 
-            [GNHashtableDataMember(code = ParameterCode.SetGroupCurrency, isOptional = true)]
-            public PermissionRulesParam? setGroupCurrency;
+            [GNHashtableDataMember(code = ParameterCode.ChangeGroupCurrency, isOptional = true)]
+            public PermissionRulesParam? changeGroupCurrency;
 
             [GNHashtableDataMember(code = ParameterCode.GetGroupCurrency, isOptional = true)]
             public PermissionRulesParam? getGroupCurrency;
 
-            [GNHashtableDataMember(code = ParameterCode.SetGroupStatistics, isOptional = true)]
-            public PermissionRulesParam? setGroupStatistics;
+            [GNHashtableDataMember(code = ParameterCode.ChangeGroupStatistics, isOptional = true)]
+            public PermissionRulesParam? changeGroupStatistics;
 
             [GNHashtableDataMember(code = ParameterCode.GetGroupStatistics, isOptional = true)]
             public PermissionRulesParam? getGroupStatistics;
@@ -1081,8 +1081,8 @@
             [GNHashtableDataMember(code = ParameterCode.GetAvatar, isOptional = true)]
             public PermissionRulesParam? getAvatar;
 
-            [GNHashtableDataMember(code = ParameterCode.SetItemStatistics, isOptional = true)]
-            public PermissionRulesParam? setItemStatistics;
+            [GNHashtableDataMember(code = ParameterCode.ChangeItemStatistics, isOptional = true)]
+            public PermissionRulesParam? changeItemStatistics;
 
             [GNHashtableDataMember(code = ParameterCode.GetItemStatistics, isOptional = true)]
             public PermissionRulesParam? getItemStatistics;
@@ -1459,14 +1459,14 @@
             [GNHashtableDataMember(code = ParameterCode.GetAvatar, isOptional = true)]
             public PermissionRulesParam? getAvatar;
 
-            [GNHashtableDataMember(code = ParameterCode.SetPlayerCurrency, isOptional = true)]
-            public PermissionRulesParam? setPlayerCurrency;
+            [GNHashtableDataMember(code = ParameterCode.ChangePlayerCurrency, isOptional = true)]
+            public PermissionRulesParam? changePlayerCurrency;
 
             [GNHashtableDataMember(code = ParameterCode.GetPlayerCurrency, isOptional = true)]
             public PermissionRulesParam? getPlayerCurrency;
 
-            [GNHashtableDataMember(code = ParameterCode.SetPlayerStatistics, isOptional = true)]
-            public PermissionRulesParam? setPlayerStatistics;
+            [GNHashtableDataMember(code = ParameterCode.ChangePlayerStatistics, isOptional = true)]
+            public PermissionRulesParam? changePlayerStatistics;
 
             [GNHashtableDataMember(code = ParameterCode.GetPlayerStatistics, isOptional = true)]
             public PermissionRulesParam? getPlayerStatistics;

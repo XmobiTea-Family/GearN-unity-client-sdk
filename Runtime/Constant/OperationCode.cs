@@ -101,10 +101,10 @@ namespace XmobiTea.GearN.Constant
         public const string SetAvatar = "setAvatar";
         public const string GetAvatar = "getAvatar";
 
-        public const string SetPlayerCurrency = "setPlayerCurrency";
+        public const string ChangePlayerCurrency = "changePlayerCurrency";
         public const string GetPlayerCurrency = "getPlayerCurrency";
 
-        public const string SetPlayerStatistics = "setPlayerStatistics";
+        public const string ChangePlayerStatistics = "changePlayerStatistics";
         public const string GetPlayerStatistics = "getPlayerStatistics";
 
         public const string GetStatisticsLeaderboard = "getStatisticsLeaderboard";
@@ -142,10 +142,10 @@ namespace XmobiTea.GearN.Constant
         public const string CreatePlayerCharacter = "createPlayerCharacter";
         public const string GetOwner = "getOwner";
         public const string GetRemoveStatus = "getRemoveStatus";
-        public const string SetGroupStatistics = "setGroupStatistics";
+        public const string ChangeGroupStatistics = "changeGroupStatistics";
         public const string SetGroupData = "setGroupData";
         public const string GetGroupCurrency = "getGroupCurrency";
-        public const string SetGroupCurrency = "setGroupCurrency";
+        public const string ChangeGroupCurrency = "changeGroupCurrency";
         public const string CreateGroupItem = "createGroupItem";
         public const string GetStatisticsLeaderboardAroundGroup = "getStatisticsLeaderboardAroundGroup";
         public const string GetGroupsWithTag = "getGroupsWithTag";
@@ -155,7 +155,7 @@ namespace XmobiTea.GearN.Constant
         public const string GetGroupData = "getGroupData";
         public const string GetGroupInformation = "getGroupInformation";
         public const string GetMembers = "getMembers";
-        public const string SetItemStatistics = "setItemStatistics";
+        public const string ChangeItemStatistics = "changeItemStatistics";
         public const string SetItemData = "setItemData";
         public const string GetItemData = "getItemData";
         public const string GetStatisticsLeaderboardAroundItem = "getStatisticsLeaderboardAroundItem";

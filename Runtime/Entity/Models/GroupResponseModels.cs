@@ -159,7 +159,7 @@
 
         }
 
-        public class SetGroupCurrencyOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class ChangeGroupCurrencyOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
         {
 
         }
@@ -169,7 +169,7 @@
 
         }
 
-        public class SetGroupStatisticsOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class ChangeGroupStatisticsOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
         {
 
         }

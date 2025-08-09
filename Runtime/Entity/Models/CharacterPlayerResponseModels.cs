@@ -219,7 +219,7 @@
 
         }
 
-        public class SetPlayerCurrencyOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
+        public class ChangePlayerCurrencyOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
         {
 
         }
@@ -229,7 +229,7 @@
 
         }
 
-        public class SetPlayerStatisticsOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
+        public class ChangePlayerStatisticsOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
         {
 
         }

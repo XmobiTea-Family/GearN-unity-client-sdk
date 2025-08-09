@@ -533,7 +533,7 @@
         {
         }
 
-        public class SetItemStatisticsRequestData
+        public class ChangeItemStatisticsRequestData
         {
             [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
@@ -546,11 +546,11 @@
 
         }
 
-        public class ServerSetItemStatisticsRequestData : SetItemStatisticsRequestData
+        public class ServerChangeItemStatisticsRequestData : ChangeItemStatisticsRequestData
         {
         }
 
-        public class AdminSetItemStatisticsRequestData : ServerSetItemStatisticsRequestData
+        public class AdminChangeItemStatisticsRequestData : ServerChangeItemStatisticsRequestData
         {
         }
 

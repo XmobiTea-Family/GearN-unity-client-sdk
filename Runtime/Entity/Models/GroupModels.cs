@@ -611,7 +611,7 @@
         {
         }
 
-        public class SetGroupCurrencyRequestData
+        public class ChangeGroupCurrencyRequestData
         {
             [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
@@ -624,11 +624,11 @@
 
         }
 
-        public class ServerSetGroupCurrencyRequestData : SetGroupCurrencyRequestData
+        public class ServerChangeGroupCurrencyRequestData : ChangeGroupCurrencyRequestData
         {
         }
 
-        public class AdminSetGroupCurrencyRequestData : ServerSetGroupCurrencyRequestData
+        public class AdminChangeGroupCurrencyRequestData : ServerChangeGroupCurrencyRequestData
         {
         }
 
@@ -650,7 +650,7 @@
         {
         }
 
-        public class SetGroupStatisticsRequestData
+        public class ChangeGroupStatisticsRequestData
         {
             [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
@@ -663,11 +663,11 @@
 
         }
 
-        public class ServerSetGroupStatisticsRequestData : SetGroupStatisticsRequestData
+        public class ServerChangeGroupStatisticsRequestData : ChangeGroupStatisticsRequestData
         {
         }
 
-        public class AdminSetGroupStatisticsRequestData : ServerSetGroupStatisticsRequestData
+        public class AdminChangeGroupStatisticsRequestData : ServerChangeGroupStatisticsRequestData
         {
         }
 

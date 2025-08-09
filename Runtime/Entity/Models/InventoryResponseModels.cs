@@ -144,7 +144,7 @@
 
         }
 
-        public class SetItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class ChangeItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
         {
 
         }

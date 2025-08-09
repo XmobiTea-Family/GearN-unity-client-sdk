@@ -552,14 +552,14 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.SetPlayerBanOperationRequest, MasterPlayerResponseModels.SetPlayerBanOperationResponse>(new MasterPlayerRequestModels.SetPlayerBanOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void setPlayerCurrency(MasterPlayerModels.SetPlayerCurrencyRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void changePlayerCurrency(MasterPlayerModels.ChangePlayerCurrencyRequestData requestData, Action<MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new MasterPlayerRequestModels.SetPlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ChangePlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse> setPlayerCurrencyAsync(MasterPlayerModels.SetPlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> changePlayerCurrencyAsync(MasterPlayerModels.ChangePlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.SetPlayerCurrencyOperationRequest, MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse>(new MasterPlayerRequestModels.SetPlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ChangePlayerCurrencyOperationRequest, MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse>(new MasterPlayerRequestModels.ChangePlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void setPlayerData(MasterPlayerModels.SetPlayerDataRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -572,14 +572,14 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.SetPlayerDataOperationRequest, MasterPlayerResponseModels.SetPlayerDataOperationResponse>(new MasterPlayerRequestModels.SetPlayerDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void setPlayerStatistics(MasterPlayerModels.SetPlayerStatisticsRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void changePlayerStatistics(MasterPlayerModels.ChangePlayerStatisticsRequestData requestData, Action<MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new MasterPlayerRequestModels.SetPlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ChangePlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse> setPlayerStatisticsAsync(MasterPlayerModels.SetPlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> changePlayerStatisticsAsync(MasterPlayerModels.ChangePlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.SetPlayerStatisticsOperationRequest, MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse>(new MasterPlayerRequestModels.SetPlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ChangePlayerStatisticsOperationRequest, MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse>(new MasterPlayerRequestModels.ChangePlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void setTag(MasterPlayerModels.SetTagRequestData requestData, Action<MasterPlayerResponseModels.SetTagOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1404,14 +1404,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerSetPlayerBanOperationRequest, MasterPlayerResponseModels.SetPlayerBanOperationResponse>(new MasterPlayerRequestModels.ServerSetPlayerBanOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerCurrency(MasterPlayerModels.ServerSetPlayerCurrencyRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerCurrency(MasterPlayerModels.ServerChangePlayerCurrencyRequestData requestData, Action<MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ServerSetPlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ServerChangePlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse> setPlayerCurrencyAsync(MasterPlayerModels.ServerSetPlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> changePlayerCurrencyAsync(MasterPlayerModels.ServerChangePlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerSetPlayerCurrencyOperationRequest, MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse>(new MasterPlayerRequestModels.ServerSetPlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerChangePlayerCurrencyOperationRequest, MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse>(new MasterPlayerRequestModels.ServerChangePlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setPlayerData(MasterPlayerModels.ServerSetPlayerDataRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1424,14 +1424,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerSetPlayerDataOperationRequest, MasterPlayerResponseModels.SetPlayerDataOperationResponse>(new MasterPlayerRequestModels.ServerSetPlayerDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerStatistics(MasterPlayerModels.ServerSetPlayerStatisticsRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerStatistics(MasterPlayerModels.ServerChangePlayerStatisticsRequestData requestData, Action<MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ServerSetPlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ServerChangePlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse> setPlayerStatisticsAsync(MasterPlayerModels.ServerSetPlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> changePlayerStatisticsAsync(MasterPlayerModels.ServerChangePlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerSetPlayerStatisticsOperationRequest, MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse>(new MasterPlayerRequestModels.ServerSetPlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerChangePlayerStatisticsOperationRequest, MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse>(new MasterPlayerRequestModels.ServerChangePlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setTag(MasterPlayerModels.ServerSetTagRequestData requestData, Action<MasterPlayerResponseModels.SetTagOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -2257,14 +2257,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminSetPlayerBanOperationRequest, MasterPlayerResponseModels.SetPlayerBanOperationResponse>(new MasterPlayerRequestModels.AdminSetPlayerBanOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerCurrency(MasterPlayerModels.AdminSetPlayerCurrencyRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerCurrency(MasterPlayerModels.AdminChangePlayerCurrencyRequestData requestData, Action<MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.AdminSetPlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.AdminChangePlayerCurrencyOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse> setPlayerCurrencyAsync(MasterPlayerModels.AdminSetPlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse> changePlayerCurrencyAsync(MasterPlayerModels.AdminChangePlayerCurrencyRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminSetPlayerCurrencyOperationRequest, MasterPlayerResponseModels.SetPlayerCurrencyOperationResponse>(new MasterPlayerRequestModels.AdminSetPlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminChangePlayerCurrencyOperationRequest, MasterPlayerResponseModels.ChangePlayerCurrencyOperationResponse>(new MasterPlayerRequestModels.AdminChangePlayerCurrencyOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setPlayerData(MasterPlayerModels.AdminSetPlayerDataRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerDataOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -2277,14 +2277,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminSetPlayerDataOperationRequest, MasterPlayerResponseModels.SetPlayerDataOperationResponse>(new MasterPlayerRequestModels.AdminSetPlayerDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setPlayerStatistics(MasterPlayerModels.AdminSetPlayerStatisticsRequestData requestData, Action<MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changePlayerStatistics(MasterPlayerModels.AdminChangePlayerStatisticsRequestData requestData, Action<MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.AdminSetPlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.AdminChangePlayerStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse> setPlayerStatisticsAsync(MasterPlayerModels.AdminSetPlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse> changePlayerStatisticsAsync(MasterPlayerModels.AdminChangePlayerStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminSetPlayerStatisticsOperationRequest, MasterPlayerResponseModels.SetPlayerStatisticsOperationResponse>(new MasterPlayerRequestModels.AdminSetPlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminChangePlayerStatisticsOperationRequest, MasterPlayerResponseModels.ChangePlayerStatisticsOperationResponse>(new MasterPlayerRequestModels.AdminChangePlayerStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setTag(MasterPlayerModels.AdminSetTagRequestData requestData, Action<MasterPlayerResponseModels.SetTagOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)

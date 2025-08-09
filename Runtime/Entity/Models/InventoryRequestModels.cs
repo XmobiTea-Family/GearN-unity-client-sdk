@@ -677,27 +677,27 @@
         }
 
 
-        public class SetItemStatisticsOperationRequest : CustomOperationRequest<InventoryModels.SetItemStatisticsRequestData>
+        public class ChangeItemStatisticsOperationRequest : CustomOperationRequest<InventoryModels.ChangeItemStatisticsRequestData>
         {
-            protected override string operationCode => OperationCode.SetItemStatistics;
+            protected override string operationCode => OperationCode.ChangeItemStatistics;
             protected override RequestType requestType => RequestType.Inventory;
             protected override RequestRole role => RequestRole.Client;
 
-            public SetItemStatisticsOperationRequest(InventoryModels.SetItemStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ChangeItemStatisticsOperationRequest(InventoryModels.ChangeItemStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class ServerSetItemStatisticsOperationRequest : SetItemStatisticsOperationRequest
+        public class ServerChangeItemStatisticsOperationRequest : ChangeItemStatisticsOperationRequest
         {
             protected override RequestRole role => RequestRole.Server;
 
-            public ServerSetItemStatisticsOperationRequest(InventoryModels.ServerSetItemStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ServerChangeItemStatisticsOperationRequest(InventoryModels.ServerChangeItemStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
-        public class AdminSetItemStatisticsOperationRequest : SetItemStatisticsOperationRequest
+        public class AdminChangeItemStatisticsOperationRequest : ChangeItemStatisticsOperationRequest
         {
             protected override RequestRole role => RequestRole.Admin;
 
-            public AdminSetItemStatisticsOperationRequest(InventoryModels.AdminSetItemStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public AdminChangeItemStatisticsOperationRequest(InventoryModels.AdminChangeItemStatisticsRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
 

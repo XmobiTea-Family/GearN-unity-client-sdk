@@ -846,7 +846,7 @@
         {
         }
 
-        public class SetPlayerCurrencyRequestData
+        public class ChangePlayerCurrencyRequestData
         {
             [StringDataMember(code = ParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
             public string characterId;
@@ -859,11 +859,11 @@
 
         }
 
-        public class ServerSetPlayerCurrencyRequestData : SetPlayerCurrencyRequestData
+        public class ServerChangePlayerCurrencyRequestData : ChangePlayerCurrencyRequestData
         {
         }
 
-        public class AdminSetPlayerCurrencyRequestData : ServerSetPlayerCurrencyRequestData
+        public class AdminChangePlayerCurrencyRequestData : ServerChangePlayerCurrencyRequestData
         {
         }
 
@@ -885,7 +885,7 @@
         {
         }
 
-        public class SetPlayerStatisticsRequestData
+        public class ChangePlayerStatisticsRequestData
         {
             [StringDataMember(code = ParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
             public string characterId;
@@ -898,11 +898,11 @@
 
         }
 
-        public class ServerSetPlayerStatisticsRequestData : SetPlayerStatisticsRequestData
+        public class ServerChangePlayerStatisticsRequestData : ChangePlayerStatisticsRequestData
         {
         }
 
-        public class AdminSetPlayerStatisticsRequestData : ServerSetPlayerStatisticsRequestData
+        public class AdminChangePlayerStatisticsRequestData : ServerChangePlayerStatisticsRequestData
         {
         }
 

@@ -292,14 +292,14 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<InventoryRequestModels.SetItemDataOperationRequest, InventoryResponseModels.SetItemDataOperationResponse>(new InventoryRequestModels.SetItemDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void setItemStatistics(InventoryModels.SetItemStatisticsRequestData requestData, Action<InventoryResponseModels.SetItemStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void changeItemStatistics(InventoryModels.ChangeItemStatisticsRequestData requestData, Action<InventoryResponseModels.ChangeItemStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new InventoryRequestModels.SetItemStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new InventoryRequestModels.ChangeItemStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<InventoryResponseModels.SetItemStatisticsOperationResponse> setItemStatisticsAsync(InventoryModels.SetItemStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<InventoryResponseModels.ChangeItemStatisticsOperationResponse> changeItemStatisticsAsync(InventoryModels.ChangeItemStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<InventoryRequestModels.SetItemStatisticsOperationRequest, InventoryResponseModels.SetItemStatisticsOperationResponse>(new InventoryRequestModels.SetItemStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<InventoryRequestModels.ChangeItemStatisticsOperationRequest, InventoryResponseModels.ChangeItemStatisticsOperationResponse>(new InventoryRequestModels.ChangeItemStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void setOwner(InventoryModels.SetOwnerRequestData requestData, Action<InventoryResponseModels.SetOwnerOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -635,14 +635,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<InventoryRequestModels.ServerSetItemDataOperationRequest, InventoryResponseModels.SetItemDataOperationResponse>(new InventoryRequestModels.ServerSetItemDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setItemStatistics(InventoryModels.ServerSetItemStatisticsRequestData requestData, Action<InventoryResponseModels.SetItemStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changeItemStatistics(InventoryModels.ServerChangeItemStatisticsRequestData requestData, Action<InventoryResponseModels.ChangeItemStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new InventoryRequestModels.ServerSetItemStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new InventoryRequestModels.ServerChangeItemStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<InventoryResponseModels.SetItemStatisticsOperationResponse> setItemStatisticsAsync(InventoryModels.ServerSetItemStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<InventoryResponseModels.ChangeItemStatisticsOperationResponse> changeItemStatisticsAsync(InventoryModels.ServerChangeItemStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<InventoryRequestModels.ServerSetItemStatisticsOperationRequest, InventoryResponseModels.SetItemStatisticsOperationResponse>(new InventoryRequestModels.ServerSetItemStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<InventoryRequestModels.ServerChangeItemStatisticsOperationRequest, InventoryResponseModels.ChangeItemStatisticsOperationResponse>(new InventoryRequestModels.ServerChangeItemStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setOwner(InventoryModels.ServerSetOwnerRequestData requestData, Action<InventoryResponseModels.SetOwnerOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -979,14 +979,14 @@ namespace XmobiTea.GearN
                 return GNNetwork.sendViaHttpAsync<InventoryRequestModels.AdminSetItemDataOperationRequest, InventoryResponseModels.SetItemDataOperationResponse>(new InventoryRequestModels.AdminSetItemDataOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void setItemStatistics(InventoryModels.AdminSetItemStatisticsRequestData requestData, Action<InventoryResponseModels.SetItemStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void changeItemStatistics(InventoryModels.AdminChangeItemStatisticsRequestData requestData, Action<InventoryResponseModels.ChangeItemStatisticsOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new InventoryRequestModels.AdminSetItemStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new InventoryRequestModels.AdminChangeItemStatisticsOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<InventoryResponseModels.SetItemStatisticsOperationResponse> setItemStatisticsAsync(InventoryModels.AdminSetItemStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<InventoryResponseModels.ChangeItemStatisticsOperationResponse> changeItemStatisticsAsync(InventoryModels.AdminChangeItemStatisticsRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<InventoryRequestModels.AdminSetItemStatisticsOperationRequest, InventoryResponseModels.SetItemStatisticsOperationResponse>(new InventoryRequestModels.AdminSetItemStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<InventoryRequestModels.AdminChangeItemStatisticsOperationRequest, InventoryResponseModels.ChangeItemStatisticsOperationResponse>(new InventoryRequestModels.AdminChangeItemStatisticsOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void setOwner(InventoryModels.AdminSetOwnerRequestData requestData, Action<InventoryResponseModels.SetOwnerOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
