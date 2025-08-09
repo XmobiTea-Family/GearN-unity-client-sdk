@@ -39,7 +39,7 @@
 
         }
 
-        public class LoginByGenericServiceOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByGenericServiceOperationResponse : CustomOperationResponse<AuthenticateModels.GenericServiceAuthenticateResponseData>
         {
 
         }

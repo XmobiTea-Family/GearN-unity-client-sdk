@@ -8,7 +8,7 @@
     {
         public class CreateNewFileUploadInfoRequestData
         {
-            [StringDataMember(code = GNParameterCode.FileName, mustNonNull = true, minLength = 5, maxLength = 50)]
+            [StringDataMember(code = ParameterCode.FileName, mustNonNull = true, minLength = 5, maxLength = 50)]
             public string fileName;
 
         }
@@ -23,10 +23,10 @@
 
         public class GetContentDataRequestData
         {
-            [GNArrayDataMember(code = GNParameterCode.Keys, elementCls = typeof(string), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Keys, elementCls = typeof(string), isOptional = true)]
             public List<string>? keys;
 
-            [StringDataMember(code = GNParameterCode.Label, minLength = 2, maxLength = 32, isOptional = true, defaultValue = "")]
+            [StringDataMember(code = ParameterCode.Label, minLength = 2, maxLength = 32, isOptional = true, defaultValue = "")]
             public string? label;
 
         }
@@ -41,10 +41,10 @@
 
         public class GetFileUploadInfoListRequestData
         {
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -59,7 +59,7 @@
 
         public class GetFileUploadInfoRequestData
         {
-            [StringDataMember(code = GNParameterCode.FileId, mustNonNull = true, minLength = 15, maxLength = 15)]
+            [StringDataMember(code = ParameterCode.FileId, mustNonNull = true, minLength = 15, maxLength = 15)]
             public string fileId;
 
         }
@@ -74,10 +74,10 @@
 
         public class RemoveFileUploadInfoRequestData
         {
-            [StringDataMember(code = GNParameterCode.FileId, mustNonNull = true, minLength = 15, maxLength = 15)]
+            [StringDataMember(code = ParameterCode.FileId, mustNonNull = true, minLength = 15, maxLength = 15)]
             public string fileId;
 
-            [StringDataMember(code = GNParameterCode.Reason, isOptional = true, defaultValue = "")]
+            [StringDataMember(code = ParameterCode.Reason, isOptional = true, defaultValue = "")]
             public string? reason;
 
         }
@@ -92,7 +92,7 @@
 
         public class RequestDownloadFileUploadInfoRequestData
         {
-            [StringDataMember(code = GNParameterCode.FileId, mustNonNull = true, minLength = 15, maxLength = 15)]
+            [StringDataMember(code = ParameterCode.FileId, mustNonNull = true, minLength = 15, maxLength = 15)]
             public string fileId;
 
         }
@@ -107,10 +107,10 @@
 
         public class SetContentDataRequestData
         {
-            [GNArrayDataMember(code = GNParameterCode.Configs, elementCls = typeof(ContentDataParam), mustNonNull = true)]
+            [GNArrayDataMember(code = ParameterCode.Configs, elementCls = typeof(ContentDataParam), mustNonNull = true)]
             public List<ContentDataParam> configs;
 
-            [StringDataMember(code = GNParameterCode.Label, minLength = 2, maxLength = 32, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Label, minLength = 2, maxLength = 32, isOptional = true)]
             public string? label;
 
         }
@@ -129,10 +129,10 @@
     {
         public class ContentDataParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [GNHashtableDataMember(code = GNParameterCode.Data)]
+            [GNHashtableDataMember(code = ParameterCode.Data)]
             public GNHashtable data;
 
         }
@@ -143,60 +143,60 @@
     {
         public class FileIdUploadResponseData
         {
-            [StringDataMember(code = GNParameterCode.FileId)]
+            [StringDataMember(code = ParameterCode.FileId)]
             public string fileId;
 
         }
 
         public class GetContentDataResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Configs, elementCls = typeof(ContentDataParam), mustNonNull = true)]
+            [GNArrayDataMember(code = ParameterCode.Configs, elementCls = typeof(ContentDataParam), mustNonNull = true)]
             public List<ContentDataParam> configs;
 
         }
 
         public class GetFileUploadInfoListResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(FileIdUploadResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(FileIdUploadResponseData))]
             public List<FileIdUploadResponseData> results;
 
         }
 
         public class FileUploadItem
         {
-            [StringDataMember(code = GNParameterCode.MimeType)]
+            [StringDataMember(code = ParameterCode.MimeType)]
             public string mimeType;
 
-            [NumberDataMember(code = GNParameterCode.Size)]
+            [NumberDataMember(code = ParameterCode.Size)]
             public long size;
 
-            [StringDataMember(code = GNParameterCode.FolderFileName)]
+            [StringDataMember(code = ParameterCode.FolderFileName)]
             public string folderFileName;
 
         }
 
         public class GetFileUploadInfoResponseData : FileIdUploadResponseData
         {
-            [StringDataMember(code = GNParameterCode.FileName)]
+            [StringDataMember(code = ParameterCode.FileName)]
             public string fileName;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            [NumberDataMember(code = ParameterCode.TsCreate)]
             public long tsCreate;
 
-            [GNHashtableDataMember(code = GNParameterCode.RemoveStatus)]
+            [GNHashtableDataMember(code = ParameterCode.RemoveStatus)]
             public GenericModels.RemoveStatusItem removeStatus;
 
-            [NumberDataMember(code = GNParameterCode.TsUploadExpire, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.TsUploadExpire, isOptional = true)]
             public long? tsUploadExpire;
 
-            [GNHashtableDataMember(code = GNParameterCode.FileUpload, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.FileUpload, isOptional = true)]
             public FileUploadItem? fileUpload;
 
         }
 
         public class RequestDownloadFileUploadInfoResponseData
         {
-            [StringDataMember(code = GNParameterCode.DownloadToken)]
+            [StringDataMember(code = ParameterCode.DownloadToken)]
             public string downloadToken;
         }
 

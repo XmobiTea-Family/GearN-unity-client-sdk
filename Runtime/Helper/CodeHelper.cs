@@ -41,29 +41,7 @@
     /// </summary>
     public static class CodeHelper
     {
-        private static CodeHelperBase operationCodeHelper;
-        private static CodeHelperBase eventCodeHelper;
         private static CodeHelperBase returnCodeHelper;
-
-        /// <summary>
-        /// Gets the name of an operation code.
-        /// </summary>
-        /// <param name="operationCode">The operation code to look up.</param>
-        /// <returns>The name of the operation code.</returns>
-        public static string getOperationCodeName(int operationCode)
-        {
-            return CodeHelper.operationCodeHelper.getCodeName(operationCode);
-        }
-
-        /// <summary>
-        /// Gets the name of an event code.
-        /// </summary>
-        /// <param name="eventCode">The event code to look up.</param>
-        /// <returns>The name of the event code.</returns>
-        public static string getEventCodeName(int eventCode)
-        {
-            return CodeHelper.eventCodeHelper.getCodeName(eventCode);
-        }
 
         /// <summary>
         /// Gets the name of a return code.
@@ -78,45 +56,7 @@
         // Static constructor to initialize the helper dictionaries.
         static CodeHelper()
         {
-            CodeHelper.setOperationCodeDic();
-            CodeHelper.setEventCodeDic();
             CodeHelper.setReturnCodeDic();
-        }
-
-        /// <summary>
-        /// Sets up the operation code dictionary by reflecting on the OperationCode class.
-        /// </summary>
-        private static void setOperationCodeDic()
-        {
-            var codeDict = new Dictionary<int, string>();
-
-            // Retrieve all public static fields in the OperationCode class.
-            var fields = typeof(OperationCode).GetFields(BindingFlags.Public | BindingFlags.Static);
-
-            foreach (var field in fields)
-            {
-                codeDict[Convert.ToInt32(field.GetValue(null))] = field.Name;
-            }
-
-            CodeHelper.operationCodeHelper = new CodeHelperBase(codeDict);
-        }
-
-        /// <summary>
-        /// Sets up the event code dictionary by reflecting on the EventCode class.
-        /// </summary>
-        private static void setEventCodeDic()
-        {
-            var codeDict = new Dictionary<int, string>();
-
-            // Retrieve all public static fields in the EventCode class.
-            var fields = typeof(EventCode).GetFields(BindingFlags.Public | BindingFlags.Static);
-
-            foreach (var field in fields)
-            {
-                codeDict[Convert.ToInt32(field.GetValue(null))] = field.Name;
-            }
-
-            CodeHelper.eventCodeHelper = new CodeHelperBase(codeDict);
         }
 
         /// <summary>

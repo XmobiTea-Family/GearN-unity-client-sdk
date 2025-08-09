@@ -1,6 +1,7 @@
 ﻿namespace XmobiTea.GN.Networking
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using XmobiTea.GN.Common;
@@ -94,13 +95,13 @@
         /// Enqueues an operation request for processing.
         /// </summary>
         /// <param name="requestType">The type of the request.</param>
-        /// <param name="requestRole">The role associated with the request.</param>
+        /// <param name="role">The role associated with the request.</param>
         /// <param name="operationRequest">The operation request to be enqueued.</param>
         /// <param name="onOperationResponse">The callback for the response.</param>
         /// <param name="authToken">The authentication token.</param>
         /// <param name="secretKey">The secret key, if applicable.</param>
         /// <param name="customTags">Custom tags for the operation.</param>
-        void IPeer.enqueue(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        void IPeer.enqueue(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             if (!this.isUse)
             {
@@ -110,7 +111,7 @@
 
             if (operationRequest.getRequestId() != -1) operationRequest.setRequestId(PeerBase.requestId++);
 
-            var operationPending = new OperationPending(requestType, requestRole, operationRequest, onOperationResponse, authToken, secretKey, customTags, gameId);
+            var operationPending = new OperationPending(requestType, role, operationRequest, onOperationResponse, authToken, secretKey, customTags, gameId);
             this.operationPendingQueue.Enqueue(operationPending);
 
             onEnqueue(operationPending);
@@ -141,7 +142,7 @@
 
                 if (this.operationWaitingResponseDict.Count != 0)
                 {
-                    var gnArrayLst = new List<GNArray>();
+                    var gnHashtableLst = new List<GNHashtable>();
 
                     foreach (var operationPendingPair in this.operationWaitingResponseDict)
                     {
@@ -149,22 +150,21 @@
 
                         if (operationPending.isTimeout())
                         {
-                            var gnArray = new GNArray();
+                            var gnHashtable = new GNHashtable();
 
-                            gnArray.add((int)ReturnCode.OperationTimeout);
-                            gnArray.add(null);
-                            gnArray.add(operationPending.getOperationRequest().getRequestId());
-                            gnArray.add(operationPending.getOperationRequest().isEncrypted());
+                            gnHashtable.add(ParameterCode.ReturnCode, ReturnCode.OperationTimeout);
+                            gnHashtable.add(ParameterCode.Parameters, null);
+                            gnHashtable.add(ParameterCode.ResponseId, operationPending.getOperationRequest().getRequestId());
 
-                            gnArrayLst.Add(gnArray);
+                            gnHashtableLst.Add(gnHashtable);
                         }
                     }
 
-                    if (gnArrayLst.Count != 0)
+                    if (gnHashtableLst.Count != 0)
                     {
-                        foreach (var gnArray in gnArrayLst)
+                        foreach (var gnHashtable in gnHashtableLst)
                         {
-                            this.onResponseHandler(gnArray, gnArray.getBool(3));
+                            this.onResponseHandler(gnHashtable);
                         }
                     }
                 }
@@ -189,9 +189,9 @@
         /// </summary>
         /// <param name="obj">The response object.</param>
         /// <param name="isEncrypted">Indicates if the response is encrypted.</param>
-        internal void onResponseHandler(GNArray obj, bool isEncrypted)
+        internal void onResponseHandler(GNHashtable obj)
         {
-            var responseId = obj.getInt(2);
+            var responseId = obj.getInt(ParameterCode.ResponseId);
 
             if (this.operationWaitingResponseDict.ContainsKey(responseId))
             {
@@ -200,22 +200,14 @@
 
                 this.operationWaitingResponseDict.Remove(responseId);
 
-                var returnCode = obj.getInt(0);
+                var returnCode = obj.getInt(ParameterCode.ReturnCode);
 
-                GNHashtable parameters = null;
-                string debugMessage = null;
-                GNArray array = null;
-
-                if (returnCode == ReturnCode.Ok) parameters = obj.getGNHashtable(1);
-                else if (returnCode == ReturnCode.InvalidRequestParameters) array = obj.getGNArray(1);
-                else if (returnCode == ReturnCode.OperationNotAuthorized)
-                {
-
-                }
-                else debugMessage = obj.getString(1);
+                var parameters = obj.getGNHashtable(ParameterCode.Parameters);
+                var debugMessage = obj.getString(ParameterCode.DebugMessage);
+                var invalidRequestParameterArray = obj.getGNArray(ParameterCode.InvalidRequestParameters);
 
                 var operationRequest = operationPending.getOperationRequest();
-                var operationResponse = new OperationResponse(operationRequest.getOperationCode(), operationRequest.getRequestId(), isEncrypted);
+                var operationResponse = new OperationResponse(operationRequest.getOperationCode(), operationRequest.getRequestId());
 
                 operationResponse.setReturnCode(returnCode);
                 operationResponse.setDebugMessage(debugMessage);
@@ -223,12 +215,12 @@
 
                 //if (!parameters.containsKey(GNParameterCode.CustomTags)) parameters.add(GNParameterCode.CustomTags, customTags);
 
-                if (array != null)
+                if (invalidRequestParameterArray != null)
                 {
-                    var invalidMembers = new InvalidMember[array.count()];
-                    for (var i = 0; i < array.count(); i++)
+                    var invalidMembers = new InvalidMember[invalidRequestParameterArray.count()];
+                    for (var i = 0; i < invalidRequestParameterArray.count(); i++)
                     {
-                        var arrChild = array.getGNArray(i);
+                        var arrChild = invalidRequestParameterArray.getGNArray(i);
 
                         invalidMembers[i] = new InvalidMember(arrChild.getString(0), (InvalidMemberType)arrChild.getInt(1));
                     }

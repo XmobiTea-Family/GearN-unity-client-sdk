@@ -33,57 +33,57 @@
         /// <summary>
         /// Key for the authentication token in requests.
         /// </summary>
-        public const string RequestAuthTokenCmd = "a";
+        public const string RequestAuthTokenCmd = "Auth-Token";
 
         /// <summary>
         /// Key for the secret key in requests.
         /// </summary>
-        public const string RequestSecretCmd = "s";
+        public const string RequestSecretCmd = "Secret-Key";
 
         /// <summary>
         /// Key for the gameId key in requests.
         /// </summary>
-        public const string RequestGameIdCmd = "g";
+        public const string RequestGameIdCmd = "Game-Id";
 
         /// <summary>
         /// Key for MsgPack request commands.
         /// </summary>
-        public const string RequestCmd_MsgPack = "r";
+        public const string RequestCmd_MsgPack = "rMsgPack";
 
         /// <summary>
         /// Key for MsgPack response commands.
         /// </summary>
-        public const string ResponseCmd_MsgPack = "r";
+        public const string ResponseCmd_MsgPack = "rMsgPack";
 
         /// <summary>
         /// Key for MsgPack event commands.
         /// </summary>
-        public const string EventCmd_MsgPack = "e";
+        public const string EventCmd_MsgPack = "eMsgPack";
 
         /// <summary>
         /// Key for JSON request commands.
         /// </summary>
-        public const string RequestCmd_Json = "t";
+        public const string RequestCmd_Json = "rJson";
 
         /// <summary>
         /// Key for JSON response commands.
         /// </summary>
-        public const string ResponseCmd_Json = "t";
+        public const string ResponseCmd_Json = "rJson";
 
         /// <summary>
         /// Key for JSON event commands.
         /// </summary>
-        public const string EventCmd_Json = "y";
+        public const string EventCmd_Json = "eJson";
 
         /// <summary>
         /// General key for data fields.
         /// </summary>
-        public const string Data = "d";
+        public const string Data = "data";
 
         /// <summary>
         /// Key for file fields.
         /// </summary>
-        public const string File = "f";
+        public const string File = "file";
 
         /// <summary>
         /// Private constructor to prevent instantiation of this utility class.

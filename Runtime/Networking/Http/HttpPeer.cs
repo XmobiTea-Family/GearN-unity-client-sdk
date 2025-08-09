@@ -1,10 +1,12 @@
 ﻿namespace XmobiTea.GN.Networking.Http
 {
     using System;
+    using System.Collections.Generic;
     using System.Text;
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Config;
     using XmobiTea.GN.Constant;
+    using XmobiTea.GN.Entity;
     using XmobiTea.GN.Helper;
     using XmobiTea.GN.Logger;
 
@@ -73,7 +75,7 @@
     {
         private NetworkingHttpPeerBase networkingHttpPeerBase;
 
-        private const char JSON_CHAR_KNOWN = '[';
+        private const char JSON_CHAR_KNOWN = '{';
 
         /// <summary>
         /// Initializes the GN HTTP socket object.
@@ -104,9 +106,13 @@
         /// <param name="operationPending">The operation pending to be sent.</param>
         internal override void send(OperationPending operationPending)
         {
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var operationRequest = operationPending.getOperationRequest();
+
+            if (operationRequest.getTimeout() == OperationRequest.defaultTimeOut) operationRequest.setTimeout(gnServerSettings.getDefaultTimeoutInSeconds());
+
             base.send(operationPending);
 
-            var operationRequest = operationPending.getOperationRequest();
             GNDebug.log("[GN Http SEND] " + operationRequest.ToString());
 
             var authToken = operationPending.getAuthToken();
@@ -114,10 +120,9 @@
             var gameId = operationPending.getGameId();
             var customTags = operationPending.getCustomTags();
 
-            var gnServerSettings = GNNetwork.gnServerSettings;
             var postType = gnServerSettings.getMessageType() == MessageType.Json ? PostType.Json : PostType.MsgPack;
 
-            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationRequest.getOperationCode() + "/" + (int)operationPending.getRequestType() + "/" + (int)operationPending.getRequestRole();
+            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + operationPending.getRequestType().ToString() + "/" + operationRequest.getOperationCode() + "/" + operationPending.getRole().ToString();
 
             this.networkingHttpPeerBase.postRequest(subUri, operationRequest.getParameters(), postType, httpAppResponse =>
             {
@@ -138,57 +143,52 @@
         void onSendOperationRequestResponse(OperationPending operationPending, HttpAppResponse httpAppResponse)
         {
             var operationRequest = operationPending.getOperationRequest();
-            var obj = new GNArray();
+            var obj = new GNHashtable();
 
             if (!httpAppResponse.hasError())
             {
                 if (httpAppResponse.statusCode == 200)
                 {
-                    var isEncrypted = false;
-                    GNArray gnArray = null;
+                    GNHashtable gnHashtable = null;
 
                     if (!string.IsNullOrEmpty(httpAppResponse.text))
                     {
                         if (httpAppResponse.text[0].Equals(HttpPeer.JSON_CHAR_KNOWN))
                         {
-                            var returnDatas = (System.Collections.IList)Parser.Parse(httpAppResponse.text);
-                            gnArray = new GNArray.Builder()
+                            var returnDatas = (System.Collections.IDictionary)Parser.Parse(httpAppResponse.text);
+                            gnHashtable = new GNHashtable.Builder()
                                 .addAll(returnDatas)
                                 .build();
                         }
                     }
 
-                    if (gnArray == null)
+                    if (gnHashtable == null)
                     {
-                        var iList = MessagePackConverterService.deserialize<object[]>(httpAppResponse.data);
-                        gnArray = new GNArray.Builder()
-                            .addAll(Socket.NetworkingSocketPeerBase.fromMsgList(iList))
+                        var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(httpAppResponse.data);
+                        gnHashtable = new GNHashtable.Builder()
+                            .addAll(iDict)
                             .build();
-
-                        isEncrypted = true;
                     }
 
-                    if (gnArray != null)
+                    if (gnHashtable != null)
                     {
-                        var returnCode = gnArray.getInt(0);
-                        obj.add(returnCode);
+                        obj.add(ParameterCode.ReturnCode, gnHashtable.getInt(ParameterCode.ReturnCode));
+                        obj.add(ParameterCode.Parameters, gnHashtable.getGNHashtable(ParameterCode.Parameters, new GNHashtable()));
+                        obj.add(ParameterCode.InvalidRequestParameters, gnHashtable.getGNArray(ParameterCode.InvalidRequestParameters, new GNArray()));
+                        obj.add(ParameterCode.DebugMessage, gnHashtable.getString(ParameterCode.DebugMessage));
+                        obj.add(ParameterCode.ResponseId, operationRequest.getRequestId());
 
-                        if (returnCode == (int)ReturnCode.Ok) obj.add(gnArray.getGNHashtable(1, new GNHashtable()));
-                        else if (returnCode == ReturnCode.InvalidRequestParameters) obj.add(gnArray.getGNArray(1, new GNArray()));
-                        else obj.add(gnArray.getString(1));
-                        obj.add(operationRequest.getRequestId());
-
-                        this.onResponseHandler(obj, isEncrypted);
+                        this.onResponseHandler(obj);
                         return;
                     }
                 }
             }
 
-            obj.add((int)ReturnCode.UnknownError);
-            obj.add(httpAppResponse.error);
-            obj.add(operationRequest.getRequestId());
+            obj.add(ParameterCode.ReturnCode, ReturnCode.UnknownError);
+            obj.add(ParameterCode.DebugMessage, httpAppResponse.error);
+            obj.add(ParameterCode.ResponseId, operationRequest.getRequestId());
 
-            this.onResponseHandler(obj, operationRequest.isEncrypted());
+            this.onResponseHandler(obj);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@
         /// <param name="timeout">The timeout for the request, in seconds.</param>
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
-        internal void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = 15, string authToken = null, string secretKey = null, string gameId = null)
+        internal void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = OperationRequest.defaultTimeOut, string authToken = null, string secretKey = null, string gameId = null)
         {
             this.networkingHttpPeerBase.getRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey, gameId);
         }

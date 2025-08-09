@@ -7,13 +7,13 @@
     {
         public class AddFunctionRequestData
         {
-            [StringDataMember(code = GNParameterCode.Script, minLength = 0, maxLength = int.MaxValue, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Script, minLength = 0, maxLength = int.MaxValue, mustNonNull = true)]
             public string script;
 
-            [BooleanDataMember(code = GNParameterCode.CanExecute)]
+            [BooleanDataMember(code = ParameterCode.CanExecute)]
             public string canExecute;
 
-            [BooleanDataMember(code = GNParameterCode.IsLive)]
+            [BooleanDataMember(code = ParameterCode.IsLive)]
             public string isLive;
 
         }
@@ -28,13 +28,13 @@
 
         public class EditFunctionRequestData
         {
-            [StringDataMember(code = GNParameterCode.Version, minLength = 7, maxLength = 7, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Version, minLength = 7, maxLength = 7, mustNonNull = true)]
             public string version;
 
-            [BooleanDataMember(code = GNParameterCode.CanExecute)]
+            [BooleanDataMember(code = ParameterCode.CanExecute)]
             public string canExecute;
 
-            [BooleanDataMember(code = GNParameterCode.IsLive)]
+            [BooleanDataMember(code = ParameterCode.IsLive)]
             public string isLive;
 
         }
@@ -49,23 +49,23 @@
 
         public class ExecuteFunctionRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, isOptional = true)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10, isOptional = true)]
             public string? userId;
 
-            [StringDataMember(code = GNParameterCode.FunctionName, minLength = 3, maxLength = 30, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.FunctionName, minLength = 3, maxLength = 30, mustNonNull = true)]
             public string functionName;
 
-            [DataMember(code = GNParameterCode.FunctionParameters)]
+            [DataMember(code = ParameterCode.FunctionParameters)]
             public object functionParameters;
 
-            [StringDataMember(code = GNParameterCode.Version, minLength = 7, maxLength = 7, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Version, minLength = 7, maxLength = 7, isOptional = true)]
             public string? version;
 
         }
 
         public class ServerExecuteFunctionRequestData : ExecuteFunctionRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public new string userId;
 
         }
@@ -76,7 +76,7 @@
 
         public class GetFunctionRequestData
         {
-            [StringDataMember(code = GNParameterCode.Version, minLength = 7, maxLength = 7, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Version, minLength = 7, maxLength = 7, mustNonNull = true)]
             public string version;
 
         }
@@ -104,78 +104,78 @@
 
         public class AddFunctionResponseData
         {
-            [StringDataMember(code = GNParameterCode.Version)]
+            [StringDataMember(code = ParameterCode.Version)]
             public string version;
 
-            [StringDataMember(code = GNParameterCode.Message)]
+            [StringDataMember(code = ParameterCode.ErrorMessage)]
             public string errorMessage;
 
         }
 
         public class EditFunctionResponseData
         {
-            [StringDataMember(code = GNParameterCode.Message)]
+            [StringDataMember(code = ParameterCode.ErrorMessage)]
             public string errorMessage;
 
         }
 
         public class ExecuteFunctionResponseData
         {
-            [NumberDataMember(code = GNParameterCode.Status)]
+            [NumberDataMember(code = ParameterCode.Status)]
             public int status;
 
-            [NumberDataMember(code = GNParameterCode.ExecutionTimeInMs)]
+            [NumberDataMember(code = ParameterCode.ExecutionTimeInMs)]
             public float executionTimeInMs;
 
-            [NumberDataMember(code = GNParameterCode.MemoryUsedInBytes)]
+            [NumberDataMember(code = ParameterCode.MemoryUsedInBytes)]
             public float memoryUsedInBytes;
 
-            [DataMember(code = GNParameterCode.FunctionResult)]
+            [DataMember(code = ParameterCode.FunctionResult)]
             public object functionResult;
 
-            [StringDataMember(code = GNParameterCode.Message)]
+            [StringDataMember(code = ParameterCode.ErrorMessage)]
             public string errorMessage;
 
         }
 
         public class GetFunctionResponseData
         {
-            [StringDataMember(code = GNParameterCode.Script)]
+            [StringDataMember(code = ParameterCode.Script)]
             public string script;
 
-            [BooleanDataMember(code = GNParameterCode.CanExecute)]
+            [BooleanDataMember(code = ParameterCode.CanExecute)]
             public bool canExecute;
 
-            [BooleanDataMember(code = GNParameterCode.IsLive)]
+            [BooleanDataMember(code = ParameterCode.IsLive)]
             public bool isLive;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            [NumberDataMember(code = ParameterCode.TsCreate)]
             public long tsCreate;
 
-            [GNArrayDataMember(code = GNParameterCode.FunctionLogs, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.FunctionLogs, elementCls = typeof(string))]
             public List<string> functionLogs;
 
         }
 
         public class FunctionResponseData
         {
-            [StringDataMember(code = GNParameterCode.Version)]
+            [StringDataMember(code = ParameterCode.Version)]
             public string version;
 
-            [BooleanDataMember(code = GNParameterCode.CanExecute)]
+            [BooleanDataMember(code = ParameterCode.CanExecute)]
             public bool canExecute;
 
         }
 
         public class GetFunctionsResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(FunctionResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(FunctionResponseData))]
             public List<FunctionResponseData> results;
 
-            [StringDataMember(code = GNParameterCode.LatestVersion)]
+            [StringDataMember(code = ParameterCode.LatestVersion)]
             public string latestVersion;
 
-            [StringDataMember(code = GNParameterCode.LiveLatestVersion)]
+            [StringDataMember(code = ParameterCode.LiveLatestVersion)]
             public string liveLatestVersion;
 
         }

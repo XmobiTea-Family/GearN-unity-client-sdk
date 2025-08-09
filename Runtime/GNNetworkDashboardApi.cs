@@ -92,34 +92,34 @@ namespace XmobiTea.GN
             return GNNetwork.sendViaHttpAsync<DashboardRequestModels.GetServerLogOperationRequest, DashboardResponseModels.GetServerLogOperationResponse>(new DashboardRequestModels.GetServerLogOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void grantAdminAccount(DashboardModels.GrantAdminAccountRequestData requestData, Action<DashboardResponseModels.GrantAdminAccountOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void createAdminAccount(DashboardModels.CreateAdminAccountRequestData requestData, Action<DashboardResponseModels.CreateAdminAccountOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new DashboardRequestModels.GrantAdminAccountOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new DashboardRequestModels.CreateAdminAccountOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<DashboardResponseModels.GrantAdminAccountOperationResponse> grantAdminAccountAsync(DashboardModels.GrantAdminAccountRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<DashboardResponseModels.CreateAdminAccountOperationResponse> createAdminAccountAsync(DashboardModels.CreateAdminAccountRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<DashboardRequestModels.GrantAdminAccountOperationRequest, DashboardResponseModels.GrantAdminAccountOperationResponse>(new DashboardRequestModels.GrantAdminAccountOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<DashboardRequestModels.CreateAdminAccountOperationRequest, DashboardResponseModels.CreateAdminAccountOperationResponse>(new DashboardRequestModels.CreateAdminAccountOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void grantGame(DashboardModels.GrantGameRequestData requestData, Action<DashboardResponseModels.GrantGameOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void createGame(DashboardModels.CreateGameRequestData requestData, Action<DashboardResponseModels.CreateGameOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new DashboardRequestModels.GrantGameOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new DashboardRequestModels.CreateGameOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<DashboardResponseModels.GrantGameOperationResponse> grantGameAsync(DashboardModels.GrantGameRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<DashboardResponseModels.CreateGameOperationResponse> createGameAsync(DashboardModels.CreateGameRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<DashboardRequestModels.GrantGameOperationRequest, DashboardResponseModels.GrantGameOperationResponse>(new DashboardRequestModels.GrantGameOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<DashboardRequestModels.CreateGameOperationRequest, DashboardResponseModels.CreateGameOperationResponse>(new DashboardRequestModels.CreateGameOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void grantSecretInfo(DashboardModels.GrantSecretInfoRequestData requestData, Action<DashboardResponseModels.GrantSecretInfoOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void createSecretInfo(DashboardModels.CreateSecretInfoRequestData requestData, Action<DashboardResponseModels.CreateSecretInfoOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new DashboardRequestModels.GrantSecretInfoOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new DashboardRequestModels.CreateSecretInfoOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<DashboardResponseModels.GrantSecretInfoOperationResponse> grantSecretInfoAsync(DashboardModels.GrantSecretInfoRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<DashboardResponseModels.CreateSecretInfoOperationResponse> createSecretInfoAsync(DashboardModels.CreateSecretInfoRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<DashboardRequestModels.GrantSecretInfoOperationRequest, DashboardResponseModels.GrantSecretInfoOperationResponse>(new DashboardRequestModels.GrantSecretInfoOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<DashboardRequestModels.CreateSecretInfoOperationRequest, DashboardResponseModels.CreateSecretInfoOperationResponse>(new DashboardRequestModels.CreateSecretInfoOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void loginByAdminAccount(DashboardModels.LoginByAdminAccountRequestData requestData, Action<DashboardResponseModels.LoginByAdminAccountOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)

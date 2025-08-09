@@ -34,21 +34,14 @@
                     if (httpAppResponse.statusCode == 200) // HTTP success status.
                     {
                         // Parses the response text into a list and converts it to a GNArray.
-                        var returnDatas = (IList)Parser.Parse(httpAppResponse.text);
-                        var gnArray = new GNArray.Builder()
+                        var returnDatas = (IDictionary)Parser.Parse(httpAppResponse.text);
+                        var gnHashtable = new GNHashtable.Builder()
                             .addAll(returnDatas)
                             .build();
 
-                        // Extracts the return code and checks if the operation was successful.
-                        var returnCode = gnArray.getInt(0);
-                        if (returnCode == ReturnCode.Ok)
-                        {
-                            // Retrieves the server timestamp from the response and updates the local timestamp.
-                            var gnHashtable = gnArray.getGNHashtable(1);
-                            var newServerTimestamp = gnHashtable.getLong("1", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                        var newServerTimestamp = gnHashtable.getLong(ParameterCode.Ts, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-                            this.setServerTimeMilliseconds(newServerTimestamp);
-                        }
+                        this.setServerTimeMilliseconds(newServerTimestamp);
                     }
                 }
 

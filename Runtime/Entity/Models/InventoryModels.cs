@@ -7,10 +7,10 @@
     {
         public class AddSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 6, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 6, maxLength = 32, mustNonNull = true)]
             public string value;
 
         }
@@ -25,7 +25,7 @@
 
         public class GetAmountRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -40,7 +40,7 @@
 
         public class GetAvatarRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -55,7 +55,7 @@
 
         public class GetCatalogIdRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -70,7 +70,7 @@
 
         public class GetClassIdRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -85,10 +85,10 @@
 
         public class GetCustomDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? customDataKeys;
 
         }
@@ -103,7 +103,7 @@
 
         public class GetDisplayNameRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -118,10 +118,10 @@
 
         public class GetItemDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.ItemDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? inventoryDataKeys;
 
         }
@@ -136,10 +136,10 @@
 
         public class GetItemInformationRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
         }
@@ -154,10 +154,10 @@
 
         public class GetItemStatisticsRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNArrayDataMember(code = GNParameterCode.StatisticsKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.StatisticsKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? statisticsKeys;
 
         }
@@ -172,16 +172,16 @@
 
         public class GetItemsWithDisplayNameRequestData
         {
-            [StringDataMember(code = GNParameterCode.Keyword, minLength = 2, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.Keyword, minLength = 2, maxLength = 32)]
             public string keyword;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -196,16 +196,16 @@
 
         public class GetItemsWithSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -220,19 +220,19 @@
 
         public class GetItemsWithTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -247,7 +247,7 @@
 
         public class GetItemTypeRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -262,7 +262,7 @@
 
         public class GetOwnerRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -277,7 +277,7 @@
 
         public class GetRemoveStatusRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -292,7 +292,7 @@
 
         public class GetSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -307,25 +307,25 @@
 
         public class GetStatisticsLeaderboardAroundItemRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
             public bool? loadFromCache;
 
-            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? catalogId;
 
         }
@@ -340,25 +340,25 @@
 
         public class GetStatisticsLeaderboardRequestData
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
             public bool? loadFromCache;
 
-            [StringDataMember(code = GNParameterCode.Version, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Version, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? version;
 
-            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? catalogId;
 
         }
@@ -373,10 +373,10 @@
 
         public class GetTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNArrayDataMember(code = GNParameterCode.TagKeys, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.TagKeys, elementCls = typeof(string))]
             public List<string> tagKeys;
 
         }
@@ -391,7 +391,7 @@
 
         public class GetTsCreateRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -406,10 +406,10 @@
 
         public class RemoveSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
         }
@@ -424,10 +424,10 @@
 
         public class RemoveTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
         }
@@ -442,10 +442,10 @@
 
         public class SetAmountRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [NumberDataMember(code = GNParameterCode.Amount, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Amount, mustInt = true)]
             public long amount;
 
         }
@@ -460,13 +460,13 @@
 
         public class SetAvatarRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [NumberDataMember(code = GNParameterCode.Type, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 1, maxLength = 128, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 1, maxLength = 128, mustNonNull = true)]
             public string value;
 
         }
@@ -481,10 +481,10 @@
 
         public class SetCustomDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
+            [GNArrayDataMember(code = ParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
             public List<CustomDataParam> customData;
 
         }
@@ -499,10 +499,10 @@
 
         public class SetDisplayNameRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.DisplayName, minLength = 5, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.DisplayName, minLength = 5, maxLength = 32, mustNonNull = true)]
             public string displayName;
 
         }
@@ -517,10 +517,10 @@
 
         public class SetItemDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(ItemDataParam))]
+            [GNArrayDataMember(code = ParameterCode.ItemDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(ItemDataParam))]
             public List<ItemDataParam> inventoryDataParams;
 
         }
@@ -535,13 +535,13 @@
 
         public class SetItemStatisticsRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(ItemStatisticsParam))]
+            [GNArrayDataMember(code = ParameterCode.ItemStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(ItemStatisticsParam))]
             public List<ItemStatisticsParam> inventoryStatisticsParams;
 
-            [StringDataMember(code = GNParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
 
         }
@@ -556,13 +556,13 @@
 
         public class SetOwnerRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 11, maxLength = 11, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.OwnerId, minLength = 10, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 12, mustNonNull = true)]
             public string newOwnerId;
 
-            [NumberDataMember(code = GNParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
             public int newOwnerType;
 
         }
@@ -577,10 +577,10 @@
 
         public class SetRemoveStatusRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.Reason, isOptional = true, defaultValue = "")]
+            [StringDataMember(code = ParameterCode.Reason, isOptional = true, defaultValue = "")]
             public string? reason;
 
         }
@@ -595,13 +595,13 @@
 
         public class SetTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
         }
@@ -616,16 +616,16 @@
 
         public class GetCreateLeaderboardRequestData
         {
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
             public bool? loadFromCache;
 
         }
@@ -640,16 +640,16 @@
 
         public class GetStatisticsLogRequestData
         {
-            [GNArrayDataMember(code = GNParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
             public List<string>? keys;
 
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true, isOptional = true)]
             public string? itemId;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [StringDataMember(code = GNParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
             public string? token;
 
         }
@@ -668,88 +668,88 @@
     {
         public class CustomDataParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [DataMember(code = GNParameterCode.Value)]
+            [DataMember(code = ParameterCode.Value)]
             public object value;
 
         }
 
         public class InfoRequestParam
         {
-            [BooleanDataMember(code = GNParameterCode.CatalogId, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.CatalogId, isOptional = true, defaultValue = false)]
             public bool? catalogId;
 
-            [BooleanDataMember(code = GNParameterCode.ClassId, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ClassId, isOptional = true, defaultValue = false)]
             public bool? classId;
 
-            [BooleanDataMember(code = GNParameterCode.ItemType, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ItemType, isOptional = true, defaultValue = false)]
             public bool? itemType;
 
-            [BooleanDataMember(code = GNParameterCode.Amount, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Amount, isOptional = true, defaultValue = false)]
             public bool? amount;
 
-            [BooleanDataMember(code = GNParameterCode.Owner, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Owner, isOptional = true, defaultValue = false)]
             public bool? owner;
 
-            [BooleanDataMember(code = GNParameterCode.RemoveStatus, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.RemoveStatus, isOptional = true, defaultValue = false)]
             public bool? removeStatus;
 
-            [BooleanDataMember(code = GNParameterCode.Segments, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Segments, isOptional = true, defaultValue = false)]
             public bool? segments;
 
-            [BooleanDataMember(code = GNParameterCode.CustomDatas, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.CustomDatas, isOptional = true, defaultValue = false)]
             public bool? customDatas;
 
-            [BooleanDataMember(code = GNParameterCode.DisplayName, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.DisplayName, isOptional = true, defaultValue = false)]
             public bool? displayName;
 
-            [BooleanDataMember(code = GNParameterCode.Avatar, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Avatar, isOptional = true, defaultValue = false)]
             public bool? avatar;
 
-            [BooleanDataMember(code = GNParameterCode.TsCreate, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.TsCreate, isOptional = true, defaultValue = false)]
             public bool? tsCreate;
 
-            [BooleanDataMember(code = GNParameterCode.Tags, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Tags, isOptional = true, defaultValue = false)]
             public bool? tags;
 
-            [BooleanDataMember(code = GNParameterCode.ItemStatistics, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ItemStatistics, isOptional = true, defaultValue = false)]
             public bool? itemStatistics;
 
-            [BooleanDataMember(code = GNParameterCode.ItemDatas, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ItemDatas, isOptional = true, defaultValue = false)]
             public bool? itemDatas;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.ItemDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? itemDataKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemStatisticsKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.ItemStatisticsKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? itemStatisticsKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? customDataKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? tagKeys;
 
         }
 
         public class ItemDataParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [DataMember(code = GNParameterCode.Value)]
+            [DataMember(code = ParameterCode.Value)]
             public object value;
 
         }
 
         public class ItemStatisticsParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [NumberDataMember(code = GNParameterCode.Value)]
+            [NumberDataMember(code = ParameterCode.Value)]
             public double value;
 
         }
@@ -760,139 +760,139 @@
     {
         public class InfoResponseParameters
         {
-            [StringDataMember(code = GNParameterCode.CatalogId, isOptional = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, isOptional = true)]
             public string? catalogId;
 
-            [StringDataMember(code = GNParameterCode.ClassId, isOptional = true)]
+            [StringDataMember(code = ParameterCode.ClassId, isOptional = true)]
             public string? classId;
 
-            [NumberDataMember(code = GNParameterCode.ItemType, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.ItemType, isOptional = true)]
             public int? itemType;
 
-            [NumberDataMember(code = GNParameterCode.Amount, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Amount, isOptional = true)]
             public int? amount;
 
-            [GNHashtableDataMember(code = GNParameterCode.Owner, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.Owner, isOptional = true)]
             public GenericModels.OwnerItem? owner;
 
-            [GNHashtableDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.RemoveStatus, isOptional = true)]
             public GenericModels.RemoveStatusItem? removeStatus;
 
-            [GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
             public List<string>? segments;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+            [GNArrayDataMember(code = ParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
             public List<GenericModels.DataItem>? customDatas;
 
-            [StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+            [StringDataMember(code = ParameterCode.DisplayName, isOptional = true)]
             public string? displayName;
 
-            [GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.Avatar, isOptional = true)]
             public GenericModels.AvatarItem? avatar;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.TsCreate, isOptional = true)]
             public long? tsCreate;
 
-            [GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+            [GNArrayDataMember(code = ParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
             public List<GenericModels.TagItem>? tags;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+            [GNArrayDataMember(code = ParameterCode.ItemDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
             public List<GenericModels.DataItem>? itemDatas;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
+            [GNArrayDataMember(code = ParameterCode.ItemStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
             public List<GenericModels.StatisticsItem>? itemStatistics;
 
         }
 
         public class InventoryResponseData
         {
-            [GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+            [GNHashtableDataMember(code = ParameterCode.InfoResponseParameters)]
             public InfoResponseParameters infoResponseParameters;
 
         }
 
         public class InventoryWithItemIdResponseData : InventoryResponseData
         {
-            [StringDataMember(code = GNParameterCode.ItemId)]
+            [StringDataMember(code = ParameterCode.ItemId)]
             public string itemId;
 
         }
 
         public class InventoryLeaderboardResponseData : InventoryWithItemIdResponseData
         {
-            [NumberDataMember(code = GNParameterCode.Position)]
+            [NumberDataMember(code = ParameterCode.Position)]
             public int position;
 
-            [NumberDataMember(code = GNParameterCode.BackupValue, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.BackupValue, isOptional = true)]
             public double? backupValue;
 
         }
 
         public class InventoryLogResponseData
         {
-            [StringDataMember(code = GNParameterCode.ItemId)]
+            [StringDataMember(code = ParameterCode.ItemId)]
             public string itemId;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            [NumberDataMember(code = ParameterCode.TsCreate)]
             public long tsCreate;
 
-            [NumberDataMember(code = GNParameterCode.Log)]
+            [NumberDataMember(code = ParameterCode.Log)]
             public string log;
 
-            [NumberDataMember(code = GNParameterCode.Key)]
+            [NumberDataMember(code = ParameterCode.Key)]
             public string key;
 
-            [NumberDataMember(code = GNParameterCode.Amount)]
+            [NumberDataMember(code = ParameterCode.Amount)]
             public double amount;
 
-            [NumberDataMember(code = GNParameterCode.StartValue)]
+            [NumberDataMember(code = ParameterCode.StartValue)]
             public double startValue;
 
-            [NumberDataMember(code = GNParameterCode.FinalValue)]
+            [NumberDataMember(code = ParameterCode.FinalValue)]
             public double finalValue;
 
         }
 
         public class GetStatisticsLeaderboardResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(InventoryLeaderboardResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(InventoryLeaderboardResponseData))]
             public List<InventoryLeaderboardResponseData> results;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.TsCreate, isOptional = true)]
             public long? tsCreate;
 
         }
 
         public class InventoriesWithItemIdResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(InventoryWithItemIdResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(InventoryWithItemIdResponseData))]
             public List<InventoryWithItemIdResponseData> results;
 
         }
 
         public class GetCreateLeaderboardResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(InventoryLeaderboardResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(InventoryLeaderboardResponseData))]
             public List<InventoryLeaderboardResponseData> results;
 
         }
 
         public class GetStatisticsLogResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(InventoryLogResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(InventoryLogResponseData))]
             public List<InventoryLogResponseData> results;
 
-            [StringDataMember(code = GNParameterCode.Token, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Token, isOptional = true)]
             public string? token;
 
         }
 
         public class GetCurrencyLogResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(InventoryLogResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(InventoryLogResponseData))]
             public List<InventoryLogResponseData> results;
 
-            [StringDataMember(code = GNParameterCode.Token, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Token, isOptional = true)]
             public string? token;
 
         }

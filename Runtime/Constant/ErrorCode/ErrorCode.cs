@@ -1,6 +1,6 @@
 ﻿namespace XmobiTea.GN.Constant
 {
-    public partial class GNErrorCode
+    public partial class ErrorCode
     {
         public const int Ok = 1;
 
@@ -8,7 +8,7 @@
         public const int AccountPasswordWrong = 3;
         public const int AccountUsernameExists = 4;
         public const int VerifyTokenError = 5;
-        public const int ServiceNameNotFound = 6;
+        public const int VerifyFailed = 6;
         public const int CharacterPlayerNotFound = 7;
         public const int NotEnoughCurrency = 8;
         public const int KeyNotFound = 9;

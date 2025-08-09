@@ -11,12 +11,7 @@
         /// <summary>
         /// The operation code for the request.
         /// </summary>
-        protected abstract int operationCode { get; }
-
-        /// <summary>
-        /// Specifies if the request should be encrypted.
-        /// </summary>
-        protected abstract bool operationEncrypted { get; }
+        protected abstract string operationCode { get; }
 
         /// <summary>
         /// The type of request (e.g., Socket, HTTP).
@@ -26,7 +21,7 @@
         /// <summary>
         /// The role of the request (e.g., Client, Admin, Server).
         /// </summary>
-        protected abstract RequestRole requestRole { get; }
+        protected abstract RequestRole role { get; }
 
         /// <summary>
         /// Timeout value for the operation request.
@@ -44,9 +39,9 @@
         /// <summary>
         /// Gets the request role for the operation.
         /// </summary>
-        public RequestRole getRequestRole()
+        public RequestRole getRole()
         {
-            return this.requestRole;
+            return this.role;
         }
 
         /// <summary>
@@ -101,7 +96,7 @@
         /// <returns>An `OperationRequest` object with serialized request data.</returns>
         public override OperationRequest build()
         {
-            var request = new OperationRequest(this.operationCode, this.operationEncrypted, this.operationTimeout);
+            var request = new OperationRequest(this.operationCode, this.operationTimeout);
 
             // Serialize the requestData into the parameters of the request.
             request.setParameters(ConverterService.serializeObject(this.requestData));

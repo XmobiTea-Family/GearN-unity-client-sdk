@@ -8,14 +8,14 @@
     {
         public class CancelAllMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.QueueName, minLength = 6, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.QueueName, minLength = 6, maxLength = 32)]
             public string queueName;
 
         }
 
         public class ServerCancelAllMatchmakingTicketRequestData : CancelAllMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10)]
             public string userId;
 
         }
@@ -27,14 +27,14 @@
 
         public class CancelMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.TicketId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.TicketId, minLength = 10, maxLength = 10)]
             public string ticketId;
 
         }
 
         public class ServerCancelMatchmakingTicketRequestData : CancelMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10)]
             public string userId;
 
         }
@@ -46,23 +46,23 @@
 
         public class CreateMatchmakingTicketRequestData
         {
-            [NumberDataMember(code = GNParameterCode.GiveUpAfterSeconds, mustInt = true, minValue = 20)]
+            [NumberDataMember(code = ParameterCode.GiveUpAfterSeconds, mustInt = true, minValue = 20)]
             public int giveUpAfterSeconds;
 
-            [StringDataMember(code = GNParameterCode.QueueName, minLength = 6, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.QueueName, minLength = 6, maxLength = 32)]
             public string queueName;
 
-            [GNHashtableDataMember(code = GNParameterCode.Attribute, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.Attribute, isOptional = true)]
             public GNHashtable? attribute;
 
-            [GNArrayDataMember(code = GNParameterCode.Members, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.Members, isOptional = true, elementCls = typeof(string))]
             public List<string>? members;
 
         }
 
         public class ServerCreateMatchmakingTicketRequestData : CreateMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10)]
             public string userId;
 
         }
@@ -74,10 +74,10 @@
 
         public class GetMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.TicketId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.TicketId, minLength = 10, maxLength = 10)]
             public string ticketId;
 
-            [BooleanDataMember(code = GNParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
             public bool? returnMember;
         }
 
@@ -92,10 +92,10 @@
 
         public class GetMatchRequestData
         {
-            [StringDataMember(code = GNParameterCode.MatchId, minLength = 15, maxLength = 15)]
+            [StringDataMember(code = ParameterCode.MatchId, minLength = 15, maxLength = 15)]
             public string matchId;
 
-            [BooleanDataMember(code = GNParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
             public bool? returnMember;
 
         }
@@ -111,13 +111,13 @@
 
         public class GetAllMatchRequestData
         {
-            [BooleanDataMember(code = GNParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
             public bool? returnMember;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -132,16 +132,16 @@
 
         public class GetAllMatchmakingTicketRequestData
         {
-            [NumberDataMember(code = GNParameterCode.Status, minValue = 1, maxValue = 5, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Status, minValue = 1, maxValue = 5, mustInt = true, isOptional = true)]
             public int? status;
 
-            [BooleanDataMember(code = GNParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.ReturnMember, isOptional = true, defaultValue = false)]
             public bool? returnMember;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -157,10 +157,10 @@
 
         public class GetQueueStatisticsRequestData
         {
-            [StringDataMember(code = GNParameterCode.QueueName, minLength = 6, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.QueueName, minLength = 6, maxLength = 32)]
             public string queueName;
 
-            [NumberDataMember(code = GNParameterCode.TimeInSeconds, mustInt = true, minValue = 20)]
+            [NumberDataMember(code = ParameterCode.TimeInSeconds, mustInt = true, minValue = 20)]
             public int timeInSeconds;
 
         }
@@ -177,17 +177,17 @@
 
         public class JoinMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.TicketId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.TicketId, minLength = 10, maxLength = 10)]
             public string ticketId;
 
-            [GNHashtableDataMember(code = GNParameterCode.Attribute, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.Attribute, isOptional = true)]
             public GNHashtable? attribute;
 
         }
 
         public class ServerJoinMatchmakingTicketRequestData : JoinMatchmakingTicketRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10)]
             public string userId;
 
         }
@@ -199,14 +199,14 @@
 
         public class ListMatchmakingTicketsForPlayerRequestData
         {
-            [StringDataMember(code = GNParameterCode.QueueName, minLength = 6, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.QueueName, minLength = 6, maxLength = 32)]
             public string queueName;
 
         }
 
         public class ServerListMatchmakingTicketsForPlayerRequestData : ListMatchmakingTicketsForPlayerRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10)]
             public string userId;
 
         }
@@ -218,169 +218,169 @@
 
         public class CancelAllMatchmakingTicketResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.TicketIds, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.TicketIds, elementCls = typeof(string))]
             public List<string> ticketIds;
 
         }
 
         public class CreateMatchmakingTicketResponseData
         {
-            [StringDataMember(code = GNParameterCode.TicketId)]
+            [StringDataMember(code = ParameterCode.TicketId)]
             public string ticketId;
 
         }
 
         public class MatchmakingTicketMember
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10)]
             public string userId;
 
-            [NumberDataMember(code = GNParameterCode.Status, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Status, mustInt = true)]
             public int status;
 
-            [GNHashtableDataMember(code = GNParameterCode.Attribute)]
+            [GNHashtableDataMember(code = ParameterCode.Attribute)]
             public GNHashtable attribute;
 
         }
 
         public class MatchmakingTicketResponseData
         {
-            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            [NumberDataMember(code = ParameterCode.TsCreate)]
             public long tsCreate;
 
-            [StringDataMember(code = GNParameterCode.CreatorId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.CreatorId, minLength = 10, maxLength = 10)]
             public string creatorId;
 
-            [NumberDataMember(code = GNParameterCode.GiveUpAfterSeconds)]
+            [NumberDataMember(code = ParameterCode.GiveUpAfterSeconds)]
             public int giveUpAfterSeconds;
 
-            [StringDataMember(code = GNParameterCode.QueueName, minLength = 6, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.QueueName, minLength = 6, maxLength = 32)]
             public string queueName;
 
-            [NumberDataMember(code = GNParameterCode.Status, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Status, mustInt = true)]
             public int status;
 
-            [StringDataMember(code = GNParameterCode.MatchId, minLength = 15, maxLength = 15, isOptional = true)]
+            [StringDataMember(code = ParameterCode.MatchId, minLength = 15, maxLength = 15, isOptional = true)]
             public string? matchId;
 
-            [GNArrayDataMember(code = GNParameterCode.Members, elementCls = typeof(MatchmakingTicketMember), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Members, elementCls = typeof(MatchmakingTicketMember), isOptional = true)]
             public List<MatchmakingTicketMember>? members;
 
         }
 
         public class MatchmakingTicketWithTicketIdResponseData : MatchmakingTicketResponseData
         {
-            [StringDataMember(code = GNParameterCode.TicketId)]
+            [StringDataMember(code = ParameterCode.TicketId)]
             public string ticketId;
 
         }
 
         public class GetMatchmakingTicketResponseData
         {
-            [GNHashtableDataMember(code = GNParameterCode.MatchmakingTicket)]
+            [GNHashtableDataMember(code = ParameterCode.MatchmakingTicket)]
             public MatchmakingTicketResponseData matchmakingTicket;
 
         }
 
         public class MatchMember
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 10)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10)]
             public string userId;
 
-            [StringDataMember(code = GNParameterCode.TeamId)]
+            [StringDataMember(code = ParameterCode.TeamId)]
             public string teamId;
 
-            [GNHashtableDataMember(code = GNParameterCode.Attribute)]
+            [GNHashtableDataMember(code = ParameterCode.Attribute)]
             public GNHashtable attribute;
 
         }
 
         public class PortInfo
         {
-            [StringDataMember(code = GNParameterCode.Name)]
+            [StringDataMember(code = ParameterCode.Name)]
             public string name;
 
-            [NumberDataMember(code = GNParameterCode.PublicPort, mustInt = true, minValue = 0)]
+            [NumberDataMember(code = ParameterCode.PublicPort, mustInt = true, minValue = 0)]
             public ushort publicPort;
 
-            [NumberDataMember(code = GNParameterCode.PrivatePort, mustInt = true, minValue = 0)]
+            [NumberDataMember(code = ParameterCode.PrivatePort, mustInt = true, minValue = 0)]
             public ushort privatePort;
 
-            [NumberDataMember(code = GNParameterCode.Protocol, mustInt = true, minValue = 1, maxValue = 2)]
+            [NumberDataMember(code = ParameterCode.Protocol, mustInt = true, minValue = 1, maxValue = 2)]
             public ushort protocol;
 
         }
 
         public class ServerDetail
         {
-            [StringDataMember(code = GNParameterCode.IpV4Address)]
+            [StringDataMember(code = ParameterCode.IpV4Address)]
             public string ipV4Address;
 
-            [GNArrayDataMember(code = GNParameterCode.Ports, elementCls = typeof(PortInfo))]
+            [GNArrayDataMember(code = ParameterCode.Ports, elementCls = typeof(PortInfo))]
             public List<PortInfo> ports;
 
         }
 
         public class MatchResponseData
         {
-            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            [NumberDataMember(code = ParameterCode.TsCreate)]
             public long tsCreate;
 
-            [StringDataMember(code = GNParameterCode.QueueName, minLength = 6, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.QueueName, minLength = 6, maxLength = 32)]
             public string queueName;
 
-            [GNArrayDataMember(code = GNParameterCode.Members, elementCls = typeof(MatchMember), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Members, elementCls = typeof(MatchMember), isOptional = true)]
             public List<MatchMember>? members;
 
-            [NumberDataMember(code = GNParameterCode.TimeToMatchInSeconds)]
+            [NumberDataMember(code = ParameterCode.TimeToMatchInSeconds)]
             public float timeToMatchInSeconds;
 
         }
 
         public class MatchWithMatchIdResponseData : MatchResponseData
         {
-            [StringDataMember(code = GNParameterCode.MatchId)]
+            [StringDataMember(code = ParameterCode.MatchId)]
             public string matchId;
 
         }
 
         public class GetMatchResponseData
         {
-            [GNHashtableDataMember(code = GNParameterCode.Match)]
+            [GNHashtableDataMember(code = ParameterCode.Match)]
             public MatchResponseData match;
 
         }
 
         public class GetQueueStatisticsResponseData
         {
-            [NumberDataMember(code = GNParameterCode.PendingMemberCount, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.PendingMemberCount, mustInt = true)]
             public int pendingMemberCount;
 
-            [NumberDataMember(code = GNParameterCode.PendingTicketCount, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.PendingTicketCount, mustInt = true)]
             public int pendingTicketCount;
 
-            [NumberDataMember(code = GNParameterCode.AverageMatchmakingTimeInSeconds)]
+            [NumberDataMember(code = ParameterCode.AverageMatchmakingTimeInSeconds)]
             public float averageMatchmakingTimeInSeconds;
 
         }
 
         public class ListMatchmakingTicketsForPlayerResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.TicketIds, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.TicketIds, elementCls = typeof(string))]
             public List<string> ticketIds;
 
         }
 
         public class GetAllMatchResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MatchWithMatchIdResponseData), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(MatchWithMatchIdResponseData), isOptional = true)]
             public List<MatchWithMatchIdResponseData>? results;
 
         }
 
         public class GetAllMatchmakingTicketResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(MatchmakingTicketWithTicketIdResponseData), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(MatchmakingTicketWithTicketIdResponseData), isOptional = true)]
             public List<MatchmakingTicketWithTicketIdResponseData>? results;
 
         }

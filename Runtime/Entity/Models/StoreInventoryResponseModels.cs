@@ -19,7 +19,7 @@
 
         }
 
-        public class GrantStoreItemOperationResponse : CustomOperationResponse<StoreInventoryModels.GrantStoreItemResponseData>
+        public class CreateStoreItemOperationResponse : CustomOperationResponse<StoreInventoryModels.CreateStoreItemResponseData>
         {
 
         }

@@ -184,7 +184,7 @@
 
         }
 
-        public class LinkGenericServiceOperationResponse : CustomOperationResponse<MasterPlayerModels.MasterPlayerResponseData>
+        public class LinkGenericServiceOperationResponse : CustomOperationResponse<MasterPlayerModels.GenericServiceMasterPlayerResponseData>
         {
 
         }

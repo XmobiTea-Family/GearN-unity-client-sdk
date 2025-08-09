@@ -5,6 +5,7 @@
     using System.Linq;
     using XmobiTea.GN.Common;
     using XmobiTea.GN.Config;
+    using XmobiTea.GN.Constant;
     using XmobiTea.GN.Entity;
     using XmobiTea.GN.Logger;
 
@@ -14,7 +15,7 @@
     internal class SocketPeer : PeerBase
     {
         private NetworkingSocketPeerBase networkingSocketPeerBase;
-        private Dictionary<int, List<IServerEventHandler>> serverEventHandlersDict;
+        private Dictionary<string, List<IServerEventHandler>> serverEventHandlersDict;
         private Action<OperationEvent> _onEventHandler;
 
         /// <summary>
@@ -49,7 +50,7 @@
         void subscriberServerEventHandler()
         {
             if (this.serverEventHandlersDict == null)
-                this.serverEventHandlersDict = new Dictionary<int, List<IServerEventHandler>>();
+                this.serverEventHandlersDict = new Dictionary<string, List<IServerEventHandler>>();
             else
                 this.serverEventHandlersDict.Clear();
 
@@ -195,6 +196,11 @@
         /// </summary>
         internal override void send(OperationPending operationPending)
         {
+            var gnServerSettings = GNNetwork.gnServerSettings;
+            var operationRequest = operationPending.getOperationRequest();
+
+            if (operationRequest.getTimeout() == OperationRequest.defaultTimeOut) operationRequest.setTimeout(gnServerSettings.getDefaultTimeoutInSeconds());
+
             base.send(operationPending);
 
             GNDebug.log("[GN Socket SEND] " + operationPending.getOperationRequest().ToString());
@@ -204,7 +210,7 @@
             var gameId = operationPending.getGameId();
             var customTags = operationPending.getCustomTags();
 
-            this.networkingSocketPeerBase.send(operationPending.getRequestType(), operationPending.getRequestRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags, gameId);
+            this.networkingSocketPeerBase.send(operationPending.getRequestType(), operationPending.getRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags, gameId);
         }
 
         protected override void onEnqueue(OperationPending operationPending)
@@ -215,12 +221,11 @@
         /// <summary>
         /// Handles incoming socket events and invokes appropriate handlers.
         /// </summary>
-        internal void onEventHandler(GNArray obj, bool isEncrypted)
+        internal void onEventHandler(GNHashtable obj)
         {
-            var eventCode = obj.getInt(0);
+            var eventCode = obj.getString(ParameterCode.EventCode);
 
-            var operationEvent = new OperationEvent(eventCode, obj.getGNHashtable(1));
-            operationEvent.setEncrypted(isEncrypted);
+            var operationEvent = new OperationEvent(eventCode, obj.getGNHashtable(ParameterCode.Parameters));
 
             GNDebug.log("[GN Socket EVENT] " + operationEvent.toString());
 
@@ -240,6 +245,7 @@
         public override void service()
         {
             base.service();
+
             this.networkingSocketPeerBase?.service();
         }
 

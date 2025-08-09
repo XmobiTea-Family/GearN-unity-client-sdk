@@ -149,12 +149,12 @@
 
         }
 
-        public class GrantGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
+        public class CreateGroupOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
         {
 
         }
 
-        public class GrantPlayerItemOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
+        public class CreatePlayerItemOperationResponse : CustomOperationResponse<CharacterPlayerModels.CharacterPlayerResponseData>
         {
 
         }

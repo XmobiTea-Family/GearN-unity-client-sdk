@@ -196,32 +196,32 @@
         /// Sends a request via socket.
         /// </summary>
         /// <param name="requestType">The type of the request.</param>
-        /// <param name="requestRole">The role of the request.</param>
+        /// <param name="role">The role of the request.</param>
         /// <param name="request">The request data to send.</param>
         /// <param name="onResponse">Optional callback for handling the response.</param>
         /// <param name="overrideAuthToken">Optional token override for the request.</param>
         /// <param name="overrideSecretKey">Optional secret key override for the request.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
-        public static void sendViaSocket(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static void sendViaSocket(RequestType requestType, RequestRole role, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
-            GNNetwork.peer.sendViaSocket(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.peer.sendViaSocket(requestType, role, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
         /// <summary>
         /// Sends a request via socket asynchronously and returns the response.
         /// </summary>
         /// <param name="requestType">The type of the request.</param>
-        /// <param name="requestRole">The role of the request.</param>
+        /// <param name="role">The role of the request.</param>
         /// <param name="request">The request data.</param>
         /// <param name="overrideAuthToken">Optional token to override the default authentication token.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default key.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
         /// <returns>A Task that resolves with the operation response.</returns>
-        public static Task<OperationResponse> sendViaSocketAsync(RequestType requestType, RequestRole requestRole, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static Task<OperationResponse> sendViaSocketAsync(RequestType requestType, RequestRole role, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
             var taskCompletionSource = new TaskCompletionSource<OperationResponse>();
 
-            GNNetwork.sendViaSocket(requestType, requestRole, request, response =>
+            GNNetwork.sendViaSocket(requestType, role, request, response =>
             {
                 taskCompletionSource.SetResult(response);
             }, overrideAuthToken, overrideSecretKey, customTags);
@@ -233,32 +233,32 @@
         /// Sends a request via HTTP.
         /// </summary>
         /// <param name="requestType">The type of the request.</param>
-        /// <param name="requestRole">The role of the request.</param>
+        /// <param name="role">The role of the request.</param>
         /// <param name="request">The request data.</param>
         /// <param name="onResponse">Optional callback to handle the response.</param>
         /// <param name="overrideAuthToken">Optional token to override the default authentication token.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default key.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
-        public static void sendViaHttp(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static void sendViaHttp(RequestType requestType, RequestRole role, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
-            GNNetwork.peer.sendViaHttp(requestType, requestRole, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.peer.sendViaHttp(requestType, role, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
         /// <summary>
         /// Sends a request via HTTP asynchronously and returns the response.
         /// </summary>
         /// <param name="requestType">The type of the request.</param>
-        /// <param name="requestRole">The role of the request.</param>
+        /// <param name="role">The role of the request.</param>
         /// <param name="request">The request data.</param>
         /// <param name="overrideAuthToken">Optional token to override the default authentication token.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default key.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
         /// <returns>A Task that resolves with the operation response.</returns>
-        public static Task<OperationResponse> sendViaHttpAsync(RequestType requestType, RequestRole requestRole, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static Task<OperationResponse> sendViaHttpAsync(RequestType requestType, RequestRole role, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
             var taskCompletionSource = new TaskCompletionSource<OperationResponse>();
 
-            GNNetwork.sendViaHttp(requestType, requestRole, request, response =>
+            GNNetwork.sendViaHttp(requestType, role, request, response =>
             {
                 taskCompletionSource.SetResult(response);
             }, overrideAuthToken, overrideSecretKey, customTags);
@@ -278,7 +278,7 @@
         /// <param name="customTags">Optional custom tags for the request.</param>
         public static void sendViaSocket<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
-            GNNetwork.sendViaSocket(request.getRequestType(), request.getRequestRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaSocket(request.getRequestType(), request.getRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
         /// <summary>
@@ -317,7 +317,7 @@
         /// <param name="customTags">Optional custom tags for the request.</param>
         public static void sendViaHttp<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
-            GNNetwork.sendViaHttp(request.getRequestType(), request.getRequestRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(request.getRequestType(), request.getRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
         /// <summary>
@@ -347,15 +347,15 @@
         /// </summary>
         /// <typeparam name="TResponse">The type of the response object.</typeparam>
         /// <param name="requestType">The type of the request being sent.</param>
-        /// <param name="requestRole">The role of the request being sent.</param>
+        /// <param name="role">The role of the request being sent.</param>
         /// <param name="request">The request data to send.</param>
         /// <param name="onResponse">Optional callback to handle the strongly-typed response.</param>
         /// <param name="overrideAuthToken">Optional authentication token to override the default value.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default value.</param>
         /// <param name="customTags">Optional custom tags to send with the request.</param>
-        public static void sendViaSocket<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static void sendViaSocket<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
-            GNNetwork.sendViaSocket(requestType, requestRole, request, response =>
+            GNNetwork.sendViaSocket(requestType, role, request, response =>
             {
                 if (response == null) return;
 
@@ -371,17 +371,17 @@
         /// </summary>
         /// <typeparam name="TResponse">The type of the response object.</typeparam>
         /// <param name="requestType">The type of the request being sent.</param>
-        /// <param name="requestRole">The role of the request being sent.</param>
+        /// <param name="role">The role of the request being sent.</param>
         /// <param name="request">The request data to send.</param>
         /// <param name="overrideAuthToken">Optional authentication token to override the default value.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default value.</param>
         /// <param name="customTags">Optional custom tags to send with the request.</param>
         /// <returns>A Task that resolves to the strongly-typed response.</returns>
-        public static Task<TResponse> sendViaSocketAsync<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static Task<TResponse> sendViaSocketAsync<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
-            GNNetwork.sendViaSocket<TResponse>(requestType, requestRole, request, response =>
+            GNNetwork.sendViaSocket<TResponse>(requestType, role, request, response =>
             {
                 taskCompletionSource.SetResult(response);
             }, overrideAuthToken, overrideSecretKey, customTags);
@@ -394,15 +394,15 @@
         /// </summary>
         /// <typeparam name="TResponse">The type of the response object.</typeparam>
         /// <param name="requestType">The type of the request being sent.</param>
-        /// <param name="requestRole">The role of the request being sent.</param>
+        /// <param name="role">The role of the request being sent.</param>
         /// <param name="request">The request data to send.</param>
         /// <param name="onResponse">Optional callback to handle the strongly-typed response.</param>
         /// <param name="overrideAuthToken">Optional authentication token to override the default value.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default value.</param>
         /// <param name="customTags">Optional custom tags to send with the request.</param>
-        public static void sendViaHttp<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static void sendViaHttp<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
-            GNNetwork.sendViaHttp(requestType, requestRole, request, response =>
+            GNNetwork.sendViaHttp(requestType, role, request, response =>
             {
                 if (response == null) return;
 
@@ -418,17 +418,17 @@
         /// </summary>
         /// <typeparam name="TResponse">The type of the response object.</typeparam>
         /// <param name="requestType">The type of the request being sent.</param>
-        /// <param name="requestRole">The role of the request being sent.</param>
+        /// <param name="role">The role of the request being sent.</param>
         /// <param name="request">The request data to send.</param>
         /// <param name="overrideAuthToken">Optional authentication token to override the default value.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default value.</param>
         /// <param name="customTags">Optional custom tags to send with the request.</param>
         /// <returns>A Task that resolves to the strongly-typed response.</returns>
-        public static Task<TResponse> sendViaHttpAsync<TResponse>(RequestType requestType, RequestRole requestRole, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static Task<TResponse> sendViaHttpAsync<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
-            GNNetwork.sendViaHttp<TResponse>(requestType, requestRole, request, response =>
+            GNNetwork.sendViaHttp<TResponse>(requestType, role, request, response =>
             {
                 taskCompletionSource.SetResult(response);
             }, overrideAuthToken, overrideSecretKey, customTags);

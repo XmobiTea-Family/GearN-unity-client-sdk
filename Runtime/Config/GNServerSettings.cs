@@ -79,6 +79,9 @@
         private bool useHttp = true;
 
         [SerializeField]
+        private int defaultTimeoutInSeconds = 20;
+
+        [SerializeField]
         private MessageType messageType = MessageType.MsgPack;
 
         [SerializeField]
@@ -159,6 +162,10 @@
 
         public void setUseHttp(bool useHttp) => this.useHttp = useHttp;
 
+        public int getDefaultTimeoutInSeconds() => this.defaultTimeoutInSeconds;
+
+        public void setDefaultTimeoutInSeconds(int defaultTimeoutInSeconds) => this.defaultTimeoutInSeconds = defaultTimeoutInSeconds;
+
         public MessageType getMessageType() => this.messageType;
 
         public void setMessageType(MessageType messageType) => this.messageType = messageType;
@@ -177,7 +184,7 @@
         /// <returns>The reconnect delay.</returns>
         public int getReconnectDelay() => this.reconnectDelay;
 
-        public void setReconnectDelay(int recoonectDelay) => this.reconnectDelay = reconnectDelay;
+        public void setReconnectDelay(int reconnectDelay) => this.reconnectDelay = reconnectDelay;
 
         /// <summary>
         /// Gets the ping interval in milliseconds.

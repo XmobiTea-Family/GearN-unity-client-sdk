@@ -15,7 +15,7 @@
         /// <summary>
         /// A list of members associated with the group.
         /// </summary>
-        [GNArrayDataMember(code = GNParameterCode.Members, elementCls = typeof(GenericModels.FriendItem))]
+        [GNArrayDataMember(code = ParameterCode.Members, elementCls = typeof(GenericModels.FriendItem))]
         public List<GenericModels.MemberItem> members;
     }
 
@@ -33,7 +33,7 @@
         /// Gets the event code associated with this handler.
         /// </summary>
         /// <returns>The event code for "OnGroupMemberUpdate".</returns>
-        public int getEventCode() => EventCode.OnGroupMemberUpdate;
+        public string getEventCode() => EventCode.OnGroupMemberUpdate;
 
         /// <summary>
         /// Handles the "OnGroupMemberUpdate" operation event.

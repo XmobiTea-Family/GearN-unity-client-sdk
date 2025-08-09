@@ -1,6 +1,7 @@
 namespace XmobiTea.GN.Networking.Socket
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
     using XmobiTea.GN.Common;
@@ -22,7 +23,7 @@ namespace XmobiTea.GN.Networking.Socket
         /// <summary>
         /// Indicates whether the packet is encrypted.
         /// </summary>
-        public bool encrypted { get; private set; }
+        public bool isMsgPack { get; private set; }
 
         /// <summary>
         /// Gets the object data of the packet.
@@ -33,22 +34,22 @@ namespace XmobiTea.GN.Networking.Socket
         /// Initializes a new instance of the <see cref="SocketPacket"/> class with byte array data.
         /// </summary>
         /// <param name="byteArr">The byte array of the packet.</param>
-        /// <param name="encrypted">Indicates whether the packet is encrypted.</param>
-        public SocketPacket(byte[] byteArr, bool encrypted)
+        /// <param name="isMsgPack">Indicates whether the packet is MsgPack.</param>
+        public SocketPacket(byte[] byteArr, bool isMsgPack)
         {
             this.byteArr = byteArr;
-            this.encrypted = encrypted;
+            this.isMsgPack = isMsgPack;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SocketPacket"/> class with object data.
         /// </summary>
         /// <param name="obj">The object data of the packet.</param>
-        /// <param name="encrypted">Indicates whether the packet is encrypted.</param>
-        public SocketPacket(object obj, bool encrypted)
+        /// <param name="isMsgPack">Indicates whether the packet is MsgPack.</param>
+        public SocketPacket(object obj, bool isMsgPack)
         {
             this.obj = obj;
-            this.encrypted = encrypted;
+            this.isMsgPack = isMsgPack;
         }
     }
 
@@ -108,8 +109,8 @@ namespace XmobiTea.GN.Networking.Socket
         /// </summary>
         protected string url;
 
-        private Action<GNArray, bool> _onEventHandler;
-        private Action<GNArray, bool> _onResponseHandler;
+        private Action<GNHashtable> _onEventHandler;
+        private Action<GNHashtable> _onResponseHandler;
         private Action _onSocketConnect;
         private Action _onSocketDisconnect;
         private Action _onConnectHandler;
@@ -172,20 +173,20 @@ namespace XmobiTea.GN.Networking.Socket
         /// Sends a request via the socket.
         /// </summary>
         /// <param name="requestType">The type of the request.</param>
-        /// <param name="requestRole">The role of the request.</param>
+        /// <param name="role">The role of the request.</param>
         /// <param name="operationRequest">The operation request object.</param>
         /// <param name="authToken">Authentication token, if applicable.</param>
         /// <param name="secretKey">Secret key, if applicable.</param>
         /// <param name="customTags">Custom tags for the request.</param>
-        internal void send(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        internal void send(RequestType requestType, RequestRole role, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
-            this.emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags, gameId);
+            this.emit(requestType, role, operationRequest, authToken, secretKey, customTags, gameId);
         }
 
         /// <summary>
         /// Emits a request to the socket.
         /// </summary>
-        protected virtual void emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags, string gameId) { }
+        protected virtual void emit(RequestType requestType, RequestRole role, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags, string gameId) { }
 
         #endregion
 
@@ -265,7 +266,7 @@ namespace XmobiTea.GN.Networking.Socket
         /// Sets the handler for processing socket events.
         /// </summary>
         /// <param name="_onEventHandler">The event handler action.</param>
-        internal void setOnEventHandler(Action<GNArray, bool> _onEventHandler)
+        internal void setOnEventHandler(Action<GNHashtable> _onEventHandler)
         {
             this._onEventHandler = _onEventHandler;
         }
@@ -274,17 +275,16 @@ namespace XmobiTea.GN.Networking.Socket
         /// Invokes the event handler with the specified data and encryption status.
         /// </summary>
         /// <param name="obj">The event data.</param>
-        /// <param name="isEncrypted">Indicates whether the data is encrypted.</param>
-        internal void onEventHandler(GNArray obj, bool isEncrypted)
+        internal void onEventHandler(GNHashtable obj)
         {
-            this._onEventHandler?.Invoke(obj, isEncrypted);
+            this._onEventHandler?.Invoke(obj);
         }
 
         /// <summary>
         /// Sets the handler for processing socket responses.
         /// </summary>
         /// <param name="_onResponseHandler">The response handler action.</param>
-        internal void setOnResponseHandler(Action<GNArray, bool> _onResponseHandler)
+        internal void setOnResponseHandler(Action<GNHashtable> _onResponseHandler)
         {
             this._onResponseHandler = _onResponseHandler;
         }
@@ -293,10 +293,9 @@ namespace XmobiTea.GN.Networking.Socket
         /// Invokes the response handler with the specified data and encryption status.
         /// </summary>
         /// <param name="obj">The response data.</param>
-        /// <param name="isEncrypted">Indicates whether the data is encrypted.</param>
-        internal void onResponseHandler(GNArray obj, bool isEncrypted)
+        internal void onResponseHandler(GNHashtable obj)
         {
-            this._onResponseHandler?.Invoke(obj, isEncrypted);
+            this._onResponseHandler?.Invoke(obj);
         }
         /// <summary>
         /// Converts an array of key-value pairs to a dictionary.
@@ -385,18 +384,18 @@ namespace XmobiTea.GN.Networking.Socket
                     {
                         var responsePacket = this.responsePacketLst[i];
 
-                        if (responsePacket.encrypted)
+                        if (responsePacket.isMsgPack)
                         {
                             var byteArr = responsePacket.byteArr;
 
                             try
                             {
-                                var iList = MessagePackConverterService.deserialize<object[]>(byteArr);
+                                var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(byteArr);
 
-                                var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingSocketPeerBase.fromMsgList(iList))
+                                var gnHashtable = new GNHashtable.Builder()
+                                    .addAll(iDict)
                                     .build();
-                                this.onResponseHandler(gnArray, responsePacket.encrypted);
+                                this.onResponseHandler(gnHashtable);
                             }
                             catch (Exception ex)
                             {
@@ -407,12 +406,11 @@ namespace XmobiTea.GN.Networking.Socket
                         {
                             try
                             {
-                                var iList = responsePacket.obj;
-
-                                var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingSocketPeerBase.fromJsonList(iList))
+                                var iDict = (IDictionary)responsePacket.obj;
+                                var gnHashtable = new GNHashtable.Builder()
+                                    .addAll(iDict)
                                     .build();
-                                this.onResponseHandler(gnArray, responsePacket.encrypted);
+                                this.onResponseHandler(gnHashtable);
                             }
                             catch (Exception ex)
                             {
@@ -431,18 +429,18 @@ namespace XmobiTea.GN.Networking.Socket
                     {
                         var eventPacket = this.eventPacketLst[i];
 
-                        if (eventPacket.encrypted)
+                        if (eventPacket.isMsgPack)
                         {
                             var byteArr = eventPacket.byteArr;
 
                             try
                             {
-                                var iList = MessagePackConverterService.deserialize<object[]>(byteArr);
+                                var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(byteArr);
 
-                                var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingSocketPeerBase.fromMsgList(iList))
+                                var gnHashtable = new GNHashtable.Builder()
+                                    .addAll(iDict)
                                     .build();
-                                this.onEventHandler(gnArray, eventPacket.encrypted);
+                                this.onEventHandler(gnHashtable);
                             }
                             catch (Exception ex)
                             {
@@ -453,12 +451,12 @@ namespace XmobiTea.GN.Networking.Socket
                         {
                             try
                             {
-                                var iList = eventPacket.obj;
+                                var iDict = (IDictionary)eventPacket.obj;
 
-                                var gnArray = new GNArray.Builder()
-                                    .addAll(NetworkingSocketPeerBase.fromJsonList(iList))
+                                var gnHashtable = new GNHashtable.Builder()
+                                    .addAll(iDict)
                                     .build();
-                                this.onEventHandler(gnArray, eventPacket.encrypted);
+                                this.onEventHandler(gnHashtable);
                             }
                             catch (Exception ex)
                             {

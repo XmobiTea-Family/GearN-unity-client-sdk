@@ -12,7 +12,7 @@ namespace XmobiTea.GN.Networking
     {
         private OperationRequest operationRequest; // The operation request to be processed.
         private RequestType requestType;           // The type of the request.
-        private RequestRole requestRole;           // The role associated with the request.
+        private RequestRole role;           // The role associated with the request.
         private string authToken;                  // The authentication token for the request.
         private string secretKey;                  // The secret key for the request, if applicable.
         private string gameId;                     // The game id for the request
@@ -27,13 +27,13 @@ namespace XmobiTea.GN.Networking
         /// Initializes a new instance of the <see cref="OperationPending"/> struct.
         /// </summary>
         /// <param name="requestType">The type of the request.</param>
-        /// <param name="requestRole">The role associated with the request.</param>
+        /// <param name="role">The role associated with the request.</param>
         /// <param name="operationRequest">The operation request data.</param>
         /// <param name="onOperationResponse">The callback for the response.</param>
         /// <param name="authToken">The authentication token.</param>
         /// <param name="secretKey">The secret key, if applicable.</param>
         /// <param name="customTags">Custom tags for the request.</param>
-        public OperationPending(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        public OperationPending(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             this.operationRequest = operationRequest;
             this.onOperationResponse = onOperationResponse;
@@ -42,7 +42,7 @@ namespace XmobiTea.GN.Networking
             this.secondsSend = 0;
 
             this.requestType = requestType;
-            this.requestRole = requestRole;
+            this.role = role;
             this.authToken = authToken;
             this.secretKey = secretKey;
             this.gameId = gameId;
@@ -62,9 +62,9 @@ namespace XmobiTea.GN.Networking
         /// Gets the request role.
         /// </summary>
         /// <returns>The request role.</returns>
-        public RequestRole getRequestRole()
+        public RequestRole getRole()
         {
-            return this.requestRole;
+            return this.role;
         }
 
         /// <summary>

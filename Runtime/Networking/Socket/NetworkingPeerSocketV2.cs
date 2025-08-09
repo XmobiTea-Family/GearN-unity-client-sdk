@@ -149,23 +149,23 @@
         /// Emits a request via the socket.
         /// </summary>
         /// <param name="requestType">The type of request to emit.</param>
-        /// <param name="requestRole">The role associated with the request.</param>
+        /// <param name="role">The role associated with the request.</param>
         /// <param name="operationRequest">The operation request data.</param>
         /// <param name="authToken">Authentication token, if available.</param>
         /// <param name="secretKey">Secret key, if available.</param>
         /// <param name="customTags">Custom tags for the request.</param>
-        protected override void emit(RequestType requestType, RequestRole requestRole, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        protected override void emit(RequestType requestType, RequestRole role, OperationRequest operationRequest, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
-            base.emit(requestType, requestRole, operationRequest, authToken, secretKey, customTags, gameId);
+            base.emit(requestType, role, operationRequest, authToken, secretKey, customTags, gameId);
 
             if (this.socketManager == null || this.socketManager.Socket == null)
             {
                 return;
             }
 
-            if (customTags != null) operationRequest.setParameter(GNParameterCode.CustomTags, customTags);
+            if (customTags != null) operationRequest.setParameter(ParameterCode.CustomTags, customTags);
 
-            var dataSend = OperationHelper.toSocketData(requestType, requestRole, operationRequest);
+            var dataSend = OperationHelper.toSocketData(requestType, role, operationRequest);
 
             var gnServerSettings = GNNetwork.gnServerSettings;
 

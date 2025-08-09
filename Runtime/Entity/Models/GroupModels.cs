@@ -7,10 +7,10 @@
     {
         public class AddMemberRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string userId;
 
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -25,10 +25,10 @@
 
         public class AddSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 6, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 6, maxLength = 32, mustNonNull = true)]
             public string value;
 
         }
@@ -43,7 +43,7 @@
 
         public class GetAvatarRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -58,7 +58,7 @@
 
         public class GetCatalogIdRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -73,10 +73,10 @@
 
         public class GetCustomDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? customDataKeys;
 
         }
@@ -91,7 +91,7 @@
 
         public class GetDisplayNameRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -106,10 +106,10 @@
 
         public class GetGroupCurrencyRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupCurrencyKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.GroupCurrencyKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? groupCurrencyKeys;
 
         }
@@ -124,10 +124,10 @@
 
         public class GetGroupDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.GroupDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? groupDataKeys;
 
         }
@@ -142,10 +142,10 @@
 
         public class GetGroupInformationRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
         }
@@ -160,10 +160,10 @@
 
         public class GetGroupInventoryRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
             public List<string>? itemCatalogIds;
 
         }
@@ -178,13 +178,13 @@
 
         public class GetGroupMessageRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -199,10 +199,10 @@
 
         public class GetGroupStatisticsRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.StatisticsKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.StatisticsKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? statisticsKeys;
 
         }
@@ -217,16 +217,16 @@
 
         public class GetGroupsWithDisplayNameRequestData
         {
-            [StringDataMember(code = GNParameterCode.Keyword, minLength = 2, maxLength = 32)]
+            [StringDataMember(code = ParameterCode.Keyword, minLength = 2, maxLength = 32)]
             public string keyword;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -241,16 +241,16 @@
 
         public class GetGroupsWithSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -265,19 +265,19 @@
 
         public class GetGroupsWithTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -292,7 +292,7 @@
 
         public class GetMembersRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -307,7 +307,7 @@
 
         public class GetRemoveStatusRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -322,7 +322,7 @@
 
         public class GetSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -337,25 +337,25 @@
 
         public class GetStatisticsLeaderboardAroundGroupRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
             public bool? loadFromCache;
 
-            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? catalogId;
 
         }
@@ -370,25 +370,25 @@
 
         public class GetStatisticsLeaderboardRequestData
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
             public bool? loadFromCache;
 
-            [StringDataMember(code = GNParameterCode.Version, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Version, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? version;
 
-            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? catalogId;
 
         }
@@ -403,10 +403,10 @@
 
         public class GetTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.TagKeys, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.TagKeys, elementCls = typeof(string))]
             public List<string> tagKeys;
 
         }
@@ -421,7 +421,7 @@
 
         public class GetTsCreateRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -434,39 +434,39 @@
         {
         }
 
-        public class GrantGroupItemRequestData
+        public class CreateGroupItemRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string catalogId;
 
-            [StringDataMember(code = GNParameterCode.ClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ClassId, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string classId;
 
-            [StringDataMember(code = GNParameterCode.DisplayName, defaultValue = "", isOptional = true)]
+            [StringDataMember(code = ParameterCode.DisplayName, defaultValue = "", isOptional = true)]
             public string? displayName;
 
-            [NumberDataMember(code = GNParameterCode.Amount, defaultValue = 1, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Amount, defaultValue = 1, mustInt = true, isOptional = true)]
             public int? amount;
 
         }
 
-        public class ServerGrantGroupItemRequestData : GrantGroupItemRequestData
+        public class ServerCreateGroupItemRequestData : CreateGroupItemRequestData
         {
         }
 
-        public class AdminGrantGroupItemRequestData : ServerGrantGroupItemRequestData
+        public class AdminCreateGroupItemRequestData : ServerCreateGroupItemRequestData
         {
         }
 
         public class RemoveGroupItemRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.ItemId, minLength = 12, maxLength = 12, mustNonNull = true)]
             public string itemId;
 
         }
@@ -481,10 +481,10 @@
 
         public class RemoveMemberRequestData
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string userId;
 
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
         }
@@ -499,10 +499,10 @@
 
         public class RemoveSegmentRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
         }
@@ -517,10 +517,10 @@
 
         public class RemoveTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
         }
@@ -535,13 +535,13 @@
 
         public class SendGroupMessageRequestData
         {
-            [StringDataMember(code = GNParameterCode.SenderId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.SenderId, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string senderId;
 
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.Message, minLength = 2, maxLength = 256, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Message, minLength = 2, maxLength = 256, mustNonNull = true)]
             public string message;
 
         }
@@ -556,13 +556,13 @@
 
         public class SetAvatarRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [NumberDataMember(code = GNParameterCode.Type, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 1, maxLength = 128, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 1, maxLength = 128, mustNonNull = true)]
             public string value;
 
         }
@@ -577,10 +577,10 @@
 
         public class SetCustomDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
+            [GNArrayDataMember(code = ParameterCode.CustomDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(CustomDataParam))]
             public List<CustomDataParam> customData;
 
         }
@@ -595,10 +595,10 @@
 
         public class SetDisplayNameRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.DisplayName, minLength = 5, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.DisplayName, minLength = 5, maxLength = 32, mustNonNull = true)]
             public string displayName;
 
         }
@@ -613,13 +613,13 @@
 
         public class SetGroupCurrencyRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupCurrencies, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupCurrencyParam))]
+            [GNArrayDataMember(code = ParameterCode.GroupCurrencies, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupCurrencyParam))]
             public List<GroupCurrencyParam> groupCurrencyParams;
 
-            [StringDataMember(code = GNParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
 
         }
@@ -634,10 +634,10 @@
 
         public class SetGroupDataRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupDataParam))]
+            [GNArrayDataMember(code = ParameterCode.GroupDatas, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupDataParam))]
             public List<GroupDataParam> groupDataParams;
 
         }
@@ -652,13 +652,13 @@
 
         public class SetGroupStatisticsRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupStatisticsParam))]
+            [GNArrayDataMember(code = ParameterCode.GroupStatistics, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(GroupStatisticsParam))]
             public List<GroupStatisticsParam> groupStatisticsParams;
 
-            [StringDataMember(code = GNParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
             public string? log;
 
         }
@@ -673,10 +673,10 @@
 
         public class SetRemoveStatusRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.Reason, isOptional = true, defaultValue = "")]
+            [StringDataMember(code = ParameterCode.Reason, isOptional = true, defaultValue = "")]
             public string? reason;
 
         }
@@ -691,13 +691,13 @@
 
         public class SetTagRequestData
         {
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [StringDataMember(code = GNParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Value, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string value;
 
         }
@@ -712,16 +712,16 @@
 
         public class GetCreateLeaderboardRequestData
         {
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
             public bool? loadFromCache;
 
         }
@@ -736,16 +736,16 @@
 
         public class GetStatisticsLogRequestData
         {
-            [GNArrayDataMember(code = GNParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
             public List<string>? keys;
 
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true, isOptional = true)]
             public string? groupId;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [StringDataMember(code = GNParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
             public string? token;
 
         }
@@ -760,16 +760,16 @@
 
         public class GetCurrencyLogRequestData
         {
-            [GNArrayDataMember(code = GNParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.Keys, minLength = 1, maxLength = 32, mustNonNull = true, elementCls = typeof(string), isOptional = true)]
             public List<string>? keys;
 
-            [StringDataMember(code = GNParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.GroupId, minLength = 10, maxLength = 10, mustNonNull = true, isOptional = true)]
             public string? groupId;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [StringDataMember(code = GNParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Token, minLength = 24, maxLength = 24, mustNonNull = true, isOptional = true)]
             public string? token;
 
         }
@@ -788,111 +788,111 @@
     {
         public class CustomDataParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [DataMember(code = GNParameterCode.Value)]
+            [DataMember(code = ParameterCode.Value)]
             public object value;
 
         }
 
         public class GroupCurrencyParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [NumberDataMember(code = GNParameterCode.Amount)]
+            [NumberDataMember(code = ParameterCode.Amount)]
             public double amount;
 
         }
 
         public class GroupDataParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [DataMember(code = GNParameterCode.Value)]
+            [DataMember(code = ParameterCode.Value)]
             public object value;
 
         }
 
         public class GroupMemberParam
         {
-            [StringDataMember(code = GNParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string userId;
 
-            [NumberDataMember(code = GNParameterCode.Role, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Role, mustInt = true)]
             public int role;
 
         }
 
         public class GroupStatisticsParam
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [NumberDataMember(code = GNParameterCode.Value)]
+            [NumberDataMember(code = ParameterCode.Value)]
             public double value;
 
         }
 
         public class InfoRequestParam
         {
-            [BooleanDataMember(code = GNParameterCode.CatalogId, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.CatalogId, isOptional = true, defaultValue = false)]
             public bool? catalogId;
 
-            [BooleanDataMember(code = GNParameterCode.Members, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Members, isOptional = true, defaultValue = false)]
             public bool? members;
 
-            [BooleanDataMember(code = GNParameterCode.RemoveStatus, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.RemoveStatus, isOptional = true, defaultValue = false)]
             public bool? removeStatus;
 
-            [BooleanDataMember(code = GNParameterCode.Segments, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Segments, isOptional = true, defaultValue = false)]
             public bool? segments;
 
-            [BooleanDataMember(code = GNParameterCode.CustomDatas, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.CustomDatas, isOptional = true, defaultValue = false)]
             public bool? customDatas;
 
-            [BooleanDataMember(code = GNParameterCode.DisplayName, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.DisplayName, isOptional = true, defaultValue = false)]
             public bool? displayName;
 
-            [BooleanDataMember(code = GNParameterCode.Avatar, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Avatar, isOptional = true, defaultValue = false)]
             public bool? avatar;
 
-            [BooleanDataMember(code = GNParameterCode.TsCreate, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.TsCreate, isOptional = true, defaultValue = false)]
             public bool? tsCreate;
 
-            [BooleanDataMember(code = GNParameterCode.Tags, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.Tags, isOptional = true, defaultValue = false)]
             public bool? tags;
 
-            [BooleanDataMember(code = GNParameterCode.GroupCurrencies, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.GroupCurrencies, isOptional = true, defaultValue = false)]
             public bool? groupCurrencies;
 
-            [BooleanDataMember(code = GNParameterCode.GroupStatistics, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.GroupStatistics, isOptional = true, defaultValue = false)]
             public bool? groupStatistics;
 
-            [BooleanDataMember(code = GNParameterCode.GroupDatas, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.GroupDatas, isOptional = true, defaultValue = false)]
             public bool? groupDatas;
 
-            [BooleanDataMember(code = GNParameterCode.GroupInventories, isOptional = true, defaultValue = false)]
+            [BooleanDataMember(code = ParameterCode.GroupInventories, isOptional = true, defaultValue = false)]
             public bool? groupInventories;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.GroupDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? groupDataKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupCurrencyKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.GroupCurrencyKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? groupCurrencyKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupStatisticsKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.GroupStatisticsKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? groupStatisticsKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.CustomDataKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? customDataKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? tagKeys;
 
-            [GNArrayDataMember(code = GNParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.ItemCatalogIds, isOptional = true, elementCls = typeof(string))]
             public List<string>? itemCatalogIds;
 
         }
@@ -903,152 +903,152 @@
     {
         public class InfoResponseParameters
         {
-            [StringDataMember(code = GNParameterCode.CatalogId, isOptional = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, isOptional = true)]
             public string? catalogId;
 
-            [GNArrayDataMember(code = GNParameterCode.Members, isOptional = true, elementCls = typeof(GenericModels.MemberItem))]
+            [GNArrayDataMember(code = ParameterCode.Members, isOptional = true, elementCls = typeof(GenericModels.MemberItem))]
             public List<GenericModels.MemberItem>? members;
 
-            [GNHashtableDataMember(code = GNParameterCode.RemoveStatus, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.RemoveStatus, isOptional = true)]
             public GenericModels.RemoveStatusItem? removeStatus;
 
-            [GNArrayDataMember(code = GNParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
+            [GNArrayDataMember(code = ParameterCode.Segments, isOptional = true, elementCls = typeof(string))]
             public List<string>? segments;
 
-            [GNArrayDataMember(code = GNParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+            [GNArrayDataMember(code = ParameterCode.CustomDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
             public List<GenericModels.DataItem>? customDatas;
 
-            [StringDataMember(code = GNParameterCode.DisplayName, isOptional = true)]
+            [StringDataMember(code = ParameterCode.DisplayName, isOptional = true)]
             public string? displayName;
 
-            [GNHashtableDataMember(code = GNParameterCode.Avatar, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.Avatar, isOptional = true)]
             public GenericModels.AvatarItem? avatar;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.TsCreate, isOptional = true)]
             public long? tsCreate;
 
-            [GNArrayDataMember(code = GNParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
+            [GNArrayDataMember(code = ParameterCode.Tags, isOptional = true, elementCls = typeof(GenericModels.TagItem))]
             public List<GenericModels.TagItem>? tags;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
+            [GNArrayDataMember(code = ParameterCode.GroupDatas, isOptional = true, elementCls = typeof(GenericModels.DataItem))]
             public List<GenericModels.DataItem>? groupDatas;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupCurrencies, isOptional = true, elementCls = typeof(GenericModels.CurrencyItem))]
+            [GNArrayDataMember(code = ParameterCode.GroupCurrencies, isOptional = true, elementCls = typeof(GenericModels.CurrencyItem))]
             public List<GenericModels.CurrencyItem>? groupCurrencies;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
+            [GNArrayDataMember(code = ParameterCode.GroupStatistics, isOptional = true, elementCls = typeof(GenericModels.StatisticsItem))]
             public List<GenericModels.StatisticsItem>? groupStatistics;
 
-            [GNArrayDataMember(code = GNParameterCode.GroupInventories, isOptional = true, elementCls = typeof(GenericModels.InventoryItem))]
+            [GNArrayDataMember(code = ParameterCode.GroupInventories, isOptional = true, elementCls = typeof(GenericModels.InventoryItem))]
             public List<GenericModels.InventoryItem>? groupInventories;
 
         }
 
         public class GroupResponseData
         {
-            [GNHashtableDataMember(code = GNParameterCode.InfoResponseParameters)]
+            [GNHashtableDataMember(code = ParameterCode.InfoResponseParameters)]
             public InfoResponseParameters infoResponseParameters;
 
         }
 
         public class GroupWithGroupIdResponseData : GroupResponseData
         {
-            [StringDataMember(code = GNParameterCode.GroupId)]
+            [StringDataMember(code = ParameterCode.GroupId)]
             public string groupId;
 
         }
 
         public class GroupLeaderboardResponseData : GroupWithGroupIdResponseData
         {
-            [NumberDataMember(code = GNParameterCode.Position)]
+            [NumberDataMember(code = ParameterCode.Position)]
             public int position;
 
-            [NumberDataMember(code = GNParameterCode.BackupValue, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.BackupValue, isOptional = true)]
             public double? backupValue;
 
         }
 
         public class GroupLogResponseData
         {
-            [StringDataMember(code = GNParameterCode.GroupId)]
+            [StringDataMember(code = ParameterCode.GroupId)]
             public string groupId;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            [NumberDataMember(code = ParameterCode.TsCreate)]
             public long tsCreate;
 
-            [NumberDataMember(code = GNParameterCode.Log)]
+            [NumberDataMember(code = ParameterCode.Log)]
             public string log;
 
-            [NumberDataMember(code = GNParameterCode.Key)]
+            [NumberDataMember(code = ParameterCode.Key)]
             public string key;
 
-            [NumberDataMember(code = GNParameterCode.Amount)]
+            [NumberDataMember(code = ParameterCode.Amount)]
             public double amount;
 
-            [NumberDataMember(code = GNParameterCode.StartValue)]
+            [NumberDataMember(code = ParameterCode.StartValue)]
             public double startValue;
 
-            [NumberDataMember(code = GNParameterCode.FinalValue)]
+            [NumberDataMember(code = ParameterCode.FinalValue)]
             public double finalValue;
 
         }
 
         public class GetStatisticsLeaderboardResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupLeaderboardResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(GroupLeaderboardResponseData))]
             public List<GroupLeaderboardResponseData> results;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.TsCreate, isOptional = true)]
             public long? tsCreate;
 
         }
 
         public class GroupsWithGroupIdResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupWithGroupIdResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(GroupWithGroupIdResponseData))]
             public List<GroupWithGroupIdResponseData> results;
 
         }
 
         public class GroupMessageResponseData
         {
-            [StringDataMember(code = GNParameterCode.Message)]
+            [StringDataMember(code = ParameterCode.Message)]
             public string message;
 
-            [StringDataMember(code = GNParameterCode.SenderId)]
+            [StringDataMember(code = ParameterCode.SenderId)]
             public string senderId;
 
-            [NumberDataMember(code = GNParameterCode.SenderType)]
+            [NumberDataMember(code = ParameterCode.SenderType)]
             public int senderType;
 
-            [NumberDataMember(code = GNParameterCode.TsCreate)]
+            [NumberDataMember(code = ParameterCode.TsCreate)]
             public long tsCreate;
         }
 
         public class GroupMessagesResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.GroupMessages, elementCls = typeof(GroupMessageResponseData))]
+            [GNArrayDataMember(code = ParameterCode.GroupMessages, elementCls = typeof(GroupMessageResponseData))]
             public List<GroupMessageResponseData> groupMessages;
         }
 
         public class GetCurrencyLeaderboardRequestData
         {
-            [StringDataMember(code = GNParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32, mustNonNull = true)]
             public string key;
 
-            [GNHashtableDataMember(code = GNParameterCode.InfoRequestParam, mustNonNull = true)]
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
             public InfoRequestParam infoRequestParam;
 
-            [NumberDataMember(code = GNParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
             public int? skip;
 
-            [NumberDataMember(code = GNParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
-            [BooleanDataMember(code = GNParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
             public bool? loadFromCache;
 
-            [StringDataMember(code = GNParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? catalogId;
 
         }
@@ -1063,34 +1063,34 @@
 
         public class GetCurrencyLeaderboardResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupLeaderboardResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(GroupLeaderboardResponseData))]
             public List<GroupLeaderboardResponseData> results;
 
         }
 
         public class GetCreateLeaderboardResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupLeaderboardResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(GroupLeaderboardResponseData))]
             public List<GroupLeaderboardResponseData> results;
 
         }
 
         public class GetStatisticsLogResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupLogResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(GroupLogResponseData))]
             public List<GroupLogResponseData> results;
 
-            [StringDataMember(code = GNParameterCode.Token, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Token, isOptional = true)]
             public string? token;
 
         }
 
         public class GetCurrencyLogResponseData
         {
-            [GNArrayDataMember(code = GNParameterCode.Results, elementCls = typeof(GroupLogResponseData))]
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(GroupLogResponseData))]
             public List<GroupLogResponseData> results;
 
-            [StringDataMember(code = GNParameterCode.Token, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Token, isOptional = true)]
             public string? token;
 
         }

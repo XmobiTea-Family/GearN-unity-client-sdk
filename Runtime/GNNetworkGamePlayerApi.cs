@@ -292,34 +292,34 @@ namespace XmobiTea.GN
             return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.GetTsLastLoginOperationRequest, GamePlayerResponseModels.GetTsLastLoginOperationResponse>(new GamePlayerRequestModels.GetTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void grantGroup(GamePlayerModels.GrantGroupRequestData requestData, Action<GamePlayerResponseModels.GrantGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void createGroup(GamePlayerModels.CreateGroupRequestData requestData, Action<GamePlayerResponseModels.CreateGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new GamePlayerRequestModels.GrantGroupOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new GamePlayerRequestModels.CreateGroupOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<GamePlayerResponseModels.GrantGroupOperationResponse> grantGroupAsync(GamePlayerModels.GrantGroupRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<GamePlayerResponseModels.CreateGroupOperationResponse> createGroupAsync(GamePlayerModels.CreateGroupRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.GrantGroupOperationRequest, GamePlayerResponseModels.GrantGroupOperationResponse>(new GamePlayerRequestModels.GrantGroupOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.CreateGroupOperationRequest, GamePlayerResponseModels.CreateGroupOperationResponse>(new GamePlayerRequestModels.CreateGroupOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void grantPlayerCharacter(GamePlayerModels.GrantPlayerCharacterRequestData requestData, Action<GamePlayerResponseModels.GrantPlayerCharacterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void createPlayerCharacter(GamePlayerModels.CreatePlayerCharacterRequestData requestData, Action<GamePlayerResponseModels.CreatePlayerCharacterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new GamePlayerRequestModels.GrantPlayerCharacterOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new GamePlayerRequestModels.CreatePlayerCharacterOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<GamePlayerResponseModels.GrantPlayerCharacterOperationResponse> grantPlayerCharacterAsync(GamePlayerModels.GrantPlayerCharacterRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<GamePlayerResponseModels.CreatePlayerCharacterOperationResponse> createPlayerCharacterAsync(GamePlayerModels.CreatePlayerCharacterRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.GrantPlayerCharacterOperationRequest, GamePlayerResponseModels.GrantPlayerCharacterOperationResponse>(new GamePlayerRequestModels.GrantPlayerCharacterOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.CreatePlayerCharacterOperationRequest, GamePlayerResponseModels.CreatePlayerCharacterOperationResponse>(new GamePlayerRequestModels.CreatePlayerCharacterOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void grantPlayerItem(GamePlayerModels.GrantPlayerItemRequestData requestData, Action<GamePlayerResponseModels.GrantPlayerItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void createPlayerItem(GamePlayerModels.CreatePlayerItemRequestData requestData, Action<GamePlayerResponseModels.CreatePlayerItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new GamePlayerRequestModels.GrantPlayerItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new GamePlayerRequestModels.CreatePlayerItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<GamePlayerResponseModels.GrantPlayerItemOperationResponse> grantPlayerItemAsync(GamePlayerModels.GrantPlayerItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<GamePlayerResponseModels.CreatePlayerItemOperationResponse> createPlayerItemAsync(GamePlayerModels.CreatePlayerItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.GrantPlayerItemOperationRequest, GamePlayerResponseModels.GrantPlayerItemOperationResponse>(new GamePlayerRequestModels.GrantPlayerItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.CreatePlayerItemOperationRequest, GamePlayerResponseModels.CreatePlayerItemOperationResponse>(new GamePlayerRequestModels.CreatePlayerItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void joinGroup(GamePlayerModels.JoinGroupRequestData requestData, Action<GamePlayerResponseModels.JoinGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -805,34 +805,34 @@ namespace XmobiTea.GN
                 return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGetTsLastLoginOperationRequest, GamePlayerResponseModels.GetTsLastLoginOperationResponse>(new GamePlayerRequestModels.ServerGetTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantGroup(GamePlayerModels.ServerGrantGroupRequestData requestData, Action<GamePlayerResponseModels.GrantGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createGroup(GamePlayerModels.ServerCreateGroupRequestData requestData, Action<GamePlayerResponseModels.CreateGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerGrantGroupOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerCreateGroupOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GamePlayerResponseModels.GrantGroupOperationResponse> grantGroupAsync(GamePlayerModels.ServerGrantGroupRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GamePlayerResponseModels.CreateGroupOperationResponse> createGroupAsync(GamePlayerModels.ServerCreateGroupRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGrantGroupOperationRequest, GamePlayerResponseModels.GrantGroupOperationResponse>(new GamePlayerRequestModels.ServerGrantGroupOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerCreateGroupOperationRequest, GamePlayerResponseModels.CreateGroupOperationResponse>(new GamePlayerRequestModels.ServerCreateGroupOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantPlayerCharacter(GamePlayerModels.ServerGrantPlayerCharacterRequestData requestData, Action<GamePlayerResponseModels.GrantPlayerCharacterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createPlayerCharacter(GamePlayerModels.ServerCreatePlayerCharacterRequestData requestData, Action<GamePlayerResponseModels.CreatePlayerCharacterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerGrantPlayerCharacterOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerCreatePlayerCharacterOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GamePlayerResponseModels.GrantPlayerCharacterOperationResponse> grantPlayerCharacterAsync(GamePlayerModels.ServerGrantPlayerCharacterRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GamePlayerResponseModels.CreatePlayerCharacterOperationResponse> createPlayerCharacterAsync(GamePlayerModels.ServerCreatePlayerCharacterRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGrantPlayerCharacterOperationRequest, GamePlayerResponseModels.GrantPlayerCharacterOperationResponse>(new GamePlayerRequestModels.ServerGrantPlayerCharacterOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerCreatePlayerCharacterOperationRequest, GamePlayerResponseModels.CreatePlayerCharacterOperationResponse>(new GamePlayerRequestModels.ServerCreatePlayerCharacterOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantPlayerItem(GamePlayerModels.ServerGrantPlayerItemRequestData requestData, Action<GamePlayerResponseModels.GrantPlayerItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createPlayerItem(GamePlayerModels.ServerCreatePlayerItemRequestData requestData, Action<GamePlayerResponseModels.CreatePlayerItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerGrantPlayerItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerCreatePlayerItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GamePlayerResponseModels.GrantPlayerItemOperationResponse> grantPlayerItemAsync(GamePlayerModels.ServerGrantPlayerItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GamePlayerResponseModels.CreatePlayerItemOperationResponse> createPlayerItemAsync(GamePlayerModels.ServerCreatePlayerItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGrantPlayerItemOperationRequest, GamePlayerResponseModels.GrantPlayerItemOperationResponse>(new GamePlayerRequestModels.ServerGrantPlayerItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerCreatePlayerItemOperationRequest, GamePlayerResponseModels.CreatePlayerItemOperationResponse>(new GamePlayerRequestModels.ServerCreatePlayerItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void joinGroup(GamePlayerModels.ServerJoinGroupRequestData requestData, Action<GamePlayerResponseModels.JoinGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1319,34 +1319,34 @@ namespace XmobiTea.GN
                 return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGetTsLastLoginOperationRequest, GamePlayerResponseModels.GetTsLastLoginOperationResponse>(new GamePlayerRequestModels.AdminGetTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantGroup(GamePlayerModels.AdminGrantGroupRequestData requestData, Action<GamePlayerResponseModels.GrantGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createGroup(GamePlayerModels.AdminCreateGroupRequestData requestData, Action<GamePlayerResponseModels.CreateGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminGrantGroupOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminCreateGroupOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GamePlayerResponseModels.GrantGroupOperationResponse> grantGroupAsync(GamePlayerModels.AdminGrantGroupRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GamePlayerResponseModels.CreateGroupOperationResponse> createGroupAsync(GamePlayerModels.AdminCreateGroupRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGrantGroupOperationRequest, GamePlayerResponseModels.GrantGroupOperationResponse>(new GamePlayerRequestModels.AdminGrantGroupOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminCreateGroupOperationRequest, GamePlayerResponseModels.CreateGroupOperationResponse>(new GamePlayerRequestModels.AdminCreateGroupOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantPlayerCharacter(GamePlayerModels.AdminGrantPlayerCharacterRequestData requestData, Action<GamePlayerResponseModels.GrantPlayerCharacterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createPlayerCharacter(GamePlayerModels.AdminCreatePlayerCharacterRequestData requestData, Action<GamePlayerResponseModels.CreatePlayerCharacterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminGrantPlayerCharacterOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminCreatePlayerCharacterOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GamePlayerResponseModels.GrantPlayerCharacterOperationResponse> grantPlayerCharacterAsync(GamePlayerModels.AdminGrantPlayerCharacterRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GamePlayerResponseModels.CreatePlayerCharacterOperationResponse> createPlayerCharacterAsync(GamePlayerModels.AdminCreatePlayerCharacterRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGrantPlayerCharacterOperationRequest, GamePlayerResponseModels.GrantPlayerCharacterOperationResponse>(new GamePlayerRequestModels.AdminGrantPlayerCharacterOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminCreatePlayerCharacterOperationRequest, GamePlayerResponseModels.CreatePlayerCharacterOperationResponse>(new GamePlayerRequestModels.AdminCreatePlayerCharacterOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantPlayerItem(GamePlayerModels.AdminGrantPlayerItemRequestData requestData, Action<GamePlayerResponseModels.GrantPlayerItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createPlayerItem(GamePlayerModels.AdminCreatePlayerItemRequestData requestData, Action<GamePlayerResponseModels.CreatePlayerItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminGrantPlayerItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminCreatePlayerItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GamePlayerResponseModels.GrantPlayerItemOperationResponse> grantPlayerItemAsync(GamePlayerModels.AdminGrantPlayerItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GamePlayerResponseModels.CreatePlayerItemOperationResponse> createPlayerItemAsync(GamePlayerModels.AdminCreatePlayerItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGrantPlayerItemOperationRequest, GamePlayerResponseModels.GrantPlayerItemOperationResponse>(new GamePlayerRequestModels.AdminGrantPlayerItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminCreatePlayerItemOperationRequest, GamePlayerResponseModels.CreatePlayerItemOperationResponse>(new GamePlayerRequestModels.AdminCreatePlayerItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void joinGroup(GamePlayerModels.AdminJoinGroupRequestData requestData, Action<GamePlayerResponseModels.JoinGroupOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)

@@ -114,7 +114,7 @@
 
         }
 
-        public class GrantGroupItemOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class CreateGroupItemOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
         {
 
         }

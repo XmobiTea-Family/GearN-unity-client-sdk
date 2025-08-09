@@ -10,12 +10,11 @@
     /// </summary>
     public class OperationResponse
     {
-        private int operationCode;
+        private string operationCode;
         private int responseId;
         private int returnCode;
         private string debugMessage;
         private GNHashtable parameters;
-        private bool encrypted;
 
         private InvalidMember[] invalidMembers;
 
@@ -25,11 +24,10 @@
         /// <param name="operationCode">The operation code associated with the response.</param>
         /// <param name="responseId">The response ID.</param>
         /// <param name="encrypted">Indicates whether the response is encrypted.</param>
-        public OperationResponse(int operationCode, int responseId, bool encrypted = true)
+        public OperationResponse(string operationCode, int responseId)
         {
             this.operationCode = operationCode;
             this.responseId = responseId;
-            this.encrypted = encrypted;
             this.parameters = new GNHashtable();
             this.debugMessage = null;
         }
@@ -37,7 +35,7 @@
         /// <summary>
         /// Gets the operation code of the response.
         /// </summary>
-        public int getOperationCode() => this.operationCode;
+        public string getOperationCode() => this.operationCode;
 
         /// <summary>
         /// Gets the return code of the response.
@@ -48,11 +46,6 @@
         /// Gets the parameters associated with the response.
         /// </summary>
         public GNHashtable getParameters() => this.parameters;
-
-        /// <summary>
-        /// Determines whether the response is encrypted.
-        /// </summary>
-        public bool isEncrypted() => this.encrypted;
 
         /// <summary>
         /// Gets the response ID of the operation.
@@ -121,17 +114,6 @@
         }
 
         /// <summary>
-        /// Sets whether the response is encrypted.
-        /// </summary>
-        /// <param name="encrypted">True if the response should be encrypted; otherwise false.</param>
-        /// <returns>The updated <see cref="OperationResponse"/> instance.</returns>
-        public OperationResponse setEncrypted(bool encrypted)
-        {
-            this.encrypted = encrypted;
-            return this;
-        }
-
-        /// <summary>
         /// Sets the invalid members for the response.
         /// </summary>
         /// <param name="invalidMembers">The invalid members to set.</param>
@@ -150,8 +132,8 @@
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append("Code: ")
-                         .Append(CodeHelper.getOperationCodeName(this.operationCode))
+            stringBuilder.Append("OperationCode: ")
+                         .Append(this.operationCode)
                          .Append(", responseId: ")
                          .Append(this.responseId)
                          .Append(", returnCode: ")
@@ -177,8 +159,6 @@
             {
                 stringBuilder.Append(", debugMessage: ").Append(this.debugMessage);
             }
-
-            stringBuilder.Append(", encrypted: ").Append(this.encrypted);
 
             return stringBuilder.ToString();
         }

@@ -9,7 +9,7 @@
     /// </summary>
     public abstract class CustomOperationResponse
     {
-        public int operationCode { get; private set; }
+        public string operationCode { get; private set; }
         public GNHashtable parameters { get; private set; }
         public int returnCode { get; private set; }
         public string debugMessage { get; private set; }
@@ -48,8 +48,7 @@
         /// </summary>
         public string toString()
         {
-            return "ReturnCode: " + this.returnCode + " " +
-                   (this.parameters != null ? this.parameters.ToString() : this.debugMessage);
+            return "ReturnCode: " + this.returnCode + " " + (this.parameters != null ? this.parameters.ToString() : this.debugMessage);
         }
 
         public override string ToString()

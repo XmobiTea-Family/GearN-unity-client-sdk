@@ -121,7 +121,7 @@ namespace XmobiTea.GN.Networking.Http
                 unityWebRequest.timeout = (int)timeout;
 
                 if (param == null) param = new GNHashtable();
-                if (customTags != null) param.add(GNParameterCode.CustomTags, customTags);
+                if (customTags != null) param.add(ParameterCode.CustomTags, customTags);
 
                 if (postType == PostType.Json)
                 {

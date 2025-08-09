@@ -13,7 +13,7 @@
         /// The event codes should be defined in the EventCode file.
         /// </summary>
         /// <returns>An integer representing the event code.</returns>
-        int getEventCode();
+        string getEventCode();
 
         /// <summary>
         /// Handles the specified operation event.

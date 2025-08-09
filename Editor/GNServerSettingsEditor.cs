@@ -19,6 +19,7 @@
         SerializedProperty useSsl;
         SerializedProperty useSocket;
         SerializedProperty useHttp;
+        SerializedProperty defaultTimeoutInSeconds;
         SerializedProperty messageType;
         SerializedProperty sendRate;
         SerializedProperty reconnectDelay;
@@ -43,6 +44,7 @@
             this.useSsl = this.serializedObject.FindProperty("useSsl");
             this.useSocket = this.serializedObject.FindProperty("useSocket");
             this.useHttp = this.serializedObject.FindProperty("useHttp");
+            this.defaultTimeoutInSeconds = this.serializedObject.FindProperty("defaultTimeoutInSeconds");
             this.messageType = this.serializedObject.FindProperty("messageType");
             this.sendRate = this.serializedObject.FindProperty("sendRate");
             this.reconnectDelay = this.serializedObject.FindProperty("reconnectDelay");
@@ -80,6 +82,7 @@
             EditorGUILayout.Space(5);
             EditorGUILayout.PropertyField(this.useSsl);
             EditorGUILayout.PropertyField(this.sendRate);
+            EditorGUILayout.PropertyField(this.defaultTimeoutInSeconds);
             EditorGUILayout.PropertyField(this.messageType);
             EditorGUILayout.Space(10);
 
@@ -150,16 +153,22 @@
             return gnServerSettings;
         }
 
-        [MenuItem("XmobiTea GN/About GN")]
+        [MenuItem("XmobiTea GearN/About")]
         private static void AboutGN()
         {
-            Application.OpenURL("https://gn.xmobitea.com");
+            Application.OpenURL("https://gearn.net");
         }
 
-        [MenuItem("XmobiTea GN/Go to GN-server")]
+        [MenuItem("XmobiTea GearN/Documentation")]
+        private static void DocsGearN()
+        {
+            Application.OpenURL("https://docs.gearn.net");
+        }
+
+        [MenuItem("XmobiTea GearN/Go to github")]
         private static void GotoGNserver()
         {
-            Application.OpenURL("https://github.com/XmobiTea-Family/GN-server");
+            Application.OpenURL("https://github.com/XmobiTea-Family/GearN-server");
         }
     }
 }

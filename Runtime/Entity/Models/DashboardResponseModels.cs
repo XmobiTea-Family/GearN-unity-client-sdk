@@ -44,17 +44,17 @@
 
         }
 
-        public class GrantAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.GrantAdminAccountResponseData>
+        public class CreateAdminAccountOperationResponse : CustomOperationResponse<DashboardModels.CreateAdminAccountResponseData>
         {
 
         }
 
-        public class GrantGameOperationResponse : CustomOperationResponse<DashboardModels.GameWithGameIdResponseData>
+        public class CreateGameOperationResponse : CustomOperationResponse<DashboardModels.GameWithGameIdResponseData>
         {
 
         }
 
-        public class GrantSecretInfoOperationResponse : CustomOperationResponse<DashboardModels.SecretInfoWithSecretKeyResponseData>
+        public class CreateSecretInfoOperationResponse : CustomOperationResponse<DashboardModels.SecretInfoWithSecretKeyResponseData>
         {
 
         }

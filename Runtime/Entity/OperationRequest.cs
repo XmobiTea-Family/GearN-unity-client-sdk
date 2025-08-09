@@ -2,7 +2,6 @@
 {
     using System.Text;
     using XmobiTea.GN.Common;
-    using XmobiTea.GN.Helper;
 
     /// <summary>
     /// Represents an operation request, encapsulating details such as operation code, parameters, encryption, and timeout.
@@ -12,31 +11,28 @@
         /// <summary>
         /// Default timeout for operation requests in seconds.
         /// </summary>
-        public const int defaultTimeOut = 15;
+        public const int defaultTimeOut = 20;
 
-        private int operationCode;
+        private string operationCode;
         private int requestId;
         private GNHashtable parameters;
-        private bool encrypted;
         private int timeout;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationRequest"/> class.
         /// </summary>
         /// <param name="operationCode">The code representing the operation.</param>
-        /// <param name="encrypted">Indicates whether the request is encrypted.</param>
         /// <param name="timeout">Timeout duration for the request.</param>
-        public OperationRequest(int operationCode, bool encrypted = true, int timeout = defaultTimeOut)
+        public OperationRequest(string operationCode, int timeout = OperationRequest.defaultTimeOut)
         {
             this.operationCode = operationCode;
-            this.encrypted = encrypted;
             this.timeout = timeout;
         }
 
         /// <summary>
         /// Gets the operation code of the request.
         /// </summary>
-        public int getOperationCode() => this.operationCode;
+        public string getOperationCode() => this.operationCode;
 
         /// <summary>
         /// Gets the request ID of the operation.
@@ -47,11 +43,6 @@
         /// Gets the parameters associated with the operation.
         /// </summary>
         public GNHashtable getParameters() => this.parameters;
-
-        /// <summary>
-        /// Determines whether the request is encrypted.
-        /// </summary>
-        public bool isEncrypted() => this.encrypted;
 
         /// <summary>
         /// Gets the timeout duration for the request.
@@ -94,17 +85,6 @@
         }
 
         /// <summary>
-        /// Sets whether the request is encrypted.
-        /// </summary>
-        /// <param name="encrypted">True if the request should be encrypted; otherwise false.</param>
-        /// <returns>The updated <see cref="OperationRequest"/> instance.</returns>
-        public OperationRequest setEncrypted(bool encrypted)
-        {
-            this.encrypted = encrypted;
-            return this;
-        }
-
-        /// <summary>
         /// Sets the timeout duration for the request.
         /// </summary>
         /// <param name="timeout">Timeout duration in seconds.</param>
@@ -122,14 +102,12 @@
         public string toString()
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append("Code: ")
-                         .Append(CodeHelper.getOperationCodeName(this.operationCode))
+            stringBuilder.Append("OperationCode: ")
+                         .Append(this.operationCode)
                          .Append(", requestId: ")
                          .Append(this.requestId)
                          .Append(", parameters: ")
-                         .Append(this.parameters)
-                         .Append(", encrypted: ")
-                         .Append(this.encrypted);
+                         .Append(this.parameters);
             return stringBuilder.ToString();
         }
 

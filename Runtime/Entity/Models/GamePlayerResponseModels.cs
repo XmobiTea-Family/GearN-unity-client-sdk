@@ -144,17 +144,17 @@
 
         }
 
-        public class GrantGroupOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
+        public class CreateGroupOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
         {
 
         }
 
-        public class GrantPlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
+        public class CreatePlayerCharacterOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
         {
 
         }
 
-        public class GrantPlayerItemOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
+        public class CreatePlayerItemOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
         {
 
         }

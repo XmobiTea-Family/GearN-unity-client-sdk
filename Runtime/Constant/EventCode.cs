@@ -8,32 +8,32 @@
         /// <summary>
         /// Event code for when a game player's friend list is updated.
         /// </summary>
-        public const int OnGamePlayerFriendUpdate = 1;
+        public const string OnGamePlayerFriendUpdate = "onGamePlayerFriendUpdate";
 
         /// <summary>
         /// Event code for when a character player's friend list is updated.
         /// </summary>
-        public const int OnCharacterPlayerFriendUpdate = 2;
+        public const string OnCharacterPlayerFriendUpdate = "onCharacterPlayerFriendUpdate";
 
         /// <summary>
         /// Event code for when a game player's group list is updated.
         /// </summary>
-        public const int OnGamePlayerGroupUpdate = 3;
+        public const string OnGamePlayerGroupUpdate = "onGamePlayerGroupUpdate";
 
         /// <summary>
         /// Event code for when a group member's details are updated.
         /// </summary>
-        public const int OnGroupMemberUpdate = 4;
+        public const string OnGroupMemberUpdate = "onGroupMemberUpdate";
 
         /// <summary>
         /// Event code for when group messages are updated.
         /// </summary>
-        public const int OnGroupMessageUpdate = 5;
+        public const string OnGroupMessageUpdate = "onGroupMessageUpdate";
 
         /// <summary>
         /// Event code for when a character player's group list is updated.
         /// </summary>
-        public const int OnCharacterPlayerGroupUpdate = 6;
+        public const string OnCharacterPlayerGroupUpdate = "onCharacterPlayerGroupUpdate";
 
         /// <summary>
         /// Private constructor to prevent instantiation of this utility class.

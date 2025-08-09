@@ -6,145 +6,145 @@
     {
         public class AvatarItem
         {
-            [NumberDataMember(code = GNParameterCode.Type)]
+            [NumberDataMember(code = ParameterCode.Type)]
             public int type;
 
-            [StringDataMember(code = GNParameterCode.Value)]
+            [StringDataMember(code = ParameterCode.Value)]
             public string value;
 
         }
 
         public class TagItem
         {
-            [StringDataMember(code = GNParameterCode.Key)]
+            [StringDataMember(code = ParameterCode.Key)]
             public string key;
 
-            [StringDataMember(code = GNParameterCode.Value)]
+            [StringDataMember(code = ParameterCode.Value)]
             public string value;
 
         }
 
         public class BanItem
         {
-            [NumberDataMember(code = GNParameterCode.TsExpire)]
+            [NumberDataMember(code = ParameterCode.TsExpire)]
             public long tsExpire;
 
-            [StringDataMember(code = GNParameterCode.Reason)]
+            [StringDataMember(code = ParameterCode.Reason)]
             public string reason;
 
         }
 
         public class DataItem
         {
-            [StringDataMember(code = GNParameterCode.Key)]
+            [StringDataMember(code = ParameterCode.Key)]
             public string key;
 
-            [DataMember(code = GNParameterCode.Value)]
+            [DataMember(code = ParameterCode.Value)]
             public object value;
 
         }
 
         public class CurrencyItem
         {
-            [StringDataMember(code = GNParameterCode.Key)]
+            [StringDataMember(code = ParameterCode.Key)]
             public string key;
 
-            [NumberDataMember(code = GNParameterCode.Value)]
+            [NumberDataMember(code = ParameterCode.Value)]
             public double value;
 
         }
 
         public class StatisticsItem
         {
-            [StringDataMember(code = GNParameterCode.Key)]
+            [StringDataMember(code = ParameterCode.Key)]
             public string key;
 
-            [NumberDataMember(code = GNParameterCode.Value)]
+            [NumberDataMember(code = ParameterCode.Value)]
             public double value;
 
         }
 
         public class CharacterItem
         {
-            [StringDataMember(code = GNParameterCode.CharacterId)]
+            [StringDataMember(code = ParameterCode.CharacterId)]
             public string characterId;
 
-            [StringDataMember(code = GNParameterCode.CatalogId)]
+            [StringDataMember(code = ParameterCode.CatalogId)]
             public string catalogId;
 
         }
 
         public class OwnerItem
         {
-            [NumberDataMember(code = GNParameterCode.Type)]
+            [NumberDataMember(code = ParameterCode.Type)]
             public int type;
 
-            [StringDataMember(code = GNParameterCode.Id)]
+            [StringDataMember(code = ParameterCode.Id)]
             public string id;
 
         }
 
         public class RemoveStatusItem
         {
-            [NumberDataMember(code = GNParameterCode.TsRemove)]
+            [NumberDataMember(code = ParameterCode.TsRemove)]
             public long tsRemove;
 
-            [StringDataMember(code = GNParameterCode.Reason, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Reason, isOptional = true)]
             public string? reason;
 
         }
 
         public class InventoryItem
         {
-            [StringDataMember(code = GNParameterCode.ItemId)]
+            [StringDataMember(code = ParameterCode.ItemId)]
             public string itemId;
 
-            [StringDataMember(code = GNParameterCode.CatalogId)]
+            [StringDataMember(code = ParameterCode.CatalogId)]
             public string catalogId;
 
-            [StringDataMember(code = GNParameterCode.ClassId)]
+            [StringDataMember(code = ParameterCode.ClassId)]
             public string classId;
 
         }
 
         public class GroupItem
         {
-            [StringDataMember(code = GNParameterCode.GroupId)]
+            [StringDataMember(code = ParameterCode.GroupId)]
             public string groupId;
 
-            [StringDataMember(code = GNParameterCode.CatalogId)]
+            [StringDataMember(code = ParameterCode.CatalogId)]
             public string catalogId;
 
-            [NumberDataMember(code = GNParameterCode.Status)]
+            [NumberDataMember(code = ParameterCode.Status)]
             public int status;
 
-            [NumberDataMember(code = GNParameterCode.TsLastStatusUpdate)]
+            [NumberDataMember(code = ParameterCode.TsLastStatusUpdate)]
             public long tsLastStatusUpdate;
 
         }
 
         public class FriendItem
         {
-            [StringDataMember(code = GNParameterCode.FriendId)]
+            [StringDataMember(code = ParameterCode.FriendId)]
             public string friendId;
 
-            [StringDataMember(code = GNParameterCode.CatalogId)]
+            [StringDataMember(code = ParameterCode.CatalogId)]
             public string catalogId;
 
-            [NumberDataMember(code = GNParameterCode.Status)]
+            [NumberDataMember(code = ParameterCode.Status)]
             public int status;
 
-            [NumberDataMember(code = GNParameterCode.TsLastStatusUpdate)]
+            [NumberDataMember(code = ParameterCode.TsLastStatusUpdate)]
             public long tsLastStatusUpdate;
 
         }
 
         public class MemberItem
         {
-            [StringDataMember(code = GNParameterCode.MemberId)]
+            [StringDataMember(code = ParameterCode.MemberId)]
             public string memberId;
 
-            [NumberDataMember(code = GNParameterCode.Status)]
+            [NumberDataMember(code = ParameterCode.Status)]
             public int status;
 
         }

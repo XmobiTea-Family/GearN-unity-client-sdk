@@ -15,7 +15,7 @@
         /// <summary>
         /// A list of updated group messages.
         /// </summary>
-        [GNArrayDataMember(code = GNParameterCode.GroupMessages, elementCls = typeof(GroupModels.GroupMessageResponseData))]
+        [GNArrayDataMember(code = ParameterCode.GroupMessages, elementCls = typeof(GroupModels.GroupMessageResponseData))]
         public List<GroupModels.GroupMessageResponseData> groupMessages;
     }
 
@@ -33,7 +33,7 @@
         /// Gets the event code associated with the group message update.
         /// </summary>
         /// <returns>The event code for group message updates.</returns>
-        public int getEventCode() => EventCode.OnGroupMessageUpdate;
+        public string getEventCode() => EventCode.OnGroupMessageUpdate;
 
         /// <summary>
         /// Handles the group message update event.

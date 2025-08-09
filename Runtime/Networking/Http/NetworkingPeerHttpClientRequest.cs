@@ -16,7 +16,7 @@
     {
         private readonly HttpClient client;
 
-        private readonly float DefaultTimeout = 15;
+        private readonly float DefaultTimeout = 20;
 
         /// <summary>
         /// Sends a GET request using HttpWebRequest or HttpClient.
@@ -136,7 +136,7 @@
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, this.httpUrl + "/" + subUri))
             {
                 if (param == null) param = new GNHashtable();
-                if (customTags != null) param.add(GNParameterCode.CustomTags, customTags);
+                if (customTags != null) param.add(ParameterCode.CustomTags, customTags);
 
                 if (postType == PostType.Json)
                 {

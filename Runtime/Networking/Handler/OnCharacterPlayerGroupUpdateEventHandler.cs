@@ -15,13 +15,13 @@
         /// <summary>
         /// The character ID.
         /// </summary>
-        [StringDataMember(code = GNParameterCode.CharacterId)]
+        [StringDataMember(code = ParameterCode.CharacterId)]
         public string characterId;
 
         /// <summary>
         /// A list of player groups associated with the character.
         /// </summary>
-        [GNArrayDataMember(code = GNParameterCode.PlayerGroups, elementCls = typeof(GenericModels.GroupItem))]
+        [GNArrayDataMember(code = ParameterCode.PlayerGroups, elementCls = typeof(GenericModels.GroupItem))]
         public List<GenericModels.GroupItem> playerGroups;
     }
 
@@ -39,7 +39,7 @@
         /// Gets the event code associated with this handler.
         /// </summary>
         /// <returns>The event code for "OnCharacterPlayerGroupUpdate".</returns>
-        public int getEventCode() => EventCode.OnCharacterPlayerGroupUpdate;
+        public string getEventCode() => EventCode.OnCharacterPlayerGroupUpdate;
 
         /// <summary>
         /// Handles the "OnCharacterPlayerGroupUpdate" operation event.

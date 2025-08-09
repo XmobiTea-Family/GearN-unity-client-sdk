@@ -15,13 +15,13 @@
         /// <summary>
         /// The character ID.
         /// </summary>
-        [StringDataMember(code = GNParameterCode.CharacterId)]
+        [StringDataMember(code = ParameterCode.CharacterId)]
         public string characterId;
 
         /// <summary>
         /// A list of player friends associated with the character.
         /// </summary>
-        [GNArrayDataMember(code = GNParameterCode.PlayerFriends, elementCls = typeof(GenericModels.FriendItem))]
+        [GNArrayDataMember(code = ParameterCode.PlayerFriends, elementCls = typeof(GenericModels.FriendItem))]
         public List<GenericModels.FriendItem> playerFriends;
     }
 
@@ -43,7 +43,7 @@
         /// <returns>
         /// The event code for "OnCharacterPlayerFriendUpdate".
         /// </returns>
-        public int getEventCode() => EventCode.OnCharacterPlayerFriendUpdate;
+        public string getEventCode() => EventCode.OnCharacterPlayerFriendUpdate;
 
         /// <summary>
         /// Handles the "OnCharacterPlayerFriendUpdate" operation event.

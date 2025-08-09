@@ -232,14 +232,14 @@ namespace XmobiTea.GN
             return GNNetwork.sendViaHttpAsync<GroupRequestModels.GetTsCreateOperationRequest, GroupResponseModels.GetTsCreateOperationResponse>(new GroupRequestModels.GetTsCreateOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public void grantGroupItem(GroupModels.GrantGroupItemRequestData requestData, Action<GroupResponseModels.GrantGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void createGroupItem(GroupModels.CreateGroupItemRequestData requestData, Action<GroupResponseModels.CreateGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new GroupRequestModels.GrantGroupItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new GroupRequestModels.CreateGroupItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
-        public Task<GroupResponseModels.GrantGroupItemOperationResponse> grantGroupItemAsync(GroupModels.GrantGroupItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<GroupResponseModels.CreateGroupItemOperationResponse> createGroupItemAsync(GroupModels.CreateGroupItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<GroupRequestModels.GrantGroupItemOperationRequest, GroupResponseModels.GrantGroupItemOperationResponse>(new GroupRequestModels.GrantGroupItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<GroupRequestModels.CreateGroupItemOperationRequest, GroupResponseModels.CreateGroupItemOperationResponse>(new GroupRequestModels.CreateGroupItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         public void removeGroupItem(GroupModels.RemoveGroupItemRequestData requestData, Action<GroupResponseModels.RemoveGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -635,14 +635,14 @@ namespace XmobiTea.GN
                 return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerGetTsCreateOperationRequest, GroupResponseModels.GetTsCreateOperationResponse>(new GroupRequestModels.ServerGetTsCreateOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantGroupItem(GroupModels.ServerGrantGroupItemRequestData requestData, Action<GroupResponseModels.GrantGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createGroupItem(GroupModels.ServerCreateGroupItemRequestData requestData, Action<GroupResponseModels.CreateGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GroupRequestModels.ServerGrantGroupItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GroupRequestModels.ServerCreateGroupItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GroupResponseModels.GrantGroupItemOperationResponse> grantGroupItemAsync(GroupModels.ServerGrantGroupItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GroupResponseModels.CreateGroupItemOperationResponse> createGroupItemAsync(GroupModels.ServerCreateGroupItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerGrantGroupItemOperationRequest, GroupResponseModels.GrantGroupItemOperationResponse>(new GroupRequestModels.ServerGrantGroupItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GroupRequestModels.ServerCreateGroupItemOperationRequest, GroupResponseModels.CreateGroupItemOperationResponse>(new GroupRequestModels.ServerCreateGroupItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void removeGroupItem(GroupModels.ServerRemoveGroupItemRequestData requestData, Action<GroupResponseModels.RemoveGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -1039,14 +1039,14 @@ namespace XmobiTea.GN
                 return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminGetTsCreateOperationRequest, GroupResponseModels.GetTsCreateOperationResponse>(new GroupRequestModels.AdminGetTsCreateOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public void grantGroupItem(GroupModels.AdminGrantGroupItemRequestData requestData, Action<GroupResponseModels.GrantGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void createGroupItem(GroupModels.AdminCreateGroupItemRequestData requestData, Action<GroupResponseModels.CreateGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new GroupRequestModels.AdminGrantGroupItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new GroupRequestModels.AdminCreateGroupItemOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
-            public Task<GroupResponseModels.GrantGroupItemOperationResponse> grantGroupItemAsync(GroupModels.AdminGrantGroupItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<GroupResponseModels.CreateGroupItemOperationResponse> createGroupItemAsync(GroupModels.AdminCreateGroupItemRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminGrantGroupItemOperationRequest, GroupResponseModels.GrantGroupItemOperationResponse>(new GroupRequestModels.AdminGrantGroupItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<GroupRequestModels.AdminCreateGroupItemOperationRequest, GroupResponseModels.CreateGroupItemOperationResponse>(new GroupRequestModels.AdminCreateGroupItemOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             public void removeGroupItem(GroupModels.AdminRemoveGroupItemRequestData requestData, Action<GroupResponseModels.RemoveGroupItemOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
