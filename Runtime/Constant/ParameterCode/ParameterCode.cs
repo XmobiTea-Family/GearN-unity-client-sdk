@@ -125,6 +125,7 @@
         public const string GroupStatistics = "groupStatistics";
         public const string Members = "members";
         public const string OwnerId = "ownerId";
+        public const string NewOwnerId = "newOwnerId";
         public const string OwnerType = "ownerType";
         public const string Keys = "keys";
         public const string Label = "label";
