@@ -1,15 +1,15 @@
-﻿namespace XmobiTea.GN.Networking.Socket
+﻿namespace XmobiTea.GearN.Networking.Socket
 {
 #if UNITY_USING_BEST_HTTP
 
     using BestHTTP.SocketIO;
     using System;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Config;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Helper;
-    using XmobiTea.GN.Logger;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Config;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Helper;
+    using XmobiTea.GearN.Logger;
 
     /// <summary>
     /// Handles socket networking using BestHTTP Socket.IO v2.

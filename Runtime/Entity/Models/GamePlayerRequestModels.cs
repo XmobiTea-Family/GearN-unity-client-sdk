@@ -1,7 +1,7 @@
-﻿namespace XmobiTea.GN.Entity.Models
+﻿namespace XmobiTea.GearN.Entity.Models
 {
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity.Request;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity.Request;
 
     public class GamePlayerRequestModels
     {

@@ -1,13 +1,13 @@
-﻿namespace XmobiTea.GN.Networking.Http
+﻿namespace XmobiTea.GearN.Networking.Http
 {
     using System;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Handles HTTP networking using HttpWebRequest or HttpClient.

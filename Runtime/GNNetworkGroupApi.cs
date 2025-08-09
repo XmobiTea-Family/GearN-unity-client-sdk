@@ -1,10 +1,10 @@
-namespace XmobiTea.GN
+namespace XmobiTea.GearN
 {
     using System;
     using System.Threading.Tasks;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Entity.Models;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Entity.Models;
 
     public class GroupApi
     {

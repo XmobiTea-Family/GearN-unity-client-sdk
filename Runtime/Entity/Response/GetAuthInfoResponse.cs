@@ -1,6 +1,6 @@
-﻿namespace XmobiTea.GN.Entity.Response
+﻿namespace XmobiTea.GearN.Entity.Response
 {
-    using XmobiTea.GN.Common;
+    using XmobiTea.GearN.Common;
 
     public class AuthInfoResponse
     {

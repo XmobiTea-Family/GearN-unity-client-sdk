@@ -1,13 +1,13 @@
-﻿namespace XmobiTea.GN.Networking
+﻿namespace XmobiTea.GearN.Networking
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Logger;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Logger;
 
     /// <summary>
     /// Abstract base class for managing common functionalities of network peers.

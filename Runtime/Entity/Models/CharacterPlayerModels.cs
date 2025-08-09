@@ -1,8 +1,8 @@
-﻿namespace XmobiTea.GN.Entity.Models
+﻿namespace XmobiTea.GearN.Entity.Models
 {
     using System.Collections.Generic;
-    using XmobiTea.GN.Constant;
-    using static XmobiTea.GN.Entity.Models.MasterPlayerModels;
+    using XmobiTea.GearN.Constant;
+    using static XmobiTea.GearN.Entity.Models.MasterPlayerModels;
 
     public partial class CharacterPlayerModels
     {

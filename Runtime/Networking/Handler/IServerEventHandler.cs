@@ -1,6 +1,6 @@
-﻿namespace XmobiTea.GN.Networking
+﻿namespace XmobiTea.GearN.Networking
 {
-    using XmobiTea.GN.Entity;
+    using XmobiTea.GearN.Entity;
 
     /// <summary>
     /// Defines an interface for handling server events. 

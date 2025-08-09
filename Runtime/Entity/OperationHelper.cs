@@ -1,6 +1,6 @@
-using XmobiTea.GN.Constant;
+using XmobiTea.GearN.Constant;
 
-namespace XmobiTea.GN.Entity
+namespace XmobiTea.GearN.Entity
 {
     /// <summary>
     /// Utility class for handling operations and formatting data for socket or HTTP communication.

@@ -1,4 +1,4 @@
-namespace XmobiTea.GN.Unity
+namespace XmobiTea.GearN.Unity
 {
     /// <summary>
     /// The ServiceCoroutine class is responsible for updating and handling coroutine.

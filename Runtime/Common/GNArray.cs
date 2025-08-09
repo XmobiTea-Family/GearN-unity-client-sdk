@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Common
+﻿namespace XmobiTea.GearN.Common
 {
     using System;
     using System.Collections.Generic;

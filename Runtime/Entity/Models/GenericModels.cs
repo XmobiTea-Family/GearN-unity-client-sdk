@@ -1,6 +1,6 @@
-﻿namespace XmobiTea.GN.Entity.Models
+﻿namespace XmobiTea.GearN.Entity.Models
 {
-    using XmobiTea.GN.Constant;
+    using XmobiTea.GearN.Constant;
 
     public class GenericModels
     {

@@ -1,4 +1,4 @@
-namespace XmobiTea.GN.Networking.Http
+namespace XmobiTea.GearN.Networking.Http
 {
 #if UNITY_USING_BEST_HTTP
 
@@ -6,9 +6,9 @@ namespace XmobiTea.GN.Networking.Http
     using System;
     using System.IO;
     using System.Text;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Handles HTTP requests using BestHTTP library.

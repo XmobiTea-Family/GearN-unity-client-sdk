@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Entity.Response
+﻿namespace XmobiTea.GearN.Entity.Response
 {
     public class UploadFileResponse
     {

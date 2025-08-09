@@ -1,7 +1,7 @@
-﻿namespace XmobiTea.GN.Entity.Models
+﻿namespace XmobiTea.GearN.Entity.Models
 {
     using System.Collections.Generic;
-    using XmobiTea.GN.Constant;
+    using XmobiTea.GearN.Constant;
 
     public partial class GroupModels
     {

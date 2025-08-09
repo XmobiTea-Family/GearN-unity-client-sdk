@@ -1,14 +1,14 @@
-namespace XmobiTea.GN.Networking.Socket
+namespace XmobiTea.GearN.Networking.Socket
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.Json;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Helper;
-    using XmobiTea.GN.Logger;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Helper;
+    using XmobiTea.GearN.Logger;
 
     /// <summary>
     /// Handles socket networking using Socket.IO v4 DogHappy.

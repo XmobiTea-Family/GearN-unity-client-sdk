@@ -1,7 +1,7 @@
-﻿namespace XmobiTea.GN.Entity
+﻿namespace XmobiTea.GearN.Entity
 {
     using System.Text;
-    using XmobiTea.GN.Common;
+    using XmobiTea.GearN.Common;
 
     /// <summary>
     /// Represents an operation event with a code, parameters, and encryption status.

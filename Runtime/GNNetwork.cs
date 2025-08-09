@@ -1,15 +1,15 @@
-﻿namespace XmobiTea.GN
+﻿namespace XmobiTea.GearN
 {
     using System;
     using System.Threading.Tasks;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Config;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Entity.Request;
-    using XmobiTea.GN.Entity.Response;
-    using XmobiTea.GN.Logger;
-    using XmobiTea.GN.Networking;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Config;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Entity.Request;
+    using XmobiTea.GearN.Entity.Response;
+    using XmobiTea.GearN.Logger;
+    using XmobiTea.GearN.Networking;
 
     /// <summary>
     /// Static class GNNetwork handles all the networking logic, including socket and HTTP communication.

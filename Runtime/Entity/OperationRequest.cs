@@ -1,7 +1,7 @@
-﻿namespace XmobiTea.GN.Entity
+﻿namespace XmobiTea.GearN.Entity
 {
     using System.Text;
-    using XmobiTea.GN.Common;
+    using XmobiTea.GearN.Common;
 
     /// <summary>
     /// Represents an operation request, encapsulating details such as operation code, parameters, encryption, and timeout.

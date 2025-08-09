@@ -1,13 +1,13 @@
-namespace XmobiTea.GN.Networking.Http
+namespace XmobiTea.GearN.Networking.Http
 {
     using System;
     using System.Collections;
     using System.Text;
     using UnityEngine.Networking;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Helper;
-    using XmobiTea.GN.Unity;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Helper;
+    using XmobiTea.GearN.Unity;
 
     /// <summary>
     /// Handles HTTP networking using UnityWebRequest.

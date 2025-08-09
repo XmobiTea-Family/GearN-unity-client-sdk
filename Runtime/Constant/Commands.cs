@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Constant
+﻿namespace XmobiTea.GearN.Constant
 {
     /// <summary>
     /// Holds constant values used throughout the GN networking system.

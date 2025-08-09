@@ -1,14 +1,13 @@
-namespace XmobiTea.GN.Networking.Socket
+namespace XmobiTea.GearN.Networking.Socket
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
 
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Helper;
-    using XmobiTea.GN.Logger;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Helper;
+    using XmobiTea.GearN.Logger;
 
     /// <summary>
     /// Represents a socket packet containing data and encryption information.
@@ -360,6 +359,53 @@ namespace XmobiTea.GN.Networking.Socket
             return answer;
         }
 
+        //internal static System.Collections.IDictionary fromMsgKeyValuePair(KeyValuePair<object, object> keyValuePair)
+        //{
+        //    var answer = new Dictionary<object, object>();
+
+        //    var key = keyValuePair.Key;
+        //    var value = keyValuePair.Value;
+
+        //    if (value is KeyValuePair<object, object>[] keyValuePairs1)
+        //    {
+        //        answer.Add(key, fromMsgKeyValuePairs(keyValuePairs1));
+        //    }
+        //    else if (value is object[] objects1)
+        //    {
+        //        answer.Add(key, fromMsgList(objects1));
+        //    }
+
+        //    return answer;
+        //}
+
+        internal static System.Collections.IDictionary fromMsgDict(object objects)
+        {
+            var answer = new Dictionary<object, object>();
+
+            var value = objects;
+
+            if (value is KeyValuePair<object, object>[] keyValuePairs1)
+            {
+                var dict = fromMsgKeyValuePairs(keyValuePairs1);
+
+                foreach (var c in dict.Keys)
+                {
+                    answer.Add(c, dict[c]);
+                }
+            }
+            else if (value is System.Collections.IDictionary iDict)
+            {
+                var dict = fromMsgDict(iDict);
+
+                foreach (var c in dict.Keys)
+                {
+                    answer.Add(c, dict[c]);
+                }
+            }
+
+            return answer;
+        }
+
         /// <summary>
         /// Converts a JSON object to a list.
         /// </summary>
@@ -368,6 +414,11 @@ namespace XmobiTea.GN.Networking.Socket
         internal static System.Collections.IList fromJsonList(object objects)
         {
             return (System.Collections.IList)objects;
+        }
+
+        internal static System.Collections.IDictionary fromJsonDict(object objects)
+        {
+            return (System.Collections.IDictionary)objects;
         }
 
         /// <summary>
@@ -393,7 +444,7 @@ namespace XmobiTea.GN.Networking.Socket
                                 var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(byteArr);
 
                                 var gnHashtable = new GNHashtable.Builder()
-                                    .addAll(iDict)
+                                    .addAll(NetworkingSocketPeerBase.fromMsgDict(iDict))
                                     .build();
                                 this.onResponseHandler(gnHashtable);
                             }
@@ -406,9 +457,9 @@ namespace XmobiTea.GN.Networking.Socket
                         {
                             try
                             {
-                                var iDict = (IDictionary)responsePacket.obj;
+                                var iDict = responsePacket.obj;
                                 var gnHashtable = new GNHashtable.Builder()
-                                    .addAll(iDict)
+                                    .addAll(NetworkingSocketPeerBase.fromJsonDict(iDict))
                                     .build();
                                 this.onResponseHandler(gnHashtable);
                             }
@@ -438,7 +489,7 @@ namespace XmobiTea.GN.Networking.Socket
                                 var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(byteArr);
 
                                 var gnHashtable = new GNHashtable.Builder()
-                                    .addAll(iDict)
+                                    .addAll(NetworkingSocketPeerBase.fromMsgDict(iDict))
                                     .build();
                                 this.onEventHandler(gnHashtable);
                             }
@@ -451,10 +502,10 @@ namespace XmobiTea.GN.Networking.Socket
                         {
                             try
                             {
-                                var iDict = (IDictionary)eventPacket.obj;
+                                var iDict = eventPacket.obj;
 
                                 var gnHashtable = new GNHashtable.Builder()
-                                    .addAll(iDict)
+                                    .addAll(NetworkingSocketPeerBase.fromJsonDict(iDict))
                                     .build();
                                 this.onEventHandler(gnHashtable);
                             }

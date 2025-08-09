@@ -1,4 +1,4 @@
-namespace XmobiTea.GN.Constant
+namespace XmobiTea.GearN.Constant
 {
     /// <summary>
     /// Defines constant return codes used to represent various operation outcomes.

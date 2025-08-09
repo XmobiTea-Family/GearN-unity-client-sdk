@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using XmobiTea.GN.Common;
+using XmobiTea.GearN.Common;
 
-namespace XmobiTea.GN.Entity
+namespace XmobiTea.GearN.Entity
 {
     /// <summary>
     /// Enhanced metadata for an object field in the GN system.

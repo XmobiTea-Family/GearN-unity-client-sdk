@@ -1,11 +1,11 @@
-﻿namespace XmobiTea.GN.Helper
+﻿namespace XmobiTea.GearN.Helper
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Entity;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Entity;
 
     /// <summary>
     /// Mapper class for extracting and caching metadata of fields in a class decorated with DataMember attributes.

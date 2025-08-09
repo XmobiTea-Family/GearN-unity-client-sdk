@@ -1,13 +1,13 @@
-﻿namespace XmobiTea.GN.Networking.Socket
+﻿namespace XmobiTea.GearN.Networking.Socket
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Config;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Logger;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Config;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Logger;
 
     /// <summary>
     /// Manages socket communication for the application.

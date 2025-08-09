@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Editor
+﻿namespace XmobiTea.GearN.Editor
 {
     using System.Collections.Generic;
     using System.IO;
@@ -6,8 +6,8 @@
     using UnityEditor;
 
     using UnityEngine;
-    using XmobiTea.GN.Config;
-    using XmobiTea.GN.Constant;
+    using XmobiTea.GearN.Config;
+    using XmobiTea.GearN.Constant;
     using Debug = UnityEngine.Debug;
 
     [CustomEditor(typeof(GNServerSettings))]

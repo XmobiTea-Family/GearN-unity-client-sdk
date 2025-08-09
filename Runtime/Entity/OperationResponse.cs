@@ -1,9 +1,9 @@
-﻿namespace XmobiTea.GN.Entity
+﻿namespace XmobiTea.GearN.Entity
 {
     using System.Text;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Represents an operation response, encapsulating details such as operation code, return code, debug messages, and parameters.

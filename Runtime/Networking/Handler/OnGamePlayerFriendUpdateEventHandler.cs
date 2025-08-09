@@ -1,11 +1,11 @@
-﻿namespace XmobiTea.GN.Networking
+﻿namespace XmobiTea.GearN.Networking
 {
     using System;
     using System.Collections.Generic;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Entity.Models;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Entity.Models;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Represents the data structure for updating a player's friend list in the game.

@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Config
+﻿namespace XmobiTea.GearN.Config
 {
     using UnityEngine;
 
@@ -112,7 +112,7 @@
         private HttpRequestType httpRequestType = HttpRequestType.UnityWebRequest;
 
         [SerializeField]
-        private GN.Logger.LogType logType = GN.Logger.LogType.All;
+        private GearN.Logger.LogType logType = GearN.Logger.LogType.All;
 
         /// <summary>
         /// Gets the server address.
@@ -242,7 +242,7 @@
         /// Gets the log type.
         /// </summary>
         /// <returns>The log type.</returns>
-        public GN.Logger.LogType getLogType() => this.logType;
+        public GearN.Logger.LogType getLogType() => this.logType;
 
         /// <summary>
         /// Constructs the socket URL.

@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Constant
+﻿namespace XmobiTea.GearN.Constant
 {
     public enum MatchmakingMemberStatus
     {

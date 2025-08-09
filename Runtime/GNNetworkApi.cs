@@ -1,9 +1,9 @@
-﻿namespace XmobiTea.GN
+﻿namespace XmobiTea.GearN
 {
     using System;
     using System.Threading.Tasks;
-    using XmobiTea.GN.Entity.Response;
-    using XmobiTea.GN.Networking;
+    using XmobiTea.GearN.Entity.Response;
+    using XmobiTea.GearN.Networking;
 
     public static partial class GNNetwork
     {

@@ -1,10 +1,10 @@
-﻿namespace XmobiTea.GN.Helper
+﻿namespace XmobiTea.GearN.Helper
 {
     using System;
     using System.Collections.Generic;
     using System.Reflection;
 
-    using XmobiTea.GN.Constant;
+    using XmobiTea.GearN.Constant;
 
     /// <summary>
     /// Base class for managing code-to-name mappings.

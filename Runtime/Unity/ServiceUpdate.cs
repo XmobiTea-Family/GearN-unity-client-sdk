@@ -1,6 +1,6 @@
-namespace XmobiTea.GN.Unity
+namespace XmobiTea.GearN.Unity
 {
-    using XmobiTea.GN.Networking;
+    using XmobiTea.GearN.Networking;
 
     /// <summary>
     /// The ServiceUpdate class is responsible for updating and handling network services.

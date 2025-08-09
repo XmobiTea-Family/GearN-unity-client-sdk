@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Networking
+﻿namespace XmobiTea.GearN.Networking
 {
     /// <summary>
     /// Represents the authentication status of a user.

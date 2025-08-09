@@ -1,6 +1,6 @@
-﻿namespace XmobiTea.GN.Entity.Models
+﻿namespace XmobiTea.GearN.Entity.Models
 {
-    using XmobiTea.GN.Entity.Response;
+    using XmobiTea.GearN.Entity.Response;
 
     public class AuthenticateResponseModels
     {

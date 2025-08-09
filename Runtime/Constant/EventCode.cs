@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Constant
+﻿namespace XmobiTea.GearN.Constant
 {
     /// <summary>
     /// Defines constant event codes for handling various server events.

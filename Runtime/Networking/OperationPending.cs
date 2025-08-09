@@ -1,9 +1,9 @@
-namespace XmobiTea.GN.Networking
+namespace XmobiTea.GearN.Networking
 {
     using System;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
 
     /// <summary>
     /// Represents a pending operation request, including metadata and timing information.

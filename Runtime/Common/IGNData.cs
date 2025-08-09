@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Common
+﻿namespace XmobiTea.GearN.Common
 {
     /// <summary>
     /// Interface defining the structure for GNData objects.

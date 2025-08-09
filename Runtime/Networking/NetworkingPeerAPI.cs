@@ -1,11 +1,11 @@
-﻿namespace XmobiTea.GN.Networking
+﻿namespace XmobiTea.GearN.Networking
 {
     using System;
     using System.Collections;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity.Response;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity.Response;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Provides additional functionality for managing network peers.

@@ -1,7 +1,7 @@
-﻿namespace XmobiTea.GN.Entity.Request
+﻿namespace XmobiTea.GearN.Entity.Request
 {
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Base class for creating custom operation requests.

@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Entity
+﻿namespace XmobiTea.GearN.Entity
 {
     using System;
 

@@ -1,4 +1,4 @@
-﻿namespace XmobiTea.GN.Helper
+﻿namespace XmobiTea.GearN.Helper
 {
     using XmobiTea.Binary;
     using XmobiTea.Binary.MessagePack;

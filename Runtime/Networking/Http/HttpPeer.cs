@@ -1,14 +1,15 @@
-﻿namespace XmobiTea.GN.Networking.Http
+﻿namespace XmobiTea.GearN.Networking.Http
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Text;
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Config;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Entity;
-    using XmobiTea.GN.Helper;
-    using XmobiTea.GN.Logger;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Config;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Helper;
+    using XmobiTea.GearN.Logger;
 
     /// <summary>
     /// Represents the HTTP application response.
@@ -166,7 +167,7 @@
                     {
                         var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(httpAppResponse.data);
                         gnHashtable = new GNHashtable.Builder()
-                            .addAll(iDict)
+                            .addAll(Socket.NetworkingSocketPeerBase.fromMsgDict(iDict))
                             .build();
                     }
 

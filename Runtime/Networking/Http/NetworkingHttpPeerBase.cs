@@ -1,7 +1,7 @@
-namespace XmobiTea.GN.Networking.Http
+namespace XmobiTea.GearN.Networking.Http
 {
     using System;
-    using XmobiTea.GN.Common;
+    using XmobiTea.GearN.Common;
 
     /// <summary>
     /// Abstract base class for HTTP networking operations.

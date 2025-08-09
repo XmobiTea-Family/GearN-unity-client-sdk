@@ -1,8 +1,8 @@
-﻿namespace XmobiTea.GN.Entity.Response
+﻿namespace XmobiTea.GearN.Entity.Response
 {
-    using XmobiTea.GN.Common;
-    using XmobiTea.GN.Constant;
-    using XmobiTea.GN.Helper;
+    using XmobiTea.GearN.Common;
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Base class for handling custom operation responses.

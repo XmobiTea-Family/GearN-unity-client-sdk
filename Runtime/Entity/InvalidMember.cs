@@ -1,7 +1,7 @@
-﻿namespace XmobiTea.GN.Entity
+﻿namespace XmobiTea.GearN.Entity
 {
     using System.Text;
-    using XmobiTea.GN.Constant;
+    using XmobiTea.GearN.Constant;
 
     /// <summary>
     /// Represents an invalid member with its code and type of invalidation.

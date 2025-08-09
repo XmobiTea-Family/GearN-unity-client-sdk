@@ -1,4 +1,4 @@
-namespace XmobiTea.GN.Logger
+namespace XmobiTea.GearN.Logger
 {
     using System;
 

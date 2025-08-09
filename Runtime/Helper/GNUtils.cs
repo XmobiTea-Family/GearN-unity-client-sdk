@@ -1,7 +1,7 @@
-﻿namespace XmobiTea.GN.Helper
+﻿namespace XmobiTea.GearN.Helper
 {
     using System.Collections.Generic;
-    using XmobiTea.GN.Entity.Models;
+    using XmobiTea.GearN.Entity.Models;
 
     public static class GNUtils
     {
