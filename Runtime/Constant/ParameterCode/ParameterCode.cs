@@ -193,9 +193,15 @@
         public const string InitialValue = "initialValue";
         public const string GameName = "gameName";
 
-        public const string CurrencySettings = "currencySettings";
-        public const string StatisticsSettings = "statisticsSettings";
+        public const string PlayerCurrenciesSettings = "playerCurrenciesSettings";
+        public const string GroupCurrenciesSettings = "playerCurrenciesSettings";
+        public const string PlayerStatisticsSettings = "playerStatisticsSettings";
+        public const string GroupStatisticsSettings = "groupStatisticsSettings";
+        public const string ItemStatisticsSettings = "itemStatisticsSettings";
         public const string DatasSettings = "datasSettings";
+        public const string PlayerDatasSettings = "playerDatasSettings";
+        public const string GroupDatasSettings = "groupDatasSettings";
+        public const string ItemDatasSettings = "itemDatasSettings";
         public const string CustomDatasSettings = "customDatasSettings";
         public const string TagsSettings = "tagsSettings";
         public const string MasterPlayerSettings = "masterPlayerSettings";
@@ -205,10 +211,11 @@
         public const string GroupSettings = "groupSettings";
         public const string InventorySettings = "inventorySettings";
 
-        public const string CharacterCatalogSettings = "characterCatalogSettings";
-        public const string GroupCatalogSettings = "groupCatalogSettings";
-        public const string ItemCatalogSettings = "itemCatalogSettings";
-        public const string FriendCatalogSettings = "friendCatalogSettings";
+        public const string PlayerCharacterCatalogSettings = "playerCharacterCatalogSettings";
+        public const string PlayerGroupCatalogSettings = "playerGroupCatalogSettings";
+        public const string PlayerItemCatalogSettings = "playerItemCatalogSettings";
+        public const string GroupItemCatalogSettings = "groupItemCatalogSettings";
+        public const string PlayerFriendCatalogSettings = "playerFriendCatalogSettings";
         public const string ItemClassSettings = "itemClassSettings";
         public const string Remove = "remove";
         public const string SelfEnable = "selfEnable";

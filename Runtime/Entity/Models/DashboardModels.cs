@@ -552,13 +552,13 @@
 
         public class CharacterPlayerSettingsParam
         {
-            [GNArrayDataMember(code = ParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
-            public List<CurrencySettingsParam>? playerCurrencySettings;
+            [GNArrayDataMember(code = ParameterCode.PlayerCurrenciesSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
+            public List<CurrencySettingsParam>? playerCurrenciesSettings;
 
-            [GNArrayDataMember(code = ParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
             public List<StatisticsSettingsParam>? playerStatisticsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
             public List<DataSettingsParam>? playerDatasSettings;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
@@ -567,13 +567,13 @@
             [GNArrayDataMember(code = ParameterCode.TagsSettings, elementCls = typeof(TagSettingsParam), isOptional = true)]
             public List<TagSettingsParam>? tagsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.GroupCatalogSettings, elementCls = typeof(GroupCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerGroupCatalogSettings, elementCls = typeof(GroupCatalogSettingsParam), isOptional = true)]
             public List<GroupCatalogSettingsParam>? playerGroupCatalogSettings;
 
-            [GNArrayDataMember(code = ParameterCode.ItemCatalogSettings, elementCls = typeof(ItemCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerItemCatalogSettings, elementCls = typeof(ItemCatalogSettingsParam), isOptional = true)]
             public List<ItemCatalogSettingsParam>? playerItemCatalogSettings;
 
-            [GNArrayDataMember(code = ParameterCode.FriendCatalogSettings, elementCls = typeof(FriendCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerFriendCatalogSettings, elementCls = typeof(FriendCatalogSettingsParam), isOptional = true)]
             public List<FriendCatalogSettingsParam>? playerFriendCatalogSettings;
 
         }
@@ -835,13 +835,13 @@
 
         public class GamePlayerSettingsParam
         {
-            [GNArrayDataMember(code = ParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
-            public List<CurrencySettingsParam>? playerCurrencySettings;
+            [GNArrayDataMember(code = ParameterCode.PlayerCurrenciesSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
+            public List<CurrencySettingsParam>? playerCurrenciesSettings;
 
-            [GNArrayDataMember(code = ParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
             public List<StatisticsSettingsParam>? playerStatisticsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
             public List<DataSettingsParam>? playerDatasSettings;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
@@ -850,16 +850,16 @@
             [GNArrayDataMember(code = ParameterCode.TagsSettings, elementCls = typeof(TagSettingsParam), isOptional = true)]
             public List<TagSettingsParam>? tagsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.CharacterCatalogSettings, elementCls = typeof(CharacterCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerCharacterCatalogSettings, elementCls = typeof(CharacterCatalogSettingsParam), isOptional = true)]
             public List<CharacterCatalogSettingsParam>? playerCharacterCatalogSettings;
 
-            [GNArrayDataMember(code = ParameterCode.GroupCatalogSettings, elementCls = typeof(GroupCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerGroupCatalogSettings, elementCls = typeof(GroupCatalogSettingsParam), isOptional = true)]
             public List<GroupCatalogSettingsParam>? playerGroupCatalogSettings;
 
-            [GNArrayDataMember(code = ParameterCode.ItemCatalogSettings, elementCls = typeof(ItemCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerItemCatalogSettings, elementCls = typeof(ItemCatalogSettingsParam), isOptional = true)]
             public List<ItemCatalogSettingsParam>? playerItemCatalogSettings;
 
-            [GNArrayDataMember(code = ParameterCode.FriendCatalogSettings, elementCls = typeof(FriendCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerFriendCatalogSettings, elementCls = typeof(FriendCatalogSettingsParam), isOptional = true)]
             public List<FriendCatalogSettingsParam>? playerFriendCatalogSettings;
 
         }
@@ -1026,13 +1026,13 @@
 
         public class GroupSettingsParam
         {
-            [GNArrayDataMember(code = ParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
-            public List<CurrencySettingsParam>? groupCurrencySettings;
+            [GNArrayDataMember(code = ParameterCode.GroupCurrenciesSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
+            public List<CurrencySettingsParam>? groupCurrenciesSettings;
 
-            [GNArrayDataMember(code = ParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.GroupStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
             public List<StatisticsSettingsParam>? groupStatisticsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.GroupDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
             public List<DataSettingsParam>? groupDatasSettings;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
@@ -1041,7 +1041,7 @@
             [GNArrayDataMember(code = ParameterCode.TagsSettings, elementCls = typeof(TagSettingsParam), isOptional = true)]
             public List<TagSettingsParam>? tagsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.ItemCatalogSettings, elementCls = typeof(ItemCatalogSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.GroupItemCatalogSettings, elementCls = typeof(ItemCatalogSettingsParam), isOptional = true)]
             public List<ItemCatalogSettingsParam>? groupItemCatalogSettings;
 
         }
@@ -1154,11 +1154,11 @@
 
         public class InventorySettingsParam
         {
-            [GNArrayDataMember(code = ParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
-            public List<StatisticsSettingsParam>? inventoryStatisticsSettings;
+            [GNArrayDataMember(code = ParameterCode.ItemStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+            public List<StatisticsSettingsParam>? itemStatisticsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
-            public List<DataSettingsParam>? inventoryDatasSettings;
+            [GNArrayDataMember(code = ParameterCode.ItemDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+            public List<DataSettingsParam>? itemDatasSettings;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
             public List<DataSettingsParam>? customDatasSettings;
@@ -1568,13 +1568,13 @@
             [GNArrayDataMember(code = ParameterCode.GenericServiceSettings, elementCls = typeof(GenericServiceSettingsParam), isOptional = true)]
             public List<GenericServiceSettingsParam>? genericServiceSettings;
 
-            [GNArrayDataMember(code = ParameterCode.CurrencySettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
-            public List<CurrencySettingsParam>? playerCurrencySettings;
+            [GNArrayDataMember(code = ParameterCode.PlayerCurrenciesSettings, elementCls = typeof(CurrencySettingsParam), isOptional = true)]
+            public List<CurrencySettingsParam>? playerCurrenciesSettings;
 
-            [GNArrayDataMember(code = ParameterCode.StatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerStatisticsSettings, elementCls = typeof(StatisticsSettingsParam), isOptional = true)]
             public List<StatisticsSettingsParam>? playerStatisticsSettings;
 
-            [GNArrayDataMember(code = ParameterCode.DatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
+            [GNArrayDataMember(code = ParameterCode.PlayerDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
             public List<DataSettingsParam>? playerDatasSettings;
 
             [GNArrayDataMember(code = ParameterCode.CustomDatasSettings, elementCls = typeof(DataSettingsParam), isOptional = true)]
