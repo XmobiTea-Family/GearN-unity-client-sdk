@@ -1,4 +1,5 @@
 using XmobiTea.GearN.Constant;
+using XmobiTea.GearN.Helper;
 
 namespace XmobiTea.GearN.Entity
 {
@@ -20,16 +21,16 @@ namespace XmobiTea.GearN.Entity
 
             if (requestId == -1)
                 return new object[] {
-                    requestType.ToString(),
+                    CodeHelper.getRequestTypeName((int)requestType),
                     request.getOperationCode(),
-                    role.ToString(),
+                    CodeHelper.getRequestRoleName((int)role),
                     (request.getParameters() == null) ? null : request.getParameters().toData()
                 };
             else
                 return new object[] {
-                    requestType.ToString(),
+                    CodeHelper.getRequestTypeName((int)requestType),
                     request.getOperationCode(),
-                    role.ToString(),
+                    CodeHelper.getRequestRoleName((int)role),
                     (request.getParameters() == null) ? null : request.getParameters().toData(),
                     requestId
                 };

@@ -42,6 +42,8 @@
     public static class CodeHelper
     {
         private static CodeHelperBase returnCodeHelper;
+        private static CodeHelperBase requestTypeHelper;
+        private static CodeHelperBase requestRoleHelper;
 
         /// <summary>
         /// Gets the name of a return code.
@@ -53,10 +55,22 @@
             return CodeHelper.returnCodeHelper.getCodeName(returnCode);
         }
 
+        public static string getRequestTypeName(int requestType)
+        {
+            return CodeHelper.requestTypeHelper.getCodeName(requestType);
+        }
+
+        public static string getRequestRoleName(int requestRole)
+        {
+            return CodeHelper.requestRoleHelper.getCodeName(requestRole);
+        }
+
         // Static constructor to initialize the helper dictionaries.
         static CodeHelper()
         {
             CodeHelper.setReturnCodeDic();
+            CodeHelper.setRequestTypeDic();
+            CodeHelper.setRequestRoleDic();
         }
 
         /// <summary>
@@ -76,5 +90,42 @@
 
             CodeHelper.returnCodeHelper = new CodeHelperBase(codeDict);
         }
+
+        private static string toLowerCase(string value)
+        {
+            return value[0].ToString().ToLower() + value.Substring(1);
+        }
+
+        private static void setRequestTypeDic()
+        {
+            var codeDict = new Dictionary<int, string>();
+
+            codeDict[(int)RequestType.Custom] = CodeHelper.toLowerCase(RequestType.Custom.ToString());
+            codeDict[(int)RequestType.Authenticate] = CodeHelper.toLowerCase(RequestType.Authenticate.ToString());
+            codeDict[(int)RequestType.CharacterPlayer] = CodeHelper.toLowerCase(RequestType.CharacterPlayer.ToString());
+            codeDict[(int)RequestType.Content] = CodeHelper.toLowerCase(RequestType.Content.ToString());
+            codeDict[(int)RequestType.GamePlayer] = CodeHelper.toLowerCase(RequestType.GamePlayer.ToString());
+            codeDict[(int)RequestType.Group] = CodeHelper.toLowerCase(RequestType.Group.ToString());
+            codeDict[(int)RequestType.Inventory] = CodeHelper.toLowerCase(RequestType.Inventory.ToString());
+            codeDict[(int)RequestType.MasterPlayer] = CodeHelper.toLowerCase(RequestType.MasterPlayer.ToString());
+            codeDict[(int)RequestType.StoreInventory] = CodeHelper.toLowerCase(RequestType.StoreInventory.ToString());
+            codeDict[(int)RequestType.Multiplayer] = CodeHelper.toLowerCase(RequestType.Multiplayer.ToString());
+            codeDict[(int)RequestType.CloudScript] = CodeHelper.toLowerCase(RequestType.CloudScript.ToString());
+
+            CodeHelper.requestTypeHelper = new CodeHelperBase(codeDict);
+        }
+
+        private static void setRequestRoleDic()
+        {
+            var codeDict = new Dictionary<int, string>();
+
+            codeDict[(int)RequestRole.Admin] = CodeHelper.toLowerCase(RequestRole.Admin.ToString());
+            codeDict[(int)RequestRole.Server] = CodeHelper.toLowerCase(RequestRole.Server.ToString());
+            codeDict[(int)RequestRole.Client] = CodeHelper.toLowerCase(RequestRole.Client.ToString());
+
+            CodeHelper.requestRoleHelper = new CodeHelperBase(codeDict);
+        }
+
     }
+
 }

@@ -83,7 +83,7 @@
             [StringDataMember(code = ParameterCode.GameId, minLength = 2, maxLength = 32, mustNonNull = true, isOptional = true)]
             public string? gameId;
 
-            [NumberDataMember(code = ParameterCode.Role, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Role, mustInt = true, minValue = 1, maxValue = 3)]
             public int role;
 
             [GNHashtableDataMember(code = ParameterCode.PermissionParam, isOptional = true)]
@@ -2053,8 +2053,8 @@
             [StringDataMember(code = ParameterCode.Description)]
             public string description;
 
-            [GNHashtableDataMember(code = ParameterCode.Permission)]
-            public PermissionParam permission;
+            [GNHashtableDataMember(code = ParameterCode.PermissionParam)]
+            public PermissionParam permissionParam;
 
         }
 
