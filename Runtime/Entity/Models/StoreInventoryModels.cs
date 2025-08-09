@@ -10,10 +10,10 @@
             [StringDataMember(code = ParameterCode.StoreId, minLength = 10, maxLength = 32, mustNonNull = true)]
             public string storeId;
 
-            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Id, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string id;
 
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
@@ -34,10 +34,10 @@
             [StringDataMember(code = ParameterCode.StoreId, minLength = 10, maxLength = 32, mustNonNull = true)]
             public string storeId;
 
-            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Id, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string id;
 
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
@@ -79,7 +79,7 @@
             [GNArrayDataMember(code = ParameterCode.StoreReceiveTypes, minLength = 1, maxLength = 10, mustNonNull = true, elementCls = typeof(int))]
             public List<int> storeReceiveTypes;
 
-            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 11, mustNonNull = true, isOptional = true)]
+            [StringDataMember(code = ParameterCode.Id, minLength = 10, maxLength = 11, mustNonNull = true, isOptional = true)]
             public string? id;
 
             [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
@@ -203,28 +203,28 @@
             public int? storeItemType;
 
             [GNArrayDataMember(code = ParameterCode.StoreDatas, minLength = 0, maxLength = 32, mustNonNull = true, isOptional = true, elementCls = typeof(StoreDataParam))]
-            public List<StoreDataParam>? storeDataParams;
+            public List<StoreDataParam>? storeDatas;
 
             [GNArrayDataMember(code = ParameterCode.StoreItems, minLength = 0, maxLength = 32, mustNonNull = true, isOptional = true, elementCls = typeof(StoreItemParam))]
-            public List<StoreItemParam>? storeItemParams;
+            public List<StoreItemParam>? storeItems;
 
             [GNArrayDataMember(code = ParameterCode.StoreCurrencies, minLength = 0, maxLength = 32, mustNonNull = true, isOptional = true, elementCls = typeof(CurrencyParam))]
-            public List<CurrencyParam>? storeCurrencyParams;
+            public List<CurrencyParam>? storeCurrencies;
 
             [GNArrayDataMember(code = ParameterCode.PriceCurrencies, minLength = 0, maxLength = 32, mustNonNull = true, isOptional = true, elementCls = typeof(CurrencyParam))]
-            public List<CurrencyParam>? priceCurrencyParams;
+            public List<CurrencyParam>? priceCurrencies;
 
             [GNHashtableDataMember(code = ParameterCode.InAppPurchase, mustNonNull = true, isOptional = true)]
-            public InAppPurchaseParam? inAppPurchaseParam;
+            public InAppPurchaseParam? inAppPurchase;
 
             [StringDataMember(code = ParameterCode.DisplayName, mustNonNull = true, isOptional = true)]
             public string? displayName;
 
             [GNHashtableDataMember(code = ParameterCode.Avatar, mustNonNull = true, isOptional = true)]
-            public AvatarParam? avatarParam;
+            public AvatarParam? avatar;
 
             [GNArrayDataMember(code = ParameterCode.Tags, minLength = 0, maxLength = 32, mustNonNull = true, isOptional = true, elementCls = typeof(TagParam))]
-            public List<TagParam>? tagParams;
+            public List<TagParam>? tags;
 
         }
 
@@ -241,10 +241,10 @@
             [StringDataMember(code = ParameterCode.Receipt, minLength = 10, maxLength = 2048, mustNonNull = true)]
             public string receipt;
 
-            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Id, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string id;
 
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
@@ -265,10 +265,10 @@
             [StringDataMember(code = ParameterCode.Receipt, minLength = 10, maxLength = 2048, mustNonNull = true)]
             public string receipt;
 
-            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Id, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string id;
 
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
@@ -289,10 +289,10 @@
             [StringDataMember(code = ParameterCode.Receipt, minLength = 10, maxLength = 2048, mustNonNull = true)]
             public string receipt;
 
-            [StringDataMember(code = ParameterCode.OwnerId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Id, minLength = 10, maxLength = 11, mustNonNull = true)]
             public string id;
 
-            [NumberDataMember(code = ParameterCode.OwnerType, mustInt = true)]
+            [NumberDataMember(code = ParameterCode.Type, mustInt = true)]
             public int type;
 
             [StringDataMember(code = ParameterCode.Log, minLength = 1, maxLength = 256, mustNonNull = true, isOptional = true)]
