@@ -653,6 +653,7 @@
         public const string Objects = "objects";
         public const string Indexes = "indexes";
         public const string DatabaseSystem = "databaseSystem";
+        public const string LogDatabaseSystem = "logDatabaseSystem";
 
         public const string Cost = "cost";
         public const string MonthlyCost = "monthlyCost";

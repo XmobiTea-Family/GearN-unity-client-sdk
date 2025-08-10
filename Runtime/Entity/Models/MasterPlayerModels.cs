@@ -1779,8 +1779,8 @@
             [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10, isOptional = true)]
             public string? userId;
 
-            [NumberDataMember(code = ParameterCode.EventCode, mustInt = true, minValue = 1000)]
-            public int eventCode;
+            [StringDataMember(code = ParameterCode.EventCode, minLength = 1, maxLength = 64)]
+            public string eventCode;
 
             [GNHashtableDataMember(code = ParameterCode.EventParameters, minLength = 0, maxLength = 128, mustNonNull = true, isOptional = true)]
             public GNHashtable? eventParameters;

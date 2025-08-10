@@ -123,7 +123,7 @@
 
             var postType = gnServerSettings.getMessageType() == MessageType.Json ? PostType.Json : PostType.MsgPack;
 
-            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + CodeHelper.getRequestTypeName((int)operationPending.getRequestType()) + "/" + operationRequest.getOperationCode() + "/" + CodeHelper.getRequestRoleName((int)operationPending.getRole());
+            var subUri = (postType == PostType.Json ? NetworkingPeer.API_JSON : NetworkingPeer.API_MSG_PACK) + "/" + CodeHelper.getRequestTypeName((int)operationPending.getRequestType()) + "/" + CodeHelper.getRequestRoleName((int)operationPending.getRole()) + "/" + operationRequest.getOperationCode();
 
             this.networkingHttpPeerBase.postRequest(subUri, operationRequest.getParameters(), postType, httpAppResponse =>
             {

@@ -93,7 +93,7 @@
 
         public class LoginByAdminAccountRequestData
         {
-            [StringDataMember(code = ParameterCode.Username, minLength = 6, maxLength = 32, mustNonNull = true)]
+            [StringDataMember(code = ParameterCode.Username, minLength = 4, maxLength = 32, mustNonNull = true)]
             public string username;
 
             [StringDataMember(code = ParameterCode.Password, minLength = 6, maxLength = 64, mustNonNull = true)]
@@ -211,6 +211,9 @@
 
             [BooleanDataMember(code = ParameterCode.DatabaseSystem, isOptional = true)]
             public bool? databaseSystem;
+
+            [BooleanDataMember(code = ParameterCode.LogDatabaseSystem, isOptional = true)]
+            public bool? logDatabaseSystem;
 
             [BooleanDataMember(code = ParameterCode.Cost, isOptional = true)]
             public bool? cost;
@@ -382,8 +385,8 @@
             [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32)]
             public string catalogId;
 
-            [StringDataMember(code = ParameterCode.Description, isOptional = true)]
-            public string? description;
+            [StringDataMember(code = ParameterCode.Description)]
+            public string description;
 
         }
 
@@ -611,7 +614,7 @@
             [NumberDataMember(code = ParameterCode.InitialValue)]
             public double initialValue;
 
-            [StringDataMember(code = ParameterCode.Description, minLength = 2, maxLength = 64)]
+            [StringDataMember(code = ParameterCode.Description)]
             public string description;
 
             [BooleanDataMember(code = ParameterCode.Index)]
@@ -636,6 +639,9 @@
         {
             [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32)]
             public string catalogId;
+
+            [StringDataMember(code = ParameterCode.Description)]
+            public string description;
 
             [BooleanDataMember(code = ParameterCode.ForceAcceptFriend)]
             public bool forceAcceptFriend;
@@ -892,8 +898,8 @@
             [StringDataMember(code = ParameterCode.CatalogId, minLength = 2, maxLength = 32)]
             public string catalogId;
 
-            [StringDataMember(code = ParameterCode.Description, isOptional = true)]
-            public string? description;
+            [StringDataMember(code = ParameterCode.Description)]
+            public string description;
 
             [BooleanDataMember(code = ParameterCode.ForceAcceptMember)]
             public bool forceAcceptMember;
@@ -1186,8 +1192,8 @@
             [StringDataMember(code = ParameterCode.ClassId, minLength = 2, maxLength = 32)]
             public string classId;
 
-            [StringDataMember(code = ParameterCode.Description, isOptional = true)]
-            public string? description;
+            [StringDataMember(code = ParameterCode.Description)]
+            public string description;
 
         }
 
@@ -1674,7 +1680,7 @@
             [NumberDataMember(code = ParameterCode.InitialValue)]
             public double initialValue;
 
-            [StringDataMember(code = ParameterCode.Description, minLength = 2, maxLength = 64)]
+            [StringDataMember(code = ParameterCode.Description)]
             public string description;
 
             [BooleanDataMember(code = ParameterCode.Index)]
@@ -1733,8 +1739,8 @@
             [StringDataMember(code = ParameterCode.Key, minLength = 2, maxLength = 32)]
             public string key;
 
-            [StringDataMember(code = ParameterCode.Description, isOptional = true)]
-            public string? description;
+            [StringDataMember(code = ParameterCode.Description)]
+            public string description;
 
             [BooleanDataMember(code = ParameterCode.Index)]
             public bool index;
@@ -2272,6 +2278,9 @@
 
             [GNHashtableDataMember(code = ParameterCode.DatabaseSystem, isOptional = true)]
             public DatabaseSystemResponseData? databaseSystem;
+
+            [GNHashtableDataMember(code = ParameterCode.LogDatabaseSystem, isOptional = true)]
+            public DatabaseSystemResponseData? logDatabaseSystem;
 
             [GNHashtableDataMember(code = ParameterCode.Cost, isOptional = true)]
             public CostResponseData? cost;

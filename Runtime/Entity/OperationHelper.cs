@@ -22,15 +22,15 @@ namespace XmobiTea.GearN.Entity
             if (requestId == -1)
                 return new object[] {
                     CodeHelper.getRequestTypeName((int)requestType),
-                    request.getOperationCode(),
                     CodeHelper.getRequestRoleName((int)role),
+                    request.getOperationCode(),
                     (request.getParameters() == null) ? null : request.getParameters().toData()
                 };
             else
                 return new object[] {
                     CodeHelper.getRequestTypeName((int)requestType),
-                    request.getOperationCode(),
                     CodeHelper.getRequestRoleName((int)role),
+                    request.getOperationCode(),
                     (request.getParameters() == null) ? null : request.getParameters().toData(),
                     requestId
                 };
