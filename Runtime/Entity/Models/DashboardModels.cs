@@ -1817,7 +1817,7 @@
             [GNHashtableDataMember(code = ParameterCode.AppleSettings, isOptional = true)]
             public ThirtPartyAppleSettingsParam? appleSettings;
 
-            [GNHashtableDataMember(code = ParameterCode.GooglePlayGameService, isOptional = true)]
+            [GNHashtableDataMember(code = ParameterCode.GooglePlayGameSettings, isOptional = true)]
             public ThirtPartyGooglePlayGameSettingsParam? googlePlayGameSettings;
 
             [GNHashtableDataMember(code = ParameterCode.GameCenterSettings, isOptional = true)]
