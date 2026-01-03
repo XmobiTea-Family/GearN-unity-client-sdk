@@ -68,6 +68,27 @@
             return taskCompletionSource.Task;
         }
 
+        public static void healthCheck(Action<HealthCheckResponse> onResponse = null)
+        {
+            GNNetwork.peer.healthCheck(onResponse);
+        }
+
+        public static Task<HealthCheckResponse> healthCheckAsync()
+        {
+            // Create a TaskCompletionSource to manage the asynchronous operation.
+            var taskCompletionSource = new TaskCompletionSource<HealthCheckResponse>();
+
+            // Call the syncTs method and use the callback to set the Task result.
+            GNNetwork.healthCheck(response =>
+            {
+                // Set the result of the Task once the callback is invoked.
+                taskCompletionSource.SetResult(response);
+            });
+
+            // Return the Task to the caller, allowing them to await the result.
+            return taskCompletionSource.Task;
+        }
+
         /// <summary>
         /// Upload file to server
         /// </summary>

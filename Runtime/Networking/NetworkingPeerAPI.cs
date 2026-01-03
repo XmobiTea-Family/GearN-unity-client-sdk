@@ -14,6 +14,7 @@
     {
         internal const string SYNC_TS = "ts"; // API endpoint for synchronizing timestamps.
         internal const string GET_AUTH_INFO = "getAuthInfo"; // API endpoint for validate an GN authToken.
+        internal const string HEALTH_CHECK = "healthcheck"; // API endpoint for healthcheck.
         internal const string UPLOAD_FILE = "upload"; // API endpoint for file uploads.
         internal const string DOWNLOAD_FILE = "download"; // API endpoint for file downloads.
         internal const string API_JSON = "api/" + Commands.RequestCmd_Json; // Base path for JSON API requests.
@@ -110,7 +111,88 @@
                 });
             });
         }
-    
+
+        internal void healthCheck(Action<HealthCheckResponse> onResponse)
+        {
+            // Sends a request to the HEALTH_CHECK endpoint using the HTTP peer.
+            (this.httpPeer as Http.HttpPeer).getRequest(NetworkingPeer.HEALTH_CHECK, httpAppResponse =>
+            {
+                // Processes the response if there is no error.
+                if (!httpAppResponse.hasError())
+                {
+                    if (httpAppResponse.statusCode == 200) // HTTP success status.
+                    {
+                        // Parses the response text into a list and converts it to a GNArray.
+                        var returnDatas = new GNHashtable.Builder().addAll((IDictionary)Parser.Parse(httpAppResponse.text)).build();
+                        if (returnDatas["error"] != null)
+                        {
+                            onResponse?.Invoke(new HealthCheckResponse()
+                            {
+                                error = (string)returnDatas["error"]
+                            });
+                        }
+                        else
+                        {
+                            var gnThisInstance = returnDatas.getGNHashtable("thisInstance");
+                            var gnOtherInstances = returnDatas.getGNArray("otherInstances");
+
+                            var otherInstances = new OtherInstanceResponse[gnOtherInstances.count()];
+                            for (var i = 0; i < otherInstances.Length; i++)
+                            {
+                                var gnOtherInstance = gnOtherInstances.getGNHashtable(i);
+
+                                otherInstances[i] = new OtherInstanceResponse()
+                                {
+                                    instanceId = gnOtherInstance.getString("instanceId"),
+                                    isPrimary = gnOtherInstance.getBool("isPrimary"),
+                                    currentInstanceIdPrimary = gnOtherInstance.getString("currentInstanceIdPrimary"),
+                                    currentTsPrimary = gnOtherInstance.getLong("currentTsPrimary"),
+                                    currentTsPrimaryToDate = gnOtherInstance.getString("currentTsPrimaryToDate"),
+                                    tsPrimary = gnOtherInstance.getLong("tsPrimary"),
+                                    tsPrimaryToDate = gnOtherInstance.getString("tsPrimaryToDate"),
+                                    lostPing = gnOtherInstance.getInt("lostPing"),
+                                };
+                            }
+
+                            onResponse?.Invoke(new HealthCheckResponse()
+                            {
+                                error = null,
+                                data = new HealthCheckDataResponse()
+                                {
+                                    thisInstance = new InstanceResponse()
+                                    {
+                                        instanceId = gnThisInstance.getString("instanceId"),
+                                        isPrimary = gnThisInstance.getBool("isPrimary"),
+                                        currentInstanceIdPrimary = gnThisInstance.getString("currentInstanceIdPrimary"),
+                                        currentTsPrimary = gnThisInstance.getLong("currentTsPrimary"),
+                                        currentTsPrimaryToDate = gnThisInstance.getString("currentTsPrimaryToDate"),
+                                        tsPrimary = gnThisInstance.getLong("tsPrimary"),
+                                        tsPrimaryToDate = gnThisInstance.getString("tsPrimaryToDate"),
+                                    },
+                                    otherInstances = otherInstances,
+                                }
+                            });
+                        }
+                    }
+                    else
+                    {
+                        onResponse?.Invoke(new HealthCheckResponse()
+                        {
+                            error = "unknown error"
+                        });
+                    }
+
+                    return;
+                }
+
+                // Invokes the callback with the current server timestamp.
+                onResponse?.Invoke(new HealthCheckResponse()
+                {
+                    error = httpAppResponse.error
+                });
+            });
+        }
+
         /// <summary>
         /// upload the file
         /// </summary>
