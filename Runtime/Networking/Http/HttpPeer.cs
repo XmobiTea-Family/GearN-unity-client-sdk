@@ -1,9 +1,6 @@
 ﻿namespace XmobiTea.GearN.Networking.Http
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Config;
     using XmobiTea.GearN.Constant;
@@ -43,7 +40,7 @@
         /// <returns>A string representation of the response.</returns>
         public string toString()
         {
-            var stringBuilder = new StringBuilder();
+            var stringBuilder = new System.Text.StringBuilder();
             stringBuilder.Append(" StatusCode: " + this.statusCode);
             if (!string.IsNullOrEmpty(this.error)) stringBuilder.Append(", <color=red>Error: " + this.error + "</color>");
             stringBuilder.Append(", Text: " + this.text);
@@ -84,7 +81,7 @@
         internal override void initGNSocketObject()
         {
             var gnServerSettings = GNNetwork.gnServerSettings;
-            if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
+            if (gnServerSettings == null) throw new System.NullReferenceException("Where is GN Server Settings");
 
             this.isUse = gnServerSettings.isUseHttp();
             var httpRequestType = gnServerSettings.getHttpRequestType();
@@ -94,7 +91,9 @@
             else
 #endif
             if (httpRequestType == HttpRequestType.UnityWebRequest) this.networkingHttpPeerBase = new NetworkingPeerUnityWebRequest();
-            else if (httpRequestType == HttpRequestType.HttpWebRequest) this.networkingHttpPeerBase = new NetworkingPeerHttpWebRequest();
+            else if (httpRequestType == HttpRequestType.HttpClientRequest) this.networkingHttpPeerBase = new NetworkingPeerHttpClientRequest();
+
+            if (this.networkingHttpPeerBase == null) throw new System.NullReferenceException("this.networkingHttpPeerBase null");
 
             var httpUrl = gnServerSettings.getHttpUrl();
             var userAgent = "GN-unity-" + GNNetwork.getPlatform() + "@" + GNNetwork.getClientSdkVersion();
@@ -200,7 +199,7 @@
         /// <param name="timeout">The timeout for the request, in seconds.</param>
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
-        internal void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout = OperationRequest.defaultTimeOut, string authToken = null, string secretKey = null, string gameId = null)
+        internal void getRequest(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout = OperationRequest.defaultTimeOut, string authToken = null, string secretKey = null, string gameId = null)
         {
             this.networkingHttpPeerBase.getRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey, gameId);
         }
@@ -213,7 +212,7 @@
         /// <param name="mimetype">The MIME type of the file.</param>
         /// <param name="onHttpAppResponse">Callback to handle the HTTP response.</param>
         /// <param name="timeout">The timeout for the request, in seconds.</param>
-        internal void uploadFile(string fileId, byte[] content, string filename, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout = 6000)
+        internal void uploadFile(string fileId, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout = 6000)
         {
             var authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
 

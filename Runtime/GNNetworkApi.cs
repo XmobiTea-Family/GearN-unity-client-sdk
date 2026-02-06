@@ -1,7 +1,7 @@
 ﻿namespace XmobiTea.GearN
 {
-    using System;
     using System.Threading.Tasks;
+    using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Entity.Response;
     using XmobiTea.GearN.Networking;
 
@@ -11,7 +11,7 @@
         /// Synchronizes the timestamp by calling a peer method and invokes the callback with the result.
         /// </summary>
         /// <param name="onResponse">An optional callback that receives the synchronized timestamp.</param>
-        public static void syncTs(Action<long> onResponse = null)
+        public static void syncTs(Action1<long> onResponse = null)
         {
             // Delegate the synchronization to the peer's syncTs method.
             GNNetwork.peer.syncTs(onResponse);
@@ -42,7 +42,7 @@
         /// </summary>
         /// <param name="authToken"></param>
         /// <param name="onResponse"></param>
-        public static void getAuthInfo(string authToken, Action<GetAuthInfoResponse> onResponse = null)
+        public static void getAuthInfo(string authToken, Action1<GetAuthInfoResponse> onResponse = null)
         {
             GNNetwork.peer.getAuthInfo(authToken, onResponse);
         }
@@ -68,7 +68,7 @@
             return taskCompletionSource.Task;
         }
 
-        public static void healthCheck(Action<HealthCheckResponse> onResponse = null)
+        public static void healthCheck(Action1<HealthCheckResponse> onResponse = null)
         {
             GNNetwork.peer.healthCheck(onResponse);
         }
@@ -97,7 +97,7 @@
         /// <param name="filename">the full file name</param>
         /// <param name="mimetype">the mimetype of file</param>
         /// <param name="onResponse">response</param>
-        public static void uploadFile(string fileId, byte[] content, string filename, string mimetype, Action<UploadFileResponse> onResponse)
+        public static void uploadFile(string fileId, byte[] content, string filename, string mimetype, Action1<UploadFileResponse> onResponse)
         {
             GNNetwork.peer.uploadFile(fileId, content, filename, mimetype, onResponse);
         }

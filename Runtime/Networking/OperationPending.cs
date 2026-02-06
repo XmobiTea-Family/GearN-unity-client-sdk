@@ -1,6 +1,5 @@
 namespace XmobiTea.GearN.Networking
 {
-    using System;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Entity;
@@ -17,11 +16,11 @@ namespace XmobiTea.GearN.Networking
         private string secretKey;                  // The secret key for the request, if applicable.
         private string gameId;                     // The game id for the request
         private GNHashtable customTags;            // Custom tags to be sent with the request.
-        private Action<OperationResponse> onOperationResponse; // The callback for handling the operation response.
-        private float timeout;                     // The timeout for the operation.
+        private Action1<OperationResponse> onOperationResponse; // The callback for handling the operation response.
+        private long timeout;                     // The timeout for the operation.
 
-        private float firstSend;                   // The timestamp of the first send attempt.
-        private float secondsSend;                 // The timestamp of the response receipt.
+        private long firstSend;                   // The timestamp of the first send attempt.
+        private long secondsSend;                 // The timestamp of the response receipt.
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperationPending"/> struct.
@@ -33,11 +32,11 @@ namespace XmobiTea.GearN.Networking
         /// <param name="authToken">The authentication token.</param>
         /// <param name="secretKey">The secret key, if applicable.</param>
         /// <param name="customTags">Custom tags for the request.</param>
-        public OperationPending(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        public OperationPending(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action1<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             this.operationRequest = operationRequest;
             this.onOperationResponse = onOperationResponse;
-            this.timeout = UnityEngine.Time.realtimeSinceStartup + OperationRequest.defaultTimeOut;
+            this.timeout = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + (int)(OperationRequest.defaultTimeOut * 1000);
             this.firstSend = 0;
             this.secondsSend = 0;
 
@@ -108,8 +107,8 @@ namespace XmobiTea.GearN.Networking
         /// </summary>
         public void onSend()
         {
-            this.firstSend = UnityEngine.Time.realtimeSinceStartup;
-            this.timeout = this.firstSend + this.operationRequest.getTimeout();
+            this.firstSend = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            this.timeout = this.firstSend + (int)(this.operationRequest.getTimeout() * 1000);
         }
 
         /// <summary>
@@ -117,7 +116,7 @@ namespace XmobiTea.GearN.Networking
         /// </summary>
         public void onRecv()
         {
-            this.secondsSend = UnityEngine.Time.realtimeSinceStartup;
+            this.secondsSend = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
         /// <summary>
@@ -126,7 +125,7 @@ namespace XmobiTea.GearN.Networking
         /// <returns>The execution time in milliseconds.</returns>
         public float getExecuteTimerInMs()
         {
-            return (this.secondsSend - this.firstSend) * 1000;
+            return this.secondsSend - this.firstSend;
         }
 
         /// <summary>
@@ -135,7 +134,7 @@ namespace XmobiTea.GearN.Networking
         /// <returns>True if the operation has timed out; otherwise, false.</returns>
         public bool isTimeout()
         {
-            return this.timeout < UnityEngine.Time.realtimeSinceStartup;
+            return this.timeout < System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
         /// <summary>
@@ -151,7 +150,7 @@ namespace XmobiTea.GearN.Networking
         /// Gets the callback for handling the operation response.
         /// </summary>
         /// <returns>The response callback action.</returns>
-        public Action<OperationResponse> getCallback()
+        public Action1<OperationResponse> getCallback()
         {
             return this.onOperationResponse;
         }

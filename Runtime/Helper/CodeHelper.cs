@@ -1,6 +1,5 @@
 ﻿namespace XmobiTea.GearN.Helper
 {
-    using System;
     using System.Collections.Generic;
     using System.Reflection;
 
@@ -85,7 +84,7 @@
 
             foreach (var field in fields)
             {
-                codeDict[Convert.ToInt32(field.GetValue(null))] = field.Name;
+                codeDict[System.Convert.ToInt32(field.GetValue(null))] = field.Name;
             }
 
             CodeHelper.returnCodeHelper = new CodeHelperBase(codeDict);

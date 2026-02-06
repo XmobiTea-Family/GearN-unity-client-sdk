@@ -1,6 +1,5 @@
 ﻿namespace XmobiTea.GearN.Networking
 {
-    using System;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Entity;
@@ -59,7 +58,7 @@
         internal void setServerTimeMilliseconds(long currentServerMilliseconds)
         {
             this.lastCurrentServerMilliseconds = currentServerMilliseconds;
-            this.lastGetCurrentMilliseconds = UnityEngine.Time.realtimeSinceStartup;
+            this.lastGetCurrentMilliseconds = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
         /// <summary>
@@ -68,7 +67,7 @@
         /// <returns>The current server timestamp.</returns>
         internal long getServerTimestamp()
         {
-            return this.lastCurrentServerMilliseconds + (int)((UnityEngine.Time.realtimeSinceStartup - this.lastGetCurrentMilliseconds) * 1000);
+            return this.lastCurrentServerMilliseconds + (int)(System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - this.lastGetCurrentMilliseconds);
         }
 
         /// <summary>
@@ -76,10 +75,10 @@
         /// </summary>
         internal void initPeer()
         {
-            this.setServerTimeMilliseconds(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+            this.setServerTimeMilliseconds(System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
             var gnServerSettings = GNNetwork.gnServerSettings;
-            if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
+            if (gnServerSettings == null) throw new System.NullReferenceException("Null GN Server Settings, please find it now");
 
             this.authenticateStatus = new AuthenticateStatus();
 
@@ -102,7 +101,7 @@
         /// <summary>
         /// Sends a request via socket peer.
         /// </summary>
-        internal void sendViaSocket(RequestType requestType, RequestRole role, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
+        internal void sendViaSocket(RequestType requestType, RequestRole role, OperationRequest request, Action1<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
             if (authToken == null) authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
             if (secretKey == null)
@@ -118,7 +117,7 @@
         /// <summary>
         /// Sends a request via HTTP peer.
         /// </summary>
-        internal void sendViaHttp(RequestType requestType, RequestRole role, OperationRequest request, Action<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
+        internal void sendViaHttp(RequestType requestType, RequestRole role, OperationRequest request, Action1<OperationResponse> onResponse = null, string authToken = null, string secretKey = null, GNHashtable customTags = null)
         {
             if (authToken == null) authToken = this.authenticateStatus.getAuthToken();
             if (secretKey == null)
@@ -142,7 +141,7 @@
         /// <summary>
         /// Connects to the socket with a specified callback.
         /// </summary>
-        internal void connectSocket(Action _onSocketConnect)
+        internal void connectSocket(Action0 _onSocketConnect)
         {
             (this.socketPeer as Socket.SocketPeer).connect(_onSocketConnect);
         }
@@ -150,7 +149,7 @@
         /// <summary>
         /// Disconnects the socket with a specified callback.
         /// </summary>
-        internal void disconnectSocket(Action _onSocketDisconnect)
+        internal void disconnectSocket(Action0 _onSocketDisconnect)
         {
             (this.socketPeer as Socket.SocketPeer).disconnect(_onSocketDisconnect);
         }
@@ -158,7 +157,7 @@
         /// <summary>
         /// Sets the handler for processing socket events.
         /// </summary>
-        internal void setOnEventHandler(Action<OperationEvent> _onEventHandler)
+        internal void setOnEventHandler(Action1<OperationEvent> _onEventHandler)
         {
             (this.socketPeer as Socket.SocketPeer).setOnEventHandler(_onEventHandler);
         }
@@ -166,7 +165,7 @@
         /// <summary>
         /// Sets a handler for socket connection events.
         /// </summary>
-        internal void setOnConnectHandler(Action _onConnectHandler)
+        internal void setOnConnectHandler(Action0 _onConnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).setOnConnectHandler(_onConnectHandler);
         }
@@ -174,7 +173,7 @@
         /// <summary>
         /// Sets a handler for socket disconnection events.
         /// </summary>
-        internal void setOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void setOnDisconnectHandler(Action0 _onDisconnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).setOnDisconnectHandler(_onDisconnectHandler);
         }
@@ -182,7 +181,7 @@
         /// <summary>
         /// Removes the handler for socket connection events.
         /// </summary>
-        internal void removeOnConnectHandler(Action _onConnectHandler)
+        internal void removeOnConnectHandler(Action0 _onConnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).removeOnConnectHandler(_onConnectHandler);
         }
@@ -190,7 +189,7 @@
         /// <summary>
         /// Removes the handler for socket disconnection events.
         /// </summary>
-        internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void removeOnDisconnectHandler(Action0 _onDisconnectHandler)
         {
             (this.socketPeer as Socket.SocketPeer).removeOnDisconnectHandler(_onDisconnectHandler);
         }

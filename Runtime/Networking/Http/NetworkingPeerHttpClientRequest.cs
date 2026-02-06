@@ -1,37 +1,35 @@
 ﻿namespace XmobiTea.GearN.Networking.Http
 {
-    using System;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
-    using System.Text;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Helper;
 
     /// <summary>
-    /// Handles HTTP networking using HttpWebRequest or HttpClient.
+    /// Handles HTTP networking using HttpClientRequest or HttpClient.
     /// </summary>
-    internal class NetworkingPeerHttpWebRequest : NetworkingHttpPeerBase
+    internal class NetworkingPeerHttpClientRequest : NetworkingHttpPeerBase
     {
         private readonly HttpClient client;
 
         private readonly float DefaultTimeout = 20;
 
         /// <summary>
-        /// Sends a GET request using HttpWebRequest or HttpClient.
+        /// Sends a GET request using HttpClientRequest or HttpClient.
         /// </summary>
         /// <param name="subUri">The sub-URI for the request.</param>
         /// <param name="onHttpAppResponse">Callback to handle the HTTP response.</param>
         /// <param name="timeout">Timeout for the request, in seconds.</param>
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
-        public override void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
+        public override void getRequest(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
         {
             this.getRequestViaHttpWeb(subUri, onHttpAppResponse, timeout, authToken, secretKey, gameId);
         }
 
-        private async void getRequestViaHttpWeb(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
+        private async void getRequestViaHttpWeb(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, this.httpUrl + "/" + subUri))
             {
@@ -62,7 +60,7 @@
 
                         onHttpAppResponse?.Invoke(httpAppResponse);
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         var httpAppResponse = new HttpAppResponse
                         {
@@ -77,7 +75,7 @@
                 {
                     using (var httpClient = new HttpClient())
                     {
-                        httpClient.Timeout = TimeSpan.FromSeconds(timeout);
+                        httpClient.Timeout = System.TimeSpan.FromSeconds(timeout);
 
                         try
                         {
@@ -100,7 +98,7 @@
 
                             onHttpAppResponse?.Invoke(httpAppResponse);
                         }
-                        catch (Exception e)
+                        catch (System.Exception e)
                         {
                             var httpAppResponse = new HttpAppResponse
                             {
@@ -116,7 +114,7 @@
         }
 
         /// <summary>
-        /// Sends a POST request using HttpWebRequest or HttpClient.
+        /// Sends a POST request using HttpClientRequest or HttpClient.
         /// </summary>
         /// <param name="subUri">The sub-URI for the request.</param>
         /// <param name="param">The parameters to include in the request.</param>
@@ -126,12 +124,12 @@
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
         /// <param name="customTags">Optional custom tags.</param>
-        public override void postRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        public override void postRequest(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             this.postRequestViaHttpWeb(subUri, param, postType, onHttpAppResponse, timeout, authToken, secretKey, customTags, gameId);
         }
 
-        private async void postRequestViaHttpWeb(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        private async void postRequestViaHttpWeb(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, this.httpUrl + "/" + subUri))
             {
@@ -140,7 +138,7 @@
 
                 if (postType == PostType.Json)
                 {
-                    var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
+                    var content = System.Text.Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
                     requestMessage.Content = new ByteArrayContent(content);
                     requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(Commands.APPLICATION_JSON);
                 }
@@ -178,7 +176,7 @@
 
                         onHttpAppResponse?.Invoke(httpAppResponse);
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         var httpAppResponse = new HttpAppResponse
                         {
@@ -193,7 +191,7 @@
                 {
                     using (var httpClient = new HttpClient())
                     {
-                        httpClient.Timeout = TimeSpan.FromSeconds(timeout);
+                        httpClient.Timeout = System.TimeSpan.FromSeconds(timeout);
 
                         try
                         {
@@ -216,7 +214,7 @@
 
                             onHttpAppResponse?.Invoke(httpAppResponse);
                         }
-                        catch (Exception e)
+                        catch (System.Exception e)
                         {
                             var httpAppResponse = new HttpAppResponse
                             {
@@ -232,19 +230,19 @@
         }
 
         /// <summary>
-        /// Sends a file upload request using HttpWebRequest or HttpClient.
+        /// Sends a file upload request using HttpClientRequest or HttpClient.
         /// </summary>
         /// <param name="subUri">The sub-URI for the request.</param>
         /// <param name="content">The file content to upload.</param>
         /// <param name="mimetype">The MIME type of the file.</param>
         /// <param name="onHttpAppResponse">Callback to handle the HTTP response.</param>
         /// <param name="timeout">Timeout for the request, in seconds.</param>
-        public override void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        public override void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout)
         {
             this.postRequestUploadViaHttpWeb(subUri, content, filename, mimetype, onHttpAppResponse, timeout);
         }
 
-        private async void postRequestUploadViaHttpWeb(string subUri, byte[] content, string filename, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private async void postRequestUploadViaHttpWeb(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout)
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, this.httpUrl + "/" + subUri))
             {
@@ -261,7 +259,7 @@
 
                 using (var httpClient = new HttpClient())
                 {
-                    httpClient.Timeout = TimeSpan.FromSeconds(timeout);
+                    httpClient.Timeout = System.TimeSpan.FromSeconds(timeout);
 
                     try
                     {
@@ -284,7 +282,7 @@
 
                         onHttpAppResponse?.Invoke(httpAppResponse);
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         var httpAppResponse = new HttpAppResponse
                         {
@@ -303,14 +301,14 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NetworkingPeerHttpWebRequest"/> class.
+        /// Initializes a new instance of the <see cref="NetworkingPeerHttpClientRequest"/> class.
         /// </summary>
-        public NetworkingPeerHttpWebRequest()
+        public NetworkingPeerHttpClientRequest()
         {
             //HTTPManager.KeepAliveDefaultValue = true;
 
             this.client = new HttpClient();
-            this.client.Timeout = TimeSpan.FromSeconds(DefaultTimeout);
+            this.client.Timeout = System.TimeSpan.FromSeconds(DefaultTimeout);
 
         }
     }

@@ -1,6 +1,5 @@
 namespace XmobiTea.GearN.Networking.Socket
 {
-    using System;
     using System.Collections.Generic;
 
     using XmobiTea.GearN.Common;
@@ -108,12 +107,12 @@ namespace XmobiTea.GearN.Networking.Socket
         /// </summary>
         protected string url;
 
-        private Action<GNHashtable> _onEventHandler;
-        private Action<GNHashtable> _onResponseHandler;
-        private Action _onSocketConnect;
-        private Action _onSocketDisconnect;
-        private Action _onConnectHandler;
-        private Action _onDisconnectHandler;
+        private Action1<GNHashtable> _onEventHandler;
+        private Action1<GNHashtable> _onResponseHandler;
+        private Action0 _onSocketConnect;
+        private Action0 _onSocketDisconnect;
+        private Action0 _onConnectHandler;
+        private Action0 _onDisconnectHandler;
 
         #endregion
 
@@ -149,7 +148,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Connects to the socket server.
         /// </summary>
         /// <param name="_onSocketConnect">Callback invoked upon successful connection.</param>
-        internal virtual void connect(Action _onSocketConnect)
+        internal virtual void connect(Action0 _onSocketConnect)
         {
             this._onSocketConnect = _onSocketConnect;
         }
@@ -158,7 +157,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Closes the socket connection.
         /// </summary>
         /// <param name="_onSocketDisconnect">Callback invoked upon disconnection.</param>
-        internal virtual void close(Action _onSocketDisconnect)
+        internal virtual void close(Action0 _onSocketDisconnect)
         {
             this._onSocketDisconnect = _onSocketDisconnect;
         }
@@ -200,7 +199,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Sets the callback to be invoked when the socket connects.
         /// </summary>
         /// <param name="_onConnectHandler">The callback action.</param>
-        internal void setOnConnectHandler(Action _onConnectHandler)
+        internal void setOnConnectHandler(Action0 _onConnectHandler)
         {
             this._onConnectHandler -= _onConnectHandler;
             this._onConnectHandler += _onConnectHandler;
@@ -210,7 +209,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Sets the callback to be invoked when the socket disconnects.
         /// </summary>
         /// <param name="_onDisconnectHandler">The callback action.</param>
-        internal void setOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void setOnDisconnectHandler(Action0 _onDisconnectHandler)
         {
             this._onDisconnectHandler -= _onDisconnectHandler;
             this._onDisconnectHandler += _onDisconnectHandler;
@@ -220,7 +219,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Removes the specified callback for socket connection events.
         /// </summary>
         /// <param name="_onConnectHandler">The callback action to remove.</param>
-        internal void removeOnConnectHandler(Action _onConnectHandler)
+        internal void removeOnConnectHandler(Action0 _onConnectHandler)
         {
             this._onConnectHandler -= _onConnectHandler;
         }
@@ -229,7 +228,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Removes the specified callback for socket disconnection events.
         /// </summary>
         /// <param name="_onDisconnectHandler">The callback action to remove.</param>
-        internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void removeOnDisconnectHandler(Action0 _onDisconnectHandler)
         {
             this._onDisconnectHandler -= _onDisconnectHandler;
         }
@@ -265,7 +264,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Sets the handler for processing socket events.
         /// </summary>
         /// <param name="_onEventHandler">The event handler action.</param>
-        internal void setOnEventHandler(Action<GNHashtable> _onEventHandler)
+        internal void setOnEventHandler(Action1<GNHashtable> _onEventHandler)
         {
             this._onEventHandler = _onEventHandler;
         }
@@ -283,7 +282,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Sets the handler for processing socket responses.
         /// </summary>
         /// <param name="_onResponseHandler">The response handler action.</param>
-        internal void setOnResponseHandler(Action<GNHashtable> _onResponseHandler)
+        internal void setOnResponseHandler(Action1<GNHashtable> _onResponseHandler)
         {
             this._onResponseHandler = _onResponseHandler;
         }
@@ -448,7 +447,7 @@ namespace XmobiTea.GearN.Networking.Socket
                                     .build();
                                 this.onResponseHandler(gnHashtable);
                             }
-                            catch (Exception ex)
+                            catch (System.Exception ex)
                             {
                                 GNDebug.logException(ex);
                             }
@@ -463,7 +462,7 @@ namespace XmobiTea.GearN.Networking.Socket
                                     .build();
                                 this.onResponseHandler(gnHashtable);
                             }
-                            catch (Exception ex)
+                            catch (System.Exception ex)
                             {
                                 GNDebug.logException(ex);
                             }
@@ -493,7 +492,7 @@ namespace XmobiTea.GearN.Networking.Socket
                                     .build();
                                 this.onEventHandler(gnHashtable);
                             }
-                            catch (Exception ex)
+                            catch (System.Exception ex)
                             {
                                 GNDebug.logException(ex);
                             }
@@ -509,7 +508,7 @@ namespace XmobiTea.GearN.Networking.Socket
                                     .build();
                                 this.onEventHandler(gnHashtable);
                             }
-                            catch (Exception ex)
+                            catch (System.Exception ex)
                             {
                                 GNDebug.logException(ex);
                             }

@@ -1,8 +1,6 @@
 namespace XmobiTea.GearN.Networking.Http
 {
-    using System;
     using System.Collections;
-    using System.Text;
     using UnityEngine.Networking;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
@@ -36,7 +34,7 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="timeout">Timeout for the request, in seconds.</param>
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
-        public override void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
+        public override void getRequest(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
         {
             this.unityMonoBehaviour.StartCoroutine(this.ieGetRequestViaUnityWebRequest(subUri, onHttpAppResponse, timeout, authToken, secretKey, gameId));
         }
@@ -52,7 +50,7 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
         /// <param name="customTags">Optional custom tags.</param>
-        public override void postRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        public override void postRequest(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             this.unityMonoBehaviour.StartCoroutine(this.iePostRequestViaUnityWebRequest(subUri, param, postType, onHttpAppResponse, timeout, authToken, secretKey, customTags, gameId));
         }
@@ -65,14 +63,14 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="mimetype">The MIME type of the file.</param>
         /// <param name="onHttpAppResponse">Callback to handle the HTTP response.</param>
         /// <param name="timeout">Timeout for the request, in seconds.</param>
-        public override void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        public override void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout)
         {
             this.unityMonoBehaviour.StartCoroutine(this.iePostRequestUploadViaUnityWebRequest(subUri, content, filename, mimetype, onHttpAppResponse, timeout));
         }
 
-        private IEnumerator ieGetRequestViaUnityWebRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
+        private IEnumerator ieGetRequestViaUnityWebRequest(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
         {
-            using (var unityWebRequest = UnityWebRequest.Get(new Uri(this.httpUrl + "/" + subUri)))
+            using (var unityWebRequest = UnityWebRequest.Get(new System.Uri(this.httpUrl + "/" + subUri)))
             {
                 var certificateHandler = new AcceptAllCertificatesSignedWithASpecificKeyPublicKey();
                 unityWebRequest.certificateHandler = certificateHandler;
@@ -109,9 +107,9 @@ namespace XmobiTea.GearN.Networking.Http
             }
         }
 
-        private IEnumerator iePostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        private IEnumerator iePostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
-            using (var unityWebRequest = new UnityWebRequest(new Uri(this.httpUrl + "/" + subUri)))
+            using (var unityWebRequest = new UnityWebRequest(new System.Uri(this.httpUrl + "/" + subUri)))
             {
                 unityWebRequest.method = UnityWebRequest.kHttpVerbPOST;
 
@@ -126,7 +124,7 @@ namespace XmobiTea.GearN.Networking.Http
                 if (postType == PostType.Json)
                 {
                     unityWebRequest.SetRequestHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_JSON);
-                    var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
+                    var content = System.Text.Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
                     unityWebRequest.uploadHandler = new UploadHandlerRaw(content);
                 }
                 else if (postType == PostType.MsgPack)
@@ -168,12 +166,12 @@ namespace XmobiTea.GearN.Networking.Http
             }
         }
 
-        private IEnumerator iePostRequestUploadViaUnityWebRequest(string subUri, byte[] content, string filename, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        private IEnumerator iePostRequestUploadViaUnityWebRequest(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout)
         {
             var form = new UnityEngine.WWWForm();
             form.AddBinaryData(Commands.File, content, filename, mimetype);
 
-            using (var unityWebRequest = UnityWebRequest.Post(new Uri(this.httpUrl + "/" + subUri), form))
+            using (var unityWebRequest = UnityWebRequest.Post(new System.Uri(this.httpUrl + "/" + subUri), form))
             {
                 var certificateHandler = new AcceptAllCertificatesSignedWithASpecificKeyPublicKey();
 

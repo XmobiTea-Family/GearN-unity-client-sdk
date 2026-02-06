@@ -1,38 +1,5 @@
 namespace XmobiTea.GearN.Logger
 {
-    using System;
-
-    /// <summary>
-    /// Enum defining different log levels for GNDebug.
-    /// </summary>
-    public enum LogType
-    {
-        /// <summary>
-        /// No logging.
-        /// </summary>
-        Off,
-
-        /// <summary>
-        /// Logs exceptions only.
-        /// </summary>
-        Exception,
-
-        /// <summary>
-        /// Logs errors and exceptions.
-        /// </summary>
-        Error,
-
-        /// <summary>
-        /// Logs warnings, errors, and exceptions.
-        /// </summary>
-        Warning,
-
-        /// <summary>
-        /// Logs all messages, including general logs, warnings, errors, and exceptions.
-        /// </summary>
-        All,
-    }
-
     /// <summary>
     /// Utility class for handling logging in the GN framework.
     /// </summary>
@@ -63,7 +30,7 @@ namespace XmobiTea.GearN.Logger
         /// Logs an exception if the log level includes exceptions.
         /// </summary>
         /// <param name="exception">The exception to log.</param>
-        public static void logException(Exception exception)
+        public static void logException(System.Exception exception)
         {
             if (_logType >= LogType.Exception)
                 UnityEngine.Debug.LogException(exception);
@@ -88,5 +55,7 @@ namespace XmobiTea.GearN.Logger
             if (_logType >= LogType.Error)
                 UnityEngine.Debug.LogError(message);
         }
+
     }
+
 }

@@ -1,6 +1,5 @@
 ﻿namespace XmobiTea.GearN.Networking
 {
-    using System;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Entity;
@@ -25,7 +24,7 @@
         /// <param name="authToken">The authentication token to include with the request.</param>
         /// <param name="secretKey">The secret key to include with the request, if applicable.</param>
         /// <param name="customTags">Custom tags to be attached to the request.</param>
-        void enqueue(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId);
+        void enqueue(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action1<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId);
 
         /// <summary>
         /// Checks whether the peer is currently in use.

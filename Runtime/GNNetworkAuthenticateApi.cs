@@ -1,6 +1,5 @@
 namespace XmobiTea.GearN
 {
-    using System;
     using System.Threading.Tasks;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Entity;
@@ -30,7 +29,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByAccount(AuthenticateModels.LoginByAccountRequestData requestData, Action<AuthenticateResponseModels.LoginByAccountOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByAccount(AuthenticateModels.LoginByAccountRequestData requestData, Action1<AuthenticateResponseModels.LoginByAccountOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByAccountOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -58,7 +57,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByAndroidDeviceId(AuthenticateModels.LoginByAndroidDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByAndroidDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByAndroidDeviceId(AuthenticateModels.LoginByAndroidDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByAndroidDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByAndroidDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -86,7 +85,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByApple(AuthenticateModels.LoginByAppleRequestData requestData, Action<AuthenticateResponseModels.LoginByAppleOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByApple(AuthenticateModels.LoginByAppleRequestData requestData, Action1<AuthenticateResponseModels.LoginByAppleOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByAppleOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -114,7 +113,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByCustomDeviceId(AuthenticateModels.LoginByCustomDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByCustomDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByCustomDeviceId(AuthenticateModels.LoginByCustomDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByCustomDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByCustomDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -142,7 +141,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByCustomId(AuthenticateModels.LoginByCustomIdRequestData requestData, Action<AuthenticateResponseModels.LoginByCustomIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByCustomId(AuthenticateModels.LoginByCustomIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByCustomIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByCustomIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -170,7 +169,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByEditorDeviceId(AuthenticateModels.LoginByEditorDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByEditorDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByEditorDeviceId(AuthenticateModels.LoginByEditorDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByEditorDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByEditorDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -198,7 +197,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByFacebook(AuthenticateModels.LoginByFacebookRequestData requestData, Action<AuthenticateResponseModels.LoginByFacebookOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByFacebook(AuthenticateModels.LoginByFacebookRequestData requestData, Action1<AuthenticateResponseModels.LoginByFacebookOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByFacebookOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -225,7 +224,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByGenericService(AuthenticateModels.LoginByGenericServiceRequestData requestData, Action<AuthenticateResponseModels.LoginByGenericServiceOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByGenericService(AuthenticateModels.LoginByGenericServiceRequestData requestData, Action1<AuthenticateResponseModels.LoginByGenericServiceOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByGenericServiceOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -253,7 +252,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByGoogle(AuthenticateModels.LoginByGoogleRequestData requestData, Action<AuthenticateResponseModels.LoginByGoogleOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByGoogle(AuthenticateModels.LoginByGoogleRequestData requestData, Action1<AuthenticateResponseModels.LoginByGoogleOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByGoogleOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -281,7 +280,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByGooglePlayGameService(AuthenticateModels.LoginByGooglePlayGameServiceRequestData requestData, Action<AuthenticateResponseModels.LoginByGooglePlayGameServiceOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByGooglePlayGameService(AuthenticateModels.LoginByGooglePlayGameServiceRequestData requestData, Action1<AuthenticateResponseModels.LoginByGooglePlayGameServiceOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByGooglePlayGameServiceOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -309,7 +308,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByGameCenter(AuthenticateModels.LoginByGameCenterRequestData requestData, Action<AuthenticateResponseModels.LoginByGameCenterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByGameCenter(AuthenticateModels.LoginByGameCenterRequestData requestData, Action1<AuthenticateResponseModels.LoginByGameCenterOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByGameCenterOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -337,7 +336,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByiOSDeviceId(AuthenticateModels.LoginByiOSDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByiOSDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByiOSDeviceId(AuthenticateModels.LoginByiOSDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByiOSDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByiOSDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -365,7 +364,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByLinuxDeviceId(AuthenticateModels.LoginByLinuxDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByLinuxDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByLinuxDeviceId(AuthenticateModels.LoginByLinuxDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByLinuxDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByLinuxDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -393,7 +392,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByMacOSDeviceId(AuthenticateModels.LoginByMacOSDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByMacOSDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByMacOSDeviceId(AuthenticateModels.LoginByMacOSDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByMacOSDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByMacOSDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -421,7 +420,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByWindowsDeviceId(AuthenticateModels.LoginByWindowsDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByWindowsDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByWindowsDeviceId(AuthenticateModels.LoginByWindowsDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByWindowsDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByWindowsDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -449,7 +448,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void loginByWindowsPhoneDeviceId(AuthenticateModels.LoginByWindowsPhoneDeviceIdRequestData requestData, Action<AuthenticateResponseModels.LoginByWindowsPhoneDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void loginByWindowsPhoneDeviceId(AuthenticateModels.LoginByWindowsPhoneDeviceIdRequestData requestData, Action1<AuthenticateResponseModels.LoginByWindowsPhoneDeviceIdOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.LoginByWindowsPhoneDeviceIdOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -477,7 +476,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void registerAccount(AuthenticateModels.RegisterAccountRequestData requestData, Action<AuthenticateResponseModels.RegisterAccountOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void registerAccount(AuthenticateModels.RegisterAccountRequestData requestData, Action1<AuthenticateResponseModels.RegisterAccountOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.RegisterAccountOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -505,7 +504,7 @@ namespace XmobiTea.GearN
         /// <param name="overrideSecretKey">Optional override for the secret key.</param>
         /// <param name="customTags">Custom tags to send along with the request.</param>
         /// <param name="timeout">The timeout duration for the request, in seconds.</param>
-        public void refreshAuthToken(AuthenticateModels.RefreshAuthTokenRequestData requestData, Action<AuthenticateResponseModels.RefreshAuthTokenOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void refreshAuthToken(AuthenticateModels.RefreshAuthTokenRequestData requestData, Action1<AuthenticateResponseModels.RefreshAuthTokenOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new AuthenticateRequestModels.RefreshAuthTokenOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }

@@ -1,6 +1,7 @@
 namespace XmobiTea.GearN.Networking.Socket
 {
-    using System;
+#if UNITY_USING_SOCKET_IO_UNITY
+    
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.Json;
@@ -11,9 +12,10 @@ namespace XmobiTea.GearN.Networking.Socket
     using XmobiTea.GearN.Logger;
 
     /// <summary>
-    /// Handles socket networking using Socket.IO v4 DogHappy.
+    /// Handles socket networking using Socket.IO v4 https://github.com/XmobiTea-Family-Fork/SocketIOUnity.
+    /// Acknowledgement https://github.com/itisnajim/SocketIOUnity and https://github.com/doghappy/socket.io-client-csharp
     /// </summary>
-    internal class NetworkingPeerSocketV4 : NetworkingSocketPeerBase
+    internal class NetworkingPeerSocketIOUnity : NetworkingSocketPeerBase
     {
         private SocketIOClient.SocketIO socketManager;
         private bool isConnected;
@@ -49,7 +51,7 @@ namespace XmobiTea.GearN.Networking.Socket
                     EIO = SocketIOClient.EngineIO.V4,
                     Reconnection = true,
                     ReconnectionDelay = this.reconnectDelay,
-                    ConnectionTimeout = new TimeSpan(0, 0, (int)this.pingTimeout),
+                    ConnectionTimeout = new System.TimeSpan(0, 0, (int)this.pingTimeout),
                     //AutoConnect = false,
                     Transport = SocketIOClient.Transport.TransportProtocol.WebSocket,
                 });
@@ -175,7 +177,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// <summary>
         /// Handles socket connection events.
         /// </summary>
-        private void onConnect(object sender, EventArgs eventArgs)
+        private void onConnect(object sender, System.EventArgs eventArgs)
         {
             GNDebug.log("[GN Socket RECV] HandleOpen " + this.socketManager.Id);
 
@@ -230,7 +232,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Closes the socket connection.
         /// </summary>
         /// <param name="_onSocketDisconnect">Callback for when the socket is disconnected.</param>
-        internal override void close(Action _onSocketDisconnect)
+        internal override void close(Action0 _onSocketDisconnect)
         {
             base.close(_onSocketDisconnect);
 
@@ -254,7 +256,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Opens a socket connection.
         /// </summary>
         /// <param name="_onSocketConnect">Callback for when the socket is connected.</param>
-        internal override void connect(Action _onSocketConnect)
+        internal override void connect(Action0 _onSocketConnect)
         {
             base.connect(_onSocketConnect);
 
@@ -271,5 +273,5 @@ namespace XmobiTea.GearN.Networking.Socket
             if (this.socketManager != null) this.socketManager.ConnectAsync();
         }
     }
-
+#endif
 }

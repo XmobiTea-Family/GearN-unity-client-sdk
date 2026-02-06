@@ -1,9 +1,9 @@
-﻿using System;
-using System.Reflection;
-using XmobiTea.GearN.Common;
-
-namespace XmobiTea.GearN.Entity
+﻿namespace XmobiTea.GearN.Entity
 {
+    using System;
+    using System.Reflection;
+    using XmobiTea.GearN.Common;
+
     /// <summary>
     /// Enhanced metadata for an object field in the GN system.
     /// </summary>

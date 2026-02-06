@@ -1,7 +1,7 @@
 ﻿namespace XmobiTea.GearN.Networking
 {
-    using System;
     using System.Collections.Generic;
+    using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Entity;
     using XmobiTea.GearN.Entity.Models;
@@ -35,7 +35,7 @@
         /// Event triggered when a character's player friend list is updated.
         /// Subscribing to this action allows handling the update logic.
         /// </summary>
-        public static Action<CharacterPlayerFriendUpdate> onUpdate;
+        public static Action1<CharacterPlayerFriendUpdate> onUpdate;
 
         /// <summary>
         /// Gets the event code associated with this handler.

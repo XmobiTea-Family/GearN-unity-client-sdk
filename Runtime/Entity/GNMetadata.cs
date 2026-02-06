@@ -1,7 +1,5 @@
 ﻿namespace XmobiTea.GearN.Entity
 {
-    using System;
-
     /// <summary>
     /// Enum representing the various data types for object fields.
     /// </summary>
@@ -51,7 +49,7 @@
         /// <summary>
         /// Gets the class type of the field, if applicable.
         /// </summary>
-        Type cls { get; }
+        System.Type cls { get; }
     }
 
     /// <summary>

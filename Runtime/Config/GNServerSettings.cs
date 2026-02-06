@@ -7,20 +7,30 @@
     /// </summary>
     public enum PeerSocketVersion
     {
+        None = 0,
+#if UNITY_USING_BEST_HTTP
         /// <summary>
-        /// Socket.IO version 2 with protocol v2.
+        /// Socket.IO version 2 with protocol v2 from BestHttp2.
         /// </summary>
-        V2_v2 = 0,
+        V2_v2_BestHttp = 1,
 
         /// <summary>
-        /// Socket.IO version 2 with protocol v3.
+        /// Socket.IO version 2 with protocol v3 from BestHttp2.
         /// </summary>
-        V2_v3 = 1,
+        V2_v3_BestHttp = 2,
 
         /// <summary>
-        /// Socket.IO version 3.
+        /// Socket.IO version 3 from BestHttp2.
         /// </summary>
-        V3 = 2,
+        V3_BestHttp = 3,
+#endif
+
+#if UNITY_USING_SOCKET_IO_UNITY
+        /// <summary>
+        /// Socket.IO version 4 from SocketIOUnity
+        /// </summary>
+        V4_SocketIOUnity = 4,
+#endif
     }
 
     /// <summary>
@@ -41,9 +51,9 @@
 #endif
 
         /// <summary>
-        /// HttpWebRequest for HTTP requests.
+        /// HttpClientRequest for HTTP requests.
         /// </summary>
-        HttpWebRequest = 2,
+        HttpClientRequest = 2,
     }
 
     public enum MessageType
@@ -106,7 +116,7 @@
         private string clientSecretKey;
 
         [SerializeField]
-        private PeerSocketVersion peerSocketVersion = PeerSocketVersion.V3;
+        private PeerSocketVersion peerSocketVersion = PeerSocketVersion.None;
 
         [SerializeField]
         private HttpRequestType httpRequestType = HttpRequestType.UnityWebRequest;
@@ -243,6 +253,8 @@
         /// </summary>
         /// <returns>The log type.</returns>
         public GearN.Logger.LogType getLogType() => this.logType;
+
+        public void setLogType(GearN.Logger.LogType logType) => this.logType = logType;
 
         /// <summary>
         /// Constructs the socket URL.

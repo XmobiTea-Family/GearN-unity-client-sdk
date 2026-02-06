@@ -3,9 +3,7 @@ namespace XmobiTea.GearN.Networking.Http
 #if UNITY_USING_BEST_HTTP
 
     using BestHTTP;
-    using System;
     using System.IO;
-    using System.Text;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Helper;
@@ -23,9 +21,9 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="timeout">Timeout for the request, in seconds.</param>
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
-        public override void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
+        public override void getRequest(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
         {
-            var request = new HTTPRequest(new Uri(this.httpUrl + "/" + subUri), HTTPMethods.Get, (httpRequest, httpResponse) =>
+            var request = new HTTPRequest(new System.Uri(this.httpUrl + "/" + subUri), HTTPMethods.Get, (httpRequest, httpResponse) =>
             {
                 var httpAppResponse = new HttpAppResponse();
 
@@ -44,7 +42,7 @@ namespace XmobiTea.GearN.Networking.Http
                 onHttpAppResponse?.Invoke(httpAppResponse);
             });
 
-            request.Timeout = TimeSpan.FromSeconds(timeout);
+            request.Timeout = System.TimeSpan.FromSeconds(timeout);
 
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
             if (!string.IsNullOrEmpty(secretKey)) request.SetHeader(Commands.RequestSecretCmd, secretKey);
@@ -64,9 +62,9 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
         /// <param name="customTags">Optional custom tags.</param>
-        public override void postRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        public override void postRequest(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
-            var request = new HTTPRequest(new Uri(this.httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
+            var request = new HTTPRequest(new System.Uri(this.httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
             {
                 var httpAppResponse = new HttpAppResponse();
 
@@ -91,7 +89,7 @@ namespace XmobiTea.GearN.Networking.Http
             if (postType == PostType.Json)
             {
                 request.SetHeader(Commands.CONTENT_TYPE, Commands.APPLICATION_JSON);
-                var content = Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
+                var content = System.Text.Encoding.UTF8.GetBytes(Serializer.Serialize(param.toData()));
                 request.UploadStream = new MemoryStream(content);
             }
             else if (postType == PostType.MsgPack)
@@ -101,7 +99,7 @@ namespace XmobiTea.GearN.Networking.Http
                 request.UploadStream = new MemoryStream(content);
             }
 
-            request.Timeout = TimeSpan.FromSeconds(timeout);
+            request.Timeout = System.TimeSpan.FromSeconds(timeout);
 
             if (!string.IsNullOrEmpty(authToken)) request.SetHeader(Commands.RequestAuthTokenCmd, authToken);
             if (!string.IsNullOrEmpty(secretKey)) request.SetHeader(Commands.RequestSecretCmd, secretKey);
@@ -118,9 +116,9 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="mimetype">The MIME type of the file.</param>
         /// <param name="onHttpAppResponse">Callback to handle the HTTP response.</param>
         /// <param name="timeout">Timeout for the request, in seconds.</param>
-        public override void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout)
+        public override void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout)
         {
-            var request = new HTTPRequest(new Uri(this.httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
+            var request = new HTTPRequest(new System.Uri(this.httpUrl + "/" + subUri), HTTPMethods.Post, (httpRequest, httpResponse) =>
             {
                 var httpAppResponse = new HttpAppResponse();
 
@@ -139,7 +137,7 @@ namespace XmobiTea.GearN.Networking.Http
                 onHttpAppResponse?.Invoke(httpAppResponse);
             });
 
-            request.Timeout = TimeSpan.FromSeconds(timeout);
+            request.Timeout = System.TimeSpan.FromSeconds(timeout);
             request.AddBinaryData(Commands.File, content, filename, mimetype);
 
             var authToken = GNNetwork.getAuthenticateStatus().getAuthToken();

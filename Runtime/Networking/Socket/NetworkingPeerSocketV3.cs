@@ -3,7 +3,6 @@ namespace XmobiTea.GearN.Networking.Socket
 #if UNITY_USING_BEST_HTTP
 
     using BestHTTP.SocketIO3;
-    using System;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Config;
     using XmobiTea.GearN.Constant;
@@ -44,12 +43,12 @@ namespace XmobiTea.GearN.Networking.Socket
 
             if (this.socketManager == null)
             {
-                var uri = new Uri(this.url + "/socket.io/");
+                var uri = new System.Uri(this.url + "/socket.io/");
                 this.socketManager = new SocketManager(uri, new SocketOptions()
                 {
                     Reconnection = true,
-                    ReconnectionDelay = new TimeSpan(0, 0, this.reconnectDelay),
-                    Timeout = new TimeSpan(0, 0, (int)this.pingTimeout),
+                    ReconnectionDelay = new System.TimeSpan(0, 0, this.reconnectDelay),
+                    Timeout = new System.TimeSpan(0, 0, (int)this.pingTimeout),
                     AutoConnect = false,
                     ConnectWith = BestHTTP.SocketIO3.Transports.TransportTypes.WebSocket
                 });
@@ -192,7 +191,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Closes the socket connection.
         /// </summary>
         /// <param name="_onSocketDisconnect">Callback for when the socket is disconnected.</param>
-        internal override void close(Action _onSocketDisconnect)
+        internal override void close(Action0 _onSocketDisconnect)
         {
             base.close(_onSocketDisconnect);
 
@@ -216,7 +215,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// Opens a socket connection.
         /// </summary>
         /// <param name="_onSocketConnect">Callback for when the socket is connected.</param>
-        internal override void connect(Action _onSocketConnect)
+        internal override void connect(Action0 _onSocketConnect)
         {
             base.connect(_onSocketConnect);
 

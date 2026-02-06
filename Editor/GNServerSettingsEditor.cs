@@ -107,9 +107,9 @@
                 EditorGUILayout.PropertyField(this.pingTimout);
                 EditorGUILayout.PropertyField(this.peerSocketVersion);
 #else
-                EditorGUILayout.LabelField("GN Unity Client current only support BEST_HTTP/2 to handle socket");
-                EditorGUILayout.LabelField("You must import BEST_HTTP/2 package");
-                EditorGUILayout.LabelField("\tand define UNITY_USING_BEST_HTTP on Project Settings/Player");
+                EditorGUILayout.LabelField("GN Unity Client current only support BEST_HTTP/2 or SocketIOUnity to handle socket");
+                EditorGUILayout.LabelField("You must import BEST_HTTP/2 or SocketIOUnity package");
+                EditorGUILayout.LabelField("\tand define UNITY_USING_BEST_HTTP if using BEST_HTTP/2 (or define UNITY_USING_SOCKET_IO_UNITY if using SocketIOUnity) on Project Settings/Player");
                 EditorGUILayout.LabelField("\t\t-> Scripting Define Symbols");
 #endif
             }

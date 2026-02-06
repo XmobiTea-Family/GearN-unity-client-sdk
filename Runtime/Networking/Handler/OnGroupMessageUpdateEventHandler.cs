@@ -1,7 +1,7 @@
 ﻿namespace XmobiTea.GearN.Networking
 {
-    using System;
     using System.Collections.Generic;
+    using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Entity;
     using XmobiTea.GearN.Entity.Models;
@@ -27,7 +27,7 @@
         /// <summary>
         /// An action to be invoked when a group message update occurs.
         /// </summary>
-        public static Action<GroupMessageUpdate> onUpdate;
+        public static Action1<GroupMessageUpdate> onUpdate;
 
         /// <summary>
         /// Gets the event code associated with the group message update.

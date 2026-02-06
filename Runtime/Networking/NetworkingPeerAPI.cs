@@ -1,6 +1,5 @@
 ﻿namespace XmobiTea.GearN.Networking
 {
-    using System;
     using System.Collections;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
@@ -24,7 +23,7 @@
         /// Synchronizes the local time with the server time by retrieving the latest server timestamp.
         /// </summary>
         /// <param name="onResponse">An optional callback to handle the synchronized server timestamp.</param>
-        internal void syncTs(Action<long> onResponse = null)
+        internal void syncTs(Action1<long> onResponse = null)
         {
             // Sends a request to the SYNC_TS endpoint using the HTTP peer.
             (this.httpPeer as Http.HttpPeer).getRequest(NetworkingPeer.SYNC_TS, httpAppResponse =>
@@ -40,7 +39,7 @@
                             .addAll(returnDatas)
                             .build();
 
-                        var newServerTimestamp = gnHashtable.getLong(ParameterCode.Ts, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                        var newServerTimestamp = gnHashtable.getLong(ParameterCode.Ts, System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
                         this.setServerTimeMilliseconds(newServerTimestamp);
                     }
@@ -56,7 +55,7 @@
         /// </summary>
         /// <param name="authToken"></param>
         /// <param name="onResponse"></param>
-        internal void getAuthInfo(string authToken, Action<GetAuthInfoResponse> onResponse)
+        internal void getAuthInfo(string authToken, Action1<GetAuthInfoResponse> onResponse)
         {
             // Sends a request to the GET_AUTH_INFO endpoint using the HTTP peer.
             (this.httpPeer as Http.HttpPeer).getRequest(NetworkingPeer.GET_AUTH_INFO + "?authToken=" + authToken, httpAppResponse =>
@@ -112,7 +111,7 @@
             });
         }
 
-        internal void healthCheck(Action<HealthCheckResponse> onResponse)
+        internal void healthCheck(Action1<HealthCheckResponse> onResponse)
         {
             // Sends a request to the HEALTH_CHECK endpoint using the HTTP peer.
             (this.httpPeer as Http.HttpPeer).getRequest(NetworkingPeer.HEALTH_CHECK, httpAppResponse =>
@@ -201,7 +200,7 @@
         /// <param name="filename"></param>
         /// <param name="mimetype"></param>
         /// <param name="onResponse"></param>
-        internal void uploadFile(string fileId, byte[] content, string filename, string mimetype, Action<UploadFileResponse> onResponse)
+        internal void uploadFile(string fileId, byte[] content, string filename, string mimetype, Action1<UploadFileResponse> onResponse)
         {
             (this.httpPeer as Http.HttpPeer).uploadFile(fileId, content, filename, mimetype, httpAppResponse =>
             {

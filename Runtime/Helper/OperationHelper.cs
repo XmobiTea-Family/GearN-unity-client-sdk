@@ -1,8 +1,8 @@
-using XmobiTea.GearN.Constant;
-using XmobiTea.GearN.Helper;
-
-namespace XmobiTea.GearN.Entity
+namespace XmobiTea.GearN.Helper
 {
+    using XmobiTea.GearN.Constant;
+    using XmobiTea.GearN.Entity;
+
     /// <summary>
     /// Utility class for handling operations and formatting data for socket or HTTP communication.
     /// </summary>

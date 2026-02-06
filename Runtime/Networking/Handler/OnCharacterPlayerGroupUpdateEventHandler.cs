@@ -1,7 +1,7 @@
 ﻿namespace XmobiTea.GearN.Networking
 {
-    using System;
     using System.Collections.Generic;
+    using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Entity;
     using XmobiTea.GearN.Entity.Models;
@@ -33,7 +33,7 @@
         /// <summary>
         /// Event triggered when a character's player group list is updated.
         /// </summary>
-        public static Action<CharacterPlayerGroupUpdate> onUpdate;
+        public static Action1<CharacterPlayerGroupUpdate> onUpdate;
 
         /// <summary>
         /// Gets the event code associated with this handler.

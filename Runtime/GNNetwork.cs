@@ -1,6 +1,5 @@
 ﻿namespace XmobiTea.GearN
 {
-    using System;
     using System.Threading.Tasks;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Config;
@@ -8,6 +7,7 @@
     using XmobiTea.GearN.Entity;
     using XmobiTea.GearN.Entity.Request;
     using XmobiTea.GearN.Entity.Response;
+    using XmobiTea.GearN.Helper;
     using XmobiTea.GearN.Logger;
     using XmobiTea.GearN.Networking;
 
@@ -19,20 +19,20 @@
         /// <summary>
         /// Current SDK version.
         /// </summary>
-        private const string GN_VERSION = "2.5";
+        private const string GN_VERSION = "2.6";
 
         /// <summary>
-        /// Key for storing authentication token in PlayerPrefs.
+        /// Key for storing authentication token in StorageService.
         /// </summary>
         internal const string AUTH_TOKEN_KEY = "[GN]_AUTH_TOKEN_KEY";
 
         /// <summary>
-        /// Key for storing user ID in PlayerPrefs.
+        /// Key for storing user ID in StorageService.
         /// </summary>
         internal const string USER_ID_KEY = "[GN]_USER_ID_KEY";
 
         /// <summary>
-        /// Key for storing game ID in PlayerPrefs.
+        /// Key for storing game ID in StorageService.
         /// </summary>
         internal const string GAME_ID_KEY = "[GN]_GAME_ID_KEY";
 
@@ -73,7 +73,7 @@
         /// Gets the server's current timestamp in milliseconds.
         /// </summary>
         /// <returns>The server's current timestamp, or the local UTC timestamp if no peer exists.</returns>
-        public static long getServerTimestamp() => GNNetwork.peer != null ? GNNetwork.peer.getServerTimestamp() : DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public static long getServerTimestamp() => GNNetwork.peer != null ? GNNetwork.peer.getServerTimestamp() : System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
         /// <summary>
         /// Gets the current authentication status of the connection.
@@ -107,9 +107,9 @@
 
             GNNetwork.initGNSocketObject();
 
-            GNNetwork.peer.authenticateStatus.setAuthToken(UnityEngine.PlayerPrefs.GetString(GNNetwork.AUTH_TOKEN_KEY, string.Empty));
-            GNNetwork.peer.authenticateStatus.setUserId(UnityEngine.PlayerPrefs.GetString(GNNetwork.USER_ID_KEY, string.Empty));
-            GNNetwork.peer.gameId = UnityEngine.PlayerPrefs.GetString(GNNetwork.GAME_ID_KEY, string.Empty);
+            GNNetwork.peer.authenticateStatus.setAuthToken(StorageService.getString(GNNetwork.AUTH_TOKEN_KEY, string.Empty));
+            GNNetwork.peer.authenticateStatus.setUserId(StorageService.getString(GNNetwork.USER_ID_KEY, string.Empty));
+            GNNetwork.peer.gameId = StorageService.getString(GNNetwork.GAME_ID_KEY, string.Empty);
 
             GNNetwork.authenticate = new AuthenticateApi();
             GNNetwork.characterPlayer = new CharacterPlayerApi();
@@ -142,7 +142,7 @@
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.ExecuteMenuItem("XmobiTea GN/Open Settings");
                 gnServerSettings = UnityEngine.Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
-                if (gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
+                if (gnServerSettings == null) throw new System.NullReferenceException("Null GN Server Settings, please find it now");
 #endif
             }
 
@@ -154,7 +154,7 @@
         /// </summary>
         private static void initGNDebug()
         {
-            if (GNNetwork.gnServerSettings == null) throw new NullReferenceException("Null GN Server Settings, please find it now");
+            if (GNNetwork.gnServerSettings == null) throw new System.NullReferenceException("Null GN Server Settings, please find it now");
 
             GNDebug.logType = GNNetwork.gnServerSettings.getLogType();
         }
@@ -178,8 +178,8 @@
 
         public static void setNewAuthenticateStatus(AuthenticateStatus authenticateStatus)
         {
-            UnityEngine.PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, authenticateStatus.getAuthToken());
-            UnityEngine.PlayerPrefs.SetString(GNNetwork.USER_ID_KEY, authenticateStatus.getUserId());
+            StorageService.setString(GNNetwork.AUTH_TOKEN_KEY, authenticateStatus.getAuthToken());
+            StorageService.setString(GNNetwork.USER_ID_KEY, authenticateStatus.getUserId());
 
             GNNetwork.peer.authenticateStatus.setAuthToken(authenticateStatus.getAuthToken());
             GNNetwork.peer.authenticateStatus.setUserId(authenticateStatus.getUserId());
@@ -187,7 +187,7 @@
 
         public static void setGameId(string gameId)
         {
-            UnityEngine.PlayerPrefs.SetString(GNNetwork.GAME_ID_KEY, gameId);
+            StorageService.setString(GNNetwork.GAME_ID_KEY, gameId);
 
             GNNetwork.peer.gameId = gameId;
         }
@@ -202,7 +202,7 @@
         /// <param name="overrideAuthToken">Optional token override for the request.</param>
         /// <param name="overrideSecretKey">Optional secret key override for the request.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
-        public static void sendViaSocket(RequestType requestType, RequestRole role, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static void sendViaSocket(RequestType requestType, RequestRole role, OperationRequest request, Action1<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
             GNNetwork.peer.sendViaSocket(requestType, role, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -239,7 +239,7 @@
         /// <param name="overrideAuthToken">Optional token to override the default authentication token.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default key.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
-        public static void sendViaHttp(RequestType requestType, RequestRole role, OperationRequest request, Action<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
+        public static void sendViaHttp(RequestType requestType, RequestRole role, OperationRequest request, Action1<OperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null)
         {
             GNNetwork.peer.sendViaHttp(requestType, role, request, onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -276,7 +276,7 @@
         /// <param name="overrideAuthToken">Optional token to override the default authentication token.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default key.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
-        public static void sendViaSocket<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
+        public static void sendViaSocket<TRequest, TResponse>(TRequest request, Action1<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
             GNNetwork.sendViaSocket(request.getRequestType(), request.getRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -315,7 +315,7 @@
         /// <param name="overrideAuthToken">Optional token to override the default authentication token.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default key.</param>
         /// <param name="customTags">Optional custom tags for the request.</param>
-        public static void sendViaHttp<TRequest, TResponse>(TRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
+        public static void sendViaHttp<TRequest, TResponse>(TRequest request, Action1<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TRequest : CustomOperationRequest where TResponse : CustomOperationResponse, new()
         {
             GNNetwork.sendViaHttp(request.getRequestType(), request.getRole(), request.build(), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -353,7 +353,7 @@
         /// <param name="overrideAuthToken">Optional authentication token to override the default value.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default value.</param>
         /// <param name="customTags">Optional custom tags to send with the request.</param>
-        public static void sendViaSocket<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static void sendViaSocket<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, Action1<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
             GNNetwork.sendViaSocket(requestType, role, request, response =>
             {
@@ -400,7 +400,7 @@
         /// <param name="overrideAuthToken">Optional authentication token to override the default value.</param>
         /// <param name="overrideSecretKey">Optional secret key to override the default value.</param>
         /// <param name="customTags">Optional custom tags to send with the request.</param>
-        public static void sendViaHttp<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, Action<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
+        public static void sendViaHttp<TResponse>(RequestType requestType, RequestRole role, OperationRequest request, Action1<TResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null) where TResponse : CustomOperationResponse, new()
         {
             GNNetwork.sendViaHttp(requestType, role, request, response =>
             {
@@ -440,7 +440,7 @@
         /// Connects to the socket server.
         /// </summary>
         /// <param name="_onSocketConnect">Optional callback invoked when the socket is connected.</param>
-        public static void connectSocket(Action _onSocketConnect = null)
+        public static void connectSocket(Action0 _onSocketConnect = null)
         {
             GNNetwork.peer.connectSocket(_onSocketConnect);
         }
@@ -449,7 +449,7 @@
         /// Disconnects from the socket server.
         /// </summary>
         /// <param name="_onSocketDisconnect">Optional callback invoked when the socket is disconnected.</param>
-        public static void disconnectSocket(Action _onSocketDisconnect = null)
+        public static void disconnectSocket(Action0 _onSocketDisconnect = null)
         {
             GNNetwork.peer.disconnectSocket(_onSocketDisconnect);
         }
@@ -458,7 +458,7 @@
         /// Subscribes to event handlers for socket events.
         /// </summary>
         /// <param name="_onEventHandler">The handler to invoke when an event occurs.</param>
-        public static void setOnEventHandler(Action<OperationEvent> _onEventHandler)
+        public static void setOnEventHandler(Action1<OperationEvent> _onEventHandler)
         {
             GNNetwork.peer.setOnEventHandler(_onEventHandler);
         }
@@ -467,7 +467,7 @@
         /// Subscribes a handler to be invoked when the socket connects successfully.
         /// </summary>
         /// <param name="onConnectHandler">The action to execute when the socket connects.</param>
-        public static void subscriberOnConnectHandler(Action onConnectHandler)
+        public static void subscriberOnConnectHandler(Action0 onConnectHandler)
         {
             GNNetwork.peer.setOnConnectHandler(onConnectHandler);
         }
@@ -476,7 +476,7 @@
         /// Subscribes a handler to be invoked when the socket disconnects.
         /// </summary>
         /// <param name="onDisconnectHandler">The action to execute when the socket disconnects.</param>
-        public static void subscriberOnDisconnectHandler(Action onDisconnectHandler)
+        public static void subscriberOnDisconnectHandler(Action0 onDisconnectHandler)
         {
             GNNetwork.peer.setOnDisconnectHandler(onDisconnectHandler);
         }
@@ -485,7 +485,7 @@
         /// Unsubscribes a previously subscribed handler for socket connection events.
         /// </summary>
         /// <param name="onConnectHandler">The action to remove from connection event handlers.</param>
-        public static void unscriberOnConnectHandler(Action onConnectHandler)
+        public static void unscriberOnConnectHandler(Action0 onConnectHandler)
         {
             GNNetwork.peer.removeOnConnectHandler(onConnectHandler);
         }
@@ -494,7 +494,7 @@
         /// Unsubscribes a previously subscribed handler for socket disconnection events.
         /// </summary>
         /// <param name="onDisconnectHandler">The action to remove from disconnection event handlers.</param>
-        public static void unsubscriberOnDisconnectHandler(Action onDisconnectHandler)
+        public static void unsubscriberOnDisconnectHandler(Action0 onDisconnectHandler)
         {
             GNNetwork.peer.removeOnDisconnectHandler(onDisconnectHandler);
         }

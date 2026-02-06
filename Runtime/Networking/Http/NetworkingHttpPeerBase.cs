@@ -1,6 +1,5 @@
 namespace XmobiTea.GearN.Networking.Http
 {
-    using System;
     using XmobiTea.GearN.Common;
 
     /// <summary>
@@ -26,7 +25,7 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="timeout">The timeout for the request, in seconds.</param>
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
-        public abstract void getRequest(string subUri, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKe, string gameIdy);
+        public abstract void getRequest(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKe, string gameIdy);
 
         /// <summary>
         /// Sends a POST request to the specified URI.
@@ -39,7 +38,7 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="authToken">Optional authentication token.</param>
         /// <param name="secretKey">Optional secret key.</param>
         /// <param name="customTags">Optional custom tags to include in the request.</param>
-        public abstract void postRequest(string subUri, GNHashtable param, PostType postType, Action<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId);
+        public abstract void postRequest(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId);
 
         /// <summary>
         /// Sends a file upload request to the specified URI.
@@ -49,7 +48,7 @@ namespace XmobiTea.GearN.Networking.Http
         /// <param name="mimetype">The MIME type of the file.</param>
         /// <param name="onHttpAppResponse">Callback to handle the HTTP response.</param>
         /// <param name="timeout">The timeout for the request, in seconds.</param>
-        public abstract void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action<HttpAppResponse> onHttpAppResponse, float timeout);
+        public abstract void postRequestUpload(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout);
 
         /// <summary>
         /// Initializes the HTTP peer with the specified URL and user agent.

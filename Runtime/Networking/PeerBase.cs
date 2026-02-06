@@ -1,12 +1,11 @@
 ﻿namespace XmobiTea.GearN.Networking
 {
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using XmobiTea.GearN.Common;
     using XmobiTea.GearN.Constant;
     using XmobiTea.GearN.Entity;
+    using XmobiTea.GearN.Helper;
     using XmobiTea.GearN.Logger;
 
     /// <summary>
@@ -80,7 +79,7 @@
         {
             var gnServerSettings = GNNetwork.gnServerSettings;
             if (gnServerSettings == null)
-                throw new NullReferenceException("Null GN Server Settings, please find it now");
+                throw new System.NullReferenceException("Null GN Server Settings, please find it now");
 
             this.setSendRate(gnServerSettings.getSendRate());
         }
@@ -101,7 +100,7 @@
         /// <param name="authToken">The authentication token.</param>
         /// <param name="secretKey">The secret key, if applicable.</param>
         /// <param name="customTags">Custom tags for the operation.</param>
-        void IPeer.enqueue(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
+        void IPeer.enqueue(RequestType requestType, RequestRole role, OperationRequest operationRequest, Action1<OperationResponse> onOperationResponse, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             if (!this.isUse)
             {
@@ -237,19 +236,19 @@
                         {
                             var authToken = parameters.getString(ParameterCode.AuthToken);
                             GNNetwork.getAuthenticateStatus().setAuthToken(authToken);
-                            UnityEngine.PlayerPrefs.SetString(GNNetwork.AUTH_TOKEN_KEY, authToken);
+                            StorageService.setString(GNNetwork.AUTH_TOKEN_KEY, authToken);
                         }
 
                         if (parameters.containsKey(ParameterCode.UserId))
                         {
                             var userId = parameters.getString(ParameterCode.UserId);
                             GNNetwork.getAuthenticateStatus().setUserId(userId);
-                            UnityEngine.PlayerPrefs.SetString(GNNetwork.USER_ID_KEY, userId);
+                            StorageService.setString(GNNetwork.USER_ID_KEY, userId);
                         }
 
                         if (parameters.containsKey(ParameterCode.Ts))
                         {
-                            GNNetwork.peer.setServerTimeMilliseconds(parameters.getLong(ParameterCode.Ts, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
+                            GNNetwork.peer.setServerTimeMilliseconds(parameters.getLong(ParameterCode.Ts, System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
                         }
                     }
                 }

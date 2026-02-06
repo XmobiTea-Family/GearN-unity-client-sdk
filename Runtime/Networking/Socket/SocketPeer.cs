@@ -1,6 +1,5 @@
 ﻿namespace XmobiTea.GearN.Networking.Socket
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using XmobiTea.GearN.Common;
@@ -16,7 +15,7 @@
     {
         private NetworkingSocketPeerBase networkingSocketPeerBase;
         private Dictionary<string, List<IServerEventHandler>> serverEventHandlersDict;
-        private Action<OperationEvent> _onEventHandler;
+        private Action1<OperationEvent> _onEventHandler;
 
         /// <summary>
         /// Gets the client ID of the socket connection.
@@ -55,13 +54,13 @@
                 this.serverEventHandlersDict.Clear();
 
             var type = typeof(IServerEventHandler);
-            var types = AppDomain.CurrentDomain.GetAssemblies()
+            var types = System.AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && p != type).ToList();
 
             foreach (var t in types)
             {
-                var srvMsg = Activator.CreateInstance(t) as IServerEventHandler;
+                var srvMsg = System.Activator.CreateInstance(t) as IServerEventHandler;
                 if (srvMsg != null)
                 {
                     if (!this.serverEventHandlersDict.TryGetValue(srvMsg.getEventCode(), out var serverEventHandlers))
@@ -94,7 +93,7 @@
         internal override void initGNSocketObject()
         {
             var gnServerSettings = GNNetwork.gnServerSettings;
-            if (gnServerSettings == null) throw new NullReferenceException("Where is GN Server Settings");
+            if (gnServerSettings == null) throw new System.NullReferenceException("Where is GN Server Settings");
 
             this.isUse = gnServerSettings.isUseSocket();
 
@@ -102,29 +101,35 @@
 
             var peerSocketVersion = gnServerSettings.getPeerSocketVersion();
 
-            if (peerSocketVersion == PeerSocketVersion.V3)
-            {
 #if UNITY_USING_BEST_HTTP
+            if (peerSocketVersion == PeerSocketVersion.V3_BestHttp)
+            {
                 this.networkingSocketPeerBase = new NetworkingPeerSocketV3();
-#endif
             }
-            else
+            else if (peerSocketVersion == PeerSocketVersion.V2_v2_BestHttp)
             {
-#if UNITY_USING_BEST_HTTP
                 this.networkingSocketPeerBase = new NetworkingPeerSocketV2();
 
-                if (peerSocketVersion == PeerSocketVersion.V2_v2)
-                {
-                    ((NetworkingPeerSocketV2)this.networkingSocketPeerBase).setServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v2);
-                }
-                else if (peerSocketVersion == PeerSocketVersion.V2_v3)
-                {
-                    ((NetworkingPeerSocketV2)this.networkingSocketPeerBase).setServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v3);
-                }
-#endif
+                ((NetworkingPeerSocketV2)this.networkingSocketPeerBase).setServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v2);
             }
+            else if (peerSocketVersion == PeerSocketVersion.V2_v3_BestHttp)
+            {
+                this.networkingSocketPeerBase = new NetworkingPeerSocketV2();
 
-            if (this.networkingSocketPeerBase == null) throw new NullReferenceException("this.networkingSocketPeerBase null");
+                ((NetworkingPeerSocketV2)this.networkingSocketPeerBase).setServerVersion(BestHTTP.SocketIO.SupportedSocketIOVersions.v3);
+            }
+#endif
+#if UNITY_USING_SOCKET_IO_UNITY
+#if UNITY_USING_BEST_HTTP
+            else
+#endif
+            if (peerSocketVersion == PeerSocketVersion.V4_SocketIOUnity)
+            {
+                this.networkingSocketPeerBase = new NetworkingPeerSocketIOUnity();
+            }
+#endif
+
+            if (this.networkingSocketPeerBase == null) throw new System.NullReferenceException("this.networkingSocketPeerBase null");
 
             this.networkingSocketPeerBase.init(gnServerSettings.getSocketUrl(), gnServerSettings.getReconnectDelay(), gnServerSettings.getPingInterval(), gnServerSettings.getPingTimeout());
             this.networkingSocketPeerBase.reInitNewSocket();
@@ -138,7 +143,7 @@
         /// <summary>
         /// Sets a callback for when the socket connects.
         /// </summary>
-        internal void setOnConnectHandler(Action _onConnectHandler)
+        internal void setOnConnectHandler(Action0 _onConnectHandler)
         {
             this.networkingSocketPeerBase.setOnConnectHandler(_onConnectHandler);
         }
@@ -146,7 +151,7 @@
         /// <summary>
         /// Sets a callback for when the socket disconnects.
         /// </summary>
-        internal void setOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void setOnDisconnectHandler(Action0 _onDisconnectHandler)
         {
             this.networkingSocketPeerBase.setOnDisconnectHandler(_onDisconnectHandler);
         }
@@ -154,7 +159,7 @@
         /// <summary>
         /// Removes the connection callback.
         /// </summary>
-        internal void removeOnConnectHandler(Action _onConnectHandler)
+        internal void removeOnConnectHandler(Action0 _onConnectHandler)
         {
             this.networkingSocketPeerBase.removeOnConnectHandler(_onConnectHandler);
         }
@@ -162,7 +167,7 @@
         /// <summary>
         /// Removes the disconnection callback.
         /// </summary>
-        internal void removeOnDisconnectHandler(Action _onDisconnectHandler)
+        internal void removeOnDisconnectHandler(Action0 _onDisconnectHandler)
         {
             this.networkingSocketPeerBase.removeOnDisconnectHandler(_onDisconnectHandler);
         }
@@ -170,7 +175,7 @@
         /// <summary>
         /// Connects the socket with a specified callback.
         /// </summary>
-        internal void connect(Action _onSocketConnect)
+        internal void connect(Action0 _onSocketConnect)
         {
             this.networkingSocketPeerBase.connect(_onSocketConnect);
         }
@@ -178,7 +183,7 @@
         /// <summary>
         /// Disconnects the socket with a specified callback.
         /// </summary>
-        internal void disconnect(Action _onSocketDisconnect)
+        internal void disconnect(Action0 _onSocketDisconnect)
         {
             this.networkingSocketPeerBase.close(_onSocketDisconnect);
         }
@@ -186,7 +191,7 @@
         /// <summary>
         /// Sets the event handler for incoming socket events.
         /// </summary>
-        internal void setOnEventHandler(Action<OperationEvent> _onEventHandler)
+        internal void setOnEventHandler(Action1<OperationEvent> _onEventHandler)
         {
             this._onEventHandler = _onEventHandler;
         }
