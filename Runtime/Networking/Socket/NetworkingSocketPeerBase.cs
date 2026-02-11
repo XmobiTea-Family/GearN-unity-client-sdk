@@ -1,5 +1,6 @@
 namespace XmobiTea.GearN.Networking.Socket
 {
+    using System.Collections;
     using System.Collections.Generic;
 
     using XmobiTea.GearN.Common;
@@ -302,30 +303,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// <returns>A dictionary representing the key-value pairs.</returns>
         internal static System.Collections.IDictionary fromMsgKeyValuePairs(KeyValuePair<object, object>[] keyValuePairs)
         {
-            var answer = new Dictionary<object, object>();
-
-            for (var i = 0; i < keyValuePairs.Length; i++)
-            {
-                var keyValuePair = keyValuePairs[i];
-
-                var key = keyValuePair.Key;
-                var value = keyValuePair.Value;
-
-                if (value is KeyValuePair<object, object>[] keyValuePairs1)
-                {
-                    answer[key] = fromMsgKeyValuePairs(keyValuePairs1);
-                }
-                else if (value is object[] objects1)
-                {
-                    answer[key] = fromMsgList(objects1);
-                }
-                else
-                {
-                    answer[key] = value;
-                }
-            }
-
-            return answer;
+            return (IDictionary)fromMsgObject(keyValuePairs);
         }
 
         /// <summary>
@@ -335,27 +313,7 @@ namespace XmobiTea.GearN.Networking.Socket
         /// <returns>A list representing the objects.</returns>
         internal static System.Collections.IList fromMsgList(object[] objects)
         {
-            var answer = new List<object>();
-
-            for (var i = 0; i < objects.Length; i++)
-            {
-                var value = objects[i];
-
-                if (value is KeyValuePair<object, object>[] keyValuePairs1)
-                {
-                    answer.Add(fromMsgKeyValuePairs(keyValuePairs1));
-                }
-                else if (value is object[] objects1)
-                {
-                    answer.Add(fromMsgList(objects1));
-                }
-                else
-                {
-                    answer.Add(value);
-                }
-            }
-
-            return answer;
+            return (IList)fromMsgObject(objects);
         }
 
         //internal static System.Collections.IDictionary fromMsgKeyValuePair(KeyValuePair<object, object> keyValuePair)
@@ -379,31 +337,54 @@ namespace XmobiTea.GearN.Networking.Socket
 
         internal static System.Collections.IDictionary fromMsgDict(object objects)
         {
-            var answer = new Dictionary<object, object>();
-
-            var value = objects;
-
-            if (value is KeyValuePair<object, object>[] keyValuePairs1)
-            {
-                var dict = fromMsgKeyValuePairs(keyValuePairs1);
-
-                foreach (var c in dict.Keys)
-                {
-                    answer.Add(c, dict[c]);
-                }
-            }
-            else if (value is System.Collections.IDictionary iDict)
-            {
-                var dict = fromMsgDict(iDict);
-
-                foreach (var c in dict.Keys)
-                {
-                    answer.Add(c, dict[c]);
-                }
-            }
-
-            return answer;
+            return (IDictionary)fromMsgObject(objects);
         }
+
+        internal static object fromMsgObject(object value)
+        {
+            if (value == null)
+                return null;
+
+            if (value is KeyValuePair<object, object>[] kvps)
+            {
+                var dict = new Dictionary<object, object>(kvps.Length);
+
+                for (int i = 0; i < kvps.Length; i++)
+                {
+                    var pair = kvps[i];
+                    dict[pair.Key] = fromMsgObject(pair.Value);
+                }
+
+                return dict;
+            }
+
+            if (value is object[] arr)
+            {
+                var list = new List<object>(arr.Length);
+
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    list.Add(fromMsgObject(arr[i]));
+                }
+
+                return list;
+            }
+
+            if (value is System.Collections.IDictionary iDict)
+            {
+                var dict = new Dictionary<object, object>(iDict.Count);
+
+                foreach (var key in iDict.Keys)
+                {
+                    dict[key] = fromMsgObject(iDict[key]);
+                }
+
+                return dict;
+            }
+
+            return value;
+        }
+
 
         /// <summary>
         /// Converts a JSON object to a list.
@@ -440,7 +421,7 @@ namespace XmobiTea.GearN.Networking.Socket
 
                             try
                             {
-                                var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(byteArr);
+                                var iDict = MessagePackConverterService.deserialize<System.Collections.IDictionary>(byteArr);
 
                                 var gnHashtable = new GNHashtable.Builder()
                                     .addAll(NetworkingSocketPeerBase.fromMsgDict(iDict))
@@ -485,7 +466,7 @@ namespace XmobiTea.GearN.Networking.Socket
 
                             try
                             {
-                                var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(byteArr);
+                                var iDict = MessagePackConverterService.deserialize<System.Collections.IDictionary>(byteArr);
 
                                 var gnHashtable = new GNHashtable.Builder()
                                     .addAll(NetworkingSocketPeerBase.fromMsgDict(iDict))
