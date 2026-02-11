@@ -140,7 +140,7 @@
             if (gnServerSettings == null)
             {
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.ExecuteMenuItem("XmobiTea GN/Open Settings");
+                UnityEditor.EditorApplication.ExecuteMenuItem("XmobiTea GearN/Open Settings");
                 gnServerSettings = UnityEngine.Resources.Load(GNServerSettings.ResourcesPath) as GNServerSettings;
                 if (gnServerSettings == null) throw new System.NullReferenceException("Null GN Server Settings, please find it now");
 #endif

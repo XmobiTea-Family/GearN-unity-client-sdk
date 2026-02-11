@@ -74,7 +74,7 @@
         {
             this.serializedObject.Update();
 
-            EditorGUILayout.LabelField($"GN Unity Client SDK Version v{GNNetwork.getClientSdkVersion()}");
+            EditorGUILayout.LabelField($"GearN Unity Client SDK Version v{GNNetwork.getClientSdkVersion()}");
             EditorGUILayout.Space(20);
 
             EditorGUILayout.PropertyField(this.serverAddress);
@@ -107,7 +107,7 @@
                 EditorGUILayout.PropertyField(this.pingTimout);
                 EditorGUILayout.PropertyField(this.peerSocketVersion);
 #else
-                EditorGUILayout.LabelField("GN Unity Client current only support BEST_HTTP/2 or SocketIOUnity to handle socket");
+                EditorGUILayout.LabelField("GearN Unity Client current only support BEST_HTTP/2 or SocketIOUnity to handle socket");
                 EditorGUILayout.LabelField("You must import BEST_HTTP/2 or SocketIOUnity package");
                 EditorGUILayout.LabelField("\tand define UNITY_USING_BEST_HTTP if using BEST_HTTP/2 (or define UNITY_USING_SOCKET_IO_UNITY if using SocketIOUnity) on Project Settings/Player");
                 EditorGUILayout.LabelField("\t\t-> Scripting Define Symbols");
@@ -126,7 +126,7 @@
             if (this.serializedObject.hasModifiedProperties) this.serializedObject.ApplyModifiedProperties();
         }
 
-        [MenuItem("XmobiTea GN/Open Settings")]
+        [MenuItem("XmobiTea GearN/Open Settings")]
         private static void OpenGNServerSettings()
         {
             var gnServerSettings = GetSettings();
