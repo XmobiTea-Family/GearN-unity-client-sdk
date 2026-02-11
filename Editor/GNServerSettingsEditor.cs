@@ -1,13 +1,11 @@
 ﻿namespace XmobiTea.GearN.Editor
 {
-    using System.Collections.Generic;
     using System.IO;
 
     using UnityEditor;
 
     using UnityEngine;
     using XmobiTea.GearN.Config;
-    using XmobiTea.GearN.Constant;
     using Debug = UnityEngine.Debug;
 
     [CustomEditor(typeof(GNServerSettings))]
@@ -32,8 +30,6 @@
         SerializedProperty serverSecretKey;
         SerializedProperty clientSecretKey;
 
-        private Dictionary<int, string> operationCodeFieldDict;
-
         Color m_Color = Color.white;
 
         private void OnEnable()
@@ -56,18 +52,6 @@
             this.adminSecretKey = this.serializedObject.FindProperty("adminSecretKey");
             this.serverSecretKey = this.serializedObject.FindProperty("serverSecretKey");
             this.clientSecretKey = this.serializedObject.FindProperty("clientSecretKey");
-
-            var fields = typeof(OperationCode).GetFields();
-
-            if (this.operationCodeFieldDict == null) this.operationCodeFieldDict = new Dictionary<int, string>();
-            else this.operationCodeFieldDict.Clear();
-
-            for (var i = 0; i < fields.Length; i++)
-            {
-                var field = fields[i];
-
-                this.operationCodeFieldDict[(int)field.GetValue(null)] = field.Name;
-            }
         }
 
         public override void OnInspectorGUI()
