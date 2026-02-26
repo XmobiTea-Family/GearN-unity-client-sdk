@@ -2,7 +2,7 @@
     "name": "XmobiTea.GearN.editor",
     "rootNamespace": "XmobiTea.GearN.Editor",
     "references": [
-        "XmobiTea.GN.runtime"
+        "XmobiTea.GearN.runtime"
     ],
     "includePlatforms": [
         "Editor"

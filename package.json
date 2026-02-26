@@ -1,10 +1,12 @@
 {
   "name": "com.xmobitea.changx.gearn-unity-client-sdk",
-  "version": "2.6.0",
-  "displayName": "XmobiTea GearN Unity Client Sdk",
-  "description": "XmobiTea Unity packages",
+  "version": "2.6.2",
+  "displayName": "XmobiTea GearN UnityClientSdk",
+  "description": "XmobiTea Unity Toolkit packages",
   "unity": "2020.3",
-  "dependencies": {},
+  "dependencies": {
+    "com.xmobitea.changx.app": "1.4.0"
+  },
   "keywords": [
     "chang x",
     "changx",
