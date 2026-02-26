@@ -1,7 +1,7 @@
 {
-  "name": "com.xmobitea.changx.gn-unity",
+  "name": "com.xmobitea.changx.gearn-unity-client-sdk",
   "version": "2.6.0",
-  "displayName": "XmobiTea GearN Unity",
+  "displayName": "XmobiTea GearN Unity Client Sdk",
   "description": "XmobiTea Unity packages",
   "unity": "2020.3",
   "dependencies": {},
@@ -11,9 +11,5 @@
     "xmobitea"
   ],
   "author": "Chang X <changx.develop@gmail.com> (https://xmobitea.com)",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "license": "Apache-2.0"
 }

@@ -1,6 +1,6 @@
 {
-    "name": "XmobiTea.GN.runtime",
-    "rootNamespace": "",
+    "name": "XmobiTea.GearN.runtime",
+    "rootNamespace": "XmobiTea.GearN",
     "references": [
         "BestHTTP",
         "XmobiTea.MsgPack.runtime",

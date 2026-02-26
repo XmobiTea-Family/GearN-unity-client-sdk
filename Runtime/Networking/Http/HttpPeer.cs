@@ -164,7 +164,7 @@
 
                     if (gnHashtable == null)
                     {
-                        var iDict = MessagePackConverterService.deserialize<Dictionary<string, object>>(httpAppResponse.data);
+                        var iDict = MessagePackConverterService.deserialize<System.Collections.IDictionary>(httpAppResponse.data);
                         gnHashtable = new GNHashtable.Builder()
                             .addAll(Socket.NetworkingSocketPeerBase.fromMsgDict(iDict))
                             .build();

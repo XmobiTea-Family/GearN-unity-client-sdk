@@ -1,6 +1,6 @@
 {
-    "name": "XmobiTea.GN.editor",
-    "rootNamespace": "",
+    "name": "XmobiTea.GearN.editor",
+    "rootNamespace": "XmobiTea.GearN.Editor",
     "references": [
         "XmobiTea.GN.runtime"
     ],
