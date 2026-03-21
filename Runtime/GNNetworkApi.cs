@@ -5,6 +5,9 @@
     using XmobiTea.GearN.Entity.Response;
     using XmobiTea.GearN.Networking;
 
+    /// <summary>
+    /// Represents the GN network component.
+    /// </summary>
     public static partial class GNNetwork
     {
         /// <summary>
@@ -68,11 +71,17 @@
             return taskCompletionSource.Task;
         }
 
+        /// <summary>
+        /// Performs a health check.
+        /// </summary>
         public static void healthCheck(Action1<HealthCheckResponse> onResponse = null)
         {
             GNNetwork.peer.healthCheck(onResponse);
         }
 
+        /// <summary>
+        /// Performs a health check asynchronously.
+        /// </summary>
         public static Task<HealthCheckResponse> healthCheckAsync()
         {
             // Create a TaskCompletionSource to manage the asynchronous operation.
@@ -102,6 +111,9 @@
             GNNetwork.peer.uploadFile(fileId, content, filename, mimetype, onResponse);
         }
 
+        /// <summary>
+        /// Uploads file asynchronously.
+        /// </summary>
         public static Task<UploadFileResponse> uploadFileAsync(string fileId, byte[] content, string filename, string mimetype)
         {
             // Create a TaskCompletionSource to manage the asynchronous operation.
@@ -118,6 +130,9 @@
             return taskCompletionSource.Task;
         }
 
+        /// <summary>
+        /// Gets download file URL.
+        /// </summary>
         public static string getDownloadFileUrl(string downloadToken)
         {
             return GNNetwork.gnServerSettings.getHttpUrl() + "/" + NetworkingPeer.DOWNLOAD_FILE + "/" + downloadToken;

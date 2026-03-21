@@ -7,15 +7,45 @@
     /// </summary>
     public abstract class GNData : IGNData
     {
+        /// <summary>
+        /// Stores the type of byte value.
+        /// </summary>
         private static readonly Type typeOfByte = typeof(byte);
+        /// <summary>
+        /// Stores the type of S byte value.
+        /// </summary>
         private static readonly Type typeOfSByte = typeof(sbyte);
+        /// <summary>
+        /// Stores the type of short value.
+        /// </summary>
         private static readonly Type typeOfShort = typeof(short);
+        /// <summary>
+        /// Stores the type of U short value.
+        /// </summary>
         private static readonly Type typeOfUShort = typeof(ushort);
+        /// <summary>
+        /// Stores the type of int value.
+        /// </summary>
         private static readonly Type typeOfInt = typeof(int);
+        /// <summary>
+        /// Stores the type of U int value.
+        /// </summary>
         private static readonly Type typeOfUInt = typeof(uint);
+        /// <summary>
+        /// Stores the type of float value.
+        /// </summary>
         private static readonly Type typeOfFloat = typeof(float);
+        /// <summary>
+        /// Stores the type of long value.
+        /// </summary>
         private static readonly Type typeOfLong = typeof(long);
+        /// <summary>
+        /// Stores the type of U long value.
+        /// </summary>
         private static readonly Type typeOfULong = typeof(ulong);
+        /// <summary>
+        /// Stores the type of double value.
+        /// </summary>
         private static readonly Type typeOfDouble = typeof(double);
 
         /// <summary>

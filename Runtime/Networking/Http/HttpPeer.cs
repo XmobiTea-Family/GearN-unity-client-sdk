@@ -71,8 +71,14 @@
     /// </summary>
     internal class HttpPeer : PeerBase
     {
+        /// <summary>
+        /// Stores the networking HTTP peer base value.
+        /// </summary>
         private NetworkingHttpPeerBase networkingHttpPeerBase;
 
+        /// <summary>
+        /// Specifies the constant value for JSON CHAR KNOWN.
+        /// </summary>
         private const char JSON_CHAR_KNOWN = '{';
 
         /// <summary>
@@ -130,6 +136,9 @@
             }, operationRequest.getTimeout(), authToken, secretKey, customTags, gameId);
         }
 
+        /// <summary>
+        /// Handles enqueue.
+        /// </summary>
         protected override void onEnqueue(OperationPending operationPending)
         {
             GNDebug.log("[GN Http ENQUEUE] " + operationPending.getOperationRequest().ToString());

@@ -9,10 +9,22 @@
     /// </summary>
     public partial class NetworkingPeer
     {
+        /// <summary>
+        /// Stores the socket peer value.
+        /// </summary>
         private IPeer socketPeer; // Socket peer instance.
+        /// <summary>
+        /// Stores the HTTP peer value.
+        /// </summary>
         private IPeer httpPeer;   // HTTP peer instance.
 
+        /// <summary>
+        /// Stores the authenticate status value.
+        /// </summary>
         internal AuthenticateStatus authenticateStatus; // Stores authentication status.
+        /// <summary>
+        /// Stores the game ID value.
+        /// </summary>
         internal string gameId;
 
         /// <summary>
@@ -48,7 +60,13 @@
             return (this.socketPeer as Socket.SocketPeer).getClientId();
         }
 
+        /// <summary>
+        /// Stores the last current server milliseconds value.
+        /// </summary>
         private long lastCurrentServerMilliseconds; // The last known server time in milliseconds.
+        /// <summary>
+        /// Stores the last get current milliseconds value.
+        /// </summary>
         private float lastGetCurrentMilliseconds;  // The local time in seconds when the server time was last updated.
 
         /// <summary>
@@ -194,6 +212,9 @@
             (this.socketPeer as Socket.SocketPeer).removeOnDisconnectHandler(_onDisconnectHandler);
         }
 
+        /// <summary>
+        /// Subscribes server event handler.
+        /// </summary>
         internal void subscriberServerEventHandler(IServerEventHandler serverEventHandler)
         {
             (this.socketPeer as Socket.SocketPeer).subscriberAServerEventHandler(serverEventHandler);

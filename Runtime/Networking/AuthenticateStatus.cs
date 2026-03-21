@@ -5,7 +5,13 @@
     /// </summary>
     public class AuthenticateStatus
     {
+        /// <summary>
+        /// Stores the auth token value.
+        /// </summary>
         private string authToken; // Stores the authentication token.
+        /// <summary>
+        /// Stores the user ID value.
+        /// </summary>
         private string userId;    // Stores the user ID.
 
         /// <summary>

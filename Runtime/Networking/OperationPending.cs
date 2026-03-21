@@ -9,17 +9,50 @@ namespace XmobiTea.GearN.Networking
     /// </summary>
     public struct OperationPending
     {
+        /// <summary>
+        /// Stores the operation request value.
+        /// </summary>
         private OperationRequest operationRequest; // The operation request to be processed.
+        /// <summary>
+        /// Gets the request type used by this request wrapper.
+        /// </summary>
         private RequestType requestType;           // The type of the request.
+        /// <summary>
+        /// Gets the request role used by this request wrapper.
+        /// </summary>
         private RequestRole role;           // The role associated with the request.
+        /// <summary>
+        /// Stores the auth token value.
+        /// </summary>
         private string authToken;                  // The authentication token for the request.
+        /// <summary>
+        /// Stores the secret key value.
+        /// </summary>
         private string secretKey;                  // The secret key for the request, if applicable.
+        /// <summary>
+        /// Stores the game ID value.
+        /// </summary>
         private string gameId;                     // The game id for the request
+        /// <summary>
+        /// Stores the custom tags value.
+        /// </summary>
         private GNHashtable customTags;            // Custom tags to be sent with the request.
+        /// <summary>
+        /// Stores the on operation response value.
+        /// </summary>
         private Action1<OperationResponse> onOperationResponse; // The callback for handling the operation response.
+        /// <summary>
+        /// Stores the timeout value.
+        /// </summary>
         private long timeout;                     // The timeout for the operation.
 
+        /// <summary>
+        /// Stores the first send value.
+        /// </summary>
         private long firstSend;                   // The timestamp of the first send attempt.
+        /// <summary>
+        /// Stores the seconds send value.
+        /// </summary>
         private long secondsSend;                 // The timestamp of the response receipt.
 
         /// <summary>

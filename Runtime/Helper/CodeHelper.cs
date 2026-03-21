@@ -10,9 +10,15 @@
     /// </summary>
     internal class CodeHelperBase
     {
+        /// <summary>
+        /// Stores the unknown code value.
+        /// </summary>
         private static string unknownCode = "Unknown";
 
         // Dictionary to map codes to their names.
+        /// <summary>
+        /// Stores the code dict value.
+        /// </summary>
         private Dictionary<int, string> codeDict;
 
         /// <summary>
@@ -40,8 +46,17 @@
     /// </summary>
     public static class CodeHelper
     {
+        /// <summary>
+        /// Stores the return code helper value.
+        /// </summary>
         private static CodeHelperBase returnCodeHelper;
+        /// <summary>
+        /// Stores the request type helper value.
+        /// </summary>
         private static CodeHelperBase requestTypeHelper;
+        /// <summary>
+        /// Stores the request role helper value.
+        /// </summary>
         private static CodeHelperBase requestRoleHelper;
 
         /// <summary>
@@ -54,11 +69,17 @@
             return CodeHelper.returnCodeHelper.getCodeName(returnCode);
         }
 
+        /// <summary>
+        /// Gets request type name.
+        /// </summary>
         public static string getRequestTypeName(int requestType)
         {
             return CodeHelper.requestTypeHelper.getCodeName(requestType);
         }
 
+        /// <summary>
+        /// Gets request role name.
+        /// </summary>
         public static string getRequestRoleName(int requestRole)
         {
             return CodeHelper.requestRoleHelper.getCodeName(requestRole);
@@ -90,11 +111,17 @@
             CodeHelper.returnCodeHelper = new CodeHelperBase(codeDict);
         }
 
+        /// <summary>
+        /// Converts the input values to lower case.
+        /// </summary>
         private static string toLowerCase(string value)
         {
             return value[0].ToString().ToLower() + value.Substring(1);
         }
 
+        /// <summary>
+        /// Sets request type dic.
+        /// </summary>
         private static void setRequestTypeDic()
         {
             var codeDict = new Dictionary<int, string>();
@@ -114,6 +141,9 @@
             CodeHelper.requestTypeHelper = new CodeHelperBase(codeDict);
         }
 
+        /// <summary>
+        /// Sets request role dic.
+        /// </summary>
         private static void setRequestRoleDic()
         {
             var codeDict = new Dictionary<int, string>();

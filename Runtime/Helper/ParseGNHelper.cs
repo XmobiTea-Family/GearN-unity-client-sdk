@@ -10,27 +10,45 @@
     using IEnumerable = System.Collections.IEnumerable;
     using IList = System.Collections.IList;
 
+    /// <summary>
+    /// Parses lightweight JSON text into dictionary and list structures used by the SDK.
+    /// </summary>
     public class Parser : IDisposable
     {
+        /// <summary>
+        /// Stores the JSON value.
+        /// </summary>
         private StringReader json;
 
+        /// <summary>
+        /// Initializes a new instance of the Parser class.
+        /// </summary>
         private Parser(string jsonString)
         {
             this.json = new StringReader(jsonString);
         }
 
+        /// <summary>
+        /// Parses.
+        /// </summary>
         public static object Parse(string jsonString)
         {
             using (var parser = new Parser(jsonString))
                 return parser.ParseValue();
         }
 
+        /// <summary>
+        /// Disposes.
+        /// </summary>
         public void Dispose()
         {
             this.json.Dispose();
             this.json = (StringReader)null;
         }
 
+        /// <summary>
+        /// Parses object.
+        /// </summary>
         private Dictionary<string, object> ParseObject()
         {
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
@@ -79,6 +97,9 @@
             return (Dictionary<string, object>)null;
         }
 
+        /// <summary>
+        /// Parses array.
+        /// </summary>
         private List<object> ParseArray()
         {
             List<object> objectList = new List<object>();
@@ -105,11 +126,17 @@
             return objectList;
         }
 
+        /// <summary>
+        /// Parses value.
+        /// </summary>
         private object ParseValue()
         {
             return this.ParseByToken(this.NextToken);
         }
 
+        /// <summary>
+        /// Parses by token.
+        /// </summary>
         private object ParseByToken(Parser.TOKEN token)
         {
             switch (token)
@@ -133,6 +160,9 @@
             }
         }
 
+        /// <summary>
+        /// Parses string.
+        /// </summary>
         private string ParseString()
         {
             StringBuilder stringBuilder1 = new StringBuilder();
@@ -194,6 +224,9 @@
             return stringBuilder1.ToString();
         }
 
+        /// <summary>
+        /// Parses number.
+        /// </summary>
         private object ParseNumber()
         {
             double result;
@@ -201,6 +234,9 @@
             return (object)result;
         }
 
+        /// <summary>
+        /// Executes the eat whitespace operation.
+        /// </summary>
         private void EatWhitespace()
         {
             while (" \t\n\r".IndexOf(this.PeekChar) != -1)
@@ -298,6 +334,9 @@
             }
         }
 
+        /// <summary>
+        /// Defines the available TOKEN values.
+        /// </summary>
         private enum TOKEN
         {
             NONE,
@@ -315,15 +354,27 @@
         }
     }
 
+    /// <summary>
+    /// Represents the serializer component.
+    /// </summary>
     public class Serializer
     {
+        /// <summary>
+        /// Stores the builder value.
+        /// </summary>
         private StringBuilder builder;
 
+        /// <summary>
+        /// Initializes a new instance of the Serializer class.
+        /// </summary>
         private Serializer()
         {
             this.builder = new StringBuilder();
         }
 
+        /// <summary>
+        /// Executes the serialize operation.
+        /// </summary>
         public static string Serialize(object obj)
         {
             var serializer = new Serializer();
@@ -331,6 +382,9 @@
             return serializer.builder.ToString();
         }
 
+        /// <summary>
+        /// Executes the serialize value operation.
+        /// </summary>
         private void SerializeValue(object value)
         {
             //if (value is IGSData)
@@ -351,6 +405,9 @@
                 this.SerializeOther(value);
         }
 
+        /// <summary>
+        /// Executes the serialize object operation.
+        /// </summary>
         private void SerializeObject(IDictionary obj)
         {
             bool flag = true;
@@ -367,6 +424,9 @@
             this.builder.Append('}');
         }
 
+        /// <summary>
+        /// Executes the serialize array operation.
+        /// </summary>
         private void SerializeArray(IList anArray)
         {
             this.builder.Append('[');
@@ -381,6 +441,9 @@
             this.builder.Append(']');
         }
 
+        /// <summary>
+        /// Executes the serialize string operation.
+        /// </summary>
         private void SerializeString(string str)
         {
             this.builder.Append('"');
@@ -423,6 +486,9 @@
             this.builder.Append('"');
         }
 
+        /// <summary>
+        /// Executes the serialize other operation.
+        /// </summary>
         private void SerializeOther(object value)
         {
             switch (value)

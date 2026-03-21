@@ -9,11 +9,29 @@
     /// </summary>
     public abstract class CustomOperationResponse
     {
+        /// <summary>
+        /// Gets the operation code used by this request wrapper.
+        /// </summary>
         public string operationCode { get; private set; }
+        /// <summary>
+        /// Stores the parameters value.
+        /// </summary>
         public GNHashtable parameters { get; private set; }
+        /// <summary>
+        /// Stores the return code value.
+        /// </summary>
         public int returnCode { get; private set; }
+        /// <summary>
+        /// Stores the debug message value.
+        /// </summary>
         public string debugMessage { get; private set; }
+        /// <summary>
+        /// Stores the error code value.
+        /// </summary>
         public int errorCode { get; private set; }
+        /// <summary>
+        /// Stores the invalid members value.
+        /// </summary>
         public InvalidMember[] invalidMembers { get; private set; }
 
         /// <summary>
@@ -51,6 +69,9 @@
             return "ReturnCode: " + this.returnCode + " " + (this.parameters != null ? this.parameters.ToString() : this.debugMessage);
         }
 
+        /// <summary>
+        /// Converts string.
+        /// </summary>
         public override string ToString()
         {
             return this.toString();
@@ -63,6 +84,9 @@
     /// <typeparam name="TResponseData">The type of the response data.</typeparam>
     public class CustomOperationResponse<TResponseData> : CustomOperationResponse
     {
+        /// <summary>
+        /// Stores the response data value.
+        /// </summary>
         public TResponseData responseData { get; private set; }
 
         /// <summary>

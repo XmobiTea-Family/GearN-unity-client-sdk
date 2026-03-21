@@ -9,8 +9,14 @@
     /// </summary>
     public class GNHashtable : GNData
     {
+        /// <summary>
+        /// Represents the builder component.
+        /// </summary>
         public class Builder
         {
+            /// <summary>
+            /// Stores the dict value.
+            /// </summary>
             private IDictionary<string, object> dict;
 
             /// <summary>
@@ -70,6 +76,9 @@
             }
         }
 
+        /// <summary>
+        /// Stores the dict value.
+        /// </summary>
         private IDictionary<string, object> dict;
 
         /// <summary>

@@ -10,12 +10,30 @@
     /// </summary>
     public class OperationResponse
     {
+        /// <summary>
+        /// Gets the operation code used by this request wrapper.
+        /// </summary>
         private string operationCode;
+        /// <summary>
+        /// Stores the response ID value.
+        /// </summary>
         private int responseId;
+        /// <summary>
+        /// Stores the return code value.
+        /// </summary>
         private int returnCode;
+        /// <summary>
+        /// Stores the debug message value.
+        /// </summary>
         private string debugMessage;
+        /// <summary>
+        /// Stores the parameters value.
+        /// </summary>
         private GNHashtable parameters;
 
+        /// <summary>
+        /// Stores the invalid members value.
+        /// </summary>
         private InvalidMember[] invalidMembers;
 
         /// <summary>

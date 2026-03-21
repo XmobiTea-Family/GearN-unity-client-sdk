@@ -108,11 +108,29 @@ namespace XmobiTea.GearN.Networking.Socket
         /// </summary>
         protected string url;
 
+        /// <summary>
+        /// Stores the on event handler value.
+        /// </summary>
         private Action1<GNHashtable> _onEventHandler;
+        /// <summary>
+        /// Stores the on response handler value.
+        /// </summary>
         private Action1<GNHashtable> _onResponseHandler;
+        /// <summary>
+        /// Stores the on socket connect value.
+        /// </summary>
         private Action0 _onSocketConnect;
+        /// <summary>
+        /// Stores the on socket disconnect value.
+        /// </summary>
         private Action0 _onSocketDisconnect;
+        /// <summary>
+        /// Stores the on connect handler value.
+        /// </summary>
         private Action0 _onConnectHandler;
+        /// <summary>
+        /// Stores the on disconnect handler value.
+        /// </summary>
         private Action0 _onDisconnectHandler;
 
         #endregion
@@ -335,11 +353,17 @@ namespace XmobiTea.GearN.Networking.Socket
         //    return answer;
         //}
 
+        /// <summary>
+        /// Executes the from msg dict operation.
+        /// </summary>
         internal static System.Collections.IDictionary fromMsgDict(object objects)
         {
             return (IDictionary)fromMsgObject(objects);
         }
 
+        /// <summary>
+        /// Executes the from msg object operation.
+        /// </summary>
         internal static object fromMsgObject(object value)
         {
             if (value == null)
@@ -396,6 +420,9 @@ namespace XmobiTea.GearN.Networking.Socket
             return (System.Collections.IList)objects;
         }
 
+        /// <summary>
+        /// Executes the from JSON dict operation.
+        /// </summary>
         internal static System.Collections.IDictionary fromJsonDict(object objects)
         {
             return (System.Collections.IDictionary)objects;

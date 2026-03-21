@@ -3,8 +3,14 @@
     using XmobiTea.Binary;
     using XmobiTea.Binary.MessagePack;
 
+    /// <summary>
+    /// Represents the message pack converter service component.
+    /// </summary>
     public static class MessagePackConverterService
     {
+        /// <summary>
+        /// Stores the binary converter value.
+        /// </summary>
         private static IBinaryConverter binaryConverter { get; }
 
         static MessagePackConverterService()

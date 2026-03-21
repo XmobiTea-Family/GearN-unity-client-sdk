@@ -176,6 +176,9 @@
             serviceUpdate.peer = peer;
         }
 
+        /// <summary>
+        /// Sets new authenticate status.
+        /// </summary>
         public static void setNewAuthenticateStatus(AuthenticateStatus authenticateStatus)
         {
             StorageService.setString(GNNetwork.AUTH_TOKEN_KEY, authenticateStatus.getAuthToken());
@@ -185,6 +188,9 @@
             GNNetwork.peer.authenticateStatus.setUserId(authenticateStatus.getUserId());
         }
 
+        /// <summary>
+        /// Sets game ID.
+        /// </summary>
         public static void setGameId(string gameId)
         {
             StorageService.setString(GNNetwork.GAME_ID_KEY, gameId);
@@ -302,8 +308,6 @@
 
             return taskCompletionSource.Task;
         }
-
-        // Similar comments for other methods (HTTP variants and generics)
 
         /// <summary>
         /// Sends a request via HTTP with strongly-typed request and response.
@@ -499,6 +503,9 @@
             GNNetwork.peer.removeOnDisconnectHandler(onDisconnectHandler);
         }
 
+        /// <summary>
+        /// Subscribes a server event handler instance for socket event fan-out.
+        /// </summary>
         public static void subscriberServerEventHandler(IServerEventHandler serverEventHandler)
         {
             GNNetwork.peer.subscriberServerEventHandler(serverEventHandler);

@@ -13,8 +13,17 @@
     /// </summary>
     internal class SocketPeer : PeerBase
     {
+        /// <summary>
+        /// Stores the networking socket peer base value.
+        /// </summary>
         private NetworkingSocketPeerBase networkingSocketPeerBase;
+        /// <summary>
+        /// Stores the server event handlers dict value.
+        /// </summary>
         private Dictionary<string, List<IServerEventHandler>> serverEventHandlersDict;
+        /// <summary>
+        /// Stores the on event handler value.
+        /// </summary>
         private Action1<OperationEvent> _onEventHandler;
 
         /// <summary>
@@ -75,6 +84,9 @@
             }
         }
 
+        /// <summary>
+        /// Subscribes a server event handler.
+        /// </summary>
         internal void subscriberAServerEventHandler(IServerEventHandler serverEventHandler)
         {
             if (!this.serverEventHandlersDict.TryGetValue(serverEventHandler.getEventCode(), out var serverEventHandlers))
@@ -218,6 +230,9 @@
             this.networkingSocketPeerBase.send(operationPending.getRequestType(), operationPending.getRole(), operationPending.getOperationRequest(), authToken, secretKey, customTags, gameId);
         }
 
+        /// <summary>
+        /// Handles enqueue.
+        /// </summary>
         protected override void onEnqueue(OperationPending operationPending)
         {
             GNDebug.log("[GN Socket ENQUEUE] " + operationPending.getOperationRequest().ToString());

@@ -56,71 +56,137 @@
         HttpClientRequest = 2,
     }
 
+    /// <summary>
+    /// Defines the available message serialization formats.
+    /// </summary>
     public enum MessageType
     {
+        /// <summary>
+        /// Represents JSON.
+        /// </summary>
         Json = 1,
+        /// <summary>
+        /// Represents msgpack.
+        /// </summary>
         MsgPack = 2,
     }
 
     /// <summary>
-    /// GN Server settings configuration.
+    /// Defines the runtime settings used to configure the GearN Unity client SDK.
     /// </summary>
     //[CreateAssetMenu(fileName = GNServerSettings.ResourcesPath, menuName = "GN/GNServerSettings", order = 1)]
     public class GNServerSettings : ScriptableObject
     {
+        /// <summary>
+        /// Specifies the Unity Resources path used to load the GearN server settings asset.
+        /// </summary>
         public const string ResourcesPath = "GNServerSettings";
 
+        /// <summary>
+        /// Stores the server address value.
+        /// </summary>
         [SerializeField]
         private string serverAddress = "127.0.0.1";
 
+        /// <summary>
+        /// Stores the server port value.
+        /// </summary>
         [SerializeField]
         private int serverPort = 2202;
 
+        /// <summary>
+        /// Stores the server socket port value.
+        /// </summary>
         [SerializeField]
         private int serverSocketPort = 2901;
 
+        /// <summary>
+        /// Indicates whether use ssl.
+        /// </summary>
         [SerializeField]
         private bool useSsl = false;
 
+        /// <summary>
+        /// Indicates whether use socket.
+        /// </summary>
         [SerializeField]
         private bool useSocket = true;
 
+        /// <summary>
+        /// Indicates whether use HTTP.
+        /// </summary>
         [SerializeField]
         private bool useHttp = true;
 
+        /// <summary>
+        /// Stores the default timeout in seconds value.
+        /// </summary>
         [SerializeField]
         private int defaultTimeoutInSeconds = 20;
 
+        /// <summary>
+        /// Stores the message type value.
+        /// </summary>
         [SerializeField]
         private MessageType messageType = MessageType.MsgPack;
 
+        /// <summary>
+        /// Stores the send rate value.
+        /// </summary>
         [SerializeField]
         private int sendRate = 20;
 
+        /// <summary>
+        /// Stores the reconnect delay value.
+        /// </summary>
         [SerializeField]
         private int reconnectDelay = 5000;
 
+        /// <summary>
+        /// Stores the ping interval value.
+        /// </summary>
         [SerializeField]
         private float pingInterval = 20000;
 
+        /// <summary>
+        /// Stores the ping timeout value.
+        /// </summary>
         [SerializeField]
         private float pingTimeout = 20000;
 
+        /// <summary>
+        /// Stores the admin secret key value.
+        /// </summary>
         [SerializeField]
         private string adminSecretKey;
 
+        /// <summary>
+        /// Stores the server secret key value.
+        /// </summary>
         [SerializeField]
         private string serverSecretKey;
 
+        /// <summary>
+        /// Stores the client secret key value.
+        /// </summary>
         [SerializeField]
         private string clientSecretKey;
 
+        /// <summary>
+        /// Stores the peer socket version value.
+        /// </summary>
         [SerializeField]
         private PeerSocketVersion peerSocketVersion = PeerSocketVersion.None;
 
+        /// <summary>
+        /// Stores the HTTP request type value.
+        /// </summary>
         [SerializeField]
         private HttpRequestType httpRequestType = HttpRequestType.UnityWebRequest;
 
+        /// <summary>
+        /// Stores the log type value.
+        /// </summary>
         [SerializeField]
         private GearN.Logger.LogType logType = GearN.Logger.LogType.All;
 
@@ -130,6 +196,9 @@
         /// <returns>The server address.</returns>
         public string getServerAddress() => this.serverAddress;
 
+        /// <summary>
+        /// Sets server address.
+        /// </summary>
         public void setServerAddress(string serverAddress) => this.serverAddress = serverAddress;
 
         /// <summary>
@@ -138,6 +207,9 @@
         /// <returns>The server port.</returns>
         public int getServerPort() => this.serverPort;
 
+        /// <summary>
+        /// Sets server port.
+        /// </summary>
         public void setServerPort(int serverPort) => this.serverPort = serverPort;
 
         /// <summary>
@@ -146,6 +218,9 @@
         /// <returns>The server socket port.</returns>
         public int getServerSocketPort() => this.serverSocketPort;
 
+        /// <summary>
+        /// Sets server socket port.
+        /// </summary>
         public void setServerSocketPort(int serverSocketPort) => this.serverSocketPort = serverSocketPort;
 
         /// <summary>
@@ -154,6 +229,9 @@
         /// <returns>True if SSL is used; otherwise, false.</returns>
         public bool isUseSsl() => this.useSsl;
 
+        /// <summary>
+        /// Sets use ssl.
+        /// </summary>
         public void setUseSsl(bool useSsl) => this.useSsl = useSsl;
 
         /// <summary>
@@ -162,6 +240,9 @@
         /// <returns>True if socket is used; otherwise, false.</returns>
         public bool isUseSocket() => this.useSocket;
 
+        /// <summary>
+        /// Sets use socket.
+        /// </summary>
         public void setUseSocket(bool useSocket) => this.useSocket = useSocket;
 
         /// <summary>
@@ -170,14 +251,29 @@
         /// <returns>True if HTTP is used; otherwise, false.</returns>
         public bool isUseHttp() => this.useHttp;
 
+        /// <summary>
+        /// Sets use HTTP.
+        /// </summary>
         public void setUseHttp(bool useHttp) => this.useHttp = useHttp;
 
+        /// <summary>
+        /// Gets default timeout in seconds.
+        /// </summary>
         public int getDefaultTimeoutInSeconds() => this.defaultTimeoutInSeconds;
 
+        /// <summary>
+        /// Sets default timeout in seconds.
+        /// </summary>
         public void setDefaultTimeoutInSeconds(int defaultTimeoutInSeconds) => this.defaultTimeoutInSeconds = defaultTimeoutInSeconds;
 
+        /// <summary>
+        /// Gets message type.
+        /// </summary>
         public MessageType getMessageType() => this.messageType;
 
+        /// <summary>
+        /// Sets message type.
+        /// </summary>
         public void setMessageType(MessageType messageType) => this.messageType = messageType;
 
         /// <summary>
@@ -186,6 +282,9 @@
         /// <returns>The send rate.</returns>
         public int getSendRate() => this.sendRate;
 
+        /// <summary>
+        /// Sets send rate.
+        /// </summary>
         public void setSendRate(int sendRate) => this.sendRate = sendRate;
 
         /// <summary>
@@ -194,6 +293,9 @@
         /// <returns>The reconnect delay.</returns>
         public int getReconnectDelay() => this.reconnectDelay;
 
+        /// <summary>
+        /// Sets reconnect delay.
+        /// </summary>
         public void setReconnectDelay(int reconnectDelay) => this.reconnectDelay = reconnectDelay;
 
         /// <summary>
@@ -202,6 +304,9 @@
         /// <returns>The ping interval.</returns>
         public float getPingInterval() => this.pingInterval;
 
+        /// <summary>
+        /// Sets ping interval.
+        /// </summary>
         public void setPingInterval(int pingInterval) => this.pingInterval = pingInterval; 
 
         /// <summary>
@@ -210,6 +315,9 @@
         /// <returns>The ping timeout.</returns>
         public float getPingTimeout() => this.pingTimeout;
 
+        /// <summary>
+        /// Sets ping timeout.
+        /// </summary>
         public void setPingTimeout(float pingTimeout) => this.pingTimeout = pingTimeout;
 
         /// <summary>
@@ -218,6 +326,9 @@
         /// <returns>The admin secret key.</returns>
         public string getAdminSecretKey() => this.adminSecretKey;
 
+        /// <summary>
+        /// Sets admin secret key.
+        /// </summary>
         public void setAdminSecretKey(string adminSecretKey) => this.adminSecretKey = adminSecretKey;
 
         /// <summary>
@@ -226,6 +337,9 @@
         /// <returns>The server secret key.</returns>
         public string getServerSecretKey() => this.serverSecretKey;
 
+        /// <summary>
+        /// Sets server secret key.
+        /// </summary>
         public void setServerSecretKey(string serverSecretKey) => this.serverSecretKey = serverSecretKey;
 
         /// <summary>
@@ -234,6 +348,9 @@
         /// <returns>The client secret key.</returns>
         public string getClientSecretKey() => this.clientSecretKey;
 
+        /// <summary>
+        /// Sets client secret key.
+        /// </summary>
         public void setClientSecretKey(string clientSecretKey) => this.clientSecretKey = clientSecretKey;
 
         /// <summary>
@@ -254,6 +371,9 @@
         /// <returns>The log type.</returns>
         public GearN.Logger.LogType getLogType() => this.logType;
 
+        /// <summary>
+        /// Sets log type.
+        /// </summary>
         public void setLogType(GearN.Logger.LogType logType) => this.logType = logType;
 
         /// <summary>

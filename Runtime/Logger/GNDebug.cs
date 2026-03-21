@@ -5,6 +5,9 @@ namespace XmobiTea.GearN.Logger
     /// </summary>
     internal class GNDebug
     {
+        /// <summary>
+        /// Stores the log type value.
+        /// </summary>
         private static LogType _logType; // Current log level.
 
         /// <summary>

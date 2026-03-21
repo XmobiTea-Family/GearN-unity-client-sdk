@@ -8,7 +8,13 @@
     /// </summary>
     public class OperationEvent
     {
+        /// <summary>
+        /// Stores the event code value.
+        /// </summary>
         private string eventCode;
+        /// <summary>
+        /// Stores the parameters value.
+        /// </summary>
         private GNHashtable parameters;
 
         /// <summary>

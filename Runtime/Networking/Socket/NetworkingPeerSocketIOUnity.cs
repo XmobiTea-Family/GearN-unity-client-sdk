@@ -17,7 +17,13 @@ namespace XmobiTea.GearN.Networking.Socket
     /// </summary>
     internal class NetworkingPeerSocketIOUnity : NetworkingSocketPeerBase
     {
+        /// <summary>
+        /// Stores the socket manager value.
+        /// </summary>
         private SocketIOClient.SocketIO socketManager;
+        /// <summary>
+        /// Indicates whether is connected.
+        /// </summary>
         private bool isConnected;
 
         /// <summary>
@@ -136,6 +142,9 @@ namespace XmobiTea.GearN.Networking.Socket
             }
         }
 
+        /// <summary>
+        /// Executes the JSON element to dictionary operation.
+        /// </summary>
         private IDictionary<string, object> jsonElementToDictionary(JsonElement element)
         {
             var dict = new Dictionary<string, object>();
@@ -148,6 +157,9 @@ namespace XmobiTea.GearN.Networking.Socket
             return dict;
         }
 
+        /// <summary>
+        /// Gets value.
+        /// </summary>
         private object getValue(JsonElement element)
         {
             return element.ValueKind switch

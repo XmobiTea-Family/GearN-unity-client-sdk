@@ -18,12 +18,18 @@ namespace XmobiTea.GearN.Networking.Http
         /// </summary>
         class AcceptAllCertificatesSignedWithASpecificKeyPublicKey : CertificateHandler
         {
+            /// <summary>
+            /// Validates certificate.
+            /// </summary>
             protected override bool ValidateCertificate(byte[] certificateData)
             {
                 return true;
             }
         }
 
+        /// <summary>
+        /// Stores the unity mono behaviour value.
+        /// </summary>
         private UnityEngine.MonoBehaviour unityMonoBehaviour;
 
         /// <summary>
@@ -68,6 +74,9 @@ namespace XmobiTea.GearN.Networking.Http
             this.unityMonoBehaviour.StartCoroutine(this.iePostRequestUploadViaUnityWebRequest(subUri, content, filename, mimetype, onHttpAppResponse, timeout));
         }
 
+        /// <summary>
+        /// Executes the ie get request via unity web request operation.
+        /// </summary>
         private IEnumerator ieGetRequestViaUnityWebRequest(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
         {
             using (var unityWebRequest = UnityWebRequest.Get(new System.Uri(this.httpUrl + "/" + subUri)))
@@ -107,6 +116,9 @@ namespace XmobiTea.GearN.Networking.Http
             }
         }
 
+        /// <summary>
+        /// Executes the ie post request via unity web request operation.
+        /// </summary>
         private IEnumerator iePostRequestViaUnityWebRequest(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             using (var unityWebRequest = new UnityWebRequest(new System.Uri(this.httpUrl + "/" + subUri)))
@@ -166,6 +178,9 @@ namespace XmobiTea.GearN.Networking.Http
             }
         }
 
+        /// <summary>
+        /// Executes the ie post request upload via unity web request operation.
+        /// </summary>
         private IEnumerator iePostRequestUploadViaUnityWebRequest(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout)
         {
             var form = new UnityEngine.WWWForm();

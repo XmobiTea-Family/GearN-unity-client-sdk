@@ -8,6 +8,9 @@
     using XmobiTea.GearN.Config;
     using Debug = UnityEngine.Debug;
 
+    /// <summary>
+    /// Renders the custom inspector and menu entries for the GearN server settings asset.
+    /// </summary>
     [CustomEditor(typeof(GNServerSettings))]
     public class GNServerSettingsEditor : Editor
     {
@@ -32,6 +35,9 @@
 
         Color m_Color = Color.white;
 
+        /// <summary>
+        /// Caches the serialized settings properties used by the custom inspector.
+        /// </summary>
         private void OnEnable()
         {
             this.serverAddress = this.serializedObject.FindProperty("serverAddress");
@@ -54,6 +60,9 @@
             this.clientSecretKey = this.serializedObject.FindProperty("clientSecretKey");
         }
 
+        /// <summary>
+        /// Draws the custom inspector for the GearN server settings asset.
+        /// </summary>
         public override void OnInspectorGUI()
         {
             this.serializedObject.Update();
@@ -110,6 +119,9 @@
             if (this.serializedObject.hasModifiedProperties) this.serializedObject.ApplyModifiedProperties();
         }
 
+        /// <summary>
+        /// Opens the GearN server settings asset in the Unity editor.
+        /// </summary>
         [MenuItem("XmobiTea GearN/Open Settings")]
         private static void OpenGNServerSettings()
         {
@@ -118,6 +130,9 @@
             Selection.SetActiveObjectWithContext(gnServerSettings, gnServerSettings);
         }
 
+        /// <summary>
+        /// Loads or creates the GearN server settings asset used by the SDK.
+        /// </summary>
         public static GNServerSettings GetSettings()
         {
             var gnServerSettings = Resources.Load<GNServerSettings>(GNServerSettings.ResourcesPath);
@@ -137,18 +152,27 @@
             return gnServerSettings;
         }
 
+        /// <summary>
+        /// Opens the GearN website.
+        /// </summary>
         [MenuItem("XmobiTea GearN/About")]
         private static void AboutGN()
         {
             Application.OpenURL("https://gearn.net");
         }
 
+        /// <summary>
+        /// Opens the GearN documentation website.
+        /// </summary>
         [MenuItem("XmobiTea GearN/Documentation")]
         private static void DocsGearN()
         {
             Application.OpenURL("https://docs.gearn.net");
         }
 
+        /// <summary>
+        /// Opens the GearN server repository page.
+        /// </summary>
         [MenuItem("XmobiTea GearN/Go to github")]
         private static void GotoGNserver()
         {

@@ -11,12 +11,33 @@
     /// </summary>
     public partial class NetworkingPeer
     {
+        /// <summary>
+        /// Specifies the constant value for SYNC timestamp.
+        /// </summary>
         internal const string SYNC_TS = "ts"; // API endpoint for synchronizing timestamps.
+        /// <summary>
+        /// Specifies the constant value for GET auth INFO.
+        /// </summary>
         internal const string GET_AUTH_INFO = "getAuthInfo"; // API endpoint for validate an GN authToken.
+        /// <summary>
+        /// Specifies the constant value for HEALTH CHECK.
+        /// </summary>
         internal const string HEALTH_CHECK = "healthcheck"; // API endpoint for healthcheck.
+        /// <summary>
+        /// Specifies the constant value for UPLOAD FILE.
+        /// </summary>
         internal const string UPLOAD_FILE = "upload"; // API endpoint for file uploads.
+        /// <summary>
+        /// Specifies the constant value for DOWNLOAD FILE.
+        /// </summary>
         internal const string DOWNLOAD_FILE = "download"; // API endpoint for file downloads.
+        /// <summary>
+        /// Specifies the constant value for API JSON.
+        /// </summary>
         internal const string API_JSON = "api/" + Commands.RequestCmd_Json; // Base path for JSON API requests.
+        /// <summary>
+        /// Specifies the constant value for API msg PACK.
+        /// </summary>
         internal const string API_MSG_PACK = "api/" + Commands.RequestCmd_MsgPack; // Base path for MsgPack API requests.
 
         /// <summary>
@@ -111,6 +132,9 @@
             });
         }
 
+        /// <summary>
+        /// Performs a health check.
+        /// </summary>
         internal void healthCheck(Action1<HealthCheckResponse> onResponse)
         {
             // Sends a request to the HEALTH_CHECK endpoint using the HTTP peer.

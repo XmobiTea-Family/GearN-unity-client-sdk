@@ -13,9 +13,21 @@
         /// </summary>
         public const int defaultTimeOut = 20;
 
+        /// <summary>
+        /// Gets the operation code used by this request wrapper.
+        /// </summary>
         private string operationCode;
+        /// <summary>
+        /// Stores the request ID value.
+        /// </summary>
         private int requestId;
+        /// <summary>
+        /// Stores the parameters value.
+        /// </summary>
         private GNHashtable parameters;
+        /// <summary>
+        /// Stores the timeout value.
+        /// </summary>
         private int timeout;
 
         /// <summary>

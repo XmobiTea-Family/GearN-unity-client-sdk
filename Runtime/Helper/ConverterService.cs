@@ -13,9 +13,15 @@
     internal class DataMemberFieldInfoTypeMapper
     {
         // A cache to store metadata mappings of fields for each class type
+        /// <summary>
+        /// Stores the declared fields map value.
+        /// </summary>
         private Dictionary<Type, GNEnhancedObjectFieldMetadata[]> declaredFieldsMap;
 
         // Retrieves metadata for all fields in a class, including inherited ones
+        /// <summary>
+        /// Gets GN enhanced object field metadata.
+        /// </summary>
         public GNEnhancedObjectFieldMetadata[] getGNEnhancedObjectFieldMetadata(System.Type cls)
         {
             GNEnhancedObjectFieldMetadata[] declaredFields;
@@ -125,6 +131,9 @@
         }
 
         // Constructor initializes the declaredFieldsMap dictionary
+        /// <summary>
+        /// Initializes a new instance of the DataMemberFieldInfoTypeMapper class.
+        /// </summary>
         public DataMemberFieldInfoTypeMapper()
         {
             this.declaredFieldsMap = new Dictionary<Type, GNEnhancedObjectFieldMetadata[]>();
@@ -137,22 +146,67 @@
     internal class DeserializeConverter
     {
         // Mapper to retrieve metadata for fields with DataMember attributes
+        /// <summary>
+        /// Stores the data member field info mapper value.
+        /// </summary>
         private DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper { get; }
 
         // Cached type definitions for common types
+        /// <summary>
+        /// Stores the type of byte value.
+        /// </summary>
         private Type typeOfByte { get; }
+        /// <summary>
+        /// Stores the type of S byte value.
+        /// </summary>
         private Type typeOfSByte { get; }
+        /// <summary>
+        /// Stores the type of short value.
+        /// </summary>
         private Type typeOfShort { get; }
+        /// <summary>
+        /// Stores the type of U short value.
+        /// </summary>
         private Type typeOfUShort { get; }
+        /// <summary>
+        /// Stores the type of int value.
+        /// </summary>
         private Type typeOfInt { get; }
+        /// <summary>
+        /// Stores the type of U int value.
+        /// </summary>
         private Type typeOfUInt { get; }
+        /// <summary>
+        /// Stores the type of float value.
+        /// </summary>
         private Type typeOfFloat { get; }
+        /// <summary>
+        /// Stores the type of long value.
+        /// </summary>
         private Type typeOfLong { get; }
+        /// <summary>
+        /// Stores the type of U long value.
+        /// </summary>
         private Type typeOfULong { get; }
+        /// <summary>
+        /// Stores the type of double value.
+        /// </summary>
         private Type typeOfDouble { get; }
+        /// <summary>
+        /// Stores the type of bool value.
+        /// </summary>
         private Type typeOfBool { get; }
+        /// <summary>
+        /// Stores the type of string value.
+        /// </summary>
         private Type typeOfString { get; }
+        /// <summary>
+        /// Stores the type of GN array value.
+        /// </summary>
         private Type typeOfGNArray { get; }
+        /// <summary>
+        /// Stores the type of GN hashtable value.
+        /// </summary>
         private Type typeOfGNHashtable { get; }
 
         bool TryGetNullable(FieldInfo fieldInfo, out Type tType)
@@ -385,6 +439,9 @@
             return answer;
         }
 
+        /// <summary>
+        /// Executes the cast list operation.
+        /// </summary>
         public System.Collections.IList castList(System.Collections.IList objectLst, System.Type cls, bool isArray)
         {
             if (isArray)
@@ -443,17 +500,50 @@
     internal class SerializeConverter
     {
         // Mapper to retrieve metadata for fields with DataMember attributes.
+        /// <summary>
+        /// Stores the data member field info mapper value.
+        /// </summary>
         private DataMemberFieldInfoTypeMapper dataMemberFieldInfoMapper;
 
+        /// <summary>
+        /// Stores the type of byte value.
+        /// </summary>
         private Type typeOfByte { get; }
+        /// <summary>
+        /// Stores the type of S byte value.
+        /// </summary>
         private Type typeOfSByte { get; }
+        /// <summary>
+        /// Stores the type of short value.
+        /// </summary>
         private Type typeOfShort { get; }
+        /// <summary>
+        /// Stores the type of U short value.
+        /// </summary>
         private Type typeOfUShort { get; }
+        /// <summary>
+        /// Stores the type of int value.
+        /// </summary>
         private Type typeOfInt { get; }
+        /// <summary>
+        /// Stores the type of U int value.
+        /// </summary>
         private Type typeOfUInt { get; }
+        /// <summary>
+        /// Stores the type of float value.
+        /// </summary>
         private Type typeOfFloat { get; }
+        /// <summary>
+        /// Stores the type of long value.
+        /// </summary>
         private Type typeOfLong { get; }
+        /// <summary>
+        /// Stores the type of U long value.
+        /// </summary>
         private Type typeOfULong { get; }
+        /// <summary>
+        /// Stores the type of double value.
+        /// </summary>
         private Type typeOfDouble { get; }
 
         /// <summary>
@@ -651,7 +741,13 @@
     public static class ConverterService
     {
         // Private static instances for serialization and deserialization operations.
+        /// <summary>
+        /// Stores the serialize converter value.
+        /// </summary>
         private static SerializeConverter serializeConverter;
+        /// <summary>
+        /// Stores the deserialize converter value.
+        /// </summary>
         private static DeserializeConverter deserializeConverter;
 
         /// <summary>

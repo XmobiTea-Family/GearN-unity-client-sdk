@@ -15,7 +15,13 @@
     /// </summary>
     internal class NetworkingPeerSocketV2 : NetworkingSocketPeerBase
     {
+        /// <summary>
+        /// Stores the socket manager value.
+        /// </summary>
         private SocketManager socketManager;
+        /// <summary>
+        /// Indicates whether is connected.
+        /// </summary>
         private bool isConnected;
 
         /// <summary>
@@ -23,6 +29,9 @@
         /// </summary>
         internal override bool isWsConnected => this.socketManager != null ? this.socketManager.State == SocketManager.States.Open : false;
 
+        /// <summary>
+        /// Stores the server version value.
+        /// </summary>
         private SupportedSocketIOVersions serverVersion = SupportedSocketIOVersions.v3;
 
         /// <summary>
@@ -77,6 +86,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles response MsgPack.
+        /// </summary>
         private void onResponseMsgPack(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
@@ -85,6 +97,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles event MsgPack.
+        /// </summary>
         private void onEventMsgPack(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
@@ -93,6 +108,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles response JSON.
+        /// </summary>
         private void onResponseJson(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
@@ -101,6 +119,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles event JSON.
+        /// </summary>
         private void onEventJson(Socket socket, Packet packet, object[] args)
         {
             lock (this.messageLstLock)
@@ -109,6 +130,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles connect.
+        /// </summary>
         private void onConnect(Socket socket, Packet packet, object[] args)
         {
             GNDebug.log("[GN Socket RECV] HandleOpen " + socket.Id);
@@ -118,6 +142,9 @@
             this.onConnectHandler();
         }
 
+        /// <summary>
+        /// Handles disconnect.
+        /// </summary>
         private void onDisconnect(Socket socket, Packet packet, object[] args)
         {
             GNDebug.log("[GN Socket RECV] HandleClose ");
@@ -127,6 +154,9 @@
             this.onDisconnectHandler();
         }
 
+        /// <summary>
+        /// Handles error.
+        /// </summary>
         private void onError(Socket socket, Packet packet, object[] args)
         {
             GNDebug.logError(string.Format("Error: {0}", args[0].ToString()));

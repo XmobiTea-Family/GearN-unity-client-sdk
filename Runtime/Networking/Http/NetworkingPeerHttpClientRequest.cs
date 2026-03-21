@@ -12,8 +12,14 @@
     /// </summary>
     internal class NetworkingPeerHttpClientRequest : NetworkingHttpPeerBase
     {
+        /// <summary>
+        /// Stores the client value.
+        /// </summary>
         private readonly HttpClient client;
 
+        /// <summary>
+        /// Stores the default timeout value.
+        /// </summary>
         private readonly float DefaultTimeout = 20;
 
         /// <summary>
@@ -29,6 +35,9 @@
             this.getRequestViaHttpWeb(subUri, onHttpAppResponse, timeout, authToken, secretKey, gameId);
         }
 
+        /// <summary>
+        /// Gets request via HTTP web.
+        /// </summary>
         private async void getRequestViaHttpWeb(string subUri, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, string gameId)
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, this.httpUrl + "/" + subUri))
@@ -129,6 +138,9 @@
             this.postRequestViaHttpWeb(subUri, param, postType, onHttpAppResponse, timeout, authToken, secretKey, customTags, gameId);
         }
 
+        /// <summary>
+        /// Executes the post request via HTTP web operation.
+        /// </summary>
         private async void postRequestViaHttpWeb(string subUri, GNHashtable param, PostType postType, Action1<HttpAppResponse> onHttpAppResponse, float timeout, string authToken, string secretKey, GNHashtable customTags, string gameId)
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, this.httpUrl + "/" + subUri))
@@ -242,6 +254,9 @@
             this.postRequestUploadViaHttpWeb(subUri, content, filename, mimetype, onHttpAppResponse, timeout);
         }
 
+        /// <summary>
+        /// Executes the post request upload via HTTP web operation.
+        /// </summary>
         private async void postRequestUploadViaHttpWeb(string subUri, byte[] content, string filename, string mimetype, Action1<HttpAppResponse> onHttpAppResponse, float timeout)
         {
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Post, this.httpUrl + "/" + subUri))

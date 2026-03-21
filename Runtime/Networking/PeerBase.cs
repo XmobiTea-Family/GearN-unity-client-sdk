@@ -14,13 +14,31 @@
     /// </summary>
     internal abstract class PeerBase : IPeer
     {
+        /// <summary>
+        /// Stores the operation pending queue value.
+        /// </summary>
         private Queue<OperationPending> operationPendingQueue; // Queue to store pending operations to be sent.
+        /// <summary>
+        /// Stores the operation waiting response dict value.
+        /// </summary>
         private Dictionary<int, OperationPending> operationWaitingResponseDict; // Dictionary to track operations awaiting responses.
 
+        /// <summary>
+        /// Stores the request ID value.
+        /// </summary>
         private static int requestId; // Static counter for generating unique request IDs.
 
+        /// <summary>
+        /// Stores the per msg timer value.
+        /// </summary>
         private float perMsgTimer; // Interval between sending messages.
+        /// <summary>
+        /// Stores the next send msg timer value.
+        /// </summary>
         private float nextSendMsgTimer; // Time for the next message to be sent.
+        /// <summary>
+        /// Stores the check timeout operation pending value.
+        /// </summary>
         private float checkTimeoutOperationPending = 0; // Timer to check for timed-out operations.
 
         /// <summary>
@@ -46,6 +64,9 @@
         /// </summary>
         internal int ping { get; set; } = -1;
 
+        /// <summary>
+        /// Stores the ping lst value.
+        /// </summary>
         private Queue<float> pingLst; // Queue to store recent ping values for averaging.
 
         /// <summary>
@@ -116,6 +137,9 @@
             onEnqueue(operationPending);
         }
 
+        /// <summary>
+        /// Handles enqueue.
+        /// </summary>
         protected abstract void onEnqueue(OperationPending operationPending);
 
         /// <summary>

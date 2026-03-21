@@ -523,19 +523,31 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<AuthenticateRequestModels.RefreshAuthTokenOperationRequest, AuthenticateResponseModels.RefreshAuthTokenOperationResponse>(new AuthenticateRequestModels.RefreshAuthTokenOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
+        /// <summary>
+        /// Provides server-scoped operations for the parent API.
+        /// </summary>
         public class ServerApi
         {
         }
 
+        /// <summary>
+        /// Provides admin-scoped operations for the parent API.
+        /// </summary>
         public class AdminApi
         {
         }
 
     }
 
+    /// <summary>
+    /// Represents the GN network component.
+    /// </summary>
     public static partial class GNNetwork
     {
 
+        /// <summary>
+        /// Stores the authenticate value.
+        /// </summary>
         public static AuthenticateApi authenticate { get; }
     }
 

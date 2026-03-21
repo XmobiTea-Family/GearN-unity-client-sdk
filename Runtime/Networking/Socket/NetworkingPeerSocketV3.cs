@@ -15,7 +15,13 @@ namespace XmobiTea.GearN.Networking.Socket
     /// </summary>
     internal class NetworkingPeerSocketV3 : NetworkingSocketPeerBase
     {
+        /// <summary>
+        /// Stores the socket manager value.
+        /// </summary>
         private SocketManager socketManager;
+        /// <summary>
+        /// Indicates whether is connected.
+        /// </summary>
         private bool isConnected;
 
         /// <summary>
