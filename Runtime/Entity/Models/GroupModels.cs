@@ -16,8 +16,8 @@
             /// <summary>
             /// Stores the user ID value.
             /// </summary>
-            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
-            public string userId;
+            [StringDataMember(code = ParameterCode.MemberId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            public string memberId;
 
             /// <summary>
             /// Stores the group ID value.
@@ -890,10 +890,10 @@
         public class RemoveMemberRequestData
         {
             /// <summary>
-            /// Stores the user ID value.
+            /// Stores the member ID value.
             /// </summary>
-            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 11, mustNonNull = true)]
-            public string userId;
+            [StringDataMember(code = ParameterCode.MemberId, minLength = 10, maxLength = 11, mustNonNull = true)]
+            public string memberId;
 
             /// <summary>
             /// Stores the group ID value.

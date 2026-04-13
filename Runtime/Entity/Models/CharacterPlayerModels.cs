@@ -1955,10 +1955,10 @@
         public class GroupMemberParam
         {
             /// <summary>
-            /// Stores the user ID value.
+            /// Stores the character ID value.
             /// </summary>
-            [StringDataMember(code = ParameterCode.UserId, minLength = 11, maxLength = 11, mustNonNull = true)]
-            public string userId;
+            [StringDataMember(code = ParameterCode.CharacterId, minLength = 11, maxLength = 11, mustNonNull = true)]
+            public string characterId;
 
         }
 

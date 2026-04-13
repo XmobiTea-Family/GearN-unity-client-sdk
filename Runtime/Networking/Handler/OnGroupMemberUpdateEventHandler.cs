@@ -15,8 +15,11 @@
         /// <summary>
         /// A list of members associated with the group.
         /// </summary>
-        [GNArrayDataMember(code = ParameterCode.Members, elementCls = typeof(GenericModels.FriendItem))]
+        [GNArrayDataMember(code = ParameterCode.Members, elementCls = typeof(GenericModels.MemberItem))]
         public List<GenericModels.MemberItem> members;
+
+        [StringDataMember(code = ParameterCode.GroupId)]
+        public string groupId;
     }
 
     /// <summary>
