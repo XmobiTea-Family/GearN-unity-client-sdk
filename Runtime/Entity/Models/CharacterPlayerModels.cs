@@ -1133,7 +1133,7 @@
             /// <summary>
             /// Stores the amount value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Amount, defaultValue = 1, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Amount, defaultValue = 1, mustInt = true, minValue = 1, maxValue = 256, isOptional = true)]
             public int? amount;
 
         }

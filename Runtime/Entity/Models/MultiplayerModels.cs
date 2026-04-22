@@ -620,6 +620,12 @@
             [NumberDataMember(code = ParameterCode.TimeToMatchInSeconds)]
             public float timeToMatchInSeconds;
 
+            /// <summary>
+            /// Stores the time to match in seconds value.
+            /// </summary>
+            [NumberDataMember(code = ParameterCode.Status, mustInt = true)]
+            public int status;
+
         }
 
         /// <summary>
