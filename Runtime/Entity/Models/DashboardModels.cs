@@ -156,12 +156,6 @@
             public string? gameId;
 
             /// <summary>
-            /// Gets the request role used by this request wrapper.
-            /// </summary>
-            [NumberDataMember(code = ParameterCode.Role, mustInt = true, minValue = 1, maxValue = 3)]
-            public int role;
-
-            /// <summary>
             /// Stores the permission param value.
             /// </summary>
             [GNHashtableDataMember(code = ParameterCode.PermissionParam, isOptional = true)]
@@ -4007,12 +4001,6 @@
             public string gameId;
 
             /// <summary>
-            /// Gets the request role used by this request wrapper.
-            /// </summary>
-            [NumberDataMember(code = ParameterCode.Role)]
-            public int role;
-
-            /// <summary>
             /// Stores the timestamp create value.
             /// </summary>
             [NumberDataMember(code = ParameterCode.TsCreate)]
@@ -4069,22 +4057,10 @@
         public class GetSecretInfoListResponseData
         {
             /// <summary>
-            /// Stores the admin secret key collection.
+            /// Stores the secret key collection.
             /// </summary>
-            [GNArrayDataMember(code = ParameterCode.AdminSecretKeys, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
-            public List<SecretInfoWithSecretKeyResponseData> adminSecretKeys;
-
-            /// <summary>
-            /// Stores the server secret key collection.
-            /// </summary>
-            [GNArrayDataMember(code = ParameterCode.ServerSecretKeys, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
-            public List<SecretInfoWithSecretKeyResponseData> serverSecretKeys;
-
-            /// <summary>
-            /// Stores the player secret key collection.
-            /// </summary>
-            [GNArrayDataMember(code = ParameterCode.PlayerSecretKeys, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
-            public List<SecretInfoWithSecretKeyResponseData> playerSecretKeys;
+            [GNArrayDataMember(code = ParameterCode.SecretKeys, elementCls = typeof(SecretInfoWithSecretKeyResponseData))]
+            public List<SecretInfoWithSecretKeyResponseData> secretKeys;
 
         }
 

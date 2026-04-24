@@ -2511,17 +2511,9 @@
         public const string RemoveStoreUsed = "removeStoreUsed";
 
         /// <summary>
-        /// Specifies the parameter key for admin secret keys.
+        /// Specifies the parameter key for secret keys.
         /// </summary>
-        public const string AdminSecretKeys = "adminSecretKeys";
-        /// <summary>
-        /// Specifies the parameter key for server secret keys.
-        /// </summary>
-        public const string ServerSecretKeys = "serverSecretKeys";
-        /// <summary>
-        /// Specifies the parameter key for player secret keys.
-        /// </summary>
-        public const string PlayerSecretKeys = "playerSecretKeys";
+        public const string SecretKeys = "secretKeys";
 
     }
 
