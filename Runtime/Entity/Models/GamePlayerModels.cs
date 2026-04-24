@@ -2268,6 +2268,12 @@
             public bool? playerFriends;
 
             /// <summary>
+            /// Stores the online status value.
+            /// </summary>
+            [BooleanDataMember(code = ParameterCode.OnlineStatus, isOptional = true, defaultValue = false)]
+            public bool? onlineStatus;
+
+            /// <summary>
             /// Stores the player data key collection.
             /// </summary>
             [GNArrayDataMember(code = ParameterCode.PlayerDataKeys, isOptional = true, elementCls = typeof(string))]
@@ -2493,6 +2499,13 @@
             /// </summary>
             [StringDataMember(code = ParameterCode.CountryCode, isOptional = true)]
             public string? countryCode;
+
+            /// <summary>
+            /// Stores the player ban value.
+            /// </summary>
+            [GNHashtableDataMember(code = ParameterCode.OnlineStatus, isOptional = true)]
+            public OnlineStatusItem? onlineStatus;
+
         }
 
         /// <summary>
@@ -2624,7 +2637,7 @@
         /// <summary>
         /// Represents the response payload for the online status operation.
         /// </summary>
-        public class OnlineStatusResponseData
+        public class OnlineStatusItem
         {
             /// <summary>
             /// Stores the timestamp last login value.

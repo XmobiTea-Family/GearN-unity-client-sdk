@@ -82,7 +82,7 @@
         /// <summary>
         /// Represents the typed response for the get online status operation.
         /// </summary>
-        public class GetOnlineStatusOperationResponse : CustomOperationResponse<GamePlayerModels.OnlineStatusResponseData>
+        public class GetOnlineStatusOperationResponse : CustomOperationResponse<GamePlayerModels.GamePlayerResponseData>
         {
 
         }
