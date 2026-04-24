@@ -2341,9 +2341,9 @@
         }
 
         /// <summary>
-        /// Represents the master admin permission rules param component.
+        /// Represents the dashboard permission rules param component.
         /// </summary>
-        public class MasterAdminPermissionRulesParam
+        public class DashboardPermissionRulesParam
         {
             /// <summary>
             /// Stores the set master game settings value.
@@ -3215,10 +3215,10 @@
             public StoreInventoryPermissionRulesParam? storeInventory;
 
             /// <summary>
-            /// Stores the master admin value.
+            /// Stores the dashboard value.
             /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.MasterAdmin, isOptional = true)]
-            public MasterAdminPermissionRulesParam? masterAdmin;
+            [GNHashtableDataMember(code = ParameterCode.Dashboard, isOptional = true)]
+            public DashboardPermissionRulesParam? dashboard;
 
             /// <summary>
             /// Stores the multiplayer value.

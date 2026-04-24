@@ -858,7 +858,7 @@
         /// <summary>
         /// Specifies the parameter key for master admin.
         /// </summary>
-        public const string MasterAdmin = "masterAdmin";
+        public const string Dashboard = "dashboard";
 
         /// <summary>
         /// Specifies the parameter key for login by account.
