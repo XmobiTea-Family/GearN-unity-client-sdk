@@ -97,7 +97,7 @@
         /// <summary>
         /// Specifies the error code for game is exists.
         /// </summary>
-        public const int GameIsExists = 23;
+        public const int GameExists = 23;
         /// <summary>
         /// Specifies the error code for secret info not found.
         /// </summary>
@@ -105,7 +105,7 @@
         /// <summary>
         /// Specifies the error code for secret info is exists.
         /// </summary>
-        public const int SecretInfoIsExists = 25;
+        public const int SecretInfoExists = 25;
         /// <summary>
         /// Specifies the error code for external not linked.
         /// </summary>
@@ -149,11 +149,11 @@
         /// <summary>
         /// Specifies the error code for store item had been remove.
         /// </summary>
-        public const int StoreItemHadBeenRemove = 36;
+        public const int StoreItemRemoved = 36;
         /// <summary>
         /// Specifies the error code for display name has use.
         /// </summary>
-        public const int DisplayNameHasUse = 37;
+        public const int DisplayNameUsed = 37;
         /// <summary>
         /// Specifies the error code for player ban.
         /// </summary>
@@ -170,7 +170,7 @@
         /// <summary>
         /// Specifies the error code for matchmaking player has not joined ticket.
         /// </summary>
-        public const int MatchmakingPlayerHasNotJoinedTicket = 41;
+        public const int MatchmakingPlayerNotJoinedTicket = 41;
         /// <summary>
         /// Specifies the error code for match not found.
         /// </summary>
@@ -178,7 +178,7 @@
         /// <summary>
         /// Specifies the error code for matchmaking player has joined other ticket.
         /// </summary>
-        public const int MatchmakingPlayerHasJoinedOtherTicket = 43;
+        public const int MatchmakingPlayerJoinedOtherTicket = 43;
         /// <summary>
         /// Specifies the error code for matchmaking queue not found.
         /// </summary>
@@ -204,11 +204,11 @@
         /// <summary>
         /// Specifies the error code for store item had purchase and non consumable.
         /// </summary>
-        public const int StoreItemHadPurchaseAndNonConsumable = 49;
+        public const int StoreItemPurchasedAndNonConsumable = 49;
         /// <summary>
         /// Specifies the error code for store item had exists.
         /// </summary>
-        public const int StoreItemHadExists = 50;
+        public const int StoreItemExists = 50;
 
     }
 
