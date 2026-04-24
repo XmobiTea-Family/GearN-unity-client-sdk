@@ -155,22 +155,10 @@
         private float pingTimeout = 20000;
 
         /// <summary>
-        /// Stores the admin secret key value.
+        /// Stores the secret key value.
         /// </summary>
         [SerializeField]
-        private string adminSecretKey;
-
-        /// <summary>
-        /// Stores the server secret key value.
-        /// </summary>
-        [SerializeField]
-        private string serverSecretKey;
-
-        /// <summary>
-        /// Stores the client secret key value.
-        /// </summary>
-        [SerializeField]
-        private string clientSecretKey;
+        private string secretKey;
 
         /// <summary>
         /// Stores the peer socket version value.
@@ -321,37 +309,15 @@
         public void setPingTimeout(float pingTimeout) => this.pingTimeout = pingTimeout;
 
         /// <summary>
-        /// Gets the admin secret key.
+        /// Gets the secret key.
         /// </summary>
-        /// <returns>The admin secret key.</returns>
-        public string getAdminSecretKey() => this.adminSecretKey;
+        /// <returns>The secret key.</returns>
+        public string getSecretKey() => this.secretKey;
 
         /// <summary>
-        /// Sets admin secret key.
+        /// Sets secret key.
         /// </summary>
-        public void setAdminSecretKey(string adminSecretKey) => this.adminSecretKey = adminSecretKey;
-
-        /// <summary>
-        /// Gets the server secret key.
-        /// </summary>
-        /// <returns>The server secret key.</returns>
-        public string getServerSecretKey() => this.serverSecretKey;
-
-        /// <summary>
-        /// Sets server secret key.
-        /// </summary>
-        public void setServerSecretKey(string serverSecretKey) => this.serverSecretKey = serverSecretKey;
-
-        /// <summary>
-        /// Gets the client secret key.
-        /// </summary>
-        /// <returns>The client secret key.</returns>
-        public string getClientSecretKey() => this.clientSecretKey;
-
-        /// <summary>
-        /// Sets client secret key.
-        /// </summary>
-        public void setClientSecretKey(string clientSecretKey) => this.clientSecretKey = clientSecretKey;
+        public void setSecretKey(string secretKey) => this.secretKey = secretKey;
 
         /// <summary>
         /// Gets the peer socket version.

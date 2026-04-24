@@ -29,9 +29,7 @@
         SerializedProperty peerSocketVersion;
         SerializedProperty httpRequestType;
         SerializedProperty logType;
-        SerializedProperty adminSecretKey;
-        SerializedProperty serverSecretKey;
-        SerializedProperty clientSecretKey;
+        SerializedProperty secretKey;
 
         Color m_Color = Color.white;
 
@@ -55,9 +53,7 @@
             this.peerSocketVersion = this.serializedObject.FindProperty("peerSocketVersion");
             this.httpRequestType = this.serializedObject.FindProperty("httpRequestType");
             this.logType = this.serializedObject.FindProperty("logType");
-            this.adminSecretKey = this.serializedObject.FindProperty("adminSecretKey");
-            this.serverSecretKey = this.serializedObject.FindProperty("serverSecretKey");
-            this.clientSecretKey = this.serializedObject.FindProperty("clientSecretKey");
+            this.secretKey = this.serializedObject.FindProperty("secretKey");
         }
 
         /// <summary>
@@ -112,9 +108,7 @@
             EditorGUILayout.PropertyField(this.logType);
 
             EditorGUILayout.Space(20);
-            EditorGUILayout.PropertyField(this.adminSecretKey);
-            EditorGUILayout.PropertyField(this.serverSecretKey);
-            EditorGUILayout.PropertyField(this.clientSecretKey);
+            EditorGUILayout.PropertyField(this.secretKey);
 
             if (this.serializedObject.hasModifiedProperties) this.serializedObject.ApplyModifiedProperties();
         }
