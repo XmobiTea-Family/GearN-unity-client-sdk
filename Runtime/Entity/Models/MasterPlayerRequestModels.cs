@@ -3285,12 +3285,12 @@
         /// <summary>
         /// Builds the set timestamp last login operation request.
         /// </summary>
-        public class SetTsLastLoginOperationRequest : CustomOperationRequest<MasterPlayerModels.SetTsLastLoginRequestData>
+        public class UpdateTsLastLoginOperationRequest : CustomOperationRequest<MasterPlayerModels.UpdateTsLastLoginRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
             /// </summary>
-            protected override string operationCode => OperationCode.SetTsLastLogin;
+            protected override string operationCode => OperationCode.UpdateTsLastLogin;
             /// <summary>
             /// Gets the request type used by this request wrapper.
             /// </summary>
@@ -3301,15 +3301,15 @@
             protected override RequestRole role => RequestRole.Client;
 
             /// <summary>
-            /// Initializes a new instance of the SetTsLastLoginOperationRequest class.
+            /// Initializes a new instance of the UpdateTsLastLoginOperationRequest class.
             /// </summary>
-            public SetTsLastLoginOperationRequest(MasterPlayerModels.SetTsLastLoginRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public UpdateTsLastLoginOperationRequest(MasterPlayerModels.UpdateTsLastLoginRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
         /// <summary>
         /// Builds the server-scoped set timestamp last login operation request.
         /// </summary>
-        public class ServerSetTsLastLoginOperationRequest : SetTsLastLoginOperationRequest
+        public class ServerUpdateTsLastLoginOperationRequest : UpdateTsLastLoginOperationRequest
         {
             /// <summary>
             /// Gets the request role used by this request wrapper.
@@ -3317,15 +3317,15 @@
             protected override RequestRole role => RequestRole.Server;
 
             /// <summary>
-            /// Initializes a new instance of the ServerSetTsLastLoginOperationRequest class.
+            /// Initializes a new instance of the ServerUpdateTsLastLoginOperationRequest class.
             /// </summary>
-            public ServerSetTsLastLoginOperationRequest(MasterPlayerModels.ServerSetTsLastLoginRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ServerUpdateTsLastLoginOperationRequest(MasterPlayerModels.ServerUpdateTsLastLoginRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
         /// <summary>
         /// Builds the admin-scoped set timestamp last login operation request.
         /// </summary>
-        public class AdminSetTsLastLoginOperationRequest : SetTsLastLoginOperationRequest
+        public class AdminUpdateTsLastLoginOperationRequest : UpdateTsLastLoginOperationRequest
         {
             /// <summary>
             /// Gets the request role used by this request wrapper.
@@ -3333,9 +3333,9 @@
             protected override RequestRole role => RequestRole.Admin;
 
             /// <summary>
-            /// Initializes a new instance of the AdminSetTsLastLoginOperationRequest class.
+            /// Initializes a new instance of the AdminUpdateTsLastLoginOperationRequest class.
             /// </summary>
-            public AdminSetTsLastLoginOperationRequest(MasterPlayerModels.AdminSetTsLastLoginRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public AdminUpdateTsLastLoginOperationRequest(MasterPlayerModels.AdminUpdateTsLastLoginRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
 

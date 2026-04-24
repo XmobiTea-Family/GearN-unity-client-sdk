@@ -367,7 +367,7 @@ Request type: `MasterPlayer`
 | `setPlayerBan` | Yes | Yes | Yes |
 | `setPlayerData` | Yes | Yes | Yes |
 | `setTag` | Yes | Yes | Yes |
-| `setTsLastLogin` | Yes | Yes | Yes |
+| `updateTsLastLogin` | Yes | Yes | Yes |
 | `unlinkAccount` | Yes | Yes | Yes |
 | `unlinkAndroidDeviceId` | Yes | Yes | Yes |
 | `unlinkApple` | Yes | Yes | Yes |

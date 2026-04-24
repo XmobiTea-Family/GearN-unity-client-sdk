@@ -2818,8 +2818,8 @@
             /// <summary>
             /// Stores the set timestamp last login value.
             /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.SetTsLastLogin, isOptional = true)]
-            public PermissionRulesParam? setTsLastLogin;
+            [GNHashtableDataMember(code = ParameterCode.UpdateTsLastLogin, isOptional = true)]
+            public PermissionRulesParam? updateTsLastLogin;
 
             /// <summary>
             /// Stores the get timestamp last login value.

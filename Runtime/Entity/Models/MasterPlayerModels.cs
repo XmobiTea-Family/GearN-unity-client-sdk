@@ -2416,7 +2416,7 @@
         /// <summary>
         /// Represents the request payload for the set timestamp last login operation.
         /// </summary>
-        public class SetTsLastLoginRequestData
+        public class UpdateTsLastLoginRequestData
         {
             /// <summary>
             /// Stores the user ID value.
@@ -2429,7 +2429,7 @@
         /// <summary>
         /// Represents the server-scoped request payload for the set timestamp last login operation.
         /// </summary>
-        public class ServerSetTsLastLoginRequestData : SetTsLastLoginRequestData
+        public class ServerUpdateTsLastLoginRequestData : UpdateTsLastLoginRequestData
         {
             /// <summary>
             /// Stores the user ID value.
@@ -2442,7 +2442,7 @@
         /// <summary>
         /// Represents the admin-scoped request payload for the set timestamp last login operation.
         /// </summary>
-        public class AdminSetTsLastLoginRequestData : ServerSetTsLastLoginRequestData
+        public class AdminUpdateTsLastLoginRequestData : ServerUpdateTsLastLoginRequestData
         {
         }
 

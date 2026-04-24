@@ -1080,7 +1080,7 @@
         /// <summary>
         /// Specifies the parameter key for set timestamp last login.
         /// </summary>
-        public const string SetTsLastLogin = "setTsLastLogin";
+        public const string UpdateTsLastLogin = "updateTsLastLogin";
         /// <summary>
         /// Specifies the parameter key for get timestamp last login.
         /// </summary>

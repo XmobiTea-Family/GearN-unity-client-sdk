@@ -946,7 +946,7 @@ Mutation and communication methods:
 - `setPlayerData`
 - `changePlayerStatistics`
 - `setTag`
-- `setTsLastLogin`
+- `updateTsLastLogin`
 - `sendSocketOperationEvent`
 - `sendEmail`
 - `addPushNotification`

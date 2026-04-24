@@ -951,17 +951,17 @@ namespace XmobiTea.GearN
         /// <summary>
         /// Sets timestamp last login.
         /// </summary>
-        public void setTsLastLogin(MasterPlayerModels.SetTsLastLoginRequestData requestData, Action1<MasterPlayerResponseModels.SetTsLastLoginOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void updateTsLastLogin(MasterPlayerModels.UpdateTsLastLoginRequestData requestData, Action1<MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            GNNetwork.sendViaHttp(new MasterPlayerRequestModels.SetTsLastLoginOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            GNNetwork.sendViaHttp(new MasterPlayerRequestModels.UpdateTsLastLoginOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
 
         /// <summary>
         /// Sets timestamp last login asynchronously.
         /// </summary>
-        public Task<MasterPlayerResponseModels.SetTsLastLoginOperationResponse> setTsLastLoginAsync(MasterPlayerModels.SetTsLastLoginRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse> updateTsLastLoginAsync(MasterPlayerModels.UpdateTsLastLoginRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
-            return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.SetTsLastLoginOperationRequest, MasterPlayerResponseModels.SetTsLastLoginOperationResponse>(new MasterPlayerRequestModels.SetTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.UpdateTsLastLoginOperationRequest, MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse>(new MasterPlayerRequestModels.UpdateTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
         /// <summary>
@@ -2316,17 +2316,17 @@ namespace XmobiTea.GearN
             /// <summary>
             /// Sets timestamp last login.
             /// </summary>
-            public void setTsLastLogin(MasterPlayerModels.ServerSetTsLastLoginRequestData requestData, Action1<MasterPlayerResponseModels.SetTsLastLoginOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void updateTsLastLogin(MasterPlayerModels.ServerUpdateTsLastLoginRequestData requestData, Action1<MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ServerSetTsLastLoginOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ServerUpdateTsLastLoginOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
             /// <summary>
             /// Sets timestamp last login asynchronously.
             /// </summary>
-            public Task<MasterPlayerResponseModels.SetTsLastLoginOperationResponse> setTsLastLoginAsync(MasterPlayerModels.ServerSetTsLastLoginRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse> updateTsLastLoginAsync(MasterPlayerModels.ServerUpdateTsLastLoginRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerSetTsLastLoginOperationRequest, MasterPlayerResponseModels.SetTsLastLoginOperationResponse>(new MasterPlayerRequestModels.ServerSetTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerUpdateTsLastLoginOperationRequest, MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse>(new MasterPlayerRequestModels.ServerUpdateTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             /// <summary>
@@ -3682,17 +3682,17 @@ namespace XmobiTea.GearN
             /// <summary>
             /// Sets timestamp last login.
             /// </summary>
-            public void setTsLastLogin(MasterPlayerModels.AdminSetTsLastLoginRequestData requestData, Action1<MasterPlayerResponseModels.SetTsLastLoginOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void updateTsLastLogin(MasterPlayerModels.AdminUpdateTsLastLoginRequestData requestData, Action1<MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.AdminSetTsLastLoginOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.AdminUpdateTsLastLoginOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
 
             /// <summary>
             /// Sets timestamp last login asynchronously.
             /// </summary>
-            public Task<MasterPlayerResponseModels.SetTsLastLoginOperationResponse> setTsLastLoginAsync(MasterPlayerModels.AdminSetTsLastLoginRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse> updateTsLastLoginAsync(MasterPlayerModels.AdminUpdateTsLastLoginRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
-                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminSetTsLastLoginOperationRequest, MasterPlayerResponseModels.SetTsLastLoginOperationResponse>(new MasterPlayerRequestModels.AdminSetTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminUpdateTsLastLoginOperationRequest, MasterPlayerResponseModels.UpdateTsLastLoginOperationResponse>(new MasterPlayerRequestModels.AdminUpdateTsLastLoginOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             /// <summary>

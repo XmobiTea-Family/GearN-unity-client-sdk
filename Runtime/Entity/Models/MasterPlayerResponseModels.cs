@@ -474,7 +474,7 @@
         /// <summary>
         /// Represents the typed response for the set timestamp last login operation.
         /// </summary>
-        public class SetTsLastLoginOperationResponse : CustomOperationResponse<MasterPlayerModels.EmptyResponseData>
+        public class UpdateTsLastLoginOperationResponse : CustomOperationResponse<MasterPlayerModels.EmptyResponseData>
         {
 
         }

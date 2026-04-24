@@ -606,7 +606,7 @@ namespace XmobiTea.GearN.Constant
         /// <summary>
         /// Specifies the operation code for set timestamp last login.
         /// </summary>
-        public const string SetTsLastLogin = "setTsLastLogin";
+        public const string UpdateTsLastLogin = "updateTsLastLogin";
         /// <summary>
         /// Specifies the operation code for set remove status.
         /// </summary>
