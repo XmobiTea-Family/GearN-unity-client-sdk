@@ -754,8 +754,8 @@
             /// <summary>
             /// Stores the tag key collection.
             /// </summary>
-            [GNArrayDataMember(code = ParameterCode.TagKeys, elementCls = typeof(string))]
-            public List<string> tagKeys;
+            [GNArrayDataMember(code = ParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
+            public List<string>? tagKeys;
 
         }
 
