@@ -13,12 +13,6 @@
     public class GamePlayerGroupUpdate
     {
         /// <summary>
-        /// The character ID (optional).
-        /// </summary>
-        [StringDataMember(code = ParameterCode.CharacterId, isOptional = true)]
-        public string? characterId;
-
-        /// <summary>
         /// A list of player groups associated with the game player.
         /// </summary>
         [GNArrayDataMember(code = ParameterCode.PlayerGroups, elementCls = typeof(GenericModels.GroupItem))]

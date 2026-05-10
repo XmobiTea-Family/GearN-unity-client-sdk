@@ -13,12 +13,6 @@
     public class GamePlayerFriendUpdate
     {
         /// <summary>
-        /// The character ID (optional).
-        /// </summary>
-        [StringDataMember(code = ParameterCode.CharacterId, isOptional = true)]
-        public string? characterId;
-
-        /// <summary>
         /// A list of player friends associated with the game player.
         /// </summary>
         [GNArrayDataMember(code = ParameterCode.PlayerFriends, elementCls = typeof(GenericModels.FriendItem))]

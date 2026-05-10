@@ -17,6 +17,12 @@
         /// </summary>
         [GNArrayDataMember(code = ParameterCode.GroupMessages, elementCls = typeof(GroupModels.GroupMessageResponseData))]
         public List<GroupModels.GroupMessageResponseData> groupMessages;
+
+        [StringDataMember(code = ParameterCode.GroupId)]
+        public string groupId;
+
+        [StringDataMember(code = ParameterCode.CharacterId, isOptional: true)]
+        public string? characterId;
     }
 
     /// <summary>
