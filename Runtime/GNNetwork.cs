@@ -32,11 +32,6 @@
         internal const string USER_ID_KEY = "[GN]_USER_ID_KEY";
 
         /// <summary>
-        /// Key for storing game ID in StorageService.
-        /// </summary>
-        internal const string GAME_ID_KEY = "[GN]_GAME_ID_KEY";
-
-        /// <summary>
         /// Holds GN server settings loaded from resources.
         /// </summary>
         public static GNServerSettings gnServerSettings { get; private set; }
@@ -82,12 +77,6 @@
         public static AuthenticateStatus getAuthenticateStatus() => GNNetwork.peer.authenticateStatus;
 
         /// <summary>
-        /// Gets the current override gameId
-        /// </summary>
-        /// <returns></returns>
-        public static string getGameId() => GNNetwork.peer.gameId;
-
-        /// <summary>
         /// Gets the current platform of the application.
         /// </summary>
         /// <returns>The current runtime platform.</returns>
@@ -109,7 +98,6 @@
 
             GNNetwork.peer.authenticateStatus.setAuthToken(StorageService.getString(GNNetwork.AUTH_TOKEN_KEY, string.Empty));
             GNNetwork.peer.authenticateStatus.setUserId(StorageService.getString(GNNetwork.USER_ID_KEY, string.Empty));
-            GNNetwork.peer.gameId = StorageService.getString(GNNetwork.GAME_ID_KEY, string.Empty);
 
             GNNetwork.authenticate = new AuthenticateApi();
             GNNetwork.characterPlayer = new CharacterPlayerApi();
@@ -186,16 +174,6 @@
 
             GNNetwork.peer.authenticateStatus.setAuthToken(authenticateStatus.getAuthToken());
             GNNetwork.peer.authenticateStatus.setUserId(authenticateStatus.getUserId());
-        }
-
-        /// <summary>
-        /// Sets game ID.
-        /// </summary>
-        public static void setGameId(string gameId)
-        {
-            StorageService.setString(GNNetwork.GAME_ID_KEY, gameId);
-
-            GNNetwork.peer.gameId = gameId;
         }
 
         /// <summary>

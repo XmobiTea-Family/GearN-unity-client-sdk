@@ -161,6 +161,12 @@
         private string secretKey;
 
         /// <summary>
+        /// Stores the gameId value.
+        /// </summary>
+        [SerializeField]
+        private string gameId;
+
+        /// <summary>
         /// Stores the peer socket version value.
         /// </summary>
         [SerializeField]
@@ -315,9 +321,20 @@
         public string getSecretKey() => this.secretKey;
 
         /// <summary>
+        /// Gets the gameId.
+        /// </summary>
+        /// <returns>The gameId.</returns>
+        public string getGameId() => this.gameId;
+
+        /// <summary>
         /// Sets secret key.
         /// </summary>
         public void setSecretKey(string secretKey) => this.secretKey = secretKey;
+
+        /// <summary>
+        /// Sets gameId.
+        /// </summary>
+        public void setGameId(string gameId) => this.gameId = gameId;
 
         /// <summary>
         /// Gets the peer socket version.

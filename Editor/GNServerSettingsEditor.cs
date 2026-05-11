@@ -30,6 +30,7 @@
         SerializedProperty httpRequestType;
         SerializedProperty logType;
         SerializedProperty secretKey;
+        SerializedProperty gameId;
 
         Color m_Color = Color.white;
 
@@ -54,6 +55,7 @@
             this.httpRequestType = this.serializedObject.FindProperty("httpRequestType");
             this.logType = this.serializedObject.FindProperty("logType");
             this.secretKey = this.serializedObject.FindProperty("secretKey");
+            this.gameId = this.serializedObject.FindProperty("gameId");
         }
 
         /// <summary>
@@ -109,6 +111,8 @@
 
             EditorGUILayout.Space(20);
             EditorGUILayout.PropertyField(this.secretKey);
+            EditorGUILayout.Space(10);
+            EditorGUILayout.PropertyField(this.gameId);
 
             if (this.serializedObject.hasModifiedProperties) this.serializedObject.ApplyModifiedProperties();
         }

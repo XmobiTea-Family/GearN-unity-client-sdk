@@ -22,10 +22,6 @@
         /// Stores the authenticate status value.
         /// </summary>
         internal AuthenticateStatus authenticateStatus; // Stores authentication status.
-        /// <summary>
-        /// Stores the game ID value.
-        /// </summary>
-        internal string gameId;
 
         /// <summary>
         /// Calculates and returns the average ping between HTTP and socket peers.
@@ -123,8 +119,9 @@
         {
             if (authToken == null) authToken = GNNetwork.getAuthenticateStatus().getAuthToken();
             if (secretKey == null) secretKey = GNNetwork.gnServerSettings.getSecretKey();
+            var gameId = GNNetwork.gnServerSettings.getGameId();
 
-            this.socketPeer.enqueue(requestType, role, request, onResponse, authToken, secretKey, customTags, this.gameId);
+            this.socketPeer.enqueue(requestType, role, request, onResponse, authToken, secretKey, customTags, gameId);
         }
 
         /// <summary>
@@ -134,8 +131,9 @@
         {
             if (authToken == null) authToken = this.authenticateStatus.getAuthToken();
             if (secretKey == null) secretKey = GNNetwork.gnServerSettings.getSecretKey();
+            var gameId = GNNetwork.gnServerSettings.getGameId();
 
-            this.httpPeer.enqueue(requestType, role, request, onResponse, authToken, secretKey, customTags, this.gameId);
+            this.httpPeer.enqueue(requestType, role, request, onResponse, authToken, secretKey, customTags, gameId);
         }
 
         /// <summary>

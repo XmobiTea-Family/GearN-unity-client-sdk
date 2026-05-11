@@ -21,7 +21,7 @@
         [StringDataMember(code = ParameterCode.GroupId)]
         public string groupId;
 
-        [StringDataMember(code = ParameterCode.CharacterId, isOptional: true)]
+        [StringDataMember(code = ParameterCode.CharacterId, isOptional = true)]
         public string? characterId;
     }
 
