@@ -71,7 +71,7 @@
         /// <summary>
         /// Gets function information.
         /// </summary>
-        public void getFuntionId(CloudScriptModels.GetFunctionRequestData requestData, Action1<CloudScriptResponseModels.GetFunctionOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public void getFunction(CloudScriptModels.GetFunctionRequestData requestData, Action1<CloudScriptResponseModels.GetFunctionOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             GNNetwork.sendViaHttp(new CloudScriptRequestModels.GetFunctionOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -79,7 +79,7 @@
         /// <summary>
         /// Gets function information asynchronously.
         /// </summary>
-        public Task<CloudScriptResponseModels.GetFunctionOperationResponse> getFuntionAsync(CloudScriptModels.GetFunctionRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        public Task<CloudScriptResponseModels.GetFunctionOperationResponse> getFunctionAsync(CloudScriptModels.GetFunctionRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
         {
             return GNNetwork.sendViaHttpAsync<CloudScriptRequestModels.GetFunctionOperationRequest, CloudScriptResponseModels.GetFunctionOperationResponse>(new CloudScriptRequestModels.GetFunctionOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
@@ -156,7 +156,7 @@
             /// <summary>
             /// Gets function information.
             /// </summary>
-            public void getFuntionId(CloudScriptModels.ServerGetFunctionRequestData requestData, Action1<CloudScriptResponseModels.GetFunctionOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void getFunction(CloudScriptModels.ServerGetFunctionRequestData requestData, Action1<CloudScriptResponseModels.GetFunctionOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 GNNetwork.sendViaHttp(new CloudScriptRequestModels.ServerGetFunctionOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
@@ -164,7 +164,7 @@
             /// <summary>
             /// Gets function information asynchronously.
             /// </summary>
-            public Task<CloudScriptResponseModels.GetFunctionOperationResponse> getFuntionAsync(CloudScriptModels.ServerGetFunctionRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<CloudScriptResponseModels.GetFunctionOperationResponse> getFunctionAsync(CloudScriptModels.ServerGetFunctionRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<CloudScriptRequestModels.ServerGetFunctionOperationRequest, CloudScriptResponseModels.GetFunctionOperationResponse>(new CloudScriptRequestModels.ServerGetFunctionOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
@@ -243,7 +243,7 @@
             /// <summary>
             /// Gets function information.
             /// </summary>
-            public void getFuntionId(CloudScriptModels.AdminGetFunctionRequestData requestData, Action1<CloudScriptResponseModels.GetFunctionOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public void getFunction(CloudScriptModels.AdminGetFunctionRequestData requestData, Action1<CloudScriptResponseModels.GetFunctionOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 GNNetwork.sendViaHttp(new CloudScriptRequestModels.AdminGetFunctionOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
             }
@@ -251,7 +251,7 @@
             /// <summary>
             /// Gets function information asynchronously.
             /// </summary>
-            public Task<CloudScriptResponseModels.GetFunctionOperationResponse> getFuntionAsync(CloudScriptModels.AdminGetFunctionRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            public Task<CloudScriptResponseModels.GetFunctionOperationResponse> getFunctionAsync(CloudScriptModels.AdminGetFunctionRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<CloudScriptRequestModels.AdminGetFunctionOperationRequest, CloudScriptResponseModels.GetFunctionOperationResponse>(new CloudScriptRequestModels.AdminGetFunctionOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }

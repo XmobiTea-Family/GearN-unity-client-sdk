@@ -1,54 +1,319 @@
 # GearN Unity Client SDK
 
-GearN Unity Client SDK is a Unity package that exposes the public GearN transport and domain APIs for gameplay clients, server-side Unity tools, and admin tooling built inside Unity.
+SDK Unity/C# client cho GearN Server.
 
-## Repository Role
+`GNNetwork` là entrypoint public chính. Khi Unity runtime load SDK, `GNNetwork` tự đọc `GNServerSettings` từ `Resources/GNServerSettings`, tạo networking peer, cache auth state, và expose 11 API group: `GNNetwork.authenticate`, `GNNetwork.masterPlayer`, `GNNetwork.gamePlayer`, `GNNetwork.characterPlayer`, `GNNetwork.group`, `GNNetwork.inventory`, `GNNetwork.storeInventory`, `GNNetwork.content`, `GNNetwork.multiplayer`, `GNNetwork.cloudScript`, `GNNetwork.dashboard`.
 
-This repository contains:
+> **AI / code assistant:** đọc [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md) trước, rồi [docs/RULES.md](/docs/RULES.md) cho rule chi tiết về route, permission, self/other-self, socket và error. Machine-readable manifest: [docs/ai-manifest.json](/docs/ai-manifest.json).
 
-- the runtime package consumed by Unity projects through `Runtime/`
-- the editor tooling that creates and edits `GNServerSettings` through `Editor/`
-- the public SDK facade entry point in `Runtime/GNNetwork.cs`
+Package Unity: `com.xmobitea.changx.gearn-unity-client-sdk`. Rule canonical: [docs/RULES.md](/docs/RULES.md).
 
-## Main Entry Points
+## 1. Yêu cầu
 
-- Runtime facade: `Runtime/GNNetwork.cs`
-- Runtime transport coordinator: `Runtime/Networking/NetworkingPeer.cs`
-- HTTP transport: `Runtime/Networking/Http/HttpPeer.cs`
-- Socket transport: `Runtime/Networking/Socket/SocketPeer.cs`
-- Settings asset: `Runtime/Config/GNServerSettings.cs`
-- Unity editor settings inspector: `Editor/GNServerSettingsEditor.cs`
+- Unity `2020.3` trở lên.
+- Dependency package: `com.xmobitea.changx.app`.
+- Một asset `GNServerSettings` trong `Resources/GNServerSettings`.
+- Nếu dùng socket realtime, cài transport socket tương ứng và bật define cần thiết (`UNITY_USING_BEST_HTTP` hoặc `UNITY_USING_SOCKET_IO_UNITY`) theo setup project.
 
-## Quick Start
+## 2. Cài đặt
 
-1. Add the package to a Unity project.
-2. Open `XmobiTea GearN/Open Settings` to create `Resources/GNServerSettings.asset` if it does not exist yet.
-3. Fill the server address, ports, transport flags, and secret keys in the settings asset.
-4. Call `GNNetwork.syncTs`, `GNNetwork.authenticate.*`, or another domain API from gameplay code.
-5. If you need realtime events, enable socket support in the settings asset and call `GNNetwork.connectSocket()`.
+Thêm package vào Unity project qua UPM/git/local package theo workflow của project. Package name trong `package.json`:
 
-## Public API Shape
+```json
+"com.xmobitea.changx.gearn-unity-client-sdk"
+```
 
-- `GNNetwork.authenticate`
-- `GNNetwork.characterPlayer`
-- `GNNetwork.content`
-- `GNNetwork.dashboard`
-- `GNNetwork.gamePlayer`
-- `GNNetwork.group`
-- `GNNetwork.inventory`
-- `GNNetwork.masterPlayer`
-- `GNNetwork.storeInventory`
-- `GNNetwork.multiplayer`
-- `GNNetwork.cloudScript`
+Sau khi import package, mở menu Unity:
 
-Most domain methods send requests through HTTP. Socket support is mainly for realtime events plus raw request transport when needed.
+```text
+XmobiTea GearN/Open Settings
+```
 
-## Docs For AI
+Tạo/cấu hình asset `Resources/GNServerSettings` với host, port, secret key, message type, socket/http options và log type.
 
-- `AGENTS.md`: editing and usage rules for AI agents
-- `ARCHITECTURE.md`: runtime layers, initialization flow, and module boundaries
-- `DEVELOPMENT.md`: local workflow, Unity defines, and maintenance caveats
-- `DOMAIN_RELATIONSHIP.md`: domain relationship map from the client SDK point of view
-- `API_MAP.md`: operation map per domain and request scope
-- `REQUEST_FLOW.md`: end-to-end request and response flow through the SDK
-- `INTEGRATION_GUIDE.md`: practical usage guide for consuming the SDK inside another Unity project
+## 3. Cách SDK hoạt động
+
+Flow chuẩn:
+
+1. Cấu hình `GNServerSettings` trong Unity Editor hoặc qua setter trước khi gọi API.
+2. Truy cập `GNNetwork` lần đầu trong Play Mode; SDK tự load settings và init peer.
+3. Gọi API qua `GNNetwork.*`.
+4. Check response theo 2 tầng: `returnCode` trước, `errorCode` sau.
+5. Nếu app cần realtime, subscribe event handler **trước** rồi mới gọi `GNNetwork.connectSocket()`.
+
+```csharp
+using System.Threading.Tasks;
+using UnityEngine;
+using XmobiTea.GearN;
+using XmobiTea.GearN.Constant;
+using XmobiTea.GearN.Entity.Models;
+
+public class GearNLoginExample : MonoBehaviour
+{
+    private async void Start()
+    {
+        var infoRequestParam = new AuthenticateModels.InfoRequestParam();
+        infoRequestParam.countryCode = true;
+        infoRequestParam.displayName = true;
+
+        var request = new AuthenticateModels.LoginByCustomIdRequestData();
+        request.customId = "a-custom-id-store-this-for-next-login";
+        request.createPlayerIfNotExists = true;
+        request.infoRequestParam = infoRequestParam;
+
+        var res = await GNNetwork.authenticate.loginByCustomIdAsync(request);
+
+        if (res.returnCode != ReturnCode.Ok)
+        {
+            Debug.LogError("Transport/permission error: " + res.debugMessage);
+            return;
+        }
+
+        if (res.errorCode != ErrorCode.Ok)
+        {
+            Debug.LogError("Business error: " + res.errorCode);
+            return;
+        }
+
+        Debug.Log("UserId: " + res.responseData.userId);
+        Debug.Log("AuthToken: " + GNNetwork.getAuthenticateStatus().getAuthToken());
+    }
+}
+```
+
+## 4. Config cơ bản
+
+`GNServerSettings` là `ScriptableObject`. SDK load asset theo path:
+
+```text
+Resources/GNServerSettings
+```
+
+Các field quan trọng:
+
+- `serverAddress`: host/IP GearN Server, không kèm scheme.
+- `serverPort`: HTTP port; set `-1` nếu reverse proxy expose default port.
+- `serverSocketPort`: socket port; set `-1` nếu reverse proxy expose default port.
+- `useSsl`: build URL `https`.
+- `useSocket`: bật socket transport.
+- `useHttp`: bật HTTP transport.
+- `defaultTimeoutInSeconds`: timeout mặc định.
+- `messageType`: `MessageType.Json` hoặc `MessageType.MsgPack`.
+- `sendRate`, `reconnectDelay`, `pingInterval`, `pingTimeout`: transport timing.
+- `secretKey`: secret key lấy từ GearN Dashboard.
+- `logType`: mức log của `GNDebug`.
+
+Có thể chỉnh runtime bằng setter khi thật sự cần:
+
+```csharp
+GNNetwork.gnServerSettings.setServerAddress("api.example.com");
+GNNetwork.gnServerSettings.setServerPort(443);
+GNNetwork.gnServerSettings.setUseSsl(true);
+GNNetwork.gnServerSettings.setSecretKey("<secret-key>");
+GNNetwork.gnServerSettings.setGameId("<game-id>");
+```
+
+Full schema: [docs/reference/CONFIG.md](/docs/reference/CONFIG.md).
+
+## 5. Quick start: login bằng custom device id
+
+```csharp
+using UnityEngine;
+using XmobiTea.GearN;
+using XmobiTea.GearN.Constant;
+using XmobiTea.GearN.Entity.Models;
+
+public class CustomDeviceLogin : MonoBehaviour
+{
+    private async void Start()
+    {
+        var infoRequest = new AuthenticateModels.InfoRequestParam();
+        infoRequest.displayName = true;
+        infoRequest.avatar = true;
+        infoRequest.playerDatas = true;
+
+        var request = new AuthenticateModels.LoginByCustomDeviceIdRequestData();
+        request.customDeviceId = SystemInfo.deviceUniqueIdentifier;
+        request.createPlayerIfNotExists = true;
+        request.infoRequestParam = infoRequest;
+
+        var res = await GNNetwork.authenticate.loginByCustomDeviceIdAsync(request);
+
+        if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
+        if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
+
+        Debug.Log("userId: " + res.responseData.userId);
+        Debug.Log("authToken: " + GNNetwork.getAuthenticateStatus().getAuthToken());
+    }
+}
+```
+
+## 6. Login bằng account
+
+```csharp
+var infoRequest = new AuthenticateModels.InfoRequestParam();
+infoRequest.displayName = true;
+infoRequest.playerStatistics = true;
+
+var request = new AuthenticateModels.LoginByAccountRequestData();
+request.username = "player001";
+request.password = "12345678";
+request.infoRequestParam = infoRequest;
+
+var res = await GNNetwork.authenticate.loginByAccountAsync(request);
+if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
+if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
+```
+
+## 7. Socket
+
+```csharp
+GNNetwork.subscriberOnConnectHandler(() =>
+{
+    Debug.Log("socket connected: " + GNNetwork.getSocketSId());
+});
+
+GNNetwork.subscriberOnDisconnectHandler(() =>
+{
+    Debug.Log("socket disconnected");
+});
+
+GNNetwork.setOnEventHandler(operationEvent =>
+{
+    Debug.Log("eventCode: " + operationEvent.getEventCode());
+    Debug.Log("parameters: " + operationEvent.getParameters()?.toString());
+});
+
+GNNetwork.connectSocket();
+```
+
+Re-auth thủ công chỉ khi socket connect trước token hoặc token vừa đổi:
+
+```csharp
+if (GNNetwork.isSocketConnected() && !string.IsNullOrEmpty(GNNetwork.getAuthenticateStatus().getAuthToken()))
+{
+    GNNetwork.sendRequestAuthSocket();
+}
+```
+
+Realtime event handler: [docs/reference/EVENTS.md](/docs/reference/EVENTS.md).
+
+## 8. Dashboard / admin login
+
+`DashboardApi` public wrapper đi `RequestRole.Client`. Sau `loginByAdminAccountAsync`, backend resolve admin context từ `authToken`.
+
+```csharp
+var request = new DashboardModels.LoginByAdminAccountRequestData();
+request.username = "gnadmin";
+request.password = "123456";
+
+var res = await GNNetwork.dashboard.loginByAdminAccountAsync(request);
+if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
+if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
+```
+
+## 9. Method signature
+
+Đa số method có 2 form:
+
+```csharp
+// Callback form:
+GNNetwork.authenticate.loginByAccount(requestData, onResponse, overrideAuthToken, overrideSecretKey, customTags, timeout);
+
+// Async form:
+var res = await GNNetwork.authenticate.loginByAccountAsync(requestData, overrideAuthToken, overrideSecretKey, customTags, timeout);
+```
+
+Signature đầy đủ + override params (`overrideAuthToken`, `overrideSecretKey`, `customTags`, `timeout`): [docs/RULES.md § 8](/docs/RULES.md#8-method-signature--override-params).
+
+## 10. Response model
+
+Typed response có 5 public field: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`. Pattern check 2 tầng + full table ReturnCode/ErrorCode: [docs/reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
+
+## 11. Auth state, gameId, health check, upload
+
+```csharp
+GNNetwork.getAuthenticateStatus().getAuthToken();
+GNNetwork.getAuthenticateStatus().getUserId();
+
+GNNetwork.gnServerSettings.setGameId("your-game-id");
+
+await GNNetwork.healthCheckAsync();
+await GNNetwork.getAuthInfoAsync("some-auth-token");
+
+var bytes = new byte[] { 1, 2, 3, 4 };
+await GNNetwork.uploadFileAsync("file-001", bytes, "demo.bin", "application/octet-stream");
+
+var url = GNNetwork.getDownloadFileUrl("download-token-from-server");
+```
+
+## 12. Custom operation
+
+Low-level API dùng khi operation chưa expose wrapper:
+
+```csharp
+using XmobiTea.GearN;
+using XmobiTea.GearN.Common;
+using XmobiTea.GearN.Constant;
+using XmobiTea.GearN.Entity.Request;
+using XmobiTea.GearN.Entity.Response;
+
+public class ExampleRequestData
+{
+    [StringDataMember(code = ParameterCode.Key, mustNonNull = true)]
+    public string key;
+}
+
+public class ExampleResponseData
+{
+    [StringDataMember(code = ParameterCode.Value, isOptional = true)]
+    public string? value;
+}
+
+public class ExampleRequest : CustomOperationRequest<ExampleRequestData>
+{
+    protected override string operationCode => OperationCode.GetCustomData;
+    protected override RequestType requestType => RequestType.CharacterPlayer;
+    protected override RequestRole role => RequestRole.Client;
+
+    public ExampleRequest(ExampleRequestData requestData, int timeout = OperationRequest.defaultTimeOut)
+        : base(requestData, timeout) { }
+}
+
+public class ExampleResponse : CustomOperationResponse<ExampleResponseData> { }
+
+var requestData = new ExampleRequestData();
+requestData.key = "tutorial";
+
+var res = await GNNetwork.sendViaHttpAsync<ExampleRequest, ExampleResponse>(new ExampleRequest(requestData));
+```
+
+## 13. Platform / Unity
+
+- Detect platform: `GNNetwork.getPlatform()`.
+- Auth token/user id được cache qua `StorageService`.
+- `MessageType.MsgPack` giúp payload nhỏ hơn nếu server bật msgpack.
+- Socket phụ thuộc `PeerSocketVersion`/define compile trong project.
+
+## 14. Build & publish
+
+Build SDK qua Unity/package workflow của repo. Không dùng `npm build` cho Unity package này.
+
+## 15. Lỗi hay gặp
+
+Full checklist + anti-patterns: [docs/RULES.md § 10](/docs/RULES.md#10-anti-patterns--pitfalls). Return/error code table: [docs/reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
+
+## 16. File tham khảo trong repo
+
+- Entry public API: `Runtime/GNNetwork.cs`
+- API groups: `Runtime/GNNetwork*Api.cs`
+- Config asset type: `Runtime/Config/GNServerSettings.cs`
+- DTO/models: `Runtime/Entity/Models/*.cs`
+
+## 17. TL;DR
+
+1. Tạo/cấu hình `Resources/GNServerSettings` (trên thanh menu Unity, chọn XmobiTea GearN/Open Settings).
+2. Mọi call qua `GNNetwork.*`.
+3. Check `returnCode` trước, `errorCode` sau.
+4. Socket: login HTTP → subscribe handler → `connectSocket()`; chỉ `sendRequestAuthSocket()` khi cần re-auth thủ công.
+5. Rule chi tiết → [docs/RULES.md](/docs/RULES.md).

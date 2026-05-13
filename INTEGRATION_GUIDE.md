@@ -17,31 +17,38 @@ This guide shows how another Unity project should consume the GearN Unity Client
 ## 2. Basic Runtime Usage
 
 ```csharp
+using UnityEngine;
 using XmobiTea.GearN;
+using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-public class GearNBootstrap : UnityEngine.MonoBehaviour
+public class GearNBootstrap : MonoBehaviour
 {
     private async void Start()
     {
         await GNNetwork.syncTsAsync();
 
-        var loginResponse = await GNNetwork.authenticate.loginByCustomIdAsync(new AuthenticateModels.LoginByCustomIdRequestData
+        var loginResponse = await GNNetwork.authenticate.loginByCustomIdAsync(new AuthenticateModels.LoginByCustomIdRequestData()
         {
             customId = SystemInfo.deviceUniqueIdentifier,
-            createAccount = true,
+            createPlayerIfNotExists = true,
+            infoRequestParam = new AuthenticateModels.InfoRequestParam()
+            {
+                avatar = true,
+                displayName = true,
+            }
         });
 
-        if (loginResponse.hasError())
+        if (loginResponse.hasReturnCodeError() || loginResponse.errorCode != ErrorCode.Ok)
         {
-            UnityEngine.Debug.LogError(loginResponse.getDebugMessage());
+            UnityEngine.Debug.LogError(loginResponse.debugMessage);
             return;
         }
 
-        GNNetwork.setGameId("your-game-id");
+        GNNetwork.gnServerSettings.setGameId("your-game-id");
 
         var infoResponse = await GNNetwork.gamePlayer.getPlayerInformationAsync(new GamePlayerModels.GetPlayerInformationRequestData());
-        UnityEngine.Debug.Log(infoResponse.getDebugMessage());
+        UnityEngine.Debug.Log(infoResponse.debugMessage);
     }
 }
 ```
@@ -97,7 +104,7 @@ The SDK persists:
 If you want to replace the current auth state manually, use:
 
 - `GNNetwork.setNewAuthenticateStatus(...)`
-- `GNNetwork.setGameId(...)`
+- `GNNetwork.gnServerSettings.setGameId(...)`
 
 ## 6. When To Use Raw Transport
 
@@ -111,7 +118,7 @@ Use raw `GNNetwork.sendViaHttp(...)` or `GNNetwork.sendViaSocket(...)` only when
 
 ## 7. Where To Look For Operation Names
 
-- `API_MAP.md`
+- `docs/reference/API_INDEX.md`
 - `Runtime/GNNetwork*Api.cs`
 - `Runtime/Entity/Models/*RequestModels.cs`
 - `Runtime/Entity/Models/*Models.cs`

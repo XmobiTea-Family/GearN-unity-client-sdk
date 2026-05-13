@@ -1,0 +1,43 @@
+llms-full.txt — optional generated bundle placeholder
+
+Status: deprecated-safe stub.
+
+This repository no longer treats this file as a primary AI reading source because
+stale concatenated bundles can preserve outdated examples and broken relative
+links. Use the source documents below instead; they are the canonical inputs.
+
+Canonical reading order:
+
+1. /AGENTS.md
+2. /docs/AI_CHEATSHEET.md
+3. /docs/RULES.md
+4. /docs/ai-manifest.json
+5. /docs/reference/API_INDEX.md
+6. /docs/guides/<DOMAIN>.md for the target domain
+7. /docs/reference/dto/<DOMAIN>.md or grep reference/DTO_INDEX.md for DTO fields
+8. /Runtime/**/*.cs only when docs do not cover the public contract
+
+Conflict rule:
+
+- Cross-cutting route, permission, auth/socket, override, and error rules:
+  RULES.md wins.
+- Method signatures, DTO fields, and enum names:
+  reference/API_<GROUP>.md, reference/dto/<DOMAIN>.md, reference/ENUMS.md, then
+  Runtime/**/*.cs win.
+- This bundle placeholder never wins over source docs.
+
+Important direct links:
+
+- AI cheatsheet: /docs/AI_CHEATSHEET.md
+- Cross-cutting rules: /docs/RULES.md
+- Machine manifest: /docs/ai-manifest.json
+- API index: /docs/reference/API_INDEX.md
+- DTO index: /docs/reference/DTO_INDEX.md
+- Enums: /docs/reference/ENUMS.md
+- Config: /docs/reference/CONFIG.md
+- Events: /docs/reference/EVENTS.md
+- Error handling: /docs/reference/ERROR_HANDLING.md
+- Cookbook: /docs/COOKBOOK.md
+
+If a release needs a true full concatenated bundle again, regenerate it from the
+current source docs and include a generation timestamp plus source commit hash.

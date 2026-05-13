@@ -34,7 +34,7 @@ Socket backend selection is controlled by `GNServerSettings.peerSocketVersion`.
 
 - Keep typed request wrappers aligned with server operation codes
 - Keep DTO field names aligned with server parameter codes
-- If you change public API shape, update `API_MAP.md`, `REQUEST_FLOW.md`, and `INTEGRATION_GUIDE.md`
+- If you change public API shape, update `docs/reference/API_INDEX.md`, `REQUEST_FLOW.md`, and `INTEGRATION_GUIDE.md`
 - When changing persistence behavior, inspect `GNNetwork.cs`, `NetworkingPeer.cs`, and `StorageService.cs` together
 
 ## Known Characteristics

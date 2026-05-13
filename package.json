@@ -1,6 +1,6 @@
 {
   "name": "com.xmobitea.changx.gearn-unity-client-sdk",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "displayName": "XmobiTea GearN UnityClientSdk",
   "description": "XmobiTea Unity Toolkit packages",
   "unity": "2020.3",

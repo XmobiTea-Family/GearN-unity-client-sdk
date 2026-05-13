@@ -1324,7 +1324,7 @@ The operation set is the same:
 
 Current Unity-specific caveats:
 
-- The current Unity API exposes `getFuntionId` and `getFuntionAsync` instead of `getFunction` and `getFunctionAsync`.
+- The current Unity API exposes `getFunction` and `getFunctionAsync`.
 - The current Unity `CloudScriptModels.AddFunctionRequestData` and `EditFunctionRequestData` declare `canExecute` and `isLive` as `string`, not `bool`.
 - If an AI agent writes Unity usage code, it must read those current public types first instead of assuming the TypeScript signatures are identical.
 

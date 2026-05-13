@@ -89,7 +89,6 @@
 
 - auth token is stored under `[GN]_AUTH_TOKEN_KEY`
 - user ID is stored under `[GN]_USER_ID_KEY`
-- game ID is stored under `[GN]_GAME_ID_KEY`
 - successful responses can refresh auth token, user ID, and server timestamp
 
 ## Domain API Shape

@@ -836,6 +836,21 @@ namespace XmobiTea.GearN
             return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.GetCurrencyLogOperationRequest, GamePlayerResponseModels.GetCurrencyLogOperationResponse>(new GamePlayerRequestModels.GetCurrencyLogOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
         }
 
+        /// <summary>
+        /// Gets last login leaderboard.
+        /// </summary>
+        public void getLastLoginLeaderboard(GamePlayerModels.GetLastLoginLeaderboardRequestData requestData, Action1<GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        {
+            GNNetwork.sendViaHttp(new GamePlayerRequestModels.GetLastLoginLeaderboardOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+        }
+
+        /// <summary>
+        /// Gets last login leaderboard.
+        /// </summary>
+        public Task<GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse> getLastLoginLeaderboard(GamePlayerModels.GetLastLoginLeaderboardRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        {
+            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.GetLastLoginLeaderboardOperationRequest, GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse>(new GamePlayerRequestModels.GetLastLoginLeaderboardOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+        }
 
         /// <summary>
         /// Provides server-scoped operations for the parent API.
@@ -1656,6 +1671,22 @@ namespace XmobiTea.GearN
             public Task<GamePlayerResponseModels.GetCurrencyLogOperationResponse> getCurrencyLogAsync(GamePlayerModels.ServerGetCurrencyLogRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGetCurrencyLogOperationRequest, GamePlayerResponseModels.GetCurrencyLogOperationResponse>(new GamePlayerRequestModels.ServerGetCurrencyLogOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+            /// <summary>
+            /// Gets last login leaderboard.
+            /// </summary>
+            public void getLastLoginLeaderboard(GamePlayerModels.ServerGetLastLoginLeaderboardRequestData requestData, Action1<GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerGetLastLoginLeaderboardOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+            /// <summary>
+            /// Gets last login leaderboard.
+            /// </summary>
+            public Task<GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse> getLastLoginLeaderboard(GamePlayerModels.ServerGetLastLoginLeaderboardRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGetLastLoginLeaderboardOperationRequest, GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse>(new GamePlayerRequestModels.ServerGetLastLoginLeaderboardOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
         }
@@ -2479,6 +2510,22 @@ namespace XmobiTea.GearN
             public Task<GamePlayerResponseModels.GetCurrencyLogOperationResponse> getCurrencyLogAsync(GamePlayerModels.AdminGetCurrencyLogRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGetCurrencyLogOperationRequest, GamePlayerResponseModels.GetCurrencyLogOperationResponse>(new GamePlayerRequestModels.AdminGetCurrencyLogOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+            /// <summary>
+            /// Gets last login leaderboard.
+            /// </summary>
+            public void getLastLoginLeaderboard(GamePlayerModels.AdminGetLastLoginLeaderboardRequestData requestData, Action1<GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminGetLastLoginLeaderboardOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+            /// <summary>
+            /// Gets last login leaderboard.
+            /// </summary>
+            public Task<GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse> getLastLoginLeaderboard(GamePlayerModels.AdminGetLastLoginLeaderboardRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGetLastLoginLeaderboardOperationRequest, GamePlayerResponseModels.GetLastLoginLeaderboardOperationResponse>(new GamePlayerRequestModels.AdminGetLastLoginLeaderboardOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
         }

@@ -1,0 +1,46 @@
+# GearN TypeScript Client SDK
+
+> TypeScript SDK cho GearN backend: authenticate, realtime socket, player/inventory/group/multiplayer/cloudscript APIs. Package: `@xmobitea/gearn-typescript-client-sdk`. Entrypoint: static class `GNNetwork`. Cài: `npm install @xmobitea/gearn-typescript-client-sdk`.
+
+Rule canonical: [docs/RULES.md](/docs/RULES.md). Đọc trước khi sinh code.
+
+## Start here
+
+- [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md): one-page reference (decision tree, mandatory pattern, top pitfalls)
+- [docs/RULES.md](/docs/RULES.md): single source of truth cho route, permission, self/other-self, socket, error
+- [AGENTS.md](/AGENTS.md): full AI entry guide
+- [docs/ai-manifest.json](/docs/ai-manifest.json): machine-readable manifest (schemaVersion=3)
+
+## Reference
+
+- [docs/reference/API_INDEX.md](/docs/reference/API_INDEX.md): 11 API group, 945 public async methods (bảng method → DTO → response class)
+- [docs/reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md): 2506 DTO, grep target (đừng load full)
+- [docs/reference/dto/](/docs/reference/dto/): DTO field-level theo từng domain
+- [docs/reference/ENUMS.md](/docs/reference/ENUMS.md): giá trị numeric của mọi enum
+- [docs/reference/CONFIG.md](/docs/reference/CONFIG.md): schema `GNServerSettings`
+- [docs/reference/PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md): permission route/target/flag offline
+- [docs/reference/EVENTS.md](/docs/reference/EVENTS.md): 6 realtime event handler
+- [docs/reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md): pattern check `ReturnCode` + `ErrorCode`
+
+## Cookbook
+
+- [docs/COOKBOOK.md](/docs/COOKBOOK.md): 16 scenario end-to-end (init, login, socket, matchmaking, store, cloudscript, cleanup, diagnose permission)
+
+## Guides (per domain)
+
+- [docs/guides/AUTHENTICATE.md](/docs/guides/AUTHENTICATE.md)
+- [docs/guides/MASTER_PLAYER.md](/docs/guides/MASTER_PLAYER.md)
+- [docs/guides/GAME_PLAYER.md](/docs/guides/GAME_PLAYER.md)
+- [docs/guides/CHARACTER_PLAYER.md](/docs/guides/CHARACTER_PLAYER.md)
+- [docs/guides/INVENTORY.md](/docs/guides/INVENTORY.md)
+- [docs/guides/GROUP.md](/docs/guides/GROUP.md)
+- [docs/guides/STORE_INVENTORY.md](/docs/guides/STORE_INVENTORY.md)
+- [docs/guides/MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md)
+- [docs/guides/CONTENT.md](/docs/guides/CONTENT.md)
+- [docs/guides/CLOUDSCRIPT.md](/docs/guides/CLOUDSCRIPT.md)
+- [docs/guides/DASHBOARD.md](/docs/guides/DASHBOARD.md)
+
+## Optional
+
+- [README.MD](/README.MD): full package README
+- [docs/llms-full.txt](/docs/llms-full.txt): optional generated-bundle placeholder; source docs above always win

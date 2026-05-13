@@ -2121,6 +2121,51 @@
         {
         }
 
+        /// <summary>
+        /// Represents the request payload for the get last login leaderboard operation.
+        /// </summary>
+        public class GetLastLoginLeaderboardRequestData
+        {
+            /// <summary>
+            /// Stores the info request param value.
+            /// </summary>
+            [GNHashtableDataMember(code = ParameterCode.InfoRequestParam, mustNonNull = true)]
+            public InfoRequestParam infoRequestParam;
+
+            /// <summary>
+            /// Stores the skip value.
+            /// </summary>
+            [NumberDataMember(code = ParameterCode.Skip, defaultValue = 0, minValue = 0, mustInt = true, isOptional = true)]
+            public int? skip;
+
+            /// <summary>
+            /// Stores the limit value.
+            /// </summary>
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            public int? limit;
+
+            /// <summary>
+            /// Stores the load from cache value.
+            /// </summary>
+            [BooleanDataMember(code = ParameterCode.LoadFromCache, defaultValue = true, isOptional = true)]
+            public bool? loadFromCache;
+
+        }
+
+        /// <summary>
+        /// Represents the server-scoped request payload for the get last login leaderboard operation.
+        /// </summary>
+        public class ServerGetLastLoginLeaderboardRequestData : GetLastLoginLeaderboardRequestData
+        {
+        }
+
+        /// <summary>
+        /// Represents the admin-scoped request payload for the get last login leaderboard operation.
+        /// </summary>
+        public class AdminGetLastLoginLeaderboardRequestData : ServerGetLastLoginLeaderboardRequestData
+        {
+        }
+
     }
 
     /// <summary>
@@ -2708,6 +2753,19 @@
         /// Represents the response payload for the get currency leaderboard operation.
         /// </summary>
         public class GetCurrencyLeaderboardResponseData
+        {
+            /// <summary>
+            /// Stores the results value.
+            /// </summary>
+            [GNArrayDataMember(code = ParameterCode.Results, elementCls = typeof(GamePlayerLeaderboardResponseData))]
+            public List<GamePlayerLeaderboardResponseData> results;
+
+        }
+
+        /// <summary>
+        /// Represents the response payload for the get last login leaderboard operation.
+        /// </summary>
+        public class GetLastLoginLeaderboardResponseData
         {
             /// <summary>
             /// Stores the results value.

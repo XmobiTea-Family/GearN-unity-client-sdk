@@ -1,86 +1,37 @@
-# AGENTS
+# GearN Unity Client SDK — AI Entry Guide
 
-This file tells an AI agent how to work inside this Unity package without re-exploring the codebase from scratch.
+Entry point cho AI agent / code assistant khi làm việc với repo hoặc package Unity này.
 
-## Read These Files First
+Mục tiêu:
 
-1. `Runtime/GNNetwork.cs`
-2. `Runtime/Networking/NetworkingPeer.cs`
-3. `Runtime/Networking/Http/HttpPeer.cs`
-4. `Runtime/Networking/Socket/SocketPeer.cs`
-5. `Runtime/Config/GNServerSettings.cs`
-6. `API_MAP.md`
-7. `REQUEST_FLOW.md`
-8. `DOMAIN_RELATIONSHIP.md`
+- Sinh code tích hợp SDK đúng từ đầu cho Unity/C#.
+- Không cần đọc sâu `Runtime/` để hiểu public contract thông thường.
+- Tránh suy diễn sai về route, secret, permission, auth/socket flow.
 
-## Repository Boundaries
+## 1. Reading order
 
-- SDK runtime source lives in `Runtime/`
-- Unity editor tooling for the package lives in `Editor/`
-- Ignore all `.meta` files unless the task is explicitly about Unity asset metadata
-- There is no third-party package cache or build output checked into this repository
+1. [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md) — one-page reference, decision tree, mandatory pattern.
+2. [docs/RULES.md](/docs/RULES.md) — **canonical** cho mọi rule cross-cutting.
+3. [docs/ai-manifest.json](/docs/ai-manifest.json) — machine-readable manifest cho tooling.
+4. [docs/reference/API_INDEX.md](/docs/reference/API_INDEX.md) — bảng method theo 11 API group.
+5. Guide đúng domain trong [docs/guides/](/docs/guides/).
+6. DTO field qua [docs/reference/dto/](/docs/reference/dto/) hoặc grep [docs/reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md).
+7. Public type trong `Runtime/**/*.cs` — fallback khi docs chưa cover.
 
-## What This Package Is
+Bảng chọn API group theo yêu cầu: xem [docs/AI_CHEATSHEET.md § 2](/docs/AI_CHEATSHEET.md#2-decision-tree-tôi-cần-làm-gì). Rule router/permission/socket: xem [docs/RULES.md](/docs/RULES.md); permission operation/flag offline: [docs/reference/PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md).
 
-- A Unity client SDK for the GearN server
-- A facade package that hides HTTP and socket transport details behind `GNNetwork`
-- A strongly-typed wrapper over GearN request types, operation codes, request roles, and DTOs
+## 2. Khi nào được đọc `Runtime/`
 
-## What This Package Is Not
+Chỉ đọc `Runtime/` khi:
 
-- Not a gameplay sample project
-- Not a server implementation
-- Not a standalone app with scenes, gameplay state, or content assets
+- Sửa chính SDK.
+- Debug behavior nội bộ repo.
+- Verify public contract mà docs chưa mô tả đủ.
 
-## Public Contract Rules
+Với mục tiêu tích hợp package: **không** bắt đầu từ implementation chi tiết. Nguồn chính: `AI_CHEATSHEET.md` → `RULES.md` → guide domain → `API_<GROUP>.md` → `Runtime/**/*.cs` khi cần xác nhận chữ ký public.
 
-- `Runtime/GNNetwork.cs` is the public entry point that other Unity projects are expected to call
-- `GNNetwork` persists auth token, user ID, and game ID in `PlayerPrefs`
-- HTTP is the default request path for almost every typed domain operation
-- Socket is mainly for realtime events and optional raw transport use
-- Request role controls which secret key is used when no override is provided:
-  - `Client` -> `clientSecretKey`
-  - `Server` -> `serverSecretKey`
-  - `Admin` -> `adminSecretKey`
-- Domain APIs map directly to server `RequestType` values:
-  - `Authenticate`
-  - `CharacterPlayer`
-  - `Content`
-  - `Dashboard`
-  - `GamePlayer`
-  - `Group`
-  - `Inventory`
-  - `MasterPlayer`
-  - `StoreInventory`
-  - `Multiplayer`
-  - `CloudScript`
+Nếu `docs` + public C# type vẫn chưa đủ kết luận, hỏi lại con người hoặc ghi rõ giả định — không bịa behavior.
 
-## Important Runtime Facts
+## 3. Scenario end-to-end
 
-- `GNServerSettings` is loaded from Unity `Resources`
-- `GNNetwork` static initialization only finishes the full runtime setup when `Application.isPlaying` is true
-- `ServiceUpdate` is created automatically and marked as `DontDestroyOnLoad`
-- Socket event handlers are auto-discovered from `IServerEventHandler` implementations
-- Extra server event handlers can also be registered manually with `GNNetwork.subscriberServerEventHandler(...)`
-
-## When Editing
-
-- Preserve the public method names in `GNNetwork*Api.cs` unless the task explicitly changes the SDK contract
-- Keep request wrappers aligned with `OperationCode`, `RequestType`, and `RequestRole`
-- If a change affects a domain API, update the matching DTO files under `Runtime/Entity/Models/`
-- If a change affects transport, check both `NetworkingPeer`, `HttpPeer`, and `SocketPeer`
-- If a change affects configuration, check both `GNServerSettings` and `GNServerSettingsEditor`
-
-## High-Risk Areas
-
-- `Runtime/Networking/Socket/`: compile-symbol-dependent implementations
-- `Runtime/Networking/Http/`: behavior differs by HTTP backend selection
-- `Runtime/Entity/Models/`: request and response DTO compatibility with the server contract
-- `Runtime/Helper/ConverterService.cs` and `Runtime/Helper/ParseGNHelper.cs`: serialization and parsing glue
-
-## Unity Define Symbols
-
-- `UNITY_USING_BEST_HTTP`
-- `UNITY_USING_SOCKET_IO_UNITY`
-
-Those defines change which socket and HTTP implementations are available at compile time.
+16 scenario end-to-end (config settings asset, login, socket, realtime event, matchmaking, store, cloudscript, cleanup, diagnose permission, ...): [docs/COOKBOOK.md](/docs/COOKBOOK.md).

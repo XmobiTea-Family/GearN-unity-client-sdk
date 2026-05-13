@@ -392,6 +392,14 @@
         }
 
         /// <summary>
+        /// Represents the typed response for the get last login leaderboard operation.
+        /// </summary>
+        public class GetLastLoginLeaderboardOperationResponse : CustomOperationResponse<GamePlayerModels.GetLastLoginLeaderboardResponseData>
+        {
+
+        }
+
+        /// <summary>
         /// Represents the typed response for the get create leaderboard operation.
         /// </summary>
         public class GetCreateLeaderboardOperationResponse : CustomOperationResponse<GamePlayerModels.GetCreateLeaderboardResponseData>

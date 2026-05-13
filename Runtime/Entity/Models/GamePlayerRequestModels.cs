@@ -2910,6 +2910,62 @@
             public AdminGetCurrencyLogOperationRequest(GamePlayerModels.AdminGetCurrencyLogRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
+        /// <summary>
+        /// Builds the get last login leaderboard operation request.
+        /// </summary>
+        public class GetLastLoginLeaderboardOperationRequest : CustomOperationRequest<GamePlayerModels.GetLastLoginLeaderboardRequestData>
+        {
+            /// <summary>
+            /// Gets the operation code used by this request wrapper.
+            /// </summary>
+            protected override string operationCode => OperationCode.GetLastLoginLeaderboard;
+            /// <summary>
+            /// Gets the request type used by this request wrapper.
+            /// </summary>
+            protected override RequestType requestType => RequestType.GamePlayer;
+            /// <summary>
+            /// Gets the request role used by this request wrapper.
+            /// </summary>
+            protected override RequestRole role => RequestRole.Client;
+
+            /// <summary>
+            /// Initializes a new instance of the GetLastLoginLeaderboardOperationRequest class.
+            /// </summary>
+            public GetLastLoginLeaderboardOperationRequest(GamePlayerModels.GetLastLoginLeaderboardRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+        }
+
+        /// <summary>
+        /// Builds the server-scoped get last login leaderboard operation request.
+        /// </summary>
+        public class ServerGetLastLoginLeaderboardOperationRequest : GetLastLoginLeaderboardOperationRequest
+        {
+            /// <summary>
+            /// Gets the request role used by this request wrapper.
+            /// </summary>
+            protected override RequestRole role => RequestRole.Server;
+
+            /// <summary>
+            /// Initializes a new instance of the ServerGetLastLoginLeaderboardOperationRequest class.
+            /// </summary>
+            public ServerGetLastLoginLeaderboardOperationRequest(GamePlayerModels.ServerGetLastLoginLeaderboardRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+        }
+
+        /// <summary>
+        /// Builds the admin-scoped get last login leaderboard operation request.
+        /// </summary>
+        public class AdminGetLastLoginLeaderboardOperationRequest : GetLastLoginLeaderboardOperationRequest
+        {
+            /// <summary>
+            /// Gets the request role used by this request wrapper.
+            /// </summary>
+            protected override RequestRole role => RequestRole.Admin;
+
+            /// <summary>
+            /// Initializes a new instance of the AdminGetLastLoginLeaderboardOperationRequest class.
+            /// </summary>
+            public AdminGetLastLoginLeaderboardOperationRequest(GamePlayerModels.AdminGetLastLoginLeaderboardRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+        }
+
     }
 
 }
