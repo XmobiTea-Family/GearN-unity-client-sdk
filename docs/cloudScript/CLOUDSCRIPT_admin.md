@@ -79,6 +79,11 @@ Rule:
 - Với route `admin`, phần lớn method yêu cầu `userId` (hoặc entity id) rõ ràng — không bỏ trống như route `client`.
 - **KHÔNG dùng `any` cho `response` / item array / `args`** — base type cho helper là `CustomOperationResponse`; item array dùng `GenericModels.CurrencyItem[]` / `StatisticsItem[]` / `DataItem[]` …; `args` dùng `unknown` rồi narrow. Đầy đủ pattern + bảng mapping: [CLOUDSCRIPT_USAGE.md § 5](/docs/cloudScript/CLOUDSCRIPT_USAGE.md#5-typing--không-dùng-any-vô-tội-vạ).
 
+Lưu ý:
+- code trong `CloudScript` bắt buộc viết bằng `typescript`.
+- File mô tả / giải thích / spec: có thể dùng `csharp`-style pseudo/code để dễ đọc.
+- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp`
+
 ```ts
 // Helper chuẩn cho mọi ví dụ
 const assertResponseOk = (response: CustomOperationResponse, actionName: string): void => {
@@ -1237,11 +1242,6 @@ Source trong repo này:
 31. [ContentModels.cs](/Runtime/Entity/Models/ContentModels.cs)
 32. [CloudScriptModels.cs](/Runtime/Entity/Models/CloudScriptModels.cs)
 33. [MultiplayerModels.cs](/Runtime/Entity/Models/MultiplayerModels.cs)
-
-Lưu ý:
-- `CloudScript` script code: bắt buộc viết bằng `typescript`.
-- File mô tả / giải thích / spec: có thể dùng `csharp`-style pseudo/code để dễ đọc.
-- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp`
 
 ## 13. Kết luận ngắn
 
