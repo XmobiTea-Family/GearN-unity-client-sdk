@@ -90,6 +90,7 @@ Rule nhanh:
 | `getTsCreateAsync` | Cần đọc thời điểm tạo account | `userId?` | `MasterPlayerResponseData` | Kết quả ở `infoResponseParameters.tsCreate` | `Ok`, `MasterPlayerNotFound` |
 | `getTsLastLoginAsync` | Cần đọc lần login gần nhất | `userId?` | `MasterPlayerResponseData` | Kết quả ở `infoResponseParameters.tsLastLogin` | `Ok`, `MasterPlayerNotFound` |
 | `getPushNotificationAsync` | Cần đọc danh sách push token đã đăng ký | `userId?` | `MasterPlayerResponseData` | Dữ liệu nằm ở `infoResponseParameters.pushNotifications`, không phải `results` | `Ok`, `MasterPlayerNotFound` |
+| `getOnlineStatusAsync` | Cần biết trạng thái socket hiện tại | `userId?` | `MasterPlayerResponseData` | Dữ liệu nằm ở `infoResponseParameters.onlineStatus`, không phải `results` | `Ok`, `MasterPlayerNotFound` |
 
 ### Search player, leaderboard và log
 
@@ -295,7 +296,7 @@ Những response chính AI cần nhớ:
 - `addPushNotificationAsync` trả `AddPushNotificationResponseData` với `pushId`.
 - `sendPushNotificationAsync` trả `SendPushNotificationResponseData` với `message`.
 - `addSegmentAsync`, `removeSegmentAsync`, `setTagAsync`, `removeTagAsync`, `changeAccountPasswordAsync`, `resetAccountPasswordAsync`, `setAvatarAsync`, `setCountryCodeAsync`, `setDisplayNameAsync`, `setEmailAsync`, `setPlayerBanAsync`, `updateTsLastLoginAsync`, toàn bộ `unlink*Async`, `sendSocketOperationEventAsync`, `sendEmailAsync`, `removePushNotificationAsync` trả `EmptyResponseData`.
-- `setCustomDataAsync`, `changePlayerCurrencyAsync`, `setPlayerDataAsync`, `changePlayerStatisticsAsync` và đa số `link*Async` trả `MasterPlayerResponseData`.
+- `setCustomDataAsync`, `changePlayerCurrencyAsync`, `setPlayerDataAsync`, `changePlayerStatisticsAsync`, `getOnlineStatusAsync` và đa số `link*Async` trả `MasterPlayerResponseData`.
 
 ## 9. Cảnh Báo Implementation Hiện Tại
 
@@ -305,6 +306,7 @@ Những response chính AI cần nhớ:
 - `linkGenericServiceAsync` là case đặc biệt vì response data có thể chứa `errorMessage`.
 - `getPushNotificationAsync` không trả `results`; dữ liệu nằm trong `infoResponseParameters.pushNotifications`.
 - Package có expose `sendEmailAsync`, `sendPushNotificationAsync`, `sendSocketOperationEventAsync` ở cả `client`, `server`, `admin`, nhưng trong production nên ưu tiên `server/admin` cho các flow có trust boundary cao.
+- `getOnlineStatusAsync` không trả boolean `isOnline`; bạn phải tự diễn giải từ `socketId` theo contract backend thực tế.
 
 ## 10. Best Practices
 
@@ -316,6 +318,7 @@ Những response chính AI cần nhớ:
 - Với `forceLink`, chỉ bật khi flow ownership merge/reclaim đã được thiết kế rõ.
 - Với `linkGameCenterAsync`, chuẩn bị đầy đủ verification bundle từ platform trước khi gọi SDK.
 - Với `sendSocketOperationEventAsync`, chỉ dùng khi bạn biết receiver đang connect socket và đã auth socket thành công.
+- Không giả định `getOnlineStatusAsync` trả boolean.
 
 ## 11. Ví Dụ Khuyến Nghị
 
@@ -453,3 +456,4 @@ var pushId = response.responseData.pushId;
 - Nếu đang lấy log, có dùng `token` cho page tiếp chưa.
 - Nếu đang gửi socket event, receiver có socket session hợp lệ không.
 - Có kiểm tra `hasReturnCodeError()` trước `errorCode` chưa.
+- Nếu đang dùng `getOnlineStatusAsync`, có nhớ rằng response không có boolean `isOnline` không.

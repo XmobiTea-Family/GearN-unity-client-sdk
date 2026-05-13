@@ -3578,6 +3578,39 @@
         {
         }
 
+        /// <summary>
+        /// Represents the request payload for the get online status operation.
+        /// </summary>
+        public class GetOnlineStatusRequestData
+        {
+            /// <summary>
+            /// Stores the user ID value.
+            /// </summary>
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10, isOptional = true)]
+            public string? userId;
+
+        }
+
+        /// <summary>
+        /// Represents the server-scoped request payload for the get online status operation.
+        /// </summary>
+        public class ServerGetOnlineStatusRequestData : GetOnlineStatusRequestData
+        {
+            /// <summary>
+            /// Stores the user ID value.
+            /// </summary>
+            [StringDataMember(code = ParameterCode.UserId, minLength = 10, maxLength = 10, mustNonNull = true)]
+            public new string userId;
+
+        }
+
+        /// <summary>
+        /// Represents the admin-scoped request payload for the get online status operation.
+        /// </summary>
+        public class AdminGetOnlineStatusRequestData : ServerGetOnlineStatusRequestData
+        {
+        }
+
     }
 
     /// <summary>
@@ -3706,6 +3739,12 @@
             public bool? pushNotifications;
 
             /// <summary>
+            /// Stores the online status value.
+            /// </summary>
+            [BooleanDataMember(code = ParameterCode.OnlineStatus, isOptional = true, defaultValue = false)]
+            public bool? onlineStatus;
+
+            /// <summary>
             /// Stores the player data key collection.
             /// </summary>
             [GNArrayDataMember(code = ParameterCode.PlayerDataKeys, isOptional = true, elementCls = typeof(string))]
@@ -3734,6 +3773,25 @@
             /// </summary>
             [GNArrayDataMember(code = ParameterCode.TagKeys, isOptional = true, elementCls = typeof(string))]
             public List<string>? tagKeys;
+
+        }
+
+        /// <summary>
+        /// Represents the response payload for the online status operation.
+        /// </summary>
+        public class OnlineStatusItem
+        {
+            /// <summary>
+            /// Stores the timestamp last login value.
+            /// </summary>
+            [NumberDataMember(code = ParameterCode.TsLastLogin)]
+            public long tsLastLogin;
+
+            /// <summary>
+            /// Stores the socket ID value.
+            /// </summary>
+            [StringDataMember(code = ParameterCode.SocketId)]
+            public string socketId;
 
         }
 
@@ -4206,6 +4264,12 @@
             /// </summary>
             [GNArrayDataMember(code = ParameterCode.PushNotifications, isOptional = true, elementCls = typeof(MasterPlayerModels.PushNotificationItem))]
             public List<MasterPlayerModels.PushNotificationItem>? pushNotifications;
+
+            /// <summary>
+            /// Stores the online status value.
+            /// </summary>
+            [GNHashtableDataMember(code = ParameterCode.OnlineStatus, isOptional = true)]
+            public OnlineStatusItem? onlineStatus;
 
         }
 

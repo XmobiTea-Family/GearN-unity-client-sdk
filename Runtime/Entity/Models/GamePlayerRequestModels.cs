@@ -522,63 +522,6 @@
 
 
         /// <summary>
-        /// Builds the get online status operation request.
-        /// </summary>
-        public class GetOnlineStatusOperationRequest : CustomOperationRequest<GamePlayerModels.GetOnlineStatusRequestData>
-        {
-            /// <summary>
-            /// Gets the operation code used by this request wrapper.
-            /// </summary>
-            protected override string operationCode => OperationCode.GetOnlineStatus;
-            /// <summary>
-            /// Gets the request type used by this request wrapper.
-            /// </summary>
-            protected override RequestType requestType => RequestType.GamePlayer;
-            /// <summary>
-            /// Gets the request role used by this request wrapper.
-            /// </summary>
-            protected override RequestRole role => RequestRole.Client;
-
-            /// <summary>
-            /// Initializes a new instance of the GetOnlineStatusOperationRequest class.
-            /// </summary>
-            public GetOnlineStatusOperationRequest(GamePlayerModels.GetOnlineStatusRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
-        }
-
-        /// <summary>
-        /// Builds the server-scoped get online status operation request.
-        /// </summary>
-        public class ServerGetOnlineStatusOperationRequest : GetOnlineStatusOperationRequest
-        {
-            /// <summary>
-            /// Gets the request role used by this request wrapper.
-            /// </summary>
-            protected override RequestRole role => RequestRole.Server;
-
-            /// <summary>
-            /// Initializes a new instance of the ServerGetOnlineStatusOperationRequest class.
-            /// </summary>
-            public ServerGetOnlineStatusOperationRequest(GamePlayerModels.ServerGetOnlineStatusRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
-        }
-
-        /// <summary>
-        /// Builds the admin-scoped get online status operation request.
-        /// </summary>
-        public class AdminGetOnlineStatusOperationRequest : GetOnlineStatusOperationRequest
-        {
-            /// <summary>
-            /// Gets the request role used by this request wrapper.
-            /// </summary>
-            protected override RequestRole role => RequestRole.Admin;
-
-            /// <summary>
-            /// Initializes a new instance of the AdminGetOnlineStatusOperationRequest class.
-            /// </summary>
-            public AdminGetOnlineStatusOperationRequest(GamePlayerModels.AdminGetOnlineStatusRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
-        }
-
-
-        /// <summary>
         /// Builds the get player ban operation request.
         /// </summary>
         public class GetPlayerBanOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerBanRequestData>

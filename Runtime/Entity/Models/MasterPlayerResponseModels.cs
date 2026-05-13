@@ -695,6 +695,14 @@
 
         }
 
+        /// <summary>
+        /// Maps the GetOnlineStatus operation to a typed response wrapper.
+        /// </summary>
+        public class GetOnlineStatusOperationResponse : CustomOperationResponse<MasterPlayerModels.MasterPlayerResponseData>
+        {
+
+        }
+
     }
 
 }

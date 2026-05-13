@@ -1537,12 +1537,6 @@
             public PermissionRulesParam? removePlayerItem;
 
             /// <summary>
-            /// Stores the get online status value.
-            /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.GetOnlineStatus, isOptional = true)]
-            public PermissionRulesParam? getOnlineStatus;
-
-            /// <summary>
             /// Stores the create group value.
             /// </summary>
             [GNHashtableDataMember(code = ParameterCode.CreateGroup, isOptional = true)]
@@ -3078,6 +3072,12 @@
             /// </summary>
             [GNHashtableDataMember(code = ParameterCode.GetPushNotification, isOptional = true)]
             public PermissionRulesParam? getPushNotification;
+
+            /// <summary>
+            /// Stores the get online status value.
+            /// </summary>
+            [GNHashtableDataMember(code = ParameterCode.GetOnlineStatus, isOptional = true)]
+            public PermissionRulesParam? getOnlineStatus;
 
         }
 

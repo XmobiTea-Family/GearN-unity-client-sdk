@@ -165,22 +165,6 @@ namespace XmobiTea.GearN
         }
 
         /// <summary>
-        /// Gets online status.
-        /// </summary>
-        public void getOnlineStatus(GamePlayerModels.GetOnlineStatusRequestData requestData, Action1<GamePlayerResponseModels.GetOnlineStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
-        {
-            GNNetwork.sendViaHttp(new GamePlayerRequestModels.GetOnlineStatusOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
-        }
-
-        /// <summary>
-        /// Gets online status asynchronously.
-        /// </summary>
-        public Task<GamePlayerResponseModels.GetOnlineStatusOperationResponse> getOnlineStatusAsync(GamePlayerModels.GetOnlineStatusRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
-        {
-            return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.GetOnlineStatusOperationRequest, GamePlayerResponseModels.GetOnlineStatusOperationResponse>(new GamePlayerRequestModels.GetOnlineStatusOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
-        }
-
-        /// <summary>
         /// Gets player ban.
         /// </summary>
         public void getPlayerBan(GamePlayerModels.GetPlayerBanRequestData requestData, Action1<GamePlayerResponseModels.GetPlayerBanOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
@@ -999,22 +983,6 @@ namespace XmobiTea.GearN
             public Task<GamePlayerResponseModels.GetIpAddressCreateOperationResponse> getIpAddressCreateAsync(GamePlayerModels.ServerGetIpAddressCreateRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGetIpAddressCreateOperationRequest, GamePlayerResponseModels.GetIpAddressCreateOperationResponse>(new GamePlayerRequestModels.ServerGetIpAddressCreateOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
-            }
-
-            /// <summary>
-            /// Gets online status.
-            /// </summary>
-            public void getOnlineStatus(GamePlayerModels.ServerGetOnlineStatusRequestData requestData, Action1<GamePlayerResponseModels.GetOnlineStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
-            {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.ServerGetOnlineStatusOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
-            }
-
-            /// <summary>
-            /// Gets online status asynchronously.
-            /// </summary>
-            public Task<GamePlayerResponseModels.GetOnlineStatusOperationResponse> getOnlineStatusAsync(GamePlayerModels.ServerGetOnlineStatusRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
-            {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.ServerGetOnlineStatusOperationRequest, GamePlayerResponseModels.GetOnlineStatusOperationResponse>(new GamePlayerRequestModels.ServerGetOnlineStatusOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             /// <summary>
@@ -1838,22 +1806,6 @@ namespace XmobiTea.GearN
             public Task<GamePlayerResponseModels.GetIpAddressCreateOperationResponse> getIpAddressCreateAsync(GamePlayerModels.AdminGetIpAddressCreateRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGetIpAddressCreateOperationRequest, GamePlayerResponseModels.GetIpAddressCreateOperationResponse>(new GamePlayerRequestModels.AdminGetIpAddressCreateOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
-            }
-
-            /// <summary>
-            /// Gets online status.
-            /// </summary>
-            public void getOnlineStatus(GamePlayerModels.AdminGetOnlineStatusRequestData requestData, Action1<GamePlayerResponseModels.GetOnlineStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
-            {
-                GNNetwork.sendViaHttp(new GamePlayerRequestModels.AdminGetOnlineStatusOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
-            }
-
-            /// <summary>
-            /// Gets online status asynchronously.
-            /// </summary>
-            public Task<GamePlayerResponseModels.GetOnlineStatusOperationResponse> getOnlineStatusAsync(GamePlayerModels.AdminGetOnlineStatusRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
-            {
-                return GNNetwork.sendViaHttpAsync<GamePlayerRequestModels.AdminGetOnlineStatusOperationRequest, GamePlayerResponseModels.GetOnlineStatusOperationResponse>(new GamePlayerRequestModels.AdminGetOnlineStatusOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
             /// <summary>

@@ -283,8 +283,12 @@ Mỗi section bên dưới là 1 class DTO. Field table cho biết: tên field, 
     - [SendPushNotificationRequestData](#sendpushnotificationrequestdata)
     - [ServerSendPushNotificationRequestData](#serversendpushnotificationrequestdata)
     - [AdminSendPushNotificationRequestData](#adminsendpushnotificationrequestdata)
+    - [GetOnlineStatusRequestData](#getonlinestatusrequestdata)
+    - [ServerGetOnlineStatusRequestData](#servergetonlinestatusrequestdata)
+    - [AdminGetOnlineStatusRequestData](#admingetonlinestatusrequestdata)
     - [PushNotificationItem](#pushnotificationitem)
     - [InfoResponseParameters](#inforesponseparameters)
+    - [OnlineStatusItem](#onlinestatusitem)
     - [MasterPlayerResponseData](#masterplayerresponsedata)
     - [GenericServiceMasterPlayerResponseData](#genericservicemasterplayerresponsedata)
     - [MasterPlayerWithUserIdResponseData](#masterplayerwithuseridresponsedata)
@@ -571,6 +575,9 @@ Mỗi section bên dưới là 1 class DTO. Field table cho biết: tên field, 
     - [SendPushNotificationOperationRequest](#sendpushnotificationoperationrequest)
     - [ServerSendPushNotificationOperationRequest](#serversendpushnotificationoperationrequest)
     - [AdminSendPushNotificationOperationRequest](#adminsendpushnotificationoperationrequest)
+    - [GetOnlineStatusOperationRequest](#getonlinestatusoperationrequest)
+    - [ServerGetOnlineStatusOperationRequest](#servergetonlinestatusoperationrequest)
+    - [AdminGetOnlineStatusOperationRequest](#admingetonlinestatusoperationrequest)
 - **MasterPlayerResponseModels** (from `MasterPlayerResponseModels.ts`)
     - [AddSegmentOperationResponse](#addsegmentoperationresponse)
     - [ChangeAccountPasswordOperationResponse](#changeaccountpasswordoperationresponse)
@@ -658,6 +665,7 @@ Mỗi section bên dưới là 1 class DTO. Field table cho biết: tên field, 
     - [RemovePushNotificationOperationResponse](#removepushnotificationoperationresponse)
     - [GetPushNotificationOperationResponse](#getpushnotificationoperationresponse)
     - [SendPushNotificationOperationResponse](#sendpushnotificationoperationresponse)
+    - [GetOnlineStatusOperationResponse](#getonlinestatusoperationresponse)
 
 ---
 
@@ -696,6 +704,7 @@ Selects which optional master-player fields should be returned in `infoResponseP
 | `email` | `boolean` | no | Includes the email currently stored for the player. — _default=false_ |
 | `tsLastLogin` | `boolean` | no | Includes the last-login timestamp. — _default=false_ |
 | `pushNotifications` | `boolean` | no | Includes registered push-notification endpoints. — _default=false_ |
+| `onlineStatus` | `boolean` | no | Includes the player's online status, if supported by the connected game server. — _default=false_ |
 | `playerDataKeys` | `Array<string>` | no | Restricts `playerDatas` to the specified keys when that field is requested. — _elementCls=String_ |
 | `playerCurrencyKeys` | `Array<string>` | no | Restricts `playerCurrencies` to the specified currency keys when that field is requested. — _elementCls=String_ |
 | `playerStatisticsKeys` | `Array<string>` | no | Restricts `playerStatistics` to the specified statistic keys when that field is requested. — _elementCls=String_ |
@@ -3093,6 +3102,32 @@ Defines the request payload for AdminSendPushNotification.
 
 _Không có field public (payload rỗng)._
 
+### GetOnlineStatusRequestData
+
+Defines the request payload for GetOnlineStatus.
+
+<!-- prettier-ignore -->
+| Field | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `userId` | `string` | no | _minLength=10, maxLength=10_ |
+
+### ServerGetOnlineStatusRequestData
+
+Extends: `GetOnlineStatusRequestData`
+
+Defines the request payload for ServerGetOnlineStatus.
+
+_Không có field public (payload rỗng)._
+
+### AdminGetOnlineStatusRequestData
+
+Extends: `ServerGetOnlineStatusRequestData`
+
+Defines the request payload for AdminGetOnlineStatus.
+
+_Không có field public (payload rỗng)._
+
+
 ### PushNotificationItem
 
 Describes one registered push endpoint stored for a player.
@@ -3127,6 +3162,17 @@ Contains the optional fields requested through `InfoRequestParam`.
 | `countryCode` | `string` | no | Country code associated with the master player account. |
 | `email` | `string` | no | Email address linked to the master player account. |
 | `pushNotifications` | `Array<MasterPlayerModels.PushNotificationItem>` | no | Registered push endpoints when `pushNotifications` was requested. — _elementCls=MasterPlayerModels.PushNotificationItem_ |
+| `onlineStatus` | `OnlineStatusItem` | no | Online status snapshot; present when `onlineStatus` is enabled in `InfoRequestParam`. |
+
+### OnlineStatusItem
+
+Online status snapshot returned when `InfoRequestParam.onlineStatus` is `true`.
+
+<!-- prettier-ignore -->
+| Field | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `tsLastLogin` | `number` | yes | Unix timestamp (ms) of the player's last login. |
+| `socketId` | `string` | yes | Active socket connection ID, or empty string if the player is offline. |
 
 ### MasterPlayerResponseData
 
@@ -5464,6 +5510,30 @@ Maps the AdminSendPushNotification operation to a typed request wrapper.
 
 _Không có field public (payload rỗng)._
 
+### GetOnlineStatusOperationRequest
+
+Extends: `CustomOperationRequestAbstract<MasterPlayerModels.GetOnlineStatusRequestData>`
+
+Maps the GetOnlineStatus operation to a typed request wrapper.
+
+_Không có field public (payload rỗng)._
+
+### ServerGetOnlineStatusOperationRequest
+
+Extends: `GetOnlineStatusOperationRequest`
+
+Maps the ServerGetOnlineStatus operation to a typed request wrapper.
+
+_Không có field public (payload rỗng)._
+
+### AdminGetOnlineStatusOperationRequest
+
+Extends: `GetOnlineStatusOperationRequest`
+
+Maps the AdminGetOnlineStatus operation to a typed request wrapper.
+
+_Không có field public (payload rỗng)._
+
 ## Namespace `MasterPlayerResponseModels`
 
 ### AddSegmentOperationResponse
@@ -6151,5 +6221,13 @@ _Không có field public (payload rỗng)._
 Extends: `CustomOperationResponseAbstract<MasterPlayerModels.SendPushNotificationResponseData>`
 
 Maps the SendPushNotification operation to a typed response wrapper.
+
+_Không có field public (payload rỗng)._
+
+### GetOnlineStatusOperationResponse
+
+Extends: `CustomOperationResponseAbstract<MasterPlayerModels.MasterPlayerResponseData>`
+
+Maps the GetOnlineStatus operation to a typed response wrapper.
 
 _Không có field public (payload rỗng)._

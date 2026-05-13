@@ -48,9 +48,6 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
     - [GetIpAddressCreateRequestData](#getipaddresscreaterequestdata)
     - [ServerGetIpAddressCreateRequestData](#servergetipaddresscreaterequestdata)
     - [AdminGetIpAddressCreateRequestData](#admingetipaddresscreaterequestdata)
-    - [GetOnlineStatusRequestData](#getonlinestatusrequestdata)
-    - [ServerGetOnlineStatusRequestData](#servergetonlinestatusrequestdata)
-    - [AdminGetOnlineStatusRequestData](#admingetonlinestatusrequestdata)
     - [GetPlayerBanRequestData](#getplayerbanrequestdata)
     - [ServerGetPlayerBanRequestData](#servergetplayerbanrequestdata)
     - [AdminGetPlayerBanRequestData](#admingetplayerbanrequestdata)
@@ -172,7 +169,6 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
     - [ServerGetStatisticsLogRequestData](#servergetstatisticslogrequestdata)
     - [AdminGetStatisticsLogRequestData](#admingetstatisticslogrequestdata)
     - [InfoResponseParameters](#inforesponseparameters)
-    - [OnlineStatusItem](#onlinestatusitem)
     - [GamePlayerResponseData](#gameplayerresponsedata)
     - [GamePlayerWithUserIdResponseData](#gameplayerwithuseridresponsedata)
     - [GamePlayerLeaderboardResponseData](#gameplayerleaderboardresponsedata)
@@ -182,7 +178,6 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
     - [GetLastLoginLeaderboardResponseData](#getlastloginleaderboardresponsedata)
     - [GetCreateLeaderboardResponseData](#getcreateleaderboardresponsedata)
     - [GamePlayersWithUserIdResponseData](#gameplayerswithuseridresponsedata)
-    - [OnlineStatusResponseData](#onlinestatusresponsedata)
     - [GetCurrencyLeaderboardRequestData](#getcurrencyleaderboardrequestdata)
     - [ServerGetCurrencyLeaderboardRequestData](#servergetcurrencyleaderboardrequestdata)
     - [AdminGetCurrencyLeaderboardRequestData](#admingetcurrencyleaderboardrequestdata)
@@ -220,9 +215,6 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
     - [GetIpAddressCreateOperationRequest](#getipaddresscreateoperationrequest)
     - [ServerGetIpAddressCreateOperationRequest](#servergetipaddresscreateoperationrequest)
     - [AdminGetIpAddressCreateOperationRequest](#admingetipaddresscreateoperationrequest)
-    - [GetOnlineStatusOperationRequest](#getonlinestatusoperationrequest)
-    - [ServerGetOnlineStatusOperationRequest](#servergetonlinestatusoperationrequest)
-    - [AdminGetOnlineStatusOperationRequest](#admingetonlinestatusoperationrequest)
     - [GetPlayerBanOperationRequest](#getplayerbanoperationrequest)
     - [ServerGetPlayerBanOperationRequest](#servergetplayerbanoperationrequest)
     - [AdminGetPlayerBanOperationRequest](#admingetplayerbanoperationrequest)
@@ -359,7 +351,6 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
     - [GetFriendStatisticsLeaderboardAroundPlayerOperationResponse](#getfriendstatisticsleaderboardaroundplayeroperationresponse)
     - [GetFriendStatisticsLeaderboardOperationResponse](#getfriendstatisticsleaderboardoperationresponse)
     - [GetIpAddressCreateOperationResponse](#getipaddresscreateoperationresponse)
-    - [GetOnlineStatusOperationResponse](#getonlinestatusoperationresponse)
     - [GetPlayerBanOperationResponse](#getplayerbanoperationresponse)
     - [GetPlayerCharacterOperationResponse](#getplayercharacteroperationresponse)
     - [GetPlayerCurrencyOperationResponse](#getplayercurrencyoperationresponse)
@@ -430,7 +421,6 @@ Selects which optional game-player fields and lightweight relations should be re
 | `playerCharacters` | `boolean` | no | Includes relation items for characters owned by the player, optionally filtered by `characterCatalogIds`. — _default=false_ |
 | `playerInventories` | `boolean` | no | Includes relation items for inventory owned by the player, optionally filtered by `itemCatalogIds`. — _default=false_ |
 | `playerGroups` | `boolean` | no | Includes relation items for groups joined or owned by the player, optionally filtered by `groupCatalogIds`. — _default=false_ |
-| `onlineStatus` | `boolean` | no | Includes the player's online status, if supported by the connected game server. — _default=false_ |
 | `playerFriends` | `boolean` | no | Includes relation items for friends attached to the player, optionally filtered by `friendCatalogIds`. — _default=false_ |
 | `playerDataKeys` | `Array<string>` | no | _elementCls=String_ |
 | `playerCurrencyKeys` | `Array<string>` | no | _elementCls=String_ |
@@ -727,31 +717,6 @@ _Không có field public (payload rỗng)._
 Extends: `ServerGetIpAddressCreateRequestData`
 
 Defines the request payload for AdminGetIpAddressCreate.
-
-_Không có field public (payload rỗng)._
-
-### GetOnlineStatusRequestData
-
-Defines the request payload for GetOnlineStatus.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `userId` | `string` | no | _minLength=10, maxLength=10_ |
-
-### ServerGetOnlineStatusRequestData
-
-Extends: `GetOnlineStatusRequestData`
-
-Defines the request payload for ServerGetOnlineStatus.
-
-_Không có field public (payload rỗng)._
-
-### AdminGetOnlineStatusRequestData
-
-Extends: `ServerGetOnlineStatusRequestData`
-
-Defines the request payload for AdminGetOnlineStatus.
 
 _Không có field public (payload rỗng)._
 
@@ -1852,17 +1817,6 @@ Contains the optional fields requested through `InfoRequestParam`.
 | `tsLastLogin` | `number` | no | Timestamp of the player's last login; present when requested. |
 | `ipAddressCreate` | `string` | no | IP address recorded at account creation; present when requested. |
 | `countryCode` | `string` | no | Country code associated with the player; present when requested. |
-| `onlineStatus` | `OnlineStatusItem` | no | Online status snapshot; present when `onlineStatus` is enabled in `InfoRequestParam`. |
-
-### OnlineStatusItem
-
-Online status snapshot returned when `InfoRequestParam.onlineStatus` is `true`.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `tsLastLogin` | `number` | yes | Unix timestamp (ms) of the player's last login. |
-| `socketId` | `string` | yes | Active socket connection ID, or empty string if the player is offline. |
 
 ### GamePlayerResponseData
 
@@ -1956,16 +1910,6 @@ Defines the response payload for GamePlayersWithUserId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `results` | `Array<GamePlayerWithUserIdResponseData>` | yes | _elementCls=GamePlayerWithUserIdResponseData_ |
-
-### OnlineStatusResponseData
-
-Reports the latest known login timestamp and active socket identity for a player.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `tsLastLogin` | `number` | yes | Unix timestamp of the player's last login. |
-| `socketId` | `string` | yes | Active socket connection ID, or empty string if the player is offline. |
 
 ### GetCurrencyLeaderboardRequestData
 
@@ -2265,30 +2209,6 @@ _Không có field public (payload rỗng)._
 Extends: `GetIpAddressCreateOperationRequest`
 
 Maps the AdminGetIpAddressCreate operation to a typed request wrapper.
-
-_Không có field public (payload rỗng)._
-
-### GetOnlineStatusOperationRequest
-
-Extends: `CustomOperationRequestAbstract<GamePlayerModels.GetOnlineStatusRequestData>`
-
-Maps the GetOnlineStatus operation to a typed request wrapper.
-
-_Không có field public (payload rỗng)._
-
-### ServerGetOnlineStatusOperationRequest
-
-Extends: `GetOnlineStatusOperationRequest`
-
-Maps the ServerGetOnlineStatus operation to a typed request wrapper.
-
-_Không có field public (payload rỗng)._
-
-### AdminGetOnlineStatusOperationRequest
-
-Extends: `GetOnlineStatusOperationRequest`
-
-Maps the AdminGetOnlineStatus operation to a typed request wrapper.
 
 _Không có field public (payload rỗng)._
 
@@ -3371,14 +3291,6 @@ _Không có field public (payload rỗng)._
 Extends: `CustomOperationResponseAbstract<GamePlayerModels.GamePlayerResponseData>`
 
 Maps the GetIpAddressCreate operation to a typed response wrapper.
-
-_Không có field public (payload rỗng)._
-
-### GetOnlineStatusOperationResponse
-
-Extends: `CustomOperationResponseAbstract<GamePlayerModels.OnlineStatusResponseData>`
-
-Maps the GetOnlineStatus operation to a typed response wrapper.
 
 _Không có field public (payload rỗng)._
 

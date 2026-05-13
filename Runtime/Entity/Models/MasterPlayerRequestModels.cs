@@ -4866,6 +4866,62 @@
             public AdminSendPushNotificationOperationRequest(MasterPlayerModels.AdminSendPushNotificationRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
+        /// <summary>
+        /// Builds the get push notification operation request.
+        /// </summary>
+        public class GetOnlineStatusOperationRequest : CustomOperationRequest<MasterPlayerModels.GetOnlineStatusRequestData>
+        {
+            /// <summary>
+            /// Gets the operation code used by this request wrapper.
+            /// </summary>
+            protected override string operationCode => OperationCode.GetOnlineStatus;
+            /// <summary>
+            /// Gets the request type used by this request wrapper.
+            /// </summary>
+            protected override RequestType requestType => RequestType.MasterPlayer;
+            /// <summary>
+            /// Gets the request role used by this request wrapper.
+            /// </summary>
+            protected override RequestRole role => RequestRole.Client;
+
+            /// <summary>
+            /// Initializes a new instance of the GetOnlineStatusOperationRequest class.
+            /// </summary>
+            public GetOnlineStatusOperationRequest(MasterPlayerModels.GetOnlineStatusRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+        }
+
+        /// <summary>
+        /// Builds the server-scoped get push notification operation request.
+        /// </summary>
+        public class ServerGetOnlineStatusOperationRequest : GetOnlineStatusOperationRequest
+        {
+            /// <summary>
+            /// Gets the request role used by this request wrapper.
+            /// </summary>
+            protected override RequestRole role => RequestRole.Server;
+
+            /// <summary>
+            /// Initializes a new instance of the ServerGetOnlineStatusOperationRequest class.
+            /// </summary>
+            public ServerGetOnlineStatusOperationRequest(MasterPlayerModels.GetOnlineStatusRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+        }
+
+        /// <summary>
+        /// Builds the admin-scoped get push notification operation request.
+        /// </summary>
+        public class AdminGetOnlineStatusOperationRequest : GetOnlineStatusOperationRequest
+        {
+            /// <summary>
+            /// Gets the request role used by this request wrapper.
+            /// </summary>
+            protected override RequestRole role => RequestRole.Admin;
+
+            /// <summary>
+            /// Initializes a new instance of the AdminGetOnlineStatusOperationRequest class.
+            /// </summary>
+            public AdminGetOnlineStatusOperationRequest(MasterPlayerModels.AdminGetOnlineStatusRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+        }
+
     }
 
 }

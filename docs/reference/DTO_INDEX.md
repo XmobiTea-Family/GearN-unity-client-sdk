@@ -774,9 +774,6 @@ Tổng cộng **2506** DTO class trên **12** domain.
 | GAME_PLAYER | `GamePlayerModels` | [GetIpAddressCreateRequestData](/docs/reference/dto/GAME_PLAYER.md#getipaddresscreaterequestdata) | 1 | — |
 | GAME_PLAYER | `GamePlayerModels` | [ServerGetIpAddressCreateRequestData](/docs/reference/dto/GAME_PLAYER.md#servergetipaddresscreaterequestdata) | 0 | `GetIpAddressCreateRequestData` |
 | GAME_PLAYER | `GamePlayerModels` | [AdminGetIpAddressCreateRequestData](/docs/reference/dto/GAME_PLAYER.md#admingetipaddresscreaterequestdata) | 0 | `ServerGetIpAddressCreateRequestData` |
-| GAME_PLAYER | `GamePlayerModels` | [GetOnlineStatusRequestData](/docs/reference/dto/GAME_PLAYER.md#getonlinestatusrequestdata) | 1 | — |
-| GAME_PLAYER | `GamePlayerModels` | [ServerGetOnlineStatusRequestData](/docs/reference/dto/GAME_PLAYER.md#servergetonlinestatusrequestdata) | 0 | `GetOnlineStatusRequestData` |
-| GAME_PLAYER | `GamePlayerModels` | [AdminGetOnlineStatusRequestData](/docs/reference/dto/GAME_PLAYER.md#admingetonlinestatusrequestdata) | 0 | `ServerGetOnlineStatusRequestData` |
 | GAME_PLAYER | `GamePlayerModels` | [GetPlayerBanRequestData](/docs/reference/dto/GAME_PLAYER.md#getplayerbanrequestdata) | 1 | — |
 | GAME_PLAYER | `GamePlayerModels` | [ServerGetPlayerBanRequestData](/docs/reference/dto/GAME_PLAYER.md#servergetplayerbanrequestdata) | 0 | `GetPlayerBanRequestData` |
 | GAME_PLAYER | `GamePlayerModels` | [AdminGetPlayerBanRequestData](/docs/reference/dto/GAME_PLAYER.md#admingetplayerbanrequestdata) | 0 | `ServerGetPlayerBanRequestData` |
@@ -907,7 +904,6 @@ Tổng cộng **2506** DTO class trên **12** domain.
 | GAME_PLAYER | `GamePlayerModels` | [GetLastLoginLeaderboardResponseData](/docs/reference/dto/GAME_PLAYER.md#getlastloginleaderboardresponsedata) | 1 | — |
 | GAME_PLAYER | `GamePlayerModels` | [GetCreateLeaderboardResponseData](/docs/reference/dto/GAME_PLAYER.md#getcreateleaderboardresponsedata) | 1 | — |
 | GAME_PLAYER | `GamePlayerModels` | [GamePlayersWithUserIdResponseData](/docs/reference/dto/GAME_PLAYER.md#gameplayerswithuseridresponsedata) | 1 | — |
-| GAME_PLAYER | `GamePlayerModels` | [OnlineStatusResponseData](/docs/reference/dto/GAME_PLAYER.md#onlinestatusresponsedata) | 2 | — |
 | GAME_PLAYER | `GamePlayerModels` | [GetCurrencyLeaderboardRequestData](/docs/reference/dto/GAME_PLAYER.md#getcurrencyleaderboardrequestdata) | 5 | — |
 | GAME_PLAYER | `GamePlayerModels` | [ServerGetCurrencyLeaderboardRequestData](/docs/reference/dto/GAME_PLAYER.md#servergetcurrencyleaderboardrequestdata) | 0 | `GetCurrencyLeaderboardRequestData` |
 | GAME_PLAYER | `GamePlayerModels` | [AdminGetCurrencyLeaderboardRequestData](/docs/reference/dto/GAME_PLAYER.md#admingetcurrencyleaderboardrequestdata) | 0 | `ServerGetCurrencyLeaderboardRequestData` |
@@ -944,9 +940,6 @@ Tổng cộng **2506** DTO class trên **12** domain.
 | GAME_PLAYER | `GamePlayerRequestModels` | [GetIpAddressCreateOperationRequest](/docs/reference/dto/GAME_PLAYER.md#getipaddresscreateoperationrequest) | 0 | `CustomOperationRequestAbstract<GamePlayerModels.GetIpAddressCreateRequestData>` |
 | GAME_PLAYER | `GamePlayerRequestModels` | [ServerGetIpAddressCreateOperationRequest](/docs/reference/dto/GAME_PLAYER.md#servergetipaddresscreateoperationrequest) | 0 | `GetIpAddressCreateOperationRequest` |
 | GAME_PLAYER | `GamePlayerRequestModels` | [AdminGetIpAddressCreateOperationRequest](/docs/reference/dto/GAME_PLAYER.md#admingetipaddresscreateoperationrequest) | 0 | `GetIpAddressCreateOperationRequest` |
-| GAME_PLAYER | `GamePlayerRequestModels` | [GetOnlineStatusOperationRequest](/docs/reference/dto/GAME_PLAYER.md#getonlinestatusoperationrequest) | 0 | `CustomOperationRequestAbstract<GamePlayerModels.GetOnlineStatusRequestData>` |
-| GAME_PLAYER | `GamePlayerRequestModels` | [ServerGetOnlineStatusOperationRequest](/docs/reference/dto/GAME_PLAYER.md#servergetonlinestatusoperationrequest) | 0 | `GetOnlineStatusOperationRequest` |
-| GAME_PLAYER | `GamePlayerRequestModels` | [AdminGetOnlineStatusOperationRequest](/docs/reference/dto/GAME_PLAYER.md#admingetonlinestatusoperationrequest) | 0 | `GetOnlineStatusOperationRequest` |
 | GAME_PLAYER | `GamePlayerRequestModels` | [GetPlayerBanOperationRequest](/docs/reference/dto/GAME_PLAYER.md#getplayerbanoperationrequest) | 0 | `CustomOperationRequestAbstract<GamePlayerModels.GetPlayerBanRequestData>` |
 | GAME_PLAYER | `GamePlayerRequestModels` | [ServerGetPlayerBanOperationRequest](/docs/reference/dto/GAME_PLAYER.md#servergetplayerbanoperationrequest) | 0 | `GetPlayerBanOperationRequest` |
 | GAME_PLAYER | `GamePlayerRequestModels` | [AdminGetPlayerBanOperationRequest](/docs/reference/dto/GAME_PLAYER.md#admingetplayerbanoperationrequest) | 0 | `GetPlayerBanOperationRequest` |
@@ -1082,7 +1075,6 @@ Tổng cộng **2506** DTO class trên **12** domain.
 | GAME_PLAYER | `GamePlayerResponseModels` | [GetFriendStatisticsLeaderboardAroundPlayerOperationResponse](/docs/reference/dto/GAME_PLAYER.md#getfriendstatisticsleaderboardaroundplayeroperationresponse) | 0 | `CustomOperationResponseAbstract<GamePlayerModels.GetStatisticsLeaderboardResponseData>` |
 | GAME_PLAYER | `GamePlayerResponseModels` | [GetFriendStatisticsLeaderboardOperationResponse](/docs/reference/dto/GAME_PLAYER.md#getfriendstatisticsleaderboardoperationresponse) | 0 | `CustomOperationResponseAbstract<GamePlayerModels.GetStatisticsLeaderboardResponseData>` |
 | GAME_PLAYER | `GamePlayerResponseModels` | [GetIpAddressCreateOperationResponse](/docs/reference/dto/GAME_PLAYER.md#getipaddresscreateoperationresponse) | 0 | `CustomOperationResponseAbstract<GamePlayerModels.GamePlayerResponseData>` |
-| GAME_PLAYER | `GamePlayerResponseModels` | [GetOnlineStatusOperationResponse](/docs/reference/dto/GAME_PLAYER.md#getonlinestatusoperationresponse) | 0 | `CustomOperationResponseAbstract<GamePlayerModels.OnlineStatusResponseData>` |
 | GAME_PLAYER | `GamePlayerResponseModels` | [GetPlayerBanOperationResponse](/docs/reference/dto/GAME_PLAYER.md#getplayerbanoperationresponse) | 0 | `CustomOperationResponseAbstract<GamePlayerModels.GamePlayerResponseData>` |
 | GAME_PLAYER | `GamePlayerResponseModels` | [GetPlayerCharacterOperationResponse](/docs/reference/dto/GAME_PLAYER.md#getplayercharacteroperationresponse) | 0 | `CustomOperationResponseAbstract<GamePlayerModels.GamePlayerResponseData>` |
 | GAME_PLAYER | `GamePlayerResponseModels` | [GetPlayerCurrencyOperationResponse](/docs/reference/dto/GAME_PLAYER.md#getplayercurrencyoperationresponse) | 0 | `CustomOperationResponseAbstract<GamePlayerModels.GamePlayerResponseData>` |
@@ -1958,6 +1950,9 @@ Tổng cộng **2506** DTO class trên **12** domain.
 | MASTER_PLAYER | `MasterPlayerModels` | [SendPushNotificationRequestData](/docs/reference/dto/MASTER_PLAYER.md#sendpushnotificationrequestdata) | 7 | — |
 | MASTER_PLAYER | `MasterPlayerModels` | [ServerSendPushNotificationRequestData](/docs/reference/dto/MASTER_PLAYER.md#serversendpushnotificationrequestdata) | 0 | `SendPushNotificationRequestData` |
 | MASTER_PLAYER | `MasterPlayerModels` | [AdminSendPushNotificationRequestData](/docs/reference/dto/MASTER_PLAYER.md#adminsendpushnotificationrequestdata) | 0 | `ServerSendPushNotificationRequestData` |
+| MASTER_PLAYER | `MasterPlayerModels` | [GetOnlineStatusRequestData](/docs/reference/dto/MASTER_PLAYER.md#getonlinestatusrequestdata) | 1 | — |
+| MASTER_PLAYER | `MasterPlayerModels` | [ServerGetOnlineStatusRequestData](/docs/reference/dto/MASTER_PLAYER.md#servergetonlinestatusrequestdata) | 0 | `GetOnlineStatusRequestData` |
+| MASTER_PLAYER | `MasterPlayerModels` | [AdminGetOnlineStatusRequestData](/docs/reference/dto/MASTER_PLAYER.md#admingetonlinestatusrequestdata) | 0 | `ServerGetOnlineStatusRequestData` |
 | MASTER_PLAYER | `MasterPlayerModels` | [PushNotificationItem](/docs/reference/dto/MASTER_PLAYER.md#pushnotificationitem) | 3 | — |
 | MASTER_PLAYER | `MasterPlayerModels` | [InfoResponseParameters](/docs/reference/dto/MASTER_PLAYER.md#inforesponseparameters) | 16 | — |
 | MASTER_PLAYER | `MasterPlayerModels` | [MasterPlayerResponseData](/docs/reference/dto/MASTER_PLAYER.md#masterplayerresponsedata) | 1 | — |
@@ -2245,6 +2240,9 @@ Tổng cộng **2506** DTO class trên **12** domain.
 | MASTER_PLAYER | `MasterPlayerRequestModels` | [SendPushNotificationOperationRequest](/docs/reference/dto/MASTER_PLAYER.md#sendpushnotificationoperationrequest) | 0 | `CustomOperationRequestAbstract<MasterPlayerModels.SendPushNotificationRequestData>` |
 | MASTER_PLAYER | `MasterPlayerRequestModels` | [ServerSendPushNotificationOperationRequest](/docs/reference/dto/MASTER_PLAYER.md#serversendpushnotificationoperationrequest) | 0 | `SendPushNotificationOperationRequest` |
 | MASTER_PLAYER | `MasterPlayerRequestModels` | [AdminSendPushNotificationOperationRequest](/docs/reference/dto/MASTER_PLAYER.md#adminsendpushnotificationoperationrequest) | 0 | `SendPushNotificationOperationRequest` |
+| MASTER_PLAYER | `MasterPlayerRequestModels` | [GetOnlineStatusOperationRequest](/docs/reference/dto/MASTER_PLAYER.md#getonlinestatusoperationrequest) | 0 | `CustomOperationRequestAbstract<MasterPlayerModels.GetOnlineStatusRequestData>` |
+| MASTER_PLAYER | `MasterPlayerRequestModels` | [ServerGetOnlineStatusOperationRequest](/docs/reference/dto/MASTER_PLAYER.md#servergetonlinestatusoperationrequest) | 0 | `GetOnlineStatusOperationRequest` |
+| MASTER_PLAYER | `MasterPlayerRequestModels` | [AdminGetOnlineStatusOperationRequest](/docs/reference/dto/MASTER_PLAYER.md#admingetonlinestatusoperationrequest) | 0 | `GetOnlineStatusOperationRequest` |
 | MASTER_PLAYER | `MasterPlayerResponseModels` | [AddSegmentOperationResponse](/docs/reference/dto/MASTER_PLAYER.md#addsegmentoperationresponse) | 0 | `CustomOperationResponseAbstract<MasterPlayerModels.EmptyResponseData>` |
 | MASTER_PLAYER | `MasterPlayerResponseModels` | [ChangeAccountPasswordOperationResponse](/docs/reference/dto/MASTER_PLAYER.md#changeaccountpasswordoperationresponse) | 0 | `CustomOperationResponseAbstract<MasterPlayerModels.EmptyResponseData>` |
 | MASTER_PLAYER | `MasterPlayerResponseModels` | [GetAvatarOperationResponse](/docs/reference/dto/MASTER_PLAYER.md#getavataroperationresponse) | 0 | `CustomOperationResponseAbstract<MasterPlayerModels.MasterPlayerResponseData>` |
@@ -2331,6 +2329,7 @@ Tổng cộng **2506** DTO class trên **12** domain.
 | MASTER_PLAYER | `MasterPlayerResponseModels` | [RemovePushNotificationOperationResponse](/docs/reference/dto/MASTER_PLAYER.md#removepushnotificationoperationresponse) | 0 | `CustomOperationResponseAbstract<MasterPlayerModels.EmptyResponseData>` |
 | MASTER_PLAYER | `MasterPlayerResponseModels` | [GetPushNotificationOperationResponse](/docs/reference/dto/MASTER_PLAYER.md#getpushnotificationoperationresponse) | 0 | `CustomOperationResponseAbstract<MasterPlayerModels.MasterPlayerResponseData>` |
 | MASTER_PLAYER | `MasterPlayerResponseModels` | [SendPushNotificationOperationResponse](/docs/reference/dto/MASTER_PLAYER.md#sendpushnotificationoperationresponse) | 0 | `CustomOperationResponseAbstract<MasterPlayerModels.SendPushNotificationResponseData>` |
+| MASTER_PLAYER | `MasterPlayerResponseModels` | [GetOnlineStatusOperationResponse](/docs/reference/dto/MASTER_PLAYER.md#getonlinestatusoperationresponse) | 0 | `CustomOperationResponseAbstract<MasterPlayerModels.MasterPlayerResponseData>` |
 | MULTIPLAYER | `MultiplayerModels` | [CancelAllMatchmakingTicketRequestData](/docs/reference/dto/MULTIPLAYER.md#cancelallmatchmakingticketrequestdata) | 1 | — |
 | MULTIPLAYER | `MultiplayerModels` | [ServerCancelAllMatchmakingTicketRequestData](/docs/reference/dto/MULTIPLAYER.md#servercancelallmatchmakingticketrequestdata) | 1 | `CancelAllMatchmakingTicketRequestData` |
 | MULTIPLAYER | `MultiplayerModels` | [AdminCancelAllMatchmakingTicketRequestData](/docs/reference/dto/MULTIPLAYER.md#admincancelallmatchmakingticketrequestdata) | 0 | `ServerCancelAllMatchmakingTicketRequestData` |

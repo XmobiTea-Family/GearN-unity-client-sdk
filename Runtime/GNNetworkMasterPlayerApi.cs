@@ -1397,6 +1397,22 @@ namespace XmobiTea.GearN
         }
 
         /// <summary>
+        /// Gets online status.
+        /// </summary>
+        public void getOnlineStatus(MasterPlayerModels.GetOnlineStatusRequestData requestData, Action1<MasterPlayerResponseModels.GetOnlineStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        {
+            GNNetwork.sendViaHttp(new MasterPlayerRequestModels.GetOnlineStatusOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+        }
+
+        /// <summary>
+        /// Gets online status asynchronously.
+        /// </summary>
+        public Task<MasterPlayerResponseModels.GetOnlineStatusOperationResponse> getOnlineStatusAsync(MasterPlayerModels.GetOnlineStatusRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+        {
+            return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.GetOnlineStatusOperationRequest, MasterPlayerResponseModels.GetOnlineStatusOperationResponse>(new MasterPlayerRequestModels.GetOnlineStatusOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+        }
+
+        /// <summary>
         /// Provides server-scoped operations for the parent API.
         /// </summary>
         public class ServerApi
@@ -2758,6 +2774,22 @@ namespace XmobiTea.GearN
             public Task<MasterPlayerResponseModels.SendPushNotificationOperationResponse> sendPushNotificationAsync(MasterPlayerModels.ServerSendPushNotificationRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerSendPushNotificationOperationRequest, MasterPlayerResponseModels.SendPushNotificationOperationResponse>(new MasterPlayerRequestModels.ServerSendPushNotificationOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+            /// <summary>
+            /// Gets online status.
+            /// </summary>
+            public void getOnlineStatus(MasterPlayerModels.ServerGetOnlineStatusRequestData requestData, Action1<MasterPlayerResponseModels.GetOnlineStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.ServerGetOnlineStatusOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+            /// <summary>
+            /// Gets online status asynchronously.
+            /// </summary>
+            public Task<MasterPlayerResponseModels.GetOnlineStatusOperationResponse> getOnlineStatusAsync(MasterPlayerModels.ServerGetOnlineStatusRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.ServerGetOnlineStatusOperationRequest, MasterPlayerResponseModels.GetOnlineStatusOperationResponse>(new MasterPlayerRequestModels.ServerGetOnlineStatusOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
         }
@@ -4125,6 +4157,23 @@ namespace XmobiTea.GearN
             public Task<MasterPlayerResponseModels.SendPushNotificationOperationResponse> sendPushNotificationAsync(MasterPlayerModels.AdminSendPushNotificationRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
             {
                 return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminSendPushNotificationOperationRequest, MasterPlayerResponseModels.SendPushNotificationOperationResponse>(new MasterPlayerRequestModels.AdminSendPushNotificationOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+
+            /// <summary>
+            /// Gets online status.
+            /// </summary>
+            public void getOnlineStatus(MasterPlayerModels.AdminGetOnlineStatusRequestData requestData, Action1<MasterPlayerResponseModels.GetOnlineStatusOperationResponse> onResponse = null, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                GNNetwork.sendViaHttp(new MasterPlayerRequestModels.AdminGetOnlineStatusOperationRequest(requestData, timeout), onResponse, overrideAuthToken, overrideSecretKey, customTags);
+            }
+
+            /// <summary>
+            /// Gets online status asynchronously.
+            /// </summary>
+            public Task<MasterPlayerResponseModels.GetOnlineStatusOperationResponse> getOnlineStatusAsync(MasterPlayerModels.AdminGetOnlineStatusRequestData requestData, string overrideAuthToken = null, string overrideSecretKey = null, GNHashtable customTags = null, int timeout = OperationRequest.defaultTimeOut)
+            {
+                return GNNetwork.sendViaHttpAsync<MasterPlayerRequestModels.AdminGetOnlineStatusOperationRequest, MasterPlayerResponseModels.GetOnlineStatusOperationResponse>(new MasterPlayerRequestModels.AdminGetOnlineStatusOperationRequest(requestData, timeout), overrideAuthToken, overrideSecretKey, customTags);
             }
 
         }

@@ -518,7 +518,6 @@ Defines the reusable parameter block GamePlayerPermissionRulesParam.
 | `getPlayerGroup` | `PermissionRulesParam` | no | — |
 | `getPlayerFriend` | `PermissionRulesParam` | no | — |
 | `removePlayerItem` | `PermissionRulesParam` | no | — |
-| `getOnlineStatus` | `PermissionRulesParam` | no | — |
 | `createGroup` | `PermissionRulesParam` | no | — |
 | `createPlayerItem` | `PermissionRulesParam` | no | — |
 | `createPlayerCharacter` | `PermissionRulesParam` | no | — |
@@ -834,6 +833,7 @@ Defines the reusable parameter block MasterPlayerPermissionRulesParam.
 | `addPushNotification` | `PermissionRulesParam` | no | — |
 | `removePushNotification` | `PermissionRulesParam` | no | — |
 | `getPushNotification` | `PermissionRulesParam` | no | — |
+| `getOnlineStatus` | `PermissionRulesParam` | no | — |
 
 ### MasterPlayerSettingsParam
 
