@@ -451,6 +451,14 @@ handlers["fnName"] = async (args: any, context, log) => {
 - `admin`: dùng khi behavior đã tồn tại trong official GearN admin API. Ưu tiên `admin` trước `database` nếu business rule đã có sẵn. Docs: [CLOUDSCRIPT_admin.md](/docs/cloudScript/CLOUDSCRIPT_admin.md)
 - `database`: dùng khi cần đọc hoặc ghi MongoDB nội bộ của GearN, hoặc cần helper domain của `xDatabase`. Docs: [CLOUDSCRIPT_database.md](/docs/cloudScript/CLOUDSCRIPT_database.md)
 
+CloudScript không bị giới hạn 1 helper cho 1 handler. Có thể kết hợp nhiều runtime object trong cùng function, ví dụ:
+
+- Dùng `admin` để thực hiện operation chính, rồi dùng `socket` để notify user online.
+- Dùng `database` để đọc state nội bộ, rồi dùng `admin` để gọi official API ghi log/currency/inventory.
+- Dùng `http` gọi webhook bên ngoài, sau đó dùng `mail` hoặc `pushNotification` để gửi side effect.
+
+Khi kết hợp nhiều helper, vẫn ưu tiên rule chọn nhanh bên dưới: official API thì dùng `admin`, raw data thì dùng `database`, delivery bên ngoài thì dùng helper delivery tương ứng. Không trộn helper chỉ vì tiện; trộn khi workflow thật sự cần nhiều bước khác loại.
+
 Rule chọn nhanh:
 
 - Có official API rồi thì ưu tiên `admin`.

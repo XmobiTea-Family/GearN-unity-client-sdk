@@ -1025,6 +1025,7 @@
         "script gửi lên addFunction không phải file TypeScript hoàn chỉnh; phải đăng ký handlers[functionName]",
         "không link hoặc yêu cầu đọc đường dẫn local ngoài npm package khi hướng dẫn viết CloudScript",
         "không dùng literal GNNetwork, import, require, process, fetch hoặc top-level side effect trong submitted script",
+        "một CloudScript handler có thể kết hợp nhiều runtime object như admin, database, http, socket, mail, pushNotification trong cùng workflow khi thật sự cần",
         "editFunctionAsync không sửa source code, chỉ flag enabled hoặc live của version",
         "muốn đổi source code phải addFunctionAsync để tạo version mới",
         "không có public delete function hoặc hard delete version"

@@ -623,7 +623,7 @@ private async System.Threading.Tasks.Task<object> ClaimDailyRewardAsync() {
     if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) return null;
 
     var exec = res.responseData;
-    if (exec.status != ExecuteResponseStatus.Ok) {
+    if ((ExecuteResponseStatus)exec.status != ExecuteResponseStatus.Ok) {
         UnityEngine.Debug.LogWarning("function failed: " + exec.errorMessage);
         return null;
     }

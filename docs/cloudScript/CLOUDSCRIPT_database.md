@@ -78,6 +78,39 @@ Dùng khi bạn cần tạo collection hoặc tạo index.
 | `logCreateCollection<TSchema extends mongodb.Document = mongodb.Document>(collectionName: string, options?: mongodb.CreateCollectionOptions): Promise<mongodb.Collection<TSchema>>` | `database.logCreateCollection(collectionName, options?)` |
 | `logCreateIndex<TSchema extends mongodb.Document = mongodb.Document>(collectionName: string, index: { [k: string]: any }, options?: { [k: string]: any })` | `database.logCreateIndex(collectionName, index, options?)` |
 
+### Naming collection khi tạo index
+
+Các helper đọc/ghi như `runtimeGameCollection(collectionName, gameId)` nhận **tên ngắn** của collection. Các helper quản lý collection/index như `createCollection(...)` và `createIndex(...)` nhận **full collection name**.
+
+Quy ước nhanh:
+
+<!-- prettier-ignore -->
+| Khi đọc/ghi data | Full collection name tương ứng khi create/index |
+| --- | --- |
+| `database.runtimeCollection("MyCollection")` | `"Runtime.MyCollection"` |
+| `database.systemCollection("MyCollection")` | `"System.MyCollection"` |
+| `database.runtimeGameCollection("MyCollection", gameId)` | `"Runtime." + gameId + ".MyCollection"` |
+| `database.systemGameCollection("MyCollection", gameId)` | `"System." + gameId + ".MyCollection"` |
+| `database.logRuntimeCollection("MyCollection")` | `"Runtime.MyCollection"` trong log DB, dùng `logCreateIndex(...)` |
+| `database.logSystemCollection("MyCollection")` | `"System.MyCollection"` trong log DB, dùng `logCreateIndex(...)` |
+| `database.logRuntimeGameCollection("MyCollection", gameId)` | `"Runtime." + gameId + ".MyCollection"` trong log DB, dùng `logCreateIndex(...)` |
+| `database.logSystemGameCollection("MyCollection", gameId)` | `"System." + gameId + ".MyCollection"` trong log DB, dùng `logCreateIndex(...)` |
+
+Ví dụ nếu code ghi data bằng:
+
+```ts
+const messages = database.runtimeGameCollection("DirectChat.Messages", gameId);
+```
+
+thì khi tạo index cho cùng collection, truyền full name:
+
+```ts
+const messagesName = "Runtime." + gameId + ".DirectChat.Messages";
+await database.createIndex(messagesName, { chatId: 1, tsCreate: -1 });
+```
+
+Với `database.collection(fullCollectionName)` hoặc `database.logCollection(fullCollectionName)`, caller đã tự truyền full name từ đầu nên dùng lại đúng string đó khi tạo index.
+
 ### Some Repository
 
 - nếu cần cloudScript gọi hàm tương tác với `MasterPlayer`, đọc [CLOUDSCRIPT_database_MASTER_PLAYER_REPOSITORY.md](/docs/cloudScript/CLOUDSCRIPT_database_MASTER_PLAYER_REPOSITORY.md)

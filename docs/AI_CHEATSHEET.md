@@ -51,6 +51,7 @@ UseResult(res.responseData);
 | CloudScript: viết script, publish version, execute function | [cloudScript/CLOUDSCRIPT_USAGE.md](/docs/cloudScript/CLOUDSCRIPT_USAGE.md) · [guides/CLOUDSCRIPT.md](/docs/guides/CLOUDSCRIPT.md) · [reference/API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md) |
 | Admin login, secret/maintenance/analytics | [guides/DASHBOARD.md](/docs/guides/DASHBOARD.md) · [reference/API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md) |
 | Realtime event (friend, group, message) | [reference/EVENTS.md](/docs/reference/EVENTS.md) |
+| Viết custom DTO / payload event bằng `[DataMember]`, `[StringDataMember]`, `[NumberDataMember]`, `[BooleanDataMember]`, `[GNHashtableDataMember]`, `[GNArrayDataMember]` | [reference/DATAMEMBER.md](/docs/reference/DATAMEMBER.md) |
 | Tra DTO field theo class | [reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md) hoặc [reference/dto/](/docs/reference/dto/) |
 | Enum value numeric | [reference/ENUMS.md](/docs/reference/ENUMS.md) |
 | Config field của `GNServerSettings` | [reference/CONFIG.md](/docs/reference/CONFIG.md) |

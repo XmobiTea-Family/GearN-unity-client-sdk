@@ -218,7 +218,7 @@ Returns runtime telemetry and function output for one execution.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `status` | `number` | yes | Raw execution status code returned by the backend. The public package does not currently expose a dedicated enum for this field. |
+| `status` | `int` | yes | Raw execution status code returned by the backend. Cast to public enum `ExecuteResponseStatus` before comparing, for example `(ExecuteResponseStatus)exec.status == ExecuteResponseStatus.Ok`. |
 | `executionTimeInMs` | `number` | yes | Execution duration in milliseconds. |
 | `memoryUsedInBytes` | `number` | yes | Memory consumed during the function execution in bytes. |
 | `functionResult` | `any` | yes | Arbitrary function return value as returned by the handler. |
