@@ -8,6 +8,8 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
 
 > **Khi nào tra file này**: Khi parent DTO (`GamePlayer`/`MasterPlayer`/`CharacterPlayer`/...) tham chiếu field kiểu `AvatarItem`/`TagItem`/`CurrencyItem`/... — không lặp lại schema trong file domain mà link sang đây.
 
+> Nếu cần sử dụng `GNArray` hoặc `GNHashtable` đọc [GNDATA.md](/docs/reference/GNDATA.md)
+
 ## Danh sách
 
 - **GenericModels** (from `Runtime/Entity/Models/GenericModels.cs`)

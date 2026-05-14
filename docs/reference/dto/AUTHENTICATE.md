@@ -12,6 +12,8 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
 
 > **Lưu ý route**: Login chỉ qua route `client` — không có Server/Admin variant cho login operation.
 
+> Nếu cần sử dụng `GNArray` hoặc `GNHashtable` đọc [GNDATA.md](/docs/reference/GNDATA.md)
+
 ## Danh sách
 
 - **AuthenticateModels** (from `Runtime/Entity/Models/AuthenticateModels.cs`)

@@ -10,6 +10,8 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
 
 > **Naming pattern**: Mỗi method có 3 variant DTO — `XxxRequestData` (client), `ServerXxxRequestData` (server), `AdminXxxRequestData` (admin). Khi tìm DTO cho một route cụ thể, nhảy thẳng tới section `[Server|Admin]XxxRequestData` tương ứng — không cần đọc cả 3. Lưu ý: `Content` không có ownership rõ ràng nên không áp self/other-self trên route client.
 
+> Nếu cần sử dụng `GNArray` hoặc `GNHashtable` đọc [GNDATA.md](/docs/reference/GNDATA.md)
+
 ## Danh sách
 
 - **ContentModels** (from `Runtime/Entity/Models/ContentModels.cs`)

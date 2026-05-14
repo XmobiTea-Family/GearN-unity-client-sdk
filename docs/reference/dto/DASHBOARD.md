@@ -10,6 +10,8 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
 
 > **Route đặc biệt**: Public wrapper `GNNetwork.dashboard.*` đi `RequestRole.Client`; backend resolve admin context từ `authToken` sau `loginByAdminAccountAsync` — không cần secret admin riêng. `GNNetwork.dashboard.server` và `GNNetwork.dashboard.admin` hiện rỗng. Xem [RULES § 3 ngoại lệ DashboardApi](/docs/RULES.md#ngo%E1%BA%A1i-l%E1%BB%87-dashboardapi).
 
+> Nếu cần sử dụng `GNArray` hoặc `GNHashtable` đọc [GNDATA.md](/docs/reference/GNDATA.md)
+
 ## Danh sách
 
 - **DashboardModels** (from `Runtime/Entity/Models/DashboardModels.cs`)

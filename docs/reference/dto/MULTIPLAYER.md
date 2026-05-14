@@ -12,6 +12,8 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
 
 > **Lưu ý transport**: Multiplayer dùng HTTP, không qua socket. Flow: create ticket → poll `getMatchmakingTicket` → `getMatch`. Xem [RULES § 10 #10](/docs/RULES.md#10-anti-patterns--pitfalls).
 
+> Nếu cần sử dụng `GNArray` hoặc `GNHashtable` đọc [GNDATA.md](/docs/reference/GNDATA.md)
+
 ## Danh sách
 
 - **MultiplayerModels** (from `Runtime/Entity/Models/MultiplayerModels.cs`)
