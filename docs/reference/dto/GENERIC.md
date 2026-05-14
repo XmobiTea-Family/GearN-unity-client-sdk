@@ -36,7 +36,7 @@ Represents a generic avatar payload.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `type` | `number` | yes | Backend-defined avatar type identifier. The public SDK currently does not export a dedicated avatar enum. |
+| `type` | `int` | yes | Avatar type identifier. User custom this type enum. |
 | `value` | `string` | yes | Avatar value, typically a URL, file id, or provider-specific string. |
 
 ### TagItem
@@ -56,8 +56,8 @@ Represents a ban state entry returned by player-auth or player-profile flows.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `tsExpire` | `number` | yes | Expiration timestamp of the current ban state. |
-| `reason` | `string` | no | Human-readable ban reason when provided by the backend. |
+| `tsExpire` | `long` | yes | Expiration timestamp of the current ban state. |
+| `reason` | `string` | yes | Human-readable ban reason when provided by the backend. |
 
 ### DataItem
 
@@ -67,7 +67,7 @@ Represents an arbitrary key-value data entry.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `key` | `string` | yes | Data entry key used to identify the payload. |
-| `value` | `any` | yes | Raw value returned by the backend. This may be a primitive, `GNHashtable`, `GNArray`, or plain object-like data. |
+| `value` | `object` | yes | Raw value returned by the backend. This may be a primitive, `GNHashtable`, `GNArray`, or plain object-like data. |
 
 ### CurrencyItem
 
@@ -77,7 +77,7 @@ Represents one currency entry.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `key` | `string` | yes | Currency key such as the configured currency code or logical name. |
-| `value` | `number` | yes | Numeric balance of the currency identified by `key`. |
+| `value` | `double` | yes | Numeric balance of the currency identified by `key`. |
 
 ### StatisticsItem
 
@@ -87,7 +87,7 @@ Represents one statistics entry.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `key` | `string` | yes | Statistic key such as the configured metric name. |
-| `value` | `number` | yes | Numeric value of the statistic identified by `key`. |
+| `value` | `double` | yes | Numeric value of the statistic identified by `key`. |
 
 ### CharacterItem
 
@@ -106,7 +106,7 @@ Represents the current owner of an entity such as an inventory item.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `type` | `number` | yes | Owner type. Map this value with the public `OwnerType` enum. |
+| `type` | `int` | yes | Owner type. Map this value with the public `OwnerType` enum. |
 | `id` | `string` | yes | Owner id paired with `type`. |
 
 ### RemoveStatusItem
@@ -116,8 +116,8 @@ Represents soft-remove metadata for an entity.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `tsRemove` | `number` | yes | Removal timestamp when the entity was soft-removed. |
-| `reason` | `string` | no | Removal reason when the backend provides one. |
+| `tsRemove` | `long` | yes | Removal timestamp when the entity was soft-removed. |
+| `reason` | `string?` | no | Removal reason when the backend provides one. |
 
 ### InventoryItem
 
@@ -139,8 +139,8 @@ Represents a lightweight relation item pointing to a group.
 | --- | --- | --- | --- |
 | `groupId` | `string` | yes | Group identifier of the related group entity. |
 | `catalogId` | `string` | yes | Catalog identifier associated with the related group. |
-| `status` | `number` | yes | Group relation status. Map this value with the public `GroupStatus` enum. |
-| `tsLastStatusUpdate` | `number` | yes | Timestamp of the last group status change. |
+| `status` | `int` | yes | Group relation status. Map this value with the public `GroupStatus` enum. |
+| `tsLastStatusUpdate` | `long` | yes | Timestamp of the last group status change. |
 
 ### FriendItem
 
@@ -151,8 +151,8 @@ Represents a lightweight relation item pointing to a friend relation.
 | --- | --- | --- | --- |
 | `friendId` | `string` | yes | Friend identifier of the related friend entity. |
 | `catalogId` | `string` | yes | Catalog identifier associated with the related friend entity. |
-| `status` | `number` | yes | Friend relation status. Map this value with the public `FriendStatus` enum. |
-| `tsLastStatusUpdate` | `number` | yes | Timestamp of the last friend status change. |
+| `status` | `int` | yes | Friend relation status. Map this value with the public `FriendStatus` enum. |
+| `tsLastStatusUpdate` | `long` | yes | Timestamp of the last friend status change. |
 
 ### MemberItem
 
@@ -162,4 +162,4 @@ Represents a lightweight relation item pointing to a group member.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `memberId` | `string` | yes | Member identifier of the related group member. |
-| `status` | `number` | yes | Member relation status. Map this value with the public member-status enum when available. |
+| `status` | `int` | yes | Member relation status. Map this value with the public member-status enum when available. |

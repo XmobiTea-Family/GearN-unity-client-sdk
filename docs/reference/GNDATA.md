@@ -3,6 +3,35 @@
 `GNArray` và `GNHashtable` là 2 container dữ liệu động trong namespace `XmobiTea.GearN.Common`.
 SDK dùng chúng để biểu diễn payload dạng array/object khi gửi request custom, nhận response raw, truyền `customTags`, tham số `OperationEvent`, hoặc field DTO có kiểu `GNArray` / `GNHashtable`.
 
+## Chọn đúng runtime: Unity C# hay CloudScript TypeScript
+
+Tài liệu này mô tả `GNArray` / `GNHashtable` của **Unity/C# client package**. Dùng phần C# bên dưới khi viết code trong Unity, ví dụ `functionParameters`, `customTags`, `OperationEvent` hoặc DTO field phía client.
+
+Khi viết **source CloudScript** thì code chạy trong runtime **TypeScript**, không dùng public contract C# trong file này. CloudScript phải dùng `GNArray` / `GNHashtable` TypeScript được inject/import theo template CloudScript và theo reference của TypeScript SDK. Không copy các API C# như `new GNHashtable.Builder()`, `getInt()`, `getBool()`, `keys()`, `values()` hoặc indexer sang CloudScript.
+
+Khác biệt nhanh để AI chọn đúng ví dụ:
+
+<!-- prettier-ignore -->
+| Ngữ cảnh | Dùng type | Builder | Getter số/bool | Duyệt dữ liệu |
+| --- | --- | --- | --- | --- |
+| Unity client C# | `XmobiTea.GearN.Common.GNHashtable` / `GNArray` | `new GNHashtable.Builder()` / `new GNArray.Builder()` | `getInt`, `getLong`, `getFloat`, `getBool`, ... | `keys()`, `values()`, indexer |
+| CloudScript TypeScript | `GNHashtable` / `GNArray` TypeScript | `GNHashtable.builder()` / `GNArray.builder()` | `getNumber`, `getBoolean` | `toData()` rồi `Object.entries(...)` hoặc array plain |
+
+Ví dụ đúng trong CloudScript TypeScript:
+
+```typescript
+const payload = GNHashtable.builder()
+    .add("source", "daily_popup")
+    .add("amount", 100)
+    .add("items", ["coin", "gem"])
+    .build();
+
+const amount = payload.getNumber("amount", 0);
+const items = payload.getGNArray("items", new GNArray()).toData() as string[];
+```
+
+Getter TypeScript chỉ trả value đã lưu, không convert kiểu như `System.Convert` bên C#. Nếu server trả `"100"` thì `getNumber()` không tự parse thành `100`. Với dữ liệu động trong CloudScript, kiểm tra bằng `containsKey()` / `getObject()` và narrow bằng `typeof` trước khi dùng.
+
 Public imports:
 
 ```csharp
@@ -18,7 +47,7 @@ using XmobiTea.GearN.Entity;
 Dùng `GNHashtable` khi payload có key string:
 
 - `customTags` cho API call.
-- `functionParameters` cho CloudScript.
+- `functionParameters` khi Unity client gọi CloudScript.
 - `OperationEvent` parameters.
 - Raw object field trong DTO custom.
 - Dữ liệu nested không cần class DTO riêng.
@@ -208,7 +237,7 @@ for (var i = 0; i < rewards.count(); i++)
 }
 ```
 
-## toData() và ToString()
+## toData() và toString()
 
 `toData()` convert container về dữ liệu C# serializable:
 
@@ -224,7 +253,7 @@ object rawPayload = payload.toData();
 Không dùng output này như JSON parser contract nghiêm ngặt; string escaping không được thiết kế như serializer JSON đầy đủ.
 
 ```csharp
-UnityEngine.Debug.Log(payload.ToString());
+UnityEngine.Debug.Log(payload.toString());
 ```
 
 ## Convert DTO và GNData
@@ -247,9 +276,9 @@ Rule chọn nhanh:
 | Nhu cầu | Nên dùng |
 | --- | --- |
 | Payload ngắn, dynamic, ít field | `GNHashtable` / `GNArray` trực tiếp |
-| Request/response có schema ổn định | DTO + DataMember |
+| Request/response có schema ổn định | DTO + DataMember decorator |
 | Nested object/list có type rõ | DTO nested + `[GNHashtableDataMember]` / `[GNArrayDataMember]` |
-| Debug/log nhanh | `ToString()` |
+| Debug/log nhanh | `toString()` |
 | Gửi qua serializer ngoài SDK | `toData()` |
 
 ## Ví dụ: customTags

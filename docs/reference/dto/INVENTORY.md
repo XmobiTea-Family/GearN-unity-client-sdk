@@ -280,7 +280,7 @@ Defines the reusable parameter block CustomDataParam.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `key` | `string` | yes | _minLength=2, maxLength=32_ |
-| `value` | `any` | yes | Arbitrary value to store for this custom data key. May be a primitive, `GNHashtable`, or `GNArray`. |
+| `value` | `object` | yes | Arbitrary value to store for this custom data key. May be a primitive, `GNHashtable`, or `GNArray`. |
 
 ### InfoRequestParam
 
@@ -289,24 +289,24 @@ Selects which optional inventory fields should be returned in `infoResponseParam
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `catalogId` | `boolean` | no | Includes the catalog ID from which this inventory item was created. — _default=false_ |
-| `classId` | `boolean` | no | Includes the class ID of the inventory item. — _default=false_ |
-| `itemType` | `boolean` | no | Includes the item type mapped by the public `ItemType` enum. — _default=false_ |
-| `amount` | `boolean` | no | Includes the current item amount. — _default=false_ |
-| `owner` | `boolean` | no | Includes the current owner descriptor. — _default=false_ |
-| `removeStatus` | `boolean` | no | Includes soft-remove metadata for the item. — _default=false_ |
-| `segments` | `boolean` | no | Includes segment names assigned to the item. — _default=false_ |
-| `customDatas` | `boolean` | no | Includes custom data entries, optionally filtered by `customDataKeys`. — _default=false_ |
-| `displayName` | `boolean` | no | Includes the item's display name. — _default=false_ |
-| `avatar` | `boolean` | no | Includes the item's avatar descriptor. — _default=false_ |
-| `tsCreate` | `boolean` | no | Includes the item creation timestamp. — _default=false_ |
-| `tags` | `boolean` | no | Includes tag entries, optionally filtered by `tagKeys`. — _default=false_ |
-| `itemStatistics` | `boolean` | no | Includes item statistics values, optionally filtered by `itemStatisticsKeys`. — _default=false_ |
-| `itemDatas` | `boolean` | no | Includes item data entries, optionally filtered by `itemDataKeys`. — _default=false_ |
-| `itemDataKeys` | `Array<string>` | no | Restricts `itemDatas` to the specified keys when that field is requested. — _elementCls=String_ |
-| `itemStatisticsKeys` | `Array<string>` | no | Restricts `itemStatistics` to the specified statistic keys when that field is requested. — _elementCls=String_ |
-| `customDataKeys` | `Array<string>` | no | Restricts `customDatas` to the specified keys when that field is requested. — _elementCls=String_ |
-| `tagKeys` | `Array<string>` | no | Restricts `tags` to the specified tag keys when that field is requested. — _elementCls=String_ |
+| `catalogId` | `bool?` | no | Includes the catalog ID from which this inventory item was created. — _default=false_ |
+| `classId` | `bool?` | no | Includes the class ID of the inventory item. — _default=false_ |
+| `itemType` | `bool?` | no | Includes the item type mapped by the public `ItemType` enum. — _default=false_ |
+| `amount` | `bool?` | no | Includes the current item amount. — _default=false_ |
+| `owner` | `bool?` | no | Includes the current owner descriptor. — _default=false_ |
+| `removeStatus` | `bool?` | no | Includes soft-remove metadata for the item. — _default=false_ |
+| `segments` | `bool?` | no | Includes segment names assigned to the item. — _default=false_ |
+| `customDatas` | `bool?` | no | Includes custom data entries, optionally filtered by `customDataKeys`. — _default=false_ |
+| `displayName` | `bool?` | no | Includes the item's display name. — _default=false_ |
+| `avatar` | `bool?` | no | Includes the item's avatar descriptor. — _default=false_ |
+| `tsCreate` | `bool?` | no | Includes the item creation timestamp. — _default=false_ |
+| `tags` | `bool?` | no | Includes tag entries, optionally filtered by `tagKeys`. — _default=false_ |
+| `itemStatistics` | `bool?` | no | Includes item statistics values, optionally filtered by `itemStatisticsKeys`. — _default=false_ |
+| `itemDatas` | `bool?` | no | Includes item data entries, optionally filtered by `itemDataKeys`. — _default=false_ |
+| `itemDataKeys` | `List<string>?` | no | Restricts `itemDatas` to the specified keys when that field is requested. — _elementCls=String_ |
+| `itemStatisticsKeys` | `List<string>?` | no | Restricts `itemStatistics` to the specified statistic keys when that field is requested. — _elementCls=String_ |
+| `customDataKeys` | `List<string>?` | no | Restricts `customDatas` to the specified keys when that field is requested. — _elementCls=String_ |
+| `tagKeys` | `List<string>?` | no | Restricts `tags` to the specified tag keys when that field is requested. — _elementCls=String_ |
 
 ### ItemDataParam
 
@@ -316,7 +316,7 @@ Defines the reusable parameter block ItemDataParam.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `key` | `string` | yes | _minLength=2, maxLength=32_ |
-| `value` | `any` | yes | Arbitrary value to store for this item data key. May be a primitive, `GNHashtable`, or `GNArray`. |
+| `value` | `object` | yes | Arbitrary value to store for this item data key. May be a primitive, `GNHashtable`, or `GNArray`. |
 
 ### ItemStatisticsParam
 
@@ -326,7 +326,7 @@ Defines the reusable parameter block ItemStatisticsParam.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `key` | `string` | yes | _minLength=2, maxLength=32_ |
-| `value` | `number` | yes | Statistic value to apply; interpretation depends on the configured aggregation method. |
+| `value` | `double` | yes | Statistic value to apply; interpretation depends on the configured aggregation method. |
 
 ### AddSegmentRequestData
 
@@ -462,7 +462,7 @@ Defines the request payload for GetCustomData.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `customDataKeys` | `Array<string>` | no | _elementCls=String_ |
+| `customDataKeys` | `List<string>?` | no | _elementCls=String_ |
 
 ### ServerGetCustomDataRequestData
 
@@ -513,7 +513,7 @@ Defines the request payload for GetItemData.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `itemDataKeys` | `Array<string>` | no | _elementCls=String_ |
+| `itemDataKeys` | `List<string>?` | no | _elementCls=String_ |
 
 ### ServerGetItemDataRequestData
 
@@ -565,7 +565,7 @@ Reads statistics for one inventory item. Note that this request uses `statistics
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `statisticsKeys` | `Array<string>` | no | _elementCls=String_ |
+| `statisticsKeys` | `List<string>?` | no | _elementCls=String_ |
 
 ### ServerGetItemStatisticsRequestData
 
@@ -592,8 +592,8 @@ Defines the request payload for GetItemsWithDisplayName.
 | --- | --- | --- | --- |
 | `keyword` | `string` | yes | _minLength=2, maxLength=32_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional inventory item fields are included in the response. |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
 
 ### ServerGetItemsWithDisplayNameRequestData
 
@@ -620,8 +620,8 @@ Defines the request payload for GetItemsWithSegment.
 | --- | --- | --- | --- |
 | `value` | `string` | yes | _minLength=2, maxLength=32_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional inventory item fields are included in the response. |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
 
 ### ServerGetItemsWithSegmentRequestData
 
@@ -649,8 +649,8 @@ Defines the request payload for GetItemsWithTag.
 | `key` | `string` | yes | _minLength=2, maxLength=32_ |
 | `value` | `string` | yes | _minLength=2, maxLength=32_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional inventory item fields are included in the response. |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
 
 ### ServerGetItemsWithTagRequestData
 
@@ -778,10 +778,10 @@ Defines the request payload for GetStatisticsLeaderboardAroundItem.
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
 | `key` | `string` | yes | _minLength=2, maxLength=32_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional inventory item fields are included in the response. |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
-| `loadFromCache` | `boolean` | no | _default=true_ |
-| `catalogId` | `string` | no | _minLength=2, maxLength=32_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
+| `loadFromCache` | `bool?` | no | _default=true_ |
+| `catalogId` | `string?` | no | _minLength=2, maxLength=32_ |
 
 ### ServerGetStatisticsLeaderboardAroundItemRequestData
 
@@ -808,11 +808,11 @@ Defines the request payload for GetStatisticsLeaderboard.
 | --- | --- | --- | --- |
 | `key` | `string` | yes | _minLength=2, maxLength=32_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional inventory item fields are included in the response. |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
-| `loadFromCache` | `boolean` | no | _default=true_ |
-| `version` | `string` | no | _minLength=2, maxLength=32_ |
-| `catalogId` | `string` | no | _minLength=2, maxLength=32_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
+| `loadFromCache` | `bool?` | no | _default=true_ |
+| `version` | `string?` | no | _minLength=2, maxLength=32_ |
+| `catalogId` | `string?` | no | _minLength=2, maxLength=32_ |
 
 ### ServerGetStatisticsLeaderboardRequestData
 
@@ -838,9 +838,9 @@ Defines the request payload for GetCreateLeaderboard.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional inventory item fields are included in the response. |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
-| `loadFromCache` | `boolean` | no | _default=true_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
+| `loadFromCache` | `bool?` | no | _default=true_ |
 
 ### ServerGetCreateLeaderboardRequestData
 
@@ -866,7 +866,7 @@ Defines the request payload for GetTag.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `tagKeys` | `Array<string>` | no | _elementCls=String_ |
+| `tagKeys` | `List<string>?` | no | _elementCls=String_ |
 
 ### ServerGetTagRequestData
 
@@ -969,7 +969,7 @@ Replaces the stored amount with an absolute value. Use `ChangeItemStatistics` fo
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `amount` | `number` | yes | Absolute item amount to set (replaces the current value, not a delta). |
+| `amount` | `long` | yes | Absolute item amount to set (replaces the current value, not a delta). |
 
 ### ServerSetAmountRequestData
 
@@ -995,7 +995,7 @@ Defines the request payload for SetAvatar.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `type` | `number` | yes | Avatar type identifier. Map with the public avatar type enum. |
+| `type` | `int` | yes | Avatar type identifier. User custom this type enum. |
 | `value` | `string` | yes | Avatar value such as a URL, file ID, or provider-specific string. — _minLength=1, maxLength=128_ |
 
 ### ServerSetAvatarRequestData
@@ -1022,7 +1022,7 @@ Defines the request payload for SetCustomData.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `customDatas` | `Array<CustomDataParam>` | yes | _minLength=1, maxLength=32, elementCls=CustomDataParam_ |
+| `customDatas` | `List<CustomDataParam>` | yes | _minLength=1, maxLength=32, elementCls=CustomDataParam_ |
 
 ### ServerSetCustomDataRequestData
 
@@ -1074,7 +1074,7 @@ Defines the request payload for SetItemData.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `itemDatas` | `Array<ItemDataParam>` | yes | _minLength=1, maxLength=32, elementCls=ItemDataParam_ |
+| `itemDatas` | `List<ItemDataParam>` | yes | _minLength=1, maxLength=32, elementCls=ItemDataParam_ |
 
 ### ServerSetItemDataRequestData
 
@@ -1100,8 +1100,8 @@ Applies delta updates to one or more item statistics.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `itemStatistics` | `Array<ItemStatisticsParam>` | yes | _minLength=1, maxLength=32, elementCls=ItemStatisticsParam_ |
-| `log` | `string` | no | _minLength=1, maxLength=256_ |
+| `itemStatistics` | `List<ItemStatisticsParam>` | yes | _minLength=1, maxLength=32, elementCls=ItemStatisticsParam_ |
+| `log` | `string?` | no | _minLength=1, maxLength=256_ |
 
 ### ServerChangeItemStatisticsRequestData
 
@@ -1128,7 +1128,7 @@ Transfers ownership of the inventory item to a different owner.
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=11, maxLength=11_ |
 | `newOwnerId` | `string` | yes | New owner identifier matching the selected `newOwnerType`. — _minLength=10, maxLength=12_ |
-| `newOwnerType` | `number` | yes | New owner type mapped by the public `OwnerType` enum. |
+| `newOwnerType` | `int` | yes | New owner type mapped by the public `OwnerType` enum. |
 
 ### ServerSetOwnerRequestData
 
@@ -1154,7 +1154,7 @@ Defines the request payload for SetRemoveStatus.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `reason` | `string` | no | _default=""_ |
+| `reason` | `string?` | no | _default=""_ |
 
 ### ServerSetRemoveStatusRequestData
 
@@ -1206,10 +1206,10 @@ Reads statistic change logs for one inventory item. Pagination is token-based ra
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `keys` | `Array<string>` | yes | _minLength=1, maxLength=32, elementCls=String_ |
-| `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
-| `token` | `string` | yes | Continuation token returned by the previous page. — _minLength=24, maxLength=24_ |
+| `keys` | `List<string>?` | yes | _minLength=1, maxLength=32, elementCls=String_ |
+| `itemId` | `string?` | yes | _minLength=12, maxLength=12_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
+| `token` | `string?` | yes | Continuation token returned by the previous page. — _minLength=24, maxLength=24_ |
 
 ### ServerGetStatisticsLogRequestData
 
@@ -1234,20 +1234,20 @@ Contains the optional fields requested through `InfoRequestParam`.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `catalogId` | `string` | no | Catalog ID the item belongs to; present when requested. |
-| `classId` | `string` | no | Class ID of the item; present when requested. |
-| `itemType` | `number` | no | Item type mapped by the public `ItemType` enum; present when requested. |
-| `amount` | `number` | no | Current item amount; present when requested. |
-| `owner` | `GenericModels.OwnerItem` | no | Owner descriptor mapped by the public `OwnerType` enum. |
-| `removeStatus` | `GenericModels.RemoveStatusItem` | no | Soft-remove metadata; present when the item has been marked for removal. |
-| `segments` | `Array<string>` | no | Segment names assigned to the item. — _elementCls=String_ |
-| `customDatas` | `Array<GenericModels.DataItem>` | no | Custom data entries; present when `customDatas` is enabled in `InfoRequestParam`. — _elementCls=GenericModels.DataItem_ |
-| `displayName` | `string` | no | Display name of the item; present when requested. |
-| `avatar` | `GenericModels.AvatarItem` | no | Avatar descriptor of the item; present when requested. |
-| `tsCreate` | `number` | no | Creation timestamp of the item; present when requested. |
-| `tags` | `Array<GenericModels.TagItem>` | no | Tag entries assigned to the item. — _elementCls=GenericModels.TagItem_ |
-| `itemDatas` | `Array<GenericModels.DataItem>` | no | Item data entries; present when `itemDatas` is enabled. — _elementCls=GenericModels.DataItem_ |
-| `itemStatistics` | `Array<GenericModels.StatisticsItem>` | no | Item statistics values; present when `itemStatistics` is enabled. — _elementCls=GenericModels.StatisticsItem_ |
+| `catalogId` | `string?` | no | Catalog ID the item belongs to; present when requested. |
+| `classId` | `string?` | no | Class ID of the item; present when requested. |
+| `itemType` | `int?` | no | Item type mapped by the public `ItemType` enum; present when requested. |
+| `amount` | `int?` | no | Current item amount; present when requested. |
+| `owner` | `GenericModels.OwnerItem?` | no | Owner descriptor mapped by the public `OwnerType` enum. |
+| `removeStatus` | `GenericModels.RemoveStatusItem?` | no | Soft-remove metadata; present when the item has been marked for removal. |
+| `segments` | `List<string>?` | no | Segment names assigned to the item. — _elementCls=String_ |
+| `customDatas` | `List<GenericModels.DataItem>?` | no | Custom data entries; present when `customDatas` is enabled in `InfoRequestParam`. — _elementCls=GenericModels.DataItem_ |
+| `displayName` | `string?` | no | Display name of the item; present when requested. |
+| `avatar` | `GenericModels.AvatarItem?` | no | Avatar descriptor of the item; present when requested. |
+| `tsCreate` | `long?` | no | Creation timestamp of the item; present when requested. |
+| `tags` | `List<GenericModels.TagItem>?` | no | Tag entries assigned to the item. — _elementCls=GenericModels.TagItem_ |
+| `itemDatas` | `List<GenericModels.DataItem>?` | no | Item data entries; present when `itemDatas` is enabled. — _elementCls=GenericModels.DataItem_ |
+| `itemStatistics` | `List<GenericModels.StatisticsItem>?` | no | Item statistics values; present when `itemStatistics` is enabled. — _elementCls=GenericModels.StatisticsItem_ |
 
 ### InventoryResponseData
 
@@ -1278,8 +1278,8 @@ Defines the response payload for InventoryLeaderboard.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `position` | `number` | yes | Zero-based leaderboard rank position of this inventory item. |
-| `backupValue` | `number` | no | Backup statistic value used as a tiebreaker when present. |
+| `position` | `int` | yes | Zero-based leaderboard rank position of this inventory item. |
+| `backupValue` | `double?` | no | Backup statistic value used as a tiebreaker when present. |
 
 ### InventoryLogResponseData
 
@@ -1289,12 +1289,12 @@ Describes one inventory-statistics change log entry.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | Inventory item ID this log entry belongs to. |
-| `tsCreate` | `number` | yes | Timestamp when this log entry was recorded. |
+| `tsCreate` | `long` | yes | Timestamp when this log entry was recorded. |
 | `log` | `string` | yes | Human-readable log message describing the change. |
 | `key` | `string` | yes | Statistics key that was changed. |
-| `amount` | `number` | yes | Delta amount applied in this change. |
-| `startValue` | `number` | yes | Value before the change was applied. |
-| `finalValue` | `number` | yes | Value after the change was applied. |
+| `amount` | `double` | yes | Delta amount applied in this change. |
+| `startValue` | `double` | yes | Value before the change was applied. |
+| `finalValue` | `double` | yes | Value after the change was applied. |
 
 ### GetStatisticsLeaderboardResponseData
 
@@ -1303,8 +1303,8 @@ Defines the response payload for GetStatisticsLeaderboard.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<InventoryLeaderboardResponseData>` | yes | _elementCls=InventoryLeaderboardResponseData_ |
-| `tsCreate` | `number` | no | Snapshot timestamp used for this leaderboard page when returned by the backend. |
+| `results` | `List<InventoryLeaderboardResponseData>` | yes | _elementCls=InventoryLeaderboardResponseData_ |
+| `tsCreate` | `long?` | no | Snapshot timestamp used for this leaderboard page when returned by the backend. |
 
 ### InventoriesWithItemIdResponseData
 
@@ -1313,7 +1313,7 @@ Defines the response payload for InventoriesWithItemId.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<InventoryWithItemIdResponseData>` | yes | _elementCls=InventoryWithItemIdResponseData_ |
+| `results` | `List<InventoryWithItemIdResponseData>` | yes | _elementCls=InventoryWithItemIdResponseData_ |
 
 ### GetCreateLeaderboardResponseData
 
@@ -1322,7 +1322,7 @@ Defines the response payload for GetCreateLeaderboard.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<InventoryLeaderboardResponseData>` | yes | _elementCls=InventoryLeaderboardResponseData_ |
+| `results` | `List<InventoryLeaderboardResponseData>` | yes | _elementCls=InventoryLeaderboardResponseData_ |
 
 ### GetStatisticsLogResponseData
 
@@ -1331,8 +1331,8 @@ Returns one page of inventory statistics logs.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<InventoryLogResponseData>` | yes | _elementCls=InventoryLogResponseData_ |
-| `token` | `string` | no | Continuation token for the next page, or `undefined` when pagination is exhausted. |
+| `results` | `List<InventoryLogResponseData>` | yes | _elementCls=InventoryLogResponseData_ |
+| `token` | `string?` | no | Continuation token for the next page, or `undefined` when pagination is exhausted. |
 
 ### EmptyResponseData
 

@@ -71,8 +71,8 @@ Creates a new CloudScript version from raw script source.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `script` | `string` | yes | Submitted CloudScript source. It must register at least one `handlers["functionName"] = ...` handler. |
-| `canExecute` | `boolean` | yes | Whether this version may be executed. |
-| `isLive` | `boolean` | yes | Whether this version is promoted as live. |
+| `canExecute` | `string` | yes | Whether this version may be executed. |
+| `isLive` | `string` | yes | Whether this version is promoted as live. |
 
 ### ServerAddFunctionRequestData
 
@@ -98,8 +98,8 @@ Updates execution flags for an existing CloudScript version without changing its
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `version` | `string` | yes | CloudScript version to edit. — _minLength=7, maxLength=7_ |
-| `canExecute` | `boolean` | yes | Whether this version may be executed. |
-| `isLive` | `boolean` | yes | Whether this version is promoted as live. |
+| `canExecute` | `string` | yes | Whether this version may be executed. |
+| `isLive` | `string` | yes | Whether this version is promoted as live. |
 
 ### ServerEditFunctionRequestData
 
@@ -124,10 +124,10 @@ Executes one function from the selected CloudScript version.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `userId` | `string` | no | Optional self-target shortcut on the client route; trusted routes require it through derived classes. — _minLength=10, maxLength=10_ |
+| `userId` | `string?` | no | Optional self-target shortcut on the client route; trusted routes require it through derived classes. — _minLength=10, maxLength=10_ |
 | `functionName` | `string` | yes | Function name inside the script version, not the version identifier itself. — _minLength=3, maxLength=30_ |
-| `functionParameters` | `any` | no | Arbitrary payload forwarded to the CloudScript function. |
-| `version` | `string` | no | Optional version override; when omitted, backend execution rules decide which live version is used. — _minLength=7, maxLength=7_ |
+| `functionParameters` | `object` | yes | Arbitrary payload forwarded to the CloudScript function. You can use `null` for `functionParameters`. |
+| `version` | `string?` | no | Optional version override; when omitted, backend execution rules decide which live version is used. — _minLength=7, maxLength=7_ |
 
 ### ServerExecuteFunctionRequestData
 
@@ -219,11 +219,10 @@ Returns runtime telemetry and function output for one execution.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `status` | `int` | yes | Raw execution status code returned by the backend. Cast to public enum `ExecuteResponseStatus` before comparing, for example `(ExecuteResponseStatus)exec.status == ExecuteResponseStatus.Ok`. |
-| `executionTimeInMs` | `number` | yes | Execution duration in milliseconds. |
-| `memoryUsedInBytes` | `number` | yes | Memory consumed during the function execution in bytes. |
-| `functionResult` | `any` | yes | Arbitrary function return value as returned by the handler. |
+| `executionTimeInMs` | `float` | yes | Execution duration in milliseconds. |
+| `memoryUsedInBytes` | `float` | yes | Memory consumed during the function execution in bytes. |
+| `functionResult` | `object` | yes | Arbitrary function return value as returned by the handler. |
 | `errorMessage` | `string` | yes | Error message when the function threw an exception; empty string on success. |
-| `functionLogs` | `Array<string>` | yes | Ordered execution logs captured during the function run. — _elementCls=String_ |
 
 ### GetFunctionResponseData
 
@@ -233,9 +232,10 @@ Returns one full CloudScript version snapshot.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `script` | `string` | yes | Raw CloudScript source code for this version. |
-| `canExecute` | `boolean` | yes | Whether this version is permitted to execute. |
-| `isLive` | `boolean` | yes | Whether this version is promoted as the live version. |
-| `tsCreate` | `number` | yes | Creation timestamp of this CloudScript version. |
+| `canExecute` | `bool` | yes | Whether this version is permitted to execute. |
+| `isLive` | `bool` | yes | Whether this version is promoted as the live version. |
+| `tsCreate` | `long` | yes | Creation timestamp of this CloudScript version. |
+| `functionLogs` | `List<string>` | yes | Ordered execution logs captured for this CloudScript version. — _elementCls=String_ |
 
 ### FunctionResponseData
 
@@ -245,7 +245,7 @@ Describes one lightweight function-version summary.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `version` | `string` | yes | Version identifier of this CloudScript version (7-character string). |
-| `canExecute` | `boolean` | yes | Whether this version is permitted to execute. |
+| `canExecute` | `bool` | yes | Whether this version is permitted to execute. |
 
 ### GetFunctionsResponseData
 
@@ -254,7 +254,7 @@ Returns the available function-version list plus latest/live pointers.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<FunctionResponseData>` | yes | List of all CloudScript version summaries for this game. — _elementCls=FunctionResponseData_ |
+| `results` | `List<FunctionResponseData>` | yes | List of all CloudScript version summaries for this game. — _elementCls=FunctionResponseData_ |
 | `latestVersion` | `string` | yes | Version identifier of the most recently added CloudScript version. |
 | `liveLatestVersion` | `string` | yes | Version identifier of the most recently promoted live version. |
 

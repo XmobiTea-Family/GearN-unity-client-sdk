@@ -88,27 +88,27 @@ Defines the reusable parameter block `infoRequestParam`. This object controls wh
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `external` | `boolean` | no | Include linked external identity data. — _default=false_ |
-| `segments` | `boolean` | no | Include segment assignments. — _default=false_ |
-| `customDatas` | `boolean` | no | Include custom data entries, optionally filtered by `customDataKeys`. — _default=false_ |
-| `displayName` | `boolean` | no | Include display-name data. — _default=false_ |
-| `avatar` | `boolean` | no | Include avatar data. — _default=false_ |
-| `tsCreate` | `boolean` | no | Include account creation timestamp. — _default=false_ |
-| `tags` | `boolean` | no | Include tag entries, optionally filtered by `tagKeys`. — _default=false_ |
-| `playerBan` | `boolean` | no | Include ban state of the player. — _default=false_ |
-| `playerCurrencies` | `boolean` | no | Include currency balances, optionally filtered by `playerCurrencyKeys`. — _default=false_ |
-| `playerStatistics` | `boolean` | no | Include statistics values, optionally filtered by `playerStatisticsKeys`. — _default=false_ |
-| `playerDatas` | `boolean` | no | Include player data entries, optionally filtered by `playerDataKeys`. — _default=false_ |
-| `ipAddressCreate` | `boolean` | no | Include IP address recorded at the time of account creation. — _default=false_ |
-| `countryCode` | `boolean` | no | Include country code associated with the player account. — _default=false_ |
-| `email` | `boolean` | no | Include email address linked to the account. — _default=false_ |
-| `tsLastLogin` | `boolean` | no | Include timestamp of the player's last successful login. — _default=false_ |
-| `pushNotifications` | `boolean` | no | Include push notification token information registered for the player. — _default=false_ |
-| `playerDataKeys` | `Array<string>` | no | Filter the returned player data fields. — _elementCls=String_ |
-| `playerCurrencyKeys` | `Array<string>` | no | Filter the returned player currency fields. — _elementCls=String_ |
-| `playerStatisticsKeys` | `Array<string>` | no | Filter the returned player statistics fields. — _elementCls=String_ |
-| `customDataKeys` | `Array<string>` | no | Filter the returned custom-data fields. — _elementCls=String_ |
-| `tagKeys` | `Array<string>` | no | Filter the returned tags by key. — _elementCls=String_ |
+| `external` | `bool?` | no | Include linked external identity data. — _default=false_ |
+| `segments` | `bool?` | no | Include segment assignments. — _default=false_ |
+| `customDatas` | `bool?` | no | Include custom data entries, optionally filtered by `customDataKeys`. — _default=false_ |
+| `displayName` | `bool?` | no | Include display-name data. — _default=false_ |
+| `avatar` | `bool?` | no | Include avatar data. — _default=false_ |
+| `tsCreate` | `bool?` | no | Include account creation timestamp. — _default=false_ |
+| `tags` | `bool?` | no | Include tag entries, optionally filtered by `tagKeys`. — _default=false_ |
+| `playerBan` | `bool?` | no | Include ban state of the player. — _default=false_ |
+| `playerCurrencies` | `bool?` | no | Include currency balances, optionally filtered by `playerCurrencyKeys`. — _default=false_ |
+| `playerStatistics` | `bool?` | no | Include statistics values, optionally filtered by `playerStatisticsKeys`. — _default=false_ |
+| `playerDatas` | `bool?` | no | Include player data entries, optionally filtered by `playerDataKeys`. — _default=false_ |
+| `ipAddressCreate` | `bool?` | no | Include IP address recorded at the time of account creation. — _default=false_ |
+| `countryCode` | `bool?` | no | Include country code associated with the player account. — _default=false_ |
+| `email` | `bool?` | no | Include email address linked to the account. — _default=false_ |
+| `tsLastLogin` | `bool?` | no | Include timestamp of the player's last successful login. — _default=false_ |
+| `pushNotifications` | `bool?` | no | Include push notification token information registered for the player. — _default=false_ |
+| `playerDataKeys` | `List<string>?` | no | Filter the returned player data fields. — _elementCls=String_ |
+| `playerCurrencyKeys` | `List<string>?` | no | Filter the returned player currency fields. — _elementCls=String_ |
+| `playerStatisticsKeys` | `List<string>?` | no | Filter the returned player statistics fields. — _elementCls=String_ |
+| `customDataKeys` | `List<string>?` | no | Filter the returned custom-data fields. — _elementCls=String_ |
+| `tagKeys` | `List<string>?` | no | Filter the returned tags by key. — _elementCls=String_ |
 
 ### LoginByAccountRequestData
 
@@ -129,7 +129,7 @@ Defines the request payload for LoginByAndroidDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `androidDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByAppleRequestData
@@ -140,7 +140,7 @@ Defines the request payload for LoginByApple.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `token` | `string` | yes | _minLength=32, maxLength=2048_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByCustomDeviceIdRequestData
@@ -151,7 +151,7 @@ Defines the request payload for LoginByCustomDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `customDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByCustomIdRequestData
@@ -162,7 +162,7 @@ Defines the request payload for LoginByCustomId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `customId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByEditorDeviceIdRequestData
@@ -173,7 +173,7 @@ Defines the request payload for LoginByEditorDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `editorDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByFacebookRequestData
@@ -184,7 +184,7 @@ Defines the request payload for LoginByFacebook.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `token` | `string` | yes | _minLength=32, maxLength=2048_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByGenericServiceRequestData
@@ -196,7 +196,7 @@ Defines the request payload for `loginByGenericService`. `serviceData` is provid
 | --- | --- | --- | --- |
 | `serviceName` | `string` | yes | _minLength=6, maxLength=32_ |
 | `serviceData` | `GNHashtable` | yes | Provider-defined payload consumed by the backend integration for `serviceName`. |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByGoogleRequestData
@@ -207,8 +207,8 @@ Defines the request payload for `loginByGoogle`. `type` should be mapped with th
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `token` | `string` | yes | _minLength=32, maxLength=2048_ |
-| `type` | `number` | yes | _min=1, max=2_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `type` | `int` | yes | _min=1, max=2_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByGooglePlayGameServiceRequestData
@@ -219,7 +219,7 @@ Defines the request payload for LoginByGooglePlayGameService.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `token` | `string` | yes | _minLength=32, maxLength=2048_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByGameCenterRequestData
@@ -234,8 +234,8 @@ Defines the request payload for LoginByGameCenter.
 | `publicKeyUrl` | `string` | yes | _minLength=2, maxLength=2048_ |
 | `signature` | `string` | yes | _minLength=2, maxLength=2048_ |
 | `salt` | `string` | yes | _minLength=2, maxLength=256_ |
-| `timestamp` | `number` | yes | — |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `timestamp` | `long` | yes | — |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByiOSDeviceIdRequestData
@@ -246,7 +246,7 @@ Defines the request payload for LoginByiOSDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `iOSDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByLinuxDeviceIdRequestData
@@ -257,7 +257,7 @@ Defines the request payload for LoginByLinuxDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `linuxDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByMacOSDeviceIdRequestData
@@ -268,7 +268,7 @@ Defines the request payload for LoginByMacOSDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `macOSDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByWindowsDeviceIdRequestData
@@ -279,7 +279,7 @@ Defines the request payload for LoginByWindowsDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `windowsDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### LoginByWindowsPhoneDeviceIdRequestData
@@ -290,7 +290,7 @@ Defines the request payload for LoginByWindowsPhoneDeviceId.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `windowsPhoneDeviceId` | `string` | yes | _minLength=6, maxLength=64_ |
-| `createPlayerIfNotExists` | `boolean` | no | _default=false_ |
+| `createPlayerIfNotExists` | `bool?` | no | _default=false_ |
 | `infoRequestParam` | `InfoRequestParam` | yes | Controls which optional profile fields should be returned together with the auth payload. |
 
 ### RegisterAccountRequestData
@@ -319,9 +319,9 @@ Defines the response payload returned by most login and register flows. This pay
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `newlyCreated` | `boolean` | no | Indicates whether the backend created a new player as part of the login flow. |
-| `authToken` | `string` | no | Auth token to cache locally and reuse for future HTTP or socket auth flows. |
-| `playerBan` | `GenericModels.BanItem` | no | Optional ban state returned together with the auth payload. |
+| `newlyCreated` | `bool?` | no | Indicates whether the backend created a new player as part of the login flow. |
+| `authToken` | `string?` | no | Auth token to cache locally and reuse for future HTTP or socket auth flows. |
+| `playerBan` | `GenericModels.BanItem?` | no | Optional ban state returned together with the auth payload. |
 
 ### GenericServiceAuthenticateResponseData
 
@@ -332,7 +332,7 @@ Defines the response payload for `loginByGenericService`. This extends the norma
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `errorMessage` | `string` | no | Optional provider-specific error message returned by the backend integration. |
+| `errorMessage` | `string?` | no | Optional provider-specific error message returned by the backend integration. |
 
 ### RefreshAuthTokenResponseData
 
@@ -341,8 +341,8 @@ Defines the response payload for `refreshAuthToken`. Unlike the normal login flo
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `authToken` | `string` | no | Refreshed auth token that should replace the previously stored token. |
-| `playerBan` | `GenericModels.BanItem` | no | Optional ban state returned together with the refreshed token. |
+| `authToken` | `string?` | no | Refreshed auth token that should replace the previously stored token. |
+| `playerBan` | `GenericModels.BanItem?` | no | Optional ban state returned together with the refreshed token. |
 
 ### EmptyResponseData
 

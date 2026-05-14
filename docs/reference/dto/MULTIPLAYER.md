@@ -172,10 +172,10 @@ Creates a new matchmaking ticket for the current or target player.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `giveUpAfterSeconds` | `number` | yes | Maximum wait time before the ticket gives up. — _min=20_ |
+| `giveUpAfterSeconds` | `int` | yes | Maximum wait time before the ticket gives up. — _min=20_ |
 | `queueName` | `string` | yes | _minLength=6, maxLength=32_ |
-| `attribute` | `GNHashtable` | no | Backend-defined matchmaking attribute payload. |
-| `members` | `Array<string>` | no | Optional extra members joined into the same matchmaking party. — _elementCls=String_ |
+| `attribute` | `GNHashtable?` | no | Backend-defined matchmaking attribute payload. |
+| `members` | `List<string>?` | no | Optional extra members joined into the same matchmaking party. — _elementCls=String_ |
 
 ### ServerCreateMatchmakingTicketRequestData
 
@@ -204,7 +204,7 @@ Polls the current state of one matchmaking ticket.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `ticketId` | `string` | yes | _minLength=10, maxLength=10_ |
-| `returnMember` | `boolean` | no | Requests member details in addition to the ticket summary. — _default=false_ |
+| `returnMember` | `bool?` | no | Requests member details in addition to the ticket summary. — _default=false_ |
 
 ### ServerGetMatchmakingTicketRequestData
 
@@ -230,7 +230,7 @@ Reads a match after matchmaking has produced a `matchId`.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `matchId` | `string` | yes | _minLength=15, maxLength=15_ |
-| `returnMember` | `boolean` | no | Requests member details in addition to the match summary. — _default=false_ |
+| `returnMember` | `bool?` | no | Requests member details in addition to the match summary. — _default=false_ |
 
 ### ServerGetMatchRequestData
 
@@ -255,9 +255,9 @@ Defines the request payload for GetAllMatch.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `returnMember` | `boolean` | no | _default=false_ |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
+| `returnMember` | `bool?` | no | _default=false_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
 
 ### ServerGetAllMatchRequestData
 
@@ -282,10 +282,10 @@ Lists matchmaking tickets with optional status filtering.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `status` | `number` | no | Ticket status filter mapped by the public `MatchmakingTicketStatus` enum. — _min=1, max=5_ |
-| `returnMember` | `boolean` | no | _default=false_ |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
+| `status` | `int?` | no | Ticket status filter mapped by the public `MatchmakingTicketStatus` enum. — _min=1, max=5_ |
+| `returnMember` | `bool?` | no | _default=false_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
 
 ### ServerGetAllMatchmakingTicketRequestData
 
@@ -311,7 +311,7 @@ Defines the request payload for GetQueueStatistics.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `queueName` | `string` | yes | _minLength=6, maxLength=32_ |
-| `timeInSeconds` | `number` | yes | _min=20_ |
+| `timeInSeconds` | `int` | yes | _min=20_ |
 
 ### ServerGetQueueStatisticsRequestData
 
@@ -337,7 +337,7 @@ Defines the request payload for JoinMatchmakingTicket.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `ticketId` | `string` | yes | _minLength=10, maxLength=10_ |
-| `attribute` | `GNHashtable` | no | Matchmaking attributes for the joining member (e.g. skill rating, region). |
+| `attribute` | `GNHashtable?` | no | Matchmaking attributes for the joining member (e.g. skill rating, region). |
 
 ### ServerJoinMatchmakingTicketRequestData
 
@@ -393,7 +393,7 @@ Defines the response payload for CancelAllMatchmakingTicket.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `ticketIds` | `Array<string>` | yes | _elementCls=String_ |
+| `ticketIds` | `List<string>` | yes | _elementCls=String_ |
 
 ### CreateMatchmakingTicketResponseData
 
@@ -412,7 +412,7 @@ Describes one member attached to a matchmaking ticket.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `userId` | `string` | yes | _minLength=10, maxLength=10_ |
-| `status` | `number` | yes | Member status value defined by backend matchmaking semantics. |
+| `status` | `int` | yes | Member status value defined by backend matchmaking semantics. |
 | `attribute` | `GNHashtable` | yes | Matchmaking attributes for this member (e.g. skill rating, region). |
 
 ### MatchmakingTicketResponseData
@@ -422,13 +422,13 @@ Describes the current state of a matchmaking ticket.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `tsCreate` | `number` | yes | Creation timestamp of the matchmaking ticket. |
+| `tsCreate` | `long` | yes | Creation timestamp of the matchmaking ticket. |
 | `creatorId` | `string` | yes | User ID of the player who created the ticket. — _minLength=10, maxLength=10_ |
-| `giveUpAfterSeconds` | `number` | yes | Maximum wait time in seconds before the ticket gives up. |
+| `giveUpAfterSeconds` | `int` | yes | Maximum wait time in seconds before the ticket gives up. |
 | `queueName` | `string` | yes | _minLength=6, maxLength=32_ |
-| `status` | `number` | yes | Ticket status mapped by the public `MatchmakingTicketStatus` enum. |
-| `matchId` | `string` | no | Match ID assigned when the ticket is successfully matched. — _minLength=15, maxLength=15_ |
-| `members` | `Array<MatchmakingTicketMember>` | no | Members included in this matchmaking party. — _elementCls=MatchmakingTicketMember_ |
+| `status` | `int` | yes | Ticket status mapped by the public `MatchmakingTicketStatus` enum. |
+| `matchId` | `string?` | no | Match ID assigned when the ticket is successfully matched. — _minLength=15, maxLength=15_ |
+| `members` | `List<MatchmakingTicketMember>?` | no | Members included in this matchmaking party. — _elementCls=MatchmakingTicketMember_ |
 
 ### MatchmakingTicketWithTicketIdResponseData
 
@@ -469,9 +469,9 @@ Represents one port mapping exposed by a game server.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `name` | `string` | yes | Port label used to identify the service (e.g. `game`, `voice`). |
-| `publicPort` | `number` | yes | Public port number exposed to players. — _min=0_ |
-| `privatePort` | `number` | yes | Internal port number used by the server process. — _min=0_ |
-| `protocol` | `number` | yes | Transport protocol (1=UDP, 2=TCP). — _min=1, max=2_ |
+| `publicPort` | `ushort` | yes | Public port number exposed to players. — _min=0_ |
+| `privatePort` | `ushort` | yes | Internal port number used by the server process. — _min=0_ |
+| `protocol` | `ushort` | yes | Transport protocol (1=UDP, 2=TCP). — _min=1, max=2_ |
 
 ### ServerDetail
 
@@ -481,7 +481,7 @@ Represents connection details for a dedicated game server.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `ipV4Address` | `string` | yes | Public IPv4 address of the game server. |
-| `ports` | `Array<PortInfo>` | yes | List of port mappings exposed by the game server. — _elementCls=PortInfo_ |
+| `ports` | `List<PortInfo>` | yes | List of port mappings exposed by the game server. — _elementCls=PortInfo_ |
 
 ### MatchResponseData
 
@@ -490,11 +490,11 @@ Describes one resolved match. The public contract exposes queue/member data but 
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `tsCreate` | `number` | yes | Creation timestamp of the match. |
+| `tsCreate` | `long` | yes | Creation timestamp of the match. |
 | `queueName` | `string` | yes | Name of the matchmaking queue that produced this match. — _minLength=6, maxLength=32_ |
-| `members` | `Array<MatchMember>` | no | List of players assigned to this match. — _elementCls=MatchMember_ |
-| `timeToMatchInSeconds` | `number` | yes | Elapsed time in seconds from ticket creation to match resolution. |
-| `status` | `number` | yes | Match status mapped by the public `MatchStatus` enum. |
+| `members` | `List<MatchMember>?` | no | List of players assigned to this match. — _elementCls=MatchMember_ |
+| `timeToMatchInSeconds` | `float` | yes | Elapsed time in seconds from ticket creation to match resolution. |
+| `status` | `int` | yes | Match status mapped by the public `MatchStatus` enum. |
 
 ### MatchWithMatchIdResponseData
 
@@ -523,9 +523,9 @@ Defines the response payload for GetQueueStatistics.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `pendingMemberCount` | `number` | yes | Number of individual players currently waiting in this queue. |
-| `pendingTicketCount` | `number` | yes | Number of active matchmaking tickets currently waiting in this queue. |
-| `averageMatchmakingTimeInSeconds` | `number` | yes | Rolling average time in seconds for recent successful match formations. |
+| `pendingMemberCount` | `int` | yes | Number of individual players currently waiting in this queue. |
+| `pendingTicketCount` | `int` | yes | Number of active matchmaking tickets currently waiting in this queue. |
+| `averageMatchmakingTimeInSeconds` | `float` | yes | Rolling average time in seconds for recent successful match formations. |
 
 ### ListMatchmakingTicketsForPlayerResponseData
 
@@ -534,7 +534,7 @@ Defines the response payload for ListMatchmakingTicketsForPlayer.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `ticketIds` | `Array<string>` | yes | List of active ticket IDs for the requested player. — _elementCls=String_ |
+| `ticketIds` | `List<string>` | yes | List of active ticket IDs for the requested player. — _elementCls=String_ |
 
 ### GetAllMatchResponseData
 
@@ -543,7 +543,7 @@ Defines the response payload for GetAllMatch.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<MatchWithMatchIdResponseData>` | yes | List of all matches with their match IDs. — _elementCls=MatchWithMatchIdResponseData_ |
+| `results` | `List<MatchWithMatchIdResponseData>?` | yes | List of all matches with their match IDs. — _elementCls=MatchWithMatchIdResponseData_ |
 
 ### GetAllMatchmakingTicketResponseData
 
@@ -552,7 +552,7 @@ Defines the response payload for GetAllMatchmakingTicket.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<MatchmakingTicketWithTicketIdResponseData>` | yes | List of all matchmaking tickets with their ticket IDs. — _elementCls=MatchmakingTicketWithTicketIdResponseData_ |
+| `results` | `List<MatchmakingTicketWithTicketIdResponseData>?` | yes | List of all matchmaking tickets with their ticket IDs. — _elementCls=MatchmakingTicketWithTicketIdResponseData_ |
 
 ### EmptyResponseData
 

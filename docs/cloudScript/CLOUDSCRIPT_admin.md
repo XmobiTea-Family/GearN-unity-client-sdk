@@ -82,7 +82,7 @@ Rule:
 Lưu ý:
 - code trong `CloudScript` bắt buộc viết bằng `typescript`.
 - File mô tả / giải thích / spec: có thể dùng `csharp`-style pseudo/code để dễ đọc.
-- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp`
+- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp` (những biến như `int`, `long`, `double`, `float` dạng number trong `csharp` sẽ dùng như `number` trong `typescript`, những biến như `bool` trong `csharp` sẽ dùng như `boolean` trong `typescript`, `object` trong `csharp` sẽ dùng như `unknown` trong `typescript`)
 
 ```ts
 // Helper chuẩn cho mọi ví dụ

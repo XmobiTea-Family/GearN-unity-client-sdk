@@ -119,8 +119,8 @@ Reads content configuration blobs, optionally filtered by key list and label.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `keys` | `Array<string>` | no | _elementCls=String_ |
-| `label` | `string` | no | _minLength=2, maxLength=32, default=""_ |
+| `keys` | `List<string>?` | no | _elementCls=String_ |
+| `label` | `string?` | no | _minLength=2, maxLength=32, default=""_ |
 
 ### ServerGetContentDataRequestData
 
@@ -145,8 +145,8 @@ Defines the request payload for GetFileUploadInfoList.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `skip` | `number` | no | _min=0, default=0_ |
-| `limit` | `number` | no | _min=1, max=100, default=10_ |
+| `skip` | `int?` | no | _min=0, default=0_ |
+| `limit` | `int?` | no | _min=1, max=100, default=10_ |
 
 ### ServerGetFileUploadInfoListRequestData
 
@@ -197,7 +197,7 @@ Defines the request payload for RemoveFileUploadInfo.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `fileId` | `string` | yes | _minLength=15, maxLength=15_ |
-| `reason` | `string` | no | _default=""_ |
+| `reason` | `string?` | no | _default=""_ |
 
 ### ServerRemoveFileUploadInfoRequestData
 
@@ -247,8 +247,8 @@ Defines the request payload for SetContentData.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `configs` | `Array<ContentDataParam>` | yes | _elementCls=ContentDataParam_ |
-| `label` | `string` | no | _minLength=2, maxLength=32_ |
+| `configs` | `List<ContentDataParam>` | yes | _elementCls=ContentDataParam_ |
+| `label` | `string?` | no | _minLength=2, maxLength=32_ |
 
 ### ServerSetContentDataRequestData
 
@@ -282,7 +282,7 @@ Defines the response payload for GetContentData.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `configs` | `Array<ContentDataParam>` | yes | List of content data entries matching the request filters. — _elementCls=ContentDataParam_ |
+| `configs` | `List<ContentDataParam>` | yes | List of content data entries matching the request filters. — _elementCls=ContentDataParam_ |
 
 ### GetFileUploadInfoListResponseData
 
@@ -291,7 +291,7 @@ Defines the response payload for GetFileUploadInfoList.
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| `results` | `Array<FileIdUploadResponseData>` | yes | Paginated list of file IDs matching the query. — _elementCls=FileIdUploadResponseData_ |
+| `results` | `List<FileIdUploadResponseData>` | yes | Paginated list of file IDs matching the query. — _elementCls=FileIdUploadResponseData_ |
 
 ### FileUploadItem
 
@@ -301,7 +301,7 @@ Describes upload metadata stored for one file entry.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `mimeType` | `string` | yes | MIME type of the uploaded file (e.g. `image/png`, `application/json`). |
-| `size` | `number` | yes | File size in bytes. |
+| `size` | `long` | yes | File size in bytes. |
 | `folderFileName` | `string` | yes | Backend-stored path and file name for the uploaded binary. |
 
 ### GetFileUploadInfoResponseData
@@ -314,10 +314,10 @@ Returns metadata for one uploaded file entry.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `fileName` | `string` | yes | Original file name submitted when the upload slot was created. |
-| `tsCreate` | `number` | yes | Creation timestamp of the upload slot. |
+| `tsCreate` | `long` | yes | Creation timestamp of the upload slot. |
 | `removeStatus` | `GenericModels.RemoveStatusItem` | yes | Soft-remove metadata; present when the file has been marked for removal. |
-| `tsUploadExpire` | `number` | no | Upload-expiration timestamp for unfinished uploads when present. |
-| `fileUpload` | `FileUploadItem` | no | Detailed file metadata; present only after the binary has been successfully uploaded. |
+| `tsUploadExpire` | `long?` | no | Upload-expiration timestamp for unfinished uploads when present. |
+| `fileUpload` | `FileUploadItem?` | no | Detailed file metadata; present only after the binary has been successfully uploaded. |
 
 ### RequestDownloadFileUploadInfoResponseData
 
