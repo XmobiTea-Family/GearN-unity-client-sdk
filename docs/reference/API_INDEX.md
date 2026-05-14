@@ -8,7 +8,7 @@ Các khái niệm chung (áp dụng cho mọi group):
 - Mỗi method có 2 form C#: callback (`method(data, onResponse, ...)`) và `Task` (`methodAsync(data, ...)`). Ưu tiên `*Async()` khi code đang ở async context.
 - Param chung của mọi method: `(requestData, onResponse?, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?)` — xem chi tiết trong từng file.
 - Response class expose field PUBLIC: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`. Check 2 tầng (`ReturnCode` → `ErrorCode`); xem [ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
-- Enum value cụ thể: [ENUMS.md](/docs/reference/ENUMS.md). Config SDK: [CONFIG.md](/docs/reference/CONFIG.md). Permission flags: [PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md). Realtime event: [EVENTS.md](/docs/reference/EVENTS.md). Custom DTO attribute: [DATAMEMBER.md](/docs/reference/DATAMEMBER.md).
+- Enum value cụ thể: [ENUMS.md](/docs/reference/ENUMS.md). Config SDK: [CONFIG.md](/docs/reference/CONFIG.md). Permission flags: [PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md). Realtime event: [EVENTS.md](/docs/reference/EVENTS.md). Custom DTO attribute: [DATAMEMBER.md](/docs/reference/DATAMEMBER.md). Dynamic payload container: [GNDATA.md](/docs/reference/GNDATA.md).
 
 ## API groups
 
@@ -56,4 +56,5 @@ Xem [AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md#2-decision-tree-tôi-cần-làm-g�
 - Config `GNServerSettings` → [CONFIG.md](/docs/reference/CONFIG.md)
 - Realtime event handler → [EVENTS.md](/docs/reference/EVENTS.md)
 - Custom DTO / DataMember attribute → [DATAMEMBER.md](/docs/reference/DATAMEMBER.md)
+- Dynamic payload `GNArray` / `GNHashtable` → [GNDATA.md](/docs/reference/GNDATA.md)
 - Kịch bản end-to-end → [../COOKBOOK.md](/docs/COOKBOOK.md)
