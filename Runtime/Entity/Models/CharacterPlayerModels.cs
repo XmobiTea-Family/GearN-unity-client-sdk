@@ -1472,6 +1472,12 @@
             [StringDataMember(code = ParameterCode.DisplayName, minLength = 5, maxLength = 32, mustNonNull = true)]
             public string displayName;
 
+            /// <summary>
+            /// Indicates whether unique display name.
+            /// </summary>
+            [BooleanDataMember(code = ParameterCode.UniqueDisplayName, defaultValue = false, isOptional = true)]
+            public bool? uniqueDisplayName;
+
         }
 
         /// <summary>

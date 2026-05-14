@@ -1214,6 +1214,12 @@
             [StringDataMember(code = ParameterCode.DisplayName, defaultValue = "", isOptional = true, mustNonNull = true)]
             public string? displayName;
 
+            /// <summary>
+            /// Stores the display name value.
+            /// </summary>
+            [BooleanDataMember(code = ParameterCode.UniqueDisplayName, defaultValue = false, isOptional = true)]
+            public bool? uniqueDisplayName;
+
         }
 
         /// <summary>

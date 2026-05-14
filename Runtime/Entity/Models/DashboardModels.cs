@@ -1044,16 +1044,16 @@
             public PermissionRulesParam? getCurrencyLeaderboard;
 
             /// <summary>
-            /// Stores the get create leaderboard value.
-            /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.GetCreateLeaderboard, isOptional = true)]
-            public PermissionRulesParam? getCreateLeaderboard;
-
-            /// <summary>
             /// Stores the get last login leaderboard value.
             /// </summary>
             [GNHashtableDataMember(code = ParameterCode.GetLastLoginLeaderboard, isOptional = true)]
             public PermissionRulesParam? getLastLoginLeaderboard;
+
+            /// <summary>
+            /// Stores the get create leaderboard value.
+            /// </summary>
+            [GNHashtableDataMember(code = ParameterCode.GetCreateLeaderboard, isOptional = true)]
+            public PermissionRulesParam? getCreateLeaderboard;
 
             /// <summary>
             /// Stores the get statistics log value.
@@ -1613,6 +1613,12 @@
             /// </summary>
             [GNHashtableDataMember(code = ParameterCode.GetCreateLeaderboard, isOptional = true)]
             public PermissionRulesParam? getCreateLeaderboard;
+
+            /// <summary>
+            /// Stores the get last login leaderboard value.
+            /// </summary>
+            [GNHashtableDataMember(code = ParameterCode.GetLastLoginLeaderboard, isOptional = true)]
+            public PermissionRulesParam? getLastLoginLeaderboard;
 
             /// <summary>
             /// Stores the get statistics log value.
@@ -2482,6 +2488,12 @@
             /// </summary>
             [GNHashtableDataMember(code = ParameterCode.GetServerGameData, isOptional = true)]
             public PermissionRulesParam? getServerGameData;
+
+            /// <summary>
+            /// Stores the delete in database value.
+            /// </summary>
+            [GNHashtableDataMember(code = ParameterCode.DeleteInDatabase, isOptional = true)]
+            public PermissionRulesParam? deleteInDatabase;
 
         }
 
