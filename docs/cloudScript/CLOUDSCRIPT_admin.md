@@ -80,6 +80,7 @@ Rule:
 - **KHÔNG dùng `any` cho `response` / item array / `args`** — base type cho helper là `CustomOperationResponse`; item array dùng `GenericModels.CurrencyItem[]` / `StatisticsItem[]` / `DataItem[]` …; `args` dùng `unknown` rồi narrow. Đầy đủ pattern + bảng mapping: [CLOUDSCRIPT_USAGE.md § 5](/docs/cloudScript/CLOUDSCRIPT_USAGE.md#5-typing--không-dùng-any-vô-tội-vạ).
 
 Lưu ý:
+
 - code trong `CloudScript` bắt buộc viết bằng `typescript`.
 - File mô tả / giải thích / spec: có thể dùng `csharp`-style pseudo/code để dễ đọc.
 - Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp` (những biến như `int`, `long`, `double`, `float` dạng number trong `csharp` sẽ dùng như `number` trong `typescript`, những biến như `bool` trong `csharp` sẽ dùng như `boolean` trong `typescript`, `object` trong `csharp` sẽ dùng như `unknown` trong `typescript`, những biến như `List<>` trong `csharp` sẽ dùng như `Array<>` trong `typescript`)
@@ -191,30 +192,21 @@ Nên chuẩn bị 2 helper nhỏ để ví dụ ngắn mà vẫn an toàn:
 
 ```ts
 const requireString = (value: unknown, fieldName: string): string => {
-  if (typeof value !== "string" || value.trim().length === 0) {
-    throw new Error(fieldName + " is required");
-  }
+    if (typeof value !== "string" || value.trim().length === 0) {
+        throw new Error(fieldName + " is required");
+    }
 
-  return value.trim();
+    return value.trim();
 };
 
 const assertResponseOk = (response: CustomOperationResponse, actionName: string): void => {
-  if (response.hasReturnCodeError()) {
-    throw new Error(
-      actionName +
-        " return-code error: " +
-        (response.debugMessage ?? response.toString()),
-    );
-  }
+    if (response.hasReturnCodeError()) {
+        throw new Error(actionName + " return-code error: " + (response.debugMessage ?? response.toString()));
+    }
 
-  if (response.errorCode !== ErrorCode.Ok) {
-    throw new Error(
-      actionName +
-        " business error: " +
-        response.errorCode +
-        (response.debugMessage ? " - " + response.debugMessage : ""),
-    );
-  }
+    if (response.errorCode !== ErrorCode.Ok) {
+        throw new Error(actionName + " business error: " + response.errorCode + (response.debugMessage ? " - " + response.debugMessage : ""));
+    }
 };
 ```
 
@@ -224,14 +216,14 @@ const assertResponseOk = (response: CustomOperationResponse, actionName: string)
 
 ```ts
 handlers["adminGetGameInfo"] = async (args: any, context, log) => {
-  const requestData = new DashboardModels.GetGameInformationRequestData();
-  requestData.gameId = gameId;
+    const requestData = new DashboardModels.GetGameInformationRequestData();
+    requestData.gameId = gameId;
 
-  const response = await admin.dashboard.getGameInformationAsync(requestData);
+    const response = await admin.dashboard.getGameInformationAsync(requestData);
 
-  assertResponseOk(response, "admin.dashboard.getGameInformationAsync");
+    assertResponseOk(response, "admin.dashboard.getGameInformationAsync");
 
-  return response.responseData;
+    return response.responseData;
 };
 ```
 
@@ -243,31 +235,27 @@ handlers["adminGetGameInfo"] = async (args: any, context, log) => {
 ### 10.2. Đọc snapshot game player và tự tạo nếu chưa có
 
 ```ts
-handlers["adminGetOrCreateGamePlayerProfile"] = async (
-  args: any,
-  context,
-  log,
-) => {
-  const targetUserId = requireString(args?.userId, "userId");
+handlers["adminGetOrCreateGamePlayerProfile"] = async (args: any, context, log) => {
+    const targetUserId = requireString(args?.userId, "userId");
 
-  const infoRequestParam = new GamePlayerModels.InfoRequestParam();
-  infoRequestParam.displayName = true;
-  infoRequestParam.playerCurrencies = true;
-  infoRequestParam.playerCurrencyKeys = ["gold", "gem"];
-  infoRequestParam.playerInventories = true;
-  infoRequestParam.itemCatalogIds = ["weapon", "consumable"];
-  infoRequestParam.playerStatistics = true;
-  infoRequestParam.playerStatisticsKeys = ["rankScore"];
+    const infoRequestParam = new GamePlayerModels.InfoRequestParam();
+    infoRequestParam.displayName = true;
+    infoRequestParam.playerCurrencies = true;
+    infoRequestParam.playerCurrencyKeys = ["gold", "gem"];
+    infoRequestParam.playerInventories = true;
+    infoRequestParam.itemCatalogIds = ["weapon", "consumable"];
+    infoRequestParam.playerStatistics = true;
+    infoRequestParam.playerStatisticsKeys = ["rankScore"];
 
-  const requestData = new GamePlayerModels.AdminGetPlayerInformationRequestData();
-  requestData.userId = targetUserId;
-  requestData.infoRequestParam = infoRequestParam;
-  requestData.createPlayerIfNotExists = true;
+    const requestData = new GamePlayerModels.AdminGetPlayerInformationRequestData();
+    requestData.userId = targetUserId;
+    requestData.infoRequestParam = infoRequestParam;
+    requestData.createPlayerIfNotExists = true;
 
-  const response = await admin.gamePlayer.getPlayerInformationAsync(requestData);
-  assertResponseOk(response, "admin.gamePlayer.getPlayerInformationAsync");
+    const response = await admin.gamePlayer.getPlayerInformationAsync(requestData);
+    assertResponseOk(response, "admin.gamePlayer.getPlayerInformationAsync");
 
-  return response.responseData.infoResponseParameters;
+    return response.responseData.infoResponseParameters;
 };
 ```
 
@@ -280,27 +268,25 @@ handlers["adminGetOrCreateGamePlayerProfile"] = async (
 
 ```ts
 handlers["adminAdjustGamePlayerCurrency"] = async (args: any, context, log) => {
-  const targetUserId = requireString(args?.userId, "userId");
+    const targetUserId = requireString(args?.userId, "userId");
 
-  const gold = new GamePlayerModels.PlayerCurrencyParam();
-  gold.key = "gold";
-  gold.value = typeof args?.goldDelta === "number" ? args.goldDelta : 100;
+    const gold = new GamePlayerModels.PlayerCurrencyParam();
+    gold.key = "gold";
+    gold.value = typeof args?.goldDelta === "number" ? args.goldDelta : 100;
 
-  const gem = new GamePlayerModels.PlayerCurrencyParam();
-  gem.key = "gem";
-  gem.value = typeof args?.gemDelta === "number" ? args.gemDelta : 0;
+    const gem = new GamePlayerModels.PlayerCurrencyParam();
+    gem.key = "gem";
+    gem.value = typeof args?.gemDelta === "number" ? args.gemDelta : 0;
 
-  const requestData = new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
-  requestData.userId = targetUserId;
-  requestData.playerCurrencies = [gold, gem];
-  requestData.log =
-    "cloudscript adminAdjustGamePlayerCurrency, requestedBy=" +
-    (context.userId ?? "system");
+    const requestData = new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
+    requestData.userId = targetUserId;
+    requestData.playerCurrencies = [gold, gem];
+    requestData.log = "cloudscript adminAdjustGamePlayerCurrency, requestedBy=" + (context.userId ?? "system");
 
-  const response = await admin.gamePlayer.changePlayerCurrencyAsync(requestData);
-  assertResponseOk(response, "admin.gamePlayer.changePlayerCurrencyAsync");
+    const response = await admin.gamePlayer.changePlayerCurrencyAsync(requestData);
+    assertResponseOk(response, "admin.gamePlayer.changePlayerCurrencyAsync");
 
-  return response.responseData.infoResponseParameters;
+    return response.responseData.infoResponseParameters;
 };
 ```
 
@@ -313,34 +299,29 @@ handlers["adminAdjustGamePlayerCurrency"] = async (args: any, context, log) => {
 
 ```ts
 handlers["adminGrantStarterSword"] = async (args: any, context, log) => {
-  const targetUserId = requireString(args?.userId, "userId");
+    const targetUserId = requireString(args?.userId, "userId");
 
-  const createRequestData = new GamePlayerModels.AdminCreatePlayerItemRequestData();
-  createRequestData.userId = targetUserId;
-  createRequestData.catalogId = "weapon";
-  createRequestData.classId = "sword";
-  createRequestData.displayName = "Starter Sword";
-  createRequestData.amount = 1;
+    const createRequestData = new GamePlayerModels.AdminCreatePlayerItemRequestData();
+    createRequestData.userId = targetUserId;
+    createRequestData.catalogId = "weapon";
+    createRequestData.classId = "sword";
+    createRequestData.displayName = "Starter Sword";
+    createRequestData.amount = 1;
 
-  const createResponse = await admin.gamePlayer.createPlayerItemAsync(createRequestData);
-  assertResponseOk(createResponse, "admin.gamePlayer.createPlayerItemAsync");
+    const createResponse = await admin.gamePlayer.createPlayerItemAsync(createRequestData);
+    assertResponseOk(createResponse, "admin.gamePlayer.createPlayerItemAsync");
 
-  const inventoryRequestData = new GamePlayerModels.AdminGetPlayerInventoryRequestData();
-  inventoryRequestData.userId = targetUserId;
-  inventoryRequestData.itemCatalogIds = ["weapon"];
+    const inventoryRequestData = new GamePlayerModels.AdminGetPlayerInventoryRequestData();
+    inventoryRequestData.userId = targetUserId;
+    inventoryRequestData.itemCatalogIds = ["weapon"];
 
-  const inventoryResponse =
-    await admin.gamePlayer.getPlayerInventoryAsync(inventoryRequestData);
-  assertResponseOk(
-    inventoryResponse,
-    "admin.gamePlayer.getPlayerInventoryAsync",
-  );
+    const inventoryResponse = await admin.gamePlayer.getPlayerInventoryAsync(inventoryRequestData);
+    assertResponseOk(inventoryResponse, "admin.gamePlayer.getPlayerInventoryAsync");
 
-  return {
-    createResponseData: createResponse.responseData,
-    playerInventories:
-      inventoryResponse.responseData.infoResponseParameters.playerInventories,
-  };
+    return {
+        createResponseData: createResponse.responseData,
+        playerInventories: inventoryResponse.responseData.infoResponseParameters.playerInventories,
+    };
 };
 ```
 
@@ -353,24 +334,24 @@ handlers["adminGrantStarterSword"] = async (args: any, context, log) => {
 
 ```ts
 handlers["adminGetMasterPlayerProfile"] = async (args: any, context, log) => {
-  const targetUserId = requireString(args?.userId, "userId");
+    const targetUserId = requireString(args?.userId, "userId");
 
-  const infoRequestParam = new MasterPlayerModels.InfoRequestParam();
-  infoRequestParam.displayName = true;
-  infoRequestParam.email = true;
-  infoRequestParam.playerCurrencies = true;
-  infoRequestParam.playerCurrencyKeys = ["gold"];
-  infoRequestParam.tags = true;
-  infoRequestParam.tagKeys = ["vipTier", "region"];
+    const infoRequestParam = new MasterPlayerModels.InfoRequestParam();
+    infoRequestParam.displayName = true;
+    infoRequestParam.email = true;
+    infoRequestParam.playerCurrencies = true;
+    infoRequestParam.playerCurrencyKeys = ["gold"];
+    infoRequestParam.tags = true;
+    infoRequestParam.tagKeys = ["vipTier", "region"];
 
-  const requestData = new MasterPlayerModels.AdminGetPlayerInformationRequestData();
-  requestData.userId = targetUserId;
-  requestData.infoRequestParam = infoRequestParam;
+    const requestData = new MasterPlayerModels.AdminGetPlayerInformationRequestData();
+    requestData.userId = targetUserId;
+    requestData.infoRequestParam = infoRequestParam;
 
-  const response = await admin.masterPlayer.getPlayerInformationAsync(requestData);
-  assertResponseOk(response, "admin.masterPlayer.getPlayerInformationAsync");
+    const response = await admin.masterPlayer.getPlayerInformationAsync(requestData);
+    assertResponseOk(response, "admin.masterPlayer.getPlayerInformationAsync");
 
-  return response.responseData.infoResponseParameters;
+    return response.responseData.infoResponseParameters;
 };
 ```
 
@@ -383,23 +364,23 @@ handlers["adminGetMasterPlayerProfile"] = async (args: any, context, log) => {
 
 ```ts
 handlers["adminMarkGroupQueue"] = async (args: any, context, log) => {
-  const groupId = requireString(args?.groupId, "groupId");
+    const groupId = requireString(args?.groupId, "groupId");
 
-  const requestData = new GroupModels.AdminSetTagRequestData();
-  requestData.groupId = groupId;
-  requestData.key = "queue";
-  requestData.value = "ranked";
+    const requestData = new GroupModels.AdminSetTagRequestData();
+    requestData.groupId = groupId;
+    requestData.key = "queue";
+    requestData.value = "ranked";
 
-  const response = await admin.group.setTagAsync(requestData);
-  assertResponseOk(response, "admin.group.setTagAsync");
+    const response = await admin.group.setTagAsync(requestData);
+    assertResponseOk(response, "admin.group.setTagAsync");
 
-  return {
-    groupId: groupId,
-    tag: {
-      key: requestData.key,
-      value: requestData.value,
-    },
-  };
+    return {
+        groupId: groupId,
+        tag: {
+            key: requestData.key,
+            value: requestData.value,
+        },
+    };
 };
 ```
 
@@ -411,44 +392,34 @@ handlers["adminMarkGroupQueue"] = async (args: any, context, log) => {
 ### 10.7. Gọi một CloudScript function khác bằng `admin.cloudScript.executeFunctionAsync`
 
 ```ts
-handlers["adminExecuteAnotherCloudScript"] = async (
-  args: any,
-  context,
-  log,
-) => {
-  const targetUserId = requireString(args?.userId, "userId");
-  const functionName = requireString(args?.functionName, "functionName");
+handlers["adminExecuteAnotherCloudScript"] = async (args: any, context, log) => {
+    const targetUserId = requireString(args?.userId, "userId");
+    const functionName = requireString(args?.functionName, "functionName");
 
-  const requestData = new CloudScriptModels.AdminExecuteFunctionRequestData();
-  requestData.userId = targetUserId;
-  requestData.functionName = functionName;
-  requestData.version =
-    typeof args?.version === "string" ? args.version : undefined;
-  requestData.functionParameters = args?.functionParameters ?? {
-    source: "adminExecuteAnotherCloudScript",
-    requestedBy: context.userId,
-  };
+    const requestData = new CloudScriptModels.AdminExecuteFunctionRequestData();
+    requestData.userId = targetUserId;
+    requestData.functionName = functionName;
+    requestData.version = typeof args?.version === "string" ? args.version : undefined;
+    requestData.functionParameters = args?.functionParameters ?? {
+        source: "adminExecuteAnotherCloudScript",
+        requestedBy: context.userId,
+    };
 
-  const customTags = GNHashtable.builder()
-    .add("traceId", args?.traceId ?? "cloudscript-admin-chain")
-    .add("source", "admin.cloudScript.executeFunctionAsync")
-    .build();
+    const customTags = GNHashtable.builder()
+        .add("traceId", args?.traceId ?? "cloudscript-admin-chain")
+        .add("source", "admin.cloudScript.executeFunctionAsync")
+        .build();
 
-  const response = await admin.cloudScript.executeFunctionAsync(
-    requestData,
-    undefined,
-    undefined,
-    customTags,
-  );
+    const response = await admin.cloudScript.executeFunctionAsync(requestData, undefined, undefined, customTags);
 
-  assertResponseOk(response, "admin.cloudScript.executeFunctionAsync");
+    assertResponseOk(response, "admin.cloudScript.executeFunctionAsync");
 
-  return {
-    status: response.responseData.status,
-    functionResult: response.responseData.functionResult,
-    functionLogs: response.responseData.functionLogs,
-    errorMessage: response.responseData.errorMessage,
-  };
+    return {
+        status: response.responseData.status,
+        functionResult: response.responseData.functionResult,
+        functionLogs: response.responseData.functionLogs,
+        errorMessage: response.responseData.errorMessage,
+    };
 };
 ```
 
@@ -461,18 +432,17 @@ handlers["adminExecuteAnotherCloudScript"] = async (
 
 ```ts
 handlers["adminGetLeanAnalytics"] = async (args: any, context, log) => {
-  const requestData = new DashboardModels.GetAnalyticsRequestData();
-  requestData.timestamp =
-    typeof args?.timestamp === "number" ? args.timestamp : undefined;
-  requestData.country = true;
-  requestData.requestComplete = true;
-  requestData.monthlyCost = true;
+    const requestData = new DashboardModels.GetAnalyticsRequestData();
+    requestData.timestamp = typeof args?.timestamp === "number" ? args.timestamp : undefined;
+    requestData.country = true;
+    requestData.requestComplete = true;
+    requestData.monthlyCost = true;
 
-  const response = await admin.dashboard.getAnalyticsAsync(requestData);
+    const response = await admin.dashboard.getAnalyticsAsync(requestData);
 
-  assertResponseOk(response, "admin.dashboard.getAnalyticsAsync");
+    assertResponseOk(response, "admin.dashboard.getAnalyticsAsync");
 
-  return response.responseData;
+    return response.responseData;
 };
 ```
 

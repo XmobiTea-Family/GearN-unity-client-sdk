@@ -43,7 +43,7 @@ var requestData = new AuthenticateModels.LoginByAccountRequestData();
 requestData.username = username;
 requestData.password = password;
 
-var res = await GNNetwork.authenticate.loginByAccountAsync(requestData);
+var response = await GNNetwork.authenticate.loginByAccountAsync(requestData);
 ```
 
 Chỉ dùng `OperationRequest` / `CustomOperationRequestAbstract<T>` trực tiếp khi đang viết hoặc debug lớp SDK cấp thấp.

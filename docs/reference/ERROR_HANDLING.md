@@ -9,27 +9,27 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new AuthenticateModels.LoginByAccountRequestData();
-request.username = username;
-request.password = password;
-request.infoRequestParam = new AuthenticateModels.InfoRequestParam();
+var requestData = new AuthenticateModels.LoginByAccountRequestData();
+requestData.username = username;
+requestData.password = password;
+requestData.infoRequestParam = new AuthenticateModels.InfoRequestParam();
 
-var res = await GNNetwork.authenticate.loginByAccountAsync(request);
+var response = await GNNetwork.authenticate.loginByAccountAsync(requestData);
 
 // 1. Kiểm tra returnCode (transport/gateway)
-if (res.returnCode != ReturnCode.Ok) {
-    handleTransportFailure(res);
+if (response.returnCode != ReturnCode.Ok) {
+    handleTransportFailure(response);
     return;
 }
 
 // 2. Kiểm tra errorCode (business domain)
-if (res.errorCode != ErrorCode.Ok) {
-    handleDomainFailure(res);
+if (response.errorCode != ErrorCode.Ok) {
+    handleDomainFailure(response);
     return;
 }
 
 // 3. Happy path: trust typed payload
-useResult(res.responseData);
+useResult(response.responseData);
 ```
 
 Typed response (trả từ mọi `*Async()` và callback path) expose field `public`:

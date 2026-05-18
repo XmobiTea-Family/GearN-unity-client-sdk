@@ -10,115 +10,72 @@ Sử dụng script trong CloudScript để viết các đoạn cần server auth
 const GEM_COST_CHANGE_NAME = 50;
 
 const requireString = (value: unknown, fieldName: string): string => {
-  if (typeof value !== "string" || value.trim().length === 0) {
-    throw new Error(fieldName + " is required");
-  }
-  return value.trim();
+    if (typeof value !== "string" || value.trim().length === 0) {
+        throw new Error(fieldName + " is required");
+    }
+    return value.trim();
 };
 
 handlers["changeDisplayName"] = async (args: any, context, log) => {
-  const userId = context.userId;
-  const displayName = requireString(args?.displayName, "displayName");
+    const userId = context.userId;
+    const displayName = requireString(args?.displayName, "displayName");
 
-  // Bước 1: Kiểm tra số dư gem
-  const currencyRequest =
-    new GamePlayerModels.AdminGetPlayerCurrencyRequestData();
-  currencyRequest.userId = userId;
-  currencyRequest.playerCurrencyKeys = ["gem"];
+    // Bước 1: Kiểm tra số dư gem
+    const currencyRequestData = new GamePlayerModels.AdminGetPlayerCurrencyRequestData();
+    currencyRequestData.userId = userId;
+    currencyRequestData.playerCurrencyKeys = ["gem"];
 
-  const currencyResponse =
-    await admin.gamePlayer.getPlayerCurrencyAsync(currencyRequest);
-  if (currencyResponse.hasReturnCodeError()) {
-    throw new Error(
-      "admin.gamePlayer.getPlayerCurrencyAsync" +
-        " return-code error: " +
-        (currencyResponse.debugMessage ?? currencyResponse.toString()),
-    );
-  }
-  if (currencyResponse.errorCode !== ErrorCode.Ok) {
-    throw new Error(
-      "admin.gamePlayer.getPlayerCurrencyAsync" +
-        " business error: " +
-        currencyResponse.errorCode +
-        (currencyResponse.debugMessage
-          ? " - " + currencyResponse.debugMessage
-          : ""),
-    );
-  }
+    const currencyResponse = await admin.gamePlayer.getPlayerCurrencyAsync(currencyRequestData);
+    if (currencyResponse.hasReturnCodeError()) {
+        throw new Error("admin.gamePlayer.getPlayerCurrencyAsync" + " return-code error: " + (currencyResponse.debugMessage ?? currencyResponse.toString()));
+    }
+    if (currencyResponse.errorCode !== ErrorCode.Ok) {
+        throw new Error("admin.gamePlayer.getPlayerCurrencyAsync" + " business error: " + currencyResponse.errorCode + (currencyResponse.debugMessage ? " - " + currencyResponse.debugMessage : ""));
+    }
 
-  const currencies = currencyResponse.responseData.playerCurrencies ?? [];
-  const gemEntry = currencies.find((c: CurrencyItem) => c.key === "gem");
-  const currentGem = gemEntry?.value ?? 0;
+    const currencies = currencyResponse.responseData.playerCurrencies ?? [];
+    const gemEntry = currencies.find((c: CurrencyItem) => c.key === "gem");
+    const currentGem = gemEntry?.value ?? 0;
 
-  if (currentGem < GEM_COST_CHANGE_NAME) {
-    throw new Error(
-      "not_enough_gem: required=" +
-        GEM_COST_CHANGE_NAME +
-        ", current=" +
-        currentGem,
-    );
-  }
+    if (currentGem < GEM_COST_CHANGE_NAME) {
+        throw new Error("not_enough_gem: required=" + GEM_COST_CHANGE_NAME + ", current=" + currentGem);
+    }
 
-  // Bước 2: Trừ 50 gem trước khi đổi tên (delta âm = trừ)
-  const gem = new GamePlayerModels.PlayerCurrencyParam();
-  gem.key = "gem";
-  gem.value = -GEM_COST_CHANGE_NAME;
+    // Bước 2: Trừ 50 gem trước khi đổi tên (delta âm = trừ)
+    const playerCurrencyParam = new GamePlayerModels.PlayerCurrencyParam();
+    playerCurrencyParam.key = "gem";
+    playerCurrencyParam.value = -GEM_COST_CHANGE_NAME;
 
-  const deductRequest =
-    new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
-  deductRequest.userId = userId;
-  deductRequest.playerCurrencies = [gem];
-  deductRequest.log = "changeDisplayName gem cost, userId=" + userId;
+    const deductRequestData = new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
+    deductRequestData.userId = userId;
+    deductRequestData.playerCurrencies = [playerCurrencyParam];
+    deductRequestData.log = "changeDisplayName gem cost, userId=" + userId;
 
-  const deductResponse =
-    await admin.gamePlayer.changePlayerCurrencyAsync(deductRequest);
-  if (deductResponse.hasReturnCodeError()) {
-    throw new Error(
-      "admin.gamePlayer.changePlayerCurrencyAsync" +
-        " return-code error: " +
-        (deductResponse.debugMessage ?? deductResponse.toString()),
-    );
-  }
-  if (deductResponse.errorCode !== ErrorCode.Ok) {
-    throw new Error(
-      "admin.gamePlayer.changePlayerCurrencyAsync" +
-        " business error: " +
-        deductResponse.errorCode +
-        (deductResponse.debugMessage
-          ? " - " + deductResponse.debugMessage
-          : ""),
-    );
-  }
+    const deductResponse = await admin.gamePlayer.changePlayerCurrencyAsync(deductRequestData);
+    if (deductResponse.hasReturnCodeError()) {
+        throw new Error("admin.gamePlayer.changePlayerCurrencyAsync" + " return-code error: " + (deductResponse.debugMessage ?? deductResponse.toString()));
+    }
+    if (deductResponse.errorCode !== ErrorCode.Ok) {
+        throw new Error("admin.gamePlayer.changePlayerCurrencyAsync" + " business error: " + deductResponse.errorCode + (deductResponse.debugMessage ? " - " + deductResponse.debugMessage : ""));
+    }
 
-  // Bước 3: Đổi tên
-  const renameRequestData = new GamePlayerModels.AdminSetDisplayNameRequestData();
-  renameRequestData.userId = userId;
-  renameRequestData.displayName = displayName;
+    // Bước 3: Đổi tên
+    const renameRequestData = new GamePlayerModels.AdminSetDisplayNameRequestData();
+    renameRequestData.userId = userId;
+    renameRequestData.displayName = displayName;
 
-  const renameResponse =
-    await admin.gamePlayer.setDisplayNameAsync(renameRequestData);
-  if (renameResponse.hasReturnCodeError()) {
-    throw new Error(
-      "admin.gamePlayer.setDisplayNameAsync" +
-        " return-code error: " +
-        (renameResponse.debugMessage ?? renameResponse.toString()),
-    );
-  }
-  if (renameResponse.errorCode !== ErrorCode.Ok) {
-    throw new Error(
-      "admin.gamePlayer.setDisplayNameAsync" +
-        " business error: " +
-        renameResponse.errorCode +
-        (renameResponse.debugMessage
-          ? " - " + renameResponse.debugMessage
-          : ""),
-    );
-  }
+    const renameResponse = await admin.gamePlayer.setDisplayNameAsync(renameRequestData);
+    if (renameResponse.hasReturnCodeError()) {
+        throw new Error("admin.gamePlayer.setDisplayNameAsync" + " return-code error: " + (renameResponse.debugMessage ?? renameResponse.toString()));
+    }
+    if (renameResponse.errorCode !== ErrorCode.Ok) {
+        throw new Error("admin.gamePlayer.setDisplayNameAsync" + " business error: " + renameResponse.errorCode + (renameResponse.debugMessage ? " - " + renameResponse.debugMessage : ""));
+    }
 
-  return {
-    displayName: displayName,
-    gemRemaining: currentGem - GEM_COST_CHANGE_NAME,
-  };
+    return {
+        displayName: displayName,
+        gemRemaining: currentGem - GEM_COST_CHANGE_NAME,
+    };
 };
 ```
 
@@ -136,13 +93,13 @@ private async System.Threading.Tasks.Task<object> ChangeDisplayNameAsync(string 
         .add("displayName", newName)
         .build();
 
-    var res = await GNNetwork.cloudScript.executeFunctionAsync(requestData);
+    var response = await GNNetwork.cloudScript.executeFunctionAsync(requestData);
 
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) {
-        throw new System.Exception("request failed: " + res.errorCode);
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) {
+        throw new System.Exception("request failed: " + response.errorCode);
     }
 
-    var exec = res.responseData;
+    var exec = response.responseData;
 
     if (exec.status != ExecuteResponseStatus.Ok) {
         // exec.errorMessage chứa message từ throw new System.Exception(...) trong CloudScript
@@ -161,7 +118,6 @@ SDK reference cho path phía client:
 - API reference: [`reference/API_CLOUDSCRIPT.md`](/docs/reference/API_CLOUDSCRIPT.md)
 - DTO reference: [`reference/dto/CLOUDSCRIPT.md`](/docs/reference/dto/CLOUDSCRIPT.md)
 - Error handling: [`reference/ERROR_HANDLING.md`](/docs/reference/ERROR_HANDLING.md)
-
 
 ## 1. Mục đích
 
@@ -469,16 +425,13 @@ Rule chọn nhanh:
 
 ```ts
 handlers["pingCloudScript"] = async (args: any, context, log) => {
-  const message =
-    typeof args?.message === "string" && args.message.length > 0
-      ? args.message
-      : "pong";
+    const message = typeof args?.message === "string" && args.message.length > 0 ? args.message : "pong";
 
-  return {
-    gameId: gameId,
-    userId: context.userId,
-    message: message,
-  };
+    return {
+        gameId: gameId,
+        userId: context.userId,
+        message: message,
+    };
 };
 ```
 
@@ -486,20 +439,17 @@ Nếu cần debug luồng đi hoặc số liệu runtime, có thể gọi `log(v
 
 ```ts
 handlers["pingCloudScriptDebug"] = async (args: any, context, log) => {
-  const message =
-    typeof args?.message === "string" && args.message.length > 0
-      ? args.message
-      : "pong";
+    const message = typeof args?.message === "string" && args.message.length > 0 ? args.message : "pong";
 
-  // Use this only for temporary debug data or execution tracing.
-  log("pingCloudScriptDebug", {
-    userId: context.userId,
-    message: message,
-  });
+    // Use this only for temporary debug data or execution tracing.
+    log("pingCloudScriptDebug", {
+        userId: context.userId,
+        message: message,
+    });
 
-  return {
-    message: message,
-  };
+    return {
+        message: message,
+    };
 };
 ```
 

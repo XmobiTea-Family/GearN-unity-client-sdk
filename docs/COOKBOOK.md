@@ -75,19 +75,19 @@ private async System.Threading.Tasks.Task<object> LoginWithAccountAsync(string u
     requestData.password = password;
     requestData.infoRequestParam = infoRequestParam;
 
-    var res = await GNNetwork.authenticate.loginByAccountAsync(requestData);
+    var response = await GNNetwork.authenticate.loginByAccountAsync(requestData);
 
-    if (res.returnCode != ReturnCode.Ok) {
-        UnityEngine.Debug.LogError("transport error: " + res.returnCode + ", " + res.debugMessage);
+    if (response.returnCode != ReturnCode.Ok) {
+        UnityEngine.Debug.LogError("transport error: " + response.returnCode + ", " + response.debugMessage);
         return null;
     }
-    if (res.errorCode != ErrorCode.Ok) {
-        UnityEngine.Debug.LogWarning("business error: " + res.errorCode + ", invalidMembers=" + res.invalidMembers);
+    if (response.errorCode != ErrorCode.Ok) {
+        UnityEngine.Debug.LogWarning("business error: " + response.errorCode + ", invalidMembers=" + response.invalidMembers);
         return null;
     }
 
     // AuthenticateApi success auto-caches authToken + userId into AuthenticateStatus/StorageService.
-    return res.responseData; // AuthenticateResponseData
+    return response.responseData; // AuthenticateResponseData
 }
 ```
 
@@ -176,13 +176,13 @@ private async System.Threading.Tasks.Task<object> LoginWithGoogleAsync(string id
     requestData.createPlayerIfNotExists = true;
     requestData.infoRequestParam = infoRequestParam;
 
-    var res = await GNNetwork.authenticate.loginByGoogleAsync(requestData);
+    var response = await GNNetwork.authenticate.loginByGoogleAsync(requestData);
 
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) return null;
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) return null;
 
     // AuthenticateApi success auto-caches authToken + userId.
-    if (res.responseData.newlyCreated) UnityEngine.Debug.Log("new player created");
-    return res.responseData;
+    if (response.responseData.newlyCreated) UnityEngine.Debug.Log("new player created");
+    return response.responseData;
 }
 ```
 
@@ -326,10 +326,10 @@ private async System.Threading.Tasks.Task<object> SendGroupChatAsync(string grou
     requestData.groupId = groupId;
     requestData.message = text;
 
-    var res = await GNNetwork.group.sendGroupMessageAsync(requestData);
+    var response = await GNNetwork.group.sendGroupMessageAsync(requestData);
 
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) {
-        UnityEngine.Debug.LogWarning("send failed: " + res.errorCode + ", " + res.debugMessage);
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) {
+        UnityEngine.Debug.LogWarning("send failed: " + response.errorCode + ", " + response.debugMessage);
         return false;
     }
     return true;
@@ -376,9 +376,9 @@ private async System.Threading.Tasks.Task<object> JoinAsync(string groupId) {
     var requestData = new GamePlayerModels.JoinGroupRequestData();
     requestData.groupId = groupId;
 
-    var res = await GNNetwork.gamePlayer.joinGroupAsync(requestData);
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) {
-        if (res.errorCode == ErrorCode.GroupNotFound) return "group_not_found";
+    var response = await GNNetwork.gamePlayer.joinGroupAsync(requestData);
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) {
+        if (response.errorCode == ErrorCode.GroupNotFound) return "group_not_found";
         return "error";
     }
     return "ok";
@@ -386,7 +386,7 @@ private async System.Threading.Tasks.Task<object> JoinAsync(string groupId) {
 
 private async System.Threading.Tasks.Task LeaveAsync(string groupId) {
     var requestData = new GamePlayerModels.LeaveGroupRequestData();
-    request.groupId = groupId;
+    requestData.groupId = groupId;
 
     await GNNetwork.gamePlayer.leaveGroupAsync(requestData);
 }
@@ -424,11 +424,11 @@ private async System.Threading.Tasks.Task<object> FindMatchAsync(string queueNam
     createRequestData.giveUpAfterSeconds = 60;
     createRequestData.attribute = XmobiTea.GearN.Common.GNHashtable.builder().build();
 
-    var createRes = await GNNetwork.multiplayer.createMatchmakingTicketAsync(createRequestData);
-    if (createRes.returnCode != ReturnCode.Ok || createRes.errorCode != ErrorCode.Ok) {
+    var createResponse = await GNNetwork.multiplayer.createMatchmakingTicketAsync(createRequestData);
+    if (createResponse.returnCode != ReturnCode.Ok || createResponse.errorCode != ErrorCode.Ok) {
         return null;
     }
-    var ticketId = createRes.responseData.ticketId;
+    var ticketId = createResponse.responseData.ticketId;
 
     // Poll mỗi 2s cho tới khi matched hoặc timeout
     for (var i = 0; i < 30; i++) {
@@ -437,15 +437,15 @@ private async System.Threading.Tasks.Task<object> FindMatchAsync(string queueNam
         pollRequestData.ticketId = ticketId;
         pollRequestData.returnMember = true;
 
-        var poll = await GNNetwork.multiplayer.getMatchmakingTicketAsync(pollRequestData);
-        if (poll.returnCode != ReturnCode.Ok || poll.errorCode != ErrorCode.Ok) continue;
+        var pollResponse = await GNNetwork.multiplayer.getMatchmakingTicketAsync(pollRequestData);
+        if (pollResponse.returnCode != ReturnCode.Ok || pollResponse.errorCode != ErrorCode.Ok) continue;
 
-        var ticket = poll.responseData.matchmakingTicket;
+        var ticket = pollResponse.responseData.matchmakingTicket;
         var status = ticket.status;
-        if (status == MatchmakingTicketStatus.Matched) {
+        if (status == (int)MatchmakingTicketStatus.Matched) {
             return ticket.matchId;
         }
-        if (status == MatchmakingTicketStatus.Canceled) {
+        if (status == (int)MatchmakingTicketStatus.Canceled) {
             return null;
         }
     }
@@ -492,9 +492,9 @@ private async System.Threading.Tasks.Task<object> LoadMyInventoryAsync() {
     var requestData = new GamePlayerModels.GetPlayerInventoryRequestData();
     requestData.itemCatalogIds = new[] { "weapon" };
 
-    var res = await GNNetwork.gamePlayer.getPlayerInventoryAsync(requestData);
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) return null;
-    return res.responseData.infoResponseParameters?.playerInventories;
+    var response = await GNNetwork.gamePlayer.getPlayerInventoryAsync(requestData);
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) return null;
+    return response.responseData.infoResponseParameters?.playerInventories;
 }
 
 // Server: create/grant 1 sword cho player targetUserId
@@ -506,8 +506,8 @@ private async System.Threading.Tasks.Task<object> GrantSwordAsync(string targetU
     requestData.displayName = "Starter Sword";
     requestData.amount = 1;
 
-    var res = await GNNetwork.gamePlayer.server.createPlayerItemAsync(requestData);
-    return res.returnCode == ReturnCode.Ok && res.errorCode == ErrorCode.Ok;
+    var response = await GNNetwork.gamePlayer.server.createPlayerItemAsync(requestData);
+    return response.returnCode == ReturnCode.Ok && response.errorCode == ErrorCode.Ok;
 }
 ```
 
@@ -549,9 +549,9 @@ private async System.Threading.Tasks.Task<object> ListCatalogAsync() {
     requestData.skip = 0;
     requestData.limit = 50;
 
-    var res = await GNNetwork.storeInventory.getStoreItemsWithTagAsync(requestData);
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) return null;
-    return res.responseData.results;
+    var response = await GNNetwork.storeInventory.getStoreItemsWithTagAsync(requestData);
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) return null;
+    return response.responseData.results;
 }
 
 private async System.Threading.Tasks.Task<object> BuyItemAsync(string storeItemId) {
@@ -561,10 +561,10 @@ private async System.Threading.Tasks.Task<object> BuyItemAsync(string storeItemI
     requestData.type = OwnerType.GamePlayer;
     requestData.log = "shop_purchase";
 
-    var res = await GNNetwork.storeInventory.buyStoreItemAsync(requestData);
+    var response = await GNNetwork.storeInventory.buyStoreItemAsync(requestData);
 
-    if (res.returnCode != ReturnCode.Ok) return "transport_error";
-    switch (res.errorCode) {
+    if (response.returnCode != ReturnCode.Ok) return "transport_error";
+    switch (response.errorCode) {
         case ErrorCode.Ok:
             return "ok";
         case ErrorCode.NotEnoughCurrency:
@@ -573,7 +573,7 @@ private async System.Threading.Tasks.Task<object> BuyItemAsync(string storeItemI
         case ErrorCode.CanNotBuyThisStoreItem:
             return "not_buyable";
         default:
-            return "unhandled_" + res.errorCode;
+            return "unhandled_" + response.errorCode;
     }
 }
 ```
@@ -612,7 +612,7 @@ private async System.Threading.Tasks.Task<object> ClaimDailyRewardAsync() {
         .add("date", System.DateTime.UtcNow.ToString("yyyy-MM-dd"))
         .build();
 
-    var res = await GNNetwork.cloudScript.executeFunctionAsync(
+    var response = await GNNetwork.cloudScript.executeFunctionAsync(
         requestData,
         null, // overrideAuthToken
         null, // overrideSecretKey
@@ -620,9 +620,9 @@ private async System.Threading.Tasks.Task<object> ClaimDailyRewardAsync() {
         30 // timeout (seconds)
     );
 
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) return null;
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) return null;
 
-    var exec = res.responseData;
+    var exec = response.responseData;
     if ((ExecuteResponseStatus)exec.status != ExecuteResponseStatus.Ok) {
         UnityEngine.Debug.LogWarning("function failed: " + exec.errorMessage);
         return null;
@@ -667,14 +667,14 @@ private async System.Threading.Tasks.Task<object> FetchProfileAsAsync(string pla
     requestData.userId = playerId;
     requestData.infoRequestParam = infoRequestParam;
 
-    var res = await GNNetwork.masterPlayer.getPlayerInformationAsync(
+    var response = await GNNetwork.masterPlayer.getPlayerInformationAsync(
         requestData,
         playerAuthToken, // overrideAuthToken — thay token cache
         null, // overrideSecretKey — giữ secret key mặc định của role
         null, // customTags
         XmobiTea.GearN.Entity.Request.OperationRequest.defaultTimeOut // timeout
     );
-    return res.responseData;
+    return response.responseData;
 }
 
 // Dùng secret key khác (ví dụ một game khác cùng backend)
@@ -720,16 +720,16 @@ private async System.Threading.Tasks.Task<object> AdminLoginAsync(string usernam
     requestData.username = username;
     requestData.password = password;
 
-    var res = await GNNetwork.dashboard.loginByAdminAccountAsync(requestData);
-    if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) return false;
+    var response = await GNNetwork.dashboard.loginByAdminAccountAsync(requestData);
+    if (response.returnCode != ReturnCode.Ok || response.errorCode != ErrorCode.Ok) return false;
 
     // Dashboard response carries authToken; SDK caches it for later dashboard calls.
     return true;
 }
 
 private async System.Threading.Tasks.Task<object> ListGamesAsync() {
-    var res = await GNNetwork.dashboard.getGameListAsync(new DashboardModels.GetGameListRequestData());
-    return res.responseData != null ? res.responseData.games : null;
+    var response = await GNNetwork.dashboard.getGameListAsync(new DashboardModels.GetGameListRequestData());
+    return response.responseData != null ? response.responseData.games : null;
 }
 ```
 

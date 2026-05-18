@@ -148,9 +148,9 @@ Ngoại lệ: domain không có ownership (`ContentApi`, `StoreInventoryApi`, `M
 
 - Permission rule được backend admin config trên GearN Dashboard theo từng `secretKey × operation × flag`.
 - Unity client không tự đổi được flag. Chỉ có 3 option khi thiếu quyền:
-  1. Dùng `secretKey` khác trong `GNServerSettings`.
-  2. Truyền `overrideSecretKey` per-request.
-  3. Yêu cầu backend admin bật flag cho secret hiện tại.
+    1. Dùng `secretKey` khác trong `GNServerSettings`.
+    2. Truyền `overrideSecretKey` per-request.
+    3. Yêu cầu backend admin bật flag cho secret hiện tại.
 
 ### 6.3 Checklist nhanh khi gặp `ReturnCode.OperationNotAllow`
 
@@ -234,8 +234,8 @@ var tags = XmobiTea.GearN.Common.GNHashtable.builder().add("traceId", "trace-001
 - Detect platform runtime: `GNNetwork.getPlatform()`.
 - `MessageType.MsgPack` dùng binary payload khi server/transport hỗ trợ; `MessageType.Json` dùng JSON.
 - Socket transport phụ thuộc compile define / package được cài trong project:
-  - `UNITY_USING_BEST_HTTP`
-  - `UNITY_USING_SOCKET_IO_UNITY`
+    - `UNITY_USING_BEST_HTTP`
+    - `UNITY_USING_SOCKET_IO_UNITY`
 
 ---
 
@@ -277,7 +277,7 @@ Khi sinh code:
 3. **RULES.md** + [ai-manifest.json](/docs/ai-manifest.json).
 4. **DTO field table** (`docs/reference/dto/<DOMAIN>.md` hoặc grep `DTO_INDEX.md`).
 5. **ENUMS.md**.
-6. **`Runtime/**/*.cs`** — fallback nếu docs chưa cover.
+6. **`Runtime/**/\*.cs`\*\* — fallback nếu docs chưa cover.
 
 Chỉ đọc implementation chi tiết khi sửa SDK, debug nội bộ, hoặc verify public contract mà docs chưa đủ.
 

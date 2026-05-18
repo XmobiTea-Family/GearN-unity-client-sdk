@@ -22,12 +22,12 @@ var requestData = new AuthenticateModels.LoginByAccountRequestData();
 requestData.username = username;
 requestData.password = password;
 
-var res = await GNNetwork.authenticate.loginByAccountAsync(requestData);
+var response = await GNNetwork.authenticate.loginByAccountAsync(requestData);
 
-if (res.returnCode != ReturnCode.Ok) return; // transport / permission
-if (res.errorCode != ErrorCode.Ok) return;   // business
+if (response.returnCode != ReturnCode.Ok) return; // transport / permission
+if (response.errorCode != ErrorCode.Ok) return;   // business
 
-UseResult(res.responseData);
+UseResult(response.responseData);
 ```
 
 `Ok == 1` ở **cả** `ReturnCode` và `ErrorCode`. **KHÔNG** giả định `Ok == 0`.
@@ -116,7 +116,7 @@ Trong code copy-paste, build `requestData` bằng DTO class public:
 
 ```csharp
 var requestData = new GamePlayerModels.GetPlayerInformationRequestData();
-var res = await GNNetwork.gamePlayer.getPlayerInformationAsync(requestData);
+var response = await GNNetwork.gamePlayer.getPlayerInformationAsync(requestData);
 ```
 
 Response field public: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`.

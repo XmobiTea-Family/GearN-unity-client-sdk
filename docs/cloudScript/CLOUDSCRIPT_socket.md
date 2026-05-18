@@ -73,6 +73,7 @@ handlers["socketNotifyUser"] = async (args: any, context, log) => {
 ```
 
 ## 7. Ví dụ nâng cao
+
 <a id="socket-operationevent-end-to-end"></a>
 
 ### 6.1. Ví dụ end-to-end: server gửi `OperationEvent`, client nhận typed
@@ -85,15 +86,7 @@ Ví dụ này tạo event code `cloudScriptRewardGranted` và payload có 4 fiel
 const EVENT_CLOUDSCRIPT_REWARD_GRANTED = "cloudScriptRewardGranted";
 
 const createRewardGrantedEvent = (rewardId: string, amount: number, reason: string) => {
-    return new OperationEvent(
-        EVENT_CLOUDSCRIPT_REWARD_GRANTED,
-        GNHashtable.builder()
-            .add("rewardId", rewardId)
-            .add("amount", amount)
-            .add("reason", reason)
-            .add("ts", Date.now())
-            .build()
-    );
+    return new OperationEvent(EVENT_CLOUDSCRIPT_REWARD_GRANTED, GNHashtable.builder().add("rewardId", rewardId).add("amount", amount).add("reason", reason).add("ts", Date.now()).build());
 };
 
 handlers["grantDailyRewardAndNotify"] = async (args: any, context, log) => {
@@ -279,9 +272,9 @@ requestData.userId = targetUserId;
 requestData.eventCode = "cloudScriptDemo";
 requestData.eventParameters = eventParameters;
 
-var res = await GNNetwork.masterPlayer.server.sendSocketOperationEventAsync(requestData);
-if (res.returnCode != ReturnCode.Ok) return;
-if (res.errorCode != ErrorCode.Ok) return;
+var response = await GNNetwork.masterPlayer.server.sendSocketOperationEventAsync(requestData);
+if (response.returnCode != ReturnCode.Ok) return;
+if (response.errorCode != ErrorCode.Ok) return;
 ```
 
 Route chọn theo nơi code chạy:

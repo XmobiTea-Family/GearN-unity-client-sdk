@@ -61,21 +61,21 @@ public class GearNLoginExample : MonoBehaviour
         requestData.createPlayerIfNotExists = true;
         requestData.infoRequestParam = infoRequestParam;
 
-        var res = await GNNetwork.authenticate.loginByCustomIdAsync(requestData);
+        var response = await GNNetwork.authenticate.loginByCustomIdAsync(requestData);
 
-        if (res.returnCode != ReturnCode.Ok)
+        if (response.returnCode != ReturnCode.Ok)
         {
-            Debug.LogError("Transport/permission error: " + res.debugMessage);
+            Debug.LogError("Transport/permission error: " + response.debugMessage);
             return;
         }
 
-        if (res.errorCode != ErrorCode.Ok)
+        if (response.errorCode != ErrorCode.Ok)
         {
-            Debug.LogError("Business error: " + res.errorCode);
+            Debug.LogError("Business error: " + response.errorCode);
             return;
         }
 
-        Debug.Log("UserId: " + res.responseData.userId);
+        Debug.Log("UserId: " + response.responseData.userId);
         Debug.Log("AuthToken: " + GNNetwork.getAuthenticateStatus().getAuthToken());
     }
 }
@@ -137,12 +137,12 @@ public class CustomDeviceLogin : MonoBehaviour
         requestData.createPlayerIfNotExists = true;
         requestData.infoRequestParam = infoRequestParam;
 
-        var res = await GNNetwork.authenticate.loginByCustomDeviceIdAsync(requestData);
+        var response = await GNNetwork.authenticate.loginByCustomDeviceIdAsync(requestData);
 
-        if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
-        if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
+        if (response.returnCode != ReturnCode.Ok) throw new System.Exception(response.debugMessage);
+        if (response.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + response.errorCode);
 
-        Debug.Log("userId: " + res.responseData.userId);
+        Debug.Log("userId: " + response.responseData.userId);
         Debug.Log("authToken: " + GNNetwork.getAuthenticateStatus().getAuthToken());
     }
 }
@@ -160,9 +160,9 @@ requestData.username = "player001";
 requestData.password = "12345678";
 requestData.infoRequestParam = infoRequestParam;
 
-var res = await GNNetwork.authenticate.loginByAccountAsync(requestData);
-if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
-if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
+var response = await GNNetwork.authenticate.loginByAccountAsync(requestData);
+if (response.returnCode != ReturnCode.Ok) throw new System.Exception(response.debugMessage);
+if (response.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + response.errorCode);
 ```
 
 ## 7. Socket
@@ -207,9 +207,9 @@ var requestData = new DashboardModels.LoginByAdminAccountRequestData();
 requestData.username = "gnadmin";
 requestData.password = "123456";
 
-var res = await GNNetwork.dashboard.loginByAdminAccountAsync(requestData);
-if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
-if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
+var response = await GNNetwork.dashboard.loginByAdminAccountAsync(requestData);
+if (response.returnCode != ReturnCode.Ok) throw new System.Exception(response.debugMessage);
+if (response.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + response.errorCode);
 ```
 
 ## 9. Method signature
@@ -285,7 +285,7 @@ public class ExampleResponse : CustomOperationResponse<ExampleResponseData> { }
 var requestData = new ExampleRequestData();
 requestData.key = "tutorial";
 
-var res = await GNNetwork.sendViaHttpAsync<ExampleRequest, ExampleResponse>(new ExampleRequest(requestData));
+var response = await GNNetwork.sendViaHttpAsync<ExampleRequest, ExampleResponse>(new ExampleRequest(requestData));
 ```
 
 ## 13. Platform / Unity

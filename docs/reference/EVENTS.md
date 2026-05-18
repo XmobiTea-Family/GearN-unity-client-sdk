@@ -158,9 +158,9 @@ requestData.userId = targetUserId; // optional trên client route nếu gửi ch
 requestData.eventCode = "cloudScript.rewardGranted";
 requestData.eventParameters = eventParameters;
 
-var res = await GNNetwork.masterPlayer.sendSocketOperationEventAsync(requestData);
-if (res.returnCode != ReturnCode.Ok) return;
-if (res.errorCode != ErrorCode.Ok) return;
+var response = await GNNetwork.masterPlayer.sendSocketOperationEventAsync(requestData);
+if (response.returnCode != ReturnCode.Ok) return;
+if (response.errorCode != ErrorCode.Ok) return;
 ```
 
 ## Bảng event
