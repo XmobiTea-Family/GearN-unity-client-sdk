@@ -321,14 +321,14 @@ using XmobiTea.GearN.Entity.Models;
 var infoRequestParam = new GamePlayerModels.InfoRequestParam();
 infoRequestParam.displayName = true;
 infoRequestParam.playerCurrencies = true;
-infoRequestParam.playerCurrencyKeys = new[] { "gold" };
+infoRequestParam.playerCurrencyKeys = new System.Collections.Generic.List<string> { "gold" };
 infoRequestParam.playerFriends = true;
-infoRequestParam.friendCatalogIds = new[] { "default-friend" };
+infoRequestParam.friendCatalogIds = new System.Collections.Generic.List<string> { "default-friend" };
 
-var request = new GamePlayerModels.GetPlayerInformationRequestData();
-request.infoRequestParam = infoRequestParam;
+var requestData = new GamePlayerModels.GetPlayerInformationRequestData();
+requestData.infoRequestParam = infoRequestParam;
 
-var response = await GNNetwork.gamePlayer.getPlayerInformationAsync(request);
+var response = await GNNetwork.gamePlayer.getPlayerInformationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -351,14 +351,14 @@ using XmobiTea.GearN.Entity.Models;
 var infoRequestParam = new GamePlayerModels.InfoRequestParam();
 infoRequestParam.displayName = true;
 infoRequestParam.playerStatistics = true;
-infoRequestParam.playerStatisticsKeys = new[] { "rankScore" };
+infoRequestParam.playerStatisticsKeys = new System.Collections.Generic.List<string> { "rankScore" };
 
-var request = new GamePlayerModels.ServerGetPlayerInformationRequestData();
-request.userId = "1234567890";
-request.infoRequestParam = infoRequestParam;
-request.createPlayerIfNotExists = true;
+var requestData = new GamePlayerModels.ServerGetPlayerInformationRequestData();
+requestData.userId = "1234567890";
+requestData.infoRequestParam = infoRequestParam;
+requestData.createPlayerIfNotExists = true;
 
-var response = await GNNetwork.gamePlayer.server.getPlayerInformationAsync(request);
+var response = await GNNetwork.gamePlayer.server.getPlayerInformationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -385,11 +385,11 @@ OnGamePlayerFriendUpdateEventHandler.onUpdate = (update) => {
 
 GNNetwork.connectSocket(); // Follow README socket rule before expecting realtime updates.
 
-var request = new GamePlayerModels.AddPlayerFriendRequestData();
-request.friendId = "0987654321";
-request.catalogId = "default-friend";
+var requestData = new GamePlayerModels.AddPlayerFriendRequestData();
+requestData.friendId = "0987654321";
+requestData.catalogId = "default-friend";
 
-var response = await GNNetwork.gamePlayer.addPlayerFriendAsync(request);
+var response = await GNNetwork.gamePlayer.addPlayerFriendAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -407,13 +407,13 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var createRequest = new GamePlayerModels.CreatePlayerItemRequestData();
-createRequest.catalogId = "weapon";
-createRequest.classId = "sword";
-createRequest.displayName = "Starter Sword";
-createRequest.amount = 1;
+var createRequestData = new GamePlayerModels.CreatePlayerItemRequestData();
+createRequestData.catalogId = "weapon";
+createRequestData.classId = "sword";
+createRequestData.displayName = "Starter Sword";
+createRequestData.amount = 1;
 
-var createResponse = await GNNetwork.gamePlayer.createPlayerItemAsync(createRequest);
+var createResponse = await GNNetwork.gamePlayer.createPlayerItemAsync(createRequestData);
 
 if (createResponse.hasReturnCodeError()) {
     throw new System.Exception(createResponse.debugMessage);
@@ -423,10 +423,10 @@ if (createResponse.errorCode != ErrorCode.Ok) {
     throw new System.Exception("Business error: " + createResponse.errorCode);
 }
 
-var getInventoryRequest = new GamePlayerModels.GetPlayerInventoryRequestData();
-getInventoryRequest.itemCatalogIds = new[] { "weapon" };
+var getInventoryRequestData = new GamePlayerModels.GetPlayerInventoryRequestData();
+getInventoryRequestData.itemCatalogIds = new[] { "weapon" };
 
-var inventoryResponse = await GNNetwork.gamePlayer.getPlayerInventoryAsync(getInventoryRequest);
+var inventoryResponse = await GNNetwork.gamePlayer.getPlayerInventoryAsync(getInventoryRequestData);
 
 if (inventoryResponse.hasReturnCodeError()) {
     throw new System.Exception(inventoryResponse.debugMessage);

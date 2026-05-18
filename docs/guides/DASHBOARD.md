@@ -166,11 +166,11 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new DashboardModels.LoginByAdminAccountRequestData();
-request.username = "gnadmin";
-request.password = "123456";
+var requestData = new DashboardModels.LoginByAdminAccountRequestData();
+requestData.username = "gnadmin";
+requestData.password = "123456";
 
-var response = await GNNetwork.dashboard.loginByAdminAccountAsync(request);
+var response = await GNNetwork.dashboard.loginByAdminAccountAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -190,10 +190,10 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var createRequest = new DashboardModels.CreateGameRequestData();
-createRequest.gameId = "demo-game";
+var createRequestData = new DashboardModels.CreateGameRequestData();
+createRequestData.gameId = "demo-game";
 
-var createResponse = await GNNetwork.dashboard.createGameAsync(createRequest);
+var createResponse = await GNNetwork.dashboard.createGameAsync(createRequestData);
 
 if (createResponse.hasReturnCodeError()) {
     throw new System.Exception(createResponse.debugMessage);
@@ -203,12 +203,12 @@ if (createResponse.errorCode != ErrorCode.Ok) {
     throw new System.Exception("Business error: " + createResponse.errorCode);
 }
 
-var updateRequest = new DashboardModels.SetGameInformationRequestData();
-updateRequest.gameId = "demo-game";
-updateRequest.gameName = "Demo Game";
-updateRequest.gameDescription = "Internal demo project";
+var updateRequestData = new DashboardModels.SetGameInformationRequestData();
+updateRequestData.gameId = "demo-game";
+updateRequestData.gameName = "Demo Game";
+updateRequestData.gameDescription = "Internal demo project";
 
-var updateResponse = await GNNetwork.dashboard.setGameInformationAsync(updateRequest);
+var updateResponse = await GNNetwork.dashboard.setGameInformationAsync(updateRequestData);
 
 if (updateResponse.hasReturnCodeError()) {
     throw new System.Exception(updateResponse.debugMessage);
@@ -226,10 +226,10 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new DashboardModels.CreateSecretInfoRequestData();
-request.gameId = "demo-game";
+var requestData = new DashboardModels.CreateSecretInfoRequestData();
+requestData.gameId = "demo-game";
 
-var response = await GNNetwork.dashboard.createSecretInfoAsync(request);
+var response = await GNNetwork.dashboard.createSecretInfoAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

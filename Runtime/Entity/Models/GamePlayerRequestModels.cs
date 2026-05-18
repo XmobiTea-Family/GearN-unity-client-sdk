@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the add player friend operation request.
         /// </summary>
-        public class AddPlayerFriendOperationRequest : CustomOperationRequest<GamePlayerModels.AddPlayerFriendRequestData>
+        public class AddPlayerFriendOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.AddPlayerFriendRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the add segment operation request.
         /// </summary>
-        public class AddSegmentOperationRequest : CustomOperationRequest<GamePlayerModels.AddSegmentRequestData>
+        public class AddSegmentOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.AddSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -125,7 +125,7 @@
         /// <summary>
         /// Builds the get avatar operation request.
         /// </summary>
-        public class GetAvatarOperationRequest : CustomOperationRequest<GamePlayerModels.GetAvatarRequestData>
+        public class GetAvatarOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -182,7 +182,7 @@
         /// <summary>
         /// Builds the get country code operation request.
         /// </summary>
-        public class GetCountryCodeOperationRequest : CustomOperationRequest<GamePlayerModels.GetCountryCodeRequestData>
+        public class GetCountryCodeOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetCountryCodeRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -239,7 +239,7 @@
         /// <summary>
         /// Builds the get custom data operation request.
         /// </summary>
-        public class GetCustomDataOperationRequest : CustomOperationRequest<GamePlayerModels.GetCustomDataRequestData>
+        public class GetCustomDataOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -296,7 +296,7 @@
         /// <summary>
         /// Builds the get display name operation request.
         /// </summary>
-        public class GetDisplayNameOperationRequest : CustomOperationRequest<GamePlayerModels.GetDisplayNameRequestData>
+        public class GetDisplayNameOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -353,7 +353,7 @@
         /// <summary>
         /// Builds the get friend statistics leaderboard around player operation request.
         /// </summary>
-        public class GetFriendStatisticsLeaderboardAroundPlayerOperationRequest : CustomOperationRequest<GamePlayerModels.GetFriendStatisticsLeaderboardAroundPlayerRequestData>
+        public class GetFriendStatisticsLeaderboardAroundPlayerOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetFriendStatisticsLeaderboardAroundPlayerRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -410,7 +410,7 @@
         /// <summary>
         /// Builds the get friend statistics leaderboard operation request.
         /// </summary>
-        public class GetFriendStatisticsLeaderboardOperationRequest : CustomOperationRequest<GamePlayerModels.GetFriendStatisticsLeaderboardRequestData>
+        public class GetFriendStatisticsLeaderboardOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetFriendStatisticsLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -467,7 +467,7 @@
         /// <summary>
         /// Builds the get IP address create operation request.
         /// </summary>
-        public class GetIpAddressCreateOperationRequest : CustomOperationRequest<GamePlayerModels.GetIpAddressCreateRequestData>
+        public class GetIpAddressCreateOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetIpAddressCreateRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -524,7 +524,7 @@
         /// <summary>
         /// Builds the get player ban operation request.
         /// </summary>
-        public class GetPlayerBanOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerBanRequestData>
+        public class GetPlayerBanOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerBanRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -581,7 +581,7 @@
         /// <summary>
         /// Builds the get player character operation request.
         /// </summary>
-        public class GetPlayerCharacterOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerCharacterRequestData>
+        public class GetPlayerCharacterOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerCharacterRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -638,7 +638,7 @@
         /// <summary>
         /// Builds the get player currency operation request.
         /// </summary>
-        public class GetPlayerCurrencyOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerCurrencyRequestData>
+        public class GetPlayerCurrencyOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerCurrencyRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -695,7 +695,7 @@
         /// <summary>
         /// Builds the get player data operation request.
         /// </summary>
-        public class GetPlayerDataOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerDataRequestData>
+        public class GetPlayerDataOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -752,7 +752,7 @@
         /// <summary>
         /// Builds the get player friend operation request.
         /// </summary>
-        public class GetPlayerFriendOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerFriendRequestData>
+        public class GetPlayerFriendOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerFriendRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -809,7 +809,7 @@
         /// <summary>
         /// Builds the get player group operation request.
         /// </summary>
-        public class GetPlayerGroupOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerGroupRequestData>
+        public class GetPlayerGroupOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerGroupRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -866,7 +866,7 @@
         /// <summary>
         /// Builds the get player information operation request.
         /// </summary>
-        public class GetPlayerInformationOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerInformationRequestData>
+        public class GetPlayerInformationOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -923,7 +923,7 @@
         /// <summary>
         /// Builds the get player inventory operation request.
         /// </summary>
-        public class GetPlayerInventoryOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerInventoryRequestData>
+        public class GetPlayerInventoryOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerInventoryRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -980,7 +980,7 @@
         /// <summary>
         /// Builds the get player statistics operation request.
         /// </summary>
-        public class GetPlayerStatisticsOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayerStatisticsRequestData>
+        public class GetPlayerStatisticsOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayerStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1037,7 +1037,7 @@
         /// <summary>
         /// Builds the get players with display name operation request.
         /// </summary>
-        public class GetPlayersWithDisplayNameOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayersWithDisplayNameRequestData>
+        public class GetPlayersWithDisplayNameOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayersWithDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1094,7 +1094,7 @@
         /// <summary>
         /// Builds the get players with segment operation request.
         /// </summary>
-        public class GetPlayersWithSegmentOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayersWithSegmentRequestData>
+        public class GetPlayersWithSegmentOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayersWithSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1151,7 +1151,7 @@
         /// <summary>
         /// Builds the get players with tag operation request.
         /// </summary>
-        public class GetPlayersWithTagOperationRequest : CustomOperationRequest<GamePlayerModels.GetPlayersWithTagRequestData>
+        public class GetPlayersWithTagOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetPlayersWithTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1208,7 +1208,7 @@
         /// <summary>
         /// Builds the get segment operation request.
         /// </summary>
-        public class GetSegmentOperationRequest : CustomOperationRequest<GamePlayerModels.GetSegmentRequestData>
+        public class GetSegmentOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1265,7 +1265,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard around player operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardAroundPlayerOperationRequest : CustomOperationRequest<GamePlayerModels.GetStatisticsLeaderboardAroundPlayerRequestData>
+        public class GetStatisticsLeaderboardAroundPlayerOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetStatisticsLeaderboardAroundPlayerRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1322,7 +1322,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequest<GamePlayerModels.GetStatisticsLeaderboardRequestData>
+        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetStatisticsLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1379,7 +1379,7 @@
         /// <summary>
         /// Builds the get tag operation request.
         /// </summary>
-        public class GetTagOperationRequest : CustomOperationRequest<GamePlayerModels.GetTagRequestData>
+        public class GetTagOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1436,7 +1436,7 @@
         /// <summary>
         /// Builds the get timestamp create operation request.
         /// </summary>
-        public class GetTsCreateOperationRequest : CustomOperationRequest<GamePlayerModels.GetTsCreateRequestData>
+        public class GetTsCreateOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetTsCreateRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1493,7 +1493,7 @@
         /// <summary>
         /// Builds the get timestamp last login operation request.
         /// </summary>
-        public class GetTsLastLoginOperationRequest : CustomOperationRequest<GamePlayerModels.GetTsLastLoginRequestData>
+        public class GetTsLastLoginOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetTsLastLoginRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1550,7 +1550,7 @@
         /// <summary>
         /// Builds the create group operation request.
         /// </summary>
-        public class CreateGroupOperationRequest : CustomOperationRequest<GamePlayerModels.CreateGroupRequestData>
+        public class CreateGroupOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.CreateGroupRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1607,7 +1607,7 @@
         /// <summary>
         /// Builds the create player character operation request.
         /// </summary>
-        public class CreatePlayerCharacterOperationRequest : CustomOperationRequest<GamePlayerModels.CreatePlayerCharacterRequestData>
+        public class CreatePlayerCharacterOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.CreatePlayerCharacterRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1664,7 +1664,7 @@
         /// <summary>
         /// Builds the create player item operation request.
         /// </summary>
-        public class CreatePlayerItemOperationRequest : CustomOperationRequest<GamePlayerModels.CreatePlayerItemRequestData>
+        public class CreatePlayerItemOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.CreatePlayerItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1721,7 +1721,7 @@
         /// <summary>
         /// Builds the join group operation request.
         /// </summary>
-        public class JoinGroupOperationRequest : CustomOperationRequest<GamePlayerModels.JoinGroupRequestData>
+        public class JoinGroupOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.JoinGroupRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1778,7 +1778,7 @@
         /// <summary>
         /// Builds the leave group operation request.
         /// </summary>
-        public class LeaveGroupOperationRequest : CustomOperationRequest<GamePlayerModels.LeaveGroupRequestData>
+        public class LeaveGroupOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.LeaveGroupRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1835,7 +1835,7 @@
         /// <summary>
         /// Builds the remove player character operation request.
         /// </summary>
-        public class RemovePlayerCharacterOperationRequest : CustomOperationRequest<GamePlayerModels.RemovePlayerCharacterRequestData>
+        public class RemovePlayerCharacterOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.RemovePlayerCharacterRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1892,7 +1892,7 @@
         /// <summary>
         /// Builds the remove player friend operation request.
         /// </summary>
-        public class RemovePlayerFriendOperationRequest : CustomOperationRequest<GamePlayerModels.RemovePlayerFriendRequestData>
+        public class RemovePlayerFriendOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.RemovePlayerFriendRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1949,7 +1949,7 @@
         /// <summary>
         /// Builds the remove player item operation request.
         /// </summary>
-        public class RemovePlayerItemOperationRequest : CustomOperationRequest<GamePlayerModels.RemovePlayerItemRequestData>
+        public class RemovePlayerItemOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.RemovePlayerItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2006,7 +2006,7 @@
         /// <summary>
         /// Builds the remove segment operation request.
         /// </summary>
-        public class RemoveSegmentOperationRequest : CustomOperationRequest<GamePlayerModels.RemoveSegmentRequestData>
+        public class RemoveSegmentOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.RemoveSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2063,7 +2063,7 @@
         /// <summary>
         /// Builds the remove tag operation request.
         /// </summary>
-        public class RemoveTagOperationRequest : CustomOperationRequest<GamePlayerModels.RemoveTagRequestData>
+        public class RemoveTagOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.RemoveTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2120,7 +2120,7 @@
         /// <summary>
         /// Builds the set avatar operation request.
         /// </summary>
-        public class SetAvatarOperationRequest : CustomOperationRequest<GamePlayerModels.SetAvatarRequestData>
+        public class SetAvatarOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.SetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2177,7 +2177,7 @@
         /// <summary>
         /// Builds the set country code operation request.
         /// </summary>
-        public class SetCountryCodeOperationRequest : CustomOperationRequest<GamePlayerModels.SetCountryCodeRequestData>
+        public class SetCountryCodeOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.SetCountryCodeRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2234,7 +2234,7 @@
         /// <summary>
         /// Builds the set custom data operation request.
         /// </summary>
-        public class SetCustomDataOperationRequest : CustomOperationRequest<GamePlayerModels.SetCustomDataRequestData>
+        public class SetCustomDataOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.SetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2291,7 +2291,7 @@
         /// <summary>
         /// Builds the set display name operation request.
         /// </summary>
-        public class SetDisplayNameOperationRequest : CustomOperationRequest<GamePlayerModels.SetDisplayNameRequestData>
+        public class SetDisplayNameOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.SetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2348,7 +2348,7 @@
         /// <summary>
         /// Builds the set player ban operation request.
         /// </summary>
-        public class SetPlayerBanOperationRequest : CustomOperationRequest<GamePlayerModels.SetPlayerBanRequestData>
+        public class SetPlayerBanOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.SetPlayerBanRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2405,7 +2405,7 @@
         /// <summary>
         /// Builds the change player currency operation request.
         /// </summary>
-        public class ChangePlayerCurrencyOperationRequest : CustomOperationRequest<GamePlayerModels.ChangePlayerCurrencyRequestData>
+        public class ChangePlayerCurrencyOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.ChangePlayerCurrencyRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2462,7 +2462,7 @@
         /// <summary>
         /// Builds the set player data operation request.
         /// </summary>
-        public class SetPlayerDataOperationRequest : CustomOperationRequest<GamePlayerModels.SetPlayerDataRequestData>
+        public class SetPlayerDataOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.SetPlayerDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2519,7 +2519,7 @@
         /// <summary>
         /// Builds the change player statistics operation request.
         /// </summary>
-        public class ChangePlayerStatisticsOperationRequest : CustomOperationRequest<GamePlayerModels.ChangePlayerStatisticsRequestData>
+        public class ChangePlayerStatisticsOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.ChangePlayerStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2576,7 +2576,7 @@
         /// <summary>
         /// Builds the set tag operation request.
         /// </summary>
-        public class SetTagOperationRequest : CustomOperationRequest<GamePlayerModels.SetTagRequestData>
+        public class SetTagOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.SetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2632,7 +2632,7 @@
         /// <summary>
         /// Builds the get currency leaderboard operation request.
         /// </summary>
-        public class GetCurrencyLeaderboardOperationRequest : CustomOperationRequest<GamePlayerModels.GetCurrencyLeaderboardRequestData>
+        public class GetCurrencyLeaderboardOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetCurrencyLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2688,7 +2688,7 @@
         /// <summary>
         /// Builds the get create leaderboard operation request.
         /// </summary>
-        public class GetCreateLeaderboardOperationRequest : CustomOperationRequest<GamePlayerModels.GetCreateLeaderboardRequestData>
+        public class GetCreateLeaderboardOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetCreateLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2744,7 +2744,7 @@
         /// <summary>
         /// Builds the get statistics log operation request.
         /// </summary>
-        public class GetStatisticsLogOperationRequest : CustomOperationRequest<GamePlayerModels.GetStatisticsLogRequestData>
+        public class GetStatisticsLogOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetStatisticsLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2800,7 +2800,7 @@
         /// <summary>
         /// Builds the get currency log operation request.
         /// </summary>
-        public class GetCurrencyLogOperationRequest : CustomOperationRequest<GamePlayerModels.GetCurrencyLogRequestData>
+        public class GetCurrencyLogOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetCurrencyLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2856,7 +2856,7 @@
         /// <summary>
         /// Builds the get last login leaderboard operation request.
         /// </summary>
-        public class GetLastLoginLeaderboardOperationRequest : CustomOperationRequest<GamePlayerModels.GetLastLoginLeaderboardRequestData>
+        public class GetLastLoginLeaderboardOperationRequest : CustomOperationRequestAbstract<GamePlayerModels.GetLastLoginLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

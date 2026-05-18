@@ -161,11 +161,11 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new ContentModels.GetContentDataRequestData();
-request.keys = new[] { "homepage", "shop" };
-request.label = "public";
+var requestData = new ContentModels.GetContentDataRequestData();
+requestData.keys = new[] { "homepage", "shop" };
+requestData.label = "public";
 
-var response = await GNNetwork.content.getContentDataAsync(request);
+var response = await GNNetwork.content.getContentDataAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -189,11 +189,11 @@ var config = new ContentModels.ContentDataParam();
 config.key = "maintenance";
 config.data = XmobiTea.GearN.Common.GNHashtable.builder().add("enabled", true).add("message", "Server maintenance at 22:00").build();
 
-var request = new ContentModels.ServerSetContentDataRequestData();
-request.configs = new[] { config };
-request.label = "ops";
+var requestData = new ContentModels.ServerSetContentDataRequestData();
+requestData.configs = new[] { config };
+requestData.label = "ops";
 
-var response = await GNNetwork.content.server.setContentDataAsync(request);
+var response = await GNNetwork.content.server.setContentDataAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -211,10 +211,10 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var createRequest = new ContentModels.CreateNewFileUploadInfoRequestData();
-createRequest.fileName = "banner.png";
+var createRequestData = new ContentModels.CreateNewFileUploadInfoRequestData();
+createRequestData.fileName = "banner.png";
 
-var createResponse = await GNNetwork.content.createNewFileUploadInfoAsync(createRequest);
+var createResponse = await GNNetwork.content.createNewFileUploadInfoAsync(createRequestData);
 
 if (createResponse.hasReturnCodeError()) {
     throw new System.Exception(createResponse.debugMessage);
@@ -241,10 +241,10 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new ContentModels.RequestDownloadFileUploadInfoRequestData();
-request.fileId = "123456789012345";
+var requestData = new ContentModels.RequestDownloadFileUploadInfoRequestData();
+requestData.fileId = "123456789012345";
 
-var response = await GNNetwork.content.requestDownloadFileUploadInfoAsync(request);
+var response = await GNNetwork.content.requestDownloadFileUploadInfoAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

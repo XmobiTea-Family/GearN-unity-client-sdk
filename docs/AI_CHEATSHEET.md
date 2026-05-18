@@ -2,7 +2,7 @@
 
 One-page reference cho AI agent / code assistant. Đọc file này trước, đào sâu khi cần.
 
-> Package: `com.xmobitea.changx.gearn-unity-client-sdk` · Entry point: `GNNetwork` (static class) · Stack: Unity/C#, HTTP + socket realtime.
+> Package: `com.xmobitea.changx.gearn-unity-client-sdk` · Entry point: `GNNetwork` (static class) · Stack: Unity/C#, HTTP + socket io realtime.
 
 ---
 
@@ -18,11 +18,11 @@ using XmobiTea.GearN.Entity.Models;
 // - Asset đã cấu hình serverAddress, ports, secretKey, messageType, logType.
 // - Nếu cần chọn game context runtime, gọi GNNetwork.gnServerSettings.setGameId("<game-id>").
 
-var request = new AuthenticateModels.LoginByAccountRequestData();
-request.username = username;
-request.password = password;
+var requestData = new AuthenticateModels.LoginByAccountRequestData();
+requestData.username = username;
+requestData.password = password;
 
-var res = await GNNetwork.authenticate.loginByAccountAsync(request);
+var res = await GNNetwork.authenticate.loginByAccountAsync(requestData);
 
 if (res.returnCode != ReturnCode.Ok) return; // transport / permission
 if (res.errorCode != ErrorCode.Ok) return;   // business
@@ -52,6 +52,7 @@ UseResult(res.responseData);
 | Admin login, secret/maintenance/analytics | [guides/DASHBOARD.md](/docs/guides/DASHBOARD.md) · [reference/API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md) |
 | Realtime event (friend, group, message) | [reference/EVENTS.md](/docs/reference/EVENTS.md) |
 | Viết custom DTO / payload event bằng `[DataMember]`, `[StringDataMember]`, `[NumberDataMember]`, `[BooleanDataMember]`, `[GNHashtableDataMember]`, `[GNArrayDataMember]` | [reference/DATAMEMBER.md](/docs/reference/DATAMEMBER.md) |
+| Gặp `CustomOperationRequestAbstract<T>` / `CustomOperationResponseAbstract<T>` trong DTO reference | [reference/OPERATION_BASES.md](/docs/reference/OPERATION_BASES.md) |
 | Tra DTO field theo class | [reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md) hoặc [reference/dto/](/docs/reference/dto/) |
 | Enum value numeric | [reference/ENUMS.md](/docs/reference/ENUMS.md) |
 | Config field của `GNServerSettings` | [reference/CONFIG.md](/docs/reference/CONFIG.md) |
@@ -114,11 +115,13 @@ var res = await GNNetwork.authenticate.loginByAccountAsync(requestData, override
 Trong code copy-paste, build `requestData` bằng DTO class public:
 
 ```csharp
-var request = new GamePlayerModels.GetPlayerInformationRequestData();
-var res = await GNNetwork.gamePlayer.getPlayerInformationAsync(request);
+var requestData = new GamePlayerModels.GetPlayerInformationRequestData();
+var res = await GNNetwork.gamePlayer.getPlayerInformationAsync(requestData);
 ```
 
 Response field public: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`.
+
+Nếu DTO reference ghi `Extends: CustomOperationRequestAbstract<TRequestData>`, `TRequestData` là payload được serialize vào request. Nếu ghi `Extends: CustomOperationResponseAbstract<TResponseData>`, `TResponseData` là kiểu của `responseData`. Xem [reference/OPERATION_BASES.md](/docs/reference/OPERATION_BASES.md).
 
 ---
 

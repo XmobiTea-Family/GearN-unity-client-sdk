@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the buy store item operation request.
         /// </summary>
-        public class BuyStoreItemOperationRequest : CustomOperationRequest<StoreInventoryModels.BuyStoreItemRequestData>
+        public class BuyStoreItemOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.BuyStoreItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the get store item information operation request.
         /// </summary>
-        public class GetStoreItemInformationOperationRequest : CustomOperationRequest<StoreInventoryModels.GetStoreItemInformationRequestData>
+        public class GetStoreItemInformationOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.GetStoreItemInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -125,7 +125,7 @@
         /// <summary>
         /// Builds the get store items with tag operation request.
         /// </summary>
-        public class GetStoreItemsWithTagOperationRequest : CustomOperationRequest<StoreInventoryModels.GetStoreItemsWithTagRequestData>
+        public class GetStoreItemsWithTagOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.GetStoreItemsWithTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -182,7 +182,7 @@
         /// <summary>
         /// Builds the create store item operation request.
         /// </summary>
-        public class CreateStoreItemOperationRequest : CustomOperationRequest<StoreInventoryModels.CreateStoreItemRequestData>
+        public class CreateStoreItemOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.CreateStoreItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -239,7 +239,7 @@
         /// <summary>
         /// Builds the set remove status operation request.
         /// </summary>
-        public class SetRemoveStatusOperationRequest : CustomOperationRequest<StoreInventoryModels.SetRemoveStatusRequestData>
+        public class SetRemoveStatusOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.SetRemoveStatusRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -296,7 +296,7 @@
         /// <summary>
         /// Builds the set store item information operation request.
         /// </summary>
-        public class SetStoreItemInformationOperationRequest : CustomOperationRequest<StoreInventoryModels.SetStoreItemInformationRequestData>
+        public class SetStoreItemInformationOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.SetStoreItemInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -353,7 +353,7 @@
         /// <summary>
         /// Builds the validate apple app store receipt operation request.
         /// </summary>
-        public class ValidateAppleAppStoreReceiptOperationRequest : CustomOperationRequest<StoreInventoryModels.ValidateAppleAppStoreReceiptRequestData>
+        public class ValidateAppleAppStoreReceiptOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.ValidateAppleAppStoreReceiptRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -410,7 +410,7 @@
         /// <summary>
         /// Builds the validate facebook store receipt operation request.
         /// </summary>
-        public class ValidateFacebookStoreReceiptOperationRequest : CustomOperationRequest<StoreInventoryModels.ValidateFacebookStoreReceiptRequestData>
+        public class ValidateFacebookStoreReceiptOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.ValidateFacebookStoreReceiptRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -467,7 +467,7 @@
         /// <summary>
         /// Builds the validate google play store receipt operation request.
         /// </summary>
-        public class ValidateGooglePlayStoreReceiptOperationRequest : CustomOperationRequest<StoreInventoryModels.ValidateGooglePlayStoreReceiptRequestData>
+        public class ValidateGooglePlayStoreReceiptOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.ValidateGooglePlayStoreReceiptRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -523,7 +523,7 @@
         /// <summary>
         /// Builds the get create leaderboard operation request.
         /// </summary>
-        public class GetCreateLeaderboardOperationRequest : CustomOperationRequest<StoreInventoryModels.GetCreateLeaderboardRequestData>
+        public class GetCreateLeaderboardOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.GetCreateLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -579,7 +579,7 @@
         /// <summary>
         /// Builds the present store item operation request.
         /// </summary>
-        public class PresentStoreItemOperationRequest : CustomOperationRequest<StoreInventoryModels.PresentStoreItemRequestData>
+        public class PresentStoreItemOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.PresentStoreItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -635,7 +635,7 @@
         /// <summary>
         /// Builds the get store log operation request.
         /// </summary>
-        public class GetStoreLogOperationRequest : CustomOperationRequest<StoreInventoryModels.GetStoreLogRequestData>
+        public class GetStoreLogOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.GetStoreLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -691,7 +691,7 @@
         /// <summary>
         /// Builds the get store used operation request.
         /// </summary>
-        public class GetStoreUsedOperationRequest : CustomOperationRequest<StoreInventoryModels.GetStoreUsedRequestData>
+        public class GetStoreUsedOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.GetStoreUsedRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -747,7 +747,7 @@
         /// <summary>
         /// Builds the remove store used operation request.
         /// </summary>
-        public class RemoveStoreUsedOperationRequest : CustomOperationRequest<StoreInventoryModels.RemoveStoreUsedRequestData>
+        public class RemoveStoreUsedOperationRequest : CustomOperationRequestAbstract<StoreInventoryModels.RemoveStoreUsedRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

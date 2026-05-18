@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the change password admin account operation request.
         /// </summary>
-        public class ChangePasswordAdminAccountOperationRequest : CustomOperationRequest<DashboardModels.ChangePasswordAdminAccountRequestData>
+        public class ChangePasswordAdminAccountOperationRequest : CustomOperationRequestAbstract<DashboardModels.ChangePasswordAdminAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -36,7 +36,7 @@
         /// <summary>
         /// Builds the get admin account list operation request.
         /// </summary>
-        public class GetAdminAccountListOperationRequest : CustomOperationRequest<DashboardModels.GetAdminAccountListRequestData>
+        public class GetAdminAccountListOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetAdminAccountListRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -61,7 +61,7 @@
         /// <summary>
         /// Builds the get game information operation request.
         /// </summary>
-        public class GetGameInformationOperationRequest : CustomOperationRequest<DashboardModels.GetGameInformationRequestData>
+        public class GetGameInformationOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetGameInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -86,7 +86,7 @@
         /// <summary>
         /// Builds the get game list operation request.
         /// </summary>
-        public class GetGameListOperationRequest : CustomOperationRequest<DashboardModels.GetGameListRequestData>
+        public class GetGameListOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetGameListRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -111,7 +111,7 @@
         /// <summary>
         /// Builds the get master game settings operation request.
         /// </summary>
-        public class GetMasterGameSettingsOperationRequest : CustomOperationRequest<DashboardModels.GetMasterGameSettingsRequestData>
+        public class GetMasterGameSettingsOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetMasterGameSettingsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -136,7 +136,7 @@
         /// <summary>
         /// Builds the get secret info information operation request.
         /// </summary>
-        public class GetSecretInfoInformationOperationRequest : CustomOperationRequest<DashboardModels.GetSecretInfoInformationRequestData>
+        public class GetSecretInfoInformationOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetSecretInfoInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -161,7 +161,7 @@
         /// <summary>
         /// Builds the get secret info list operation request.
         /// </summary>
-        public class GetSecretInfoListOperationRequest : CustomOperationRequest<DashboardModels.GetSecretInfoListRequestData>
+        public class GetSecretInfoListOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetSecretInfoListRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -186,7 +186,7 @@
         /// <summary>
         /// Builds the get server log operation request.
         /// </summary>
-        public class GetServerLogOperationRequest : CustomOperationRequest<DashboardModels.GetServerLogRequestData>
+        public class GetServerLogOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetServerLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -211,7 +211,7 @@
         /// <summary>
         /// Builds the create admin account operation request.
         /// </summary>
-        public class CreateAdminAccountOperationRequest : CustomOperationRequest<DashboardModels.CreateAdminAccountRequestData>
+        public class CreateAdminAccountOperationRequest : CustomOperationRequestAbstract<DashboardModels.CreateAdminAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -236,7 +236,7 @@
         /// <summary>
         /// Builds the create game operation request.
         /// </summary>
-        public class CreateGameOperationRequest : CustomOperationRequest<DashboardModels.CreateGameRequestData>
+        public class CreateGameOperationRequest : CustomOperationRequestAbstract<DashboardModels.CreateGameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -261,7 +261,7 @@
         /// <summary>
         /// Builds the create secret info operation request.
         /// </summary>
-        public class CreateSecretInfoOperationRequest : CustomOperationRequest<DashboardModels.CreateSecretInfoRequestData>
+        public class CreateSecretInfoOperationRequest : CustomOperationRequestAbstract<DashboardModels.CreateSecretInfoRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -286,7 +286,7 @@
         /// <summary>
         /// Builds the login by admin account operation request.
         /// </summary>
-        public class LoginByAdminAccountOperationRequest : CustomOperationRequest<DashboardModels.LoginByAdminAccountRequestData>
+        public class LoginByAdminAccountOperationRequest : CustomOperationRequestAbstract<DashboardModels.LoginByAdminAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -311,7 +311,7 @@
         /// <summary>
         /// Builds the remove admin account operation request.
         /// </summary>
-        public class RemoveAdminAccountOperationRequest : CustomOperationRequest<DashboardModels.RemoveAdminAccountRequestData>
+        public class RemoveAdminAccountOperationRequest : CustomOperationRequestAbstract<DashboardModels.RemoveAdminAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -336,7 +336,7 @@
         /// <summary>
         /// Builds the set game information operation request.
         /// </summary>
-        public class SetGameInformationOperationRequest : CustomOperationRequest<DashboardModels.SetGameInformationRequestData>
+        public class SetGameInformationOperationRequest : CustomOperationRequestAbstract<DashboardModels.SetGameInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -361,7 +361,7 @@
         /// <summary>
         /// Builds the set master game settings operation request.
         /// </summary>
-        public class SetMasterGameSettingsOperationRequest : CustomOperationRequest<DashboardModels.SetMasterGameSettingsRequestData>
+        public class SetMasterGameSettingsOperationRequest : CustomOperationRequestAbstract<DashboardModels.SetMasterGameSettingsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -386,7 +386,7 @@
         /// <summary>
         /// Builds the set password admin account operation request.
         /// </summary>
-        public class SetPasswordAdminAccountOperationRequest : CustomOperationRequest<DashboardModels.SetPasswordAdminAccountRequestData>
+        public class SetPasswordAdminAccountOperationRequest : CustomOperationRequestAbstract<DashboardModels.SetPasswordAdminAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -411,7 +411,7 @@
         /// <summary>
         /// Builds the set secret info information operation request.
         /// </summary>
-        public class SetSecretInfoInformationOperationRequest : CustomOperationRequest<DashboardModels.SetSecretInfoInformationRequestData>
+        public class SetSecretInfoInformationOperationRequest : CustomOperationRequestAbstract<DashboardModels.SetSecretInfoInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -436,7 +436,7 @@
         /// <summary>
         /// Builds the set secret key admin account operation request.
         /// </summary>
-        public class SetSecretKeyAdminAccountOperationRequest : CustomOperationRequest<DashboardModels.SetSecretKeyAdminAccountRequestData>
+        public class SetSecretKeyAdminAccountOperationRequest : CustomOperationRequestAbstract<DashboardModels.SetSecretKeyAdminAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -461,7 +461,7 @@
         /// <summary>
         /// Builds the get username admin account operation request.
         /// </summary>
-        public class GetUsernameAdminAccountOperationRequest : CustomOperationRequest<DashboardModels.GetUsernameAdminAccountRequestData>
+        public class GetUsernameAdminAccountOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetUsernameAdminAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -486,7 +486,7 @@
         /// <summary>
         /// Builds the get analytics operation request.
         /// </summary>
-        public class GetAnalyticsOperationRequest : CustomOperationRequest<DashboardModels.GetAnalyticsRequestData>
+        public class GetAnalyticsOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetAnalyticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -511,7 +511,7 @@
         /// <summary>
         /// Builds the get event callback cloud script operation request.
         /// </summary>
-        public class GetEventCallbackCloudScriptOperationRequest : CustomOperationRequest<DashboardModels.GetEventCallbackCloudScriptRequestData>
+        public class GetEventCallbackCloudScriptOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetEventCallbackCloudScriptRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -536,7 +536,7 @@
         /// <summary>
         /// Builds the set event callback cloud script operation request.
         /// </summary>
-        public class SetEventCallbackCloudScriptOperationRequest : CustomOperationRequest<DashboardModels.SetEventCallbackCloudScriptRequestData>
+        public class SetEventCallbackCloudScriptOperationRequest : CustomOperationRequestAbstract<DashboardModels.SetEventCallbackCloudScriptRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -560,7 +560,7 @@
         /// <summary>
         /// Builds the reset statistics leaderboard operation request.
         /// </summary>
-        public class ResetStatisticsLeaderboardOperationRequest : CustomOperationRequest<DashboardModels.ResetStatisticsLeaderboardRequestData>
+        public class ResetStatisticsLeaderboardOperationRequest : CustomOperationRequestAbstract<DashboardModels.ResetStatisticsLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -584,7 +584,7 @@
         /// <summary>
         /// Builds the get backup statistics leaderboard version operation request.
         /// </summary>
-        public class GetBackupStatisticsLeaderboardVersionOperationRequest : CustomOperationRequest<DashboardModels.GetBackupStatisticsLeaderboardVersionRequestData>
+        public class GetBackupStatisticsLeaderboardVersionOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetBackupStatisticsLeaderboardVersionRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -608,7 +608,7 @@
         /// <summary>
         /// Builds the get server game data operation request.
         /// </summary>
-        public class GetServerGameDataOperationRequest : CustomOperationRequest<DashboardModels.GetServerGameDataRequestData>
+        public class GetServerGameDataOperationRequest : CustomOperationRequestAbstract<DashboardModels.GetServerGameDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -632,7 +632,7 @@
         /// <summary>
         /// Builds the delete in database operation request.
         /// </summary>
-        public class DeleteInDatabaseOperationRequest : CustomOperationRequest<DashboardModels.DeleteInDatabaseRequestData>
+        public class DeleteInDatabaseOperationRequest : CustomOperationRequestAbstract<DashboardModels.DeleteInDatabaseRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

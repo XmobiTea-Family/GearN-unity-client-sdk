@@ -274,12 +274,12 @@ eventParameters.add("message", "Hello from trusted backend");
 eventParameters.add("sourceUserId", "server");
 eventParameters.add("ts", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-var request = new MasterPlayerModels.ServerSendSocketOperationEventRequestData();
-request.userId = targetUserId;
-request.eventCode = "cloudScriptDemo";
-request.eventParameters = eventParameters;
+var requestData = new MasterPlayerModels.ServerSendSocketOperationEventRequestData();
+requestData.userId = targetUserId;
+requestData.eventCode = "cloudScriptDemo";
+requestData.eventParameters = eventParameters;
 
-var res = await GNNetwork.masterPlayer.server.sendSocketOperationEventAsync(request);
+var res = await GNNetwork.masterPlayer.server.sendSocketOperationEventAsync(requestData);
 if (res.returnCode != ReturnCode.Ok) return;
 if (res.errorCode != ErrorCode.Ok) return;
 ```

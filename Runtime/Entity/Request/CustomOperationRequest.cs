@@ -64,7 +64,7 @@
     /// Generic base class for creating custom operation requests with strongly-typed request data.
     /// </summary>
     /// <typeparam name="TRequestData">The type of the request data.</typeparam>
-    public abstract class CustomOperationRequest<TRequestData> : CustomOperationRequest where TRequestData : new()
+    public abstract class CustomOperationRequestAbstract<TRequestData> : CustomOperationRequest where TRequestData : new()
     {
         /// <summary>
         /// Data associated with the request.
@@ -75,7 +75,7 @@
         /// Constructor to initialize with a new instance of request data and a timeout.
         /// </summary>
         /// <param name="timeout">Timeout in seconds for the operation.</param>
-        public CustomOperationRequest(int timeout) : base(timeout)
+        public CustomOperationRequestAbstract(int timeout) : base(timeout)
         {
             this.requestData = new TRequestData();
         }
@@ -85,7 +85,7 @@
         /// </summary>
         /// <param name="requestData">The existing request data object.</param>
         /// <param name="timeout">Timeout in seconds for the operation.</param>
-        public CustomOperationRequest(TRequestData requestData, int timeout) : base(timeout)
+        public CustomOperationRequestAbstract(TRequestData requestData, int timeout) : base(timeout)
         {
             this.requestData = requestData;
         }

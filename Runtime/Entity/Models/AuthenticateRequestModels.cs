@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the login by account operation request.
         /// </summary>
-        public class LoginByAccountOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByAccountRequestData>
+        public class LoginByAccountOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -36,7 +36,7 @@
         /// <summary>
         /// Builds the login by android device ID operation request.
         /// </summary>
-        public class LoginByAndroidDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByAndroidDeviceIdRequestData>
+        public class LoginByAndroidDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByAndroidDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -61,7 +61,7 @@
         /// <summary>
         /// Builds the login by apple operation request.
         /// </summary>
-        public class LoginByAppleOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByAppleRequestData>
+        public class LoginByAppleOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByAppleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -86,7 +86,7 @@
         /// <summary>
         /// Builds the login by custom device ID operation request.
         /// </summary>
-        public class LoginByCustomDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByCustomDeviceIdRequestData>
+        public class LoginByCustomDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByCustomDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -111,7 +111,7 @@
         /// <summary>
         /// Builds the login by custom ID operation request.
         /// </summary>
-        public class LoginByCustomIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByCustomIdRequestData>
+        public class LoginByCustomIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByCustomIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -136,7 +136,7 @@
         /// <summary>
         /// Builds the login by editor device ID operation request.
         /// </summary>
-        public class LoginByEditorDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByEditorDeviceIdRequestData>
+        public class LoginByEditorDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByEditorDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -161,7 +161,7 @@
         /// <summary>
         /// Builds the login by facebook operation request.
         /// </summary>
-        public class LoginByFacebookOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByFacebookRequestData>
+        public class LoginByFacebookOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByFacebookRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -186,7 +186,7 @@
         /// <summary>
         /// Builds the login by generic service operation request.
         /// </summary>
-        public class LoginByGenericServiceOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByGenericServiceRequestData>
+        public class LoginByGenericServiceOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByGenericServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -211,7 +211,7 @@
         /// <summary>
         /// Builds the login by google operation request.
         /// </summary>
-        public class LoginByGoogleOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByGoogleRequestData>
+        public class LoginByGoogleOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByGoogleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -236,7 +236,7 @@
         /// <summary>
         /// Builds the login by google play game service operation request.
         /// </summary>
-        public class LoginByGooglePlayGameServiceOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByGooglePlayGameServiceRequestData>
+        public class LoginByGooglePlayGameServiceOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByGooglePlayGameServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -261,7 +261,7 @@
         /// <summary>
         /// Builds the login by game center operation request.
         /// </summary>
-        public class LoginByGameCenterOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByGameCenterRequestData>
+        public class LoginByGameCenterOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByGameCenterRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -286,7 +286,7 @@
         /// <summary>
         /// Builds the login by iOS device ID operation request.
         /// </summary>
-        public class LoginByiOSDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByiOSDeviceIdRequestData>
+        public class LoginByiOSDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByiOSDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -311,7 +311,7 @@
         /// <summary>
         /// Builds the login by linux device ID operation request.
         /// </summary>
-        public class LoginByLinuxDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByLinuxDeviceIdRequestData>
+        public class LoginByLinuxDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByLinuxDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -336,7 +336,7 @@
         /// <summary>
         /// Builds the login by macos device ID operation request.
         /// </summary>
-        public class LoginByMacOSDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByMacOSDeviceIdRequestData>
+        public class LoginByMacOSDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByMacOSDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -361,7 +361,7 @@
         /// <summary>
         /// Builds the login by windows device ID operation request.
         /// </summary>
-        public class LoginByWindowsDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByWindowsDeviceIdRequestData>
+        public class LoginByWindowsDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByWindowsDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -386,7 +386,7 @@
         /// <summary>
         /// Builds the login by windows phone device ID operation request.
         /// </summary>
-        public class LoginByWindowsPhoneDeviceIdOperationRequest : CustomOperationRequest<AuthenticateModels.LoginByWindowsPhoneDeviceIdRequestData>
+        public class LoginByWindowsPhoneDeviceIdOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.LoginByWindowsPhoneDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -411,7 +411,7 @@
         /// <summary>
         /// Builds the register account operation request.
         /// </summary>
-        public class RegisterAccountOperationRequest : CustomOperationRequest<AuthenticateModels.RegisterAccountRequestData>
+        public class RegisterAccountOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.RegisterAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -435,7 +435,7 @@
         /// <summary>
         /// Builds the refresh auth token operation request.
         /// </summary>
-        public class RefreshAuthTokenOperationRequest : CustomOperationRequest<AuthenticateModels.RefreshAuthTokenRequestData>
+        public class RefreshAuthTokenOperationRequest : CustomOperationRequestAbstract<AuthenticateModels.RefreshAuthTokenRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

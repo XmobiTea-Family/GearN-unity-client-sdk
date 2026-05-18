@@ -14,7 +14,7 @@ Tài liệu này dành cho AI code assistant và AI agent nội bộ. Mục tiê
 - Ưu tiên `async/await`; mặc định dùng `GNNetwork.authenticate.*Async()`.
 - Các method của `AuthenticateApi` hiện gửi qua HTTP, không login qua socket.
 - Trước khi gọi API, phải có asset `Resources/GNServerSettings` và `secretKey` hợp lệ.
-- Mọi flow login/register nên truyền `infoRequestParam` khác `null`; riêng `refreshAuthTokenAsync` dùng request rỗng.
+- Mọi flow login/register phải truyền instance `infoRequestParam` khác `null`; riêng `refreshAuthTokenAsync` dùng request rỗng.
 - Sau khi login hoặc refresh thành công, nếu backend trả `authToken` và `userId`, SDK tự cache vào `GNNetwork.getAuthenticateStatus()` và storage nội bộ.
 - Nếu cần realtime sau login, làm theo [socket rule trong RULES](/docs/RULES.md#7-auth--socket-flow): login HTTP thành công, subscribe handler, rồi `GNNetwork.connectSocket()`.
 
@@ -55,12 +55,12 @@ Quyết định nhanh:
 
 ## 4. InfoRequestParam
 
-`infoRequestParam` quyết định backend hydrate phần nào vào `responseData.infoResponseParameters`. Đây là rule quan trọng cho login/register; đừng bật toàn bộ field nếu màn hình hiện tại chỉ cần một phần nhỏ.
+`infoRequestParam` quyết định backend hydrate phần nào vào `responseData.infoResponseParameters`. Đây là field required cho login/register; nếu chưa cần hydrate field nào, vẫn truyền `new AuthenticateModels.InfoRequestParam()` và không bật flag nào.
 
 - Không truyền `null` cho các flow login/register.
 - Chỉ request field thật sự cần.
 - Nếu cần dữ liệu theo key, dùng các mảng filter như `playerDataKeys`, `playerCurrencyKeys`, `playerStatisticsKeys`, `customDataKeys`, `tagKeys`.
-- Schema đầy đủ: [reference/dto/AUTHENTICATE.md](/docs/reference/dto/AUTHENTICATE.md#inforequestparam).
+- Schema đầy đủ: [AUTHENTICATE_MODELS.md](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#inforequestparam).
 - Tham khảo thêm: [reference/API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md), [reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md), [reference/PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md). Source: [Runtime/GNNetworkAuthenticateApi.cs](/Runtime/GNNetworkAuthenticateApi.cs).
 
 Ví dụ tối thiểu:
@@ -82,23 +82,23 @@ var infoRequestParam = new AuthenticateModels.InfoRequestParam();
 infoRequestParam.displayName = true;
 infoRequestParam.playerDatas = true;
 infoRequestParam.playerStatistics = true;
-infoRequestParam.playerDataKeys = new[] { "profile", "settings" };
-infoRequestParam.playerStatisticsKeys = new[] { "level", "exp" };
+infoRequestParam.playerDataKeys = new System.Collections.Generic.List<string> { "profile", "settings" };
+infoRequestParam.playerStatisticsKeys = new System.Collections.Generic.List<string> { "level", "exp" };
 ```
 
 ## 5. Google Login
 
-`loginByGoogleAsync` bắt buộc có `request.type`. Giá trị nên lấy từ [GoogleLoginType](/docs/reference/ENUMS.md#googlelogintype).
+`loginByGoogleAsync` bắt buộc có `request.type`. Field DTO là `int`, nên lấy giá trị từ [GoogleLoginType](/docs/reference/ENUMS.md#googlelogintype) rồi cast rõ ràng.
 
 ```csharp
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new AuthenticateModels.LoginByGoogleRequestData();
-request.token = googleToken;
-request.type = GoogleLoginType.IdToken;
-request.createPlayerIfNotExists = true;
-request.infoRequestParam = infoRequestParam;
+var requestData = new AuthenticateModels.LoginByGoogleRequestData();
+requestData.token = googleToken;
+requestData.type = (int)GoogleLoginType.IdToken;
+requestData.createPlayerIfNotExists = true;
+requestData.infoRequestParam = infoRequestParam;
 ```
 
 ## 6. Response Rules
@@ -152,12 +152,12 @@ var infoRequestParam = new AuthenticateModels.InfoRequestParam();
 infoRequestParam.displayName = true;
 infoRequestParam.avatar = true;
 
-var request = new AuthenticateModels.LoginByCustomDeviceIdRequestData();
-request.customDeviceId = "device-000001";
-request.createPlayerIfNotExists = true;
-request.infoRequestParam = infoRequestParam;
+var requestData = new AuthenticateModels.LoginByCustomDeviceIdRequestData();
+requestData.customDeviceId = "device-000001";
+requestData.createPlayerIfNotExists = true;
+requestData.infoRequestParam = infoRequestParam;
 
-var response = await GNNetwork.authenticate.loginByCustomDeviceIdAsync(request);
+var response = await GNNetwork.authenticate.loginByCustomDeviceIdAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -178,8 +178,8 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new AuthenticateModels.RefreshAuthTokenRequestData();
-var response = await GNNetwork.authenticate.refreshAuthTokenAsync(request);
+var requestData = new AuthenticateModels.RefreshAuthTokenRequestData();
+var response = await GNNetwork.authenticate.refreshAuthTokenAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

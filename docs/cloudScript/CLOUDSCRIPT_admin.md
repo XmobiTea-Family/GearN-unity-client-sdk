@@ -82,7 +82,7 @@ Rule:
 Lưu ý:
 - code trong `CloudScript` bắt buộc viết bằng `typescript`.
 - File mô tả / giải thích / spec: có thể dùng `csharp`-style pseudo/code để dễ đọc.
-- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp` (những biến như `int`, `long`, `double`, `float` dạng number trong `csharp` sẽ dùng như `number` trong `typescript`, những biến như `bool` trong `csharp` sẽ dùng như `boolean` trong `typescript`, `object` trong `csharp` sẽ dùng như `unknown` trong `typescript`)
+- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp` (những biến như `int`, `long`, `double`, `float` dạng number trong `csharp` sẽ dùng như `number` trong `typescript`, những biến như `bool` trong `csharp` sẽ dùng như `boolean` trong `typescript`, `object` trong `csharp` sẽ dùng như `unknown` trong `typescript`, những biến như `List<>` trong `csharp` sẽ dùng như `Array<>` trong `typescript`)
 
 ```ts
 // Helper chuẩn cho mọi ví dụ
@@ -224,10 +224,10 @@ const assertResponseOk = (response: CustomOperationResponse, actionName: string)
 
 ```ts
 handlers["adminGetGameInfo"] = async (args: any, context, log) => {
-  const request = new DashboardModels.GetGameInformationRequestData();
-  request.gameId = gameId;
+  const requestData = new DashboardModels.GetGameInformationRequestData();
+  requestData.gameId = gameId;
 
-  const response = await admin.dashboard.getGameInformationAsync(request);
+  const response = await admin.dashboard.getGameInformationAsync(requestData);
 
   assertResponseOk(response, "admin.dashboard.getGameInformationAsync");
 
@@ -259,12 +259,12 @@ handlers["adminGetOrCreateGamePlayerProfile"] = async (
   infoRequestParam.playerStatistics = true;
   infoRequestParam.playerStatisticsKeys = ["rankScore"];
 
-  const request = new GamePlayerModels.AdminGetPlayerInformationRequestData();
-  request.userId = targetUserId;
-  request.infoRequestParam = infoRequestParam;
-  request.createPlayerIfNotExists = true;
+  const requestData = new GamePlayerModels.AdminGetPlayerInformationRequestData();
+  requestData.userId = targetUserId;
+  requestData.infoRequestParam = infoRequestParam;
+  requestData.createPlayerIfNotExists = true;
 
-  const response = await admin.gamePlayer.getPlayerInformationAsync(request);
+  const response = await admin.gamePlayer.getPlayerInformationAsync(requestData);
   assertResponseOk(response, "admin.gamePlayer.getPlayerInformationAsync");
 
   return response.responseData.infoResponseParameters;
@@ -290,14 +290,14 @@ handlers["adminAdjustGamePlayerCurrency"] = async (args: any, context, log) => {
   gem.key = "gem";
   gem.value = typeof args?.gemDelta === "number" ? args.gemDelta : 0;
 
-  const request = new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
-  request.userId = targetUserId;
-  request.playerCurrencies = [gold, gem];
-  request.log =
+  const requestData = new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
+  requestData.userId = targetUserId;
+  requestData.playerCurrencies = [gold, gem];
+  requestData.log =
     "cloudscript adminAdjustGamePlayerCurrency, requestedBy=" +
     (context.userId ?? "system");
 
-  const response = await admin.gamePlayer.changePlayerCurrencyAsync(request);
+  const response = await admin.gamePlayer.changePlayerCurrencyAsync(requestData);
   assertResponseOk(response, "admin.gamePlayer.changePlayerCurrencyAsync");
 
   return response.responseData.infoResponseParameters;
@@ -315,24 +315,22 @@ handlers["adminAdjustGamePlayerCurrency"] = async (args: any, context, log) => {
 handlers["adminGrantStarterSword"] = async (args: any, context, log) => {
   const targetUserId = requireString(args?.userId, "userId");
 
-  const createRequest = new GamePlayerModels.AdminCreatePlayerItemRequestData();
-  createRequest.userId = targetUserId;
-  createRequest.catalogId = "weapon";
-  createRequest.classId = "sword";
-  createRequest.displayName = "Starter Sword";
-  createRequest.amount = 1;
+  const createRequestData = new GamePlayerModels.AdminCreatePlayerItemRequestData();
+  createRequestData.userId = targetUserId;
+  createRequestData.catalogId = "weapon";
+  createRequestData.classId = "sword";
+  createRequestData.displayName = "Starter Sword";
+  createRequestData.amount = 1;
 
-  const createResponse =
-    await admin.gamePlayer.createPlayerItemAsync(createRequest);
+  const createResponse = await admin.gamePlayer.createPlayerItemAsync(createRequestData);
   assertResponseOk(createResponse, "admin.gamePlayer.createPlayerItemAsync");
 
-  const inventoryRequest =
-    new GamePlayerModels.AdminGetPlayerInventoryRequestData();
-  inventoryRequest.userId = targetUserId;
-  inventoryRequest.itemCatalogIds = ["weapon"];
+  const inventoryRequestData = new GamePlayerModels.AdminGetPlayerInventoryRequestData();
+  inventoryRequestData.userId = targetUserId;
+  inventoryRequestData.itemCatalogIds = ["weapon"];
 
   const inventoryResponse =
-    await admin.gamePlayer.getPlayerInventoryAsync(inventoryRequest);
+    await admin.gamePlayer.getPlayerInventoryAsync(inventoryRequestData);
   assertResponseOk(
     inventoryResponse,
     "admin.gamePlayer.getPlayerInventoryAsync",
@@ -365,11 +363,11 @@ handlers["adminGetMasterPlayerProfile"] = async (args: any, context, log) => {
   infoRequestParam.tags = true;
   infoRequestParam.tagKeys = ["vipTier", "region"];
 
-  const request = new MasterPlayerModels.AdminGetPlayerInformationRequestData();
-  request.userId = targetUserId;
-  request.infoRequestParam = infoRequestParam;
+  const requestData = new MasterPlayerModels.AdminGetPlayerInformationRequestData();
+  requestData.userId = targetUserId;
+  requestData.infoRequestParam = infoRequestParam;
 
-  const response = await admin.masterPlayer.getPlayerInformationAsync(request);
+  const response = await admin.masterPlayer.getPlayerInformationAsync(requestData);
   assertResponseOk(response, "admin.masterPlayer.getPlayerInformationAsync");
 
   return response.responseData.infoResponseParameters;
@@ -387,19 +385,19 @@ handlers["adminGetMasterPlayerProfile"] = async (args: any, context, log) => {
 handlers["adminMarkGroupQueue"] = async (args: any, context, log) => {
   const groupId = requireString(args?.groupId, "groupId");
 
-  const request = new GroupModels.AdminSetTagRequestData();
-  request.groupId = groupId;
-  request.key = "queue";
-  request.value = "ranked";
+  const requestData = new GroupModels.AdminSetTagRequestData();
+  requestData.groupId = groupId;
+  requestData.key = "queue";
+  requestData.value = "ranked";
 
-  const response = await admin.group.setTagAsync(request);
+  const response = await admin.group.setTagAsync(requestData);
   assertResponseOk(response, "admin.group.setTagAsync");
 
   return {
     groupId: groupId,
     tag: {
-      key: request.key,
-      value: request.value,
+      key: requestData.key,
+      value: requestData.value,
     },
   };
 };
@@ -421,12 +419,12 @@ handlers["adminExecuteAnotherCloudScript"] = async (
   const targetUserId = requireString(args?.userId, "userId");
   const functionName = requireString(args?.functionName, "functionName");
 
-  const request = new CloudScriptModels.AdminExecuteFunctionRequestData();
-  request.userId = targetUserId;
-  request.functionName = functionName;
-  request.version =
+  const requestData = new CloudScriptModels.AdminExecuteFunctionRequestData();
+  requestData.userId = targetUserId;
+  requestData.functionName = functionName;
+  requestData.version =
     typeof args?.version === "string" ? args.version : undefined;
-  request.functionParameters = args?.functionParameters ?? {
+  requestData.functionParameters = args?.functionParameters ?? {
     source: "adminExecuteAnotherCloudScript",
     requestedBy: context.userId,
   };
@@ -437,7 +435,7 @@ handlers["adminExecuteAnotherCloudScript"] = async (
     .build();
 
   const response = await admin.cloudScript.executeFunctionAsync(
-    request,
+    requestData,
     undefined,
     undefined,
     customTags,
@@ -463,14 +461,14 @@ handlers["adminExecuteAnotherCloudScript"] = async (
 
 ```ts
 handlers["adminGetLeanAnalytics"] = async (args: any, context, log) => {
-  const request = new DashboardModels.GetAnalyticsRequestData();
-  request.timestamp =
+  const requestData = new DashboardModels.GetAnalyticsRequestData();
+  requestData.timestamp =
     typeof args?.timestamp === "number" ? args.timestamp : undefined;
-  request.country = true;
-  request.requestComplete = true;
-  request.monthlyCost = true;
+  requestData.country = true;
+  requestData.requestComplete = true;
+  requestData.monthlyCost = true;
 
-  const response = await admin.dashboard.getAnalyticsAsync(request);
+  const response = await admin.dashboard.getAnalyticsAsync(requestData);
 
   assertResponseOk(response, "admin.dashboard.getAnalyticsAsync");
 
@@ -489,22 +487,22 @@ handlers["adminGetLeanAnalytics"] = async (args: any, context, log) => {
 handlers["adminDeleteInventoryRow"] = async (args: any, context, log) => {
   const itemId = requireString(args?.itemId, "itemId");
 
-  const request = new DashboardModels.DeleteInDatabaseRequestData();
-  request.gameId = gameId;
-  request.type = OwnerType.Inventory;
-  request.id = itemId;
-  request.log =
+  const requestData = new DashboardModels.DeleteInDatabaseRequestData();
+  requestData.gameId = gameId;
+  requestData.type = (int)OwnerType.Inventory;
+  requestData.id = itemId;
+  requestData.log =
     "manual cleanup from cloudscript, requestedBy=" +
     (context.userId ?? "system");
 
-  const response = await admin.dashboard.deleteInDatabaseAsync(request);
+  const response = await admin.dashboard.deleteInDatabaseAsync(requestData);
 
   assertResponseOk(response, "admin.dashboard.deleteInDatabaseAsync");
 
   return {
     deleted: true,
-    type: request.type,
-    id: request.id,
+    type: requestData.type,
+    id: requestData.id,
   };
 };
 ```

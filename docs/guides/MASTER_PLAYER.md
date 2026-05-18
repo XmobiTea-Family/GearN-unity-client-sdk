@@ -333,12 +333,12 @@ var infoRequestParam = new MasterPlayerModels.InfoRequestParam();
 infoRequestParam.displayName = true;
 infoRequestParam.email = true;
 infoRequestParam.playerCurrencies = true;
-infoRequestParam.playerCurrencyKeys = new[] { "gold" };
+infoRequestParam.playerCurrencyKeys = new System.Collections.Generic.List<string> { "gold" };
 
-var request = new MasterPlayerModels.GetPlayerInformationRequestData();
-request.infoRequestParam = infoRequestParam;
+var requestData = new MasterPlayerModels.GetPlayerInformationRequestData();
+requestData.infoRequestParam = infoRequestParam;
 
-var response = await GNNetwork.masterPlayer.getPlayerInformationAsync(request);
+var response = await GNNetwork.masterPlayer.getPlayerInformationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -358,12 +358,12 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new MasterPlayerModels.LinkGoogleRequestData();
-request.token = "google-id-token";
-request.type = GoogleLoginType.IdToken;
-request.forceLink = false;
+var requestData = new MasterPlayerModels.LinkGoogleRequestData();
+requestData.token = "google-id-token";
+requestData.type = (int)GoogleLoginType.IdToken;
+requestData.forceLink = false;
 
-var response = await GNNetwork.masterPlayer.linkGoogleAsync(request);
+var response = await GNNetwork.masterPlayer.linkGoogleAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -386,13 +386,13 @@ using XmobiTea.GearN.Entity.Models;
 var infoRequestParam = new MasterPlayerModels.InfoRequestParam();
 infoRequestParam.displayName = true;
 
-var request = new MasterPlayerModels.ServerGetStatisticsLeaderboardAroundPlayerRequestData();
-request.userId = "1234567890";
-request.key = "rankScore";
-request.infoRequestParam = infoRequestParam;
-request.limit = 20;
+var requestData = new MasterPlayerModels.ServerGetStatisticsLeaderboardAroundPlayerRequestData();
+requestData.userId = "1234567890";
+requestData.key = "rankScore";
+requestData.infoRequestParam = infoRequestParam;
+requestData.limit = 20;
 
-var response = await GNNetwork.masterPlayer.server.getStatisticsLeaderboardAroundPlayerAsync(request);
+var response = await GNNetwork.masterPlayer.server.getStatisticsLeaderboardAroundPlayerAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -412,11 +412,11 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new MasterPlayerModels.AddPushNotificationRequestData();
-request.token = "device-push-token";
-request.platformType = PushPlatformType.Android;
+var requestData = new MasterPlayerModels.AddPushNotificationRequestData();
+requestData.token = "device-push-token";
+requestData.platformType = (int)PushPlatformType.Android;
 
-var response = await GNNetwork.masterPlayer.addPushNotificationAsync(request);
+var response = await GNNetwork.masterPlayer.addPushNotificationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

@@ -91,12 +91,12 @@ handlers["changeDisplayName"] = async (args: any, context, log) => {
   }
 
   // Bước 3: Đổi tên
-  const renameRequest = new GamePlayerModels.AdminSetDisplayNameRequestData();
-  renameRequest.userId = userId;
-  renameRequest.displayName = displayName;
+  const renameRequestData = new GamePlayerModels.AdminSetDisplayNameRequestData();
+  renameRequestData.userId = userId;
+  renameRequestData.displayName = displayName;
 
   const renameResponse =
-    await admin.gamePlayer.setDisplayNameAsync(renameRequest);
+    await admin.gamePlayer.setDisplayNameAsync(renameRequestData);
   if (renameResponse.hasReturnCodeError()) {
     throw new Error(
       "admin.gamePlayer.setDisplayNameAsync" +
@@ -130,13 +130,13 @@ using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
 private async System.Threading.Tasks.Task<object> ChangeDisplayNameAsync(string newName) {
-    var request = new CloudScriptModels.ExecuteFunctionRequestData();
-    request.functionName = "changeDisplayName";
-    request.functionParameters = XmobiTea.GearN.Common.GNHashtable.builder()
+    var requestData = new CloudScriptModels.ExecuteFunctionRequestData();
+    requestData.functionName = "changeDisplayName";
+    requestData.functionParameters = XmobiTea.GearN.Common.GNHashtable.builder()
         .add("displayName", newName)
         .build();
 
-    var res = await GNNetwork.cloudScript.executeFunctionAsync(request);
+    var res = await GNNetwork.cloudScript.executeFunctionAsync(requestData);
 
     if (res.returnCode != ReturnCode.Ok || res.errorCode != ErrorCode.Ok) {
         throw new System.Exception("request failed: " + res.errorCode);
@@ -400,12 +400,12 @@ const currency = new GamePlayerModels.PlayerCurrencyParam();
 currency.key = "gem";
 currency.value = -50;
 
-const request = new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
-request.userId = userId;
-request.playerCurrencies = [currency];
+const requestData = new GamePlayerModels.AdminChangePlayerCurrencyRequestData();
+requestData.userId = userId;
+requestData.playerCurrencies = [currency];
 
 // SAI
-const request = { userId, playerCurrencies: [{ key: "gem", value: -50 }] } as GamePlayerModels.AdminChangePlayerCurrencyRequestData;
+const requestData = { userId, playerCurrencies: [{ key: "gem", value: -50 }] } as GamePlayerModels.AdminChangePlayerCurrencyRequestData;
 ```
 
 Field name cần `value` hay `amount` tùy DTO — tra [reference/dto/GAME_PLAYER.md](/docs/reference/dto/GAME_PLAYER.md) (hoặc domain tương ứng), không suy diễn.
@@ -525,12 +525,12 @@ using XmobiTea.GearN.Entity.Models;
 var secretKey = System.Environment.GetEnvironmentVariable("GN_SECRET_KEY") ?? "";
 var script = "handlers[\"pingCloudScript\"] = async (args, context, log) => ({ ok: true, userId: context.userId });";
 
-var addRequest = new CloudScriptModels.AdminAddFunctionRequestData();
-addRequest.script = script;
-addRequest.canExecute = true;
-addRequest.isLive = false;
+var addRequestData = new CloudScriptModels.AdminAddFunctionRequestData();
+addRequestData.script = script;
+addRequestData.canExecute = true;
+addRequestData.isLive = false;
 
-var addResponse = await GNNetwork.cloudScript.admin.addFunctionAsync(addRequest, null, secretKey);
+var addResponse = await GNNetwork.cloudScript.admin.addFunctionAsync(addRequestData, null, secretKey);
 
 if (addResponse.hasReturnCodeError()) {
     throw new System.Exception(addResponse.toString());
@@ -550,15 +550,15 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var executeRequest = new CloudScriptModels.AdminExecuteFunctionRequestData();
-executeRequest.userId = "0123456789";
-executeRequest.functionName = "pingCloudScript";
-executeRequest.version = version;
-executeRequest.functionParameters = XmobiTea.GearN.Common.GNHashtable.builder()
+var executeRequestData = new CloudScriptModels.AdminExecuteFunctionRequestData();
+executeRequestData.userId = "0123456789";
+executeRequestData.functionName = "pingCloudScript";
+executeRequestData.version = version;
+executeRequestData.functionParameters = XmobiTea.GearN.Common.GNHashtable.builder()
     .add("message", "hello")
     .build();
 
-var executeResponse = await GNNetwork.cloudScript.admin.executeFunctionAsync(executeRequest);
+var executeResponse = await GNNetwork.cloudScript.admin.executeFunctionAsync(executeRequestData);
 
 if (executeResponse.hasReturnCodeError()) {
     throw new System.Exception(executeResponse.toString());
@@ -572,14 +572,14 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var executeRequest = new CloudScriptModels.AdminExecuteFunctionRequestData();
-executeRequest.userId = "0123456789";
-executeRequest.functionName = "pingCloudScript";
-executeRequest.functionParameters = XmobiTea.GearN.Common.GNHashtable.builder()
+var executeRequestData = new CloudScriptModels.AdminExecuteFunctionRequestData();
+executeRequestData.userId = "0123456789";
+executeRequestData.functionName = "pingCloudScript";
+executeRequestData.functionParameters = XmobiTea.GearN.Common.GNHashtable.builder()
     .add("message", "hello")
     .build();
 
-var executeResponse = await GNNetwork.cloudScript.admin.executeFunctionAsync(executeRequest);
+var executeResponse = await GNNetwork.cloudScript.admin.executeFunctionAsync(executeRequestData);
 
 if (executeResponse.hasReturnCodeError()) {
     throw new System.Exception(executeResponse.toString());

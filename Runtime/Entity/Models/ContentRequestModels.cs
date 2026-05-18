@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the create new file upload info operation request.
         /// </summary>
-        public class CreateNewFileUploadInfoOperationRequest : CustomOperationRequest<ContentModels.CreateNewFileUploadInfoRequestData>
+        public class CreateNewFileUploadInfoOperationRequest : CustomOperationRequestAbstract<ContentModels.CreateNewFileUploadInfoRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the get content data operation request.
         /// </summary>
-        public class GetContentDataOperationRequest : CustomOperationRequest<ContentModels.GetContentDataRequestData>
+        public class GetContentDataOperationRequest : CustomOperationRequestAbstract<ContentModels.GetContentDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -125,7 +125,7 @@
         /// <summary>
         /// Builds the get file upload info list operation request.
         /// </summary>
-        public class GetFileUploadInfoListOperationRequest : CustomOperationRequest<ContentModels.GetFileUploadInfoListRequestData>
+        public class GetFileUploadInfoListOperationRequest : CustomOperationRequestAbstract<ContentModels.GetFileUploadInfoListRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -182,7 +182,7 @@
         /// <summary>
         /// Builds the get file upload info operation request.
         /// </summary>
-        public class GetFileUploadInfoOperationRequest : CustomOperationRequest<ContentModels.GetFileUploadInfoRequestData>
+        public class GetFileUploadInfoOperationRequest : CustomOperationRequestAbstract<ContentModels.GetFileUploadInfoRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -239,7 +239,7 @@
         /// <summary>
         /// Builds the remove file upload info operation request.
         /// </summary>
-        public class RemoveFileUploadInfoOperationRequest : CustomOperationRequest<ContentModels.RemoveFileUploadInfoRequestData>
+        public class RemoveFileUploadInfoOperationRequest : CustomOperationRequestAbstract<ContentModels.RemoveFileUploadInfoRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -296,7 +296,7 @@
         /// <summary>
         /// Builds the request download file upload info operation request.
         /// </summary>
-        public class RequestDownloadFileUploadInfoOperationRequest : CustomOperationRequest<ContentModels.RequestDownloadFileUploadInfoRequestData>
+        public class RequestDownloadFileUploadInfoOperationRequest : CustomOperationRequestAbstract<ContentModels.RequestDownloadFileUploadInfoRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -353,7 +353,7 @@
         /// <summary>
         /// Builds the set content data operation request.
         /// </summary>
-        public class SetContentDataOperationRequest : CustomOperationRequest<ContentModels.SetContentDataRequestData>
+        public class SetContentDataOperationRequest : CustomOperationRequestAbstract<ContentModels.SetContentDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

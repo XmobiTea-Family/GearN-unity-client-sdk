@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the cancel all matchmaking ticket operation request.
         /// </summary>
-        public class CancelAllMatchmakingTicketOperationRequest : CustomOperationRequest<MultiplayerModels.CancelAllMatchmakingTicketRequestData>
+        public class CancelAllMatchmakingTicketOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.CancelAllMatchmakingTicketRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the cancel matchmaking ticket operation request.
         /// </summary>
-        public class CancelMatchmakingTicketOperationRequest : CustomOperationRequest<MultiplayerModels.CancelMatchmakingTicketRequestData>
+        public class CancelMatchmakingTicketOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.CancelMatchmakingTicketRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -125,7 +125,7 @@
         /// <summary>
         /// Builds the create matchmaking ticket operation request.
         /// </summary>
-        public class CreateMatchmakingTicketOperationRequest : CustomOperationRequest<MultiplayerModels.CreateMatchmakingTicketRequestData>
+        public class CreateMatchmakingTicketOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.CreateMatchmakingTicketRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -182,7 +182,7 @@
         /// <summary>
         /// Builds the get matchmaking ticket operation request.
         /// </summary>
-        public class GetMatchmakingTicketOperationRequest : CustomOperationRequest<MultiplayerModels.GetMatchmakingTicketRequestData>
+        public class GetMatchmakingTicketOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.GetMatchmakingTicketRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -239,7 +239,7 @@
         /// <summary>
         /// Builds the get match operation request.
         /// </summary>
-        public class GetMatchOperationRequest : CustomOperationRequest<MultiplayerModels.GetMatchRequestData>
+        public class GetMatchOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.GetMatchRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -296,7 +296,7 @@
         /// <summary>
         /// Builds the get queue statistics operation request.
         /// </summary>
-        public class GetQueueStatisticsOperationRequest : CustomOperationRequest<MultiplayerModels.GetQueueStatisticsRequestData>
+        public class GetQueueStatisticsOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.GetQueueStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -353,7 +353,7 @@
         /// <summary>
         /// Builds the join matchmaking ticket operation request.
         /// </summary>
-        public class JoinMatchmakingTicketOperationRequest : CustomOperationRequest<MultiplayerModels.JoinMatchmakingTicketRequestData>
+        public class JoinMatchmakingTicketOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.JoinMatchmakingTicketRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -410,7 +410,7 @@
         /// <summary>
         /// Builds the list matchmaking tickets for player operation request.
         /// </summary>
-        public class ListMatchmakingTicketsForPlayerOperationRequest : CustomOperationRequest<MultiplayerModels.ListMatchmakingTicketsForPlayerRequestData>
+        public class ListMatchmakingTicketsForPlayerOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.ListMatchmakingTicketsForPlayerRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -467,7 +467,7 @@
         /// <summary>
         /// Builds the get all match operation request.
         /// </summary>
-        public class GetAllMatchOperationRequest : CustomOperationRequest<MultiplayerModels.GetAllMatchRequestData>
+        public class GetAllMatchOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.GetAllMatchRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -524,7 +524,7 @@
         /// <summary>
         /// Builds the get all matchmaking ticket operation request.
         /// </summary>
-        public class GetAllMatchmakingTicketOperationRequest : CustomOperationRequest<MultiplayerModels.GetAllMatchmakingTicketRequestData>
+        public class GetAllMatchmakingTicketOperationRequest : CustomOperationRequestAbstract<MultiplayerModels.GetAllMatchmakingTicketRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

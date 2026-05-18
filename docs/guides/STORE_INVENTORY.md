@@ -193,11 +193,11 @@ infoRequestParam.displayName = true;
 infoRequestParam.priceCurrencies = true;
 infoRequestParam.storeItemType = true;
 
-var request = new StoreInventoryModels.GetStoreItemInformationRequestData();
-request.storeId = "store-item-001";
-request.infoRequestParam = infoRequestParam;
+var requestData = new StoreInventoryModels.GetStoreItemInformationRequestData();
+requestData.storeId = "store-item-001";
+requestData.infoRequestParam = infoRequestParam;
 
-var response = await GNNetwork.storeInventory.getStoreItemInformationAsync(request);
+var response = await GNNetwork.storeInventory.getStoreItemInformationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -217,13 +217,13 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new StoreInventoryModels.BuyStoreItemRequestData();
-request.storeId = "store-item-001";
-request.id = "1234567890";
-request.type = OwnerType.MasterPlayer;
-request.log = "buy from shop popup";
+var requestData = new StoreInventoryModels.BuyStoreItemRequestData();
+requestData.storeId = "store-item-001";
+requestData.id = "1234567890";
+requestData.type = OwnerType.MasterPlayer;
+requestData.log = "buy from shop popup";
 
-var response = await GNNetwork.storeInventory.buyStoreItemAsync(request);
+var response = await GNNetwork.storeInventory.buyStoreItemAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -243,13 +243,13 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new StoreInventoryModels.ValidateGooglePlayStoreReceiptRequestData();
-request.receipt = googleReceiptPayload;
-request.id = "1234567890";
-request.type = OwnerType.MasterPlayer;
-request.log = "google-play-checkout";
+var requestData = new StoreInventoryModels.ValidateGooglePlayStoreReceiptRequestData();
+requestData.receipt = googleReceiptPayload;
+requestData.id = "1234567890";
+requestData.type = OwnerType.MasterPlayer;
+requestData.log = "google-play-checkout";
 
-var response = await GNNetwork.storeInventory.validateGooglePlayStoreReceiptAsync(request);
+var response = await GNNetwork.storeInventory.validateGooglePlayStoreReceiptAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -267,12 +267,12 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new StoreInventoryModels.GetStoreLogRequestData();
-request.storeId = "store-item-001";
-request.storeReceiveTypes = new[] { StoreReceiveType.Buy, StoreReceiveType.GooglePlayStore };
-request.limit = 20;
+var requestData = new StoreInventoryModels.GetStoreLogRequestData();
+requestData.storeId = "store-item-001";
+requestData.storeReceiveTypes = new[] { StoreReceiveType.Buy, StoreReceiveType.GooglePlayStore };
+requestData.limit = 20;
 
-var response = await GNNetwork.storeInventory.getStoreLogAsync(request);
+var response = await GNNetwork.storeInventory.getStoreLogAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

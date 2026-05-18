@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the add member operation request.
         /// </summary>
-        public class AddMemberOperationRequest : CustomOperationRequest<GroupModels.AddMemberRequestData>
+        public class AddMemberOperationRequest : CustomOperationRequestAbstract<GroupModels.AddMemberRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the add segment operation request.
         /// </summary>
-        public class AddSegmentOperationRequest : CustomOperationRequest<GroupModels.AddSegmentRequestData>
+        public class AddSegmentOperationRequest : CustomOperationRequestAbstract<GroupModels.AddSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -125,7 +125,7 @@
         /// <summary>
         /// Builds the get avatar operation request.
         /// </summary>
-        public class GetAvatarOperationRequest : CustomOperationRequest<GroupModels.GetAvatarRequestData>
+        public class GetAvatarOperationRequest : CustomOperationRequestAbstract<GroupModels.GetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -182,7 +182,7 @@
         /// <summary>
         /// Builds the get catalog ID operation request.
         /// </summary>
-        public class GetCatalogIdOperationRequest : CustomOperationRequest<GroupModels.GetCatalogIdRequestData>
+        public class GetCatalogIdOperationRequest : CustomOperationRequestAbstract<GroupModels.GetCatalogIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -239,7 +239,7 @@
         /// <summary>
         /// Builds the get custom data operation request.
         /// </summary>
-        public class GetCustomDataOperationRequest : CustomOperationRequest<GroupModels.GetCustomDataRequestData>
+        public class GetCustomDataOperationRequest : CustomOperationRequestAbstract<GroupModels.GetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -296,7 +296,7 @@
         /// <summary>
         /// Builds the get display name operation request.
         /// </summary>
-        public class GetDisplayNameOperationRequest : CustomOperationRequest<GroupModels.GetDisplayNameRequestData>
+        public class GetDisplayNameOperationRequest : CustomOperationRequestAbstract<GroupModels.GetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -353,7 +353,7 @@
         /// <summary>
         /// Builds the get group currency operation request.
         /// </summary>
-        public class GetGroupCurrencyOperationRequest : CustomOperationRequest<GroupModels.GetGroupCurrencyRequestData>
+        public class GetGroupCurrencyOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupCurrencyRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -410,7 +410,7 @@
         /// <summary>
         /// Builds the get group data operation request.
         /// </summary>
-        public class GetGroupDataOperationRequest : CustomOperationRequest<GroupModels.GetGroupDataRequestData>
+        public class GetGroupDataOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -467,7 +467,7 @@
         /// <summary>
         /// Builds the get group information operation request.
         /// </summary>
-        public class GetGroupInformationOperationRequest : CustomOperationRequest<GroupModels.GetGroupInformationRequestData>
+        public class GetGroupInformationOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -524,7 +524,7 @@
         /// <summary>
         /// Builds the get group inventory operation request.
         /// </summary>
-        public class GetGroupInventoryOperationRequest : CustomOperationRequest<GroupModels.GetGroupInventoryRequestData>
+        public class GetGroupInventoryOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupInventoryRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -581,7 +581,7 @@
         /// <summary>
         /// Builds the get group message operation request.
         /// </summary>
-        public class GetGroupMessageOperationRequest : CustomOperationRequest<GroupModels.GetGroupMessageRequestData>
+        public class GetGroupMessageOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupMessageRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -638,7 +638,7 @@
         /// <summary>
         /// Builds the get group statistics operation request.
         /// </summary>
-        public class GetGroupStatisticsOperationRequest : CustomOperationRequest<GroupModels.GetGroupStatisticsRequestData>
+        public class GetGroupStatisticsOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -695,7 +695,7 @@
         /// <summary>
         /// Builds the get groups with display name operation request.
         /// </summary>
-        public class GetGroupsWithDisplayNameOperationRequest : CustomOperationRequest<GroupModels.GetGroupsWithDisplayNameRequestData>
+        public class GetGroupsWithDisplayNameOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupsWithDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -752,7 +752,7 @@
         /// <summary>
         /// Builds the get groups with segment operation request.
         /// </summary>
-        public class GetGroupsWithSegmentOperationRequest : CustomOperationRequest<GroupModels.GetGroupsWithSegmentRequestData>
+        public class GetGroupsWithSegmentOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupsWithSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -809,7 +809,7 @@
         /// <summary>
         /// Builds the get groups with tag operation request.
         /// </summary>
-        public class GetGroupsWithTagOperationRequest : CustomOperationRequest<GroupModels.GetGroupsWithTagRequestData>
+        public class GetGroupsWithTagOperationRequest : CustomOperationRequestAbstract<GroupModels.GetGroupsWithTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -866,7 +866,7 @@
         /// <summary>
         /// Builds the get members operation request.
         /// </summary>
-        public class GetMembersOperationRequest : CustomOperationRequest<GroupModels.GetMembersRequestData>
+        public class GetMembersOperationRequest : CustomOperationRequestAbstract<GroupModels.GetMembersRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -923,7 +923,7 @@
         /// <summary>
         /// Builds the get remove status operation request.
         /// </summary>
-        public class GetRemoveStatusOperationRequest : CustomOperationRequest<GroupModels.GetRemoveStatusRequestData>
+        public class GetRemoveStatusOperationRequest : CustomOperationRequestAbstract<GroupModels.GetRemoveStatusRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -980,7 +980,7 @@
         /// <summary>
         /// Builds the get segment operation request.
         /// </summary>
-        public class GetSegmentOperationRequest : CustomOperationRequest<GroupModels.GetSegmentRequestData>
+        public class GetSegmentOperationRequest : CustomOperationRequestAbstract<GroupModels.GetSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1037,7 +1037,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard around group operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardAroundGroupOperationRequest : CustomOperationRequest<GroupModels.GetStatisticsLeaderboardAroundGroupRequestData>
+        public class GetStatisticsLeaderboardAroundGroupOperationRequest : CustomOperationRequestAbstract<GroupModels.GetStatisticsLeaderboardAroundGroupRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1094,7 +1094,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequest<GroupModels.GetStatisticsLeaderboardRequestData>
+        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequestAbstract<GroupModels.GetStatisticsLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1151,7 +1151,7 @@
         /// <summary>
         /// Builds the get tag operation request.
         /// </summary>
-        public class GetTagOperationRequest : CustomOperationRequest<GroupModels.GetTagRequestData>
+        public class GetTagOperationRequest : CustomOperationRequestAbstract<GroupModels.GetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1208,7 +1208,7 @@
         /// <summary>
         /// Builds the get timestamp create operation request.
         /// </summary>
-        public class GetTsCreateOperationRequest : CustomOperationRequest<GroupModels.GetTsCreateRequestData>
+        public class GetTsCreateOperationRequest : CustomOperationRequestAbstract<GroupModels.GetTsCreateRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1265,7 +1265,7 @@
         /// <summary>
         /// Builds the create group item operation request.
         /// </summary>
-        public class CreateGroupItemOperationRequest : CustomOperationRequest<GroupModels.CreateGroupItemRequestData>
+        public class CreateGroupItemOperationRequest : CustomOperationRequestAbstract<GroupModels.CreateGroupItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1322,7 +1322,7 @@
         /// <summary>
         /// Builds the remove group item operation request.
         /// </summary>
-        public class RemoveGroupItemOperationRequest : CustomOperationRequest<GroupModels.RemoveGroupItemRequestData>
+        public class RemoveGroupItemOperationRequest : CustomOperationRequestAbstract<GroupModels.RemoveGroupItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1379,7 +1379,7 @@
         /// <summary>
         /// Builds the remove member operation request.
         /// </summary>
-        public class RemoveMemberOperationRequest : CustomOperationRequest<GroupModels.RemoveMemberRequestData>
+        public class RemoveMemberOperationRequest : CustomOperationRequestAbstract<GroupModels.RemoveMemberRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1436,7 +1436,7 @@
         /// <summary>
         /// Builds the remove segment operation request.
         /// </summary>
-        public class RemoveSegmentOperationRequest : CustomOperationRequest<GroupModels.RemoveSegmentRequestData>
+        public class RemoveSegmentOperationRequest : CustomOperationRequestAbstract<GroupModels.RemoveSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1493,7 +1493,7 @@
         /// <summary>
         /// Builds the remove tag operation request.
         /// </summary>
-        public class RemoveTagOperationRequest : CustomOperationRequest<GroupModels.RemoveTagRequestData>
+        public class RemoveTagOperationRequest : CustomOperationRequestAbstract<GroupModels.RemoveTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1550,7 +1550,7 @@
         /// <summary>
         /// Builds the send group message operation request.
         /// </summary>
-        public class SendGroupMessageOperationRequest : CustomOperationRequest<GroupModels.SendGroupMessageRequestData>
+        public class SendGroupMessageOperationRequest : CustomOperationRequestAbstract<GroupModels.SendGroupMessageRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1607,7 +1607,7 @@
         /// <summary>
         /// Builds the set avatar operation request.
         /// </summary>
-        public class SetAvatarOperationRequest : CustomOperationRequest<GroupModels.SetAvatarRequestData>
+        public class SetAvatarOperationRequest : CustomOperationRequestAbstract<GroupModels.SetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1664,7 +1664,7 @@
         /// <summary>
         /// Builds the set custom data operation request.
         /// </summary>
-        public class SetCustomDataOperationRequest : CustomOperationRequest<GroupModels.SetCustomDataRequestData>
+        public class SetCustomDataOperationRequest : CustomOperationRequestAbstract<GroupModels.SetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1721,7 +1721,7 @@
         /// <summary>
         /// Builds the set display name operation request.
         /// </summary>
-        public class SetDisplayNameOperationRequest : CustomOperationRequest<GroupModels.SetDisplayNameRequestData>
+        public class SetDisplayNameOperationRequest : CustomOperationRequestAbstract<GroupModels.SetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1778,7 +1778,7 @@
         /// <summary>
         /// Builds the change group currency operation request.
         /// </summary>
-        public class ChangeGroupCurrencyOperationRequest : CustomOperationRequest<GroupModels.ChangeGroupCurrencyRequestData>
+        public class ChangeGroupCurrencyOperationRequest : CustomOperationRequestAbstract<GroupModels.ChangeGroupCurrencyRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1835,7 +1835,7 @@
         /// <summary>
         /// Builds the set group data operation request.
         /// </summary>
-        public class SetGroupDataOperationRequest : CustomOperationRequest<GroupModels.SetGroupDataRequestData>
+        public class SetGroupDataOperationRequest : CustomOperationRequestAbstract<GroupModels.SetGroupDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1892,7 +1892,7 @@
         /// <summary>
         /// Builds the change group statistics operation request.
         /// </summary>
-        public class ChangeGroupStatisticsOperationRequest : CustomOperationRequest<GroupModels.ChangeGroupStatisticsRequestData>
+        public class ChangeGroupStatisticsOperationRequest : CustomOperationRequestAbstract<GroupModels.ChangeGroupStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1949,7 +1949,7 @@
         /// <summary>
         /// Builds the set remove status operation request.
         /// </summary>
-        public class SetRemoveStatusOperationRequest : CustomOperationRequest<GroupModels.SetRemoveStatusRequestData>
+        public class SetRemoveStatusOperationRequest : CustomOperationRequestAbstract<GroupModels.SetRemoveStatusRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2006,7 +2006,7 @@
         /// <summary>
         /// Builds the set tag operation request.
         /// </summary>
-        public class SetTagOperationRequest : CustomOperationRequest<GroupModels.SetTagRequestData>
+        public class SetTagOperationRequest : CustomOperationRequestAbstract<GroupModels.SetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2062,7 +2062,7 @@
         /// <summary>
         /// Builds the get currency leaderboard operation request.
         /// </summary>
-        public class GetCurrencyLeaderboardOperationRequest : CustomOperationRequest<GroupModels.GetCurrencyLeaderboardRequestData>
+        public class GetCurrencyLeaderboardOperationRequest : CustomOperationRequestAbstract<GroupModels.GetCurrencyLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2118,7 +2118,7 @@
         /// <summary>
         /// Builds the get create leaderboard operation request.
         /// </summary>
-        public class GetCreateLeaderboardOperationRequest : CustomOperationRequest<GroupModels.GetCreateLeaderboardRequestData>
+        public class GetCreateLeaderboardOperationRequest : CustomOperationRequestAbstract<GroupModels.GetCreateLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2174,7 +2174,7 @@
         /// <summary>
         /// Builds the get statistics log operation request.
         /// </summary>
-        public class GetStatisticsLogOperationRequest : CustomOperationRequest<GroupModels.GetStatisticsLogRequestData>
+        public class GetStatisticsLogOperationRequest : CustomOperationRequestAbstract<GroupModels.GetStatisticsLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2230,7 +2230,7 @@
         /// <summary>
         /// Builds the get currency log operation request.
         /// </summary>
-        public class GetCurrencyLogOperationRequest : CustomOperationRequest<GroupModels.GetCurrencyLogRequestData>
+        public class GetCurrencyLogOperationRequest : CustomOperationRequestAbstract<GroupModels.GetCurrencyLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

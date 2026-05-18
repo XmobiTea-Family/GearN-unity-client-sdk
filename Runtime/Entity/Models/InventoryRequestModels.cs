@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the add segment operation request.
         /// </summary>
-        public class AddSegmentOperationRequest : CustomOperationRequest<InventoryModels.AddSegmentRequestData>
+        public class AddSegmentOperationRequest : CustomOperationRequestAbstract<InventoryModels.AddSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the get amount operation request.
         /// </summary>
-        public class GetAmountOperationRequest : CustomOperationRequest<InventoryModels.GetAmountRequestData>
+        public class GetAmountOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetAmountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -125,7 +125,7 @@
         /// <summary>
         /// Builds the get avatar operation request.
         /// </summary>
-        public class GetAvatarOperationRequest : CustomOperationRequest<InventoryModels.GetAvatarRequestData>
+        public class GetAvatarOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -182,7 +182,7 @@
         /// <summary>
         /// Builds the get catalog ID operation request.
         /// </summary>
-        public class GetCatalogIdOperationRequest : CustomOperationRequest<InventoryModels.GetCatalogIdRequestData>
+        public class GetCatalogIdOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetCatalogIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -239,7 +239,7 @@
         /// <summary>
         /// Builds the get class ID operation request.
         /// </summary>
-        public class GetClassIdOperationRequest : CustomOperationRequest<InventoryModels.GetClassIdRequestData>
+        public class GetClassIdOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetClassIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -296,7 +296,7 @@
         /// <summary>
         /// Builds the get custom data operation request.
         /// </summary>
-        public class GetCustomDataOperationRequest : CustomOperationRequest<InventoryModels.GetCustomDataRequestData>
+        public class GetCustomDataOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -353,7 +353,7 @@
         /// <summary>
         /// Builds the get display name operation request.
         /// </summary>
-        public class GetDisplayNameOperationRequest : CustomOperationRequest<InventoryModels.GetDisplayNameRequestData>
+        public class GetDisplayNameOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -410,7 +410,7 @@
         /// <summary>
         /// Builds the get item data operation request.
         /// </summary>
-        public class GetItemDataOperationRequest : CustomOperationRequest<InventoryModels.GetItemDataRequestData>
+        public class GetItemDataOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetItemDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -467,7 +467,7 @@
         /// <summary>
         /// Builds the get item information operation request.
         /// </summary>
-        public class GetItemInformationOperationRequest : CustomOperationRequest<InventoryModels.GetItemInformationRequestData>
+        public class GetItemInformationOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetItemInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -524,7 +524,7 @@
         /// <summary>
         /// Builds the get item statistics operation request.
         /// </summary>
-        public class GetItemStatisticsOperationRequest : CustomOperationRequest<InventoryModels.GetItemStatisticsRequestData>
+        public class GetItemStatisticsOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetItemStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -581,7 +581,7 @@
         /// <summary>
         /// Builds the get items with display name operation request.
         /// </summary>
-        public class GetItemsWithDisplayNameOperationRequest : CustomOperationRequest<InventoryModels.GetItemsWithDisplayNameRequestData>
+        public class GetItemsWithDisplayNameOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetItemsWithDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -638,7 +638,7 @@
         /// <summary>
         /// Builds the get items with segment operation request.
         /// </summary>
-        public class GetItemsWithSegmentOperationRequest : CustomOperationRequest<InventoryModels.GetItemsWithSegmentRequestData>
+        public class GetItemsWithSegmentOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetItemsWithSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -695,7 +695,7 @@
         /// <summary>
         /// Builds the get items with tag operation request.
         /// </summary>
-        public class GetItemsWithTagOperationRequest : CustomOperationRequest<InventoryModels.GetItemsWithTagRequestData>
+        public class GetItemsWithTagOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetItemsWithTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -752,7 +752,7 @@
         /// <summary>
         /// Builds the get item type operation request.
         /// </summary>
-        public class GetItemTypeOperationRequest : CustomOperationRequest<InventoryModels.GetItemTypeRequestData>
+        public class GetItemTypeOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetItemTypeRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -809,7 +809,7 @@
         /// <summary>
         /// Builds the get owner operation request.
         /// </summary>
-        public class GetOwnerOperationRequest : CustomOperationRequest<InventoryModels.GetOwnerRequestData>
+        public class GetOwnerOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetOwnerRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -866,7 +866,7 @@
         /// <summary>
         /// Builds the get remove status operation request.
         /// </summary>
-        public class GetRemoveStatusOperationRequest : CustomOperationRequest<InventoryModels.GetRemoveStatusRequestData>
+        public class GetRemoveStatusOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetRemoveStatusRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -923,7 +923,7 @@
         /// <summary>
         /// Builds the get segment operation request.
         /// </summary>
-        public class GetSegmentOperationRequest : CustomOperationRequest<InventoryModels.GetSegmentRequestData>
+        public class GetSegmentOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -980,7 +980,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard around item operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardAroundItemOperationRequest : CustomOperationRequest<InventoryModels.GetStatisticsLeaderboardAroundItemRequestData>
+        public class GetStatisticsLeaderboardAroundItemOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetStatisticsLeaderboardAroundItemRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1037,7 +1037,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequest<InventoryModels.GetStatisticsLeaderboardRequestData>
+        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetStatisticsLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1094,7 +1094,7 @@
         /// <summary>
         /// Builds the get tag operation request.
         /// </summary>
-        public class GetTagOperationRequest : CustomOperationRequest<InventoryModels.GetTagRequestData>
+        public class GetTagOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1151,7 +1151,7 @@
         /// <summary>
         /// Builds the get timestamp create operation request.
         /// </summary>
-        public class GetTsCreateOperationRequest : CustomOperationRequest<InventoryModels.GetTsCreateRequestData>
+        public class GetTsCreateOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetTsCreateRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1208,7 +1208,7 @@
         /// <summary>
         /// Builds the remove segment operation request.
         /// </summary>
-        public class RemoveSegmentOperationRequest : CustomOperationRequest<InventoryModels.RemoveSegmentRequestData>
+        public class RemoveSegmentOperationRequest : CustomOperationRequestAbstract<InventoryModels.RemoveSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1265,7 +1265,7 @@
         /// <summary>
         /// Builds the remove tag operation request.
         /// </summary>
-        public class RemoveTagOperationRequest : CustomOperationRequest<InventoryModels.RemoveTagRequestData>
+        public class RemoveTagOperationRequest : CustomOperationRequestAbstract<InventoryModels.RemoveTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1322,7 +1322,7 @@
         /// <summary>
         /// Builds the set amount operation request.
         /// </summary>
-        public class SetAmountOperationRequest : CustomOperationRequest<InventoryModels.SetAmountRequestData>
+        public class SetAmountOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetAmountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1379,7 +1379,7 @@
         /// <summary>
         /// Builds the set avatar operation request.
         /// </summary>
-        public class SetAvatarOperationRequest : CustomOperationRequest<InventoryModels.SetAvatarRequestData>
+        public class SetAvatarOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1436,7 +1436,7 @@
         /// <summary>
         /// Builds the set custom data operation request.
         /// </summary>
-        public class SetCustomDataOperationRequest : CustomOperationRequest<InventoryModels.SetCustomDataRequestData>
+        public class SetCustomDataOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1493,7 +1493,7 @@
         /// <summary>
         /// Builds the set display name operation request.
         /// </summary>
-        public class SetDisplayNameOperationRequest : CustomOperationRequest<InventoryModels.SetDisplayNameRequestData>
+        public class SetDisplayNameOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1550,7 +1550,7 @@
         /// <summary>
         /// Builds the set item data operation request.
         /// </summary>
-        public class SetItemDataOperationRequest : CustomOperationRequest<InventoryModels.SetItemDataRequestData>
+        public class SetItemDataOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetItemDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1607,7 +1607,7 @@
         /// <summary>
         /// Builds the change item statistics operation request.
         /// </summary>
-        public class ChangeItemStatisticsOperationRequest : CustomOperationRequest<InventoryModels.ChangeItemStatisticsRequestData>
+        public class ChangeItemStatisticsOperationRequest : CustomOperationRequestAbstract<InventoryModels.ChangeItemStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1664,7 +1664,7 @@
         /// <summary>
         /// Builds the set owner operation request.
         /// </summary>
-        public class SetOwnerOperationRequest : CustomOperationRequest<InventoryModels.SetOwnerRequestData>
+        public class SetOwnerOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetOwnerRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1721,7 +1721,7 @@
         /// <summary>
         /// Builds the set remove status operation request.
         /// </summary>
-        public class SetRemoveStatusOperationRequest : CustomOperationRequest<InventoryModels.SetRemoveStatusRequestData>
+        public class SetRemoveStatusOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetRemoveStatusRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1778,7 +1778,7 @@
         /// <summary>
         /// Builds the set tag operation request.
         /// </summary>
-        public class SetTagOperationRequest : CustomOperationRequest<InventoryModels.SetTagRequestData>
+        public class SetTagOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1834,7 +1834,7 @@
         /// <summary>
         /// Builds the get create leaderboard operation request.
         /// </summary>
-        public class GetCreateLeaderboardOperationRequest : CustomOperationRequest<InventoryModels.GetCreateLeaderboardRequestData>
+        public class GetCreateLeaderboardOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetCreateLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1890,7 +1890,7 @@
         /// <summary>
         /// Builds the get statistics log operation request.
         /// </summary>
-        public class GetStatisticsLogOperationRequest : CustomOperationRequest<InventoryModels.GetStatisticsLogRequestData>
+        public class GetStatisticsLogOperationRequest : CustomOperationRequestAbstract<InventoryModels.GetStatisticsLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

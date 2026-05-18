@@ -10,7 +10,7 @@
         /// <summary>
         /// Represents the typed response for the add member operation.
         /// </summary>
-        public class AddMemberOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class AddMemberOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -18,7 +18,7 @@
         /// <summary>
         /// Represents the typed response for the add segment operation.
         /// </summary>
-        public class AddSegmentOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class AddSegmentOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -26,7 +26,7 @@
         /// <summary>
         /// Represents the typed response for the get avatar operation.
         /// </summary>
-        public class GetAvatarOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetAvatarOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -34,7 +34,7 @@
         /// <summary>
         /// Represents the typed response for the get catalog ID operation.
         /// </summary>
-        public class GetCatalogIdOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetCatalogIdOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -42,7 +42,7 @@
         /// <summary>
         /// Represents the typed response for the get custom data operation.
         /// </summary>
-        public class GetCustomDataOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetCustomDataOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -50,7 +50,7 @@
         /// <summary>
         /// Represents the typed response for the get display name operation.
         /// </summary>
-        public class GetDisplayNameOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetDisplayNameOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -58,7 +58,7 @@
         /// <summary>
         /// Represents the typed response for the get group currency operation.
         /// </summary>
-        public class GetGroupCurrencyOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetGroupCurrencyOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -66,7 +66,7 @@
         /// <summary>
         /// Represents the typed response for the get group data operation.
         /// </summary>
-        public class GetGroupDataOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetGroupDataOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -74,7 +74,7 @@
         /// <summary>
         /// Represents the typed response for the get group information operation.
         /// </summary>
-        public class GetGroupInformationOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetGroupInformationOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -82,7 +82,7 @@
         /// <summary>
         /// Represents the typed response for the get group inventory operation.
         /// </summary>
-        public class GetGroupInventoryOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetGroupInventoryOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -90,7 +90,7 @@
         /// <summary>
         /// Represents the typed response for the get group message operation.
         /// </summary>
-        public class GetGroupMessageOperationResponse : CustomOperationResponse<GroupModels.GroupMessagesResponseData>
+        public class GetGroupMessageOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupMessagesResponseData>
         {
 
         }
@@ -98,7 +98,7 @@
         /// <summary>
         /// Represents the typed response for the get group statistics operation.
         /// </summary>
-        public class GetGroupStatisticsOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetGroupStatisticsOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -106,7 +106,7 @@
         /// <summary>
         /// Represents the typed response for the get groups with display name operation.
         /// </summary>
-        public class GetGroupsWithDisplayNameOperationResponse : CustomOperationResponse<GroupModels.GroupsWithGroupIdResponseData>
+        public class GetGroupsWithDisplayNameOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupsWithGroupIdResponseData>
         {
 
         }
@@ -114,7 +114,7 @@
         /// <summary>
         /// Represents the typed response for the get groups with segment operation.
         /// </summary>
-        public class GetGroupsWithSegmentOperationResponse : CustomOperationResponse<GroupModels.GroupsWithGroupIdResponseData>
+        public class GetGroupsWithSegmentOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupsWithGroupIdResponseData>
         {
 
         }
@@ -122,7 +122,7 @@
         /// <summary>
         /// Represents the typed response for the get groups with tag operation.
         /// </summary>
-        public class GetGroupsWithTagOperationResponse : CustomOperationResponse<GroupModels.GroupsWithGroupIdResponseData>
+        public class GetGroupsWithTagOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupsWithGroupIdResponseData>
         {
 
         }
@@ -130,7 +130,7 @@
         /// <summary>
         /// Represents the typed response for the get members operation.
         /// </summary>
-        public class GetMembersOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetMembersOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -138,7 +138,7 @@
         /// <summary>
         /// Represents the typed response for the get remove status operation.
         /// </summary>
-        public class GetRemoveStatusOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetRemoveStatusOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -146,7 +146,7 @@
         /// <summary>
         /// Represents the typed response for the get segment operation.
         /// </summary>
-        public class GetSegmentOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetSegmentOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -154,7 +154,7 @@
         /// <summary>
         /// Represents the typed response for the get statistics leaderboard around group operation.
         /// </summary>
-        public class GetStatisticsLeaderboardAroundGroupOperationResponse : CustomOperationResponse<GroupModels.GetStatisticsLeaderboardResponseData>
+        public class GetStatisticsLeaderboardAroundGroupOperationResponse : CustomOperationResponseAbstract<GroupModels.GetStatisticsLeaderboardResponseData>
         {
 
         }
@@ -162,7 +162,7 @@
         /// <summary>
         /// Represents the typed response for the get statistics leaderboard operation.
         /// </summary>
-        public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<GroupModels.GetStatisticsLeaderboardResponseData>
+        public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponseAbstract<GroupModels.GetStatisticsLeaderboardResponseData>
         {
 
         }
@@ -170,7 +170,7 @@
         /// <summary>
         /// Represents the typed response for the get tag operation.
         /// </summary>
-        public class GetTagOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetTagOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -178,7 +178,7 @@
         /// <summary>
         /// Represents the typed response for the get timestamp create operation.
         /// </summary>
-        public class GetTsCreateOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class GetTsCreateOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -186,7 +186,7 @@
         /// <summary>
         /// Represents the typed response for the create group item operation.
         /// </summary>
-        public class CreateGroupItemOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class CreateGroupItemOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -194,7 +194,7 @@
         /// <summary>
         /// Represents the typed response for the remove group item operation.
         /// </summary>
-        public class RemoveGroupItemOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class RemoveGroupItemOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -202,7 +202,7 @@
         /// <summary>
         /// Represents the typed response for the remove member operation.
         /// </summary>
-        public class RemoveMemberOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class RemoveMemberOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -210,7 +210,7 @@
         /// <summary>
         /// Represents the typed response for the remove segment operation.
         /// </summary>
-        public class RemoveSegmentOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class RemoveSegmentOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -218,7 +218,7 @@
         /// <summary>
         /// Represents the typed response for the remove tag operation.
         /// </summary>
-        public class RemoveTagOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class RemoveTagOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -226,7 +226,7 @@
         /// <summary>
         /// Represents the typed response for the send group message operation.
         /// </summary>
-        public class SendGroupMessageOperationResponse : CustomOperationResponse<GroupModels.GroupMessagesResponseData>
+        public class SendGroupMessageOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupMessagesResponseData>
         {
 
         }
@@ -234,7 +234,7 @@
         /// <summary>
         /// Represents the typed response for the set avatar operation.
         /// </summary>
-        public class SetAvatarOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class SetAvatarOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -242,7 +242,7 @@
         /// <summary>
         /// Represents the typed response for the set custom data operation.
         /// </summary>
-        public class SetCustomDataOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class SetCustomDataOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -250,7 +250,7 @@
         /// <summary>
         /// Represents the typed response for the set display name operation.
         /// </summary>
-        public class SetDisplayNameOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class SetDisplayNameOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -258,7 +258,7 @@
         /// <summary>
         /// Represents the typed response for the change group currency operation.
         /// </summary>
-        public class ChangeGroupCurrencyOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class ChangeGroupCurrencyOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -266,7 +266,7 @@
         /// <summary>
         /// Represents the typed response for the set group data operation.
         /// </summary>
-        public class SetGroupDataOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class SetGroupDataOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -274,7 +274,7 @@
         /// <summary>
         /// Represents the typed response for the change group statistics operation.
         /// </summary>
-        public class ChangeGroupStatisticsOperationResponse : CustomOperationResponse<GroupModels.GroupResponseData>
+        public class ChangeGroupStatisticsOperationResponse : CustomOperationResponseAbstract<GroupModels.GroupResponseData>
         {
 
         }
@@ -282,7 +282,7 @@
         /// <summary>
         /// Represents the typed response for the set remove status operation.
         /// </summary>
-        public class SetRemoveStatusOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class SetRemoveStatusOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -290,7 +290,7 @@
         /// <summary>
         /// Represents the typed response for the set tag operation.
         /// </summary>
-        public class SetTagOperationResponse : CustomOperationResponse<GroupModels.EmptyResponseData>
+        public class SetTagOperationResponse : CustomOperationResponseAbstract<GroupModels.EmptyResponseData>
         {
 
         }
@@ -298,7 +298,7 @@
         /// <summary>
         /// Represents the typed response for the get currency leaderboard operation.
         /// </summary>
-        public class GetCurrencyLeaderboardOperationResponse : CustomOperationResponse<GroupModels.GetCurrencyLeaderboardResponseData>
+        public class GetCurrencyLeaderboardOperationResponse : CustomOperationResponseAbstract<GroupModels.GetCurrencyLeaderboardResponseData>
         {
 
         }
@@ -306,7 +306,7 @@
         /// <summary>
         /// Represents the typed response for the get create leaderboard operation.
         /// </summary>
-        public class GetCreateLeaderboardOperationResponse : CustomOperationResponse<GroupModels.GetCreateLeaderboardResponseData>
+        public class GetCreateLeaderboardOperationResponse : CustomOperationResponseAbstract<GroupModels.GetCreateLeaderboardResponseData>
         {
 
         }
@@ -314,7 +314,7 @@
         /// <summary>
         /// Represents the typed response for the get statistics log operation.
         /// </summary>
-        public class GetStatisticsLogOperationResponse : CustomOperationResponse<GroupModels.GetStatisticsLogResponseData>
+        public class GetStatisticsLogOperationResponse : CustomOperationResponseAbstract<GroupModels.GetStatisticsLogResponseData>
         {
 
         }
@@ -322,7 +322,7 @@
         /// <summary>
         /// Represents the typed response for the get currency log operation.
         /// </summary>
-        public class GetCurrencyLogOperationResponse : CustomOperationResponse<GroupModels.GetStatisticsLogResponseData>
+        public class GetCurrencyLogOperationResponse : CustomOperationResponseAbstract<GroupModels.GetStatisticsLogResponseData>
         {
 
         }

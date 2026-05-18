@@ -153,12 +153,12 @@ eventParameters.add("reason", "dailyLogin");
 eventParameters.add("sourceUserId", "server");
 eventParameters.add("ts", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
 
-var request = new MasterPlayerModels.SendSocketOperationEventRequestData();
-request.userId = targetUserId; // optional trên client route nếu gửi cho chính user đang auth
-request.eventCode = "cloudScript.rewardGranted";
-request.eventParameters = eventParameters;
+var requestData = new MasterPlayerModels.SendSocketOperationEventRequestData();
+requestData.userId = targetUserId; // optional trên client route nếu gửi cho chính user đang auth
+requestData.eventCode = "cloudScript.rewardGranted";
+requestData.eventParameters = eventParameters;
 
-var res = await GNNetwork.masterPlayer.sendSocketOperationEventAsync(request);
+var res = await GNNetwork.masterPlayer.sendSocketOperationEventAsync(requestData);
 if (res.returnCode != ReturnCode.Ok) return;
 if (res.errorCode != ErrorCode.Ok) return;
 ```

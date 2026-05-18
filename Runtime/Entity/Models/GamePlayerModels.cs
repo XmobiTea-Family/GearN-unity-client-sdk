@@ -263,7 +263,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -326,7 +326,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -767,7 +767,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -812,7 +812,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -863,7 +863,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
         }
@@ -947,7 +947,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -1004,7 +1004,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -1979,7 +1979,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -2024,7 +2024,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -2069,7 +2069,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -2114,7 +2114,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>
@@ -2666,7 +2666,7 @@
             /// <summary>
             /// Stores the limit value.
             /// </summary>
-            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 5, maxValue = 100, mustInt = true, isOptional = true)]
+            [NumberDataMember(code = ParameterCode.Limit, defaultValue = 10, minValue = 1, maxValue = 100, mustInt = true, isOptional = true)]
             public int? limit;
 
             /// <summary>

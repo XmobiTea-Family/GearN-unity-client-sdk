@@ -46,6 +46,20 @@ Rule cứng:
 
 Full table ReturnCode/ErrorCode + recommended action: [reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
 
+### 2.1 Operation base classes
+
+Các response class cụ thể trong API reference thường kế thừa `CustomOperationResponseAbstract<TResponseData>`, còn request wrapper cụ thể thường kế thừa `CustomOperationRequestAbstract<TRequestData>`.
+
+Rule cứng:
+
+- Khi tích hợp SDK bình thường, gọi public API qua `GNNetwork.<group>.<method>Async(requestData, ...)`; không tự build `CustomOperationRequestAbstract<T>` trừ khi đang viết/debug SDK cấp thấp.
+- `CustomOperationRequestAbstract<TRequestData>` expose `requestData`; `build()` serialize `requestData` vào `OperationRequest.parameters`.
+- `CustomOperationResponseAbstract<TResponseData>` expose `responseData`; SDK chỉ deserialize `responseData` khi `returnCode == ReturnCode.Ok`.
+- Helper check lỗi chung nên nhận `CustomOperationResponse`, không nhận `CustomOperationResponseAbstract<T>`. Chỉ dùng generic abstract/response class cụ thể khi thật sự cần đọc typed `responseData`.
+- Base class không quyết định route/permission. Route đến từ namespace gọi (`GNNetwork.<group>`, `.server`, `.admin`) và operation concrete.
+
+Chi tiết contract + ví dụ: [reference/OPERATION_BASES.md](/docs/reference/OPERATION_BASES.md).
+
 ---
 
 ## 3. Route = trust boundary của caller
@@ -194,8 +208,8 @@ var res = await GNNetwork.authenticate.loginByAccountAsync(requestData, override
 
 ### 8.1 Build request DTO trong code copy-paste
 
-- Code tích hợp cuối cùng nên tạo instance DTO public: `var request = new <Group>Models.<Method>RequestData();`.
-- Set field trên instance đó rồi truyền vào `*Async(request)`.
+- Code tích hợp cuối cùng nên tạo instance DTO public: `var requestData = new <Group>Models.<Method>RequestData();`.
+- Set field trên instance đó rồi truyền vào `*Async(requestData)`.
 - Không dùng anonymous object hoặc `Dictionary` thay DTO khi API đã có request class public.
 
 <!-- prettier-ignore -->

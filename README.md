@@ -56,12 +56,12 @@ public class GearNLoginExample : MonoBehaviour
         infoRequestParam.countryCode = true;
         infoRequestParam.displayName = true;
 
-        var request = new AuthenticateModels.LoginByCustomIdRequestData();
-        request.customId = "a-custom-id-store-this-for-next-login";
-        request.createPlayerIfNotExists = true;
-        request.infoRequestParam = infoRequestParam;
+        var requestData = new AuthenticateModels.LoginByCustomIdRequestData();
+        requestData.customId = "a-custom-id-store-this-for-next-login";
+        requestData.createPlayerIfNotExists = true;
+        requestData.infoRequestParam = infoRequestParam;
 
-        var res = await GNNetwork.authenticate.loginByCustomIdAsync(request);
+        var res = await GNNetwork.authenticate.loginByCustomIdAsync(requestData);
 
         if (res.returnCode != ReturnCode.Ok)
         {
@@ -127,17 +127,17 @@ public class CustomDeviceLogin : MonoBehaviour
 {
     private async void Start()
     {
-        var infoRequest = new AuthenticateModels.InfoRequestParam();
-        infoRequest.displayName = true;
-        infoRequest.avatar = true;
-        infoRequest.playerDatas = true;
+        var infoRequestParam = new AuthenticateModels.InfoRequestParam();
+        infoRequestParam.displayName = true;
+        infoRequestParam.avatar = true;
+        infoRequestParam.playerDatas = true;
 
-        var request = new AuthenticateModels.LoginByCustomDeviceIdRequestData();
-        request.customDeviceId = SystemInfo.deviceUniqueIdentifier;
-        request.createPlayerIfNotExists = true;
-        request.infoRequestParam = infoRequest;
+        var requestData = new AuthenticateModels.LoginByCustomDeviceIdRequestData();
+        requestData.customDeviceId = SystemInfo.deviceUniqueIdentifier;
+        requestData.createPlayerIfNotExists = true;
+        requestData.infoRequestParam = infoRequestParam;
 
-        var res = await GNNetwork.authenticate.loginByCustomDeviceIdAsync(request);
+        var res = await GNNetwork.authenticate.loginByCustomDeviceIdAsync(requestData);
 
         if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
         if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
@@ -151,16 +151,16 @@ public class CustomDeviceLogin : MonoBehaviour
 ## 6. Login bằng account
 
 ```csharp
-var infoRequest = new AuthenticateModels.InfoRequestParam();
-infoRequest.displayName = true;
-infoRequest.playerStatistics = true;
+var infoRequestParam = new AuthenticateModels.InfoRequestParam();
+infoRequestParam.displayName = true;
+infoRequestParam.playerStatistics = true;
 
-var request = new AuthenticateModels.LoginByAccountRequestData();
-request.username = "player001";
-request.password = "12345678";
-request.infoRequestParam = infoRequest;
+var requestData = new AuthenticateModels.LoginByAccountRequestData();
+requestData.username = "player001";
+requestData.password = "12345678";
+requestData.infoRequestParam = infoRequestParam;
 
-var res = await GNNetwork.authenticate.loginByAccountAsync(request);
+var res = await GNNetwork.authenticate.loginByAccountAsync(requestData);
 if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
 if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
 ```
@@ -203,11 +203,11 @@ Realtime event handler: [docs/reference/EVENTS.md](/docs/reference/EVENTS.md).
 `DashboardApi` public wrapper đi `RequestRole.Client`. Sau `loginByAdminAccountAsync`, backend resolve admin context từ `authToken`.
 
 ```csharp
-var request = new DashboardModels.LoginByAdminAccountRequestData();
-request.username = "gnadmin";
-request.password = "123456";
+var requestData = new DashboardModels.LoginByAdminAccountRequestData();
+requestData.username = "gnadmin";
+requestData.password = "123456";
 
-var res = await GNNetwork.dashboard.loginByAdminAccountAsync(request);
+var res = await GNNetwork.dashboard.loginByAdminAccountAsync(requestData);
 if (res.returnCode != ReturnCode.Ok) throw new System.Exception(res.debugMessage);
 if (res.errorCode != ErrorCode.Ok) throw new System.Exception("Business error: " + res.errorCode);
 ```

@@ -241,11 +241,11 @@ infoRequestParam.amount = true;
 infoRequestParam.owner = true;
 infoRequestParam.displayName = true;
 
-var request = new InventoryModels.GetItemInformationRequestData();
-request.itemId = "ABCDEFGHIJKL";
-request.infoRequestParam = infoRequestParam;
+var requestData = new InventoryModels.GetItemInformationRequestData();
+requestData.itemId = "ABCDEFGHIJKL";
+requestData.infoRequestParam = infoRequestParam;
 
-var response = await GNNetwork.inventory.getItemInformationAsync(request);
+var response = await GNNetwork.inventory.getItemInformationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -271,12 +271,12 @@ var statisticsParam = new InventoryModels.ItemStatisticsParam();
 statisticsParam.key = "killCount";
 statisticsParam.value = 1;
 
-var request = new InventoryModels.ChangeItemStatisticsRequestData();
-request.itemId = "ABCDEFGHIJKL";
-request.itemStatistics = new[] { statisticsParam };
-request.log = "award_kill_from_match_end";
+var requestData = new InventoryModels.ChangeItemStatisticsRequestData();
+requestData.itemId = "ABCDEFGHIJKL";
+requestData.itemStatistics = new[] { statisticsParam };
+requestData.log = "award_kill_from_match_end";
 
-var response = await GNNetwork.inventory.changeItemStatisticsAsync(request);
+var response = await GNNetwork.inventory.changeItemStatisticsAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -299,15 +299,15 @@ infoRequestParam.displayName = true;
 infoRequestParam.itemStatistics = true;
 infoRequestParam.itemStatisticsKeys = new[] { "killCount" };
 
-var request = new InventoryModels.GetStatisticsLeaderboardAroundItemRequestData();
-request.itemId = "ABCDEFGHIJKL";
-request.key = "killCount";
-request.infoRequestParam = infoRequestParam;
-request.skip = 0;
-request.limit = 20;
-request.loadFromCache = true;
+var requestData = new InventoryModels.GetStatisticsLeaderboardAroundItemRequestData();
+requestData.itemId = "ABCDEFGHIJKL";
+requestData.key = "killCount";
+requestData.infoRequestParam = infoRequestParam;
+requestData.skip = 0;
+requestData.limit = 20;
+requestData.loadFromCache = true;
 
-var response = await GNNetwork.inventory.getStatisticsLeaderboardAroundItemAsync(request);
+var response = await GNNetwork.inventory.getStatisticsLeaderboardAroundItemAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -327,12 +327,12 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new InventoryModels.GetStatisticsLogRequestData();
-request.itemId = "ABCDEFGHIJKL";
-request.keys = new[] { "killCount" };
-request.limit = 20;
+var requestData = new InventoryModels.GetStatisticsLogRequestData();
+requestData.itemId = "ABCDEFGHIJKL";
+requestData.keys = new[] { "killCount" };
+requestData.limit = 20;
 
-var response = await GNNetwork.inventory.getStatisticsLogAsync(request);
+var response = await GNNetwork.inventory.getStatisticsLogAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

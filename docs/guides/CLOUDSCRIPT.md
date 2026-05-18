@@ -184,7 +184,7 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new CloudScriptModels.AdminAddFunctionRequestData();
+var requestData = new CloudScriptModels.AdminAddFunctionRequestData();
 request.script = @"
 handlers[""pingCloudScript""] = async (args, context, log) => {
     return {
@@ -194,10 +194,10 @@ handlers[""pingCloudScript""] = async (args, context, log) => {
     };
 };
 ";
-request.canExecute = true;
-request.isLive = false;
+requestData.canExecute = true;
+requestData.isLive = false;
 
-var response = await GNNetwork.cloudScript.admin.addFunctionAsync(request);
+var response = await GNNetwork.cloudScript.admin.addFunctionAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -221,12 +221,12 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new CloudScriptModels.AdminEditFunctionRequestData();
-request.version = "ABC1234";
-request.canExecute = true;
-request.isLive = true;
+var requestData = new CloudScriptModels.AdminEditFunctionRequestData();
+requestData.version = "ABC1234";
+requestData.canExecute = true;
+requestData.isLive = true;
 
-var response = await GNNetwork.cloudScript.admin.editFunctionAsync(request);
+var response = await GNNetwork.cloudScript.admin.editFunctionAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -248,16 +248,16 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new CloudScriptModels.ServerExecuteFunctionRequestData();
-request.userId = "USER000001";
-request.functionName = "grantDailyReward";
-request.version = "ABC1234";
-request.functionParameters = {
+var requestData = new CloudScriptModels.ServerExecuteFunctionRequestData();
+requestData.userId = "USER000001";
+requestData.functionName = "grantDailyReward";
+requestData.version = "ABC1234";
+requestData.functionParameters = {
     rewardId: "daily_01",
     amount: 1,
 };
 
-var response = await GNNetwork.cloudScript.server.executeFunctionAsync(request);
+var response = await GNNetwork.cloudScript.server.executeFunctionAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -283,8 +283,8 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var listRequest = new CloudScriptModels.GetFunctionsRequestData();
-var listResponse = await GNNetwork.cloudScript.getFunctionsAsync(listRequest);
+var listRequestData = new CloudScriptModels.GetFunctionsRequestData();
+var listResponse = await GNNetwork.cloudScript.getFunctionsAsync(listRequestData);
 
 if (listResponse.hasReturnCodeError()) {
     throw new System.Exception(listResponse.debugMessage);
@@ -296,10 +296,10 @@ if (listResponse.errorCode != ErrorCode.Ok) {
 
 var liveVersion = listResponse.responseData.liveLatestVersion;
 
-var getRequest = new CloudScriptModels.GetFunctionRequestData();
-getRequest.version = liveVersion;
+var getRequestData = new CloudScriptModels.GetFunctionRequestData();
+getRequestData.version = liveVersion;
 
-var getResponse = await GNNetwork.cloudScript.getFunctionAsync(getRequest);
+var getResponse = await GNNetwork.cloudScript.getFunctionAsync(getRequestData);
 
 if (getResponse.hasReturnCodeError()) {
     throw new System.Exception(getResponse.debugMessage);

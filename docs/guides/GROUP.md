@@ -275,11 +275,11 @@ infoRequestParam.members = true;
 infoRequestParam.groupCurrencies = true;
 infoRequestParam.groupCurrencyKeys = new[] { "gold" };
 
-var request = new GroupModels.GetGroupInformationRequestData();
-request.groupId = "GROUP00001";
-request.infoRequestParam = infoRequestParam;
+var requestData = new GroupModels.GetGroupInformationRequestData();
+requestData.groupId = "GROUP00001";
+requestData.infoRequestParam = infoRequestParam;
 
-var response = await GNNetwork.group.getGroupInformationAsync(request);
+var response = await GNNetwork.group.getGroupInformationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -310,12 +310,12 @@ OnGroupMessageUpdateEventHandler.onUpdate = (update) => {
 
 GNNetwork.connectSocket(); // Follow README socket rule before expecting realtime updates.
 
-var request = new GroupModels.SendGroupMessageRequestData();
-request.senderId = "1234567890";
-request.groupId = "GROUP00001";
-request.message = "hello team";
+var requestData = new GroupModels.SendGroupMessageRequestData();
+requestData.senderId = "1234567890";
+requestData.groupId = "GROUP00001";
+requestData.message = "hello team";
 
-var response = await GNNetwork.group.sendGroupMessageAsync(request);
+var response = await GNNetwork.group.sendGroupMessageAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -335,14 +335,14 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new GroupModels.CreateGroupItemRequestData();
-request.groupId = "GROUP00001";
-request.catalogId = "weapon";
-request.classId = "sword";
-request.displayName = "Guild Sword";
-request.amount = 1;
+var requestData = new GroupModels.CreateGroupItemRequestData();
+requestData.groupId = "GROUP00001";
+requestData.catalogId = "weapon";
+requestData.classId = "sword";
+requestData.displayName = "Guild Sword";
+requestData.amount = 1;
 
-var response = await GNNetwork.group.createGroupItemAsync(request);
+var response = await GNNetwork.group.createGroupItemAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -362,12 +362,12 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new GroupModels.GetCurrencyLogRequestData();
-request.groupId = "GROUP00001";
-request.keys = new[] { "gold" };
-request.limit = 20;
+var requestData = new GroupModels.GetCurrencyLogRequestData();
+requestData.groupId = "GROUP00001";
+requestData.keys = new[] { "gold" };
+requestData.limit = 20;
 
-var response = await GNNetwork.group.getCurrencyLogAsync(request);
+var response = await GNNetwork.group.getCurrencyLogAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

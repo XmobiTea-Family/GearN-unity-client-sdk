@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the add segment operation request.
         /// </summary>
-        public class AddSegmentOperationRequest : CustomOperationRequest<MasterPlayerModels.AddSegmentRequestData>
+        public class AddSegmentOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.AddSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the change account password operation request.
         /// </summary>
-        public class ChangeAccountPasswordOperationRequest : CustomOperationRequest<MasterPlayerModels.ChangeAccountPasswordRequestData>
+        public class ChangeAccountPasswordOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.ChangeAccountPasswordRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -93,7 +93,7 @@
         /// <summary>
         /// Builds the get avatar operation request.
         /// </summary>
-        public class GetAvatarOperationRequest : CustomOperationRequest<MasterPlayerModels.GetAvatarRequestData>
+        public class GetAvatarOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -150,7 +150,7 @@
         /// <summary>
         /// Builds the get country code operation request.
         /// </summary>
-        public class GetCountryCodeOperationRequest : CustomOperationRequest<MasterPlayerModels.GetCountryCodeRequestData>
+        public class GetCountryCodeOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetCountryCodeRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -207,7 +207,7 @@
         /// <summary>
         /// Builds the get custom data operation request.
         /// </summary>
-        public class GetCustomDataOperationRequest : CustomOperationRequest<MasterPlayerModels.GetCustomDataRequestData>
+        public class GetCustomDataOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -264,7 +264,7 @@
         /// <summary>
         /// Builds the get display name operation request.
         /// </summary>
-        public class GetDisplayNameOperationRequest : CustomOperationRequest<MasterPlayerModels.GetDisplayNameRequestData>
+        public class GetDisplayNameOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -321,7 +321,7 @@
         /// <summary>
         /// Builds the get email operation request.
         /// </summary>
-        public class GetEmailOperationRequest : CustomOperationRequest<MasterPlayerModels.GetEmailRequestData>
+        public class GetEmailOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetEmailRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -378,7 +378,7 @@
         /// <summary>
         /// Builds the get external operation request.
         /// </summary>
-        public class GetExternalOperationRequest : CustomOperationRequest<MasterPlayerModels.GetExternalRequestData>
+        public class GetExternalOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetExternalRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -435,7 +435,7 @@
         /// <summary>
         /// Builds the get IP address create operation request.
         /// </summary>
-        public class GetIpAddressCreateOperationRequest : CustomOperationRequest<MasterPlayerModels.GetIpAddressCreateRequestData>
+        public class GetIpAddressCreateOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetIpAddressCreateRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -492,7 +492,7 @@
         /// <summary>
         /// Builds the get player ban operation request.
         /// </summary>
-        public class GetPlayerBanOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayerBanRequestData>
+        public class GetPlayerBanOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayerBanRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -549,7 +549,7 @@
         /// <summary>
         /// Builds the get player currency operation request.
         /// </summary>
-        public class GetPlayerCurrencyOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayerCurrencyRequestData>
+        public class GetPlayerCurrencyOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayerCurrencyRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -606,7 +606,7 @@
         /// <summary>
         /// Builds the get player data operation request.
         /// </summary>
-        public class GetPlayerDataOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayerDataRequestData>
+        public class GetPlayerDataOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayerDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -663,7 +663,7 @@
         /// <summary>
         /// Builds the get player information operation request.
         /// </summary>
-        public class GetPlayerInformationOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayerInformationRequestData>
+        public class GetPlayerInformationOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayerInformationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -720,7 +720,7 @@
         /// <summary>
         /// Builds the get player statistics operation request.
         /// </summary>
-        public class GetPlayerStatisticsOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayerStatisticsRequestData>
+        public class GetPlayerStatisticsOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayerStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -777,7 +777,7 @@
         /// <summary>
         /// Builds the get players with apple operation request.
         /// </summary>
-        public class GetPlayersWithAppleOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithAppleRequestData>
+        public class GetPlayersWithAppleOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithAppleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -834,7 +834,7 @@
         /// <summary>
         /// Builds the get players with display name operation request.
         /// </summary>
-        public class GetPlayersWithDisplayNameOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithDisplayNameRequestData>
+        public class GetPlayersWithDisplayNameOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -891,7 +891,7 @@
         /// <summary>
         /// Builds the get players with facebook operation request.
         /// </summary>
-        public class GetPlayersWithFacebookOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithFacebookRequestData>
+        public class GetPlayersWithFacebookOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithFacebookRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -948,7 +948,7 @@
         /// <summary>
         /// Builds the get players with generic service operation request.
         /// </summary>
-        public class GetPlayersWithGenericServiceOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithGenericServiceRequestData>
+        public class GetPlayersWithGenericServiceOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithGenericServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1005,7 +1005,7 @@
         /// <summary>
         /// Builds the get players with google operation request.
         /// </summary>
-        public class GetPlayersWithGoogleOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithGoogleRequestData>
+        public class GetPlayersWithGoogleOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithGoogleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1062,7 +1062,7 @@
         /// <summary>
         /// Builds the get players with google play game service operation request.
         /// </summary>
-        public class GetPlayersWithGooglePlayGameServiceOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithGooglePlayGameServiceRequestData>
+        public class GetPlayersWithGooglePlayGameServiceOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithGooglePlayGameServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1119,7 +1119,7 @@
         /// <summary>
         /// Builds the get players with game center operation request.
         /// </summary>
-        public class GetPlayersWithGameCenterOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithGameCenterRequestData>
+        public class GetPlayersWithGameCenterOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithGameCenterRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1176,7 +1176,7 @@
         /// <summary>
         /// Builds the get players with segment operation request.
         /// </summary>
-        public class GetPlayersWithSegmentOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithSegmentRequestData>
+        public class GetPlayersWithSegmentOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1233,7 +1233,7 @@
         /// <summary>
         /// Builds the get players with tag operation request.
         /// </summary>
-        public class GetPlayersWithTagOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPlayersWithTagRequestData>
+        public class GetPlayersWithTagOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPlayersWithTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1290,7 +1290,7 @@
         /// <summary>
         /// Builds the get segment operation request.
         /// </summary>
-        public class GetSegmentOperationRequest : CustomOperationRequest<MasterPlayerModels.GetSegmentRequestData>
+        public class GetSegmentOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1347,7 +1347,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard around player operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardAroundPlayerOperationRequest : CustomOperationRequest<MasterPlayerModels.GetStatisticsLeaderboardAroundPlayerRequestData>
+        public class GetStatisticsLeaderboardAroundPlayerOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetStatisticsLeaderboardAroundPlayerRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1404,7 +1404,7 @@
         /// <summary>
         /// Builds the get statistics leaderboard operation request.
         /// </summary>
-        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequest<MasterPlayerModels.GetStatisticsLeaderboardRequestData>
+        public class GetStatisticsLeaderboardOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetStatisticsLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1461,7 +1461,7 @@
         /// <summary>
         /// Builds the get tag operation request.
         /// </summary>
-        public class GetTagOperationRequest : CustomOperationRequest<MasterPlayerModels.GetTagRequestData>
+        public class GetTagOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1518,7 +1518,7 @@
         /// <summary>
         /// Builds the get timestamp create operation request.
         /// </summary>
-        public class GetTsCreateOperationRequest : CustomOperationRequest<MasterPlayerModels.GetTsCreateRequestData>
+        public class GetTsCreateOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetTsCreateRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1575,7 +1575,7 @@
         /// <summary>
         /// Builds the get timestamp last login operation request.
         /// </summary>
-        public class GetTsLastLoginOperationRequest : CustomOperationRequest<MasterPlayerModels.GetTsLastLoginRequestData>
+        public class GetTsLastLoginOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetTsLastLoginRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1632,7 +1632,7 @@
         /// <summary>
         /// Builds the link account operation request.
         /// </summary>
-        public class LinkAccountOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkAccountRequestData>
+        public class LinkAccountOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1689,7 +1689,7 @@
         /// <summary>
         /// Builds the link android device ID operation request.
         /// </summary>
-        public class LinkAndroidDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkAndroidDeviceIdRequestData>
+        public class LinkAndroidDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkAndroidDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1746,7 +1746,7 @@
         /// <summary>
         /// Builds the link apple operation request.
         /// </summary>
-        public class LinkAppleOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkAppleRequestData>
+        public class LinkAppleOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkAppleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1803,7 +1803,7 @@
         /// <summary>
         /// Builds the link custom device ID operation request.
         /// </summary>
-        public class LinkCustomDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkCustomDeviceIdRequestData>
+        public class LinkCustomDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkCustomDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1860,7 +1860,7 @@
         /// <summary>
         /// Builds the link custom ID operation request.
         /// </summary>
-        public class LinkCustomIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkCustomIdRequestData>
+        public class LinkCustomIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkCustomIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1917,7 +1917,7 @@
         /// <summary>
         /// Builds the link editor device ID operation request.
         /// </summary>
-        public class LinkEditorDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkEditorDeviceIdRequestData>
+        public class LinkEditorDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkEditorDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -1974,7 +1974,7 @@
         /// <summary>
         /// Builds the link facebook operation request.
         /// </summary>
-        public class LinkFacebookOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkFacebookRequestData>
+        public class LinkFacebookOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkFacebookRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2031,7 +2031,7 @@
         /// <summary>
         /// Builds the link generic service operation request.
         /// </summary>
-        public class LinkGenericServiceOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkGenericServiceRequestData>
+        public class LinkGenericServiceOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkGenericServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2088,7 +2088,7 @@
         /// <summary>
         /// Builds the link google operation request.
         /// </summary>
-        public class LinkGoogleOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkGoogleRequestData>
+        public class LinkGoogleOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkGoogleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2145,7 +2145,7 @@
         /// <summary>
         /// Builds the link google play game service operation request.
         /// </summary>
-        public class LinkGooglePlayGameServiceOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkGooglePlayGameServiceRequestData>
+        public class LinkGooglePlayGameServiceOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkGooglePlayGameServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2202,7 +2202,7 @@
         /// <summary>
         /// Builds the link game center operation request.
         /// </summary>
-        public class LinkGameCenterOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkGameCenterRequestData>
+        public class LinkGameCenterOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkGameCenterRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2259,7 +2259,7 @@
         /// <summary>
         /// Builds the link iOS device ID operation request.
         /// </summary>
-        public class LinkiOSDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkiOSDeviceIdRequestData>
+        public class LinkiOSDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkiOSDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2316,7 +2316,7 @@
         /// <summary>
         /// Builds the link linux device ID operation request.
         /// </summary>
-        public class LinkLinuxDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkLinuxDeviceIdRequestData>
+        public class LinkLinuxDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkLinuxDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2373,7 +2373,7 @@
         /// <summary>
         /// Builds the link macos device ID operation request.
         /// </summary>
-        public class LinkMacOSDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkMacOSDeviceIdRequestData>
+        public class LinkMacOSDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkMacOSDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2430,7 +2430,7 @@
         /// <summary>
         /// Builds the link windows device ID operation request.
         /// </summary>
-        public class LinkWindowsDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkWindowsDeviceIdRequestData>
+        public class LinkWindowsDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkWindowsDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2487,7 +2487,7 @@
         /// <summary>
         /// Builds the link windows phone device ID operation request.
         /// </summary>
-        public class LinkWindowsPhoneDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.LinkWindowsPhoneDeviceIdRequestData>
+        public class LinkWindowsPhoneDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.LinkWindowsPhoneDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2544,7 +2544,7 @@
         /// <summary>
         /// Builds the remove segment operation request.
         /// </summary>
-        public class RemoveSegmentOperationRequest : CustomOperationRequest<MasterPlayerModels.RemoveSegmentRequestData>
+        public class RemoveSegmentOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.RemoveSegmentRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2601,7 +2601,7 @@
         /// <summary>
         /// Builds the remove tag operation request.
         /// </summary>
-        public class RemoveTagOperationRequest : CustomOperationRequest<MasterPlayerModels.RemoveTagRequestData>
+        public class RemoveTagOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.RemoveTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2658,7 +2658,7 @@
         /// <summary>
         /// Builds the reset account password operation request.
         /// </summary>
-        public class ResetAccountPasswordOperationRequest : CustomOperationRequest<MasterPlayerModels.ResetAccountPasswordRequestData>
+        public class ResetAccountPasswordOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.ResetAccountPasswordRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2715,7 +2715,7 @@
         /// <summary>
         /// Builds the set avatar operation request.
         /// </summary>
-        public class SetAvatarOperationRequest : CustomOperationRequest<MasterPlayerModels.SetAvatarRequestData>
+        public class SetAvatarOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetAvatarRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2772,7 +2772,7 @@
         /// <summary>
         /// Builds the set country code operation request.
         /// </summary>
-        public class SetCountryCodeOperationRequest : CustomOperationRequest<MasterPlayerModels.SetCountryCodeRequestData>
+        public class SetCountryCodeOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetCountryCodeRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2829,7 +2829,7 @@
         /// <summary>
         /// Builds the set custom data operation request.
         /// </summary>
-        public class SetCustomDataOperationRequest : CustomOperationRequest<MasterPlayerModels.SetCustomDataRequestData>
+        public class SetCustomDataOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetCustomDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2886,7 +2886,7 @@
         /// <summary>
         /// Builds the set display name operation request.
         /// </summary>
-        public class SetDisplayNameOperationRequest : CustomOperationRequest<MasterPlayerModels.SetDisplayNameRequestData>
+        public class SetDisplayNameOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetDisplayNameRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -2943,7 +2943,7 @@
         /// <summary>
         /// Builds the set email operation request.
         /// </summary>
-        public class SetEmailOperationRequest : CustomOperationRequest<MasterPlayerModels.SetEmailRequestData>
+        public class SetEmailOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetEmailRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3000,7 +3000,7 @@
         /// <summary>
         /// Builds the set player ban operation request.
         /// </summary>
-        public class SetPlayerBanOperationRequest : CustomOperationRequest<MasterPlayerModels.SetPlayerBanRequestData>
+        public class SetPlayerBanOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetPlayerBanRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3057,7 +3057,7 @@
         /// <summary>
         /// Builds the change player currency operation request.
         /// </summary>
-        public class ChangePlayerCurrencyOperationRequest : CustomOperationRequest<MasterPlayerModels.ChangePlayerCurrencyRequestData>
+        public class ChangePlayerCurrencyOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.ChangePlayerCurrencyRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3114,7 +3114,7 @@
         /// <summary>
         /// Builds the set player data operation request.
         /// </summary>
-        public class SetPlayerDataOperationRequest : CustomOperationRequest<MasterPlayerModels.SetPlayerDataRequestData>
+        public class SetPlayerDataOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetPlayerDataRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3171,7 +3171,7 @@
         /// <summary>
         /// Builds the change player statistics operation request.
         /// </summary>
-        public class ChangePlayerStatisticsOperationRequest : CustomOperationRequest<MasterPlayerModels.ChangePlayerStatisticsRequestData>
+        public class ChangePlayerStatisticsOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.ChangePlayerStatisticsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3228,7 +3228,7 @@
         /// <summary>
         /// Builds the set tag operation request.
         /// </summary>
-        public class SetTagOperationRequest : CustomOperationRequest<MasterPlayerModels.SetTagRequestData>
+        public class SetTagOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SetTagRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3285,7 +3285,7 @@
         /// <summary>
         /// Builds the set timestamp last login operation request.
         /// </summary>
-        public class UpdateTsLastLoginOperationRequest : CustomOperationRequest<MasterPlayerModels.UpdateTsLastLoginRequestData>
+        public class UpdateTsLastLoginOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UpdateTsLastLoginRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3342,7 +3342,7 @@
         /// <summary>
         /// Builds the unlink account operation request.
         /// </summary>
-        public class UnlinkAccountOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkAccountRequestData>
+        public class UnlinkAccountOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkAccountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3399,7 +3399,7 @@
         /// <summary>
         /// Builds the unlink android device ID operation request.
         /// </summary>
-        public class UnlinkAndroidDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkAndroidDeviceIdRequestData>
+        public class UnlinkAndroidDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkAndroidDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3456,7 +3456,7 @@
         /// <summary>
         /// Builds the unlink apple operation request.
         /// </summary>
-        public class UnlinkAppleOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkAppleRequestData>
+        public class UnlinkAppleOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkAppleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3513,7 +3513,7 @@
         /// <summary>
         /// Builds the unlink custom device ID operation request.
         /// </summary>
-        public class UnlinkCustomDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkCustomDeviceIdRequestData>
+        public class UnlinkCustomDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkCustomDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3570,7 +3570,7 @@
         /// <summary>
         /// Builds the unlink custom ID operation request.
         /// </summary>
-        public class UnlinkCustomIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkCustomIdRequestData>
+        public class UnlinkCustomIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkCustomIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3627,7 +3627,7 @@
         /// <summary>
         /// Builds the unlink editor device ID operation request.
         /// </summary>
-        public class UnlinkEditorDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkEditorDeviceIdRequestData>
+        public class UnlinkEditorDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkEditorDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3684,7 +3684,7 @@
         /// <summary>
         /// Builds the unlink facebook operation request.
         /// </summary>
-        public class UnlinkFacebookOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkFacebookRequestData>
+        public class UnlinkFacebookOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkFacebookRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3741,7 +3741,7 @@
         /// <summary>
         /// Builds the unlink generic service operation request.
         /// </summary>
-        public class UnlinkGenericServiceOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkGenericServiceRequestData>
+        public class UnlinkGenericServiceOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkGenericServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3798,7 +3798,7 @@
         /// <summary>
         /// Builds the unlink google operation request.
         /// </summary>
-        public class UnlinkGoogleOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkGoogleRequestData>
+        public class UnlinkGoogleOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkGoogleRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3855,7 +3855,7 @@
         /// <summary>
         /// Builds the unlink google play game service operation request.
         /// </summary>
-        public class UnlinkGooglePlayGameServiceOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkGooglePlayGameServiceRequestData>
+        public class UnlinkGooglePlayGameServiceOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkGooglePlayGameServiceRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3912,7 +3912,7 @@
         /// <summary>
         /// Builds the unlink game center operation request.
         /// </summary>
-        public class UnlinkGameCenterOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkGameCenterRequestData>
+        public class UnlinkGameCenterOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkGameCenterRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -3969,7 +3969,7 @@
         /// <summary>
         /// Builds the unlink iOS device ID operation request.
         /// </summary>
-        public class UnlinkiOSDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkiOSDeviceIdRequestData>
+        public class UnlinkiOSDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkiOSDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4026,7 +4026,7 @@
         /// <summary>
         /// Builds the unlink linux device ID operation request.
         /// </summary>
-        public class UnlinkLinuxDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkLinuxDeviceIdRequestData>
+        public class UnlinkLinuxDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkLinuxDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4083,7 +4083,7 @@
         /// <summary>
         /// Builds the unlink macos device ID operation request.
         /// </summary>
-        public class UnlinkMacOSDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkMacOSDeviceIdRequestData>
+        public class UnlinkMacOSDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkMacOSDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4140,7 +4140,7 @@
         /// <summary>
         /// Builds the unlink windows device ID operation request.
         /// </summary>
-        public class UnlinkWindowsDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkWindowsDeviceIdRequestData>
+        public class UnlinkWindowsDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkWindowsDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4197,7 +4197,7 @@
         /// <summary>
         /// Builds the unlink windows phone device ID operation request.
         /// </summary>
-        public class UnlinkWindowsPhoneDeviceIdOperationRequest : CustomOperationRequest<MasterPlayerModels.UnlinkWindowsPhoneDeviceIdRequestData>
+        public class UnlinkWindowsPhoneDeviceIdOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.UnlinkWindowsPhoneDeviceIdRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4253,7 +4253,7 @@
         /// <summary>
         /// Builds the get currency leaderboard operation request.
         /// </summary>
-        public class GetCurrencyLeaderboardOperationRequest : CustomOperationRequest<MasterPlayerModels.GetCurrencyLeaderboardRequestData>
+        public class GetCurrencyLeaderboardOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetCurrencyLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4309,7 +4309,7 @@
         /// <summary>
         /// Builds the get last login leaderboard operation request.
         /// </summary>
-        public class GetLastLoginLeaderboardOperationRequest : CustomOperationRequest<MasterPlayerModels.GetLastLoginLeaderboardRequestData>
+        public class GetLastLoginLeaderboardOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetLastLoginLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4365,7 +4365,7 @@
         /// <summary>
         /// Builds the get create leaderboard operation request.
         /// </summary>
-        public class GetCreateLeaderboardOperationRequest : CustomOperationRequest<MasterPlayerModels.GetCreateLeaderboardRequestData>
+        public class GetCreateLeaderboardOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetCreateLeaderboardRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4421,7 +4421,7 @@
         /// <summary>
         /// Builds the get statistics log operation request.
         /// </summary>
-        public class GetStatisticsLogOperationRequest : CustomOperationRequest<MasterPlayerModels.GetStatisticsLogRequestData>
+        public class GetStatisticsLogOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetStatisticsLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4477,7 +4477,7 @@
         /// <summary>
         /// Builds the get currency log operation request.
         /// </summary>
-        public class GetCurrencyLogOperationRequest : CustomOperationRequest<MasterPlayerModels.GetCurrencyLogRequestData>
+        public class GetCurrencyLogOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetCurrencyLogRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4533,7 +4533,7 @@
         /// <summary>
         /// Builds the send socket operation event operation request.
         /// </summary>
-        public class SendSocketOperationEventOperationRequest : CustomOperationRequest<MasterPlayerModels.SendSocketOperationEventRequestData>
+        public class SendSocketOperationEventOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SendSocketOperationEventRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4589,7 +4589,7 @@
         /// <summary>
         /// Builds the send email operation request.
         /// </summary>
-        public class SendEmailOperationRequest : CustomOperationRequest<MasterPlayerModels.SendEmailRequestData>
+        public class SendEmailOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SendEmailRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4645,7 +4645,7 @@
         /// <summary>
         /// Builds the remove push notification operation request.
         /// </summary>
-        public class RemovePushNotificationOperationRequest : CustomOperationRequest<MasterPlayerModels.RemovePushNotificationRequestData>
+        public class RemovePushNotificationOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.RemovePushNotificationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4701,7 +4701,7 @@
         /// <summary>
         /// Builds the add push notification operation request.
         /// </summary>
-        public class AddPushNotificationOperationRequest : CustomOperationRequest<MasterPlayerModels.AddPushNotificationRequestData>
+        public class AddPushNotificationOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.AddPushNotificationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4757,7 +4757,7 @@
         /// <summary>
         /// Builds the get push notification operation request.
         /// </summary>
-        public class GetPushNotificationOperationRequest : CustomOperationRequest<MasterPlayerModels.GetPushNotificationRequestData>
+        public class GetPushNotificationOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetPushNotificationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4813,7 +4813,7 @@
         /// <summary>
         /// Builds the send push notification operation request.
         /// </summary>
-        public class SendPushNotificationOperationRequest : CustomOperationRequest<MasterPlayerModels.SendPushNotificationRequestData>
+        public class SendPushNotificationOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.SendPushNotificationRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -4869,7 +4869,7 @@
         /// <summary>
         /// Builds the get push notification operation request.
         /// </summary>
-        public class GetOnlineStatusOperationRequest : CustomOperationRequest<MasterPlayerModels.GetOnlineStatusRequestData>
+        public class GetOnlineStatusOperationRequest : CustomOperationRequestAbstract<MasterPlayerModels.GetOnlineStatusRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

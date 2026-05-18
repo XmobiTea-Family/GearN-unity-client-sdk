@@ -10,7 +10,7 @@
         /// <summary>
         /// Represents the typed response for the login by account operation.
         /// </summary>
-        public class LoginByAccountOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByAccountOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -18,7 +18,7 @@
         /// <summary>
         /// Represents the typed response for the login by android device ID operation.
         /// </summary>
-        public class LoginByAndroidDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByAndroidDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -26,7 +26,7 @@
         /// <summary>
         /// Represents the typed response for the login by apple operation.
         /// </summary>
-        public class LoginByAppleOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByAppleOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -34,7 +34,7 @@
         /// <summary>
         /// Represents the typed response for the login by custom device ID operation.
         /// </summary>
-        public class LoginByCustomDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByCustomDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -42,7 +42,7 @@
         /// <summary>
         /// Represents the typed response for the login by custom ID operation.
         /// </summary>
-        public class LoginByCustomIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByCustomIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -50,7 +50,7 @@
         /// <summary>
         /// Represents the typed response for the login by editor device ID operation.
         /// </summary>
-        public class LoginByEditorDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByEditorDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -58,7 +58,7 @@
         /// <summary>
         /// Represents the typed response for the login by facebook operation.
         /// </summary>
-        public class LoginByFacebookOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByFacebookOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -66,7 +66,7 @@
         /// <summary>
         /// Represents the typed response for the login by generic service operation.
         /// </summary>
-        public class LoginByGenericServiceOperationResponse : CustomOperationResponse<AuthenticateModels.GenericServiceAuthenticateResponseData>
+        public class LoginByGenericServiceOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.GenericServiceAuthenticateResponseData>
         {
 
         }
@@ -74,7 +74,7 @@
         /// <summary>
         /// Represents the typed response for the login by google operation.
         /// </summary>
-        public class LoginByGoogleOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByGoogleOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -82,7 +82,7 @@
         /// <summary>
         /// Represents the typed response for the login by google play game service operation.
         /// </summary>
-        public class LoginByGooglePlayGameServiceOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByGooglePlayGameServiceOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -90,7 +90,7 @@
         /// <summary>
         /// Represents the typed response for the login by game center operation.
         /// </summary>
-        public class LoginByGameCenterOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByGameCenterOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -98,7 +98,7 @@
         /// <summary>
         /// Represents the typed response for the login by iOS device ID operation.
         /// </summary>
-        public class LoginByiOSDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByiOSDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -106,7 +106,7 @@
         /// <summary>
         /// Represents the typed response for the login by linux device ID operation.
         /// </summary>
-        public class LoginByLinuxDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByLinuxDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -114,7 +114,7 @@
         /// <summary>
         /// Represents the typed response for the login by macos device ID operation.
         /// </summary>
-        public class LoginByMacOSDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByMacOSDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -122,7 +122,7 @@
         /// <summary>
         /// Represents the typed response for the login by windows device ID operation.
         /// </summary>
-        public class LoginByWindowsDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByWindowsDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -130,7 +130,7 @@
         /// <summary>
         /// Represents the typed response for the login by windows phone device ID operation.
         /// </summary>
-        public class LoginByWindowsPhoneDeviceIdOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class LoginByWindowsPhoneDeviceIdOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -138,7 +138,7 @@
         /// <summary>
         /// Represents the typed response for the register account operation.
         /// </summary>
-        public class RegisterAccountOperationResponse : CustomOperationResponse<AuthenticateModels.AuthenticateResponseData>
+        public class RegisterAccountOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
         {
 
         }
@@ -146,7 +146,7 @@
         /// <summary>
         /// Represents the typed response for the refresh auth token operation.
         /// </summary>
-        public class RefreshAuthTokenOperationResponse : CustomOperationResponse<AuthenticateModels.RefreshAuthTokenResponseData>
+        public class RefreshAuthTokenOperationResponse : CustomOperationResponseAbstract<AuthenticateModels.RefreshAuthTokenResponseData>
         {
 
         }

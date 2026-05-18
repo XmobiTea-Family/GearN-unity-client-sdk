@@ -10,7 +10,7 @@
         /// <summary>
         /// Represents the typed response for the cancel all matchmaking ticket operation.
         /// </summary>
-        public class CancelAllMatchmakingTicketOperationResponse : CustomOperationResponse<MultiplayerModels.CancelAllMatchmakingTicketResponseData>
+        public class CancelAllMatchmakingTicketOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.CancelAllMatchmakingTicketResponseData>
         {
 
         }
@@ -18,7 +18,7 @@
         /// <summary>
         /// Represents the typed response for the cancel matchmaking ticket operation.
         /// </summary>
-        public class CancelMatchmakingTicketOperationResponse : CustomOperationResponse<MultiplayerModels.EmptyResponseData>
+        public class CancelMatchmakingTicketOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.EmptyResponseData>
         {
 
         }
@@ -26,7 +26,7 @@
         /// <summary>
         /// Represents the typed response for the create matchmaking ticket operation.
         /// </summary>
-        public class CreateMatchmakingTicketOperationResponse : CustomOperationResponse<MultiplayerModels.CreateMatchmakingTicketResponseData>
+        public class CreateMatchmakingTicketOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.CreateMatchmakingTicketResponseData>
         {
 
         }
@@ -34,7 +34,7 @@
         /// <summary>
         /// Represents the typed response for the get matchmaking ticket operation.
         /// </summary>
-        public class GetMatchmakingTicketOperationResponse : CustomOperationResponse<MultiplayerModels.GetMatchmakingTicketResponseData>
+        public class GetMatchmakingTicketOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.GetMatchmakingTicketResponseData>
         {
 
         }
@@ -42,7 +42,7 @@
         /// <summary>
         /// Represents the typed response for the get match operation.
         /// </summary>
-        public class GetMatchOperationResponse : CustomOperationResponse<MultiplayerModels.GetMatchResponseData>
+        public class GetMatchOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.GetMatchResponseData>
         {
 
         }
@@ -50,7 +50,7 @@
         /// <summary>
         /// Represents the typed response for the get queue statistics operation.
         /// </summary>
-        public class GetQueueStatisticsOperationResponse : CustomOperationResponse<MultiplayerModels.GetQueueStatisticsResponseData>
+        public class GetQueueStatisticsOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.GetQueueStatisticsResponseData>
         {
 
         }
@@ -58,7 +58,7 @@
         /// <summary>
         /// Represents the typed response for the join matchmaking ticket operation.
         /// </summary>
-        public class JoinMatchmakingTicketOperationResponse : CustomOperationResponse<MultiplayerModels.EmptyResponseData>
+        public class JoinMatchmakingTicketOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.EmptyResponseData>
         {
 
         }
@@ -66,7 +66,7 @@
         /// <summary>
         /// Represents the typed response for the list matchmaking tickets for player operation.
         /// </summary>
-        public class ListMatchmakingTicketsForPlayerOperationResponse : CustomOperationResponse<MultiplayerModels.ListMatchmakingTicketsForPlayerResponseData>
+        public class ListMatchmakingTicketsForPlayerOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.ListMatchmakingTicketsForPlayerResponseData>
         {
 
         }
@@ -74,7 +74,7 @@
         /// <summary>
         /// Represents the typed response for the get all match operation.
         /// </summary>
-        public class GetAllMatchOperationResponse : CustomOperationResponse<MultiplayerModels.GetAllMatchResponseData>
+        public class GetAllMatchOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.GetAllMatchResponseData>
         {
 
         }
@@ -82,7 +82,7 @@
         /// <summary>
         /// Represents the typed response for the get all matchmaking ticket operation.
         /// </summary>
-        public class GetAllMatchmakingTicketOperationResponse : CustomOperationResponse<MultiplayerModels.GetAllMatchmakingTicketResponseData>
+        public class GetAllMatchmakingTicketOperationResponse : CustomOperationResponseAbstract<MultiplayerModels.GetAllMatchmakingTicketResponseData>
         {
 
         }

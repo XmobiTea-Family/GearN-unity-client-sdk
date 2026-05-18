@@ -10,7 +10,7 @@
         /// <summary>
         /// Represents the typed response for the add segment operation.
         /// </summary>
-        public class AddSegmentOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class AddSegmentOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -18,7 +18,7 @@
         /// <summary>
         /// Represents the typed response for the get amount operation.
         /// </summary>
-        public class GetAmountOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetAmountOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -26,7 +26,7 @@
         /// <summary>
         /// Represents the typed response for the get avatar operation.
         /// </summary>
-        public class GetAvatarOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetAvatarOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -34,7 +34,7 @@
         /// <summary>
         /// Represents the typed response for the get catalog ID operation.
         /// </summary>
-        public class GetCatalogIdOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetCatalogIdOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -42,7 +42,7 @@
         /// <summary>
         /// Represents the typed response for the get class ID operation.
         /// </summary>
-        public class GetClassIdOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetClassIdOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -50,7 +50,7 @@
         /// <summary>
         /// Represents the typed response for the get custom data operation.
         /// </summary>
-        public class GetCustomDataOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetCustomDataOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -58,7 +58,7 @@
         /// <summary>
         /// Represents the typed response for the get display name operation.
         /// </summary>
-        public class GetDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetDisplayNameOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -66,7 +66,7 @@
         /// <summary>
         /// Represents the typed response for the get item data operation.
         /// </summary>
-        public class GetItemDataOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetItemDataOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -74,7 +74,7 @@
         /// <summary>
         /// Represents the typed response for the get item information operation.
         /// </summary>
-        public class GetItemInformationOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetItemInformationOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -82,7 +82,7 @@
         /// <summary>
         /// Represents the typed response for the get item statistics operation.
         /// </summary>
-        public class GetItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetItemStatisticsOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -90,7 +90,7 @@
         /// <summary>
         /// Represents the typed response for the get items with display name operation.
         /// </summary>
-        public class GetItemsWithDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.InventoriesWithItemIdResponseData>
+        public class GetItemsWithDisplayNameOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoriesWithItemIdResponseData>
         {
 
         }
@@ -98,7 +98,7 @@
         /// <summary>
         /// Represents the typed response for the get items with segment operation.
         /// </summary>
-        public class GetItemsWithSegmentOperationResponse : CustomOperationResponse<InventoryModels.InventoriesWithItemIdResponseData>
+        public class GetItemsWithSegmentOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoriesWithItemIdResponseData>
         {
 
         }
@@ -106,7 +106,7 @@
         /// <summary>
         /// Represents the typed response for the get items with tag operation.
         /// </summary>
-        public class GetItemsWithTagOperationResponse : CustomOperationResponse<InventoryModels.InventoriesWithItemIdResponseData>
+        public class GetItemsWithTagOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoriesWithItemIdResponseData>
         {
 
         }
@@ -114,7 +114,7 @@
         /// <summary>
         /// Represents the typed response for the get item type operation.
         /// </summary>
-        public class GetItemTypeOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetItemTypeOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -122,7 +122,7 @@
         /// <summary>
         /// Represents the typed response for the get owner operation.
         /// </summary>
-        public class GetOwnerOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetOwnerOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -130,7 +130,7 @@
         /// <summary>
         /// Represents the typed response for the get remove status operation.
         /// </summary>
-        public class GetRemoveStatusOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetRemoveStatusOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -138,7 +138,7 @@
         /// <summary>
         /// Represents the typed response for the get segment operation.
         /// </summary>
-        public class GetSegmentOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetSegmentOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -146,7 +146,7 @@
         /// <summary>
         /// Represents the typed response for the get statistics leaderboard around item operation.
         /// </summary>
-        public class GetStatisticsLeaderboardAroundItemOperationResponse : CustomOperationResponse<InventoryModels.GetStatisticsLeaderboardResponseData>
+        public class GetStatisticsLeaderboardAroundItemOperationResponse : CustomOperationResponseAbstract<InventoryModels.GetStatisticsLeaderboardResponseData>
         {
 
         }
@@ -154,7 +154,7 @@
         /// <summary>
         /// Represents the typed response for the get statistics leaderboard operation.
         /// </summary>
-        public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponse<InventoryModels.GetStatisticsLeaderboardResponseData>
+        public class GetStatisticsLeaderboardOperationResponse : CustomOperationResponseAbstract<InventoryModels.GetStatisticsLeaderboardResponseData>
         {
 
         }
@@ -162,7 +162,7 @@
         /// <summary>
         /// Represents the typed response for the get tag operation.
         /// </summary>
-        public class GetTagOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetTagOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -170,7 +170,7 @@
         /// <summary>
         /// Represents the typed response for the get timestamp create operation.
         /// </summary>
-        public class GetTsCreateOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class GetTsCreateOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -178,7 +178,7 @@
         /// <summary>
         /// Represents the typed response for the remove segment operation.
         /// </summary>
-        public class RemoveSegmentOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class RemoveSegmentOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -186,7 +186,7 @@
         /// <summary>
         /// Represents the typed response for the remove tag operation.
         /// </summary>
-        public class RemoveTagOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class RemoveTagOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -194,7 +194,7 @@
         /// <summary>
         /// Represents the typed response for the set amount operation.
         /// </summary>
-        public class SetAmountOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class SetAmountOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -202,7 +202,7 @@
         /// <summary>
         /// Represents the typed response for the set avatar operation.
         /// </summary>
-        public class SetAvatarOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class SetAvatarOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -210,7 +210,7 @@
         /// <summary>
         /// Represents the typed response for the set custom data operation.
         /// </summary>
-        public class SetCustomDataOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class SetCustomDataOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -218,7 +218,7 @@
         /// <summary>
         /// Represents the typed response for the set display name operation.
         /// </summary>
-        public class SetDisplayNameOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class SetDisplayNameOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -226,7 +226,7 @@
         /// <summary>
         /// Represents the typed response for the set item data operation.
         /// </summary>
-        public class SetItemDataOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class SetItemDataOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -234,7 +234,7 @@
         /// <summary>
         /// Represents the typed response for the change item statistics operation.
         /// </summary>
-        public class ChangeItemStatisticsOperationResponse : CustomOperationResponse<InventoryModels.InventoryResponseData>
+        public class ChangeItemStatisticsOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }
@@ -242,7 +242,7 @@
         /// <summary>
         /// Represents the typed response for the set owner operation.
         /// </summary>
-        public class SetOwnerOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class SetOwnerOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -250,7 +250,7 @@
         /// <summary>
         /// Represents the typed response for the set remove status operation.
         /// </summary>
-        public class SetRemoveStatusOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class SetRemoveStatusOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -258,7 +258,7 @@
         /// <summary>
         /// Represents the typed response for the set tag operation.
         /// </summary>
-        public class SetTagOperationResponse : CustomOperationResponse<InventoryModels.EmptyResponseData>
+        public class SetTagOperationResponse : CustomOperationResponseAbstract<InventoryModels.EmptyResponseData>
         {
 
         }
@@ -266,7 +266,7 @@
         /// <summary>
         /// Represents the typed response for the get create leaderboard operation.
         /// </summary>
-        public class GetCreateLeaderboardOperationResponse : CustomOperationResponse<InventoryModels.GetCreateLeaderboardResponseData>
+        public class GetCreateLeaderboardOperationResponse : CustomOperationResponseAbstract<InventoryModels.GetCreateLeaderboardResponseData>
         {
 
         }
@@ -274,7 +274,7 @@
         /// <summary>
         /// Represents the typed response for the get statistics log operation.
         /// </summary>
-        public class GetStatisticsLogOperationResponse : CustomOperationResponse<InventoryModels.GetStatisticsLogResponseData>
+        public class GetStatisticsLogOperationResponse : CustomOperationResponseAbstract<InventoryModels.GetStatisticsLogResponseData>
         {
 
         }

@@ -82,7 +82,7 @@
     /// A generic variant of `CustomOperationResponse` that includes typed response data.
     /// </summary>
     /// <typeparam name="TResponseData">The type of the response data.</typeparam>
-    public class CustomOperationResponse<TResponseData> : CustomOperationResponse
+    public class CustomOperationResponseAbstract<TResponseData> : CustomOperationResponse
     {
         /// <summary>
         /// Stores the response data value.

@@ -10,7 +10,7 @@
         /// <summary>
         /// Represents the typed response for the create new file upload info operation.
         /// </summary>
-        public class CreateNewFileUploadInfoOperationResponse : CustomOperationResponse<ContentModels.FileIdUploadResponseData>
+        public class CreateNewFileUploadInfoOperationResponse : CustomOperationResponseAbstract<ContentModels.FileIdUploadResponseData>
         {
 
         }
@@ -18,7 +18,7 @@
         /// <summary>
         /// Represents the typed response for the get content data operation.
         /// </summary>
-        public class GetContentDataOperationResponse : CustomOperationResponse<ContentModels.GetContentDataResponseData>
+        public class GetContentDataOperationResponse : CustomOperationResponseAbstract<ContentModels.GetContentDataResponseData>
         {
 
         }
@@ -26,7 +26,7 @@
         /// <summary>
         /// Represents the typed response for the get file upload info list operation.
         /// </summary>
-        public class GetFileUploadInfoListOperationResponse : CustomOperationResponse<ContentModels.GetFileUploadInfoListResponseData>
+        public class GetFileUploadInfoListOperationResponse : CustomOperationResponseAbstract<ContentModels.GetFileUploadInfoListResponseData>
         {
 
         }
@@ -34,7 +34,7 @@
         /// <summary>
         /// Represents the typed response for the get file upload info operation.
         /// </summary>
-        public class GetFileUploadInfoOperationResponse : CustomOperationResponse<ContentModels.GetFileUploadInfoResponseData>
+        public class GetFileUploadInfoOperationResponse : CustomOperationResponseAbstract<ContentModels.GetFileUploadInfoResponseData>
         {
 
         }
@@ -42,7 +42,7 @@
         /// <summary>
         /// Represents the typed response for the remove file upload info operation.
         /// </summary>
-        public class RemoveFileUploadInfoOperationResponse : CustomOperationResponse<ContentModels.EmptyResponseData>
+        public class RemoveFileUploadInfoOperationResponse : CustomOperationResponseAbstract<ContentModels.EmptyResponseData>
         {
 
         }
@@ -50,7 +50,7 @@
         /// <summary>
         /// Represents the typed response for the request download file upload info operation.
         /// </summary>
-        public class RequestDownloadFileUploadInfoOperationResponse : CustomOperationResponse<ContentModels.RequestDownloadFileUploadInfoResponseData>
+        public class RequestDownloadFileUploadInfoOperationResponse : CustomOperationResponseAbstract<ContentModels.RequestDownloadFileUploadInfoResponseData>
         {
 
         }
@@ -58,7 +58,7 @@
         /// <summary>
         /// Represents the typed response for the set content data operation.
         /// </summary>
-        public class SetContentDataOperationResponse : CustomOperationResponse<ContentModels.EmptyResponseData>
+        public class SetContentDataOperationResponse : CustomOperationResponseAbstract<ContentModels.EmptyResponseData>
         {
 
         }

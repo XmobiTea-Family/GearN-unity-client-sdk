@@ -319,11 +319,11 @@ infoRequestParam.owner = true;
 infoRequestParam.playerInventories = true;
 infoRequestParam.itemCatalogIds = new[] { "weapon" };
 
-var request = new CharacterPlayerModels.GetPlayerInformationRequestData();
-request.characterId = "CHAR0000001";
-request.infoRequestParam = infoRequestParam;
+var requestData = new CharacterPlayerModels.GetPlayerInformationRequestData();
+requestData.characterId = "CHAR0000001";
+requestData.infoRequestParam = infoRequestParam;
 
-var response = await GNNetwork.characterPlayer.getPlayerInformationAsync(request);
+var response = await GNNetwork.characterPlayer.getPlayerInformationAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -354,12 +354,12 @@ OnCharacterPlayerFriendUpdateEventHandler.onUpdate = (update) => {
 
 GNNetwork.connectSocket(); // Follow README socket rule before expecting realtime updates.
 
-var request = new CharacterPlayerModels.AddPlayerFriendRequestData();
-request.characterId = "CHAR0000001";
-request.friendId = "CHAR0000002";
-request.catalogId = "default-friend";
+var requestData = new CharacterPlayerModels.AddPlayerFriendRequestData();
+requestData.characterId = "CHAR0000001";
+requestData.friendId = "CHAR0000002";
+requestData.catalogId = "default-friend";
 
-var response = await GNNetwork.characterPlayer.addPlayerFriendAsync(request);
+var response = await GNNetwork.characterPlayer.addPlayerFriendAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -377,14 +377,14 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var createRequest = new CharacterPlayerModels.CreatePlayerItemRequestData();
-createRequest.characterId = "CHAR0000001";
-createRequest.catalogId = "weapon";
-createRequest.classId = "sword";
-createRequest.displayName = "Starter Sword";
-createRequest.amount = 1;
+var createRequestData = new CharacterPlayerModels.CreatePlayerItemRequestData();
+createRequestData.characterId = "CHAR0000001";
+createRequestData.catalogId = "weapon";
+createRequestData.classId = "sword";
+createRequestData.displayName = "Starter Sword";
+createRequestData.amount = 1;
 
-var createResponse = await GNNetwork.characterPlayer.createPlayerItemAsync(createRequest);
+var createResponse = await GNNetwork.characterPlayer.createPlayerItemAsync(createRequestData);
 
 if (createResponse.hasReturnCodeError()) {
     throw new System.Exception(createResponse.debugMessage);
@@ -394,11 +394,11 @@ if (createResponse.errorCode != ErrorCode.Ok) {
     throw new System.Exception("Business error: " + createResponse.errorCode);
 }
 
-var getInventoryRequest = new CharacterPlayerModels.GetPlayerInventoryRequestData();
-getInventoryRequest.characterId = "CHAR0000001";
-getInventoryRequest.itemCatalogIds = new[] { "weapon" };
+var getInventoryRequestData = new CharacterPlayerModels.GetPlayerInventoryRequestData();
+getInventoryRequestData.characterId = "CHAR0000001";
+getInventoryRequestData.itemCatalogIds = new[] { "weapon" };
 
-var inventoryResponse = await GNNetwork.characterPlayer.getPlayerInventoryAsync(getInventoryRequest);
+var inventoryResponse = await GNNetwork.characterPlayer.getPlayerInventoryAsync(getInventoryRequestData);
 
 if (inventoryResponse.hasReturnCodeError()) {
     throw new System.Exception(inventoryResponse.debugMessage);

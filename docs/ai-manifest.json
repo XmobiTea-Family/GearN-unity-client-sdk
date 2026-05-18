@@ -13,6 +13,7 @@
       "docs/RULES.md",
       "docs/ai-manifest.json",
       "docs/reference/API_INDEX.md",
+      "docs/reference/OPERATION_BASES.md",
       "docs/cloudScript/CLOUDSCRIPT_USAGE.md",
       "docs/reference/ERROR_HANDLING.md",
       "docs/reference/CONFIG.md",
@@ -36,6 +37,7 @@
       "config": "docs/reference/CONFIG.md",
       "events": "docs/reference/EVENTS.md",
       "errorHandling": "docs/reference/ERROR_HANDLING.md",
+      "operationBases": "docs/reference/OPERATION_BASES.md",
       "permissionRules": "docs/reference/PERMISSION_RULES.md"
     },
     "cookbook": "docs/COOKBOOK.md",
@@ -45,6 +47,7 @@
       "đọc docs/RULES.md cho rule cross-cutting (route, permission, self/other-self, socket, error)",
       "khi viết source CloudScript gửi lên addFunction, đọc docs/cloudScript/CLOUDSCRIPT_USAGE.md",
       "tra method signature qua docs/reference/API_<GROUP>.md",
+      "khi gặp CustomOperationRequestAbstract<T> hoặc CustomOperationResponseAbstract<T>, đọc docs/reference/OPERATION_BASES.md",
       "tra DTO field qua docs/reference/dto/<DOMAIN>.md hoặc grep DTO_INDEX.md (2506 rows, đừng load full)",
       "tra enum value numeric qua docs/reference/ENUMS.md",
       "scenario end-to-end xem docs/COOKBOOK.md (16 scenarios)",

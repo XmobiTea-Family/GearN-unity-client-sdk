@@ -4376,7 +4376,7 @@
             /// <summary>
             /// Stores the storage usage value.
             /// </summary>
-            [GNArrayDataMember(code = ParameterCode.StorageUsage, elementCls = typeof(StorageUsageResponseData))]
+            [GNArrayDataMember(code = ParameterCode.StorageUsage, elementCls = typeof(StorageUsageResponseData), isOptional = true)]
             public List<StorageUsageResponseData>? storageUsage;
 
         }

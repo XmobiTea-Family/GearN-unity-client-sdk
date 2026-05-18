@@ -11,7 +11,7 @@
         /// <summary>
         /// Builds the add function operation request.
         /// </summary>
-        public class AddFunctionOperationRequest : CustomOperationRequest<CloudScriptModels.AddFunctionRequestData>
+        public class AddFunctionOperationRequest : CustomOperationRequestAbstract<CloudScriptModels.AddFunctionRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -68,7 +68,7 @@
         /// <summary>
         /// Builds the edit function operation request.
         /// </summary>
-        public class EditFunctionOperationRequest : CustomOperationRequest<CloudScriptModels.EditFunctionRequestData>
+        public class EditFunctionOperationRequest : CustomOperationRequestAbstract<CloudScriptModels.EditFunctionRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -125,7 +125,7 @@
         /// <summary>
         /// Builds the execute function operation request.
         /// </summary>
-        public class ExecuteFunctionOperationRequest : CustomOperationRequest<CloudScriptModels.ExecuteFunctionRequestData>
+        public class ExecuteFunctionOperationRequest : CustomOperationRequestAbstract<CloudScriptModels.ExecuteFunctionRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -182,7 +182,7 @@
         /// <summary>
         /// Builds the get function operation request.
         /// </summary>
-        public class GetFunctionOperationRequest : CustomOperationRequest<CloudScriptModels.GetFunctionRequestData>
+        public class GetFunctionOperationRequest : CustomOperationRequestAbstract<CloudScriptModels.GetFunctionRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
@@ -239,7 +239,7 @@
         /// <summary>
         /// Builds the get functions operation request.
         /// </summary>
-        public class GetFunctionsOperationRequest : CustomOperationRequest<CloudScriptModels.GetFunctionsRequestData>
+        public class GetFunctionsOperationRequest : CustomOperationRequestAbstract<CloudScriptModels.GetFunctionsRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.

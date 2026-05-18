@@ -27,13 +27,13 @@ const assertResponseOk = (response: CustomOperationResponse, actionName: string)
 handlers["chainCloudScript"] = async (args: any, context, log) => {
     const functionName = requireString(args?.functionName, "functionName");
 
-    const request = new CloudScriptModels.AdminExecuteFunctionRequestData();
-    request.userId = context.userId;
-    request.functionName = functionName;
+    const requestData = new CloudScriptModels.AdminExecuteFunctionRequestData();
+    requestData.userId = context.userId;
+    requestData.functionName = functionName;
     // Không truyền version → runtime dùng version đang isLive
-    request.functionParameters = args?.functionParameters ?? {};
+    requestData.functionParameters = args?.functionParameters ?? {};
 
-    const response = await admin.cloudScript.executeFunctionAsync(request);
+    const response = await admin.cloudScript.executeFunctionAsync(requestData);
     assertResponseOk(response, "executeFunctionAsync");
 
     return {
@@ -49,5 +49,5 @@ handlers["chainCloudScript"] = async (args: any, context, log) => {
 <!-- prettier-ignore -->
 | Hàm gốc | Code trong cloudScript như thế nào | Request Data DTO | Response DTO |
 | --- | --- | --- | --- |
-| `executeFunction(requestData: CloudScriptModels.AdminExecuteFunctionRequestData, onResponse?: Action1<CloudScriptResponseModels.ExecuteFunctionOperationResponse>, overrideAuthToken?: string, overrideSecretKey?: string, customTags?: GNHashtable, timeout?: number): void` | `admin.cloudScript.executeFunction(requestData, onResponse?, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?)` | [AdminExecuteFunctionRequestData](/docs/reference/dto/CLOUDSCRIPT.md#adminexecutefunctionrequestdata) | [ExecuteFunctionOperationResponse](/docs/reference/dto/CLOUDSCRIPT.md#executefunctionoperationresponse) |
-| `executeFunctionAsync(requestData: CloudScriptModels.AdminExecuteFunctionRequestData, overrideAuthToken?: string, overrideSecretKey?: string, customTags?: GNHashtable, timeout?: number): Promise<CloudScriptResponseModels.ExecuteFunctionOperationResponse>` | `admin.cloudScript.executeFunctionAsync(requestData, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?)` | [AdminExecuteFunctionRequestData](/docs/reference/dto/CLOUDSCRIPT.md#adminexecutefunctionrequestdata) | [ExecuteFunctionOperationResponse](/docs/reference/dto/CLOUDSCRIPT.md#executefunctionoperationresponse) |
+| `executeFunction(requestData: CloudScriptModels.AdminExecuteFunctionRequestData, onResponse?: Action1<CloudScriptResponseModels.ExecuteFunctionOperationResponse>, overrideAuthToken?: string, overrideSecretKey?: string, customTags?: GNHashtable, timeout?: number): void` | `admin.cloudScript.executeFunction(requestData, onResponse?, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?)` | [CloudScriptModels.AdminExecuteFunctionRequestData:71-106](/docs/reference/dto/cloudscript/CLOUDSCRIPT_MODELS.md#adminexecutefunctionrequestdata) | [CloudScriptResponseModels.ExecuteFunctionOperationResponse:25-36](/docs/reference/dto/cloudscript/CLOUDSCRIPT_RESPONSE_MODELS.md#executefunctionoperationresponse) |
+| `executeFunctionAsync(requestData: CloudScriptModels.AdminExecuteFunctionRequestData, overrideAuthToken?: string, overrideSecretKey?: string, customTags?: GNHashtable, timeout?: number): Promise<CloudScriptResponseModels.ExecuteFunctionOperationResponse>` | `admin.cloudScript.executeFunctionAsync(requestData, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?)` | [CloudScriptModels.AdminExecuteFunctionRequestData:71-106](/docs/reference/dto/cloudscript/CLOUDSCRIPT_MODELS.md#adminexecutefunctionrequestdata) | [CloudScriptResponseModels.ExecuteFunctionOperationResponse:25-36](/docs/reference/dto/cloudscript/CLOUDSCRIPT_RESPONSE_MODELS.md#executefunctionoperationresponse) |

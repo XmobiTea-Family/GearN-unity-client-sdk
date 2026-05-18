@@ -10,158 +10,21 @@ Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field tab
 
 > Nếu cần sử dụng `GNArray` hoặc `GNHashtable` đọc [GNDATA.md](/docs/reference/GNDATA.md)
 
+> **Operation base**: Nếu class `*OperationRequest` extends `CustomOperationRequestAbstract<TRequestData>` hoặc class `*OperationResponse` extends `CustomOperationResponseAbstract<TResponseData>`, xem [OPERATION_BASES.md](/docs/reference/OPERATION_BASES.md) để hiểu `requestData`, `build()`, `setupOperationResponse()`, và `responseData`.
+
 ## Danh sách
 
 - **GenericModels** (from `Runtime/Entity/Models/GenericModels.cs`)
-    - [AvatarItem](#avataritem)
-    - [TagItem](#tagitem)
-    - [BanItem](#banitem)
-    - [DataItem](#dataitem)
-    - [CurrencyItem](#currencyitem)
-    - [StatisticsItem](#statisticsitem)
-    - [CharacterItem](#characteritem)
-    - [OwnerItem](#owneritem)
-    - [RemoveStatusItem](#removestatusitem)
-    - [InventoryItem](#inventoryitem)
-    - [GroupItem](#groupitem)
-    - [FriendItem](#frienditem)
-    - [MemberItem](#memberitem)
-
----
-
-## Namespace `GenericModels`
-
-### AvatarItem
-
-Represents a generic avatar payload.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `type` | `int` | yes | Avatar type identifier. User custom this type enum. |
-| `value` | `string` | yes | Avatar value, typically a URL, file id, or provider-specific string. |
-
-### TagItem
-
-Represents a key-value tag entry.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `key` | `string` | yes | Tag key used to identify the metadata entry. |
-| `value` | `string` | yes | Tag value associated with `key`. |
-
-### BanItem
-
-Represents a ban state entry returned by player-auth or player-profile flows.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `tsExpire` | `long` | yes | Expiration timestamp of the current ban state. |
-| `reason` | `string` | yes | Human-readable ban reason when provided by the backend. |
-
-### DataItem
-
-Represents an arbitrary key-value data entry.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `key` | `string` | yes | Data entry key used to identify the payload. |
-| `value` | `object` | yes | Raw value returned by the backend. This may be a primitive, `GNHashtable`, `GNArray`, or plain object-like data. |
-
-### CurrencyItem
-
-Represents one currency entry.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `key` | `string` | yes | Currency key such as the configured currency code or logical name. |
-| `value` | `double` | yes | Numeric balance of the currency identified by `key`. |
-
-### StatisticsItem
-
-Represents one statistics entry.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `key` | `string` | yes | Statistic key such as the configured metric name. |
-| `value` | `double` | yes | Numeric value of the statistic identified by `key`. |
-
-### CharacterItem
-
-Represents a lightweight relation item pointing to a character.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `characterId` | `string` | yes | Character identifier of the related character entity. |
-| `catalogId` | `string` | yes | Catalog identifier associated with the related character. |
-
-### OwnerItem
-
-Represents the current owner of an entity such as an inventory item.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `type` | `int` | yes | Owner type. Map this value with the public `OwnerType` enum. |
-| `id` | `string` | yes | Owner id paired with `type`. |
-
-### RemoveStatusItem
-
-Represents soft-remove metadata for an entity.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `tsRemove` | `long` | yes | Removal timestamp when the entity was soft-removed. |
-| `reason` | `string?` | no | Removal reason when the backend provides one. |
-
-### InventoryItem
-
-Represents a lightweight relation item pointing to an inventory item.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `itemId` | `string` | yes | Inventory item identifier of the related item entity. |
-| `catalogId` | `string` | yes | Catalog identifier associated with the related inventory item. |
-| `classId` | `string` | yes | Class identifier associated with the related inventory item. |
-
-### GroupItem
-
-Represents a lightweight relation item pointing to a group.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `groupId` | `string` | yes | Group identifier of the related group entity. |
-| `catalogId` | `string` | yes | Catalog identifier associated with the related group. |
-| `status` | `int` | yes | Group relation status. Map this value with the public `GroupStatus` enum. |
-| `tsLastStatusUpdate` | `long` | yes | Timestamp of the last group status change. |
-
-### FriendItem
-
-Represents a lightweight relation item pointing to a friend relation.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `friendId` | `string` | yes | Friend identifier of the related friend entity. |
-| `catalogId` | `string` | yes | Catalog identifier associated with the related friend entity. |
-| `status` | `int` | yes | Friend relation status. Map this value with the public `FriendStatus` enum. |
-| `tsLastStatusUpdate` | `long` | yes | Timestamp of the last friend status change. |
-
-### MemberItem
-
-Represents a lightweight relation item pointing to a group member.
-
-<!-- prettier-ignore -->
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `memberId` | `string` | yes | Member identifier of the related group member. |
-| `status` | `int` | yes | Member relation status. Map this value with the public member-status enum when available. |
+  - [Generic.AvatarItem:1-10](/docs/reference/dto/generic/GENERIC_MODELS.md#avataritem)
+  - [Generic.TagItem:11-20](/docs/reference/dto/generic/GENERIC_MODELS.md#tagitem)
+  - [Generic.BanItem:21-30](/docs/reference/dto/generic/GENERIC_MODELS.md#banitem)
+  - [Generic.DataItem:31-40](/docs/reference/dto/generic/GENERIC_MODELS.md#dataitem)
+  - [Generic.CurrencyItem:41-50](/docs/reference/dto/generic/GENERIC_MODELS.md#currencyitem)
+  - [Generic.StatisticsItem:51-60](/docs/reference/dto/generic/GENERIC_MODELS.md#statisticsitem)
+  - [Generic.CharacterItem:61-70](/docs/reference/dto/generic/GENERIC_MODELS.md#characteritem)
+  - [Generic.OwnerItem:71-80](/docs/reference/dto/generic/GENERIC_MODELS.md#owneritem)
+  - [Generic.RemoveStatusItem:81-90](/docs/reference/dto/generic/GENERIC_MODELS.md#removestatusitem)
+  - [Generic.InventoryItem:91-101](/docs/reference/dto/generic/GENERIC_MODELS.md#inventoryitem)
+  - [Generic.GroupItem:102-113](/docs/reference/dto/generic/GENERIC_MODELS.md#groupitem)
+  - [Generic.FriendItem:114-125](/docs/reference/dto/generic/GENERIC_MODELS.md#frienditem)
+  - [Generic.MemberItem:126-134](/docs/reference/dto/generic/GENERIC_MODELS.md#memberitem)

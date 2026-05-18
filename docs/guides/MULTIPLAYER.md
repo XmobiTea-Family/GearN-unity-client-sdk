@@ -179,11 +179,11 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var createRequest = new MultiplayerModels.CreateMatchmakingTicketRequestData();
-createRequest.giveUpAfterSeconds = 60;
-createRequest.queueName = "ranked01";
+var createRequestData = new MultiplayerModels.CreateMatchmakingTicketRequestData();
+createRequestData.giveUpAfterSeconds = 60;
+createRequestData.queueName = "ranked01";
 
-var createResponse = await GNNetwork.multiplayer.createMatchmakingTicketAsync(createRequest);
+var createResponse = await GNNetwork.multiplayer.createMatchmakingTicketAsync(createRequestData);
 
 if (createResponse.hasReturnCodeError()) {
     throw new System.Exception(createResponse.debugMessage);
@@ -195,10 +195,10 @@ if (createResponse.errorCode != ErrorCode.Ok) {
 
 var ticketId = createResponse.responseData.ticketId;
 
-var ticketRequest = new MultiplayerModels.GetMatchmakingTicketRequestData();
-ticketRequest.ticketId = ticketId;
+var ticketRequestData = new MultiplayerModels.GetMatchmakingTicketRequestData();
+ticketRequestData.ticketId = ticketId;
 
-var ticketResponse = await GNNetwork.multiplayer.getMatchmakingTicketAsync(ticketRequest);
+var ticketResponse = await GNNetwork.multiplayer.getMatchmakingTicketAsync(ticketRequestData);
 
 if (ticketResponse.hasReturnCodeError()) {
     throw new System.Exception(ticketResponse.debugMessage);
@@ -210,10 +210,10 @@ if (ticketResponse.errorCode != ErrorCode.Ok) {
 
 var ticket = ticketResponse.responseData.matchmakingTicket;
 if (ticket.status == MatchmakingTicketStatus.Matched && !string.IsNullOrEmpty(ticket.matchId)) {
-    var matchRequest = new MultiplayerModels.GetMatchRequestData();
-    matchRequest.matchId = ticket.matchId;
+    var matchRequestData = new MultiplayerModels.GetMatchRequestData();
+    matchRequestData.matchId = ticket.matchId;
 
-    var matchResponse = await GNNetwork.multiplayer.getMatchAsync(matchRequest);
+    var matchResponse = await GNNetwork.multiplayer.getMatchAsync(matchRequestData);
 
     if (matchResponse.hasReturnCodeError()) {
         throw new System.Exception(matchResponse.debugMessage);
@@ -234,12 +234,12 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new MultiplayerModels.ServerCreateMatchmakingTicketRequestData();
-request.userId = "1234567890";
-request.giveUpAfterSeconds = 60;
-request.queueName = "ranked01";
+var requestData = new MultiplayerModels.ServerCreateMatchmakingTicketRequestData();
+requestData.userId = "1234567890";
+requestData.giveUpAfterSeconds = 60;
+requestData.queueName = "ranked01";
 
-var response = await GNNetwork.multiplayer.server.createMatchmakingTicketAsync(request);
+var response = await GNNetwork.multiplayer.server.createMatchmakingTicketAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);
@@ -259,12 +259,12 @@ using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var request = new MultiplayerModels.AdminGetAllMatchmakingTicketRequestData();
-request.status = MatchmakingTicketStatus.WaitingForMatch;
-request.limit = 20;
-request.returnMember = false;
+var requestData = new MultiplayerModels.AdminGetAllMatchmakingTicketRequestData();
+requestData.status = MatchmakingTicketStatus.WaitingForMatch;
+requestData.limit = 20;
+requestData.returnMember = false;
 
-var response = await GNNetwork.multiplayer.admin.getAllMatchmakingTicketAsync(request);
+var response = await GNNetwork.multiplayer.admin.getAllMatchmakingTicketAsync(requestData);
 
 if (response.hasReturnCodeError()) {
     throw new System.Exception(response.debugMessage);

@@ -23,13 +23,13 @@
             /// Indicates whether can execute.
             /// </summary>
             [BooleanDataMember(code = ParameterCode.CanExecute)]
-            public string canExecute;
+            public bool canExecute;
 
             /// <summary>
             /// Indicates whether is live.
             /// </summary>
             [BooleanDataMember(code = ParameterCode.IsLive)]
-            public string isLive;
+            public bool isLive;
 
         }
 
