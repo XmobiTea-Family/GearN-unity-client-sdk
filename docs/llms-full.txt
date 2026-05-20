@@ -11,11 +11,10 @@ Canonical reading order:
 1. /AGENTS.md
 2. /docs/AI_CHEATSHEET.md
 3. /docs/RULES.md
-4. /docs/ai-manifest.json
-5. /docs/reference/API_INDEX.md
-6. /docs/guides/<DOMAIN>.md for the target domain
-7. /docs/reference/dto/<DOMAIN>.md or grep reference/DTO_INDEX.md for DTO fields
-8. /Runtime/**/*.cs only when docs do not cover the public contract
+4. /docs/reference/API_INDEX.md
+5. /docs/guides/<DOMAIN>.md for the target domain
+6. /docs/reference/dto/<DOMAIN>.md or grep reference/DTO_INDEX.md for DTO fields
+7. /Runtime/**/*.cs only when docs do not cover the public contract
 
 Conflict rule:
 
@@ -30,7 +29,6 @@ Important direct links:
 
 - AI cheatsheet: /docs/AI_CHEATSHEET.md
 - Cross-cutting rules: /docs/RULES.md
-- Machine manifest: /docs/ai-manifest.json
 - API index: /docs/reference/API_INDEX.md
 - DTO index: /docs/reference/DTO_INDEX.md
 - Enums: /docs/reference/ENUMS.md

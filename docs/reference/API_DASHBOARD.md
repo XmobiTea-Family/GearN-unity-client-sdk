@@ -1,6 +1,6 @@
 # API Reference: DashboardApi
 
-Admin login, game/admin account/secret management, analytics, server log, maintenance tools. Uses `RequestRole.Client` transport; admin context resolved from auth token.
+Bảng contract cho `DashboardApi`. Bắt đầu từ [guides/DASHBOARD.md](/docs/guides/DASHBOARD.md) để chọn method, auth flow, và dashboard operation trước khi đọc các row này.
 
 - Domain guide: [guides/DASHBOARD.md](/docs/guides/DASHBOARD.md)
 - DTO shapes: [dto/DASHBOARD.md](/docs/reference/dto/DASHBOARD.md)
@@ -8,80 +8,34 @@ Admin login, game/admin account/secret management, analytics, server log, mainte
 - Error handling: [ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md)
 - Permission rules: [PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md)
 
-## Namespaces
-
-- `GNNetwork.dashboard` — `RequestRole.Client`
-
-## Convention
-
-Mỗi method dưới đây có 2 form — callback và `*Async()` Task. Ưu tiên `*Async()`.
-
-```text
-// Callback
-GNNetwork.dashboard.<method>(requestData, onResponse?, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?);
-
-// Async
-var res = await GNNetwork.dashboard.<method>Async(requestData, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?);
-```
-
-Param chung:
-
-<!-- prettier-ignore -->
-| Param | Type | Optional | Notes |
-| --- | --- | --- | --- |
-| `requestData` | domain-specific (xem bảng dưới) | no | Payload chính |
-| `onResponse` | `Action1<TResponse>` | yes | Chỉ có ở callback form |
-| `overrideAuthToken` | `string` | yes | Override `authToken` cache cho request này |
-| `overrideSecretKey` | `string` | yes | Override secret key mặc định của route |
-| `customTags` | `GNHashtable` | yes | Tags gắn vào request, backend có thể log/route |
-| `timeout` | `int` | yes | Timeout giây; default = `OperationRequest.defaultTimeOut` |
-
-Response class expose field: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`. Xem [ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
-
-> `server` / `admin` namespace hiện tại không có method public — giữ để đối xứng API.
-
 ## Client methods (`GNNetwork.dashboard.*`)
 
 <!-- prettier-ignore -->
-| Method | Request DTO | Async form | Response class | Default Permission Rules |
+| Method | Request Data DTO Link | Response Data DTO Link | Default Permission Rules | Error Code có thể gặp |
 | --- | --- | --- | --- | --- |
-| `changePasswordAdminAccount` | `DashboardModels.ChangePasswordAdminAccountRequestData` | `changePasswordAdminAccountAsync(...)` | `DashboardResponseModels.ChangePasswordAdminAccountOperationResponse` | `dashboard.changePasswordAdminAccount.selfEnable` |
-| `getAdminAccountList` | `DashboardModels.GetAdminAccountListRequestData` | `getAdminAccountListAsync(...)` | `DashboardResponseModels.GetAdminAccountListOperationResponse` | `dashboard.getAdminAccountList.selfEnable` |
-| `getGameInformation` | `DashboardModels.GetGameInformationRequestData` | `getGameInformationAsync(...)` | `DashboardResponseModels.GetGameInformationOperationResponse` | `dashboard.getGameInformation.selfEnable` |
-| `getGameList` | `DashboardModels.GetGameListRequestData` | `getGameListAsync(...)` | `DashboardResponseModels.GetGameListOperationResponse` | `dashboard.getGameList.selfEnable` |
-| `getMasterGameSettings` | `DashboardModels.GetMasterGameSettingsRequestData` | `getMasterGameSettingsAsync(...)` | `DashboardResponseModels.GetMasterGameSettingsOperationResponse` | `dashboard.getMasterGameSettings.selfEnable` |
-| `getSecretInfoInformation` | `DashboardModels.GetSecretInfoInformationRequestData` | `getSecretInfoInformationAsync(...)` | `DashboardResponseModels.GetSecretInfoInformationOperationResponse` | `dashboard.getSecretInfoInformation.selfEnable` |
-| `getSecretInfoList` | `DashboardModels.GetSecretInfoListRequestData` | `getSecretInfoListAsync(...)` | `DashboardResponseModels.GetSecretInfoListOperationResponse` | `dashboard.getSecretInfoList.selfEnable` |
-| `getServerLog` | `DashboardModels.GetServerLogRequestData` | `getServerLogAsync(...)` | `DashboardResponseModels.GetServerLogOperationResponse` | `dashboard.getServerLog.selfEnable` |
-| `createAdminAccount` | `DashboardModels.CreateAdminAccountRequestData` | `createAdminAccountAsync(...)` | `DashboardResponseModels.CreateAdminAccountOperationResponse` | `dashboard.createAdminAccount.selfEnable` |
-| `createGame` | `DashboardModels.CreateGameRequestData` | `createGameAsync(...)` | `DashboardResponseModels.CreateGameOperationResponse` | `dashboard.createGame.selfEnable` |
-| `createSecretInfo` | `DashboardModels.CreateSecretInfoRequestData` | `createSecretInfoAsync(...)` | `DashboardResponseModels.CreateSecretInfoOperationResponse` | `dashboard.createSecretInfo.selfEnable` |
-| `loginByAdminAccount` | `DashboardModels.LoginByAdminAccountRequestData` | `loginByAdminAccountAsync(...)` | `DashboardResponseModels.LoginByAdminAccountOperationResponse` | `dashboard.loginByAdminAccount.selfEnable` |
-| `removeAdminAccount` | `DashboardModels.RemoveAdminAccountRequestData` | `removeAdminAccountAsync(...)` | `DashboardResponseModels.RemoveAdminAccountOperationResponse` | `dashboard.removeAdminAccount.selfEnable` |
-| `setGameInformation` | `DashboardModels.SetGameInformationRequestData` | `setGameInformationAsync(...)` | `DashboardResponseModels.SetGameInformationOperationResponse` | `dashboard.setGameInformation.selfEnable` |
-| `setMasterGameSettings` | `DashboardModels.SetMasterGameSettingsRequestData` | `setMasterGameSettingsAsync(...)` | `DashboardResponseModels.SetMasterGameSettingsOperationResponse` | `dashboard.setMasterGameSettings.selfEnable` |
-| `setPasswordAdminAccount` | `DashboardModels.SetPasswordAdminAccountRequestData` | `setPasswordAdminAccountAsync(...)` | `DashboardResponseModels.SetPasswordAdminAccountOperationResponse` | `dashboard.setPasswordAdminAccount.selfEnable` |
-| `setSecretInfoInformation` | `DashboardModels.SetSecretInfoInformationRequestData` | `setSecretInfoInformationAsync(...)` | `DashboardResponseModels.SetSecretInfoInformationOperationResponse` | `dashboard.setSecretInfoInformation.selfEnable` |
-| `setSecretKeyAdminAccount` | `DashboardModels.SetSecretKeyAdminAccountRequestData` | `setSecretKeyAdminAccountAsync(...)` | `DashboardResponseModels.SetSecretKeyAdminAccountOperationResponse` | `dashboard.setSecretKeyAdminAccount.selfEnable` |
-| `getUsernameAdminAccount` | `DashboardModels.GetUsernameAdminAccountRequestData` | `getUsernameAdminAccountAsync(...)` | `DashboardResponseModels.GetUsernameAdminAccountOperationResponse` | `dashboard.getUsernameAdminAccount.selfEnable` |
-| `getAnalytics` | `DashboardModels.GetAnalyticsRequestData` | `getAnalyticsAsync(...)` | `DashboardResponseModels.GetAnalyticsOperationResponse` | `dashboard.getAnalytics.selfEnable` |
-| `getEventCallbackCloudScript` | `DashboardModels.GetEventCallbackCloudScriptRequestData` | `getEventCallbackCloudScriptAsync(...)` | `DashboardResponseModels.GetEventCallbackCloudScriptOperationResponse` | `dashboard.getEventCallbackCloudScript.selfEnable` |
-| `setEventCallbackCloudScript` | `DashboardModels.SetEventCallbackCloudScriptRequestData` | `setEventCallbackCloudScriptAsync(...)` | `DashboardResponseModels.SetEventCallbackCloudScriptOperationResponse` | `dashboard.setEventCallbackCloudScript.selfEnable` |
-| `resetStatisticsLeaderboard` | `DashboardModels.ResetStatisticsLeaderboardRequestData` | `resetStatisticsLeaderboardAsync(...)` | `DashboardResponseModels.ResetStatisticsLeaderboardOperationResponse` | `dashboard.resetStatisticsLeaderboard.selfEnable` |
-| `getBackupStatisticsLeaderboardVersion` | `DashboardModels.GetBackupStatisticsLeaderboardVersionRequestData` | `getBackupStatisticsLeaderboardVersionAsync(...)` | `DashboardResponseModels.GetBackupStatisticsLeaderboardVersionOperationResponse` | `dashboard.getBackupStatisticsLeaderboardVersion.selfEnable` |
-| `getServerGameData` | `DashboardModels.GetServerGameDataRequestData` | `getServerGameDataAsync(...)` | `DashboardResponseModels.GetServerGameDataOperationResponse` | `dashboard.getServerGameData.selfEnable` |
-| `deleteInDatabase` | `DashboardModels.DeleteInDatabaseRequestData` | `deleteInDatabaseAsync(...)` | `DashboardResponseModels.DeleteInDatabaseOperationResponse` | `dashboard.deleteInDatabase.selfEnable` |
-
-## Ví dụ tối thiểu
-
-```csharp
-using XmobiTea.GearN;
-using XmobiTea.GearN.Constant;
-using XmobiTea.GearN.Entity.Models;
-
-// requestData: DashboardModels.ChangePasswordAdminAccountRequestData đã build theo dto/DASHBOARD.md
-var res = await GNNetwork.dashboard.changePasswordAdminAccountAsync(requestData);
-if (res.returnCode != ReturnCode.Ok) return;
-if (res.errorCode != ErrorCode.Ok) return;
-// res.responseData có typed payload
-```
+| `changePasswordAdminAccount` | [DashboardModels.ChangePasswordAdminAccountRequestData:988-997](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#changepasswordadminaccountrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.changePasswordAdminAccount.selfEnable` | `Ok`, `AccountNotFound` |
+| `getAdminAccountList` | [DashboardModels.GetAdminAccountListRequestData:998-1003](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getadminaccountlistrequestdata) | [DashboardModels.GetAdminAccountListResponseData:1286-1298](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getadminaccountlistresponsedata) | `dashboard.getAdminAccountList.selfEnable` | `Ok` |
+| `getGameInformation` | [DashboardModels.GetGameInformationRequestData:1004-1012](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getgameinformationrequestdata) | [DashboardModels.GetGameInformationResponseData:1299-1318](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getgameinformationresponsedata) | `dashboard.getGameInformation.selfEnable` | `Ok`, `GameNotFound` |
+| `getGameList` | [DashboardModels.GetGameListRequestData:1013-1018](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getgamelistrequestdata) | [DashboardModels.GetGameListResponseData:1328-1340](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getgamelistresponsedata) | `dashboard.getGameList.selfEnable` | `Ok` |
+| `getMasterGameSettings` | [DashboardModels.GetMasterGameSettingsRequestData:1019-1024](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getmastergamesettingsrequestdata) | [DashboardModels.GetMasterGameSettingsResponseData:1341-1359](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getmastergamesettingsresponsedata) | `dashboard.getMasterGameSettings.selfEnable` | `Ok` |
+| `getSecretInfoInformation` | [DashboardModels.GetSecretInfoInformationRequestData:1025-1033](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getsecretinfoinformationrequestdata) | [DashboardModels.GetSecretInfoInformationResponseData:1360-1379](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getsecretinfoinformationresponsedata) | `dashboard.getSecretInfoInformation.selfEnable` | `Ok`, `SecretInfoNotFound` |
+| `getSecretInfoList` | [DashboardModels.GetSecretInfoListRequestData:1034-1039](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getsecretinfolistrequestdata) | [DashboardModels.GetSecretInfoListResponseData:1389-1401](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getsecretinfolistresponsedata) | `dashboard.getSecretInfoList.selfEnable` | `Ok` |
+| `getServerLog` | [DashboardModels.GetServerLogRequestData:1040-1049](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getserverlogrequestdata) | [DashboardModels.GetServerLogResponseData:1433-1441](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getserverlogresponsedata) | `dashboard.getServerLog.selfEnable` | `Ok` |
+| `createAdminAccount` | [DashboardModels.CreateAdminAccountRequestData:1050-1060](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#createadminaccountrequestdata) | [DashboardModels.CreateAdminAccountResponseData:1411-1423](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#createadminaccountresponsedata) | `dashboard.createAdminAccount.selfEnable` | `Ok`, `AccountUsernameExists` |
+| `createGame` | [DashboardModels.CreateGameRequestData:1061-1069](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#creategamerequestdata) | [DashboardModels.GameWithGameIdResponseData:1319-1327](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#gamewithgameidresponsedata) | `dashboard.createGame.selfEnable` | `Ok`, `GameExists` |
+| `createSecretInfo` | [DashboardModels.CreateSecretInfoRequestData:1070-1084](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#createsecretinforequestdata) | [DashboardModels.SecretInfoWithSecretKeyResponseData:1380-1388](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#secretinfowithsecretkeyresponsedata) | `dashboard.createSecretInfo.selfEnable` | `Ok`, `SecretInfoExists` |
+| `loginByAdminAccount` | [DashboardModels.LoginByAdminAccountRequestData:1085-1094](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#loginbyadminaccountrequestdata) | [DashboardModels.LoginByAdminAccountResponseData:1424-1432](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#loginbyadminaccountresponsedata) | `dashboard.loginByAdminAccount.selfEnable` | `Ok`, `AccountNotFound` |
+| `removeAdminAccount` | [DashboardModels.RemoveAdminAccountRequestData:1095-1103](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#removeadminaccountrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.removeAdminAccount.selfEnable` | `Ok`, `AccountNotFound` |
+| `setGameInformation` | [DashboardModels.SetGameInformationRequestData:1104-1122](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#setgameinformationrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.setGameInformation.selfEnable` | `Ok`, `GameNotFound` |
+| `setMasterGameSettings` | [DashboardModels.SetMasterGameSettingsRequestData:1123-1141](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#setmastergamesettingsrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.setMasterGameSettings.selfEnable` | `Ok` |
+| `setPasswordAdminAccount` | [DashboardModels.SetPasswordAdminAccountRequestData:1142-1151](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#setpasswordadminaccountrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.setPasswordAdminAccount.selfEnable` | `Ok`, `AccountNotFound` |
+| `setSecretInfoInformation` | [DashboardModels.SetSecretInfoInformationRequestData:1152-1168](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#setsecretinfoinformationrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.setSecretInfoInformation.selfEnable` | `Ok`, `SecretInfoNotFound` |
+| `setSecretKeyAdminAccount` | [DashboardModels.SetSecretKeyAdminAccountRequestData:1169-1178](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#setsecretkeyadminaccountrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.setSecretKeyAdminAccount.selfEnable` | `Ok`, `AccountNotFound`, `SecretInfoNotFound` |
+| `getAnalytics` | [DashboardModels.GetAnalyticsRequestData:1179-1195](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getanalyticsrequestdata) | [DashboardModels.GetAnalyticsResponseData:1579-1603](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getanalyticsresponsedata) | `dashboard.getAnalytics.selfEnable` | `Ok`, `ItemNotFound` |
+| `getUsernameAdminAccount` | [DashboardModels.GetUsernameAdminAccountRequestData:1196-1204](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getusernameadminaccountrequestdata) | [DashboardModels.GetUsernameAdminAccountResponseData:1604-1612](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getusernameadminaccountresponsedata) | `dashboard.getUsernameAdminAccount.selfEnable` | `Ok`, `AccountNotFound` |
+| `getEventCallbackCloudScript` | [DashboardModels.GetEventCallbackCloudScriptRequestData:1205-1210](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#geteventcallbackcloudscriptrequestdata) | [DashboardModels.GetEventCallbackCloudScriptResponseData:1640-1652](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#geteventcallbackcloudscriptresponsedata) | `dashboard.getEventCallbackCloudScript.selfEnable` | `Ok` |
+| `setEventCallbackCloudScript` | [DashboardModels.SetEventCallbackCloudScriptRequestData:1211-1220](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#seteventcallbackcloudscriptrequestdata) | [DashboardModels.SetEventCallbackCloudScriptResponseData:1653-1661](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#seteventcallbackcloudscriptresponsedata) | `dashboard.setEventCallbackCloudScript.selfEnable` | `Ok`, `ExecuteError` |
+| `resetStatisticsLeaderboard` | [DashboardModels.ResetStatisticsLeaderboardRequestData:1221-1234](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#resetstatisticsleaderboardrequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.resetStatisticsLeaderboard.selfEnable` | `Ok`, `KeyNotFound`, `OwnerTypeNotSupport`, `VersionInvalid` |
+| `getBackupStatisticsLeaderboardVersion` | [DashboardModels.GetBackupStatisticsLeaderboardVersionRequestData:1247-1257](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getbackupstatisticsleaderboardversionrequestdata) | [DashboardModels.GetBackupStatisticsLeaderboardVersionResponseData:1673-1685](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getbackupstatisticsleaderboardversionresponsedata) | `dashboard.getBackupStatisticsLeaderboardVersion.selfEnable` | `Ok`, `OwnerNotFound` |
+| `getServerGameData` | [DashboardModels.GetServerGameDataRequestData:1258-1274](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getservergamedatarequestdata) | [DashboardModels.GetServerGameDataResponseData:1686-1705](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#getservergamedataresponsedata) | `dashboard.getServerGameData.selfEnable` | `Ok` |
+| `deleteInDatabase` | [DashboardModels.DeleteInDatabaseRequestData:1235-1246](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#deleteindatabaserequestdata) | [DashboardModels.EmptyResponseData:1706-1710](/docs/reference/dto/dashboard/DASHBOARD_MODELS.md#emptyresponsedata) | `dashboard.deleteInDatabase.selfEnable` | `Ok`, `ItemNotFound` |

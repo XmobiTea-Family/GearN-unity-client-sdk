@@ -26,19 +26,19 @@ Nếu docs và dashboard khác nhau, dashboard thắng ở runtime; docs cần �
 ## API Group Index
 
 <!-- prettier-ignore -->
-| Group | Operation list | Notes |
-| --- | --- | --- |
-| Authenticate | [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md) | Chỉ có namespace client. Login/register thường là acting-on-unauth-user; xem rule trong dashboard. |
-| Dashboard | [API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md) | Chỉ có namespace client wrapper; admin context resolve từ admin auth token. |
-| Content | [API_CONTENT.md](/docs/reference/API_CONTENT.md) | Có client/server/admin; ownership không rõ như player entity. |
-| Multiplayer | [API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md) | Có client/server/admin; dùng HTTP, không dùng socket cho ticket lifecycle. |
-| StoreInventory | [API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md) | Có client/server/admin; purchase/receipt flow cần secret đúng trust boundary. |
-| Inventory | [API_INVENTORY.md](/docs/reference/API_INVENTORY.md) | Có client/server/admin; owner có thể là master/game/character/group tùy DTO. |
-| Group | [API_GROUP.md](/docs/reference/API_GROUP.md) | Có client/server/admin; group lifecycle một số flow nằm ở GamePlayer/CharacterPlayer. |
-| MasterPlayer | [API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md) | Có client/server/admin; client có thể bỏ `userId` để target current user. |
-| GamePlayer | [API_GAME_PLAYER.md](/docs/reference/API_GAME_PLAYER.md) | Có client/server/admin; scoped theo game environment. |
-| CharacterPlayer | [API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md) | Có client/server/admin; thường phải truyền `characterId`. |
-| CloudScript | [API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md) | Có client/server/admin; execute/publish phải theo trust boundary. |
+| Group | Guide | Operation list | Notes |
+| --- | --- | --- | --- |
+| Authenticate | [AUTHENTICATE.md](/docs/guides/AUTHENTICATE.md) | [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md) | Chỉ có namespace client. Login/register thường là acting-on-unauth-user; xem rule trong dashboard. |
+| Dashboard | [DASHBOARD.md](/docs/guides/DASHBOARD.md) | [API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md) | Chỉ có namespace client wrapper; admin context resolve từ admin auth token. |
+| Content | [CONTENT.md](/docs/guides/CONTENT.md) | [API_CONTENT.md](/docs/reference/API_CONTENT.md) | Có client/server/admin; ownership không rõ như player entity. |
+| Multiplayer | [MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md) | [API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md) | Có client/server/admin; dùng HTTP, không dùng socket cho ticket lifecycle. |
+| StoreInventory | [STORE_INVENTORY.md](/docs/guides/STORE_INVENTORY.md) | [API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md) | Có client/server/admin; purchase/receipt flow cần secret đúng trust boundary. |
+| Inventory | [INVENTORY.md](/docs/guides/INVENTORY.md) | [API_INVENTORY.md](/docs/reference/API_INVENTORY.md) | Có client/server/admin; owner có thể là master/game/character/group tùy DTO. |
+| Group | [GROUP.md](/docs/guides/GROUP.md) | [API_GROUP.md](/docs/reference/API_GROUP.md) | Có client/server/admin; group lifecycle một số flow nằm ở GamePlayer/CharacterPlayer. |
+| MasterPlayer | [MASTER_PLAYER.md](/docs/guides/MASTER_PLAYER.md) | [API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md) | Có client/server/admin; client có thể bỏ `userId` để target current user. |
+| GamePlayer | [GAME_PLAYER.md](/docs/guides/GAME_PLAYER.md) | [API_GAME_PLAYER.md](/docs/reference/API_GAME_PLAYER.md) | Có client/server/admin; scoped theo game environment. |
+| CharacterPlayer | [CHARACTER_PLAYER.md](/docs/guides/CHARACTER_PLAYER.md) | [API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md) | Có client/server/admin; thường phải truyền `characterId`. |
+| CloudScript | [CLOUDSCRIPT.md](/docs/guides/CLOUDSCRIPT.md) | [API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md) | Có client/server/admin; execute/publish phải theo trust boundary. |
 
 ## Operation name convention
 

@@ -1,5 +1,7 @@
 # Domain Relationship Map
 
+> Domain map cho maintainer / người thiết kế flow cross-domain. Nếu chỉ cần chọn đúng API group để gọi từ Unity client, đọc [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md) hoặc [docs/reference/API_INDEX.md](/docs/reference/API_INDEX.md) sẽ rẻ token hơn.
+
 This document explains how the client SDK organizes GearN server domains and how a consuming Unity project should think about them.
 
 ## Core Domain Graph

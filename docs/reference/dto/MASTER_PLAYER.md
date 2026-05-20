@@ -2,7 +2,7 @@
 
 Master-player account: identity linking, profile, contact info, external providers.
 
-Related API reference: [API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md).
+Related guide: [MASTER_PLAYER.md](/docs/guides/MASTER_PLAYER.md). Related API reference: [API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md).
 
 Mỗi section bên dưới là 1 class DTO. Field table cho biết: tên field, TS type, `required`/optional, doc comment, ràng buộc length/range/default.
 

@@ -4,9 +4,26 @@ SDK Unity/C# client cho GearN Server.
 
 `GNNetwork` là entrypoint public chính. Khi Unity runtime load SDK, `GNNetwork` tự đọc `GNServerSettings` từ `Resources/GNServerSettings`, tạo networking peer, cache auth state, và expose 11 API group: `GNNetwork.authenticate`, `GNNetwork.masterPlayer`, `GNNetwork.gamePlayer`, `GNNetwork.characterPlayer`, `GNNetwork.group`, `GNNetwork.inventory`, `GNNetwork.storeInventory`, `GNNetwork.content`, `GNNetwork.multiplayer`, `GNNetwork.cloudScript`, `GNNetwork.dashboard`.
 
-> **AI / code assistant:** đọc [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md) trước, rồi [docs/RULES.md](/docs/RULES.md) cho rule chi tiết về route, permission, self/other-self, socket và error. Machine-readable manifest: [docs/ai-manifest.json](/docs/ai-manifest.json).
+> **Mục tiêu chính của repo này:** đây là package để import vào game Unity khác. Nếu bạn chỉ cần dùng SDK, **đừng bắt đầu từ `Runtime/`**.
+
+> **AI / code assistant:** đọc [docs/START_HERE.md](/docs/START_HERE.md) trước, rồi [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md) và [docs/RULES.md](/docs/RULES.md).
 
 Package Unity: `com.xmobitea.changx.gearn-unity-client-sdk`. Rule canonical: [docs/RULES.md](/docs/RULES.md).
+
+## Start Here
+
+<!-- prettier-ignore -->
+| Tôi cần... | Mở file này |
+| --- | --- |
+| Luồng đọc tối thiểu cho package consumer | [docs/START_HERE.md](/docs/START_HERE.md) |
+| One-page reference cho AI | [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md) |
+| Rule canonical (route, permission, socket, error) | [docs/RULES.md](/docs/RULES.md) |
+| Chọn API group / method | [docs/reference/API_INDEX.md](/docs/reference/API_INDEX.md) |
+| Scenario end-to-end | [docs/COOKBOOK.md](/docs/COOKBOOK.md) |
+| DTO field cụ thể | [docs/reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md) |
+| Tích hợp nhanh vào game | [INTEGRATION_GUIDE.md](/INTEGRATION_GUIDE.md) |
+
+Không cần đọc [ARCHITECTURE.md](/ARCHITECTURE.md), [REQUEST_FLOW.md](/REQUEST_FLOW.md), [DEVELOPMENT.md](/DEVELOPMENT.md), hoặc `Runtime/` nếu mục tiêu chỉ là gọi SDK đúng từ game.
 
 ## 1. Yêu cầu
 

@@ -6,6 +6,27 @@ File này là canonical source cho mọi rule cross-cutting: config, route/permi
 
 ---
 
+## Quick-jump
+
+Dùng bảng này để nhảy thẳng vào section cần mà không đọc cả file. Khi dùng Read tool: `offset = startLine - 1`, `limit = endLine - startLine + 1`.
+
+<!-- prettier-ignore -->
+| Section | Nội dung | Range |
+| --- | --- | --- |
+| §1 | Config / Bootstrap (GNServerSettings, init, gameId) | [RULES.md:30-39](docs/RULES.md) |
+| §2 | Response checking 2-tier, operation base classes | [RULES.md:40-86](docs/RULES.md) |
+| §3 | Route = trust boundary (client / server / admin) | [RULES.md:87-112](docs/RULES.md) |
+| §4 | self vs other-self (chỉ áp dụng route client) | [RULES.md:113-131](docs/RULES.md) |
+| §5 | Phân biệt SecretInvalid / OperationInvalid / OperationNotAllow | [RULES.md:132-142](docs/RULES.md) |
+| §6 | Permission flags + checklist OperationNotAllow | [RULES.md:143-188](docs/RULES.md) |
+| §7 | Auth & Socket flow (connect, auth, re-auth) | [RULES.md:189-218](docs/RULES.md) |
+| §8 | Method signature & override params | [RULES.md:219-252](docs/RULES.md) |
+| §9 | Platform & transport (compile define, MessageType) | [RULES.md:253-263](docs/RULES.md) |
+| §10 | Anti-patterns & pitfalls (15 items) | [RULES.md:264-286](docs/RULES.md) |
+| §11 | Canonical sources — thứ tự ưu tiên khi conflict | [RULES.md:287-306](docs/RULES.md) |
+
+---
+
 ## 1. Config / Bootstrap
 
 - Public entrypoint chính là static class `GNNetwork` trong namespace `XmobiTea.GearN`.
@@ -55,6 +76,7 @@ Rule cứng:
 - Khi tích hợp SDK bình thường, gọi public API qua `GNNetwork.<group>.<method>Async(requestData, ...)`; không tự build `CustomOperationRequestAbstract<T>` trừ khi đang viết/debug SDK cấp thấp.
 - `CustomOperationRequestAbstract<TRequestData>` expose `requestData`; `build()` serialize `requestData` vào `OperationRequest.parameters`.
 - `CustomOperationResponseAbstract<TResponseData>` expose `responseData`; SDK chỉ deserialize `responseData` khi `returnCode == ReturnCode.Ok`.
+- Kiểu `responseData` được suy ra từ generic trong `CustomOperationResponseAbstract<TResponseData>`; phần nằm trong cặp `<>` chính là type của `response.responseData`.
 - Helper check lỗi chung nên nhận `CustomOperationResponse`, không nhận `CustomOperationResponseAbstract<T>`. Chỉ dùng generic abstract/response class cụ thể khi thật sự cần đọc typed `responseData`.
 - Base class không quyết định route/permission. Route đến từ namespace gọi (`GNNetwork.<group>`, `.server`, `.admin`) và operation concrete.
 
@@ -274,10 +296,9 @@ Khi sinh code:
 
 1. **API reference theo domain** (`docs/reference/API_<GROUP>.md`).
 2. **Guide theo domain** (`docs/guides/<GROUP>.md`).
-3. **RULES.md** + [ai-manifest.json](/docs/ai-manifest.json).
-4. **DTO field table** (`docs/reference/dto/<DOMAIN>.md` hoặc grep `DTO_INDEX.md`).
-5. **ENUMS.md**.
-6. **`Runtime/**/\*.cs`\*\* — fallback nếu docs chưa cover.
+3. **DTO field table** (`docs/reference/dto/<DOMAIN>.md` hoặc grep `DTO_INDEX.md`).
+4. **ENUMS.md**.
+5. **`Runtime/**/\*.cs`\*\* — fallback nếu docs chưa cover.
 
 Chỉ đọc implementation chi tiết khi sửa SDK, debug nội bộ, hoặc verify public contract mà docs chưa đủ.
 
@@ -292,4 +313,3 @@ Chỉ đọc implementation chi tiết khi sửa SDK, debug nội bộ, hoặc v
 - [reference/EVENTS.md](/docs/reference/EVENTS.md) — realtime event handler
 - [reference/CONFIG.md](/docs/reference/CONFIG.md) — `GNServerSettings` schema
 - [reference/ENUMS.md](/docs/reference/ENUMS.md) — enum numeric value
-- [ai-manifest.json](/docs/ai-manifest.json) — machine-readable manifest

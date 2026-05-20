@@ -38,7 +38,7 @@ Typed response (trả từ mọi `*Async()` và callback path) expose field `pub
 - `res.errorCode: number` — tầng 2 (chỉ set khi `returnCode == Ok`)
 - `res.invalidMembers: InvalidMember[]` — khi `returnCode == InvalidRequestParameters`
 - `res.debugMessage: string` — backend debug message
-- `res.responseData: T` — typed payload, chỉ set khi `returnCode == Ok`
+- `res.responseData: T` — typed payload. Khi code tích hợp đọc kết quả nghiệp vụ, chỉ dùng sau khi `returnCode == Ok` và `errorCode == Ok`.
 
 **Rule cứng:**
 

@@ -1,6 +1,6 @@
 # API Reference: AuthenticateApi
 
-Player login (account, social, device id), register, refresh auth token.
+Bảng contract cho `AuthenticateApi`. Bắt đầu từ [guides/AUTHENTICATE.md](/docs/guides/AUTHENTICATE.md) để chọn method, DTO, và auth/socket flow trước khi đọc các row này.
 
 - Domain guide: [guides/AUTHENTICATE.md](/docs/guides/AUTHENTICATE.md)
 - DTO shapes: [dto/AUTHENTICATE.md](/docs/reference/dto/AUTHENTICATE.md)
@@ -8,72 +8,26 @@ Player login (account, social, device id), register, refresh auth token.
 - Error handling: [ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md)
 - Permission rules: [PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md)
 
-## Namespaces
-
-- `GNNetwork.authenticate` — `RequestRole.Client`
-
-## Convention
-
-Mỗi method dưới đây có 2 form — callback và `*Async()` Task. Ưu tiên `*Async()`.
-
-```text
-// Callback
-GNNetwork.authenticate.<method>(requestData, onResponse?, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?);
-
-// Async
-var res = await GNNetwork.authenticate.<method>Async(requestData, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?);
-```
-
-Param chung:
-
-<!-- prettier-ignore -->
-| Param | Type | Optional | Notes |
-| --- | --- | --- | --- |
-| `requestData` | domain-specific (xem bảng dưới) | no | Payload chính |
-| `onResponse` | `Action1<TResponse>` | yes | Chỉ có ở callback form |
-| `overrideAuthToken` | `string` | yes | Override `authToken` cache cho request này |
-| `overrideSecretKey` | `string` | yes | Override secret key mặc định của route |
-| `customTags` | `GNHashtable` | yes | Tags gắn vào request, backend có thể log/route |
-| `timeout` | `int` | yes | Timeout giây; default = `OperationRequest.defaultTimeOut` |
-
-Response class expose field: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`. Xem [ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
-
-> `server` / `admin` namespace hiện tại không có method public — giữ để đối xứng API.
-
 ## Client methods (`GNNetwork.authenticate.*`)
 
 <!-- prettier-ignore -->
-| Method | Request DTO | Async form | Response class | Default Permission Rules |
+| Method | Request Data DTO Link | Response Data DTO Link | Default Permission Rules | Error Code có thể gặp |
 | --- | --- | --- | --- | --- |
-| `loginByAccount` | `AuthenticateModels.LoginByAccountRequestData` | `loginByAccountAsync(...)` | `AuthenticateResponseModels.LoginByAccountOperationResponse` | `authenticate.loginByAccount.selfEnable` |
-| `loginByAndroidDeviceId` | `AuthenticateModels.LoginByAndroidDeviceIdRequestData` | `loginByAndroidDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByAndroidDeviceIdOperationResponse` | `authenticate.loginByAndroidDeviceId.selfEnable` |
-| `loginByApple` | `AuthenticateModels.LoginByAppleRequestData` | `loginByAppleAsync(...)` | `AuthenticateResponseModels.LoginByAppleOperationResponse` | `authenticate.loginByApple.selfEnable` |
-| `loginByCustomDeviceId` | `AuthenticateModels.LoginByCustomDeviceIdRequestData` | `loginByCustomDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByCustomDeviceIdOperationResponse` | `authenticate.loginByCustomDeviceId.selfEnable` |
-| `loginByCustomId` | `AuthenticateModels.LoginByCustomIdRequestData` | `loginByCustomIdAsync(...)` | `AuthenticateResponseModels.LoginByCustomIdOperationResponse` | `authenticate.loginByCustomId.selfEnable` |
-| `loginByEditorDeviceId` | `AuthenticateModels.LoginByEditorDeviceIdRequestData` | `loginByEditorDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByEditorDeviceIdOperationResponse` | `authenticate.loginByEditorDeviceId.selfEnable` |
-| `loginByFacebook` | `AuthenticateModels.LoginByFacebookRequestData` | `loginByFacebookAsync(...)` | `AuthenticateResponseModels.LoginByFacebookOperationResponse` | `authenticate.loginByFacebook.selfEnable` |
-| `loginByGenericService` | `AuthenticateModels.LoginByGenericServiceRequestData` | `loginByGenericServiceAsync(...)` | `AuthenticateResponseModels.LoginByGenericServiceOperationResponse` | `authenticate.loginByGenericService.selfEnable` |
-| `loginByGoogle` | `AuthenticateModels.LoginByGoogleRequestData` | `loginByGoogleAsync(...)` | `AuthenticateResponseModels.LoginByGoogleOperationResponse` | `authenticate.loginByGoogle.selfEnable` |
-| `loginByGooglePlayGameService` | `AuthenticateModels.LoginByGooglePlayGameServiceRequestData` | `loginByGooglePlayGameServiceAsync(...)` | `AuthenticateResponseModels.LoginByGooglePlayGameServiceOperationResponse` | `authenticate.loginByGooglePlayGameService.selfEnable` |
-| `loginByGameCenter` | `AuthenticateModels.LoginByGameCenterRequestData` | `loginByGameCenterAsync(...)` | `AuthenticateResponseModels.LoginByGameCenterOperationResponse` | `authenticate.loginByGameCenter.selfEnable` |
-| `loginByiOSDeviceId` | `AuthenticateModels.LoginByiOSDeviceIdRequestData` | `loginByiOSDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByiOSDeviceIdOperationResponse` | `authenticate.loginByiOSDeviceId.selfEnable` |
-| `loginByLinuxDeviceId` | `AuthenticateModels.LoginByLinuxDeviceIdRequestData` | `loginByLinuxDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByLinuxDeviceIdOperationResponse` | `authenticate.loginByLinuxDeviceId.selfEnable` |
-| `loginByMacOSDeviceId` | `AuthenticateModels.LoginByMacOSDeviceIdRequestData` | `loginByMacOSDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByMacOSDeviceIdOperationResponse` | `authenticate.loginByMacOSDeviceId.selfEnable` |
-| `loginByWindowsDeviceId` | `AuthenticateModels.LoginByWindowsDeviceIdRequestData` | `loginByWindowsDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByWindowsDeviceIdOperationResponse` | `authenticate.loginByWindowsDeviceId.selfEnable` |
-| `loginByWindowsPhoneDeviceId` | `AuthenticateModels.LoginByWindowsPhoneDeviceIdRequestData` | `loginByWindowsPhoneDeviceIdAsync(...)` | `AuthenticateResponseModels.LoginByWindowsPhoneDeviceIdOperationResponse` | `authenticate.loginByWindowsPhoneDeviceId.selfEnable` |
-| `registerAccount` | `AuthenticateModels.RegisterAccountRequestData` | `registerAccountAsync(...)` | `AuthenticateResponseModels.RegisterAccountOperationResponse` | `authenticate.registerAccount.selfEnable` |
-| `refreshAuthToken` | `AuthenticateModels.RefreshAuthTokenRequestData` | `refreshAuthTokenAsync(...)` | `AuthenticateResponseModels.RefreshAuthTokenOperationResponse` | `authenticate.refreshAuthToken.selfEnable` |
-
-## Ví dụ tối thiểu
-
-```csharp
-using XmobiTea.GearN;
-using XmobiTea.GearN.Constant;
-using XmobiTea.GearN.Entity.Models;
-
-// requestData: AuthenticateModels.LoginByAccountRequestData đã build theo dto/AUTHENTICATE.md
-var res = await GNNetwork.authenticate.loginByAccountAsync(requestData);
-if (res.returnCode != ReturnCode.Ok) return;
-if (res.errorCode != ErrorCode.Ok) return;
-// res.responseData có typed payload
-```
+| `loginByAccount` | [AuthenticateModels.LoginByAccountRequestData:30-44](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyaccountrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByAccount.selfEnable` | `Ok`, `AccountNotFound`, `AccountPasswordWrong`, `PlayerBan` |
+| `loginByAndroidDeviceId` | [AuthenticateModels.LoginByAndroidDeviceIdRequestData:45-59](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyandroiddeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByAndroidDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByApple` | [AuthenticateModels.LoginByAppleRequestData:60-74](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyapplerequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByApple.selfEnable` | `Ok`, `AccountNotFound`, `VerifyTokenError`, `PlayerBan` |
+| `loginByCustomDeviceId` | [AuthenticateModels.LoginByCustomDeviceIdRequestData:75-89](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbycustomdeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByCustomDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByCustomId` | [AuthenticateModels.LoginByCustomIdRequestData:90-104](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbycustomidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByCustomId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByEditorDeviceId` | [AuthenticateModels.LoginByEditorDeviceIdRequestData:105-119](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyeditordeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByEditorDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByFacebook` | [AuthenticateModels.LoginByFacebookRequestData:120-134](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyfacebookrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByFacebook.selfEnable` | `Ok`, `AccountNotFound`, `VerifyTokenError`, `PlayerBan` |
+| `loginByGenericService` | [AuthenticateModels.LoginByGenericServiceRequestData:135-150](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbygenericservicerequestdata) | [AuthenticateModels.GenericServiceAuthenticateResponseData:316-332](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#genericserviceauthenticateresponsedata) | `authenticate.loginByGenericService.selfEnable` | `Ok`, `AccountNotFound`, `VerifyFailed`, `PlayerBan` |
+| `loginByGoogle` | [AuthenticateModels.LoginByGoogleRequestData:151-166](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbygooglerequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByGoogle.selfEnable` | `Ok`, `AccountNotFound`, `VerifyTokenError`, `PlayerBan` |
+| `loginByGooglePlayGameService` | [AuthenticateModels.LoginByGooglePlayGameServiceRequestData:167-181](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbygoogleplaygameservicerequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByGooglePlayGameService.selfEnable` | `Ok`, `AccountNotFound`, `VerifyTokenError`, `PlayerBan` |
+| `loginByGameCenter` | [AuthenticateModels.LoginByGameCenterRequestData:182-201](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbygamecenterrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByGameCenter.selfEnable` | `Ok`, `AccountNotFound`, `VerifyTokenError`, `PlayerBan` |
+| `loginByiOSDeviceId` | [AuthenticateModels.LoginByiOSDeviceIdRequestData:202-216](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyiosdeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByiOSDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByLinuxDeviceId` | [AuthenticateModels.LoginByLinuxDeviceIdRequestData:217-231](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbylinuxdeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByLinuxDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByMacOSDeviceId` | [AuthenticateModels.LoginByMacOSDeviceIdRequestData:232-246](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbymacosdeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByMacOSDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByWindowsDeviceId` | [AuthenticateModels.LoginByWindowsDeviceIdRequestData:247-261](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbywindowsdeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByWindowsDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `loginByWindowsPhoneDeviceId` | [AuthenticateModels.LoginByWindowsPhoneDeviceIdRequestData:262-276](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbywindowsphonedeviceidrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.loginByWindowsPhoneDeviceId.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |
+| `registerAccount` | [AuthenticateModels.RegisterAccountRequestData:277-291](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#registeraccountrequestdata) | [AuthenticateModels.AuthenticateResponseData:298-315](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#authenticateresponsedata) | `authenticate.registerAccount.selfEnable` | `Ok`, `AccountUsernameExists` |
+| `refreshAuthToken` | [AuthenticateModels.RefreshAuthTokenRequestData:292-297](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#refreshauthtokenrequestdata) | [AuthenticateModels.RefreshAuthTokenResponseData:333-346](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#refreshauthtokenresponsedata) | `authenticate.refreshAuthToken.selfEnable` | `Ok`, `AccountNotFound`, `PlayerBan` |

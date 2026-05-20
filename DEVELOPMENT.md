@@ -1,5 +1,7 @@
 # Development Notes
 
+> Maintainer-only note. File này dành cho người sửa package; không phải entry point cho AI đang sinh code tích hợp SDK vào game.
+
 ## Repository Layout
 
 - `Runtime/`: package runtime source
@@ -10,7 +12,7 @@
 
 1. Open a Unity project that references this package.
 2. Ensure `Resources/GNServerSettings.asset` exists.
-3. Configure server address, ports, transport flags, and secret keys.
+3. Configure server address, ports, transport flags, và `secretKey` phù hợp với trust boundary của app/tool đang chạy.
 4. Play the Unity project and use `GNDebug` output to inspect request flow.
 
 ## Important Unity Constraints

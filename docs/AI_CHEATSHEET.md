@@ -4,6 +4,8 @@ One-page reference cho AI agent / code assistant. Đọc file này trước, đ�
 
 > Package: `com.xmobitea.changx.gearn-unity-client-sdk` · Entry point: `GNNetwork` (static class) · Stack: Unity/C#, HTTP + socket io realtime.
 
+> **Điều hướng nhanh:** Biết task cụ thể → [AGENTS.md §6 Quick Task Map](/AGENTS.md#6-quick-task-map). Cần rule route/permission/socket → [RULES.md quick-jump](/docs/RULES.md#quick-jump). Cần scenario end-to-end → [COOKBOOK.md Index](/docs/COOKBOOK.md#index) (có range-line từng scenario).
+
 ---
 
 ## 1. Mandatory pattern (sao chép & dùng)
@@ -30,37 +32,51 @@ if (response.errorCode != ErrorCode.Ok) return;   // business
 UseResult(response.responseData);
 ```
 
-`Ok == 1` ở **cả** `ReturnCode` và `ErrorCode`. **KHÔNG** giả định `Ok == 0`.
+`Ok == 1` ở **cả** `ReturnCode` và `ErrorCode`. **KHÔNG** giả định `Ok == 0`. **KHÔNG** đọc `errorCode` / `responseData` khi `returnCode != Ok`.
+
+**Throw vs early-return**: cả 2 style đều OK miễn giữ thứ tự `returnCode` → `errorCode`. KHÔNG dùng `try/catch` chung 1 lần cho cả 2 tầng (mất ngữ nghĩa transport vs business). KHÔNG gộp `if (returnCode != Ok || errorCode != Ok)` (mất khả năng log riêng từng tầng).
+
+**CloudScript variant** (chỉ cho `cloudScript.executeFunctionAsync`): thêm 2 tầng sau khi pass 2-tier trên:
+
+```csharp
+if (!string.IsNullOrEmpty(response.responseData.errorMessage)) return;     // script throw
+var status = (ExecuteResponseStatus)response.responseData.status;
+if (status != ExecuteResponseStatus.Ok) return;                            // script trả status khác Ok
+var result = response.responseData.functionResult;
+```
 
 ---
 
-## 2. Decision tree: tôi cần làm gì?
+## 2. Decision tree: What I need do?
 
 <!-- prettier-ignore -->
-| Tôi muốn... | Mở file |
-| --- | --- |
-| Login / register / refresh token | [guides/AUTHENTICATE.md](/docs/guides/AUTHENTICATE.md) · [reference/API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md) |
-| MasterPlayer account chung nhiều game: identity, external link/unlink, profile, statistics, currencies, player data, email/push, segment/tag/ban | [guides/MASTER_PLAYER.md](/docs/guides/MASTER_PLAYER.md) · [reference/API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md) |
-| GamePlayer account theo game environment: profile, friends, groups, inventory owner, online status, statistics/currencies/data | [guides/GAME_PLAYER.md](/docs/guides/GAME_PLAYER.md) · [reference/API_GAME_PLAYER.md](/docs/reference/API_GAME_PLAYER.md) |
-| CharacterPlayer nhân vật thuộc GamePlayer: profile riêng, statistics/currencies/data, friends/groups/inventory owner theo character | [guides/CHARACTER_PLAYER.md](/docs/guides/CHARACTER_PLAYER.md) · [reference/API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md) |
-| Inventory item: query, owner, amount, statistics | [guides/INVENTORY.md](/docs/guides/INVENTORY.md) · [reference/API_INVENTORY.md](/docs/reference/API_INVENTORY.md) |
-| Group metadata, member, message, group inventory | [guides/GROUP.md](/docs/guides/GROUP.md) · [reference/API_GROUP.md](/docs/reference/API_GROUP.md) |
-| Store catalog, buy, present, validate receipt | [guides/STORE_INVENTORY.md](/docs/guides/STORE_INVENTORY.md) · [reference/API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md) |
-| Matchmaking ticket / queue / match query | [guides/MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md) · [reference/API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md) |
-| Content config + upload/download file metadata | [guides/CONTENT.md](/docs/guides/CONTENT.md) · [reference/API_CONTENT.md](/docs/reference/API_CONTENT.md) |
-| CloudScript: viết script, publish version, execute function | [cloudScript/CLOUDSCRIPT_USAGE.md](/docs/cloudScript/CLOUDSCRIPT_USAGE.md) · [guides/CLOUDSCRIPT.md](/docs/guides/CLOUDSCRIPT.md) · [reference/API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md) |
-| Admin login, secret/maintenance/analytics | [guides/DASHBOARD.md](/docs/guides/DASHBOARD.md) · [reference/API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md) |
-| Realtime event (friend, group, message) | [reference/EVENTS.md](/docs/reference/EVENTS.md) |
-| Viết custom DTO / payload event bằng `[DataMember]`, `[StringDataMember]`, `[NumberDataMember]`, `[BooleanDataMember]`, `[GNHashtableDataMember]`, `[GNArrayDataMember]` | [reference/DATAMEMBER.md](/docs/reference/DATAMEMBER.md) |
-| Gặp `CustomOperationRequestAbstract<T>` / `CustomOperationResponseAbstract<T>` trong DTO reference | [reference/OPERATION_BASES.md](/docs/reference/OPERATION_BASES.md) |
-| Tra DTO field theo class | [reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md) hoặc [reference/dto/](/docs/reference/dto/) |
-| Enum value numeric | [reference/ENUMS.md](/docs/reference/ENUMS.md) |
-| Config field của `GNServerSettings` | [reference/CONFIG.md](/docs/reference/CONFIG.md) |
-| Permission flag / `OperationNotAllow` | [reference/PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md) · [RULES.md § 6](/docs/RULES.md#6-permission-flags) |
-| Cách check error / retry / debug | [reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md) |
-| Scenario end-to-end | [COOKBOOK.md](/docs/COOKBOOK.md) |
-| Rule chung (route, permission, self/other-self, socket) | [RULES.md](/docs/RULES.md) |
-| Machine-readable manifest cho tooling | [ai-manifest.json](/docs/ai-manifest.json) |
+| Tôi muốn... | Đọc nhanh (line range) | Full file |
+| --- | --- | --- |
+| Login / register / refresh token | [AUTHENTICATE.md:36-76](/docs/guides/AUTHENTICATE.md) — §4 Chọn Method | [guides/AUTHENTICATE.md](/docs/guides/AUTHENTICATE.md) · [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md) |
+| Minimal login pattern + ví dụ | [AUTHENTICATE.md:139-241](/docs/guides/AUTHENTICATE.md) — §8-9 | — |
+| MasterPlayer account chung nhiều game: identity, external link/unlink, profile, statistics, currencies, player data, email/push, segment/tag/ban | [MASTER_PLAYER.md:69-187](/docs/guides/MASTER_PLAYER.md) — §4 Chọn Method | [guides/MASTER_PLAYER.md](/docs/guides/MASTER_PLAYER.md) · [API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md) |
+| GamePlayer đọc profile/field | [GAME_PLAYER.md:104-127](/docs/guides/GAME_PLAYER.md) — §5 bảng đọc 1 player | [guides/GAME_PLAYER.md](/docs/guides/GAME_PLAYER.md) · [API_GAME_PLAYER.md](/docs/reference/API_GAME_PLAYER.md) |
+| GamePlayer friend/group lifecycle | [GAME_PLAYER.md:146-159](/docs/guides/GAME_PLAYER.md) — §5 bảng lifecycle | — |
+| GamePlayer mutation (currency, statistics, data) | [GAME_PLAYER.md:161-177](/docs/guides/GAME_PLAYER.md) — §5 bảng mutation | — |
+| GamePlayer search / leaderboard | [GAME_PLAYER.md:128-144](/docs/guides/GAME_PLAYER.md) — §5 bảng search | — |
+| CharacterPlayer nhân vật thuộc GamePlayer | [CHARACTER_PLAYER.md:79-229](/docs/guides/CHARACTER_PLAYER.md) — §4-5 (namespace + 4 method table) | [guides/CHARACTER_PLAYER.md](/docs/guides/CHARACTER_PLAYER.md) · [API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md) |
+| Inventory item: query, owner, amount, statistics | [INVENTORY.md:36-123](/docs/guides/INVENTORY.md) — §3-4 | [guides/INVENTORY.md](/docs/guides/INVENTORY.md) · [API_INVENTORY.md](/docs/reference/API_INVENTORY.md) |
+| Group metadata, member, message, group inventory | [GROUP.md:64-144](/docs/guides/GROUP.md) — §4-5 Chọn Method | [guides/GROUP.md](/docs/guides/GROUP.md) · [API_GROUP.md](/docs/reference/API_GROUP.md) |
+| Store catalog, buy, present, validate receipt | [STORE_INVENTORY.md:30-97](/docs/guides/STORE_INVENTORY.md) — §3-4 | [guides/STORE_INVENTORY.md](/docs/guides/STORE_INVENTORY.md) · [API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md) |
+| Matchmaking ticket / queue / match query | [MULTIPLAYER.md:29-78](/docs/guides/MULTIPLAYER.md) — §3-4 | [guides/MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md) · [API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md) |
+| Content config + upload/download file metadata | [CONTENT.md:28-71](/docs/guides/CONTENT.md) — §3-4 | [guides/CONTENT.md](/docs/guides/CONTENT.md) · [API_CONTENT.md](/docs/reference/API_CONTENT.md) |
+| CloudScript: viết script, publish version, execute function | [CLOUDSCRIPT.md:56-81](/docs/guides/CLOUDSCRIPT.md) — §4 Chọn Method | [cloudScript/CLOUDSCRIPT_USAGE.md](/docs/cloudScript/CLOUDSCRIPT_USAGE.md) · [guides/CLOUDSCRIPT.md](/docs/guides/CLOUDSCRIPT.md) · [API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md) |
+| Admin login, secret/maintenance/analytics | [DASHBOARD.md:39-113](/docs/guides/DASHBOARD.md) — §4 Chọn Method | [guides/DASHBOARD.md](/docs/guides/DASHBOARD.md) · [API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md) |
+| Realtime event (friend, group, message) | — | [reference/EVENTS.md](/docs/reference/EVENTS.md) |
+| Viết custom DTO / payload event bằng `[DataMember]` | — | [reference/DATAMEMBER.md](/docs/reference/DATAMEMBER.md) |
+| Gặp `CustomOperationRequestAbstract<T>` / `CustomOperationResponseAbstract<T>` | — | [reference/OPERATION_BASES.md](/docs/reference/OPERATION_BASES.md) |
+| Tra DTO field theo class | — | [reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md) hoặc [reference/dto/](/docs/reference/dto/) |
+| Enum value numeric | — | [reference/ENUMS.md](/docs/reference/ENUMS.md) |
+| Config field của `GNServerSettings` | — | [reference/CONFIG.md](/docs/reference/CONFIG.md) |
+| Permission flag / `OperationNotAllow` | — | [reference/PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md) · [RULES.md § 6](/docs/RULES.md#6-permission-flags) |
+| Cách check error / retry / debug | — | [reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md) |
+| Scenario end-to-end (cookbook) | [COOKBOOK.md Index:7-29](/docs/COOKBOOK.md) — đọc Index để lấy range rồi nhảy thẳng | [COOKBOOK.md](/docs/COOKBOOK.md) |
+| Rule chung (route, permission, self/other-self, socket) | [RULES.md quick-jump:9-27](/docs/RULES.md) — đọc bảng quick-jump rồi nhảy đúng section | [RULES.md](/docs/RULES.md) |
 
 ---
 
@@ -101,7 +117,7 @@ Ngoại lệ: DashboardApi public wrapper vẫn đi RequestRole.Client; backend 
 GNNetwork.authenticate.loginByAccount(requestData, onResponse, overrideAuthToken, overrideSecretKey, customTags, timeout);
 
 // Async form (preferred)
-var res = await GNNetwork.authenticate.loginByAccountAsync(requestData, overrideAuthToken, overrideSecretKey, customTags, timeout);
+var response = await GNNetwork.authenticate.loginByAccountAsync(requestData, overrideAuthToken, overrideSecretKey, customTags, timeout);
 ```
 
 <!-- prettier-ignore -->
@@ -171,7 +187,7 @@ Anti-patterns đầy đủ: [RULES.md § 10](/docs/RULES.md#10-anti-patterns--pi
 
 ## 8. Liên kết quan trọng
 
-- Single-source-of-truth rules: [RULES.md](/docs/RULES.md)
-- AI entry guide chi tiết: [../AGENTS.md](/AGENTS.md)
-- Machine manifest: [ai-manifest.json](/docs/ai-manifest.json)
+- Single-source-of-truth rules: [RULES.md](/docs/RULES.md) · quick-jump: [RULES.md:9-27](/docs/RULES.md)
+- AI entry guide + Quick Task Map: [AGENTS.md §6](/AGENTS.md#6-quick-task-map)
+- Scenario end-to-end index (có range): [COOKBOOK.md Index:7-29](/docs/COOKBOOK.md)
 - llmstxt.org index: [llms.txt](/llms.txt)

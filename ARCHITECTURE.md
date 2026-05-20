@@ -1,5 +1,9 @@
 # Architecture Overview
 
+> Maintainer-only overview. Nếu mục tiêu của bạn là **dùng package trong game Unity**, đọc [docs/START_HERE.md](/docs/START_HERE.md) thay vì file này.
+
+> Public contract nên lấy từ [docs/RULES.md](/docs/RULES.md), [docs/guides/](/docs/guides/), và [docs/reference/](/docs/reference/). File này chỉ mô tả shape implementation bên trong package.
+
 ## Layer Map
 
 1. `GNNetwork`
@@ -55,7 +59,7 @@
 
 - `GNServerSettings`
 - transport settings
-- role secret keys
+- active `secretKey`, `gameId`, và runtime config state
 - logging and backend-selection settings
 
 ### `Editor/`

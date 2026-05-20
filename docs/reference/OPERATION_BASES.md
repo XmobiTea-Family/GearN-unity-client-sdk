@@ -76,6 +76,24 @@ Contract:
 - Chỉ khi `returnCode == ReturnCode.Ok`, `CustomOperationResponseAbstract<TResponseData>` mới deserialize parameters sang `responseData`.
 - Vì vậy `errorCode` và `responseData` chỉ đáng tin sau khi đã check `returnCode`.
 
+### Cách xác định kiểu `responseData`
+
+Trong DTO reference, nếu response class có dòng:
+
+```text
+Extends: CustomOperationResponseAbstract<SomeResponseData>
+```
+
+thì kiểu nằm trong cặp `<>` chính là kiểu của `response.responseData`.
+
+Ví dụ:
+
+```text
+Extends: CustomOperationResponseAbstract<AuthenticateModels.AuthenticateResponseData>
+```
+
+nghĩa là sau khi check thành công cả 2 tầng, đọc payload bằng `response.responseData` với kiểu `AuthenticateModels.AuthenticateResponseData`.
+
 Pattern bắt buộc:
 
 ```csharp

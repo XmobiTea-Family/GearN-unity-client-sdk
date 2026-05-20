@@ -2,7 +2,7 @@
 
 Character-level gameplay: profile, inventory relation, friend/group relation, statistics, currency, segments, tags.
 
-Related API reference: [API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md).
+Related guide: [CHARACTER_PLAYER.md](/docs/guides/CHARACTER_PLAYER.md). Related API reference: [API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md).
 
 Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field table cho biết: tên field, kiểu C# tương ứng, có `required` hay không (suy từ metadata `DataMember` / nullable / optional), doc comment, và ràng buộc length/range/default nếu có.
 

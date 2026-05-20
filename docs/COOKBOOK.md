@@ -6,22 +6,27 @@
 
 ## Index
 
-1. [Init SDK + bootstrap tối thiểu](#scenario-1-init-sdk--bootstrap-tối-thiểu)
-2. [Login by account + retrieve profile](#scenario-2-login-by-account--retrieve-profile)
-3. [Refresh token và persist session](#scenario-3-refresh-token-và-persist-session)
-4. [Login by social (Google/Apple/Facebook)](#scenario-4-login-by-social-googleapplefacebook)
-5. [Connect socket + handle reconnect](#scenario-5-connect-socket--handle-reconnect)
-6. [Subscribe friend updates](#scenario-6-subscribe-friend-updates)
-7. [Subscribe + send group message](#scenario-7-subscribe--send-group-message)
-8. [Group member lifecycle (join / leave / kick) + realtime update](#scenario-8-group-member-lifecycle-join--leave--kick--realtime-update)
-9. [Matchmaking ticket flow](#scenario-9-matchmaking-ticket-flow)
-10. [Inventory: query + grant item (server role)](#scenario-10-inventory-query--grant-item-server-role)
-11. [Store: list catalog → purchase → validate receipt](#scenario-11-store-list-catalog--purchase--validate-receipt)
-12. [CloudScript: execute function + customTags](#scenario-12-cloudscript-execute-function--customtags)
-13. [Override authToken / secret (impersonate, cross-role)](#scenario-13-override-authtoken--secret-impersonate-cross-role)
-14. [Admin login qua DashboardApi](#scenario-14-admin-login-qua-dashboardapi)
-15. [Cleanup & shutdown flow](#scenario-15-cleanup--shutdown-flow)
-16. [Diagnose `OperationNotAllow`](#scenario-16-diagnose-operationnotallow)
+Đọc đúng range của scenario bạn cần — không cần load cả file. Khi dùng Read tool: `offset = startLine - 1`, `limit = endLine - startLine + 1`.
+
+<!-- prettier-ignore -->
+| # | Scenario | Range |
+| --- | --- | --- |
+| 1 | Init SDK + bootstrap tối thiểu | [COOKBOOK.md:33-55](docs/COOKBOOK.md) |
+| 2 | Login by account + retrieve profile | [COOKBOOK.md:56-113](docs/COOKBOOK.md) |
+| 3 | Refresh token và persist session | [COOKBOOK.md:114-157](docs/COOKBOOK.md) |
+| 4 | Login by social (Google/Apple/Facebook) | [COOKBOOK.md:158-206](docs/COOKBOOK.md) |
+| 5 | Connect socket + handle reconnect | [COOKBOOK.md:207-249](docs/COOKBOOK.md) |
+| 6 | Subscribe friend updates | [COOKBOOK.md:250-303](docs/COOKBOOK.md) |
+| 7 | Subscribe + send group message | [COOKBOOK.md:304-356](docs/COOKBOOK.md) |
+| 8 | Group member lifecycle (join / leave / kick) + realtime update | [COOKBOOK.md:357-410](docs/COOKBOOK.md) |
+| 9 | Matchmaking ticket flow | [COOKBOOK.md:411-479](docs/COOKBOOK.md) |
+| 10 | Inventory: query + grant item (server role) | [COOKBOOK.md:480-529](docs/COOKBOOK.md) |
+| 11 | Store: list catalog → purchase → validate receipt | [COOKBOOK.md:530-597](docs/COOKBOOK.md) |
+| 12 | CloudScript: execute function + customTags | [COOKBOOK.md:598-651](docs/COOKBOOK.md) |
+| 13 | Override authToken / secret (impersonate, cross-role) | [COOKBOOK.md:652-705](docs/COOKBOOK.md) |
+| 14 | Admin login qua DashboardApi | [COOKBOOK.md:706-752](docs/COOKBOOK.md) |
+| 15 | Cleanup & shutdown flow | [COOKBOOK.md:753-797](docs/COOKBOOK.md) |
+| 16 | Diagnose `OperationNotAllow` | [COOKBOOK.md:798-908](docs/COOKBOOK.md) |
 
 ---
 
@@ -54,7 +59,7 @@ Code mẫu đầy đủ (có comment từng field): [README § 4](/README.md#4-c
 
 **Prerequisites:** đã tạo/cấu hình `Resources/GNServerSettings`.
 
-**APIs used:** [`GNNetwork.authenticate.loginByAccountAsync`](/docs/reference/API_AUTHENTICATE.md), [`AuthenticateModels.LoginByAccountRequestData`](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyaccountrequestdata), [`AuthenticateModels.InfoRequestParam`](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#inforequestparam).
+**APIs used:** [`GNNetwork.authenticate.loginByAccountAsync`](/docs/guides/AUTHENTICATE.md), [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md), [`AuthenticateModels.LoginByAccountRequestData`](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#loginbyaccountrequestdata), [`AuthenticateModels.InfoRequestParam`](/docs/reference/dto/authenticate/AUTHENTICATE_MODELS.md#inforequestparam).
 
 ### Code
 
@@ -112,7 +117,7 @@ private async System.Threading.Tasks.Task<object> LoginWithAccountAsync(string u
 
 **Prerequisites:** đã có `authToken` cache từ lần login trước (stored ở `StorageService`).
 
-**APIs used:** [`GNNetwork.authenticate.refreshAuthTokenAsync`](/docs/reference/API_AUTHENTICATE.md).
+**APIs used:** [`GNNetwork.authenticate.refreshAuthTokenAsync`](/docs/guides/AUTHENTICATE.md), [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md).
 
 ### Code
 
@@ -156,7 +161,7 @@ if (!(await ensureValidToken())) {
 
 **Prerequisites:** đã init; đã có ID token từ social SDK native.
 
-**APIs used:** `loginByGoogleAsync`, `loginByAppleAsync`, `loginByFacebookAsync`, `loginByGameCenterAsync`, `loginByGooglePlayGameServiceAsync` — cùng pattern. Xem [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md).
+**APIs used:** `loginByGoogleAsync`, `loginByAppleAsync`, `loginByFacebookAsync`, `loginByGameCenterAsync`, `loginByGooglePlayGameServiceAsync` — cùng pattern. Xem [AUTHENTICATE guide](/docs/guides/AUTHENTICATE.md) trước, rồi tra [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md).
 
 ### Code
 
@@ -302,7 +307,7 @@ private void Unsubscribe() {
 
 **Prerequisites:** đã login + connect socket + là member của `groupId`.
 
-**APIs used:** [`OnGroupMessageUpdateEventHandler`](/docs/reference/EVENTS.md#ongroupmessageupdateeventhandler), [`GNNetwork.group.sendGroupMessageAsync`](/docs/reference/API_GROUP.md).
+**APIs used:** [`OnGroupMessageUpdateEventHandler`](/docs/reference/EVENTS.md#ongroupmessageupdateeventhandler), [`GNNetwork.group.sendGroupMessageAsync`](/docs/guides/GROUP.md), [API_GROUP.md](/docs/reference/API_GROUP.md).
 
 ### Code
 
@@ -409,7 +414,7 @@ private async System.Threading.Tasks.Task LeaveAsync(string groupId) {
 
 **Prerequisites:** đã login + connect socket.
 
-**APIs used:** `GNNetwork.multiplayer.createMatchmakingTicketAsync`, `getMatchmakingTicketAsync`, `cancelMatchmakingTicketAsync`. Xem [API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md).
+**APIs used:** `GNNetwork.multiplayer.createMatchmakingTicketAsync`, `getMatchmakingTicketAsync`, `cancelMatchmakingTicketAsync`. Xem [MULTIPLAYER guide](/docs/guides/MULTIPLAYER.md) trước, rồi tra [API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md).
 
 ### Code
 
@@ -478,7 +483,7 @@ private async System.Threading.Tasks.Task<object> FindMatchAsync(string queueNam
 
 **Prerequisites:** client login; `secretKey` có `permission rules` là `admin` hoặc `server` cấu hình ở backend/CloudScript.
 
-**APIs used:** [`GNNetwork.gamePlayer.getPlayerInventoryAsync`](/docs/reference/API_GAME_PLAYER.md) (client), `GNNetwork.gamePlayer.server.createPlayerItemAsync` (server).
+**APIs used:** [`GNNetwork.gamePlayer.getPlayerInventoryAsync`](/docs/guides/GAME_PLAYER.md) (client), `GNNetwork.gamePlayer.server.createPlayerItemAsync` (server), [API_GAME_PLAYER.md](/docs/reference/API_GAME_PLAYER.md).
 
 ### Code
 
@@ -528,7 +533,7 @@ private async System.Threading.Tasks.Task<object> GrantSwordAsync(string targetU
 
 **Prerequisites:** đã login.
 
-**APIs used:** [`GNNetwork.storeInventory.getStoreItemsWithTagAsync`](/docs/reference/API_STORE_INVENTORY.md), `buyStoreItemAsync`, `server.validateGooglePlayStoreReceiptAsync` / `server.validateAppleAppStoreReceiptAsync`.
+**APIs used:** [`GNNetwork.storeInventory.getStoreItemsWithTagAsync`](/docs/guides/STORE_INVENTORY.md), `buyStoreItemAsync`, `server.validateGooglePlayStoreReceiptAsync` / `server.validateAppleAppStoreReceiptAsync`, [API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md).
 
 ### Code
 
@@ -596,7 +601,7 @@ private async System.Threading.Tasks.Task<object> BuyItemAsync(string storeItemI
 
 **Prerequisites:** đã login; CloudScript function đã publish ở backend.
 
-**APIs used:** [`GNNetwork.cloudScript.executeFunctionAsync`](/docs/reference/API_CLOUDSCRIPT.md).
+**APIs used:** [`GNNetwork.cloudScript.executeFunctionAsync`](/docs/guides/CLOUDSCRIPT.md), [API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md).
 
 ### Code
 
@@ -704,7 +709,7 @@ private async System.Threading.Tasks.Task<object> CallOtherGameAsync(string game
 
 **Prerequisites:** đã init; biết admin username/password backend cấp.
 
-**APIs used:** [`GNNetwork.dashboard.loginByAdminAccountAsync`](/docs/reference/API_DASHBOARD.md), `getGameListAsync`, `getAnalyticsAsync`, …
+**APIs used:** [`GNNetwork.dashboard.loginByAdminAccountAsync`](/docs/guides/DASHBOARD.md), `getGameListAsync`, `getAnalyticsAsync`, [API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md), …
 
 > **Lưu ý thiết kế:** Dashboard API CHỈ có namespace client (`GNNetwork.dashboard`, không có `.server` / `.admin`). Transport dùng `RequestRole.Client`. Admin context backend resolve TỪ auth token trả về sau `loginByAdminAccount` — token này khác token của player thường.
 

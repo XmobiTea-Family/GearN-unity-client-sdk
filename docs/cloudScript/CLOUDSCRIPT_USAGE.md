@@ -132,6 +132,21 @@ SDK reference cho path phía client:
 
 Nếu bạn cần chi tiết theo từng helper, đọc các file trong `docs/` thay vì nhồi mọi thứ vào đây.
 
+## 1.5 Decision: dùng helper nào
+
+Chọn helper TRƯỚC khi viết script — sai helper là sai pattern, sửa rất tốn.
+
+| Task pattern | Helper |
+| --- | --- |
+| Lưu data custom (chat, kv, leaderboard riêng, log nghiệp vụ) | `database` raw collection |
+| Gọi API có sẵn của GearN (player, group, inventory, store) | `admin` |
+| Push realtime event tới user online / room | `socket` |
+| Gửi email | `mail` |
+| Gửi push notification | `pushNotification` |
+| Gọi REST API / webhook bên ngoài | `http` |
+
+> Chi tiết, combine nhiều helper trong cùng handler, và link sang file riêng từng helper: xem [§6](#6-chọn-helper-nào).
+
 ## 2. Flow runtime
 
 Flow thực tế (xem `AddFunctionRequestHandler.ts` trong GearN Server repo):
@@ -181,108 +196,21 @@ Khuyến nghị deploy:
 
 ## 4. Runtime object có sẵn
 
-Template inject sẵn các symbol này:
+Template inject sẵn ~70 symbol, gọi trực tiếp không cần `import`. Core symbol hay dùng nhất:
 
-- `gameId`
-- `handlers`
-- `database`
-- `http`
-- `socket`
-- `mail`
-- `pushNotification`
-- `admin`
-- `mongodb`
-- `axios`
-- `OperationEvent`
-- `GNHashtable`
-- `GNArray`
-- `GNHashtableBuilder`
-- `GNArrayBuilder`
-- `ExecuteResponseStatus`
-- các enum/constants tương ứng với GearN SDK như sau:
+| Symbol | Dùng khi nào |
+| --- | --- |
+| `gameId` | Lấy gameId hiện tại của script |
+| `handlers` | Đăng ký function: `handlers["X"] = async (args, context, log) => {}` |
+| `database` | Raw MongoDB collection (chat, kv, log nghiệp vụ) |
+| `admin` | Gọi API có sẵn của GearN (player, group, inventory, store, …) |
+| `GNHashtable` | Map key→value typed (DTO field, response body) |
+| `GenericModels` | DTO dùng chung; mỗi domain còn có `XxxModels` riêng |
+| `ErrorCode` / `ExecuteResponseStatus` | Check kết quả 3-tier ([guides/CLOUDSCRIPT.md:162-185](/docs/guides/CLOUDSCRIPT.md)) |
 
-### Các enum/constant tương ứng với GearN SDK:
+> Full danh sách (~70 symbol — helper, data structure, enums, models, decorators, base class, action, utility) + nguồn `dist/GN-startup/cloudScript/*.ts` để verify: xem [CLOUDSCRIPT_INJECTED_SYMBOLS.md](/docs/cloudScript/CLOUDSCRIPT_INJECTED_SYMBOLS.md).
 
-- `Action0`
-- `Action1`
-- `Action2`
-- `Action3`
-- `Action4`
-- `ConverterService`
-- `OwnerType`
-- `ErrorCode`
-- `ParameterCode`
-- `Commands`
-- `EventCode`
-- `OperationCode`
-- `ReturnCode`
-- `CodeHelper`
-- `DataMember`
-- `StringDataMember`
-- `BooleanDataMember`
-- `GNHashtableDataMember`
-- `GNArrayDataMember`
-- `NumberDataMember`
-- `GNHashtableBuilder`
-- `GNHashtable`
-- `GNArrayBuilder`
-- `GNArray`
-- `InvalidMemberType`
-- `InvalidMember`
-- `RequestType`
-- `RequestRole`
-- `CustomOperationRequest`
-- `CustomOperationRequestAbstract`
-- `CustomOperationResponse`
-- `Constructor`
-- `AbstractConstructor`
-- `FieldDataType`
-- `GNObjectFieldMetadata`
-- `GNObjectMetadata`
-- `CustomOperationResponseAbstract`
-- `IServerEventHandler`
-- `OperationEvent`
-- `OperationRequest`
-- `OperationResponse`
-- `GenericModels`
-- `CharacterPlayerModels`
-- `ContentModels`
-- `GamePlayerModels`
-- `GroupModels`
-- `InventoryModels`
-- `MasterPlayerModels`
-- `StoreInventoryModels`
-- `MultiplayerModels`
-- `CloudScriptModels`
-- `GNServerSettingsOptions`
-- `GNServerSettings`
-- `PermissionDataItem`
-- `FriendStatus`
-- `GoogleLoginType`
-- `GroupStatus`
-- `GNDebug`
-- `ItemType`
-- `StoreItemType`
-- `LogType`
-- `GNSupport`
-- `PostType`
-- `GetAuthInfoResponse`
-- `PushPlatformType`
-- `StoreReceiveType`
-- `GNUtils`
-- `MatchStatus`
-
-Source cần đọc khi cần verify (trong GearN Server repo, không public trong package này):
-
-- `dist/GN-startup/cloudScript/templateCloudScript.ts`
-- `dist/GN-startup/cloudScript/CloudScriptDatabase.ts`
-- `dist/GN-startup/cloudScript/CloudScriptHttp.ts`
-- `dist/GN-startup/cloudScript/CloudScriptSocket.ts`
-- `dist/GN-startup/cloudScript/CloudScriptMail.ts`
-- `dist/GN-startup/cloudScript/CloudScriptPushNotification.ts`
-- `dist/GN-startup/cloudScript/CloudScriptAdmin.ts`
-
-## 5. Typing — KHÔNG dùng `any` vô tội vạ
+## 5. Typing — KHÔNG lạm dụng any
 
 Script là TypeScript thật, có toàn bộ class trong [§4](#4-runtime-object-có-sẵn) inject sẵn. AI Agent hay rơi vào `response: any` / `items: any[]` / `args: any` vì không biết type nào có sẵn. Bảng dưới đây là pattern bắt buộc.
 

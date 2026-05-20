@@ -2,7 +2,7 @@
 
 Inventory item metadata, ownership, amount, statistics, activity log.
 
-Related API reference: [API_INVENTORY.md](/docs/reference/API_INVENTORY.md).
+Related guide: [INVENTORY.md](/docs/guides/INVENTORY.md). Related API reference: [API_INVENTORY.md](/docs/reference/API_INVENTORY.md).
 
 Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field table cho biết: tên field, kiểu C# tương ứng, có `required` hay không (suy từ metadata `DataMember` / nullable / optional), doc comment, và ràng buộc length/range/default nếu có.
 

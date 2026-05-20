@@ -1,6 +1,6 @@
 # API Reference: MultiplayerApi
 
-Matchmaking ticket lifecycle, queue statistics, match query.
+Bảng contract cho `MultiplayerApi`. Bắt đầu từ [guides/MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md) để chọn namespace, method, và matchmaking flow trước khi đọc các row này.
 
 - Domain guide: [guides/MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md)
 - DTO shapes: [dto/MULTIPLAYER.md](/docs/reference/dto/MULTIPLAYER.md)
@@ -8,98 +8,50 @@ Matchmaking ticket lifecycle, queue statistics, match query.
 - Error handling: [ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md)
 - Permission rules: [PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md)
 
-> **Transport**: HTTP, không qua socket. Flow chuẩn: `createMatchmakingTicket` → poll `getMatchmakingTicket` → `getMatch`. Xem [RULES § 10 #10](/docs/RULES.md#10-anti-patterns--pitfalls).
-
-## Namespaces
-
-- `GNNetwork.multiplayer` — `RequestRole.Client`
-- `GNNetwork.multiplayer.server` — `RequestRole.Server`
-- `GNNetwork.multiplayer.admin` — `RequestRole.Admin`
-
-## Convention
-
-Mỗi method dưới đây có 2 form — callback và `*Async()` Task. Ưu tiên `*Async()`.
-
-```text
-// Callback
-GNNetwork.multiplayer.<method>(requestData, onResponse?, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?);
-
-// Async
-var res = await GNNetwork.multiplayer.<method>Async(requestData, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?);
-```
-
-Param chung:
-
-<!-- prettier-ignore -->
-| Param | Type | Optional | Notes |
-| --- | --- | --- | --- |
-| `requestData` | domain-specific (xem bảng dưới) | no | Payload chính |
-| `onResponse` | `Action1<TResponse>` | yes | Chỉ có ở callback form |
-| `overrideAuthToken` | `string` | yes | Override `authToken` cache cho request này |
-| `overrideSecretKey` | `string` | yes | Override secret key mặc định của route |
-| `customTags` | `GNHashtable` | yes | Tags gắn vào request, backend có thể log/route |
-| `timeout` | `int` | yes | Timeout giây; default = `OperationRequest.defaultTimeOut` |
-
-Response class expose field: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`. Xem [ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
-
 ## Client methods (`GNNetwork.multiplayer.*`)
 
 <!-- prettier-ignore -->
-| Method | Request DTO | Async form | Response class | Default Permission Rules |
+| Method | Request Data DTO Link | Response Data DTO Link | Default Permission Rules | Error Code có thể gặp |
 | --- | --- | --- | --- | --- |
-| `cancelAllMatchmakingTicket` | `MultiplayerModels.CancelAllMatchmakingTicketRequestData` | `cancelAllMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CancelAllMatchmakingTicketOperationResponse` | `multiplayer.cancelAllMatchmakingTicket.selfEnable` |
-| `cancelMatchmakingTicket` | `MultiplayerModels.CancelMatchmakingTicketRequestData` | `cancelMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CancelMatchmakingTicketOperationResponse` | `multiplayer.cancelMatchmakingTicket.selfEnable` |
-| `createMatchmakingTicket` | `MultiplayerModels.CreateMatchmakingTicketRequestData` | `createMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CreateMatchmakingTicketOperationResponse` | `multiplayer.createMatchmakingTicket.selfEnable` |
-| `getMatchmakingTicket` | `MultiplayerModels.GetMatchmakingTicketRequestData` | `getMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.GetMatchmakingTicketOperationResponse` | `multiplayer.getMatchmakingTicket.selfEnable` |
-| `getMatch` | `MultiplayerModels.GetMatchRequestData` | `getMatchAsync(...)` | `MultiplayerResponseModels.GetMatchOperationResponse` | `multiplayer.getMatch.selfEnable` |
-| `getQueueStatistics` | `MultiplayerModels.GetQueueStatisticsRequestData` | `getQueueStatisticsAsync(...)` | `MultiplayerResponseModels.GetQueueStatisticsOperationResponse` | `multiplayer.getQueueStatistics.selfEnable` |
-| `joinMatchmakingTicket` | `MultiplayerModels.JoinMatchmakingTicketRequestData` | `joinMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.JoinMatchmakingTicketOperationResponse` | `multiplayer.joinMatchmakingTicket.selfEnable` |
-| `listMatchmakingTicketsForPlayer` | `MultiplayerModels.ListMatchmakingTicketsForPlayerRequestData` | `listMatchmakingTicketsForPlayerAsync(...)` | `MultiplayerResponseModels.ListMatchmakingTicketsForPlayerOperationResponse` | `multiplayer.listMatchmakingTicketsForPlayer.selfEnable` |
-| `getAllMatch` | `MultiplayerModels.GetAllMatchRequestData` | `getAllMatchAsync(...)` | `MultiplayerResponseModels.GetAllMatchOperationResponse` | `multiplayer.getAllMatch.selfEnable` |
-| `getAllMatchmakingTicket` | `MultiplayerModels.GetAllMatchmakingTicketRequestData` | `getAllMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.GetAllMatchmakingTicketOperationResponse` | `multiplayer.getAllMatchmakingTicket.selfEnable` |
+| `cancelAllMatchmakingTicket` | [MultiplayerModels.CancelAllMatchmakingTicketRequestData:1-9](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#cancelallmatchmakingticketrequestdata) | [MultiplayerModels.CancelAllMatchmakingTicketResponseData:368-376](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#cancelallmatchmakingticketresponsedata) | `multiplayer.cancelAllMatchmakingTicket.selfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `cancelMatchmakingTicket` | [MultiplayerModels.CancelMatchmakingTicketRequestData:39-47](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#cancelmatchmakingticketrequestdata) | [MultiplayerModels.EmptyResponseData:576-580](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#emptyresponsedata) | `multiplayer.cancelMatchmakingTicket.selfEnable` | `Ok`, `MatchmakingTicketNotFound`, `MatchmakingTicketAlreadyCompleted`, `MatchmakingPlayerNotJoinedTicket` |
+| `createMatchmakingTicket` | [MultiplayerModels.CreateMatchmakingTicketRequestData:77-88](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#creatematchmakingticketrequestdata) | [MultiplayerModels.CreateMatchmakingTicketResponseData:377-385](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#creatematchmakingticketresponsedata) | `multiplayer.createMatchmakingTicket.selfEnable` | `Ok`, `MatchmakingPlayerJoinedOtherTicket`, `MatchmakingQueueNotFound`, `TicketSizeError` |
+| `getMatchmakingTicket` | [MultiplayerModels.GetMatchmakingTicketRequestData:118-127](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchmakingticketrequestdata) | [MultiplayerModels.GetMatchmakingTicketResponseData:433-445](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchmakingticketresponsedata) | `multiplayer.getMatchmakingTicket.selfEnable` | `Ok`, `MatchmakingTicketNotFound` |
+| `getMatch` | [MultiplayerModels.GetMatchRequestData:152-161](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchrequestdata) | [MultiplayerModels.GetMatchResponseData:517-529](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchresponsedata) | `multiplayer.getMatch.selfEnable` | `Ok`, `MatchNotFound` |
+| `getQueueStatistics` | [MultiplayerModels.GetQueueStatisticsRequestData:257-266](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getqueuestatisticsrequestdata) | [MultiplayerModels.GetQueueStatisticsResponseData:530-540](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getqueuestatisticsresponsedata) | `multiplayer.getQueueStatistics.selfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `joinMatchmakingTicket` | [MultiplayerModels.JoinMatchmakingTicketRequestData:291-300](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#joinmatchmakingticketrequestdata) | [MultiplayerModels.EmptyResponseData:576-580](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#emptyresponsedata) | `multiplayer.joinMatchmakingTicket.selfEnable` | `Ok`, `MatchmakingTicketNotFound`, `MatchmakingTicketAlreadyCompleted`, `MatchmakingPlayerJoinedOtherTicket`, `MatchmakingQueueNotFound` |
+| `listMatchmakingTicketsForPlayer` | [MultiplayerModels.ListMatchmakingTicketsForPlayerRequestData:330-338](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#listmatchmakingticketsforplayerrequestdata) | [MultiplayerModels.ListMatchmakingTicketsForPlayerResponseData:541-549](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#listmatchmakingticketsforplayerresponsedata) | `multiplayer.listMatchmakingTicketsForPlayer.selfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `getAllMatch` | [MultiplayerModels.GetAllMatchRequestData:186-196](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchrequestdata) | [MultiplayerModels.GetAllMatchResponseData:550-562](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchresponsedata) | `multiplayer.getAllMatch.selfEnable` | `Ok` |
+| `getAllMatchmakingTicket` | [MultiplayerModels.GetAllMatchmakingTicketRequestData:221-232](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchmakingticketrequestdata) | [MultiplayerModels.GetAllMatchmakingTicketResponseData:563-575](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchmakingticketresponsedata) | `multiplayer.getAllMatchmakingTicket.selfEnable` | `Ok` |
 
 ## Server methods (`GNNetwork.multiplayer.server.*`)
 
 <!-- prettier-ignore -->
-| Method | Request DTO | Async form | Response class | Default Permission Rules |
+| Method | Request Data DTO Link | Response Data DTO Link | Default Permission Rules | Error Code có thể gặp |
 | --- | --- | --- | --- | --- |
-| `cancelAllMatchmakingTicket` | `MultiplayerModels.ServerCancelAllMatchmakingTicketRequestData` | `cancelAllMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CancelAllMatchmakingTicketOperationResponse` | `multiplayer.cancelAllMatchmakingTicket.serverSelfEnable` |
-| `cancelMatchmakingTicket` | `MultiplayerModels.ServerCancelMatchmakingTicketRequestData` | `cancelMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CancelMatchmakingTicketOperationResponse` | `multiplayer.cancelMatchmakingTicket.serverSelfEnable` |
-| `createMatchmakingTicket` | `MultiplayerModels.ServerCreateMatchmakingTicketRequestData` | `createMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CreateMatchmakingTicketOperationResponse` | `multiplayer.createMatchmakingTicket.serverSelfEnable` |
-| `getMatchmakingTicket` | `MultiplayerModels.ServerGetMatchmakingTicketRequestData` | `getMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.GetMatchmakingTicketOperationResponse` | `multiplayer.getMatchmakingTicket.serverSelfEnable` |
-| `getMatch` | `MultiplayerModels.ServerGetMatchRequestData` | `getMatchAsync(...)` | `MultiplayerResponseModels.GetMatchOperationResponse` | `multiplayer.getMatch.serverSelfEnable` |
-| `getQueueStatistics` | `MultiplayerModels.ServerGetQueueStatisticsRequestData` | `getQueueStatisticsAsync(...)` | `MultiplayerResponseModels.GetQueueStatisticsOperationResponse` | `multiplayer.getQueueStatistics.serverSelfEnable` |
-| `joinMatchmakingTicket` | `MultiplayerModels.ServerJoinMatchmakingTicketRequestData` | `joinMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.JoinMatchmakingTicketOperationResponse` | `multiplayer.joinMatchmakingTicket.serverSelfEnable` |
-| `listMatchmakingTicketsForPlayer` | `MultiplayerModels.ServerListMatchmakingTicketsForPlayerRequestData` | `listMatchmakingTicketsForPlayerAsync(...)` | `MultiplayerResponseModels.ListMatchmakingTicketsForPlayerOperationResponse` | `multiplayer.listMatchmakingTicketsForPlayer.serverSelfEnable` |
-| `getAllMatch` | `MultiplayerModels.ServerGetAllMatchRequestData` | `getAllMatchAsync(...)` | `MultiplayerResponseModels.GetAllMatchOperationResponse` | `multiplayer.getAllMatch.serverSelfEnable` |
-| `getAllMatchmakingTicket` | `MultiplayerModels.ServerGetAllMatchmakingTicketRequestData` | `getAllMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.GetAllMatchmakingTicketOperationResponse` | `multiplayer.getAllMatchmakingTicket.serverSelfEnable` |
+| `cancelAllMatchmakingTicket` | [MultiplayerModels.ServerCancelAllMatchmakingTicketRequestData:1-26](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servercancelallmatchmakingticketrequestdata) | [MultiplayerModels.CancelAllMatchmakingTicketResponseData:368-376](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#cancelallmatchmakingticketresponsedata) | `multiplayer.cancelAllMatchmakingTicket.serverSelfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `cancelMatchmakingTicket` | [MultiplayerModels.ServerCancelMatchmakingTicketRequestData:39-64](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servercancelmatchmakingticketrequestdata) | [MultiplayerModels.EmptyResponseData:576-580](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#emptyresponsedata) | `multiplayer.cancelMatchmakingTicket.serverSelfEnable` | `Ok`, `MatchmakingTicketNotFound`, `MatchmakingTicketAlreadyCompleted`, `MatchmakingPlayerNotJoinedTicket` |
+| `createMatchmakingTicket` | [MultiplayerModels.ServerCreateMatchmakingTicketRequestData:77-105](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servercreatematchmakingticketrequestdata) | [MultiplayerModels.CreateMatchmakingTicketResponseData:377-385](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#creatematchmakingticketresponsedata) | `multiplayer.createMatchmakingTicket.serverSelfEnable` | `Ok`, `MatchmakingPlayerJoinedOtherTicket`, `MatchmakingQueueNotFound`, `TicketSizeError` |
+| `getMatchmakingTicket` | [MultiplayerModels.ServerGetMatchmakingTicketRequestData:118-139](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servergetmatchmakingticketrequestdata) | [MultiplayerModels.GetMatchmakingTicketResponseData:433-445](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchmakingticketresponsedata) | `multiplayer.getMatchmakingTicket.serverSelfEnable` | `Ok`, `MatchmakingTicketNotFound` |
+| `getMatch` | [MultiplayerModels.ServerGetMatchRequestData:152-173](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servergetmatchrequestdata) | [MultiplayerModels.GetMatchResponseData:517-529](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchresponsedata) | `multiplayer.getMatch.serverSelfEnable` | `Ok`, `MatchNotFound` |
+| `getQueueStatistics` | [MultiplayerModels.ServerGetQueueStatisticsRequestData:257-278](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servergetqueuestatisticsrequestdata) | [MultiplayerModels.GetQueueStatisticsResponseData:530-540](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getqueuestatisticsresponsedata) | `multiplayer.getQueueStatistics.serverSelfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `joinMatchmakingTicket` | [MultiplayerModels.ServerJoinMatchmakingTicketRequestData:291-317](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#serverjoinmatchmakingticketrequestdata) | [MultiplayerModels.EmptyResponseData:576-580](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#emptyresponsedata) | `multiplayer.joinMatchmakingTicket.serverSelfEnable` | `Ok`, `MatchmakingTicketNotFound`, `MatchmakingTicketAlreadyCompleted`, `MatchmakingPlayerJoinedOtherTicket`, `MatchmakingQueueNotFound` |
+| `listMatchmakingTicketsForPlayer` | [MultiplayerModels.ServerListMatchmakingTicketsForPlayerRequestData:330-355](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#serverlistmatchmakingticketsforplayerrequestdata) | [MultiplayerModels.ListMatchmakingTicketsForPlayerResponseData:541-549](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#listmatchmakingticketsforplayerresponsedata) | `multiplayer.listMatchmakingTicketsForPlayer.serverSelfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `getAllMatch` | [MultiplayerModels.ServerGetAllMatchRequestData:186-208](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servergetallmatchrequestdata) | [MultiplayerModels.GetAllMatchResponseData:550-562](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchresponsedata) | `multiplayer.getAllMatch.serverSelfEnable` | `Ok` |
+| `getAllMatchmakingTicket` | [MultiplayerModels.ServerGetAllMatchmakingTicketRequestData:221-244](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#servergetallmatchmakingticketrequestdata) | [MultiplayerModels.GetAllMatchmakingTicketResponseData:563-575](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchmakingticketresponsedata) | `multiplayer.getAllMatchmakingTicket.serverSelfEnable` | `Ok` |
 
 ## Admin methods (`GNNetwork.multiplayer.admin.*`)
 
 <!-- prettier-ignore -->
-| Method | Request DTO | Async form | Response class | Default Permission Rules |
+| Method | Request Data DTO Link | Response Data DTO Link | Default Permission Rules | Error Code có thể gặp |
 | --- | --- | --- | --- | --- |
-| `cancelAllMatchmakingTicket` | `MultiplayerModels.AdminCancelAllMatchmakingTicketRequestData` | `cancelAllMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CancelAllMatchmakingTicketOperationResponse` | `multiplayer.cancelAllMatchmakingTicket.adminSelfEnable` |
-| `cancelMatchmakingTicket` | `MultiplayerModels.AdminCancelMatchmakingTicketRequestData` | `cancelMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CancelMatchmakingTicketOperationResponse` | `multiplayer.cancelMatchmakingTicket.adminSelfEnable` |
-| `createMatchmakingTicket` | `MultiplayerModels.AdminCreateMatchmakingTicketRequestData` | `createMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.CreateMatchmakingTicketOperationResponse` | `multiplayer.createMatchmakingTicket.adminSelfEnable` |
-| `getMatchmakingTicket` | `MultiplayerModels.AdminGetMatchmakingTicketRequestData` | `getMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.GetMatchmakingTicketOperationResponse` | `multiplayer.getMatchmakingTicket.adminSelfEnable` |
-| `getMatch` | `MultiplayerModels.AdminGetMatchRequestData` | `getMatchAsync(...)` | `MultiplayerResponseModels.GetMatchOperationResponse` | `multiplayer.getMatch.adminSelfEnable` |
-| `getQueueStatistics` | `MultiplayerModels.AdminGetQueueStatisticsRequestData` | `getQueueStatisticsAsync(...)` | `MultiplayerResponseModels.GetQueueStatisticsOperationResponse` | `multiplayer.getQueueStatistics.adminSelfEnable` |
-| `joinMatchmakingTicket` | `MultiplayerModels.AdminJoinMatchmakingTicketRequestData` | `joinMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.JoinMatchmakingTicketOperationResponse` | `multiplayer.joinMatchmakingTicket.adminSelfEnable` |
-| `listMatchmakingTicketsForPlayer` | `MultiplayerModels.AdminListMatchmakingTicketsForPlayerRequestData` | `listMatchmakingTicketsForPlayerAsync(...)` | `MultiplayerResponseModels.ListMatchmakingTicketsForPlayerOperationResponse` | `multiplayer.listMatchmakingTicketsForPlayer.adminSelfEnable` |
-| `getAllMatch` | `MultiplayerModels.AdminGetAllMatchRequestData` | `getAllMatchAsync(...)` | `MultiplayerResponseModels.GetAllMatchOperationResponse` | `multiplayer.getAllMatch.adminSelfEnable` |
-| `getAllMatchmakingTicket` | `MultiplayerModels.AdminGetAllMatchmakingTicketRequestData` | `getAllMatchmakingTicketAsync(...)` | `MultiplayerResponseModels.GetAllMatchmakingTicketOperationResponse` | `multiplayer.getAllMatchmakingTicket.adminSelfEnable` |
-
-## Ví dụ tối thiểu
-
-```csharp
-using XmobiTea.GearN;
-using XmobiTea.GearN.Constant;
-using XmobiTea.GearN.Entity.Models;
-
-// requestData: MultiplayerModels.CancelAllMatchmakingTicketRequestData đã build theo dto/MULTIPLAYER.md
-var res = await GNNetwork.multiplayer.cancelAllMatchmakingTicketAsync(requestData);
-if (res.returnCode != ReturnCode.Ok) return;
-if (res.errorCode != ErrorCode.Ok) return;
-// res.responseData có typed payload
-```
+| `cancelAllMatchmakingTicket` | [MultiplayerModels.AdminCancelAllMatchmakingTicketRequestData:1-38](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admincancelallmatchmakingticketrequestdata) | [MultiplayerModels.CancelAllMatchmakingTicketResponseData:368-376](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#cancelallmatchmakingticketresponsedata) | `multiplayer.cancelAllMatchmakingTicket.adminSelfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `cancelMatchmakingTicket` | [MultiplayerModels.AdminCancelMatchmakingTicketRequestData:39-76](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admincancelmatchmakingticketrequestdata) | [MultiplayerModels.EmptyResponseData:576-580](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#emptyresponsedata) | `multiplayer.cancelMatchmakingTicket.adminSelfEnable` | `Ok`, `MatchmakingTicketNotFound`, `MatchmakingTicketAlreadyCompleted`, `MatchmakingPlayerNotJoinedTicket` |
+| `createMatchmakingTicket` | [MultiplayerModels.AdminCreateMatchmakingTicketRequestData:77-117](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admincreatematchmakingticketrequestdata) | [MultiplayerModels.CreateMatchmakingTicketResponseData:377-385](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#creatematchmakingticketresponsedata) | `multiplayer.createMatchmakingTicket.adminSelfEnable` | `Ok`, `MatchmakingPlayerJoinedOtherTicket`, `MatchmakingQueueNotFound`, `TicketSizeError` |
+| `getMatchmakingTicket` | [MultiplayerModels.AdminGetMatchmakingTicketRequestData:118-151](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admingetmatchmakingticketrequestdata) | [MultiplayerModels.GetMatchmakingTicketResponseData:433-445](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchmakingticketresponsedata) | `multiplayer.getMatchmakingTicket.adminSelfEnable` | `Ok`, `MatchmakingTicketNotFound` |
+| `getMatch` | [MultiplayerModels.AdminGetMatchRequestData:152-185](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admingetmatchrequestdata) | [MultiplayerModels.GetMatchResponseData:517-529](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getmatchresponsedata) | `multiplayer.getMatch.adminSelfEnable` | `Ok`, `MatchNotFound` |
+| `getQueueStatistics` | [MultiplayerModels.AdminGetQueueStatisticsRequestData:257-290](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admingetqueuestatisticsrequestdata) | [MultiplayerModels.GetQueueStatisticsResponseData:530-540](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getqueuestatisticsresponsedata) | `multiplayer.getQueueStatistics.adminSelfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `joinMatchmakingTicket` | [MultiplayerModels.AdminJoinMatchmakingTicketRequestData:291-329](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#adminjoinmatchmakingticketrequestdata) | [MultiplayerModels.EmptyResponseData:576-580](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#emptyresponsedata) | `multiplayer.joinMatchmakingTicket.adminSelfEnable` | `Ok`, `MatchmakingTicketNotFound`, `MatchmakingTicketAlreadyCompleted`, `MatchmakingPlayerJoinedOtherTicket`, `MatchmakingQueueNotFound` |
+| `listMatchmakingTicketsForPlayer` | [MultiplayerModels.AdminListMatchmakingTicketsForPlayerRequestData:330-367](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#adminlistmatchmakingticketsforplayerrequestdata) | [MultiplayerModels.ListMatchmakingTicketsForPlayerResponseData:541-549](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#listmatchmakingticketsforplayerresponsedata) | `multiplayer.listMatchmakingTicketsForPlayer.adminSelfEnable` | `Ok`, `MatchmakingQueueNotFound` |
+| `getAllMatch` | [MultiplayerModels.AdminGetAllMatchRequestData:186-220](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admingetallmatchrequestdata) | [MultiplayerModels.GetAllMatchResponseData:550-562](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchresponsedata) | `multiplayer.getAllMatch.adminSelfEnable` | `Ok` |
+| `getAllMatchmakingTicket` | [MultiplayerModels.AdminGetAllMatchmakingTicketRequestData:221-256](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#admingetallmatchmakingticketrequestdata) | [MultiplayerModels.GetAllMatchmakingTicketResponseData:563-575](/docs/reference/dto/multiplayer/MULTIPLAYER_MODELS.md#getallmatchmakingticketresponsedata) | `multiplayer.getAllMatchmakingTicket.adminSelfEnable` | `Ok` |

@@ -1,128 +1,94 @@
-# StoreInventoryApi
+﻿# StoreInventoryApi
 
-Tài liệu này dành cho AI code assistant và AI agent nội bộ. Mục tiêu là chọn đúng namespace `client/server/admin`, dùng đúng enum cho store flow, và không sinh sai request ở các nhóm mua/quà/receipt/log.
+Tài liệu này là landing page cho AI code assistant khi cần dùng `GNNetwork.storeInventory*`. Đọc file này để chọn đúng namespace, method, DTO nhanh, và chỉ mở đúng row trong [API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md) khi cần contract chi tiết.
 
 ## 1. Scope
 
-- Áp dụng cho:
-    - `GNNetwork.storeInventory`
-    - `GNNetwork.storeInventory.server`
-    - `GNNetwork.storeInventory.admin`
-- Toàn bộ method hiện tại của `StoreInventoryApi` đều gửi qua HTTP.
-- `StoreInventoryApi` có đủ 3 role thật:
+- Áp dụng cho `GNNetwork.storeInventory`, `GNNetwork.storeInventory.server`, và `GNNetwork.storeInventory.admin`.
+- Tất cả method hiện tại của `StoreInventoryApi` đi qua HTTP; không dùng socket.
+- `StoreInventoryApi` có 3 role thật:
     - `GNNetwork.storeInventory` -> `RequestRole.Client`
     - `GNNetwork.storeInventory.server` -> `RequestRole.Server`
     - `GNNetwork.storeInventory.admin` -> `RequestRole.Admin`
-- Nếu không truyền `overrideSecretKey`, SDK sẽ tự lấy secret key theo role tương ứng.
-- Chỉ dùng namespace `.server` khi bạn đã cấu hình `secretKey` với `permission rules` `server` hợp lệ trong `GNServerSettings`, hoặc chủ động truyền `overrideSecretKey`.
-- Chỉ dùng namespace `.admin` khi bạn đã cấu hình `secretKey` với `permission rules` `admin` hợp lệ trong `GNServerSettings`, hoặc chủ động truyền `overrideSecretKey`.
-- Rule chuẩn để chọn `client/server/admin` và hiểu semantics permission xem [RULES](/docs/RULES.md#3-route--trust-boundary-của-caller). Với nhóm này, không tự suy diễn route chỉ từ target ownership.
-- Khác với `MultiplayerApi`, namespace `server/admin` ở đây không thêm field `userId`; payload shape giữa 3 role hiện gần như giống nhau.
+- Payload shape giữa `client`, `server`, `admin` của cùng một operation giống nhau theo ý nghĩa nghiệp vụ; khác biệt chính là request DTO variant và role.
+- Store flow gồm catalog/discovery, buy/present, receipt validation, log audit, và used-state.
+- Rule chọn route/permission canonical: [RULES.md route rules](/docs/RULES.md). Với `StoreInventoryApi`, không tự suy diễn route chỉ từ target ownership.
 
 ## 2. Hard Rules
 
-- Luôn ưu tiên `async/await`. Mặc định dùng `*Async()`.
-- Bắt buộc đã `Resources/GNServerSettings` trước khi gọi.
+- Ưu tiên `async/await`; mặc định dùng `*Async()`.
+- Bắt buộc đã có `Resources/GNServerSettings` trước khi gọi.
 - Không dùng socket cho `StoreInventoryApi`.
-- Không hardcode số cho `storeItemType`, `storeReceiveTypes` hoặc `type` nếu enum đã có.
-- `getStoreItemInformationAsync`, `getStoreItemsWithTagAsync` và `getCreateLeaderboardAsync` đều bắt buộc có `infoRequestParam`.
-- `getStoreLogAsync` dùng `token` để phân trang tiếp, không dùng `skip`.
-- `createStoreItemAsync` có `storeId` optional; nếu bạn bỏ trống, backend có thể tự sinh `storeId`.
-- `removeStoreUsedAsync` có `ownerIds` optional; nếu chưa có backend spec rõ ràng, không được bỏ trống trường này một cách mù quáng.
+- Chọn namespace theo actor thật đang chạy code: Unity client, trusted backend, hay admin/backoffice tool.
+- Chỉ dùng `.server` khi code chạy trong trusted backend/worker và secret có permission `serverSelfEnable` phù hợp.
+- Chỉ dùng `.admin` khi code chạy trong dashboard/backoffice/admin tool và secret có permission `adminSelfEnable` phù hợp.
+- Không hardcode số cho `storeItemType`, `storeReceiveTypes`, hoặc owner `type`; dùng enum public.
+- `getStoreItemInformationAsync`, `getStoreItemsWithTagAsync`, và `getCreateLeaderboardAsync` bắt buộc có `infoRequestParam`.
+- `getStoreLogAsync` dùng `token` để phân trang tiếp; không tự đổi sang offset/skip pagination.
+- `removeStoreUsedAsync` có `ownerIds` optional; nếu chưa có backend spec rõ ràng, không bỏ trống trường này một cách mù quáng.
 
 ## 3. Chọn Namespace
 
 <!-- prettier-ignore -->
 | Namespace | Role thật | Dùng khi nào |
 | --- | --- | --- |
-| `GNNetwork.storeInventory` | `Client` | client/player mua item hoặc đọc store catalog cho chính session hiện tại |
-| `GNNetwork.storeInventory.server` | `Server` | trusted backend, server worker, purchase fulfillment |
-| `GNNetwork.storeInventory.admin` | `Admin` | dashboard, ops, GM tool, quản trị store |
+| `GNNetwork.storeInventory` | `Client` | Flow từ Unity client / player app: đọc catalog, mua item, validate receipt cho session hiện tại |
+| `GNNetwork.storeInventory.server` | `Server` | Trusted backend, server worker, purchase fulfillment |
+| `GNNetwork.storeInventory.admin` | `Admin` | Dashboard, ops, GM tool, quản trị catalog/log |
 
 Rule nhanh:
 
-- Nếu flow mua/validate diễn ra từ player app: ưu tiên `GNNetwork.storeInventory`.
-- Nếu flow này chạy ở backend tin cậy: ưu tiên `GNNetwork.storeInventory.server`.
-- Nếu thao tác vận hành hoặc quản trị catalog/log: ưu tiên `GNNetwork.storeInventory.admin`.
+- Code chạy trong game client: ưu tiên `GNNetwork.storeInventory`.
+- Code chạy ở trusted backend hoặc worker: ưu tiên `GNNetwork.storeInventory.server`.
+- Code chạy ở dashboard/tool vận hành: ưu tiên `GNNetwork.storeInventory.admin`.
+- Cần thao tác cùng operation nhưng khác quyền: giữ nguyên method, đổi namespace cho đúng role.
+- Chỉ dùng `overrideSecretKey` khi có chủ đích override secret mặc định theo role cho một request.
 
 ## 4. Chọn Method
 
-### Catalog và discovery
+Đọc bảng này trước. Cột API contract rows trỏ thẳng đến row cần đọc trong `API_STORE_INVENTORY.md`; không cần mở full file API.
+
+> Khi thấy [client:16-16](/docs/example.md) nghĩa là chỉ cần đọc đúng từ dòng 16 đến 16 (hoặc gọi chính xác là đọc đúng dòng 16) của tài liệu `/docs/example.md`, tương tự với những cái khác, ví dụ [client:12-15] nghĩa là đọc đúng từ dòng 12 đến 15 của tài liệu, nếu có tool đọc từ startLine đến endLine ưu tiên cái này thay vì mở toàn bộ file.
+
+> Thứ tự columns `API contract rows` của `client`, `server` và `admin` là: `| Method | Request Data DTO Link | Response Data DTO Link | Default Permission Rules | Error Code có thể gặp |`.
+
+### Catalog và Discovery
 
 <!-- prettier-ignore -->
-| Method | Dùng khi nào | Cần truyền gì | Nhận được gì | Ghi chú | ErrorCode |
-| --- | --- | --- | --- | --- | --- |
-| `createStoreItemAsync` | Tạo store item mới | `storeId?`, `displayName?` | `CreateStoreItemResponseData` | Nếu bỏ `storeId`, backend có thể sinh id | `Ok`, `StoreItemExists` |
-| `setStoreItemInformationAsync` | Cập nhật catalog, giá, IAP mapping, metadata | `storeId` và field cần đổi | `StoreInventoryResponseData` | `storeItemType` nên map bằng enum | `Ok`, `StoreItemNotFound`, `StoreInvalid` |
-| `setRemoveStatusAsync` | Đánh dấu remove/hide store item | `storeId`, `reason?` | `EmptyResponseData` | Thường dùng để disable item | `Ok`, `StoreItemNotFound` |
-| `getStoreItemInformationAsync` | Đọc chi tiết một store item | `storeId`, `infoRequestParam` | `StoreInventoryResponseData` | Chỉ bật field thật sự cần trong `infoRequestParam` | `Ok`, `StoreItemNotFound` |
-| `getStoreItemsWithTagAsync` | Tìm store item theo tag | `key`, `value`, `infoRequestParam`, `skip?`, `limit?` | `StoreInventoriesWithStoreIdResponseData` | Hữu ích cho listing/filter | `Ok` |
-| `getCreateLeaderboardAsync` | Lấy leaderboard create của store item | `infoRequestParam`, `skip?`, `limit?`, `loadFromCache?` | `GetCreateLeaderboardResponseData` | Response có `position` | `Ok` |
+| Method | Dùng khi nào | Cần truyền gì | Nhận được gì | API contract rows |
+| --- | --- | --- | --- | --- |
+| `createStoreItemAsync` | Tạo store item mới | `storeId?`, `displayName?` | `responseData.storeId` | [client:19-19](/docs/reference/API_STORE_INVENTORY.md) / [server:39-39](/docs/reference/API_STORE_INVENTORY.md) / [admin:59-59](/docs/reference/API_STORE_INVENTORY.md) |
+| `setStoreItemInformationAsync` | Cập nhật catalog, giá, IAP mapping, metadata | `storeId` và field cần đổi | `StoreInventoryResponseData` | [client:21-21](/docs/reference/API_STORE_INVENTORY.md) / [server:41-41](/docs/reference/API_STORE_INVENTORY.md) / [admin:61-61](/docs/reference/API_STORE_INVENTORY.md) |
+| `setRemoveStatusAsync` | Đánh dấu remove/hide store item | `storeId`, `reason?` | `EmptyResponseData` | [client:20-20](/docs/reference/API_STORE_INVENTORY.md) / [server:40-40](/docs/reference/API_STORE_INVENTORY.md) / [admin:60-60](/docs/reference/API_STORE_INVENTORY.md) |
+| `getStoreItemInformationAsync` | Đọc chi tiết một store item | `storeId`, `infoRequestParam` | `responseData.infoResponseParameters` | [client:17-17](/docs/reference/API_STORE_INVENTORY.md) / [server:37-37](/docs/reference/API_STORE_INVENTORY.md) / [admin:57-57](/docs/reference/API_STORE_INVENTORY.md) |
+| `getStoreItemsWithTagAsync` | Tìm store item theo tag | `key`, `value`, `infoRequestParam`, `skip?`, `limit?` | `responseData.results` | [client:18-18](/docs/reference/API_STORE_INVENTORY.md) / [server:38-38](/docs/reference/API_STORE_INVENTORY.md) / [admin:58-58](/docs/reference/API_STORE_INVENTORY.md) |
+| `getCreateLeaderboardAsync` | Lấy leaderboard create của store item | `infoRequestParam`, `skip?`, `limit?`, `loadFromCache?` | `responseData.results` có `position` | [client:25-25](/docs/reference/API_STORE_INVENTORY.md) / [server:45-45](/docs/reference/API_STORE_INVENTORY.md) / [admin:65-65](/docs/reference/API_STORE_INVENTORY.md) |
 
-### Purchase, gift và receipt
-
-<!-- prettier-ignore -->
-| Method | Dùng khi nào | Cần truyền gì | Nhận được gì | Ghi chú | ErrorCode |
-| --- | --- | --- | --- | --- | --- |
-| `buyStoreItemAsync` | Mua store item bằng flow nội bộ | `storeId`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | `type` nên map bằng `OwnerType` | `Ok`, `NotEnoughCurrency`, `StoreItemNotFound`, `BuyerNotFound`, `CanNotBuyThisStoreItem`, `StoreItemRemoved`, `StoreItemPurchasedAndNonConsumable` |
-| `presentStoreItemAsync` | Tặng/phát store item | `storeId`, `id`, `type`, `log?` | `PresentStoreInventoryResponseData` | `type` nên map bằng `OwnerType` | `Ok`, `StoreItemNotFound`, `BuyerNotFound`, `StoreItemRemoved`, `StoreItemPurchasedAndNonConsumable` |
-| `validateAppleAppStoreReceiptAsync` | Validate receipt Apple và fulfill purchase | `receipt`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | `type` nên map bằng `OwnerType` | `Ok`, `StoreItemNotFound`, `BuyerNotFound`, `ExceptionWhenValidateReceipt`, `StoreInvalid`, `ReceiptInvalid`, `StoreItemRemoved`, `StoreItemPurchasedAndNonConsumable` |
-| `validateFacebookStoreReceiptAsync` | Validate receipt Facebook và fulfill purchase | `receipt`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | `type` nên map bằng `OwnerType` | `Ok`, `StoreItemNotFound`, `BuyerNotFound`, `ExceptionWhenValidateReceipt`, `StoreInvalid`, `ReceiptInvalid`, `StoreItemRemoved`, `StoreItemPurchasedAndNonConsumable` |
-| `validateGooglePlayStoreReceiptAsync` | Validate receipt Google Play và fulfill purchase | `receipt`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | `type` nên map bằng `OwnerType` | `Ok`, `StoreItemNotFound`, `BuyerNotFound`, `ExceptionWhenValidateReceipt`, `StoreInvalid`, `ReceiptInvalid`, `StoreItemRemoved`, `StoreItemPurchasedAndNonConsumable` |
-
-### Audit và used state
+### Purchase, Gift và Receipt
 
 <!-- prettier-ignore -->
-| Method | Dùng khi nào | Cần truyền gì | Nhận được gì | Ghi chú | ErrorCode |
-| --- | --- | --- | --- | --- | --- |
-| `getStoreLogAsync` | Đọc transaction log của store | `storeId?`, `storeReceiveTypes?`, `id?`, `limit?`, `token?` | `GetStoreLogResponseData` | `token` là cursor cho page tiếp | `Ok` |
-| `getStoreUsedAsync` | Xem owner nào đã dùng store item | `storeId` | `GetStoreUsedResponseData` | Trả list owner id/type | `Ok` |
-| `removeStoreUsedAsync` | Xóa used state của một hoặc nhiều owner | `storeId`, `ownerIds?` | `EmptyResponseData` | Chỉ gọi khi hiểu rõ hậu quả | `Ok` |
+| Method | Dùng khi nào | Cần truyền gì | Nhận được gì | API contract rows |
+| --- | --- | --- | --- | --- |
+| `buyStoreItemAsync` | Mua store item bằng flow nội bộ | `storeId`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | [client:16-16](/docs/reference/API_STORE_INVENTORY.md) / [server:36-36](/docs/reference/API_STORE_INVENTORY.md) / [admin:56-56](/docs/reference/API_STORE_INVENTORY.md) |
+| `presentStoreItemAsync` | Tặng/phát store item | `storeId`, `id`, `type`, `log?` | `PresentStoreInventoryResponseData` | [client:26-26](/docs/reference/API_STORE_INVENTORY.md) / [server:46-46](/docs/reference/API_STORE_INVENTORY.md) / [admin:66-66](/docs/reference/API_STORE_INVENTORY.md) |
+| `validateAppleAppStoreReceiptAsync` | Validate receipt Apple và fulfill purchase | `receipt`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | [client:22-22](/docs/reference/API_STORE_INVENTORY.md) / [server:42-42](/docs/reference/API_STORE_INVENTORY.md) / [admin:62-62](/docs/reference/API_STORE_INVENTORY.md) |
+| `validateFacebookStoreReceiptAsync` | Validate receipt Facebook và fulfill purchase | `receipt`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | [client:23-23](/docs/reference/API_STORE_INVENTORY.md) / [server:43-43](/docs/reference/API_STORE_INVENTORY.md) / [admin:63-63](/docs/reference/API_STORE_INVENTORY.md) |
+| `validateGooglePlayStoreReceiptAsync` | Validate receipt Google Play và fulfill purchase | `receipt`, `id`, `type`, `log?` | `BuyStoreInventoryResponseData` | [client:24-24](/docs/reference/API_STORE_INVENTORY.md) / [server:44-44](/docs/reference/API_STORE_INVENTORY.md) / [admin:64-64](/docs/reference/API_STORE_INVENTORY.md) |
 
-## 5. Enum và Reference
+### Audit và Used State
 
-- DTO fields: [reference/dto/STORE_INVENTORY.md](/docs/reference/dto/STORE_INVENTORY.md). Method table: [reference/API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md).
-- Enums: [StoreItemType](/docs/reference/ENUMS.md#storeitemtype), [StoreReceiveType](/docs/reference/ENUMS.md#storereceivetype), [OwnerType](/docs/reference/ENUMS.md#ownertype).
-- Error handling: [reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
-- Permission rules: [reference/PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md).
-- Fallback `Runtime/` chỉ khi reference docs chưa đủ: `Runtime/Entity/Models/StoreInventory*.cs`.
-- `SetStoreItemInformationRequestData.storeItemType` có range `1..2`, nên map bằng `StoreItemType`.
-- `GetStoreLogRequestData.storeReceiveTypes` nên map bằng `StoreReceiveType`.
-- `BuyStoreItemRequestData.type`, `PresentStoreItemRequestData.type` và các request validate receipt, là OwnerType; theo model/response hiện tại map bằng `OwnerType`.
+<!-- prettier-ignore -->
+| Method | Dùng khi nào | Cần truyền gì | Nhận được gì | API contract rows |
+| --- | --- | --- | --- | --- |
+| `getStoreLogAsync` | Đọc transaction log của store | `storeId?`, `storeReceiveTypes?`, `id?`, `limit?`, `token?` | `responseData.results`, `responseData.token?` | [client:27-27](/docs/reference/API_STORE_INVENTORY.md) / [server:47-47](/docs/reference/API_STORE_INVENTORY.md) / [admin:67-67](/docs/reference/API_STORE_INVENTORY.md) |
+| `getStoreUsedAsync` | Xem owner nào đã dùng store item | `storeId` | `responseData.results` | [client:28-28](/docs/reference/API_STORE_INVENTORY.md) / [server:48-48](/docs/reference/API_STORE_INVENTORY.md) / [admin:68-68](/docs/reference/API_STORE_INVENTORY.md) |
+| `removeStoreUsedAsync` | Xóa used state của một hoặc nhiều owner | `storeId`, `ownerIds?` | `EmptyResponseData` | [client:29-29](/docs/reference/API_STORE_INVENTORY.md) / [server:49-49](/docs/reference/API_STORE_INVENTORY.md) / [admin:69-69](/docs/reference/API_STORE_INVENTORY.md) |
 
-## 6. InfoRequestParam Rules
-
-`StoreInventoryModels.InfoRequestParam` điều khiển payload trả về trong:
-
-- `getStoreItemInformationAsync`
-- `getStoreItemsWithTagAsync`
-- `getCreateLeaderboardAsync`
-
-Rule cứng:
-
-- Không truyền `null`.
-- Không bật toàn bộ field một cách mù quáng.
-- Chỉ bật field mà màn hình hoặc flow hiện tại thật sự cần.
-
-Các field thường dùng:
-
-- `storeItems`
-- `storeItemType`
-- `storeCurrencies`
-- `priceCurrencies`
-- `inAppPurchase`
-- `removeStatus`
-- `displayName`
-- `avatar`
-- `tsCreate`
-- `tags`
-- `storeDatas`
-
-## 7. Decision Rules
+Decision rules:
 
 - Cần tạo catalog item mới: dùng `createStoreItemAsync`, rồi nếu cần cấu hình chi tiết thì `setStoreItemInformationAsync`.
 - Cần lấy chi tiết một store item: dùng `getStoreItemInformationAsync`.
-- Cần listing theo tag: dùng `getStoreItemsWithTagAsync`.
+- Cần listing/filter theo tag: dùng `getStoreItemsWithTagAsync`.
 - Cần đánh dấu item bị remove/hide: dùng `setRemoveStatusAsync`.
 - Cần mua item theo flow nội bộ: dùng `buyStoreItemAsync`.
 - Cần tặng item: dùng `presentStoreItemAsync`.
@@ -130,58 +96,102 @@ Các field thường dùng:
 - Cần audit transaction: dùng `getStoreLogAsync`.
 - Cần xem trạng thái used hoặc reset used: dùng `getStoreUsedAsync` và `removeStoreUsedAsync`.
 
-## 8. Response Rules
+## 5. Method Signature
 
-Tất cả typed response của `StoreInventoryApi` đều có:
-
-- `returnCode`
-- `debugMessage`
-- `invalidMembers`
-- `errorCode`
-- `responseData`
-
-Rule kiểm tra response:
+Mỗi method có 2 form: callback và `*Async()` Task. Mặc định sinh code bằng async form.
 
 ```csharp
-if (response.hasReturnCodeError()) {
-    throw new System.Exception(response.debugMessage);
-}
+// Callback
+GNNetwork.storeInventory.<method>(requestData, onResponse, overrideAuthToken, overrideSecretKey, customTags, timeout);
 
-if (response.errorCode != ErrorCode.Ok) {
-    throw new System.Exception("Business error: " + response.errorCode);
-}
+// Async
+var response = await GNNetwork.storeInventory.<method>Async(requestData, overrideAuthToken, overrideSecretKey, customTags, timeout);
 ```
 
-Những response chính AI cần nhớ:
+Param chung:
 
-- `createStoreItemAsync` trả `responseData.storeId`.
-- `getStoreItemInformationAsync` trả `responseData.infoResponseParameters`.
-- `getStoreItemsWithTagAsync` trả `responseData.results`.
-- `setStoreItemInformationAsync` trả lại `StoreInventoryResponseData`.
-- `buyStoreItemAsync` và các method validate receipt trả `BuyStoreInventoryResponseData`.
-- `presentStoreItemAsync` trả `PresentStoreInventoryResponseData`.
-- `getCreateLeaderboardAsync` trả `results` có `position` và store info.
-- `getStoreLogAsync` trả `results` và có thể có `token` để gọi page tiếp.
-- `getStoreUsedAsync` trả `results`.
+<!-- prettier-ignore -->
+| Param | Type | Khi nào cần |
+| --- | --- | --- |
+| `requestData` | domain-specific DTO | Payload chính; tạo bằng `new StoreInventoryModels.<Method>RequestData()` |
+| `onResponse` | `Action1<TResponse>` | Chỉ có ở callback form |
+| `overrideAuthToken` | `string` | Impersonate / multi-session / admin thao tác bằng auth token khác |
+| `overrideSecretKey` | `string` | Override secret key mặc định của role cho một request |
+| `customTags` | `GNHashtable` | Trace id, build version, A/B bucket; backend có thể log/route |
+| `timeout` | `int` | Override timeout theo request, tính bằng giây |
 
-### Cảnh báo implementation hiện tại
+Typed response expose public fields: `returnCode`, `errorCode`, `invalidMembers`, `debugMessage`, `responseData`. Xem [RULES.md response checking](/docs/RULES.md).
 
-- Trong model hiện tại, `BuyStoreInventoryResponseData.storeItems` và `PresentStoreInventoryResponseData.storeItems` đang được decorate bằng `ParameterCode.StoreCurrencies`.
-- Đây có thể là issue mapping của package hiện tại.
-- Nếu bạn phụ thuộc mạnh vào field `storeItems`, hãy verify runtime thực tế thay vì giả định deserialize luôn đúng.
+## 6. Request Field Rules
 
-## 9. Best Practices
+- DTO fields: [reference/dto/STORE_INVENTORY.md](/docs/reference/dto/STORE_INVENTORY.md).
+- Contract table: [reference/API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md).
+- Enums: [StoreItemType](/docs/reference/ENUMS.md#storeitemtype), [StoreReceiveType](/docs/reference/ENUMS.md#storereceivetype), [OwnerType](/docs/reference/ENUMS.md#ownertype).
+- Error handling: [reference/ERROR_HANDLING.md](/docs/reference/ERROR_HANDLING.md).
+- Permission rules: [reference/PERMISSION_RULES.md](/docs/reference/PERMISSION_RULES.md).
+- Fallback `Runtime/` chỉ khi reference docs chưa đủ: `Runtime/Entity/Models/StoreInventory*.cs`.
 
-- Dùng enum thay vì số thô cho `StoreItemType`, `StoreReceiveType`, `OwnerType`.
-- Với catalog query, giữ `infoRequestParam` tối giản.
-- Với receipt validation, luôn gọi đúng provider method theo source receipt.
-- Với `getStoreLogAsync`, dùng `token` để page tiếp thay vì tự suy diễn offset.
-- Với `removeStoreUsedAsync`, chỉ truyền `ownerIds` đã được xác nhận rõ.
-- Với `createStoreItemAsync`, nếu backend đã có convention sinh `storeId`, đừng tự phát minh format id mới trong client nếu không cần.
+<!-- prettier-ignore -->
+| DTO / field | Quick rule | DTO link |
+| --- | --- | --- |
+| `CreateStoreItemRequestData.storeId` | optional; nếu bỏ trống, backend có thể tự sinh `storeId` | [StoreInventoryModels.CreateStoreItemRequestData:382-391](/docs/reference/dto/store-inventory/STORE_INVENTORY_MODELS.md#createstoreitemrequestdata) |
+| `SetStoreItemInformationRequestData.storeItemType` | range `1..2`; map bằng `StoreItemType`, không hardcode số | [StoreInventoryModels.SetStoreItemInformationRequestData:450-476](/docs/reference/dto/store-inventory/STORE_INVENTORY_MODELS.md#setstoreiteminformationrequestdata) |
+| `InfoRequestParam` | required cho `getStoreItemInformation`, `getStoreItemsWithTag`, `getCreateLeaderboard`; chỉ bật field cần render | [StoreInventoryModels.InfoRequestParam:649-678](/docs/reference/dto/store-inventory/STORE_INVENTORY_MODELS.md#inforequestparam) |
+| owner `id` + `type` | `type` là `OwnerType`; dùng đúng owner id tương ứng với `MasterPlayer`, `GamePlayer`, `CharacterPlayer`, hoặc `Group` | [StoreInventoryModels.BuyStoreItemRequestData:127-138](/docs/reference/dto/store-inventory/STORE_INVENTORY_MODELS.md#buystoreitemrequestdata) |
+| receipt `receipt` | dùng đúng provider method theo source receipt: Apple, Facebook, hoặc Google Play | [google:573-584](/docs/reference/dto/store-inventory/STORE_INVENTORY_MODELS.md#validategoogleplaystorereceiptrequestdata) |
+| `GetStoreLogRequestData.storeReceiveTypes` | map bằng `StoreReceiveType`; `token` là cursor cho page tiếp | [StoreInventoryModels.GetStoreLogRequestData:199-211](/docs/reference/dto/store-inventory/STORE_INVENTORY_MODELS.md#getstorelogrequestdata) |
+| `RemoveStoreUsedRequestData.ownerIds` | optional nhưng nguy hiểm nếu bỏ trống khi chưa rõ semantics backend | [StoreInventoryModels.RemoveStoreUsedRequestData:269-278](/docs/reference/dto/store-inventory/STORE_INVENTORY_MODELS.md#removestoreusedrequestdata) |
 
-## 10. Ví dụ Khuyến Nghị
+## 7. Store Flow
 
-### Đọc store item với infoRequestParam tối giản
+### Catalog
+
+1. Tạo item bằng `createStoreItemAsync` nếu catalog chưa có.
+2. Cấu hình chi tiết bằng `setStoreItemInformationAsync`: type, price, currency, IAP mapping, metadata, tag.
+3. Client đọc catalog bằng `getStoreItemInformationAsync` hoặc `getStoreItemsWithTagAsync` với `infoRequestParam` tối giản.
+4. Disable/hide item bằng `setRemoveStatusAsync` thay vì để client tự lọc theo convention riêng.
+
+### Purchase và Receipt
+
+1. Với flow tiền tệ nội bộ, gọi `buyStoreItemAsync`.
+2. Với tặng/phát item, gọi `presentStoreItemAsync`.
+3. Với IAP, gọi đúng method validate theo provider receipt.
+4. Sau response thành công, đọc `responseData` theo response DTO; không đọc `responseData` khi `returnCode != Ok`.
+
+### Audit và Used State
+
+1. Dùng `getStoreLogAsync` để đọc transaction log; truyền `token` từ response trước để lấy page tiếp.
+2. Dùng `getStoreUsedAsync` để xem owner đã dùng item.
+3. Chỉ dùng `removeStoreUsedAsync` khi đã xác định rõ `ownerIds` cần reset.
+
+## 8. Minimal Pattern
+
+```csharp
+using XmobiTea.GearN;
+using XmobiTea.GearN.Constant;
+using XmobiTea.GearN.Entity.Models;
+
+var requestData = new StoreInventoryModels.GetStoreItemInformationRequestData();
+requestData.storeId = "store-item-001";
+requestData.infoRequestParam = new StoreInventoryModels.InfoRequestParam {
+    displayName = true,
+    priceCurrencies = true,
+    storeItemType = true
+};
+
+var response = await GNNetwork.storeInventory.getStoreItemInformationAsync(requestData);
+
+if (response.returnCode != ReturnCode.Ok) return;
+if (response.errorCode != ErrorCode.Ok) return;
+
+var storeInfo = response.responseData.infoResponseParameters;
+```
+
+Nếu codebase đã có helper riêng như `hasReturnCodeError()` và muốn throw exception thay vì early-return, vẫn phải giữ thứ tự check 2 tầng: `returnCode` trước, `errorCode` sau.
+
+## 9. Ví dụ Khuyến Nghị
+
+### Client đọc store item với infoRequestParam tối giản
 
 ```csharp
 using XmobiTea.GearN;
@@ -199,18 +209,13 @@ requestData.infoRequestParam = infoRequestParam;
 
 var response = await GNNetwork.storeInventory.getStoreItemInformationAsync(requestData);
 
-if (response.hasReturnCodeError()) {
-    throw new System.Exception(response.debugMessage);
-}
-
-if (response.errorCode != ErrorCode.Ok) {
-    throw new System.Exception("Business error: " + response.errorCode);
-}
+if (response.returnCode != ReturnCode.Ok) return;
+if (response.errorCode != ErrorCode.Ok) return;
 
 var storeInfo = response.responseData.infoResponseParameters;
 ```
 
-### Mua store item
+### Client mua store item
 
 ```csharp
 using XmobiTea.GearN;
@@ -225,39 +230,31 @@ requestData.log = "buy from shop popup";
 
 var response = await GNNetwork.storeInventory.buyStoreItemAsync(requestData);
 
-if (response.hasReturnCodeError()) {
-    throw new System.Exception(response.debugMessage);
-}
-
-if (response.errorCode != ErrorCode.Ok) {
-    throw new System.Exception("Business error: " + response.errorCode);
-}
+if (response.returnCode != ReturnCode.Ok) return;
+if (response.errorCode != ErrorCode.Ok) return;
 
 var result = response.responseData;
 ```
 
-### Validate Google Play receipt
+### Server validate Google Play receipt
 
 ```csharp
 using XmobiTea.GearN;
 using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
-var requestData = new StoreInventoryModels.ValidateGooglePlayStoreReceiptRequestData();
+var requestData = new StoreInventoryModels.ServerValidateGooglePlayStoreReceiptRequestData();
 requestData.receipt = googleReceiptPayload;
 requestData.id = "1234567890";
 requestData.type = OwnerType.MasterPlayer;
 requestData.log = "google-play-checkout";
 
-var response = await GNNetwork.storeInventory.validateGooglePlayStoreReceiptAsync(requestData);
+var response = await GNNetwork.storeInventory.server.validateGooglePlayStoreReceiptAsync(requestData);
 
-if (response.hasReturnCodeError()) {
-    throw new System.Exception(response.debugMessage);
-}
+if (response.returnCode != ReturnCode.Ok) return;
+if (response.errorCode != ErrorCode.Ok) return;
 
-if (response.errorCode != ErrorCode.Ok) {
-    throw new System.Exception("Business error: " + response.errorCode);
-}
+var result = response.responseData;
 ```
 
 ### Đọc store log với filter và cursor
@@ -274,35 +271,46 @@ requestData.limit = 20;
 
 var response = await GNNetwork.storeInventory.getStoreLogAsync(requestData);
 
-if (response.hasReturnCodeError()) {
-    throw new System.Exception(response.debugMessage);
-}
-
-if (response.errorCode != ErrorCode.Ok) {
-    throw new System.Exception("Business error: " + response.errorCode);
-}
+if (response.returnCode != ReturnCode.Ok) return;
+if (response.errorCode != ErrorCode.Ok) return;
 
 var logs = response.responseData.results;
 var nextToken = response.responseData.token;
 ```
 
-## 11. Anti-Patterns
+## 10. Anti-Patterns
 
 - Không hardcode số cho `storeItemType`, `storeReceiveTypes`, `type`.
 - Không bỏ `infoRequestParam` ở các method bắt buộc.
+- Không bật toàn bộ field trong `infoRequestParam` nếu màn hình chỉ cần vài field.
 - Không dùng receipt của provider này cho method validate của provider khác.
 - Không dùng `getStoreLogAsync` như offset pagination khi API đã có `token`.
 - Không bỏ trống `ownerIds` trong `removeStoreUsedAsync` nếu chưa hiểu backend sẽ xử lý thế nào.
 - Không giả định `storeItems` trong response buy/present luôn deserialize đúng nếu bạn chưa verify runtime.
-- Không bỏ qua kiểm tra `returnCode` và `errorCode`.
+- Không bỏ qua check `returnCode` trước `errorCode`.
+- Không dùng callback style mặc định khi codebase đã support `async/await`.
 
-## 12. AI Checklist
+## 11. AI Checklist
 
-- Đã `Resources/GNServerSettings` chưa.
-- Có chọn đúng namespace `storeInventory` / `storeInventory.server` / `storeInventory.admin` chưa.
-- Có nhớ rằng `StoreInventoryApi` hiện chỉ đi qua HTTP không.
-- Nếu request có numeric enum field, có dùng enum export thay vì số thô không.
-- Nếu đang gọi `getStoreItemInformationAsync`, `getStoreItemsWithTagAsync` hoặc `getCreateLeaderboardAsync`, có truyền `infoRequestParam` chưa.
+- Đã có `Resources/GNServerSettings` chưa.
+- Đã chọn đúng namespace `storeInventory` / `storeInventory.server` / `storeInventory.admin` chưa.
+- Có nhớ `StoreInventoryApi` chỉ đi qua HTTP không.
+- Nếu request có numeric enum field, có dùng enum public thay vì số thô không.
+- Nếu đang gọi `getStoreItemInformationAsync`, `getStoreItemsWithTagAsync`, hoặc `getCreateLeaderboardAsync`, có truyền `infoRequestParam` chưa.
 - Nếu đang đọc log, có dùng `token` cho page tiếp chưa.
 - Nếu đang validate receipt, method có đúng provider không.
-- Có kiểm tra `hasReturnCodeError()` trước `errorCode` chưa.
+- Có check `returnCode` trước `errorCode` chưa.
+
+## Quick Map
+
+Dùng bảng này để đọc đúng dòng mà không load cả file. `offset = startLine - 1`, `limit = endLine - startLine + 1`.
+
+<!-- prettier-ignore -->
+| Section | Lines |
+| --- | --- |
+| §3 Chọn Namespace | 30-45 |
+| §4 Chọn Method — Catalog và Discovery | 55-65 |
+| §4 Chọn Method — Purchase, Gift và Receipt | 67-76 |
+| §4 Chọn Method — Audit và Used State | 78-97 |
+| §8 Minimal Pattern | 167-188 |
+| §9 Ví Dụ Khuyến Nghị | 192-279 |

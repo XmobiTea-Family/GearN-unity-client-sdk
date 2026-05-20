@@ -1,3 +1,7 @@
+# DTO Split Plan
+
+> Internal maintenance doc. Không dùng file này làm nguồn canonical khi sinh code sử dụng SDK.
+
 Mục tiêu: chia các file lớn ra thành các file nhỏ, file lớn lúc này giữ index đến các file nhỏ để AI Agent đọc nội dung chính xác hơn, bổ sung cả start line và end line bằng định dạng kiểu [InfoRequestParam:1-35](/docs/reference/dto/character-player/CHARACTER_PLAYER_MODELS.md#inforequestparam) (nghĩa là đọc /docs/reference/dto/character-player/CHARACTER_PLAYER_MODELS.md#inforequestparam từ dòng 1-35), mục tiêu để AI AGENT không phải mở full các file mà chỉ cần Get-Content từ dòng 1-35 là đủ nội dung cần rồi
 
 Thực hiện như sau:
@@ -248,3 +252,4 @@ _Không có field public (payload rỗng)._
 - ... toàn bộ CharacterPlayerResponseModels
 
 ```
+> Internal maintenance doc. Không dùng file này làm nguồn canonical khi sinh code sử dụng SDK.

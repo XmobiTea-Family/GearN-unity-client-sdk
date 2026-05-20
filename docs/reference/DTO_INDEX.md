@@ -3,6 +3,7 @@
 Tổng cộng **2506** DTO class trên **12** domain.
 
 > **Cách dùng hiệu quả (đặc biệt cho AI consumer):**
+> - Đừng mở full một file DTO lớn nếu chưa biết class cần tìm. Ưu tiên `rg "ClassName" docs/reference/DTO_INDEX.md` hoặc mở file domain rồi nhảy bằng line-range.
 > - Khi thấy dạng tài liệu như sau hoặc tương tự `[Generic.AvatarItem:1-10](/docs/reference/dto/generic/GENERIC_MODELS.md#avataritem)`, điều đó có nghĩa dùng tool đọc từ dòng 1-10 của `/docs/reference/dto/generic/GENERIC_MODELS.md` là lấy được toàn bộ nội dung cần thiết có trong `Generic.AvatarItem`, trường hợp thấy thông tin bị lệch dòng hoặc không chính xác, fallback về dùng `grep` / ripgrep tìm class name cần: `rg "ClassName" docs/reference/DTO_INDEX.md`.
 > - Hoặc mở trực tiếp file domain tương ứng trong `docs/reference/dto/` (xem bảng "Theo domain" dưới).
 

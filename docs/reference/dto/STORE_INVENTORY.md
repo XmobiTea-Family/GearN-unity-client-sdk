@@ -2,7 +2,7 @@
 
 Store catalog, buy/present, receipt validation, store log.
 
-Related API reference: [API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md).
+Related guide: [STORE_INVENTORY.md](/docs/guides/STORE_INVENTORY.md). Related API reference: [API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md).
 
 Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field table cho biết: tên field, kiểu C# tương ứng, có `required` hay không (suy từ metadata `DataMember` / nullable / optional), doc comment, và ràng buộc length/range/default nếu có.
 

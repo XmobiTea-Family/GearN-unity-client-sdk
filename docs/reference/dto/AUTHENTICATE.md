@@ -2,7 +2,7 @@
 
 Player login (account, social, device id), register, refresh auth token.
 
-Related API reference: [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md).
+Related guide: [AUTHENTICATE.md](/docs/guides/AUTHENTICATE.md). Related API reference: [API_AUTHENTICATE.md](/docs/reference/API_AUTHENTICATE.md).
 
 Mỗi section bên dưới là 1 class DTO public trong namespace `XmobiTea.GearN.Entity.Models`. `AuthenticateModels`, `AuthenticateRequestModels`, và `AuthenticateResponseModels` là các container class chứa DTO tương ứng. Field table cho biết: tên field, kiểu C# tương ứng, có `required` hay không (suy từ metadata `DataMember` / nullable / optional), doc comment, và ràng buộc length/range/default nếu có.
 

@@ -1,5 +1,7 @@
 # Request Flow
 
+> Maintainer-only flow note. Package consumer thường **không cần** đọc file này để gọi SDK đúng; dùng [docs/START_HERE.md](/docs/START_HERE.md), [docs/AI_CHEATSHEET.md](/docs/AI_CHEATSHEET.md), và [docs/RULES.md](/docs/RULES.md) trước.
+
 ## Typed HTTP Operation Flow
 
 1. A Unity project calls a facade method such as `GNNetwork.gamePlayer.getPlayerInformation(...)`.

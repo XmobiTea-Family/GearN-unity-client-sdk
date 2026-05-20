@@ -2,7 +2,7 @@
 
 Group metadata, member roster, message stream, group-level currency/inventory/statistics.
 
-Related API reference: [API_GROUP.md](/docs/reference/API_GROUP.md).
+Related guide: [GROUP.md](/docs/guides/GROUP.md). Related API reference: [API_GROUP.md](/docs/reference/API_GROUP.md).
 
 Mỗi section bên dưới là 1 class DTO trong namespace `<Models>`. Field table cho biết: tên field, kiểu C# tương ứng, có `required` hay không (suy từ metadata `DataMember` / nullable / optional), doc comment, và ràng buộc length/range/default nếu có.
 

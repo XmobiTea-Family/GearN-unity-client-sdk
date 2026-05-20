@@ -1,5 +1,7 @@
 # CLOUDSCRIPT ADMIN
 
+> Links dạng `[file:N-M](path)` là range-line convention (xem [AGENTS.md:22-40](/AGENTS.md)). Không normalize sang anchor `#section` khi edit.
+
 ## 1. Mục đích
 
 File này chỉ tập trung vào `admin` trong cloud script.
@@ -20,7 +22,7 @@ Lý do tồn tại:
 - Không cần gọi `GNNetwork.init()` vì khi cloudScript đã chạy thì đã bootstrap hàm này rồi.
 - Không cần truyền `secretKey` từ phía client vì `cloudScript` đã có đầy đủ quyền để gọi bất kỳ hàm nào phía `GearN Server`.
 
-Mapping chính:
+### Mapping chính:
 
 - `admin.characterPlayer` → `GNNetwork.characterPlayer.admin`
 - `admin.content` → `GNNetwork.content.admin`
@@ -30,10 +32,31 @@ Mapping chính:
 - `admin.masterPlayer` → `GNNetwork.masterPlayer.admin`
 - `admin.storeInventory` → `GNNetwork.storeInventory.admin`
 - `admin.multiplayer` → `GNNetwork.multiplayer.admin`
-- `admin.cloudScript` → `GNNetwork.cloudScript.admin`, chỉ có những hàm sau: `executeFunction`, `executeFunctionAsync`.
-- `admin.dashboard` → map thủ công từ top-level `GNNetwork.dashboard` (xem §7), chỉ có những hàm sau: `getAdminAccountList`, `getAdminAccountListAsync`, `getGameInformation`, `getGameInformationAsync`, `getGameList`, `getGameListAsync`, `getMasterGameSettings`, `getMasterGameSettingsAsync`, `getSecretInfoInformation`, `getSecretInfoInformationAsync`, `getSecretInfoInformationAsync`, `getSecretInfoList`, `getSecretInfoListAsync`, `getServerLog`, `getServerLogAsync`, `setGameInformation`, `setGameInformationAsync`, `getUsernameAdminAccount`, `getUsernameAdminAccountAsync`, `getAnalytics`, `getAnalyticsAsync`, `resetStatisticsLeaderboard`, `resetStatisticsLeaderboardAsync`, `getBackupStatisticsLeaderboardVersion`, `getBackupStatisticsLeaderboardVersionAsync`, `getServerGameData`, `getServerGameDataAsync`, `deleteInDatabase`, `deleteInDatabaseAsync`.
+- `admin.cloudScript` → `GNNetwork.cloudScript.admin`, chỉ expose:
+    - `executeFunction`, `executeFunctionAsync`
+- `admin.dashboard` → map thủ công từ top-level `GNNetwork.dashboard` (xem §6), chỉ expose:
+    - `getAdminAccountList` / `getAdminAccountListAsync`
+    - `getGameInformation` / `getGameInformationAsync`
+    - `getGameList` / `getGameListAsync`
+    - `getMasterGameSettings` / `getMasterGameSettingsAsync`
+    - `getSecretInfoInformation` / `getSecretInfoInformationAsync`
+    - `getSecretInfoList` / `getSecretInfoListAsync`
+    - `getServerLog` / `getServerLogAsync`
+    - `setGameInformation` / `setGameInformationAsync`
+    - `getUsernameAdminAccount` / `getUsernameAdminAccountAsync`
+    - `getAnalytics` / `getAnalyticsAsync`
+    - `resetStatisticsLeaderboard` / `resetStatisticsLeaderboardAsync`
+    - `getBackupStatisticsLeaderboardVersion` / `getBackupStatisticsLeaderboardVersionAsync`
+    - `getServerGameData` / `getServerGameDataAsync`
+    - `deleteInDatabase` / `deleteInDatabaseAsync`
 
-Ngoài ra còn có:
+Cách tra method khi viết script (đọc theo range dòng — xem [AGENTS.md:22-40](/AGENTS.md#2-đọc-link-theo-range-line)):
+
+1. Mở [AI_CHEATSHEET.md:37-68](/docs/AI_CHEATSHEET.md#2-decision-tree-what-i-need-do) để chọn domain và action cần làm.
+2. Đọc chi tiết method trong `docs/guides/<DOMAIN>.md` theo `range line` được cheatsheet trỏ tới.
+3. Tra `API contract rows` (route `admin`) trong `docs/reference/API_<DOMAIN>.md` theo dạng `[admin:startLine-endLine](...)`. Nếu route `admin` không có method tương ứng, fallback sang `API contract rows` (route `client`).
+
+Ngoài ra còn có nhưng ít khi dùng:
 
 - `admin.send(...)`
 - `admin.sendAsync(...)`
@@ -65,8 +88,6 @@ Không nên dùng `admin` khi:
 // Preferred (async)
 const response = await admin.<domain>.<method>Async(requestData);
 
-- Khi bạn gọi `admin.*`, bạn đang chọn privileged route có chủ đích.
-- Đừng dùng `admin` chỉ để “đi đường tắt” nếu `database` hoặc helper khác mới là abstraction đúng.
 // Full signature (optional params hiếm khi cần)
 const response = await admin.<domain>.<method>Async(requestData, overrideAuthToken?, overrideSecretKey?, customTags?, timeout?);
 ```
@@ -77,40 +98,18 @@ Rule:
 - Chỉ truyền optional params khi thật sự cần override context hoặc tracing.
 - Luôn check `response.hasReturnCodeError()` trước, rồi kiểm tra `response.errorCode === ErrorCode.Ok`.
 - Với route `admin`, phần lớn method yêu cầu `userId` (hoặc entity id) rõ ràng — không bỏ trống như route `client`.
-- **KHÔNG dùng `any` cho `response` / item array / `args`** — base type cho helper là `CustomOperationResponse`; item array dùng `GenericModels.CurrencyItem[]` / `StatisticsItem[]` / `DataItem[]` …; `args` dùng `unknown` rồi narrow. Đầy đủ pattern + bảng mapping: [CLOUDSCRIPT_USAGE.md § 5](/docs/cloudScript/CLOUDSCRIPT_USAGE.md#5-typing--không-dùng-any-vô-tội-vạ).
+- Khi bạn gọi `admin.*`, bạn đang chọn privileged route có chủ đích. Đừng dùng `admin` chỉ để "đi đường tắt" nếu `database` hoặc helper khác mới là abstraction đúng.
+- **KHÔNG dùng `any` cho `response` / item array / `args`** — base type cho helper là `CustomOperationResponse`; item array dùng `GenericModels.CurrencyItem[]` / `StatisticsItem[]` / `DataItem[]` …; `args` dùng `Record<string, unknown>` rồi narrow bằng `typeof` check hoặc helper `requireString`. Đầy đủ pattern + bảng mapping: [CLOUDSCRIPT_USAGE.md § 5](/docs/cloudScript/CLOUDSCRIPT_USAGE.md#5-typing--không-lạm-dụng-any).
 
-Lưu ý:
+Lưu ý ngôn ngữ:
 
-- code trong `CloudScript` bắt buộc viết bằng `typescript`.
+- Code trong `CloudScript` bắt buộc viết bằng `typescript`.
 - File mô tả / giải thích / spec: có thể dùng `csharp`-style pseudo/code để dễ đọc.
-- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp` (những biến như `int`, `long`, `double`, `float` dạng number trong `csharp` sẽ dùng như `number` trong `typescript`, những biến như `bool` trong `csharp` sẽ dùng như `boolean` trong `typescript`, `object` trong `csharp` sẽ dùng như `unknown` trong `typescript`, những biến như `List<>` trong `csharp` sẽ dùng như `Array<>` trong `typescript`)
+- Nhưng khi triển khai thật, toàn bộ cấu trúc hàm và cách gọi sẽ được chuyển tương đương sang `typescript`, giữ logic giống `csharp` (`int`/`long`/`double`/`float` → `number`, `bool` → `boolean`, `object` → `unknown`, `List<>` → `Array<>`).
 
-```ts
-// Helper chuẩn cho mọi ví dụ
-const assertResponseOk = (response: CustomOperationResponse, actionName: string): void => {
-    if (response.hasReturnCodeError()) {
-        throw new Error(actionName + " return-code error: " + (response.debugMessage ?? response.toString()));
-    }
-    if (response.errorCode !== ErrorCode.Ok) {
-        throw new Error(actionName + " business error: " + response.errorCode + (response.debugMessage ? " - " + response.debugMessage : ""));
-    }
-};
-```
+Helper chuẩn `assertResponseOk` được dùng xuyên suốt các ví dụ — xem định nghĩa ở §8.
 
-## 5. Các hàm tồn tại trong `admin`
-
-- nếu cần cloudScript gọi hàm tương tác với `MasterPlayer`, đọc [CLOUDSCRIPT_admin_MASTER_PLAYER.md](/docs/cloudScript/CLOUDSCRIPT_admin_MASTER_PLAYER.md)
-- nếu cần cloudScript gọi hàm tương tác với `GamePlayer`, đọc [CLOUDSCRIPT_admin_GAME_PLAYER.md](/docs/cloudScript/CLOUDSCRIPT_admin_GAME_PLAYER.md)
-- nếu cần cloudScript gọi hàm tương tác với `CharacterPlayer`, đọc [CLOUDSCRIPT_admin_CHARACTER_PLAYER.md](/docs/cloudScript/CLOUDSCRIPT_admin_CHARACTER_PLAYER.md)
-- nếu cần cloudScript gọi hàm tương tác với `Inventory`, đọc [CLOUDSCRIPT_admin_INVENTORY.md](/docs/cloudScript/CLOUDSCRIPT_admin_INVENTORY.md)
-- nếu cần cloudScript gọi hàm tương tác với `Group`, đọc [CLOUDSCRIPT_admin_GROUP.md](/docs/cloudScript/CLOUDSCRIPT_admin_GROUP.md)
-- nếu cần cloudScript gọi hàm tương tác với `StoreInventory`, đọc [CLOUDSCRIPT_admin_STORE_INVENTORY.md](/docs/cloudScript/CLOUDSCRIPT_admin_STORE_INVENTORY.md)
-- nếu cần cloudScript gọi hàm tương tác với `Content`, đọc [CLOUDSCRIPT_admin_CONTENT.md](/docs/cloudScript/CLOUDSCRIPT_admin_CONTENT.md)
-- nếu cần cloudScript gọi hàm tương tác với `Multiplayer`, đọc [CLOUDSCRIPT_admin_MULTIPLAYER.md](/docs/cloudScript/CLOUDSCRIPT_admin_MULTIPLAYER.md)
-- nếu cần cloudScript gọi hàm tương tác với `CloudScript`, đọc [CLOUDSCRIPT_admin_CLOUDSCRIPT.md](/docs/cloudScript/CLOUDSCRIPT_admin_CLOUDSCRIPT.md)
-- nếu cần cloudScript gọi hàm tương tác với `Dashboard`, đọc [CLOUDSCRIPT_admin_DASHBOARD.md](/docs/cloudScript/CLOUDSCRIPT_admin_DASHBOARD.md)
-
-## 6. Rule request model rất quan trọng
+## 5. Rule request model rất quan trọng
 
 Từ SDK runtime và model:
 
@@ -128,7 +127,7 @@ Kết luận:
 - Khi AI thấy một method `admin.<domain>.*Async(...)`, đừng copy payload từ ví dụ `client` một cách máy móc.
 - Luôn kiểm tra request model tương ứng nếu method có vẻ “self route” ở client nhưng “explicit target” ở admin.
 
-## 7. `dashboard` là case đặc biệt
+## 6. `dashboard` là case đặc biệt
 
 Đây là điểm dễ gây hiểu nhầm nhất.
 
@@ -150,7 +149,7 @@ Khi dùng `admin.dashboard`, ưu tiên:
 - đọc lại [DASHBOARD guide của SDK](/docs/guides/DASHBOARD.md)
 - tra thêm [API_DASHBOARD.md của SDK](/docs/reference/API_DASHBOARD.md)
 
-## 8. `admin` hiện có những domain nào
+## 7. `admin` hiện có những domain nào
 
 - `admin.characterPlayer`: social/gameplay theo character, thường cần `characterId` rõ ràng
 - `admin.content`: content config, upload metadata, file info
@@ -175,7 +174,7 @@ Nếu cần hiểu semantics sâu hơn từng domain, đọc doc tương ứng t
 - [CLOUDSCRIPT guide](/docs/guides/CLOUDSCRIPT.md)
 - [API index](/docs/reference/API_INDEX.md)
 
-## 9. Pattern chung cho ví dụ
+## 8. Pattern chung cho ví dụ
 
 Các ví dụ dưới đây giả sử script đang chạy trong template CloudScript hiện tại, nên bạn có sẵn:
 
@@ -187,6 +186,7 @@ Các ví dụ dưới đây giả sử script đang chạy trong template CloudS
 - `GNHashtable`
 - `OwnerType`
 - `ErrorCode`
+- `gameId` — biến global (string) chứa id của game hiện tại, do template CloudScript inject sẵn vào scope. Dùng trực tiếp ở các method dashboard cần `gameId`.
 
 Nên chuẩn bị 2 helper nhỏ để ví dụ ngắn mà vẫn an toàn:
 
@@ -210,12 +210,12 @@ const assertResponseOk = (response: CustomOperationResponse, actionName: string)
 };
 ```
 
-## 10. Nhiều ví dụ thực chiến
+## 9. Nhiều ví dụ thực chiến
 
-### 10.1. Đọc game info qua `admin.dashboard.getGameInformationAsync`
+### 9.1. Đọc game info qua `admin.dashboard.getGameInformationAsync`
 
 ```ts
-handlers["adminGetGameInfo"] = async (args: any, context, log) => {
+handlers["adminGetGameInfo"] = async (args: Record<string, unknown>, context, log) => {
     const requestData = new DashboardModels.GetGameInformationRequestData();
     requestData.gameId = gameId;
 
@@ -230,12 +230,12 @@ handlers["adminGetGameInfo"] = async (args: any, context, log) => {
 Điểm chính:
 
 - Build request bằng `new DashboardModels.GetGameInformationRequestData()` rồi set field — giống mọi domain khác (xem §5.3 trong USAGE).
-- `dashboard` là case đặc biệt về mapping (xem §7), nhưng **không** phải exception về cách build request DTO.
+- `dashboard` là case đặc biệt về mapping (xem §6), nhưng **không** phải exception về cách build request DTO.
 
-### 10.2. Đọc snapshot game player và tự tạo nếu chưa có
+### 9.2. Đọc snapshot game player và tự tạo nếu chưa có
 
 ```ts
-handlers["adminGetOrCreateGamePlayerProfile"] = async (args: any, context, log) => {
+handlers["adminGetOrCreateGamePlayerProfile"] = async (args: Record<string, unknown>, context, log) => {
     const targetUserId = requireString(args?.userId, "userId");
 
     const infoRequestParam = new GamePlayerModels.InfoRequestParam();
@@ -264,10 +264,10 @@ handlers["adminGetOrCreateGamePlayerProfile"] = async (args: any, context, log) 
 - Route `admin` phải truyền `userId` rõ ràng.
 - `createPlayerIfNotExists` phù hợp cho backend provisioning, không nên bật một cách vô thức.
 
-### 10.3. Cộng hoặc trừ currency cho game player
+### 9.3. Cộng hoặc trừ currency cho game player
 
 ```ts
-handlers["adminAdjustGamePlayerCurrency"] = async (args: any, context, log) => {
+handlers["adminAdjustGamePlayerCurrency"] = async (args: Record<string, unknown>, context, log) => {
     const targetUserId = requireString(args?.userId, "userId");
 
     const gold = new GamePlayerModels.PlayerCurrencyParam();
@@ -295,10 +295,10 @@ handlers["adminAdjustGamePlayerCurrency"] = async (args: any, context, log) => {
 - Đây là delta change, không phải set tuyệt đối.
 - `request.log` là field audit của operation, khác với callback `log(value)` của CloudScript handler.
 
-### 10.4. Tạo item cho player rồi re-query inventory relation
+### 9.4. Tạo item cho player rồi re-query inventory relation
 
 ```ts
-handlers["adminGrantStarterSword"] = async (args: any, context, log) => {
+handlers["adminGrantStarterSword"] = async (args: Record<string, unknown>, context, log) => {
     const targetUserId = requireString(args?.userId, "userId");
 
     const createRequestData = new GamePlayerModels.AdminCreatePlayerItemRequestData();
@@ -330,10 +330,10 @@ handlers["adminGrantStarterSword"] = async (args: any, context, log) => {
 - Đừng giả định `createPlayerItemAsync` luôn trả thẳng `itemId` vừa tạo.
 - Nếu flow cần relation item sau khi grant, re-query là cách rõ ràng hơn.
 
-### 10.5. Đọc profile account-level qua `admin.masterPlayer`
+### 9.5. Đọc profile account-level qua `admin.masterPlayer`
 
 ```ts
-handlers["adminGetMasterPlayerProfile"] = async (args: any, context, log) => {
+handlers["adminGetMasterPlayerProfile"] = async (args: Record<string, unknown>, context, log) => {
     const targetUserId = requireString(args?.userId, "userId");
 
     const infoRequestParam = new MasterPlayerModels.InfoRequestParam();
@@ -360,10 +360,10 @@ handlers["adminGetMasterPlayerProfile"] = async (args: any, context, log) => {
 - `masterPlayer` là account/profile level.
 - Nếu bạn đang thao tác dữ liệu gameplay trong từng game, `gamePlayer` mới là domain đúng.
 
-### 10.6. Gắn tag cho group qua `admin.group.setTagAsync`
+### 9.6. Gắn tag cho group qua `admin.group.setTagAsync`
 
 ```ts
-handlers["adminMarkGroupQueue"] = async (args: any, context, log) => {
+handlers["adminMarkGroupQueue"] = async (args: Record<string, unknown>, context, log) => {
     const groupId = requireString(args?.groupId, "groupId");
 
     const requestData = new GroupModels.AdminSetTagRequestData();
@@ -389,10 +389,10 @@ handlers["adminMarkGroupQueue"] = async (args: any, context, log) => {
 - `groupId` là bắt buộc và là explicit target.
 - `setTagAsync` là upsert một cặp `key/value`, không phải merge cả object tags lớn.
 
-### 10.7. Gọi một CloudScript function khác bằng `admin.cloudScript.executeFunctionAsync`
+### 9.7. Gọi một CloudScript function khác bằng `admin.cloudScript.executeFunctionAsync`
 
 ```ts
-handlers["adminExecuteAnotherCloudScript"] = async (args: any, context, log) => {
+handlers["adminExecuteAnotherCloudScript"] = async (args: Record<string, unknown>, context, log) => {
     const targetUserId = requireString(args?.userId, "userId");
     const functionName = requireString(args?.functionName, "functionName");
 
@@ -428,10 +428,10 @@ handlers["adminExecuteAnotherCloudScript"] = async (args: any, context, log) => 
 - Nếu không truyền `version`, runtime sẽ chạy theo rule live version hiện tại.
 - `customTags` ở đây sẽ đi tiếp xuống function được execute, phù hợp cho trace và correlation id.
 
-### 10.8. Lấy analytics với payload tối giản
+### 9.8. Lấy analytics với payload tối giản
 
 ```ts
-handlers["adminGetLeanAnalytics"] = async (args: any, context, log) => {
+handlers["adminGetLeanAnalytics"] = async (args: Record<string, unknown>, context, log) => {
     const requestData = new DashboardModels.GetAnalyticsRequestData();
     requestData.timestamp = typeof args?.timestamp === "number" ? args.timestamp : undefined;
     requestData.country = true;
@@ -451,29 +451,27 @@ handlers["adminGetLeanAnalytics"] = async (args: any, context, log) => {
 - Chỉ bật đúng các flag cần lấy.
 - Với analytics/snapshot lớn, payload tối giản giúp giảm noise và cost đọc dữ liệu.
 
-### 10.9. Hard delete trực tiếp trong DB qua `admin.dashboard.deleteInDatabaseAsync`
+### 9.9. Hard delete trực tiếp trong DB qua `admin.dashboard.deleteInDatabaseAsync`
 
 ```ts
-handlers["adminDeleteInventoryRow"] = async (args: any, context, log) => {
-  const itemId = requireString(args?.itemId, "itemId");
+handlers["adminDeleteInventoryRow"] = async (args: Record<string, unknown>, context, log) => {
+    const itemId = requireString(args?.itemId, "itemId");
 
-  const requestData = new DashboardModels.DeleteInDatabaseRequestData();
-  requestData.gameId = gameId;
-  requestData.type = (int)OwnerType.Inventory;
-  requestData.id = itemId;
-  requestData.log =
-    "manual cleanup from cloudscript, requestedBy=" +
-    (context.userId ?? "system");
+    const requestData = new DashboardModels.DeleteInDatabaseRequestData();
+    requestData.gameId = gameId;
+    requestData.type = OwnerType.Inventory as number;
+    requestData.id = itemId;
+    requestData.log = "manual cleanup from cloudscript, requestedBy=" + (context.userId ?? "system");
 
-  const response = await admin.dashboard.deleteInDatabaseAsync(requestData);
+    const response = await admin.dashboard.deleteInDatabaseAsync(requestData);
 
-  assertResponseOk(response, "admin.dashboard.deleteInDatabaseAsync");
+    assertResponseOk(response, "admin.dashboard.deleteInDatabaseAsync");
 
-  return {
-    deleted: true,
-    type: requestData.type,
-    id: requestData.id,
-  };
+    return {
+        deleted: true,
+        type: requestData.type,
+        id: requestData.id,
+    };
 };
 ```
 
@@ -483,7 +481,7 @@ handlers["adminDeleteInventoryRow"] = async (args: any, context, log) => {
 - Chỉ dùng khi đã có xác nhận vận hành rõ ràng.
 - Nên luôn đi kèm `request.log` để giữ dấu vết audit.
 
-## 11. Khi nào dùng `admin.sendAsync(...)`
+## 10. Khi nào dùng `admin.sendAsync(...)`
 
 Chỉ dùng `admin.sendAsync(...)` khi:
 
@@ -498,7 +496,7 @@ Không nên ưu tiên `admin.sendAsync(...)` nếu:
 
 Với CloudScript, đây là low-level escape hatch. AI không nên chọn đường này trước.
 
-## 12. Reference source
+## 11. Reference source
 
 Source trong GearN-Server repo:
 
@@ -509,41 +507,18 @@ Source trong GearN-Server repo:
 
 Source trong repo này:
 
-1. [README.md](/README.md)
-2. [docs/guides/DASHBOARD.md](/docs/guides/DASHBOARD.md)
-3. [docs/guides/MASTER_PLAYER.md](/docs/guides/MASTER_PLAYER.md)
-4. [docs/guides/GAME_PLAYER.md](/docs/guides/GAME_PLAYER.md)
-5. [docs/guides/CHARACTER_PLAYER.md](/docs/guides/CHARACTER_PLAYER.md)
-6. [docs/guides/GROUP.md](/docs/guides/GROUP.md)
-7. [docs/guides/INVENTORY.md](/docs/guides/INVENTORY.md)
-8. [docs/guides/STORE_INVENTORY.md](/docs/guides/STORE_INVENTORY.md)
-9. [docs/guides/CONTENT.md](/docs/guides/CONTENT.md)
-10. [docs/guides/CLOUDSCRIPT.md](/docs/guides/CLOUDSCRIPT.md)
-11. [docs/guides/MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md)
-12. [docs/reference/API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md)
-13. [docs/reference/API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md)
-14. [docs/reference/API_GAME_PLAYER.md](/docs/reference/API_GAME_PLAYER.md)
-15. [docs/reference/API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md)
-16. [docs/reference/API_GROUP.md](/docs/reference/API_GROUP.md)
-17. [docs/reference/API_INVENTORY.md](/docs/reference/API_INVENTORY.md)
-18. [docs/reference/API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md)
-19. [docs/reference/API_CONTENT.md](/docs/reference/API_CONTENT.md)
-20. [docs/reference/API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md)
-21. [docs/reference/API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md)
-22. [docs/reference/DTO_INDEX.md](/docs/reference/DTO_INDEX.md)
-23. [GenericModels.cs](/Runtime/Entity/Models/GenericModels.cs)
-24. [DashboardModels.cs](/Runtime/Entity/Models/DashboardModels.cs)
-25. [MasterPlayerModels.cs](/Runtime/Entity/Models/MasterPlayerModels.cs)
-26. [GamePlayerModels.cs](/Runtime/Entity/Models/GamePlayerModels.cs)
-27. [CharacterPlayerModels.cs](/Runtime/Entity/Models/CharacterPlayerModels.cs)
-28. [GroupModels.cs](/Runtime/Entity/Models/GroupModels.cs)
-29. [InventoryModels.cs](/Runtime/Entity/Models/InventoryModels.cs)
-30. [StoreInventoryModels.cs](/Runtime/Entity/Models/StoreInventoryModels.cs)
-31. [ContentModels.cs](/Runtime/Entity/Models/ContentModels.cs)
-32. [CloudScriptModels.cs](/Runtime/Entity/Models/CloudScriptModels.cs)
-33. [MultiplayerModels.cs](/Runtime/Entity/Models/MultiplayerModels.cs)
+1. [docs/guides/DASHBOARD.md](/docs/guides/DASHBOARD.md) · [docs/reference/API_DASHBOARD.md](/docs/reference/API_DASHBOARD.md)
+2. [docs/guides/MASTER_PLAYER.md](/docs/guides/MASTER_PLAYER.md) · [docs/reference/API_MASTER_PLAYER.md](/docs/reference/API_MASTER_PLAYER.md)
+3. [docs/guides/GAME_PLAYER.md](/docs/guides/GAME_PLAYER.md) · [docs/reference/API_GAME_PLAYER.md](/docs/reference/API_GAME_PLAYER.md)
+4. [docs/guides/CHARACTER_PLAYER.md](/docs/guides/CHARACTER_PLAYER.md) · [docs/reference/API_CHARACTER_PLAYER.md](/docs/reference/API_CHARACTER_PLAYER.md)
+5. [docs/guides/GROUP.md](/docs/guides/GROUP.md) · [docs/reference/API_GROUP.md](/docs/reference/API_GROUP.md)
+6. [docs/guides/INVENTORY.md](/docs/guides/INVENTORY.md) · [docs/reference/API_INVENTORY.md](/docs/reference/API_INVENTORY.md)
+7. [docs/guides/STORE_INVENTORY.md](/docs/guides/STORE_INVENTORY.md) · [docs/reference/API_STORE_INVENTORY.md](/docs/reference/API_STORE_INVENTORY.md)
+8. [docs/guides/CONTENT.md](/docs/guides/CONTENT.md) · [docs/reference/API_CONTENT.md](/docs/reference/API_CONTENT.md)
+9. [docs/guides/CLOUDSCRIPT.md](/docs/guides/CLOUDSCRIPT.md) · [docs/reference/API_CLOUDSCRIPT.md](/docs/reference/API_CLOUDSCRIPT.md)
+10. [docs/guides/MULTIPLAYER.md](/docs/guides/MULTIPLAYER.md) · [docs/reference/API_MULTIPLAYER.md](/docs/reference/API_MULTIPLAYER.md)
 
-## 13. Kết luận ngắn
+## 12. Kết luận ngắn
 
 Muốn AI dùng `admin` đúng, chỉ cần nhớ 6 ý:
 
