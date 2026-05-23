@@ -865,9 +865,9 @@ Defines the reusable parameter block MatchmakingQueueSettingsParam.
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `queueName` | `string` | yes | _minLength=6, maxLength=32_ |
-| `matchSize` | `SizeParam` | yes | — |
-| `ticketSize` | `SizeParam` | yes | — |
-| `serverAllocation` | `ServerAllocationParam` | yes | — |
+| `matchSize` | `SizeParam` | no | — |
+| `ticketSize` | `SizeParam` | no | — |
+| `serverAllocation` | `ServerAllocationParam` | no | — |
 | `teams` | `List<TeamParam>?` | no | _elementCls=TeamParam_ |
 | `rules` | `List<RuleParam>?` | no | _elementCls=RuleParam_ |
 | `remove` | `bool?` | no | — |

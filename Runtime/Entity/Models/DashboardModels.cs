@@ -3855,20 +3855,20 @@
             /// <summary>
             /// Stores the match size value.
             /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.MatchSize)]
-            public SizeParam matchSize;
+            [GNHashtableDataMember(code = ParameterCode.MatchSize, isOptional = true)]
+            public SizeParam? matchSize;
 
             /// <summary>
             /// Stores the ticket size value.
             /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.TicketSize)]
-            public SizeParam ticketSize;
+            [GNHashtableDataMember(code = ParameterCode.TicketSize, isOptional = true)]
+            public SizeParam? ticketSize;
 
             /// <summary>
             /// Stores the server allocation value.
             /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.ServerAllocation)]
-            public ServerAllocationParam serverAllocation;
+            [GNHashtableDataMember(code = ParameterCode.ServerAllocation, isOptional = true)]
+            public ServerAllocationParam? serverAllocation;
 
             /// <summary>
             /// Stores the teams value.
