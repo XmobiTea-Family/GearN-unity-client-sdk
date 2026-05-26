@@ -1411,9 +1411,9 @@
         /// </summary>
         public const string GetAmount = "getAmount";
         /// <summary>
-        /// Specifies the parameter key for set amount.
+        /// Specifies the parameter key for change amount.
         /// </summary>
-        public const string SetAmount = "setAmount";
+        public const string ChangeAmount = "changeAmount";
         /// <summary>
         /// Specifies the parameter key for get items with display name.
         /// </summary>

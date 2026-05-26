@@ -1320,14 +1320,14 @@
 
 
         /// <summary>
-        /// Builds the set amount operation request.
+        /// Builds the change amount operation request.
         /// </summary>
-        public class SetAmountOperationRequest : CustomOperationRequestAbstract<InventoryModels.SetAmountRequestData>
+        public class ChangeAmountOperationRequest : CustomOperationRequestAbstract<InventoryModels.ChangeAmountRequestData>
         {
             /// <summary>
             /// Gets the operation code used by this request wrapper.
             /// </summary>
-            protected override string operationCode => OperationCode.SetAmount;
+            protected override string operationCode => OperationCode.ChangeAmount;
             /// <summary>
             /// Gets the request type used by this request wrapper.
             /// </summary>
@@ -1338,15 +1338,15 @@
             protected override RequestRole role => RequestRole.Client;
 
             /// <summary>
-            /// Initializes a new instance of the SetAmountOperationRequest class.
+            /// Initializes a new instance of the ChangeAmountOperationRequest class.
             /// </summary>
-            public SetAmountOperationRequest(InventoryModels.SetAmountRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ChangeAmountOperationRequest(InventoryModels.ChangeAmountRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
         /// <summary>
-        /// Builds the server-scoped set amount operation request.
+        /// Builds the server-scoped change amount operation request.
         /// </summary>
-        public class ServerSetAmountOperationRequest : SetAmountOperationRequest
+        public class ServerChangeAmountOperationRequest : ChangeAmountOperationRequest
         {
             /// <summary>
             /// Gets the request role used by this request wrapper.
@@ -1354,15 +1354,15 @@
             protected override RequestRole role => RequestRole.Server;
 
             /// <summary>
-            /// Initializes a new instance of the ServerSetAmountOperationRequest class.
+            /// Initializes a new instance of the ServerChangeAmountOperationRequest class.
             /// </summary>
-            public ServerSetAmountOperationRequest(InventoryModels.ServerSetAmountRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public ServerChangeAmountOperationRequest(InventoryModels.ServerChangeAmountRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
         /// <summary>
-        /// Builds the admin-scoped set amount operation request.
+        /// Builds the admin-scoped change amount operation request.
         /// </summary>
-        public class AdminSetAmountOperationRequest : SetAmountOperationRequest
+        public class AdminChangeAmountOperationRequest : ChangeAmountOperationRequest
         {
             /// <summary>
             /// Gets the request role used by this request wrapper.
@@ -1370,9 +1370,9 @@
             protected override RequestRole role => RequestRole.Admin;
 
             /// <summary>
-            /// Initializes a new instance of the AdminSetAmountOperationRequest class.
+            /// Initializes a new instance of the AdminChangeAmountOperationRequest class.
             /// </summary>
-            public AdminSetAmountOperationRequest(InventoryModels.AdminSetAmountRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
+            public AdminChangeAmountOperationRequest(InventoryModels.AdminChangeAmountRequestData requestData, int timeout = OperationRequest.defaultTimeOut) : base(requestData, timeout) { }
         }
 
 

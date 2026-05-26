@@ -612,9 +612,9 @@ namespace XmobiTea.GearN.Constant
         /// </summary>
         public const string SetRemoveStatus = "setRemoveStatus";
         /// <summary>
-        /// Specifies the operation code for set amount.
+        /// Specifies the operation code for change amount.
         /// </summary>
-        public const string SetAmount = "setAmount";
+        public const string ChangeAmount = "changeAmount";
         /// <summary>
         /// Specifies the operation code for remove group.
         /// </summary>

@@ -843,21 +843,21 @@ using XmobiTea.GearN.Constant;
 using XmobiTea.GearN.Entity.Models;
 
 private async System.Threading.Tasks.Task<object> GrantItemAsync(string userId, string itemId, int amount) {
-    var req = new InventoryModels.AdminSetAmountRequestData();
+    var req = new InventoryModels.AdminChangeAmountRequestData();
     req.itemId = itemId;
     req.amount = amount;
 
     // Attempt 1: route admin với secret mặc định của app
-    var res = await GNNetwork.inventory.admin.setAmountAsync(req);
+    var res = await GNNetwork.inventory.admin.changeAmountAsync(req);
 
     if (res.returnCode == ReturnCode.OperationNotAllow) {
-        UnityEngine.Debug.LogWarning("OperationNotAllow on admin route — secret thiếu adminSelfEnable cho inventory.setAmount");
+        UnityEngine.Debug.LogWarning("OperationNotAllow on admin route — secret thiếu adminSelfEnable cho inventory.changeAmount");
         UnityEngine.Debug.LogWarning("debugMessage: " + res.debugMessage);
 
         // Attempt 2: fallback override secret admin cho 1 request
         var adminSecret = System.Environment.GetEnvironmentVariable("GEARN_ADMIN_SECRET"); // KHONG hardcode
         if (!string.IsNullOrEmpty(adminSecret)) {
-            res = await GNNetwork.inventory.admin.setAmountAsync(
+            res = await GNNetwork.inventory.admin.changeAmountAsync(
                 req,
                 null, // overrideAuthToken
                 adminSecret // overrideSecretKey

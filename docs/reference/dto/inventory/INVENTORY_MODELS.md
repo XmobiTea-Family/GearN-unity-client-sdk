@@ -911,39 +911,39 @@ Reference links:
 
 - [InventoryModels.ServerRemoveTagRequestData:880-901](/docs/reference/dto/inventory/INVENTORY_MODELS.md#serverremovetagrequestdata)
 
-### SetAmountRequestData
+### ChangeAmountRequestData
 
-Replaces the stored amount with an absolute value. Use `ChangeItemStatistics` for statistics deltas; this contract is not a delta operation.
+Replaces the stored amount by applying a delta value. Use `ChangeItemStatistics` for incremental statistic updates; this contract performs delta-based operations rather than absolute replacement.
 
 <!-- prettier-ignore -->
 | Field | Type | Required | Notes |
 | --- | --- | --- | --- |
 | `itemId` | `string` | yes | _minLength=12, maxLength=12_ |
-| `amount` | `long` | yes | Absolute item amount to set (replaces the current value, not a delta). |
+| `amount` | `long` | yes | Delta amount to change. |
 
-### ServerSetAmountRequestData
+### ServerChangeAmountRequestData
 
-Extends: `SetAmountRequestData`
+Extends: `ChangeAmountRequestData`
 
-Defines the request payload for ServerSetAmount.
+Defines the request payload for ServerChangeAmount.
 
-_Không khai báo field mới; kế thừa toàn bộ field từ `SetAmountRequestData`._
-
-Reference links:
-
-- [InventoryModels.SetAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata)
-
-### AdminSetAmountRequestData
-
-Extends: `ServerSetAmountRequestData`
-
-Defines the request payload for AdminSetAmount.
-
-_Không khai báo field mới; kế thừa toàn bộ field từ `ServerSetAmountRequestData`._
+_Không khai báo field mới; kế thừa toàn bộ field từ `ChangeAmountRequestData`._
 
 Reference links:
 
-- [InventoryModels.ServerSetAmountRequestData:914-935](/docs/reference/dto/inventory/INVENTORY_MODELS.md#serversetamountrequestdata)
+- [InventoryModels.ChangeAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata)
+
+### AdminChangeAmountRequestData
+
+Extends: `ServerChangeAmountRequestData`
+
+Defines the request payload for AdminChangeAmount.
+
+_Không khai báo field mới; kế thừa toàn bộ field từ `ServerChangeAmountRequestData`._
+
+Reference links:
+
+- [InventoryModels.ServerChangeAmountRequestData:914-935](/docs/reference/dto/inventory/INVENTORY_MODELS.md#serversetamountrequestdata)
 
 ### SetAvatarRequestData
 

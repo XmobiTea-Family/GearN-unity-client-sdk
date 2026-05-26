@@ -192,9 +192,9 @@
         }
 
         /// <summary>
-        /// Represents the typed response for the set amount operation.
+        /// Represents the typed response for the change amount operation.
         /// </summary>
-        public class SetAmountOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
+        public class ChangeAmountOperationResponse : CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>
         {
 
         }

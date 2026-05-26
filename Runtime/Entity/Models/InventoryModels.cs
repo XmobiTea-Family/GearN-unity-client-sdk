@@ -810,9 +810,9 @@
         }
 
         /// <summary>
-        /// Represents the request payload for the set amount operation.
+        /// Represents the request payload for the change amount operation.
         /// </summary>
-        public class SetAmountRequestData
+        public class ChangeAmountRequestData
         {
             /// <summary>
             /// Stores the item ID value.
@@ -829,16 +829,16 @@
         }
 
         /// <summary>
-        /// Represents the server-scoped request payload for the set amount operation.
+        /// Represents the server-scoped request payload for the change amount operation.
         /// </summary>
-        public class ServerSetAmountRequestData : SetAmountRequestData
+        public class ServerChangeAmountRequestData : ChangeAmountRequestData
         {
         }
 
         /// <summary>
-        /// Represents the admin-scoped request payload for the set amount operation.
+        /// Represents the admin-scoped request payload for the change amount operation.
         /// </summary>
-        public class AdminSetAmountRequestData : ServerSetAmountRequestData
+        public class AdminChangeAmountRequestData : ServerChangeAmountRequestData
         {
         }
 

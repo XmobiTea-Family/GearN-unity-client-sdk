@@ -2228,10 +2228,10 @@
             public PermissionRulesParam? getRemoveStatus;
 
             /// <summary>
-            /// Stores the set amount value.
+            /// Stores the change amount value.
             /// </summary>
-            [GNHashtableDataMember(code = ParameterCode.SetAmount, isOptional = true)]
-            public PermissionRulesParam? setAmount;
+            [GNHashtableDataMember(code = ParameterCode.ChangeAmount, isOptional = true)]
+            public PermissionRulesParam? changeAmount;
 
             /// <summary>
             /// Stores the set owner value.

@@ -274,11 +274,11 @@ Reference links:
 
 - [InventoryModels.EmptyResponseData:1422-1426](/docs/reference/dto/inventory/INVENTORY_MODELS.md#emptyresponsedata)
 
-### SetAmountOperationResponse
+### ChangeAmountOperationResponse
 
 Extends: `CustomOperationResponseAbstract<InventoryModels.InventoryResponseData>`
 
-Maps the SetAmount operation to a typed response wrapper.
+Maps the ChangeAmount operation to a typed response wrapper.
 
 _Không có field public (payload rỗng)._
 

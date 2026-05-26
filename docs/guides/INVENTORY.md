@@ -26,7 +26,7 @@ Tài liệu này là landing page cho AI code assistant khi cần dùng `GNNetwo
 - `getItemInformationAsync`, `getItemsWithDisplayNameAsync`, `getItemsWithSegmentAsync`, `getItemsWithTagAsync`, `getStatisticsLeaderboardAroundItemAsync`, `getStatisticsLeaderboardAsync`, và `getCreateLeaderboardAsync` bắt buộc có `infoRequestParam`.
 - `getItemStatisticsAsync` dùng `statisticsKeys`; `InfoRequestParam` dùng `itemStatisticsKeys`. Không dùng lẫn hai field này.
 - `getStatisticsLogAsync` phân trang bằng `token`, không dùng `skip`.
-- `setAmountAsync` là set giá trị tuyệt đối. `changeItemStatisticsAsync` là cộng/trừ delta theo từng key.
+- `changeAmountAsync` là thay đổi giá trị amount bằng cách cộng/trừ với amount truyền vào request data. `changeItemStatisticsAsync` là cộng/trừ delta theo từng key.
 - `setOwnerAsync` chuyển owner của item, không clone item.
 - `setRemoveStatusAsync` đánh dấu remove với `reason?`; hiện không có public method riêng để undo thao tác này.
 - `removeTagAsync` xóa theo `key`, không theo cặp `key/value`.
@@ -100,7 +100,7 @@ Rule nhanh:
 | `removeSegmentAsync` | Gỡ một segment khỏi item | `itemId`, `value` | `EmptyResponseData` | [client:36-36](/docs/reference/API_INVENTORY.md) / [server:76-76](/docs/reference/API_INVENTORY.md) / [admin:116-116](/docs/reference/API_INVENTORY.md) |
 | `setTagAsync` | Set hoặc upsert một tag | `itemId`, `key`, `value` | `EmptyResponseData` | [client:46-46](/docs/reference/API_INVENTORY.md) / [server:86-86](/docs/reference/API_INVENTORY.md) / [admin:126-126](/docs/reference/API_INVENTORY.md) |
 | `removeTagAsync` | Xóa tag theo key | `itemId`, `key` | `EmptyResponseData` | [client:37-37](/docs/reference/API_INVENTORY.md) / [server:77-77](/docs/reference/API_INVENTORY.md) / [admin:117-117](/docs/reference/API_INVENTORY.md) |
-| `setAmountAsync` | Set amount tuyệt đối | `itemId`, `amount` | `InventoryResponseData` | [client:38-38](/docs/reference/API_INVENTORY.md) / [server:78-78](/docs/reference/API_INVENTORY.md) / [admin:118-118](/docs/reference/API_INVENTORY.md) |
+| `changeAmountAsync` | Thay đổi giá trị amount bằng cách cộng/trừ với amount truyền vào request data | `itemId`, `amount` | `InventoryResponseData` | [client:38-38](/docs/reference/API_INVENTORY.md) / [server:78-78](/docs/reference/API_INVENTORY.md) / [admin:118-118](/docs/reference/API_INVENTORY.md) |
 | `setAvatarAsync` | Set avatar của item | `itemId`, `type`, `value` | `EmptyResponseData` | [client:39-39](/docs/reference/API_INVENTORY.md) / [server:79-79](/docs/reference/API_INVENTORY.md) / [admin:119-119](/docs/reference/API_INVENTORY.md) |
 | `setCustomDataAsync` | Set custom data theo nhiều key | `itemId`, `customDatas[]` | `InventoryResponseData` | [client:40-40](/docs/reference/API_INVENTORY.md) / [server:80-80](/docs/reference/API_INVENTORY.md) / [admin:120-120](/docs/reference/API_INVENTORY.md) |
 | `setDisplayNameAsync` | Set display name | `itemId`, `displayName` | `EmptyResponseData` | [client:41-41](/docs/reference/API_INVENTORY.md) / [server:81-81](/docs/reference/API_INVENTORY.md) / [admin:121-121](/docs/reference/API_INVENTORY.md) |
@@ -117,8 +117,8 @@ Decision rules:
 - Cần leaderboard theo statistics key: dùng `getStatisticsLeaderboardAsync`.
 - Cần leaderboard quanh một item cụ thể: dùng `getStatisticsLeaderboardAroundItemAsync`.
 - Cần leaderboard theo thời điểm tạo: dùng `getCreateLeaderboardAsync`.
-- Cần cộng/trừ stats: dùng `changeItemStatisticsAsync`, không dùng `setAmountAsync`.
-- Cần set lại amount tuyệt đối: dùng `setAmountAsync`, không dùng `changeItemStatisticsAsync`.
+- Cần cộng/trừ stats: dùng `changeItemStatisticsAsync`, không dùng `changeAmountAsync`.
+- Cần cộng/trừ lại amount: dùng `changeAmountAsync`, không dùng `changeItemStatisticsAsync`.
 - Cần audit biến động statistics: dùng `getStatisticsLogAsync`.
 
 ## 5. Method Signature
@@ -163,7 +163,7 @@ Typed response expose public fields: `returnCode`, `errorCode`, `invalidMembers`
 | `InfoRequestParam.itemStatisticsKeys` | Dùng để filter item statistics khi response được hydrate qua `infoRequestParam` | [InventoryModels.InfoRequestParam:1272-1303](/docs/reference/dto/inventory/INVENTORY_MODELS.md#inforequestparam) |
 | `GetItemStatisticsRequestData.statisticsKeys` | Dùng riêng cho `getItemStatisticsAsync`; không đổi thành `itemStatisticsKeys` | [InventoryModels.GetItemStatisticsRequestData:362-375](/docs/reference/dto/inventory/INVENTORY_MODELS.md#getitemstatisticsrequestdata) |
 | `GetStatisticsLogRequestData.token` | Cursor page kế tiếp; không dùng `skip` | [InventoryModels.GetStatisticsLogRequestData:1236-1247](/docs/reference/dto/inventory/INVENTORY_MODELS.md#getstatisticslogrequestdata) |
-| `SetAmountRequestData.amount` | Giá trị tuyệt đối mới của stack amount | [InventoryModels.SetAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata) |
+| `ChangeAmountRequestData.amount` | Giá trị cần cộng/trừ cho stack amount | [InventoryModels.ChangeAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata) |
 | `ChangeItemStatisticsRequestData.itemStatistics` | Delta theo key; truyền `log` nếu flow cần audit | [InventoryModels.ChangeItemStatisticsRequestData:1093-1107](/docs/reference/dto/inventory/INVENTORY_MODELS.md#changeitemstatisticsrequestdata) |
 | `SetOwnerRequestData.newOwnerType` | Map bằng `OwnerType`, không hardcode số | [InventoryModels.SetOwnerRequestData:1132-1142](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setownerrequestdata) |
 | `SetAvatarRequestData.type` | Number theo backend contract; package chưa có enum public riêng | [InventoryModels.SetAvatarRequestData:948-958](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setavatarrequestdata) |
@@ -190,7 +190,7 @@ Rule cứng:
 - `getCreateLeaderboardAsync` trả `responseData.results` cùng shape leaderboard item.
 - `getStatisticsLogAsync` trả `responseData.results` và có thể có `responseData.token` cho page tiếp.
 - `addSegmentAsync`, `removeSegmentAsync`, `removeTagAsync`, `setAvatarAsync`, `setDisplayNameAsync`, `setOwnerAsync`, `setRemoveStatusAsync`, `setTagAsync` trả `EmptyResponseData`.
-- `setAmountAsync`, `setCustomDataAsync`, `setItemDataAsync`, `changeItemStatisticsAsync` trả `InventoryResponseData`.
+- `changeAmountAsync`, `setCustomDataAsync`, `setItemDataAsync`, `changeItemStatisticsAsync` trả `InventoryResponseData`.
 
 ### Implementation note
 
@@ -323,7 +323,7 @@ var nextToken = response.responseData.token;
 - Không gọi `getItemInformationAsync` chỉ để đọc một field đơn lẻ nếu getter chuyên biệt đã có.
 - Không bỏ `infoRequestParam` ở các method bắt buộc.
 - Không dùng `itemStatisticsKeys` thay cho `statisticsKeys` hoặc ngược lại.
-- Không dùng `setAmountAsync` khi ý đồ là tăng/giảm delta.
+- Không dùng `changeAmountAsync` khi ý đồ là tăng/giảm delta.
 - Không dùng `setOwnerAsync` nếu mục tiêu là duplicate item cho owner mới.
 - Không hardcode số cho `ItemType` hoặc `OwnerType`.
 - Không tự phát minh enum cho `avatar.type` nếu package chưa export.

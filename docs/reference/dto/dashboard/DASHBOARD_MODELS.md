@@ -571,7 +571,7 @@ Defines the reusable parameter block InventoryPermissionRulesParam.
 | `getAmount` | `PermissionRulesParam?` | no | — |
 | `getOwner` | `PermissionRulesParam?` | no | — |
 | `getRemoveStatus` | `PermissionRulesParam?` | no | — |
-| `setAmount` | `PermissionRulesParam?` | no | — |
+| `changeAmount` | `PermissionRulesParam?` | no | — |
 | `setOwner` | `PermissionRulesParam?` | no | — |
 | `setRemoveStatus` | `PermissionRulesParam?` | no | — |
 | `getItemsWithDisplayName` | `PermissionRulesParam?` | no | — |

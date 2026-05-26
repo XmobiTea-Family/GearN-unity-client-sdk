@@ -826,41 +826,41 @@ Reference links:
 
 - [InventoryRequestModels.RemoveTagOperationRequest:793-804](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#removetagoperationrequest)
 
-### SetAmountOperationRequest
+### ChangeAmountOperationRequest
 
-Extends: `CustomOperationRequestAbstract<InventoryModels.SetAmountRequestData>`
+Extends: `CustomOperationRequestAbstract<InventoryModels.ChangeAmountRequestData>`
 
-Maps the SetAmount operation to a typed request wrapper.
-
-_Không có field public (payload rỗng)._
-
-Reference links:
-
-- [InventoryModels.SetAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata)
-
-### ServerSetAmountOperationRequest
-
-Extends: `SetAmountOperationRequest`
-
-Maps the ServerSetAmount operation to a typed request wrapper.
+Maps the ChangeAmount operation to a typed request wrapper.
 
 _Không có field public (payload rỗng)._
 
 Reference links:
 
-- [InventoryRequestModels.SetAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#setamountoperationrequest)
+- [InventoryModels.ChangeAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata)
 
-### AdminSetAmountOperationRequest
+### ServerChangeAmountOperationRequest
 
-Extends: `SetAmountOperationRequest`
+Extends: `ChangeAmountOperationRequest`
 
-Maps the AdminSetAmount operation to a typed request wrapper.
+Maps the ServerChangeAmount operation to a typed request wrapper.
 
 _Không có field public (payload rỗng)._
 
 Reference links:
 
-- [InventoryRequestModels.SetAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#setamountoperationrequest)
+- [InventoryRequestModels.ChangeAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#setamountoperationrequest)
+
+### AdminChangeAmountOperationRequest
+
+Extends: `ChangeAmountOperationRequest`
+
+Maps the AdminChangeAmount operation to a typed request wrapper.
+
+_Không có field public (payload rỗng)._
+
+Reference links:
+
+- [InventoryRequestModels.ChangeAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#setamountoperationrequest)
 
 ### SetAvatarOperationRequest
 
