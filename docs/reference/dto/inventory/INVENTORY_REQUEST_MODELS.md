@@ -836,7 +836,7 @@ _Không có field public (payload rỗng)._
 
 Reference links:
 
-- [InventoryModels.ChangeAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata)
+- [InventoryModels.ChangeAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#changeamountrequestdata)
 
 ### ServerChangeAmountOperationRequest
 
@@ -848,7 +848,7 @@ _Không có field public (payload rỗng)._
 
 Reference links:
 
-- [InventoryRequestModels.ChangeAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#setamountoperationrequest)
+- [InventoryRequestModels.ChangeAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#changeamountoperationrequest)
 
 ### AdminChangeAmountOperationRequest
 
@@ -860,7 +860,7 @@ _Không có field public (payload rỗng)._
 
 Reference links:
 
-- [InventoryRequestModels.ChangeAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#setamountoperationrequest)
+- [InventoryRequestModels.ChangeAmountOperationRequest:829-840](/docs/reference/dto/inventory/INVENTORY_REQUEST_MODELS.md#changeamountoperationrequest)
 
 ### SetAvatarOperationRequest
 

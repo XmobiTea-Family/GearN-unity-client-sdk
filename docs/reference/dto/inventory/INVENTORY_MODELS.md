@@ -931,7 +931,7 @@ _Không khai báo field mới; kế thừa toàn bộ field từ `ChangeAmountRe
 
 Reference links:
 
-- [InventoryModels.ChangeAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#setamountrequestdata)
+- [InventoryModels.ChangeAmountRequestData:914-923](/docs/reference/dto/inventory/INVENTORY_MODELS.md#changeamountrequestdata)
 
 ### AdminChangeAmountRequestData
 
@@ -943,7 +943,7 @@ _Không khai báo field mới; kế thừa toàn bộ field từ `ServerChangeAm
 
 Reference links:
 
-- [InventoryModels.ServerChangeAmountRequestData:914-935](/docs/reference/dto/inventory/INVENTORY_MODELS.md#serversetamountrequestdata)
+- [InventoryModels.ServerChangeAmountRequestData:914-935](/docs/reference/dto/inventory/INVENTORY_MODELS.md#serverchangeamountrequestdata)
 
 ### SetAvatarRequestData
 
