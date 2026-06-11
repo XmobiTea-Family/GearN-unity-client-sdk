@@ -49,17 +49,22 @@ Typed response (trả từ mọi `*Async()` và callback path) expose field `pub
 
 **Helper method tương đương:**
 
-- `res.hasReturnCodeError(): boolean` — tương đương `res.returnCode !== ReturnCode.Ok`. Dùng cho code throw-style ngắn gọn.
-- Không có helper cho tầng 2 — dùng `res.errorCode !== ErrorCode.Ok` trực tiếp.
+- `res.hasReturnCodeError(): bool` — tương đương `res.returnCode != ReturnCode.Ok`. Dùng cho code throw-style ngắn gọn.
+- `CodeHelper.getReturnCodeName(res.returnCode)` — đổi `ReturnCode` numeric sang tên để log/debug.
+- `CodeHelper.getErrorCodeName(res.errorCode)` — đổi `ErrorCode` numeric sang tên để log/debug.
+- `CodeHelper.getInvalidMemberName((int)im.invalidMemberType)` — đổi `InvalidMemberType` sang tên lower-first-letter để log/debug.
+- Vẫn so sánh success bằng symbol `ReturnCode.Ok` / `ErrorCode.Ok`; `CodeHelper` chỉ dùng cho hiển thị, không thay thế rule check 2 tầng.
 
 ```csharp
 // Field public (early-return):
-if (res.returnCode !== ReturnCode.Ok) return;
-if (res.errorCode !== ErrorCode.Ok) return;
+if (res.returnCode != ReturnCode.Ok) return;
+if (res.errorCode != ErrorCode.Ok) return;
 
 // Helper method (throw-style):
 if (res.hasReturnCodeError()) throw new System.Exception(res.debugMessage ?? res.ToString());
-if (res.errorCode !== ErrorCode.Ok) throw new System.Exception(`business error: ${res.errorCode}`);
+if (res.errorCode != ErrorCode.Ok) {
+    throw new System.Exception("business error: " + CodeHelper.getErrorCodeName(res.errorCode));
+}
 ```
 
 ---
@@ -100,8 +105,10 @@ public class InvalidMember
 
 ```csharp
 if (res.returnCode == ReturnCode.InvalidRequestParameters) {
-    foreach (var im in res.invalidMembers ?? new System.Collections.Generic.List<InvalidMember>()) {
-        UnityEngine.Debug.LogWarning("field " + im.code + " invalid: type=" + im.invalidMemberType);
+    if (res.invalidMembers == null) return;
+
+    foreach (var im in res.invalidMembers) {
+        UnityEngine.Debug.LogWarning("field " + im.code + " invalid: type=" + CodeHelper.getInvalidMemberName((int)im.invalidMemberType));
     }
 }
 ```

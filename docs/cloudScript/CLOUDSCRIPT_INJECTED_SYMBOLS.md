@@ -123,7 +123,7 @@ Mỗi namespace export Request/Response/DTO classes cho domain tương ứng. Pa
 
 | Symbol | Dùng khi nào |
 | --- | --- |
-| `CodeHelper` | Helper xử lý code/enum |
+| `CodeHelper` | Helper đổi code/enum sang tên: `getReturnCodeName`, `getErrorCodeName`, `getRequestTypeName`, `getRequestRoleName`, `getInvalidMemberName` |
 | `Constructor` | Type helper (constructor signature) |
 | `AbstractConstructor` | Type helper (abstract constructor) |
 | `ConverterService` | Convert giữa các kiểu dữ liệu GearN |

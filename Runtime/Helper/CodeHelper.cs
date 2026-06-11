@@ -42,7 +42,8 @@
     }
 
     /// <summary>
-    /// Provides utility methods for retrieving names of operation, event, and return codes.
+    /// Provides utility methods for retrieving display names of return codes,
+    /// error codes, request types, request roles, and invalid member types.
     /// </summary>
     public static class CodeHelper
     {
@@ -51,6 +52,10 @@
         /// </summary>
         private static CodeHelperBase returnCodeHelper;
         /// <summary>
+        /// Stores the error code helper value.
+        /// </summary>
+        private static CodeHelperBase errorCodeHelper;
+        /// <summary>
         /// Stores the request type helper value.
         /// </summary>
         private static CodeHelperBase requestTypeHelper;
@@ -58,6 +63,10 @@
         /// Stores the request role helper value.
         /// </summary>
         private static CodeHelperBase requestRoleHelper;
+        /// <summary>
+        /// Stores the invalid member helper value.
+        /// </summary>
+        private static CodeHelperBase invalidMemberHelper;
 
         /// <summary>
         /// Gets the name of a return code.
@@ -70,7 +79,17 @@
         }
 
         /// <summary>
-        /// Gets request type name.
+        /// Gets the name of an error code.
+        /// </summary>
+        /// <param name="errorCode">The error code to look up.</param>
+        /// <returns>The name of the error code.</returns>
+        public static string getErrorCodeName(int errorCode)
+        {
+            return CodeHelper.errorCodeHelper.getCodeName(errorCode);
+        }
+
+        /// <summary>
+        /// Gets the wire-format name of a request type.
         /// </summary>
         public static string getRequestTypeName(int requestType)
         {
@@ -78,19 +97,29 @@
         }
 
         /// <summary>
-        /// Gets request role name.
+        /// Gets the wire-format name of a request role.
         /// </summary>
         public static string getRequestRoleName(int requestRole)
         {
             return CodeHelper.requestRoleHelper.getCodeName(requestRole);
         }
 
+        /// <summary>
+        /// Gets the name of an invalid member type.
+        /// </summary>
+        public static string getInvalidMemberName(int invalidMember)
+        {
+            return CodeHelper.invalidMemberHelper.getCodeName(invalidMember);
+        }
+
         // Static constructor to initialize the helper dictionaries.
         static CodeHelper()
         {
             CodeHelper.setReturnCodeDic();
+            CodeHelper.setErrorCodeDic();
             CodeHelper.setRequestTypeDic();
             CodeHelper.setRequestRoleDic();
+            CodeHelper.setInvalidMemberDic();
         }
 
         /// <summary>
@@ -109,6 +138,23 @@
             }
 
             CodeHelper.returnCodeHelper = new CodeHelperBase(codeDict);
+        }
+
+        /// <summary>
+        /// Sets up the error code dictionary by reflecting on the ErrorCode class.
+        /// </summary>
+        private static void setErrorCodeDic()
+        {
+            var codeDict = new Dictionary<int, string>();
+
+            var fields = typeof(ErrorCode).GetFields(BindingFlags.Public | BindingFlags.Static);
+
+            foreach (var field in fields)
+            {
+                codeDict[System.Convert.ToInt32(field.GetValue(null))] = field.Name;
+            }
+
+            CodeHelper.errorCodeHelper = new CodeHelperBase(codeDict);
         }
 
         /// <summary>
@@ -153,6 +199,21 @@
             codeDict[(int)RequestRole.Client] = CodeHelper.toLowerCase(RequestRole.Client.ToString());
 
             CodeHelper.requestRoleHelper = new CodeHelperBase(codeDict);
+        }
+
+        /// <summary>
+        /// Sets up the invalid member dictionary from the InvalidMemberType enum.
+        /// </summary>
+        private static void setInvalidMemberDic()
+        {
+            var codeDict = new Dictionary<int, string>();
+
+            foreach (InvalidMemberType invalidMemberType in System.Enum.GetValues(typeof(InvalidMemberType)))
+            {
+                codeDict[(int)invalidMemberType] = CodeHelper.toLowerCase(invalidMemberType.ToString());
+            }
+
+            CodeHelper.invalidMemberHelper = new CodeHelperBase(codeDict);
         }
 
     }
