@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// A hashtable implementation for GNData, supporting serialization and custom key-value storage.
@@ -379,25 +379,7 @@
         /// <returns>A string representing the hashtable.</returns>
         public override string toString()
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("{");
-
-            var i = 0;
-            foreach (var c in this.dict)
-            {
-                if (i != 0) stringBuilder.Append(",");
-
-                i++;
-                var value = c.Value;
-                if (value == null) stringBuilder.Append($"\"{c.Key}\":null");
-                else if (value is GNData gnData) stringBuilder.Append($"\"{c.Key}\":{gnData.ToString()}");
-                else if (value is string valueStr) stringBuilder.Append($"\"{c.Key}\":\"{valueStr}\"");
-                else if (value is bool boolValue) stringBuilder.Append($"\"{c.Key}\":{boolValue.ToString().ToLower()}");
-                else stringBuilder.Append($"\"{c.Key}\":{value}");
-            }
-
-            stringBuilder.Append("}");
-            return stringBuilder.ToString();
+            return Serializer.Serialize(this.toData());
         }
 
         /// <summary>

@@ -63,7 +63,7 @@
         /// <summary>
         /// Stores the last get current milliseconds value.
         /// </summary>
-        private float lastGetCurrentMilliseconds;  // The local time in seconds when the server time was last updated.
+        private double lastGetCurrentMilliseconds;  // The local time in seconds when the server time was last updated.
 
         /// <summary>
         /// Sets the current server time in milliseconds.
@@ -72,7 +72,7 @@
         internal void setServerTimeMilliseconds(long currentServerMilliseconds)
         {
             this.lastCurrentServerMilliseconds = currentServerMilliseconds;
-            this.lastGetCurrentMilliseconds = System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            this.lastGetCurrentMilliseconds = UnityEngine.Time.realtimeSinceStartupAsDouble;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@
         /// <returns>The current server timestamp.</returns>
         internal long getServerTimestamp()
         {
-            return this.lastCurrentServerMilliseconds + (int)(System.DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - this.lastGetCurrentMilliseconds);
+            return this.lastCurrentServerMilliseconds + (long)(UnityEngine.Time.realtimeSinceStartupAsDouble - this.lastGetCurrentMilliseconds);
         }
 
         /// <summary>

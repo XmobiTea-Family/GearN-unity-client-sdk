@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
+    using XmobiTea.GearN.Helper;
 
     /// <summary>
     /// Represents a GNData array, which can be used for request or response data.
@@ -354,24 +354,7 @@
         /// </summary>
         public override string toString()
         {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append("[");
-
-            for (var i = 0; i < this.array.Count; i++)
-            {
-                if (i != 0) stringBuilder.Append(",");
-
-                var value = this.array[i];
-
-                if (value == null) stringBuilder.Append("null");
-                else if (value is GNData gnData) stringBuilder.Append(gnData.ToString());
-                else if (value is string valueStr) stringBuilder.Append("\"" + valueStr + "\"");
-                else if (value is bool boolValue) stringBuilder.Append(boolValue.ToString().ToLower());
-                else stringBuilder.Append(value);
-            }
-
-            stringBuilder.Append("]");
-            return stringBuilder.ToString();
+            return Serializer.Serialize(this.toData());
         }
 
         /// <summary>
