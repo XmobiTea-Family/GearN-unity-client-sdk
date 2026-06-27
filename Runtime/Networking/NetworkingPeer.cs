@@ -81,7 +81,7 @@
         /// <returns>The current server timestamp.</returns>
         internal long getServerTimestamp()
         {
-            return this.lastCurrentServerMilliseconds + (long)(UnityEngine.Time.realtimeSinceStartupAsDouble - this.lastGetCurrentMilliseconds);
+            return this.lastCurrentServerMilliseconds + (int)((UnityEngine.Time.realtimeSinceStartupAsDouble - this.lastGetCurrentMilliseconds) * 1000);
         }
 
         /// <summary>
